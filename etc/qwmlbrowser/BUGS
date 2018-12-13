@@ -1,5 +1,0 @@
-BUGS
-----
-
-- The regular expression for reconizing a wbmp file is not good because it seems to match all the format.
-
