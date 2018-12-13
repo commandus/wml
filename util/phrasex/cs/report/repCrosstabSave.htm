@@ -1,0 +1,262 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType <> 'Manager')
+    error 'Only managers can save a report';
+  endif
+  if (request.cro_name = '')
+    error 'Please enter a report name';
+  endif
+  if (string.isValidDateTime(request.cro_submitted_on1) <> 1)
+    error 'Please enter a valid date-time for Submitted On >=';
+  endif
+  if (string.isValidDateTime(request.cro_submitted_on2) <> 1)
+    error 'Please enter a valid date-time for Submitted On <';
+  endif
+  if (string.isValidDateTime(request.cro_assigned_on1) <> 1)
+    error 'Please enter a valid date-time for Assigned On >=';
+  endif
+  if (string.isValidDateTime(request.cro_assigned_on2) <> 1)
+    error 'Please enter a valid date-time for Assigned On <';
+  endif
+  if (string.isValidDateTime(request.cro_closed_on1) <> 1)
+    error 'Please enter a valid date-time for Closed On >=';
+  endif
+  if (string.isValidDateTime(request.cro_closed_on2) <> 1)
+    error 'Please enter a valid date-time for Closed On <';
+  endif
+  if (string.isValidDateTime(request.cro_deadline1) <> 1)
+    error 'Please enter a valid date-time for Deadline >=';
+  endif
+  if (string.isValidDateTime(request.cro_deadline2) <> 1)
+    error 'Please enter a valid date-time for Deadline <';
+  endif
+
+  // convert user friendly column names to real column names
+  if (request.cro_col1 = 'Product')
+    set session.cro_col1 = 'product';
+  elseif (request.cro_col1 = 'Status')
+    set session.cro_col1 = 'status';
+  elseif (request.cro_col1 = 'Priority')
+    set session.cro_col1 = 'priority';
+  elseif (request.cro_col1 = 'Deadline')
+    set session.cro_col1 = 'deadline';
+  elseif (request.cro_col1 = 'Submitted To')
+    set session.cro_col1 = 'submitted_to';
+  elseif (request.cro_col1 = 'Submitted By')
+    set session.cro_col1 = 'submitted_by';
+  elseif (request.cro_col1 = 'Submitted On')
+    set session.cro_col1 = 'submitted_on';
+  elseif (request.cro_col1 = 'Assigned To')
+    set session.cro_col1 = 'assigned_to';
+  elseif (request.cro_col1 = 'Assigned By')
+    set session.cro_col1 = 'assigned_by';
+  elseif (request.cro_col1 = 'Assigned On')
+    set session.cro_col1 = 'assigned_on';
+  elseif (request.cro_col1 = 'Closed By')
+    set session.cro_col1 = 'closed_by';
+  elseif (request.cro_col1 = 'Closed On')
+    set session.cro_col1 = 'closed_on';
+  elseif (request.cro_col1 = 'Serial Number')
+    set session.cro_col1 = 'serial_num';
+  else
+    set session.cro_col1 = request.cro_col1;
+  endif
+
+  if (request.cro_col2 = 'Product')
+    set session.cro_col2 = 'product';
+  elseif (request.cro_col2 = 'Status')
+    set session.cro_col2 = 'status';
+  elseif (request.cro_col2 = 'Priority')
+    set session.cro_col2 = 'priority';
+  elseif (request.cro_col2 = 'Deadline')
+    set session.cro_col2 = 'deadline';
+  elseif (request.cro_col2 = 'Submitted To')
+    set session.cro_col2 = 'submitted_to';
+  elseif (request.cro_col2 = 'Submitted By')
+    set session.cro_col2 = 'submitted_by';
+  elseif (request.cro_col2 = 'Submitted On')
+    set session.cro_col2 = 'submitted_on';
+  elseif (request.cro_col2 = 'Assigned To')
+    set session.cro_col2 = 'assigned_to';
+  elseif (request.cro_col2 = 'Assigned By')
+    set session.cro_col2 = 'assigned_by';
+  elseif (request.cro_col2 = 'Assigned On')
+    set session.cro_col2 = 'assigned_on';
+  elseif (request.cro_col2 = 'Closed By')
+    set session.cro_col2 = 'closed_by';
+  elseif (request.cro_col2 = 'Closed On')
+    set session.cro_col2 = 'closed_on';
+  elseif (request.cro_col2 = 'Serial Number')
+    set session.cro_col2 = 'serial_num';
+  else
+    set session.cro_col2 = request.cro_col2;
+  endif
+
+  set session.cro_name = request.cro_name;
+  set session.cro_max_row = request.cro_max_row;
+  set session.cro_max_col = request.cro_max_col;
+  set session.cro_sql_where = request.cro_sql_where;
+  set session.cro_status = request.cro_status;
+  set session.cro_product = request.cro_product;
+  set session.cro_priority1 = request.cro_priority1;
+  set session.cro_priority2 = request.cro_priority2;
+  set session.cro_deadline1 = request.cro_deadline1;
+  set session.cro_deadline2 = request.cro_deadline2;
+  set session.cro_submitted_to = request.cro_submitted_to;
+  set session.cro_submitted_by = request.cro_submitted_by;
+  set session.cro_submitted_on1 = request.cro_submitted_on1;
+  set session.cro_submitted_on2 = request.cro_submitted_on2;
+  set session.cro_assigned_to = request.cro_assigned_to;
+  set session.cro_assigned_by = request.cro_assigned_by;
+  set session.cro_assigned_on1 = request.cro_assigned_on1;
+  set session.cro_assigned_on2 = request.cro_assigned_on2;
+  set session.cro_closed_by = request.cro_closed_by;
+  set session.cro_closed_on1 = request.cro_closed_on1;
+  set session.cro_closed_on2 = request.cro_closed_on2;
+  set session.cro_serial_num = request.cro_serial_num;
+
+  // construct the select list
+  set local.s = '';
+  if (session.cro_col1 <> '')
+    set local.s = session.cro_col1;
+  endif
+  if (session.cro_col2 <> '')
+    if (local.s <> '')
+      set local.s = local.s + ',';
+    endif
+    set local.s = local.s + session.cro_col2;
+  endif
+
+  // construct the htm_where, not the <serverside dataset="WHERE clause
+  set local.w = '';
+  if (session.cro_status <> '')
+    set local.w = local.w + '|status|' + session.cro_status;
+  endif
+  if (session.cro_product <> '')
+    set local.w = local.w + '|product|' + session.cro_product;
+  endif
+  if (session.cro_priority1 <> '')
+    set local.w = local.w + '|priority1|' + session.cro_priority1;
+  endif
+  if (session.cro_priority2 <> '')
+    set local.w = local.w + '|priority2|' + session.cro_priority2;
+  endif
+  if (session.cro_deadline1 <> '')
+    set local.w = local.w + '|deadline1|' + session.cro_deadline1;
+  endif
+  if (session.cro_deadline2 <> '')
+    set local.w = local.w + '|deadline2|' + session.cro_deadline2;
+  endif
+  if (session.cro_submitted_to <> '')
+    set local.w = local.w + '|submitted_to|' + session.cro_submitted_to;
+  endif
+  if (session.cro_submitted_by <> '')
+    set local.w = local.w + '|submitted_by|' + session.cro_submitted_by;
+  endif
+  if (session.cro_submitted_on1 <> '')
+    set local.w = local.w + '|submitted_on1|' + session.cro_submitted_on1;
+  endif
+  if (session.cro_submitted_on2 <> '')
+    set local.w = local.w + '|submitted_on2|' + session.cro_submitted_on2;
+  endif
+  if (session.cro_assigned_to <> '')
+    set local.w = local.w + '|assigned_to|' + session.cro_assigned_to;
+  endif
+  if (session.cro_assigned_by <> '')
+    set local.w = local.w + '|assigned_by|' + session.cro_assigned_by;
+  endif
+  if (session.cro_assigned_on1 <> '')
+    set local.w = local.w + '|assigned_on1|' + session.cro_assigned_on1;
+  endif
+  if (session.cro_assigned_on2 <> '')
+    set local.w = local.w + '|assigned_on2|' + session.cro_assigned_on2;
+  endif
+  if (session.cro_closed_by <> '')
+    set local.w = local.w + '|closed_by|' + session.cro_closed_by;
+  endif
+  if (session.cro_closed_on1 <> '')
+    set local.w = local.w + '|closed_on1|' + session.cro_closed_on1;
+  endif
+  if (session.cro_closed_on2 <> '')
+    set local.w = local.w + '|closed_on2|' + session.cro_closed_on2;
+  endif
+  if (session.cro_serial_num <> '')
+    set local.w = local.w + '|serial_num|' + session.cro_serial_num;
+  endif
+
+  if (session.cro_id = 0)
+    set local.rep_id = 
+      local.getUniqueID('cs_report', 'rep_id', 'registry');
+    <serverside dataset="sqlInsert = 
+      INSERT INTO cs_report(
+        rep_id, row_ver, name, rep_type, 
+        max_row, max_col, 
+        sql_select, sql_where, htm_where)
+      VALUES(
+        local.rep_id, 1, session.cro_name, 'Crosstab', 
+        session.cro_max_row, session.cro_max_col, 
+        local.s, session.cro_sql_where, local.w);
+
+    sqlInsert.execute;    
+    set session.cro_id = local.rep_id; 
+    set session.cro_row_ver = 1;
+  else
+    <serverside dataset="sqlUpdate" action="execute">    UPDATE cs_report SET
+        row_ver = 1 + session.cro_row_ver,
+        name = session.cro_name,
+        max_row = session.cro_max_row,
+        max_col = session.cro_max_col,
+        sql_select = local.s,
+        sql_where = session.cro_sql_where,
+        htm_where = local.w
+      WHERE rep_id = session.cro_id 
+        AND row_ver = session.cro_row_ver;
+
+    sqlUpdate.execute;
+    set session.cro_row_ver = 1 + session.cro_row_ver;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td nowrap="nowrap">
+    <a href="$session.mainMenu)">$(appname)</a> :  
+      Crosstab Report Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Report: [$session.cro_name)] has been saved.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="repMan.htm">Report Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

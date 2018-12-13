@@ -1,0 +1,976 @@
+  SPI_GETCURSORSHADOW = $101A;
+  SPI_SETCURSORSHADOW = $101B;
+
+procedure TWindowsSystemInfo.SetBooleanSetting(Index: Integer;
+  Value: Boolean);
+var RealIndex: Cardinal;
+  NewStyle: Boolean;
+begin
+  RealIndex := NULL;
+  NewStyle := False;
+  case Index of
+    SPI_GETICONTITLEWRAP: RealIndex := SPI_SETICONTITLEWRAP;
+    SPI_GETFONTSMOOTHING: RealIndex := SPI_SETFONTSMOOTHING;
+    SPI_GETDRAGFULLWINDOWS: RealIndex := SPI_SETDRAGFULLWINDOWS;
+    SPI_GETBEEP : RealIndex := SPI_SETBEEP;
+    SPI_GETKEYBOARDCUES: RealIndex := SPI_SETKEYBOARDCUES;
+    SPI_GETKEYBOARDPREF: RealIndex := SPI_SETKEYBOARDPREF;
+    SPI_GETSNAPTODEFBUTTON: RealIndex := SPI_SETSNAPTODEFBUTTON;
+    SPI_GETMENUDROPALIGNMENT:RealIndex := SPI_SETMENUDROPALIGNMENT;
+    SPI_GETMENUFADE : RealIndex := SPI_SETMENUFADE;
+    SPI_GETSHOWSOUNDS : RealIndex := SPI_SETSHOWSOUNDS;
+    SPI_GETLOWPOWERACTIVE : RealIndex := SPI_SETLOWPOWERACTIVE;
+    SPI_GETPOWEROFFACTIVE : RealIndex := SPI_SETPOWEROFFACTIVE;
+    SPI_GETSCREENSAVEACTIVE:RealIndex:= SPI_SETSCREENSAVEACTIVE;
+    SPI_GETACTIVEWNDTRKZORDER: begin RealIndex:= SPI_SETACTIVEWNDTRKZORDER;
+      NewStyle:= True; end;
+    SPI_GETSCREENREADER: RealIndex := SPI_SETSCREENREADER;
+    SPI_GETHOTTRACKING: begin RealIndex:= SPI_SETHOTTRACKING;
+      NewStyle := True; end;
+    SPI_GETUIEFFECTS: begin RealIndex:= SPI_SETUIEFFECTS;
+      NewStyle := True; end;
+    SPI_GETTOOLTIPFADE: begin RealIndex:= SPI_SETTOOLTIPFADE;
+      NewStyle := True; end;
+    SPI_GETACTIVEWINDOWTRACKING: begin RealIndex:= SPI_SETACTIVEWINDOWTRACKING;
+      NewStyle := True; end;
+    SPI_GETMENUANIMATION: begin RealIndex:= SPI_SETMENUANIMATION; NewStyle := True; end;
+    SPI_GETLISTBOXSMOOTHSCROLLING: begin RealIndex:= SPI_SETLISTBOXSMOOTHSCROLLING;
+      NewStyle := True; end;
+    SPI_GETSCREENSAVERRUNNING:;// RealIndex := SPI_SETSCREENSAVERRUNNING;
+    SPI_GETCOMBOBOXANIMATION: begin RealIndex := SPI_SETCOMBOBOXANIMATION;
+      NewStyle := True; end;
+    SPI_GETGRADIENTCAPTIONS: begin RealIndex:= SPI_SETGRADIENTCAPTIONS;
+      NewStyle := True; end;
+    SPI_GETSELECTIONFADE: begin RealIndex := SPI_SETSELECTIONFADE;
+      NewStyle := True; end;
+    SPI_SETTOOLTIPANIMATION: begin RealIndex:= SPI_SETTOOLTIPANIMATION;
+      NewStyle := True; end;
+    SPI_GETCURSORSHADOW: RealIndex := SPI_SETCURSORSHADOW;
+  end;
+
+  if NewStyle then
+    SystemParametersInfo( RealIndex, 0, @Value, UpdateFlag)
+  else
+    SystemParametersInfo(RealIndex, Cardinal(Value), nil, UpdateFlag);
+end;
+
+
+
+
+
+
+
+HowToDoThings.com 	 	
+   Where people come to learn new things    	
+  	
+ 	
+Current section: All topics / Computers / Programming / Delphi
+
+
+Wrapper around systemparametersinfo	
+Written by mr Cesar Nicolas Pena Nunez
+This article has been viewed 7686 times	Entered on Sunday, September 09, 2001
+Last modified on Sunday, March 03, 2002	
+     	
+A easy way to know system parameters, change them, et al	
+Basically windows gets/sets system information via systemparametersinfo, for instance when you go to the control panel, most applets work with systemparametersinfo to change a parameter and notify the system about it here is a rough draft of a component that sets/gets parameters systemwide.
+
+unit wsi2;
+
+interface
+
+uses Windows, Classes, Controls;
+
+const
+  SPI_GETKEYBOARDCUES = $100A;
+  SPI_SETKEYBOARDCUES = $100B;
+  SPI_SETMENUFADE = $1013;
+  SPI_GETMENUFADE = $1012;
+  SPI_SETSCREENSAVERRUNNING = 97;
+  SPI_GETSCREENSAVERRUNNING = 114;
+  SPI_SETCURSORSHADOW = $101B;
+  SPI_GETCURSORSHADOW = $101A;
+  SPI_GETSELECTIONFADE = $1014;
+  SPI_SETSELECTIONFADE = $1015;
+  SPI_GETTOOLTIPANIMATION = $1016;
+  SPI_SETTOOLTIPANIMATION = $1017;
+  SPI_GETTOOLTIPFADE = $1018;
+  SPI_SETTOOLTIPFADE = $1019;
+  SPI_GETUIEFFECTS = $103E;
+  SPI_SETUIEFFECTS = $103F;
+  SPI_GETMENUSHOWDELAY = 106;
+  SPI_SETMENUSHOWDELAY = 107;
+  SPI_GETCARETWIDTH = $2006;
+  SPI_SETCARETWIDTH = $2007;
+
+type
+  TMouseSpeed = 1..20;
+
+  TWindowsSystemInfo = class( TComponent )
+  private
+    function GetBooleanSetting(Index: Integer): Boolean;
+    procedure SetBooleanSetting(Index: Integer; Value: Boolean);
+    function GetIntegerSetting(Index: Integer): Integer;
+    procedure SetIntegerSetting(Index: Integer; Value: Integer);
+    function GetDWORDSetting(Index:Integer): DWORD;
+    procedure SetDWORDSetting(Index: Integer; Value: DWORD);
+
+    function GetWindows95Plus: Boolean;
+    function GetWindowsRect: TRect;
+    procedure SetWindowsRect(const Value: TRect);
+    function GetDoubleClkTime: UINT;
+    procedure SetDoubleClkTime(const Value: UINT);
+    function GetMouseSpeed: TMouseSpeed;
+    procedure SetMouseSpeed(const Value: TMouseSpeed);
+    function GetDblClkHeigth: Integer;
+    procedure SetDblClkHeigth(const Value: Integer);
+    function GetDblClkWidth: Integer;
+    procedure SetDblClkWidth(const Value: Integer);
+    function GetMenuShowDelay: DWORD;
+    procedure SetMenuShowDelay(const Value: DWORD);
+  protected
+  public
+    procedure ReloadSystemCursors;
+  published
+    property ShowSounds: Boolean
+    index SPI_GETSHOWSOUNDS
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property Beep: Boolean
+    index SPI_GETBEEP
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property MenuUnderlines: Boolean
+    index SPI_GETKEYBOARDCUES
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property UserPrefersKeyBoard: Boolean
+    index SPI_GETKEYBOARDPREF
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property SnapToDefButton: Boolean
+    index SPI_GETSNAPTODEFBUTTON
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property LeftAlignedMenus: Boolean
+    index SPI_GETMENUDROPALIGNMENT
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property MenuFadeAnimation: Boolean
+    index SPI_GETMENUFADE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property LowPowerActive: Boolean
+    index SPI_GETLOWPOWERACTIVE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property PowerOffActive: Boolean
+    index SPI_GETPOWEROFFACTIVE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property SecreenSaverActive: Boolean
+    index SPI_GETSCREENSAVEACTIVE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ScreenSaverRunning: Boolean
+    index SPI_GETSCREENSAVERRUNNING
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ComboBoxAnimation: Boolean
+    index SPI_GETCOMBOBOXANIMATION
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property CursorShadow: Boolean
+    index SPI_GETCURSORSHADOW
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property GradientCaptions: Boolean
+    index SPI_GETGRADIENTCAPTIONS
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property HotTracking: Boolean
+    index SPI_GETHOTTRACKING
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ListBoxSmoothScrolling: Boolean
+    index SPI_GETLISTBOXSMOOTHSCROLLING
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property MenuAnimation: Boolean
+    index SPI_GETMENUANIMATION
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property SelectionFade: Boolean
+    index SPI_GETSELECTIONFADE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ToolTipAnimation: Boolean
+    index SPI_GETTOOLTIPANIMATION
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ToolTipFade: Boolean
+    index SPI_GETTOOLTIPFADE
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property UIEffects: Boolean
+    index SPI_GETUIEFFECTS
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ActiveWindowTracking: Boolean
+    index SPI_GETACTIVEWINDOWTRACKING
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ActiveWndTrkZone: Boolean
+    index SPI_GETACTIVEWNDTRKZORDER
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property Windows95Plus: Boolean
+    read GetWindows95Plus;
+
+    property DragFullWindows: Boolean
+    index SPI_GETDRAGFULLWINDOWS
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property ScreenReader: Boolean
+    index SPI_GETSCREENREADER
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property CanShowSounds: Boolean
+    index SPI_GETSHOWSOUNDS
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property FontSmoothing: Boolean
+    index SPI_GETFONTSMOOTHING
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property IconTitleWrap: Boolean
+    index SPI_GETICONTITLEWRAP
+    read GetBooleanSetting
+    write SetBooleanSetting;
+
+    property LowPowerTimeout: Integer
+    index SPI_GETLOWPOWERTIMEOUT
+    read GetIntegerSetting
+    write SetIntegerSetting;
+
+    property PowerOffTimeOut: Integer
+    index SPI_GETPOWEROFFTIMEOUT
+    read GetIntegerSetting
+    write SetIntegerSetting;
+
+    property ScreenSaverTimeOut: Integer
+    index SPI_GETSCREENSAVETIMEOUT
+    read GetIntegerSetting
+    write SetIntegerSetting;
+
+    property BorderWidth: Integer
+    index SPI_GETBORDER
+    read GetIntegerSetting
+    write SetIntegerSetting;
+
+    property CarretWidth: DWORD
+    index SPI_GETCARETWIDTH
+    read GetDWORDSetting
+    write SetDWORDSetting;
+
+    property WorkArea: TRect read GetWindowsRect write SetWindowsRect;
+    property DoubleClickTime: UINT read GetDoubleClkTime write SetDoubleClkTime;
+    property MouseSpeed: TMouseSpeed read GetMouseSpeed write SetMouseSpeed;
+    property DoubleClickHeight: Integer read GetDblClkHeigth write SetDblClkHeigth;
+    property DoubleClickWidth: Integer read GetDblClkWidth write SetDblClkWidth;
+    property MenuShowDelay: DWORD read GetMenuShowDelay write SetMenuShowDelay;
+  end;
+
+implementation
+
+const
+  UpdateFlag = SPIF_SENDCHANGE or SPIF_UPDATEINIFILE;
+
+{ TWindowsSystemInfo }
+
+function TWindowsSystemInfo.GetBooleanSetting(Index: Integer): Boolean;
+begin SystemParametersInfo(Index, 0, @Result, 0); end;
+
+function TWindowsSystemInfo.GetDblClkHeigth: Integer;
+begin Result := GetSystemMetrics(SM_CYDOUBLECLK); end;
+
+function TWindowsSystemInfo.GetDblClkWidth: Integer;
+begin Result := GetSystemMetrics(SM_CXDOUBLECLK); end;
+
+function TWindowsSystemInfo.GetDoubleClkTime: UINT;
+begin Result := GetDoubleClickTime; end;
+
+function TWindowsSystemInfo.GetDWORDSetting(Index: Integer): DWORD;
+begin SystemParametersInfo(Index, 0, @Result, 0); end;
+
+function TWindowsSystemInfo.GetIntegerSetting(Index: Integer): Integer;
+begin SystemParametersInfo(Index, 0, @Result, 0); end;
+
+function TWindowsSystemInfo.GetMenuShowDelay: DWORD;
+begin SystemParametersInfo(SPI_GETMENUSHOWDELAY, 0, @Result, 0); end;
+
+function TWindowsSystemInfo.GetMouseSpeed: TMouseSpeed;
+begin SystemParametersInfo(SPI_GETMOUSESPEED, 0, @Result, 0); end;
+
+function TWindowsSystemInfo.GetWindows95Plus: Boolean;
+begin Result := SystemParametersInfo(SPI_GETWINDOWSEXTENSION, 1, nil, 0); end;
+
+function TWindowsSystemInfo.GetWindowsRect: TRect;
+begin SystemParametersInfo(SPI_GETWORKAREA, 0, @Result, 0); end;
+
+procedure TWindowsSystemInfo.ReloadSystemCursors;
+begin SystemParametersInfo(SPI_SETCURSORS, 0, nil, UpdateFlag); end;
+
+procedure TWindowsSystemInfo.SetBooleanSetting(Index: Integer;
+  Value: Boolean);
+var RealIndex: Cardinal;
+  NewStyle: Boolean;
+begin
+  RealIndex := NULL;
+  NewStyle := False;
+  case Index of
+    SPI_GETICONTITLEWRAP: RealIndex := SPI_SETICONTITLEWRAP;
+    SPI_GETFONTSMOOTHING: RealIndex := SPI_SETFONTSMOOTHING;
+    SPI_GETDRAGFULLWINDOWS: RealIndex := SPI_SETDRAGFULLWINDOWS;
+    SPI_GETBEEP : RealIndex := SPI_SETBEEP;
+    SPI_GETKEYBOARDCUES: RealIndex := SPI_SETKEYBOARDCUES;
+    SPI_GETKEYBOARDPREF: RealIndex := SPI_SETKEYBOARDPREF;
+    SPI_GETSNAPTODEFBUTTON: RealIndex := SPI_SETSNAPTODEFBUTTON;
+    SPI_GETMENUDROPALIGNMENT:RealIndex := SPI_SETMENUDROPALIGNMENT;
+    SPI_GETMENUFADE : RealIndex := SPI_SETMENUFADE;
+    SPI_GETSHOWSOUNDS : RealIndex := SPI_SETSHOWSOUNDS;
+    SPI_GETLOWPOWERACTIVE : RealIndex := SPI_SETLOWPOWERACTIVE;
+    SPI_GETPOWEROFFACTIVE : RealIndex := SPI_SETPOWEROFFACTIVE;
+    SPI_GETSCREENSAVEACTIVE:RealIndex:= SPI_SETSCREENSAVEACTIVE;
+    SPI_GETACTIVEWNDTRKZORDER: begin RealIndex:= SPI_SETACTIVEWNDTRKZORDER;
+      NewStyle:= True; end;
+    SPI_GETSCREENREADER: RealIndex := SPI_SETSCREENREADER;
+    SPI_GETHOTTRACKING: begin RealIndex:= SPI_SETHOTTRACKING;
+      NewStyle := True; end;
+    SPI_GETUIEFFECTS: begin RealIndex:= SPI_SETUIEFFECTS;
+      NewStyle := True; end;
+    SPI_GETTOOLTIPFADE: begin RealIndex:= SPI_SETTOOLTIPFADE;
+      NewStyle := True; end;
+    SPI_GETACTIVEWINDOWTRACKING: begin RealIndex:= SPI_SETACTIVEWINDOWTRACKING;
+      NewStyle := True; end;
+    SPI_GETMENUANIMATION: begin RealIndex:= SPI_SETMENUANIMATION; NewStyle := True; end;
+    SPI_GETLISTBOXSMOOTHSCROLLING: begin RealIndex:= SPI_SETLISTBOXSMOOTHSCROLLING;
+      NewStyle := True; end;
+    SPI_GETSCREENSAVERRUNNING:;// RealIndex := SPI_SETSCREENSAVERRUNNING;
+    SPI_GETCOMBOBOXANIMATION: begin RealIndex := SPI_SETCOMBOBOXANIMATION;
+      NewStyle := True; end;
+    SPI_GETGRADIENTCAPTIONS: begin RealIndex:= SPI_SETGRADIENTCAPTIONS;
+      NewStyle := True; end;
+    SPI_GETSELECTIONFADE: begin RealIndex := SPI_SETSELECTIONFADE;
+      NewStyle := True; end;
+    SPI_SETTOOLTIPANIMATION: begin RealIndex:= SPI_SETTOOLTIPANIMATION;
+      NewStyle := True; end;
+    SPI_GETCURSORSHADOW: RealIndex := SPI_SETCURSORSHADOW;
+  end;
+
+  if NewStyle then
+    SystemParametersInfo( RealIndex, 0, @Value, UpdateFlag)
+  else
+    SystemParametersInfo(RealIndex, Cardinal(Value), nil, UpdateFlag);
+end;
+
+procedure TWindowsSystemInfo.SetDblClkHeigth(const Value: Integer);
+begin SystemParametersInfo(SPI_SETDOUBLECLKHEIGHT, Value, nil, UpdateFlag); end;
+
+procedure TWindowsSystemInfo.SetDblClkWidth(const Value: Integer);
+begin
+
+end;
+
+procedure TWindowsSystemInfo.SetDoubleClkTime(const Value: UINT);
+begin SetDoubleClickTime( Value ); end;
+
+procedure TWindowsSystemInfo.SetDWORDSetting(Index: Integer; Value: DWORD);
+var RealIndex: Cardinal;
+  NewStyle: Boolean;
+begin
+  RealIndex:= NULL;
+  NewStyle := False;
+  case Index of
+    SPI_GETACTIVEWNDTRKTIMEOUT:
+    begin RealIndex := SPI_SETACTIVEWNDTRKTIMEOUT; NewStyle := True; end;
+    SPI_GETCARETWIDTH:
+    begin RealIndex := SPI_SETCARETWIDTH; NewStyle := True; end;
+  end;
+  if NewStyle then
+    SystemParametersInfo(RealIndex, 0, @Value, UpdateFlag)
+  else
+    SystemParametersInfo(RealIndex, Value, nil, UpdateFlag);
+end;
+
+procedure TWindowsSystemInfo.SetIntegerSetting(Index, Value: Integer);
+var
+  RealIndex: Cardinal;
+begin
+  RealIndex:= NULL;
+  case Index of
+    SPI_GETLOWPOWERTIMEOUT: RealIndex := SPI_SETLOWPOWERTIMEOUT;
+    SPI_GETPOWEROFFTIMEOUT: RealIndex := SPI_SETPOWEROFFTIMEOUT;
+    SPI_GETSCREENSAVETIMEOUT: RealIndex := SPI_SETSCREENSAVETIMEOUT;
+    SPI_GETBORDER: RealIndex := SPI_SETBORDER;
+  end;
+  SystemParametersInfo(RealIndex, Value, nil, UpdateFlag);
+end;
+
+procedure TWindowsSystemInfo.SetMenuShowDelay(const Value: DWORD);
+begin SystemParametersInfo(SPI_SETMENUSHOWDELAY, Value, nil, UpdateFlag); end;
+
+procedure TWindowsSystemInfo.SetMouseSpeed(const Value: TMouseSpeed);
+begin SystemParametersInfo(SPI_SETMOUSESPEED, 0, @Value, UpdateFlag); end;
+
+procedure TWindowsSystemInfo.SetWindowsRect(const Value: TRect);
+begin SystemParametersInfo(SPI_SETWORKAREA, 0, @Value, UpdateFlag); end;
+
+end.
+{const
+  SPI_GETBEEP = 1;
+  SPI_SETBEEP = 2;
+  SPI_GETMOUSE = 3;
+  SPI_SETMOUSE = 4;
+  SPI_GETBORDER = 5;
+  SPI_SETBORDER = 6;
+  SPI_GETKEYBOARDSPEED = 10;
+  SPI_SETKEYBOARDSPEED = 11;
+  SPI_LANGDRIVER = 12;
+  SPI_ICONHORIZONTALSPACING = 13;
+  SPI_GETSCREENSAVETIMEOUT = 14;
+  SPI_SETSCREENSAVETIMEOUT = 15;
+  SPI_GETSCREENSAVEACTIVE = 16;
+  SPI_SETSCREENSAVEACTIVE = 17;
+  SPI_GETGRIDGRANULARITY = 18;
+  SPI_SETGRIDGRANULARITY = 19;
+  SPI_SETDESKPATTERN = 21;
+  SPI_GETKEYBOARDDELAY = 22;
+  SPI_SETKEYBOARDDELAY = 23;
+  SPI_ICONVERTICALSPACING = 24;
+  SPI_GETICONTITLEWRAP = 25;
+  SPI_SETICONTITLEWRAP = 26;
+  SPI_GETMENUDROPALIGNMENT = 27;
+  SPI_SETMENUDROPALIGNMENT = 28;
+  SPI_SETDOUBLECLKWIDTH = 29;
+  SPI_SETDOUBLECLKHEIGHT = 30;
+  SPI_GETICONTITLELOGFONT = 31;
+  SPI_SETDOUBLECLICKTIME = 32;
+  SPI_SETMOUSEBUTTONSWAP = 33;
+  SPI_SETICONTITLELOGFONT = 34;
+  SPI_GETFASTTASKSWITCH = 35;
+  SPI_SETFASTTASKSWITCH = 36;
+  SPI_SETDRAGFULLWINDOWS = 37;
+  SPI_GETDRAGFULLWINDOWS = 38;
+  SPI_GETNONCLIENTMETRICS = 41;
+  SPI_SETNONCLIENTMETRICS = 42;
+  SPI_GETMINIMIZEDMETRICS = 43;
+  SPI_SETMINIMIZEDMETRICS = 44;
+  SPI_GETICONMETRICS = 45;
+  SPI_SETICONMETRICS = 46;
+  SPI_SETWORKAREA = 47;
+  SPI_GETWORKAREA = 48;
+  SPI_SETPENWINDOWS = 49;
+
+  SPI_GETHIGHCONTRAST = 66;
+  SPI_SETHIGHCONTRAST = 67;
+  SPI_GETKEYBOARDPREF = 68;
+  SPI_SETKEYBOARDPREF = 69;
+  SPI_GETSCREENREADER = 70;
+  SPI_SETSCREENREADER = 71;
+  SPI_GETANIMATION = 72;
+  SPI_SETANIMATION = 73;
+  SPI_GETFONTSMOOTHING = 74;
+  SPI_SETFONTSMOOTHING = 75;
+  SPI_SETDRAGWIDTH = 76;
+  SPI_SETDRAGHEIGHT = 77;
+  SPI_SETHANDHELD = 78;
+  SPI_GETLOWPOWERTIMEOUT = 79;
+  SPI_GETPOWEROFFTIMEOUT = 80;
+  SPI_SETLOWPOWERTIMEOUT = 81;
+  SPI_SETPOWEROFFTIMEOUT = 82;
+  SPI_GETLOWPOWERACTIVE = 83;
+  SPI_GETPOWEROFFACTIVE = 84;
+  SPI_SETLOWPOWERACTIVE = 85;
+  SPI_SETPOWEROFFACTIVE = 86;
+  SPI_SETCURSORS = 87;
+  SPI_SETICONS = 88;
+  SPI_GETDEFAULTINPUTLANG = 89;
+  SPI_SETDEFAULTINPUTLANG = 90;
+  SPI_SETLANGTOGGLE = 91;
+  SPI_GETWINDOWSEXTENSION = 92;
+  SPI_SETMOUSETRAILS = 93;
+  SPI_GETMOUSETRAILS = 94;
+  SPI_SETSCREENSAVERRUNNING = 97;
+  SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
+  SPI_GETFILTERKEYS = 50;
+  SPI_SETFILTERKEYS = 51;
+  SPI_GETTOGGLEKEYS = 52;
+  SPI_SETTOGGLEKEYS = 53;
+  SPI_GETMOUSEKEYS = 54;
+  SPI_SETMOUSEKEYS = 55;
+  SPI_GETSHOWSOUNDS = 56;
+  SPI_SETSHOWSOUNDS = 57;
+  SPI_GETSTICKYKEYS = 58;
+  SPI_SETSTICKYKEYS = 59;
+  SPI_GETACCESSTIMEOUT = 60;
+  SPI_SETACCESSTIMEOUT = 61;
+  SPI_GETSERIALKEYS = 62;
+  SPI_SETSERIALKEYS = 63;
+  SPI_GETSOUNDSENTRY = 64;
+  SPI_SETSOUNDSENTRY = 65;
+  SPI_GETSNAPTODEFBUTTON = 95;
+  SPI_SETSNAPTODEFBUTTON = 96;
+  SPI_GETMOUSEHOVERWIDTH = 98;
+  SPI_SETMOUSEHOVERWIDTH = 99;
+  SPI_GETMOUSEHOVERHEIGHT = 100;
+  SPI_SETMOUSEHOVERHEIGHT = 101;
+  SPI_GETMOUSEHOVERTIME = 102;
+  SPI_SETMOUSEHOVERTIME = 103;
+  SPI_GETWHEELSCROLLLINES = 104;
+  SPI_SETWHEELSCROLLLINES = 105;
+
+
+  SPI_GETSHOWIMEUI = 110;
+  SPI_SETSHOWIMEUI = 111;
+  SPI_GETMOUSESPEED = 112;
+  SPI_SETMOUSESPEED = 113;
+  SPI_GETSCREENSAVERRUNNING = 114;
+  SPI_GETACTIVEWINDOWTRACKING = $1000;
+  SPI_SETACTIVEWINDOWTRACKING = $1001;
+  SPI_GETMENUANIMATION = $1002;
+  SPI_SETMENUANIMATION = $1003;
+  SPI_GETCOMBOBOXANIMATION = $1004;
+  SPI_SETCOMBOBOXANIMATION = $1005;
+  SPI_GETLISTBOXSMOOTHSCROLLING = $1006;
+  SPI_SETLISTBOXSMOOTHSCROLLING = $1007;
+  SPI_GETGRADIENTCAPTIONS = $1008;
+  SPI_SETGRADIENTCAPTIONS = $1009;
+  SPI_GETKEYBOARDCUES = $100A;
+
+  SPI_GETMENUUNDERLINES = SPI_GETKEYBOARDCUES;
+  SPI_SETMENUUNDERLINES = SPI_SETKEYBOARDCUES;
+  SPI_GETACTIVEWNDTRKZORDER = $100C;
+  SPI_SETACTIVEWNDTRKZORDER = $100D;
+  SPI_GETHOTTRACKING = $100E;
+  SPI_SETHOTTRACKING = $100F;
+
+  SPI_GETSELECTIONFADE = $1014;
+  SPI_SETSELECTIONFADE = $1015;
+  SPI_GETTOOLTIPANIMATION = $1016;
+  SPI_SETTOOLTIPANIMATION = $1017;
+  SPI_GETTOOLTIPFADE = $1018;
+  SPI_SETTOOLTIPFADE = $1019;
+  SPI_GETCURSORSHADOW = $101A;
+  SPI_SETCURSORSHADOW = $101B;
+  SPI_GETUIEFFECTS = $103E;
+  SPI_SETUIEFFECTS = $103F;
+  SPI_GETFOREGROUNDLOCKTIMEOUT = $2000;
+  SPI_SETFOREGROUNDLOCKTIMEOUT = $2001;
+  SPI_GETACTIVEWNDTRKTIMEOUT = $2002;
+  SPI_SETACTIVEWNDTRKTIMEOUT = $2003;
+  SPI_GETFOREGROUNDFLASHCOUNT = $2004;
+  SPI_SETFOREGROUNDFLASHCOUNT = $2005;
+  SPI_GETCARETWIDTH = $2006;
+  SPI_SETCARETWIDTH = $2007;
+}
+
+for more information u could just use Microsoft Developers Network (hey it costs an eye but here is the info you will get read below) I left the other get/set parameters constants defined in the above code I will update this article asap but if anybody would like to help it is welcome
+
+<------------------BEGIN MSDN EXTRACT ABOUT SYSTEMPARAMETERS INFO --------------->
+SystemParametersInfo
+The SystemParametersInfo function retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter.
+
+BOOL SystemParametersInfo(
+  UINT uiAction, // system parameter to retrieve or set
+  UINT uiParam, // depends on action to be taken
+  PVOID pvParam, // depends on action to be taken
+  UINT fWinIni // user profile update option
+);
+Parameters
+uiAction
+[in] Specifies the system-wide parameter to retrieve or set. This parameter can be one of the values from the following tables.
+The following are the accessibility parameters. Accessibility parameter Meaning
+SPI_GETACCESSTIMEOUT Retrieves information about the time-out period associated with the accessibility features. The pvParam parameter must point to an ACCESSTIMEOUT structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(ACCESSTIMEOUT).
+SPI_GETFILTERKEYS Retrieves information about the FilterKeys accessibility feature. The pvParam parameter must point to a FILTERKEYS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(FILTERKEYS).
+SPI_GETHIGHCONTRAST Windows 95/98, Windows 2000: Retrieves information about the HighContrast accessibility feature. The pvParam parameter must point to a HIGHCONTRAST structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(HIGHCONTRAST).
+SPI_GETMOUSECLICKLOCK Windows Me: Gets the state of the Mouse ClickLock feature. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled, or FALSE otherwise.
+SPI_GETMOUSECLICKLOCKTIME Windows Me: Gets the time delay before the primary mouse button is locked. The pvParam parameter must point to DWORD that receives the time delay. This is only enabled if SPI_SETMOUSECLICKLOCK is set to TRUE.
+SPI_GETMOUSEKEYS Retrieves information about the MouseKeys accessibility feature. The pvParam parameter must point to a MOUSEKEYS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(MOUSEKEYS).
+SPI_GETMOUSESONAR Windows Me: Gets the state of the Mouse Sonar feature. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled or FALSE otherwise.
+SPI_GETMOUSEVANISH Windows Me: Gets the state of the Mouse Vanish feature. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled or FALSE otherwise.
+SPI_GETSCREENREADER Windows 95/98, Windows 2000: Determines whether a screen reviewer utility is running. A screen reviewer utility directs textual information to an output device, such as a speech synthesizer or Braille display. When this flag is set, an application should provide textual information in situations where it would otherwise present the information graphically.
+The pvParam parameter is a pointer to a BOOL variable that receives TRUE if a screen reviewer utility is running, or FALSE otherwise.
+
+SPI_GETSERIALKEYS Windows 95/98: Retrieves information about the SerialKeys accessibility feature. The pvParam parameter must point to a SERIALKEYS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(SERIALKEYS).
+Windows NT/2000: Not supported.
+
+SPI_GETSHOWSOUNDS Determines whether the Show Sounds accessibility flag is on or off. If it is on, the user requires an application to present information visually in situations where it would otherwise present the information only in audible form. The pvParam parameter must point to a BOOL variable that receives TRUE if the feature is on, or FALSE if it is off.
+Using this value is equivalent to calling GetSystemMetrics (SM_SHOWSOUNDS). That is the recommended call.
+
+SPI_GETSOUNDSENTRY Retrieves information about the SoundSentry accessibility feature. The pvParam parameter must point to a SOUNDSENTRY structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(SOUNDSENTRY).
+SPI_GETSTICKYKEYS Retrieves information about the StickyKeys accessibility feature. The pvParam parameter must point to a STICKYKEYS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(STICKYKEYS).
+SPI_GETTOGGLEKEYS Retrieves information about the ToggleKeys accessibility feature. The pvParam parameter must point to a TOGGLEKEYS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(TOGGLEKEYS).
+SPI_SETACCESSTIMEOUT Sets the time-out period associated with the accessibility features. The pvParam parameter must point to an ACCESSTIMEOUT structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(ACCESSTIMEOUT).
+SPI_SETFILTERKEYS Sets the parameters of the FilterKeys accessibility feature. The pvParam parameter must point to a FILTERKEYS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(FILTERKEYS).
+SPI_SETHIGHCONTRAST Windows 95/98, Windows 2000: Sets the parameters of the HighContrast accessibility feature. The pvParam parameter must point to a HIGHCONTRAST structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(HIGHCONTRAST).
+SPI_SETMOUSECLICKLOCK Windows Me: Turns the Mouse ClickLock accessibility feature on or off. This feature temporarily locks down the primary mouse button when that button is clicked and held down for the time specified by SPI_SETMOUSECLICKLOCKTIME. The uiParam parameter specifies TRUE for on, or FALSE for off. The default is off.
+For more information, see Remarks.
+
+SPI_SETMOUSECLICKLOCKTIME Windows Me: Adjusts the time delay before the primary mouse button is locked. The uiParam parameter specifies the time delay in microseconds. For example, specify 1000 for a 1 second delay. The default is 1200.
+SPI_SETMOUSEKEYS Sets the parameters of the MouseKeys accessibility feature. The pvParam parameter must point to a MOUSEKEYS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(MOUSEKEYS).
+SPI_SETMOUSESONAR Windows Me and Whistler: Turns the Sonar accessibility feature on or off. This feature briefly shows several concentric circles around the mouse pointer when the user presses and releases the CTRL key. The uiParam parameter specifies TRUE for on and FALSE for off. The default is off.
+SPI_SETMOUSEVANISH Windows Me and Whistler: Turns the Vanish feature on or off. This feature hides the mouse pointer when the user types; the pointer reappears when the user moves the mouse. The uiParam parameter specifies TRUE for on and FALSE for off.
+The default is off.
+
+SPI_SETSCREENREADER Windows 95/98, Windows 2000: Indicates whether a screen review utility is running. The uiParam parameter specifies TRUE for on, or FALSE for off.
+SPI_SETSERIALKEYS Windows 95/98: Sets the parameters of the SerialKeys accessibility feature. The pvParam parameter must point to a SERIALKEYS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(SERIALKEYS). Windows NT/2000: Not supported.
+SPI_SETSHOWSOUNDS Sets the ShowSounds accessibility feature as on or off. The uiParam parameter specifies TRUE for on, or FALSE for off.
+SPI_SETSOUNDSENTRY Sets the parameters of the SoundSentry accessibility feature. The pvParam parameter must point to a SOUNDSENTRY structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(SOUNDSENTRY).
+SPI_SETSTICKYKEYS Sets the parameters of the StickyKeys accessibility feature. The pvParam parameter must point to a STICKYKEYS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(STICKYKEYS).
+SPI_SETTOGGLEKEYS Sets the parameters of the ToggleKeys accessibility feature. The pvParam parameter must point to a TOGGLEKEYS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(TOGGLEKEYS).
+
+
+
+The following are the desktop parameters. Desktop parameter Meaning
+SPI_GETDESKWALLPAPER Windows 2000: Retrieves the full path of the bitmap file for the desktop wallpaper. The pvParam parameter must point to a buffer that receives a null-terminated path string. Set the uiParam parameter to the size, in characters, of the pvParam buffer. The returned string will not exceed MAX_PATH characters. If there is no desktop wallpaper, the returned string is empty.
+SPI_GETFONTSMOOTHING Indicates whether the font smoothing feature is enabled. This feature uses font antialiasing to make font curves appear smoother by painting pixels at different gray levels.
+The pvParam parameter must point to a BOOL variable that receives TRUE if the feature is enabled, or FALSE if it is not.
+
+Windows 95: This flag is supported only if Windows Plus! is installed. See SPI_GETWINDOWSEXTENSION.
+
+SPI_GETWORKAREA Retrieves the size of the work area on the primary display monitor. The work area is the portion of the screen not obscured by the system taskbar or by application desktop toolbars. The pvParam parameter must point to a RECT structure that receives the coordinates of the work area, expressed in virtual screen coordinates.
+To get the work area of a monitor other than the primary display monitor, call the GetMonitorInfo function.
+
+SPI_SETCURSORS Reloads the system cursors. Set the uiParam parameter to zero and the pvParam parameter to NULL
+SPI_SETDESKPATTERN Sets the current desktop pattern by causing Windows to read the Pattern= setting from the WIN.INI file.
+SPI_SETDESKWALLPAPER Sets the desktop wallpaper. The value of the pvParam parameter determines the new wallpaper. To specify a wallpaper bitmap, set pvParam to point to a null-terminated string containing the name of a bitmap file. Setting pvParam to "" removes the wallpaper. Setting pvParam to SETWALLPAPER_DEFAULT or NULL reverts to the default wallpaper.
+SPI_SETFONTSMOOTHING Enables or disables the font smoothing feature, which uses font antialiasing to make font curves appear smoother by painting pixels at different gray levels.
+To enable the feature, set the uiParam parameter to TRUE. To disable the feature, set uiParam to FALSE.
+
+Windows 95: This flag is supported only if Windows Plus! is installed. See SPI_GETWINDOWSEXTENSION.
+
+SPI_SETWORKAREA Sets the size of the work area. The work area is the portion of the screen not obscured by the system taskbar or by application desktop toolbars. The pvParam parameter is a pointer to a RECT structure that specifies the new work area rectangle, expressed in virtual screen coordinates. In a system with multiple display monitors, the function sets the work area of the monitor that contains the specified rectangle.
+If pvParam is NULL, the function sets the work area of the primary display monitor to the full screen.
+
+
+
+
+The following are the icon parameters. Icon parameter Meaning
+SPI_GETICONMETRICS Retrieves the metrics associated with icons. The pvParam parameter must point to an ICONMETRICS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(ICONMETRICS).
+SPI_GETICONTITLELOGFONT Retrieves the logical font information for the current icon-title font. The uiParam parameter specifies the size of a LOGFONT structure, and the pvParam parameter must point to the LOGFONT structure to fill in.
+SPI_GETICONTITLEWRAP Determines whether icon-title wrapping is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled, or FALSE otherwise.
+SPI_ICONHORIZONTALSPACING Sets or retrieves the width, in pixels, of an icon cell. The system uses this rectangle to arrange icons in large icon view.
+To set this value, set uiParam to the new value and set pvParam to NULL. You cannot set this value to less than SM_CXICON.
+
+To retrieve this value, pvParam must point to an integer that receives the current value.
+
+SPI_ICONVERTICALSPACING Sets or retrieves the height, in pixels, of an icon cell.
+To set this value, set uiParam to the new value and set pvParam to NULL. You cannot set this value to less than SM_CYICON.
+
+To retrieve this value, pvParam must point to an integer that receives the current value.
+
+SPI_SETICONMETRICS Sets the metrics associated with icons. The pvParam parameter must point to an ICONMETRICS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(ICONMETRICS).
+SPI_SETICONS Reloads the system icons. Set the uiParam parameter to zero and the pvParam parameter to NULL
+SPI_SETICONTITLELOGFONT Sets the font that is used for icon titles. The uiParam parameter specifies the size of a LOGFONT structure, and the pvParam parameter must point to a LOGFONT structure.
+SPI_SETICONTITLEWRAP Turns icon-title wrapping on or off. The uiParam parameter specifies TRUE for on, or FALSE for off.
+
+
+
+The following are the input parameters. They include parameters related to the keyboard, mouse, input language, and the warning beeper. Input parameter Meaning
+SPI_GETBEEP Indicates whether the warning beeper is on.
+The pvParam parameter must point to a BOOL variable that receives TRUE if the beeper is on, or FALSE if it is off.
+
+SPI_GETDEFAULTINPUTLANG Returns the input locale identifier for the system default input language. The pvParam parameter must point to an HKL variable that receives this value. For more information, see Languages, Locales, and Keyboard Layouts.
+SPI_GETKEYBOARDCUES Windows 98, Windows 2000: Indicates whether menu access keys are always underlined. The pvParam parameter must point to a BOOL variable that receives TRUE if menu access keys are always underlined, and FALSE if they are underlined only when the menu is activated by the keyboard.
+SPI_GETKEYBOARDDELAY Retrieves the keyboard repeat-delay setting, which is a value in the range from 0 (approximately 250 ms delay) through 3 (approximately 1 second delay). The actual delay associated with each value may vary depending on the hardware. The pvParam parameter must point to an integer variable that receives the setting.
+SPI_GETKEYBOARDPREF Windows 95/98, Windows 2000: Determines whether the user relies on the keyboard instead of the mouse, and wants applications to display keyboard interfaces that would otherwise be hidden. The pvParam parameter must point to a BOOL variable that receives TRUE if the user relies on the keyboard; or FALSE otherwise.
+SPI_GETKEYBOARDSPEED Retrieves the keyboard repeat-speed setting, which is a value in the range from 0 (approximately 2.5 repetitions per second) through 31 (approximately 30 repetitions per second). The actual repeat rates are hardware-dependent and may vary from a linear scale by as much as 20%. The pvParam parameter must point to a DWORD variable that receives the setting.
+SPI_GETMOUSE Retrieves the two mouse threshold values and the mouse acceleration. The pvParam parameter must point to an array of three integers that receives these values. See mouse_event for further information.
+SPI_GETMOUSEHOVERHEIGHT Windows NT 4.0, Windows 98, Windows 2000: Gets the height, in pixels, of the rectangle within which the mouse pointer has to stay for TrackMouseEvent to generate a WM_MOUSEHOVER message. The pvParam parameter must point to a UINT variable that receives the height.
+SPI_GETMOUSEHOVERTIME Windows NT 4.0, Windows 98, Windows 2000: Gets the time, in milliseconds, that the mouse pointer has to stay in the hover rectangle for TrackMouseEvent to generate a WM_MOUSEHOVER message. The pvParam parameter must point to a UINT variable that receives the time.
+SPI_GETMOUSEHOVERWIDTH Windows NT 4.0, Windows 98, Windows 2000: Gets the width, in pixels, of the rectangle within which the mouse pointer has to stay for TrackMouseEvent to generate a WM_MOUSEHOVER message. The pvParam parameter must point to a UINT variable that receives the width.
+SPI_GETMOUSESPEED Windows 98, Windows 2000: Retrieves the current mouse speed. The mouse speed determines how far the pointer will move based on the distance the mouse moves. The pvParam parameter must point to an integer that receives a value which ranges between 1 (slowest) and 20 (fastest). A value of 10 is the default. The value can be set by an end user using the mouse control panel application or by an application using SPI_SETMOUSESPEED.
+SPI_GETMOUSETRAILS Windows 95/98: Indicates whether the Mouse Trails feature is enabled. This feature improves the visibility of mouse cursor movements by briefly showing a trail of cursors and quickly erasing them.
+The pvParam parameter must point to an integer variable that receives a value. If the value is zero or 1, the feature is disabled. If the value is greater than 1, the feature is enabled and the value indicates the number of cursors drawn in the trail. The uiParam parameter is not used.
+
+Windows NT/2000: Not supported.
+
+SPI_GETSNAPTODEFBUTTON Windows NT 4.0, Windows 98, Windows 2000: Determines whether the snap-to-default-button feature is enabled. If enabled, the mouse cursor automatically moves to the default button, such as OK or Apply, of a dialog box. The pvParam parameter must point to a BOOL variable that receives TRUE if the feature is on, or FALSE if it is off.
+SPI_GETWHEELSCROLLLINES Windows NT 4.0, Windows 98, Windows 2000: Gets the number of lines to scroll when the mouse wheel is rotated. The pvParam parameter must point to a UINT variable that receives the number of lines. The default value is 3.
+SPI_SETBEEP Turns the warning beeper on or off. The uiParam parameter specifies TRUE for on, or FALSE for off.
+SPI_SETDEFAULTINPUTLANG Sets the default input language for the system shell and applications. The specified language must be displayable using the current system character set. The pvParam parameter must point to an HKL variable that contains the input locale identifier for the default language. For more information, see Languages, Locales, and Keyboard Layouts.
+SPI_SETDOUBLECLICKTIME Sets the double-click time for the mouse to the value of the uiParam parameter. The double-click time is the maximum number of milliseconds that can occur between the first and second clicks of a double-click. You can also call the SetDoubleClickTime function to set the double-click time. To get the current double-click time, call the GetDoubleClickTime function.
+SPI_SETDOUBLECLKHEIGHT Sets the height of the double-click rectangle to the value of the uiParam parameter.
+The double-click rectangle is the rectangle within which the second click of a double-click must fall for it to be registered as a double-click.
+
+To retrieve the height of the double-click rectangle, call GetSystemMetrics with the SM_CYDOUBLECLK flag.
+
+SPI_SETDOUBLECLKWIDTH Sets the width of the double-click rectangle to the value of the uiParam parameter.
+The double-click rectangle is the rectangle within which the second click of a double-click must fall for it to be registered as a double-click.
+
+To retrieve the width of the double-click rectangle, call GetSystemMetrics with the SM_CXDOUBLECLK flag.
+
+SPI_SETKEYBOARDCUES Windows 98, Windows 2000: Sets the underlining of menu access key letters. The pvParam parameter is a BOOL variable. Set pvParam to TRUE to always underline menu access keys, or FALSE to underline menu access keys only when the menu is activated from the keyboard.
+SPI_SETKEYBOARDDELAY Sets the keyboard repeat-delay setting. The uiParam parameter must specify 0, 1, 2, or 3, where zero sets the shortest delay (approximately 250 ms) and 3 sets the longest delay (approximately 1 second). The actual delay associated with each value may vary depending on the hardware.
+SPI_SETKEYBOARDPREF Windows 95/98, Windows 2000: Sets the keyboard preference. The uiParam parameter specifies TRUE if the user relies on the keyboard instead of the mouse, and wants applications to display keyboard interfaces that would otherwise be hidden; uiParam is FALSE otherwise.
+SPI_SETKEYBOARDSPEED Sets the keyboard repeat-speed setting. The uiParam parameter must specify a value in the range from 0 (approximately 2.5 repetitions per second) through 31 (approximately 30 repetitions per second). The actual repeat rates are hardware-dependent and may vary from a linear scale by as much as 20%. If uiParam is greater than 31, the parameter is set to 31.
+SPI_SETLANGTOGGLE Sets the hot key set for switching between input languages. The uiParam and pvParam parameters are not used. The value sets the shortcut keys in the keyboard property sheets by reading the registry again. The registry must be set before this flag is used. the path in the registry is \HKEY_CURRENT_USER\keyboard layout\toggle. Valid values are "1" = ALT+SHIFT, "2" = CTRL+SHIFT, and "3" = none.
+SPI_SETMOUSE Sets the two mouse threshold values and the mouse acceleration. The pvParam parameter must point to an array of three integers that specifies these values. See mouse_event for further information.
+SPI_SETMOUSEBUTTONSWAP Swaps or restores the meaning of the left and right mouse buttons. The uiParam parameter specifies TRUE to swap the meanings of the buttons, or FALSE to restore their original meanings.
+SPI_SETMOUSEHOVERHEIGHT Windows NT 4.0, Windows 98, Windows 2000: Sets the height, in pixels, of the rectangle within which the mouse pointer has to stay for TrackMouseEvent to generate a WM_MOUSEHOVER message. Set the uiParam parameter to the new height.
+SPI_SETMOUSEHOVERTIME Windows NT 4.0, Windows 98, Windows 2000: Sets the time, in milliseconds, that the mouse pointer has to stay in the hover rectangle for TrackMouseEvent to generate a WM_MOUSEHOVER message. This is used only if you pass HOVER_DEFAULT in the dwHoverTime parameter in the call to TrackMouseEvent. Set the uiParam parameter to the new time.
+SPI_SETMOUSEHOVERWIDTH Windows NT 4.0, Windows 98, Windows 2000: Sets the width, in pixels, of the rectangle within which the mouse pointer has to stay for TrackMouseEvent to generate a WM_MOUSEHOVER message. Set the uiParam parameter to the new width.
+SPI_SETMOUSESPEED Windows 98, Windows 2000: Sets the current mouse speed. The pvParam parameter is an integer between 1 (slowest) and 20 (fastest). A value of 10 is the default. This value is typically set using the mouse control panel application.
+SPI_SETMOUSETRAILS Windows 95/98: Enables or disables the Mouse Trails feature, which improves the visibility of mouse cursor movements by briefly showing a trail of cursors and quickly erasing them.
+To disable the feature, set the uiParam parameter to zero or 1. To enable the feature, set uiParam to a value greater than 1 to indicate the number of cursors drawn in the trail.
+
+Windows NT/2000: Not supported.
+
+SPI_SETSNAPTODEFBUTTON Windows NT 4.0, Windows 98, Windows 2000: Enables or disables the snap-to-default-button feature. If enabled, the mouse cursor automatically moves to the default button, such as OK or Apply, of a dialog box. Set the uiParam parameter to TRUE to enable the feature, or FALSE to disable it. Applications should use the ShowWindow function when displaying a dialog box so the dialog manager can position the mouse cursor.
+SPI_SETWHEELSCROLLLINES Windows NT 4.0, Windows 98, Windows 2000: Sets the number of lines to scroll when the mouse wheel is rotated. The number of lines is set from the uiParam parameter.
+The number of lines is the suggested number of lines to scroll when the mouse wheel is rolled without using modifier keys. If the number is 0, then no scrolling should occur. If the number of lines to scroll is greater than the number of lines viewable, and in particular if it is WHEEL_PAGESCROLL (#defined as UINT_MAX), the scroll operation should be interpreted as clicking once in the page down or page up regions of the scroll bar.
+
+
+
+
+The following are the menu parameters. Menu parameter Meaning
+SPI_GETMENUDROPALIGNMENT Determines whether pop-up menus are left-aligned or right-aligned, relative to the corresponding menu-bar item. The pvParam parameter must point to a BOOL variable that receives TRUE if left-aligned, or FALSE otherwise.
+SPI_GETMENUFADE Windows 2000: Indicates whether menu fade animation is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE when fade animation is enabled and FALSE when it is disabled. If fade animation is disabled, menus use slide animation. This flag is ignored unless menu animation is enabled, which you can do using the SPI_SETMENUANIMATION flag. For more information, see AnimateWindow.
+SPI_GETMENUSHOWDELAY Windows 95/98, Windows NT 4.0, Windows 2000: Indicates the time, in milliseconds, that the system waits before displaying a shortcut menu when the mouse cursor is over a submenu item. The pvParam parameter must point to a DWORD variable that receives the time of the delay.
+SPI_SETMENUDROPALIGNMENT Sets the alignment value of pop-up menus. The uiParam parameter specifies TRUE for right alignment, or FALSE for left alignment.
+SPI_SETMENUFADE Windows 2000: Enables or disables menu fade animation. Set pvParam to TRUE to enable the menu fade effect or FALSE to disable it. If fade animation is disabled, menus use slide animation. he The menu fade effect is possible only if the system has a color depth of more than 256 colors. This flag is ignored unless SPI_MENUANIMATION is also set. For more information, see AnimateWindow.
+SPI_SETMENUSHOWDELAY Windows 95/98, Windows NT 4.0, Windows 2000: Set uiParam to the time, in milliseconds, that the system waits before displaying a shortcut menu when the mouse cursor is over a submenu item.
+
+
+
+The following are the power parameters. Power parameter Meaning
+SPI_GETLOWPOWERACTIVE Determines whether the low-power phase of screen saving is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled, or FALSE if disabled.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_GETLOWPOWERTIMEOUT Retrieves the time-out value for the low-power phase of screen saving. The pvParam parameter must point to an integer variable that receives the value.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_GETPOWEROFFACTIVE Determines whether the power-off phase of screen saving is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled, or FALSE if disabled.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_GETPOWEROFFTIMEOUT Retrieves the time-out value for the power-off phase of screen saving. The pvParam parameter must point to an integer variable that receives the value.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_SETLOWPOWERACTIVE Activates or deactivates the low-power phase of screen saving. Set uiParam to 1 to activate, or zero to deactivate. The pvParam parameter must be NULL.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_SETLOWPOWERTIMEOUT Sets the time-out value, in seconds, for the low-power phase of screen saving. The uiParam parameter specifies the new value. The pvParam parameter must be NULL.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_SETPOWEROFFACTIVE Activates or deactivates the power-off phase of screen saving. Set uiParam to 1 to activate, or zero to deactivate. The pvParam parameter must be NULL.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+SPI_SETPOWEROFFTIMEOUT Sets the time-out value, in seconds, for the power-off phase of screen saving. The uiParam parameter specifies the new value. The pvParam parameter must be NULL.
+Windows 98: This flag is supported for 16-bit and 32-bit applications.
+
+Windows 95: This flag is supported for 16-bit applications only.
+
+Windows NT/2000: This flag is supported for 32-bit applications on Windows 2000 and later. It is not supported for 16-bit applications.
+
+
+
+
+The following are the screen saver parameters. Screen saver parameter Meaning
+SPI_GETSCREENSAVEACTIVE Determines whether screen saving is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if screen saving is enabled, or FALSE otherwise.
+SPI_GETSCREENSAVERRUNNING Windows 98, Windows 2000: Determines whether a screen saver is currently running on the window station of the calling process. The pvParam parameter must point to a BOOL variable that receives TRUE if a screen saver is currently running, or FALSE otherwise. Note that only the interactive window station, "WinSta0", can have a screen saver running.
+SPI_GETSCREENSAVETIMEOUT Retrieves the screen saver time-out value, in seconds. The pvParam parameter must point to an integer variable that receives the value.
+SPI_SETSCREENSAVEACTIVE Sets the state of the screen saver. The uiParam parameter specifies TRUE to activate screen saving, or FALSE to deactivate it.
+SPI_SETSCREENSAVERRUNNING Windows 95/98: Used internally; applications should not use this flag.
+SPI_SETSCREENSAVETIMEOUT Sets the screen saver time-out value to the value of the uiParam parameter. This value is the amount of time, in seconds, that the system must be idle before the screen saver activates.
+
+
+
+The following are the UI effects parameters. The SPI_SETUIEFFECTS value is used to enable or disable all the UI effect values at once. This table contains the complete list of UI effect values. UI effects parameter Meaning
+SPI_GETCOMBOBOXANIMATION Windows 98, Windows 2000: Indicates whether the slide-open effect for combo boxes is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE for enabled, or FALSE for disabled.
+SPI_GETCURSORSHADOW Windows 2000: Indicates whether the cursor has a shadow around it. The pvParam parameter must point to a BOOL variable that receives TRUE if the shadow is enabled, FALSE if it is disabled. This effect appears only if the system has a color depth of more than 256 colors.
+SPI_GETGRADIENTCAPTIONS Windows 98, Windows 2000: Indicates whether the gradient effect for window title bars is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE for enabled, or FALSE for disabled. For more information about the gradient effect, see the GetSysColor function.
+SPI_GETHOTTRACKING Windows 98, Windows 2000: Indicates whether hot tracking of user-interface elements, such as menu names on menu bars, is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE for enabled, or FALSE for disabled.
+Hot tracking means that when the cursor moves over an item, it is highlighted but not selected. You can query this value to decide whether to use hot tracking in the user interface of your application.
+
+SPI_GETLISTBOXSMOOTHSCROLLING Windows 98, Windows 2000: Indicates whether the smooth-scrolling effect for list boxes is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE for enabled, or FALSE for disabled.
+SPI_GETMENUANIMATION Windows 98, Windows 2000: Indicates whether the menu animation feature is enabled. This master switch must be on to enable menu animation effects. The pvParam parameter must point to a BOOL variable that receives TRUE if animation is enabled and FALSE if it is disabled.
+Windows 2000: If animation is enabled, SPI_GETMENUFADE indicates whether menus use fade or slide animation.
+
+SPI_GETMENUUNDERLINES Windows 98, Windows 2000: Same as SPI_GETKEYBOARDCUES.
+SPI_GETSELECTIONFADE Windows 2000: Indicates whether the selection fade effect is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled or FALSE if disabled.
+The selection fade effect causes the menu item selected by the user to remain on the screen briefly while fading out after the menu is dismissed.
+
+SPI_GETTOOLTIPANIMATION Windows 2000: Indicates whether ToolTip animation is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled or FALSE if disabled. If ToolTip animation is enabled, SPI_GETTOOLTIPFADE indicates whether ToolTips use fade or slide animation.
+SPI_GETTOOLTIPFADE Windows 2000: If SPI_SETTOOLTIPANIMATION is enabled, SPI_GETTOOLTIPFADE indicates whether ToolTip animation uses a fade effect or a slide effect. The pvParam parameter must point to a BOOL variable that receives TRUE for fade animation or FALSE for slide animation. For more information on slide and fade effects, see AnimateWindow.
+SPI_GETUIEFFECTS Windows 2000: Indicates whether all UI effects are disabled or not. The pvParam parameter must point to a BOOL variable that receives TRUE if UI effects are enabled, or FALSE if they are disabled. For the complete list of UI effects, see the Remarks section later in this topic.
+SPI_SETCOMBOBOXANIMATION Windows 98, Windows 2000: Enables or disables the slide-open effect for combo boxes. Set the pvParam parameter to TRUE to enable the gradient effect, or FALSE to disable it.
+SPI_SETCURSORSHADOW Windows 2000: Enables or disables a shadow around the cursor. The pvParam parameter is a BOOL variable. Set pvParam to TRUE to enable the shadow or FALSE to disable the shadow. This effect appears only if the system has a color depth of more than 256 colors.
+SPI_SETGRADIENTCAPTIONS Windows 98, Windows 2000: Enables or disables the gradient effect for window title bars. Set the pvParam parameter to TRUE to enable it, or FALSE to disable it. The gradient effect is possible only if the system has a color depth of more than 256 colors. For more information about the gradient effect, see the GetSysColor function.
+SPI_SETHOTTRACKING Windows 98, Windows 2000: Enables or disables hot tracking of user-interface elements such as menu names on menu bars. Set the pvParam parameter to TRUE to enable it, or FALSE to disable it.
+Hot-tracking means that when the cursor moves over an item, it is highlighted but not selected.
+
+SPI_SETLISTBOXSMOOTHSCROLLING Windows 98, Windows 2000: Enables or disables the smooth-scrolling effect for list boxes. Set the pvParam parameter to TRUE to enable the smooth-scrolling effect, or FALSE to disable it.
+SPI_SETMENUANIMATION Windows 98, Windows 2000: Enables or disables menu animation. This master switch must be on for any menu animation to occur. The pvParam parameter is a BOOL variable; set pvParam to TRUE to enable animation and FALSE to disable animation.
+Windows 2000: If animation is enabled, SPI_GETMENUFADE indicates whether menus use fade or slide animation.
+
+SPI_SETMENUUNDERLINES Windows 98, Windows 2000: Same as SPI_SETKEYBOARDCUES.
+SPI_SETSELECTIONFADE Windows 2000: Set pvParam to TRUE to enable the selection fade effect or FALSE to disable it.
+The selection fade effect causes the menu item selected by the user to remain on the screen briefly while fading out after the menu is dismissed. The selection fade effect is possible only if the system has a color depth of more than 256 colors.
+
+SPI_SETTOOLTIPANIMATION Windows 2000: Set pvParam to TRUE to enable ToolTip animation or FALSE to disable it. If enabled, you can use SPI_SETTOOLTIPFADE to specify fade or slide animation.
+SPI_SETTOOLTIPFADE Windows 2000: If the SPI_SETTOOLTIPANIMATION flag is enabled, use SPI_SETTOOLTIPFADE to indicate whether ToolTip animation uses a fade effect or a slide effect. Set pvParam to TRUE for fade animation or FALSE for slide animation. The tooltip fade effect is possible only if the system has a color depth of more than 256 colors. For more information on the slide and fade effects, see the AnimateWindow function.
+SPI_SETUIEFFECTS Windows 2000: Enables or disables UI effects. Set the pvParam parameter to TRUE to enable all UI effects or FALSE to disable all UI effects. For the complete list of UI effects, see the Remarks section later in this topic.
+
+
+
+The following are the window parameters. Window parameter Meaning
+SPI_GETACTIVEWINDOWTRACKING Windows 98, Windows 2000: Indicates whether active window tracking (activating the window the mouse is on) is on or off. The pvParam parameter must point to a BOOL variable that receives TRUE for on, or FALSE for off.
+SPI_GETACTIVEWNDTRKZORDER Windows 98, Windows 2000: Indicates whether windows activated through active window tracking will be brought to the top. The pvParam parameter must point to a BOOL variable that receives TRUE for on, or FALSE for off.
+SPI_GETACTIVEWNDTRKTIMEOUT Windows 98, Windows 2000: Indicates the active window tracking delay, in milliseconds. The pvParam parameter must point to a DWORD variable that receives the time.
+SPI_GETANIMATION Retrieves the animation effects associated with user actions. The pvParam parameter must point to an ANIMATIONINFO structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(ANIMATIONINFO).
+SPI_GETBORDER Retrieves the border multiplier factor that determines the width of a window's sizing border. The pvParam parameter must point to an integer variable that receives this value.
+SPI_GETCARETWIDTH Windows 2000: Indicates the caret width in edit controls. The pvParam parameter must point to a DWORD that receives the width of the caret in pixels.
+SPI_GETDRAGFULLWINDOWS Determines whether dragging of full windows is enabled. The pvParam parameter must point to a BOOL variable that receives TRUE if enabled, or FALSE otherwise.
+Windows 95: This flag is supported only if Windows Plus! is installed. See SPI_GETWINDOWSEXTENSION.
+
+SPI_GETFOREGROUNDFLASHCOUNT Windows 98, Windows 2000: Indicates the number of times SetForegroundWindow will flash the taskbar button when rejecting a foreground switch request. The pvParam parameter must point to a DWORD variable that receives the value.
+SPI_GETFOREGROUNDLOCKTIMEOUT Windows 98, Windows 2000: Indicates the amount of time following user input, in milliseconds, during which the system will not allow applications to force themselves into the foreground. The pvParam parameter must point to a DWORD variable that receives the time.
+SPI_GETMINIMIZEDMETRICS Retrieves the metrics associated with minimized windows. The pvParam parameter must point to a MINIMIZEDMETRICS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(MINIMIZEDMETRICS).
+SPI_GETNONCLIENTMETRICS Retrieves the metrics associated with the nonclient area of nonminimized windows. The pvParam parameter must point to a NONCLIENTMETRICS structure that receives the information. Set the cbSize member of this structure and the uiParam parameter to sizeof(NONCLIENTMETRICS).
+SPI_GETSHOWIMEUI Windows 98, Windows 2000: Indicates whether the IME status window is visible (on a per-user basis). The pvParam parameter must point to a BOOL variable that receives TRUE if the status window is visible, or FALSE if it is not.
+SPI_SETACTIVEWINDOWTRACKING Windows 98, Windows 2000: Sets active window tracking (activating the window the mouse is on) either on or off. Set pvParam to TRUE for on or FALSE for off.
+SPI_SETACTIVEWNDTRKZORDER Windows 98, Windows 2000: Indicates whether or not windows activated through active window tracking should be brought to the top. Set pvParam to TRUE for on or FALSE for off.
+SPI_SETACTIVEWNDTRKTIMEOUT Windows 98, Windows 2000: Sets the active window tracking delay. Set pvParam to the number of milliseconds to delay before activating the window under the mouse pointer.
+SPI_SETANIMATION Sets the animation effects associated with user actions. The pvParam parameter must point to an ANIMATIONINFO structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(ANIMATIONINFO).
+SPI_SETBORDER Sets the border multiplier factor that determines the width of a window's sizing border. The uiParam parameter specifies the new value.
+SPI_SETCARETWIDTH Windows 2000: Sets the caret width in edit controls. Set pvParam to the desired width, in pixels. The default and minimum value is 1.
+SPI_SETDRAGFULLWINDOWS Sets dragging of full windows either on or off. The uiParam parameter specifies TRUE for on, or FALSE for off.
+Windows 95: This flag is supported only if Windows Plus! is installed. See SPI_GETWINDOWSEXTENSION.
+
+SPI_SETDRAGHEIGHT Sets the height, in pixels, of the rectangle used to detect the start of a drag operation. Set uiParam to the new value. To retrieve the drag height, call GetSystemMetrics with the SM_CYDRAG flag.
+SPI_SETDRAGWIDTH Sets the width, in pixels, of the rectangle used to detect the start of a drag operation. Set uiParam to the new value. To retrieve the drag width, call GetSystemMetrics with the SM_CXDRAG flag.
+SPI_SETFOREGROUNDFLASHCOUNT Windows 98, Windows 2000: Sets the number of times SetForegroundWindow will flash the taskbar button when rejecting a foreground switch request. Set pvParam to the number of times to flash.
+SPI_SETFOREGROUNDLOCKTIMEOUT Windows 98, Windows 2000: Sets the amount of time following user input, in milliseconds, during which the system will not allow applications to force themselves into the foreground. Set pvParam to the new timeout value.
+SPI_SETMINIMIZEDMETRICS Sets the metrics associated with minimized windows. The pvParam parameter must point to a MINIMIZEDMETRICS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(MINIMIZEDMETRICS).
+SPI_SETNONCLIENTMETRICS Sets the metrics associated with the nonclient area of nonminimized windows. The pvParam parameter must point to a NONCLIENTMETRICS structure that contains the new parameters. Set the cbSize member of this structure and the uiParam parameter to sizeof(NONCLIENTMETRICS).
+SPI_SETSHOWIMEUI Windows 98, Windows 2000: Sets whether the IME status window is visible or not on a per-user basis. The uiParam parameter specifies TRUE for on or FALSE for off.
+
+
+
+The following parameters are specific to Windows 95 and Windows 98. Windows 95/98 parameter Meaning
+SPI_GETWINDOWSEXTENSION Windows 95: Indicates whether the Windows extension, Windows Plus!, is installed. Set the uiParam parameter to 1. The pvParam parameter is not used. The function returns TRUE if the extension is installed, or FALSE if it is not.
+SPI_SETPENWINDOWS Windows 95/98: Specifies that pen windows is being loaded or unloaded. The uiParam parameter is TRUE when loading and FALSE when unloading pen windows. The pvParam parameter is NULL.
+
+
+
+uiParam
+[in] Depends on the system parameter being queried or set. For more information about system-wide parameters, see the uiAction parameter. If not otherwise indicated, you must specify zero for this parameter.
+pvParam
+[in/out] Depends on the system parameter being queried or set. For more information about system-wide parameters, see the uiAction parameter. If not otherwise indicated, you must specify NULL for this parameter.
+fWinIni
+[in] If a system parameter is being set, specifies whether the user profile is to be updated, and if so, whether the WM_SETTINGCHANGE message is to be broadcast to all top-level windows to notify them of the change.
+This parameter can be zero if you don't want to update the user profile or broadcast the WM_SETTINGCHANGE message, or it can be one or more of the following values. Value Action
+SPIF_UPDATEINIFILE Writes the new system-wide parameter setting to the user profile.
+SPIF_SENDCHANGE Broadcasts the WM_SETTINGCHANGE message after updating the user profile.
+SPIF_SENDWININICHANGE Same as SPIF_SENDCHANGE.
+
+
+
+Return Values
+If the function succeeds, the return value is a nonzero value.
+
+If the function fails, the return value is zero. To get extended error information, call GetLastError.
+
+Remarks
+This function is intended for use with applications that allow the user to customize the environment.
+
+A keyboard layout name should be derived from the hexadecimal value of the language identifier corresponding to the layout. For example, U.S. English has a language identifier of 0x0409, so the primary U.S. English layout is named "00000409." Variants of U.S. English layout, such as the Dvorak layout, are named "00010409," "00020409" and so on. For a list of the primary language identifiers and sublanguage identifiers that make up a language identifier, see the MAKELANGID macro.
+
+Window Me: During the time that the primary button is held down to activate the Mouse ClickLock feature, the user can move the mouse. Once the primary button is locked down, releasing the primary button does not result in a WM_LBUTTONUP message. Thus, it will appear to an application that the primary button is still down. Any subsequent button message releases the primary button, sending a WM_LBUTTONUP message to the application, thus the button can be unlocked programmatically or through the user clicking any button.
+
+Requirements
+  Windows NT/2000: Requires Windows NT 3.1 or later.
+  Windows 95/98: Requires Windows 95 or later.
+  Header: Declared in Winuser.h; include Windows.h.
+  Library: Use User32.lib.
+  Unicode: Implemented as Unicode and ANSI versions on Windows NT/2000.
+
+See Also
+System Information Overview, System Information Functions, ACCESSTIMEOUT, ANIMATIONINFO, FILTERKEYS, HIGHCONTRAST, ICONMETRICS, LOGFONT, MAKELANGID, MINIMIZEDMETRICS, MOUSEKEYS, NONCLIENTMETRICS, RECT, SERIALKEYS, SOUNDSENTRY, STICKYKEYS, TOGGLEKEYS, WM_SETTINGCHANGE
+
+Built on Wednesday, July 12, 2000Requirements
+  Windows NT/2000: Requires Windows NT 3.1 or later.
+  Windows 95/98: Requires Windows 95 or later.
+  Header: Declared in Winuser.h; include Windows.h.
+  Library: Use User32.lib.
+  Unicode: Implemented as Unicode and ANSI versions on Windows NT/2000.
+See Also
+System Information Overview, System Information Functions, ACCESSTIMEOUT, ANIMATIONINFO, FILTERKEYS, HIGHCONTRAST, ICONMETRICS, LOGFONT, MAKELANGID, MINIMIZEDMETRICS, MOUSEKEYS, NONCLIENTMETRICS, RECT, SERIALKEYS, SOUNDSENTRY, STICKYKEYS, TOGGLEKEYS, WM_SETTINGCHANGE
+<-----------------------------------------------END MSDN CODE ----------------------------------------->	
+(C) Cesar Nicolas Pena Nunez	
+Delphi Corner	
+
+[ ... Back | Join Now | Forum | Featured Sites | Forward ... ] 
+Free Programming Code Language
+
+
+ 	
+
+
+© Copyright 2000 - 2004 HowToDoThings.com - all rights reserved.

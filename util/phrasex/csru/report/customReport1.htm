@@ -1,0 +1,11 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users cannot run this report.';
+  endif
+
+  <serverside dataset="sqlLastStatus" action="query">
+<!$ while (s1.fetch AND local.count < 500) )>

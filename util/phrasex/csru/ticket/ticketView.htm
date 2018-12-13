@@ -1,0 +1,13 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  // User can get here from a link in a report sent by email
+  if (session.isValid = 0)
+    response.redirect(app.startPage + '?ticket_id=' + request.ticket_id);
+  endif
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (string.isValidNumber(request.ticket_id) <>

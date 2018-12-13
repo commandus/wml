@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="Balance" title="Account Balance" >
+<p align="left" mode="wrap">
+Your account balance is:
+</p>
+<p align="left" mode="wrap">
+$$10&apos;000.27
+</p>
+<do label="Main Page" type="accept" >
+<go method="post" href="StaticBankMenu.jsp" >
+</go>
+</do>
+</card>
+</wml>

@@ -1,0 +1,183 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType <> 'Manager')
+    error 'Only managers can edit history.';
+  endif
+  if (app.maxText > 0 AND string.length(request.note_data) > app.maxText)
+    set local.extra = string.length(request.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  set local.count = 0;
+  while (local.count < request.att_count)
+    set local.count = local.count + 1;
+    set local.att_name = request.fieldValue('att_name' + local.count);
+    set local.old_att_name = 
+      request.fieldValue('old_att_name' + local.count);
+    if (local.att_name = '')
+      error 'Attachment name cannot be empty.';
+    elseif (local.att_name <> local.old_att_name
+        AND string.findOneOf(local.att_name, '{ ?&+/|\\"\'}') > 0)
+      error '{ ?&+/|\\"\'} not allowed in attachment name.';
+    endif
+  endwhile
+
+  file attach1('request.attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  local.beginTransaction;
+
+  <serverside dataset="sqlHistoryInfo" action="query">
+    SELECT ch_id, ch_made_on, ch_made_by
+    FROM cs_ti_change
+    WHERE ch_id = request.ch_id;
+  </serverside>
+
+  set local.change = 
+    'Edited note entered by ' + sqlHistoryInfo.ch_made_by +
+    ' on ' + sqlHistoryInfo.ch_made_on;
+  sqlHistoryInfo.close;
+
+  set local.ch_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddChange = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, ch_made_by, 
+      ch_made_on, ch_cost, ch_description)
+    VALUES(
+      local.ch_id, request.ticket_id, 'log', session.userID,
+      server.dateTime, 0, local.change);
+  </serverside>
+
+  <serverside dataset="sqlUpdateHistory" action="execute">    UPDATE cs_ti_change SET
+      ch_cost = request.ch_cost, 
+      ch_format = request.note_format, 
+      ch_description = request.note_data
+    WHERE ch_id = request.ch_id;
+  </serverside>
+  </serverside>
+
+  // calculate total cost AFTER cost of this history record is updated.
+  <serverside dataset="sqlSumCost" action="query">
+    SELECT sum(ch_cost) FROM cs_ti_change
+    WHERE ch_ticket_id = request.ticket_id;
+  </serverside>
+  set local.totalCost = sqlSumCost.column(0);
+  sqlSumCost.close;
+
+  <serverside dataset="sqlUpdateCost" action="execute">    UPDATE cs_ticket SET cost = local.totalCost
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+  </serverside>
+
+  // attachments have been defined above when checking their sizes
+  if (attach1.name <> '')
+    set local.att_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAttach1 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id,
+        tif_name, tif_size, tif_content)
+      VALUES(
+        local.att_id, request.ch_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  set local.count = 0;
+  while (local.count < request.att_count)
+    set local.count = local.count + 1;
+      
+    set local.att_id = request.fieldValue('att_id' + local.count);
+    set local.att_name = request.fieldValue('att_name' + local.count);
+    set local.old_att_name = 
+      request.fieldValue('old_att_name' + local.count);
+      
+    if (local.att_name <> local.old_att_name)
+      <serverside dataset="sqlUpdateFileName" action="execute">    UPDATE cs_ti_file '
+          'SET tif_name = \'' + local.att_name + '\' '
+        'WHERE tif_id = ' + local.att_id;
+  </serverside>
+    endif
+  endwhile
+    
+  if (request.fieldExist('del_att') AND request.del_att <> '')
+    tokenizer tkIDs(request.del_att, '\r\n');
+    set local.att_id = tkIDs.nextToken;
+    while (local.att_id <> '')
+      <serverside dataset="sqlDelAtt" action="execute">    DELETE FROM cs_ti_file '
+        'WHERE tif_id = ' + local.att_id;
+  </serverside>
+      set local.att_id = tkIDs.nextToken;
+    endwhile      
+  endif
+    
+  local.commitTransaction;
+
+  set local.backToInfo = 
+    'backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      History Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    History of <a href=
+      "ticketView.htm?ticket_id=$request.ticket_id)&$local.backToInfo)"
+      >request #$request.ticket_id)</a> has been updated. 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

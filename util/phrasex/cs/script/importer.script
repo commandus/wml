@@ -1,0 +1,643 @@
+// pt7cs_importer.script : script for Email Importer of Support
+//
+// Note: all sql objects must be closed before beginTransaction.
+// otherwise it will complain "attribute can not be set now"
+
+if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+  file fAppInit('../appInit.ssp');
+  fAppInit.appInit();
+endif
+
+if (server.emailSenderEnabled = 0) 
+  server.log('Please enable Email Sender so that '
+             'notification emails can be sent.');
+endif
+
+// To prevent email loops, this script imposes a limit on how many emails 
+// it will accept from a sender per day. Change the default if you want.
+
+set local.dailyLimitPerSender = 20;
+
+//---------------------- get default values ------------------------------
+
+file fAppFunc('appFunctions.script');
+
+// If you use different incoming email address for different product, 
+// you can hard code the local.product instead of getting the default.
+// e.g. set local.product = 'HP Printer';
+
+set local.product = '';
+
+if (local.product = '')
+  sql sqlProductInfo = 
+    'SELECT name, ticket_priority, on_new_ticket1, on_new_ticket2 '
+    'FROM pt7cs_product '
+    'WHERE is_def = 1';
+else
+  sql sqlProductInfo = 
+    'SELECT name, ticket_priority, on_new_ticket1, on_new_ticket2 '
+    'FROM pt7cs_product '
+    'WHERE name = \'' + local.product + '\'';
+endif
+
+// apply the routing scheme defined for the product 
+set local.defAssignedTo = '';
+set local.defAssignedToEmail = '';
+set local.defAssignedToStatus = '';
+set local.defAssignedOn = NULL;
+set local.defNotifyAll = 0;
+set local.allStaffEmail = '';
+
+sql sqlPriority = 'SELECT name FROM pt7cs_priority WHERE is_def = 1';
+set local.defPriority = sqlPriority.name;
+sqlPriority.close;
+
+if (sqlProductInfo.fetch)
+  set local.product = sqlProductInfo.name;
+  if (local.defPriority <= sqlProductInfo.ticket_priority)
+    if (sqlProductInfo.on_new_ticket1 = 'to_dispatcher') 
+      set local.defAssignedTo = fAppFunc.getDispatcher(local.product);
+    elseif (sqlProductInfo.on_new_ticket1 = 'notify_all') 
+      set local.defNotifyAll = 1;
+    endif
+  else
+    if (sqlProductInfo.on_new_ticket2 = 'to_dispatcher') )
+      set local.defAssignedTo = fAppFunc.getDispatcher(local.product);
+    elseif (sqlProductInfo.on_new_ticket2 = 'notify_all') 
+      set local.defNotifyAll = 1;
+    endif
+  endif
+endif
+sqlProductInfo.close;
+
+if (local.defAssignedTo <> '')
+  sql sqlDefAssignedToInfo = 
+    'SELECT status, email FROM pt7cs_user '
+    'WHERE user_id = \'' + to.2QuoteStr(local.defAssignedTo) + '\'';
+  if (sqlDefAssignedToInfo.fetch)
+    set local.defAssignedToStatus = sqlDefAssignedToInfo.status;
+    set local.defAssignedToEmail = sqlDefAssignedToInfo.email;
+  endif
+  sqlDefAssignedToInfo.close;
+endif
+
+if (local.defAssignedToStatus = 'disabled')
+  set local.defAssignedTo = '';
+  set local.defNotifyAll = 1;
+endif
+
+// order important
+if (local.defAssignedTo <> '')
+  set local.defAssignedOn = server.dateTime;
+endif
+
+if (local.defNotifyAll = 1)
+  set local.allStaffEmail = fAppFunc.getAllStaffEmails(local.product);
+endif
+
+sql sqlFirstStatus = 'SELECT name FROM pt7cs_status ORDER BY seq_num ASC';
+set local.firstStatus = sqlFirstStatus.name;
+sqlFirstStatus.close; 
+
+sql sqlLastStatus = 'SELECT name FROM pt7cs_status ORDER BY seq_num DESC';
+set local.lastStatus = sqlLastStatus.name;
+sqlLastStatus.close;
+
+//---------------------- import emails -----------------------------------
+set local.importedCount = 0;
+
+Email_In em_in;
+
+set em_in.pop3Host = server.pop3Host;
+set em_in.username = server.importerUsername;
+set em_in.password = server.importerPassword;
+set em_in.address = server.importerEmail;
+
+Email_Out em_out;
+
+// Using importerEmail as the sender could cause infinite loop between 
+// this script and another auto-replying email address. The problem is
+// handled by checking the daily incoming email limit per sender.
+set em_out.from = server.importerEmail;
+
+// An email sent to email importer by email importer itself will 
+// cause a confirmation sent back to the sender, itself. This
+// confirmation will be treated as another submission and hence
+// causes infinite loop. To prevents this from happening:
+set em_out.doNotSendTo = em_in.address;
+
+while (em_in.fetchMail)
+  // user_id is up to 50 character long
+  set local.from50 = string.substring(em_in.from, 1, 50);
+
+  if (em_in.size > 5000000)  // limit to about 5M
+    set em_out.to = em_in.from;
+    set em_out.subject = 'Re: ' + em_in.subject;
+    set em_out.content = 
+      'Dear ' + em_in.fromName + ':\r\n\r\n' + 
+      'The request you submitted has been rejected because it is '
+      'larger than 5M.\r\nPlease reduce the size of your request '
+      'and resubmit.' + 
+      '\r\n\r\n' + app.name;
+    em_out.send;
+    em_in.deleteMail; 
+    continue;  // back to fetchmail
+  endif
+  
+  //------------------ check to avoid email loop -----------------------
+  sql sqlCheckEmailCount = 
+    'SELECT ea_count, ea_date FROM pt7cs_email_addr '
+    'WHERE ea_addr = \'' + to.2QuoteStr(local.from50) + '\'';
+  if (sqlCheckEmailCount.fetch <> 1)
+    sql sqlAddEmailCountRec =
+      INSERT INTO pt7cs_email_addr(ea_addr, ea_date, ea_count) 
+      VALUES(local.from50, server.date, 1);
+    sqlAddEmailCountRec.execute;
+    sqlAddEmailCountRec.close;
+  elseif (sqlCheckEmailCount.ea_date = server.date)
+    if (sqlCheckEmailCount.ea_count > local.dailyLimitPerSender)
+      set em_out.to = em_in.from;
+      set em_out.subject = 'Re: ' + em_in.subject;
+      set em_out.content = 
+        'Dear ' + em_in.fromName + ':\r\n\r\n' + 
+        'The request you submitted has been rejected \r\n'
+        'because you have reached the daily limit of ' +
+        local.dailyLimitPerSender + ' emails \r\n'
+        'that we can accept from you. Please try again tomorrow.' + 
+        '\r\n\r\n' + app.name;
+      em_out.send;
+      em_in.deleteMail; 
+      sqlCheckEmailCount.close;
+      continue;  // back to fetchmail
+    else
+      sql sqlIncEmailCount = 
+        'UPDATE pt7cs_email_addr SET ea_count = ea_count + 1 '
+        'WHERE ea_addr = \'' + to.2QuoteStr(local.from50) + '\'';
+      sqlIncEmailCount.execute;
+      sqlIncEmailCount.close;
+    endif
+  else // a new day
+    sql sqlUpdateEmailCountRec = 
+      UPDATE pt7cs_email_addr SET
+        ea_date = server.date,
+        ea_count = 1
+      WHERE ea_addr = local.from50;  // to.2QuoteStr not needed
+    sqlUpdateEmailCountRec.execute;
+    sqlUpdateEmailCountRec.close;
+  endif
+  sqlCheckEmailCount.close;
+
+  if (string.findString(em_in.xMailer, 'Avensoft Mailer') > 0)
+    em_in.moveToFolder('bad');
+    server.log('[' + em_in.fileName + '] is not imported to avoid '
+      'creating an infinite email loop because it appears to be from '
+      'Email Importer itself. It has been moved to mail/bad.');
+    continue;  // back to fetchmail
+  endif
+
+  // look for Re: Re: Re: ..., a sign of email loop
+  set local.re_count = 0;
+  tokenizer tksRe(em_in.subject, ' :');
+  set local.word = tksRe.nextToken;
+  while (local.word <> '')
+    set local.word = to.lower(local.word);
+    if (local.word = 're') 
+      set local.re_count = 1 + local.re_count;
+    endif
+    set local.word = tksRe.nextToken;
+  endwhile
+
+  // don't import because it could be from a staff getting an assignment
+  if (local.re_count > 2 OR 
+      string.findString(em_in.subject, 'AutoReply:') > 0)
+    em_in.moveToFolder('bad');
+    server.log('[' + em_in.fileName + '] is not imported to avoid '
+      'creating an infinite email loop because it appears to be an '
+      'AutoReply email. It has been moved to mail/bad.');
+    continue;  // back to fetchmail
+  endif
+
+  //------------------ parse email subject line ------------------------
+  // check if it is a new request, a follow up or a reopen request
+  set local.email_type = 'new';
+  set local.ticket_id = 0;
+
+  // if it has something like "request #, it is an old request
+  tokenizer tokens(em_in.subject, ' :');
+  set local.word = tokens.nextToken;
+  while (local.word <> '')
+    set local.word = to.lower(local.word);
+    if (local.word = 'request')
+      set local.word = tokens.nextToken;
+      if (local.word <> '' 
+          AND string.substring(local.word, 1, 1) = '#')
+        set local.len = string.length(local.word);
+        set local.id_str = string.substring(local.word, 2, local.len - 1);
+        set local.ticket_id = to.integer(local.id_str);
+        set local.email_type = 'followup';
+        break;
+      endif
+    else
+      set local.word = tokens.nextToken;
+    endif
+  endwhile
+
+  // check to see whether the old request is still there
+  set local.old_assigned_to = '';
+  set local.old_product = '';
+  if (local.email_type <> 'new')
+    sql sqlCheckOld = 
+      SELECT ticket_id, status, product, assigned_to FROM pt7cs_ticket 
+      WHERE ticket_id = local.ticket_id;
+    if (sqlCheckOld.fetch <> 1)
+      set local.email_type = 'new';
+    else
+      set local.old_assigned_to = sqlCheckOld.assigned_to;
+      set local.old_product = sqlCheckOld.product;
+      // followup to a closed request implicitly reopens it
+      if (local.email_type = 'followup'
+          AND sqlCheckOld.status = local.lastStatus)
+        set local.email_type = 'reopen';  
+      endif
+    endif
+    sqlCheckOld.close;
+  endif
+
+  //------------------ save various parts of the email -----------------
+  // Save different part of the email to pt7cs_ticket, pt7cs_ti_change,
+  // and pt7cs_ti_file is treated as one transaction. They will all 
+  // succeed or none does. 
+  local.beginTransaction; 
+
+  //------------------ create a new user account if needed -------------
+  // Oracle is case sensitive. MS SQL Server can be installed as case
+  // sensitive or insensitive. Hence we need to use SQL lower function.
+  // lower() is not the same as to.lower(). The former is a SQL function
+  // that MS Access does not support. The latter is a SSP function
+
+  set local.submitted_by = '';
+ 
+  if (string.findString(to.lower(local.dbType), 'access') > 0)
+    sql sqlFindSubmitter1 = 
+      'SELECT user_id FROM pt7cs_user '
+      'WHERE user_id = \'' + to.2QuoteStr(local.from50) + '\'';
+  else
+    sql sqlFindSubmitter1 = 
+      'SELECT user_id FROM pt7cs_user '
+      'WHERE lower(user_id) = lower(\'' + to.2QuoteStr(local.from50) + '\')';
+  endif
+  if (sqlFindSubmitter1.fetch)
+    set local.submitted_by = sqlFindSubmitter1.user_id;
+  endif
+  sqlFindSubmitter1.close;
+  
+  if (local.submitted_by = '')
+    if (string.findString(to.lower(local.dbType), 'access') > 0)
+      sql sqlFindSubmitter2 = 
+        'SELECT user_id, email FROM pt7cs_user '
+        'WHERE email LIKE \'%' + to.2QuoteStr(em_in.from) + '%\' ';
+    else
+      sql sqlFindSubmitter2 = 
+        'SELECT user_id, email FROM pt7cs_user '
+        'WHERE lower(email) LIKE '  
+              'lower(\'%' + to.2QuoteStr(em_in.from) + '%\')';
+    endif
+    while (sqlFindSubmitter2.fetch AND local.submitted_by = '')
+      tokenizer tkEmails(sqlFindSubmitter2.email, ' ,;');
+      set local.an_addr = tkEmails.nextToken;
+      while (local.an_addr <> '' AND local.submitted_by = '')
+        if (to.lower(sqlFindSubmitter2.email) = to.lower(local.an_addr))
+          set local.submitted_by = sqlFindSubmitter2.user_id;
+        endif
+        set local.an_addr = tkEmails.nextToken;
+      endwhile
+    endwhile
+    sqlFindSubmitter2.close;
+  endif
+  
+  set local.account_created = 0;
+  if (local.submitted_by = '')
+    sql sqlAddUser = 
+      INSERT INTO pt7cs_user(
+        user_id, user_row_ver, user_type, status, 
+        full_name, email)
+      VALUES(
+        local.from50, 1, 'EndUser', 'active',
+        em_in.fromName, em_in.from);
+    sqlAddUser.execute;  // on error, log and exit this script
+    sqlAddUser.close;
+    set local.account_created = 1;
+    set local.submitted_by = local.from50;
+  endif
+
+  //------------------ save the request ---------------------------------
+  // import if new request or id not found in subject line
+  if (local.email_type = 'new')
+    
+    // save up to 200 characters of the Cc field of the incoming email
+    set local.submitter_cc = '';
+    tokenizer tkCc(em_in.cc, ',;');
+    set local.cc = tkCc.nextToken;
+    while (local.cc <> '')
+      set local.last_value = local.submitter_cc;
+      set local.submitter_cc = local.submitter_cc + local.cc;
+      set local.cc = tkCc.nextToken;
+      if (local.cc <> '')
+        set local.submitter_cc = local.submitter_cc + ', ';
+      endif
+      if (string.length(local.submitter_cc) > 200)
+        set local.submitter_cc = local.last_value;
+        break;
+      endif
+    endwhile
+
+    set local.ticket_id = 
+      local.getUniqueID('pt7cs_ticket', 'ticket_id', 'pt7_registry');
+    sql sqlInsert = 
+      INSERT INTO pt7cs_ticket(
+        ticket_id, row_ver, status, priority, 
+        product, assigned_to, assigned_on, 
+        submitted_by, submitter_cc, 
+        submitted_on, title)
+      VALUES(
+        local.ticket_id, 1, local.firstStatus, local.defPriority, 
+        local.product, local.defAssignedTo, local.defAssignedOn,
+        local.submitted_by, local.submitter_cc,
+        server.dateTime, em_in.subject);
+    sqlInsert.execute;
+    sqlInsert.close;
+
+  else
+    set local.new_assigned_to = local.old_assigned_to;
+    set local.new_assigned_to_email = '';
+
+    // if it was not assigned, or assigned_to was deleted, do nothing
+    if (local.old_assigned_to <> '')
+      sql sqlOldAssignedToInfo =
+        SELECT user_id, status, email FROM pt7cs_user 
+        WHERE user_id = local.old_assigned_to;
+
+      if (sqlOldAssignedToInfo.fetch)
+        set local.new_assigned_to_email = sqlOldAssignedToInfo.email;
+      
+        // always assign to the dispatcher
+        if (sqlOldAssignedToInfo.status = 'disabled')
+          set local.new_assigned_to = 
+                fAppFunc.getDispatcher(local.old_product);
+          set local.new_assigned_to_email = '';
+        
+          sql sqlNewAssignedToInfo =
+            SELECT user_id, status, email FROM pt7cs_user 
+            WHERE user_id = local.new_assigned_to;
+          if (sqlNewAssignedToInfo.fetch)
+            set local.new_assigned_to_email = sqlNewAssignedToInfo.email;
+          endif
+          sqlNewAssignedToInfo.close;
+        endif
+      endif
+      sqlOldAssignedToInfo.close;
+    endif
+    
+    if (local.email_type = 'reopen')  // reset status    
+      sql sqlReopen = 
+        UPDATE pt7cs_ticket SET 
+          status = local.firstStatus,
+          assigned_to = local.new_assigned_to, 
+          assigned_on = server.dateTime,
+          assigned_by = ''
+        WHERE ticket_id = local.ticket_id;
+      sqlReopen.execute;
+      sqlReopen.close;
+      
+    // it is a follow-up but the old assigned_to is disabled
+    elseif (local.new_assigned_to <> local.old_assigned_to)
+      sql sqlReAssign = 
+        UPDATE pt7cs_ticket SET 
+          assigned_to = local.new_assigned_to, 
+          assigned_on = server.dateTime,
+          assigned_by = ''
+        WHERE ticket_id = local.ticket_id;
+      sqlReAssign.execute;
+      sqlReAssign.close;
+    endif
+  endif
+
+  set local.email_format = 0;  // 0=plain text 1=html
+  if (em_in.content <> '')
+    set local.email_body = em_in.content;
+  elseif (em_in.htmlContent <> '')
+    set local.email_body = em_in.htmlContent;
+    set local.email_format = 1;
+  else
+    set local.email_body = 
+      'Warning: Missing textual email body from the email received. '
+      'Please check the attachments.';
+  endif
+
+  set local.ch_id = 
+    local.getUniqueID('pt7cs_ti_change', 'ch_id', 'pt7_registry');
+  sql sqlAddChange = 
+    INSERT INTO pt7cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, ch_made_by, 
+      ch_made_on, ch_format, ch_description)
+    VALUES(
+      local.ch_id, local.ticket_id, 'detail', local.submitted_by, 
+      server.dateTime, local.email_format, local.email_body);
+  sqlAddChange.execute;
+  sqlAddChange.close;
+
+  while (em_in.getAttachment)
+    set local.tif_id = 
+      local.getUniqueID('pt7cs_ti_file', 'tif_id', 'pt7_registry');
+    sql sqlAttach = 
+      INSERT INTO pt7cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.ch_id, 
+        em_in.attachName, em_in.attachSize, em_in.attachData);
+    sqlAttach.execute;
+    sqlAttach.close;
+  endwhile
+
+  // End of transaction. All new/changed records will be committed.
+  // Must be after all SQL otherwise error: Attribute cannot be set now
+  // in the next iteration.
+  local.commitTransaction;
+
+  //------------------ send email confirmation/notifications -----------
+  // To embed secure web server address in the notification emails,
+  // change httpAddress to httpsAddress.
+     
+  set local.hyperLink = server.httpAddress + 
+    app.startPage + '?ticket_id=' + local.ticket_id;
+
+  //------------------ notify the submitter ----------------------------
+  if (local.account_created = 1)
+    set em_out.to = em_in.from;
+    set em_out.subject = 'Your account with ' || app.name;
+    set em_out.content = 
+      'Dear ' || em_in.fromName + ',\r\n\r\n' ||  
+      'As a result of the request you submitted, ' 
+      'a user account for \r\n' || 
+      app.name || ' at ' || server.httpAddress + app.path || 
+      ' has been created for you.\r\n'
+      'Your user ID is ' || local.from50 || '. '
+      'Your password is blank. '
+      '\r\n\r\n' + app.name;
+    em_out.send;
+  endif
+
+  // Emails from postmaster or mailer-daemon are usually delivery status. 
+  // Don't send reply. 
+  set local.from_addr = to.lower(em_in.from);
+  if (string.findString(local.from_addr, 'postmaster@') > 0 OR
+      string.findString(local.from_addr, 'mailer-daemon@') > 0 OR
+      string.findString(local.from_addr, 'mdaemon@') > 0 )
+    server.log('Email from ' + em_in.from + ' imported but not replied.');
+  else
+    set em_out.to = em_in.from;
+    set local.submittedByLink = 
+      local.hyperLink + '&user_id=' + to.cgi(local.submitted_by);
+
+    if (local.email_type = 'new')
+      set em_out.cc = local.submitter_cc;
+      set em_out.subject = 
+        'Request #' + local.ticket_id + ': ' + em_in.subject;
+      set local.whatYouDid = 
+       'The request you submitted has been accepted as #' + 
+        local.ticket_id;
+    else
+      set em_out.subject = 
+        'Request #' + local.ticket_id + ': ' +
+        'Your follow up has been received.';
+      set local.whatYouDid = 
+        'Your follow up to request #' + local.ticket_id + 
+        ' has been received. ';
+    endif
+
+    if (local.email_format = 1)  // html-only email
+      set em_out.contentType = 'text/html';
+      set em_out.content = 
+        '<html><head><title>\r\n' + em_out.subject + 
+        '\r\n</title></head><body>\r\n' + 
+        'Dear ' + em_in.fromName + ',\r\n<p>' + 
+        local.whatYouDid + '<br>\r\n' + 
+        'To follow up on this request, ' + 
+        'reply to this email or go to <br>\r\n' + 
+        '<a href="' + local.submittedByLink + '">' + 
+        local.submittedByLink + '</a>\r\n<p>' +
+        local.email_body + '\r\n<p>' + app.name + '</body></html>';
+    else
+      set em_out.content = 
+        'Dear ' + em_in.fromName + ',\r\n\r\n' + 
+        local.whatYouDid + '\r\n' + 
+        'To follow up on this request, ' + 
+        'reply to this email or go to\r\n' + 
+        local.submittedByLink + '\r\n\r\n' + 
+        local.email_body + '\r\n\r\n' + app.name;
+    endif
+    em_out.send;
+  endif
+
+  //------------------ apply default product's routing scheme ----------
+  if (local.email_type = 'new')
+    
+    if (local.defAssignedTo <> '' AND local.defAssignedToEmail <> '')
+      set em_out.to = local.defAssignedToEmail;
+      set em_out.subject = 
+        'New request #' + local.ticket_id + 
+        ' has been imported and assigned to you.';
+
+      set local.assignedToLink = local.hyperLink + 
+        '&user_id=' + to.cgi(local.defAssignedTo);
+      if (local.email_format = 1)  // html-only email
+        set em_out.contentType = 'text/html';
+        set em_out.content = 
+          '<html><head><title>\r\n' + em_out.subject + 
+          '\r\n</title></head><body>\r\n' + 
+          'Dear ' + local.defAssignedTo + ':\r\n<p>' +
+          em_in.subject + '<br>\r\n' + 
+          '<a href="' + local.assignedToLink + '">' + 
+          local.assignedToLink + '</a>\r\n<p>' +
+          local.email_body + '\r\n<p>' + app.name + '</body></html>';
+      else
+        set em_out.content = 
+          'Dear ' + local.defAssignedTo + ':\r\n\r\n' +
+          em_in.subject + '\r\n' + 
+          local.assignedToLink + '\r\n' + 
+          local.email_body + '\r\n\r\n' + app.name;
+      endif
+      em_out.send;
+
+    elseif (local.defNotifyAll = 1 AND local.allStaffEmail <> '')
+      set em_out.to = local.allStaffEmail;
+      set em_out.subject = 
+        'New request #' + local.ticket_id + ' has been imported. ';
+
+      if (local.defAssignedToStatus = 'disabled')
+        set local.whyMe = 
+          'You got this notification because the product dispatcher '
+          'user account is disabled.';
+      else
+        set local.whyMe = '';
+      endif
+      if (local.email_format = 1)  // html-only email
+        set em_out.contentType = 'text/html';
+        set em_out.content = 
+          '<html><head><title>\r\n' + em_out.subject + 
+          '\r\n</title></head><body>\r\n' + 
+          'Dear All:\r\n<p>' + 
+          local.whyMe + '<br>\r\n' + 
+          em_in.subject + '<br>\r\n' + 
+          local.email_body + '\r\n<p>' + app.name + '</body></html>';
+      else
+        set em_out.content = 
+          'Dear All:\r\n\r\n' +
+          local.whyMe + '\r\n' + 
+          em_in.subject + '\r\n' + 
+          local.email_body + '\r\n\r\n' + app.name;
+      endif
+      em_out.send;
+    endif
+
+  //------------------ notify assigned_to ------------------------------
+  else // (local.email_type = 'followup' OR local.email_type = 'reopen')
+
+    if (local.new_assigned_to <> '' AND local.new_assigned_to_email <> '')
+      set em_out.to = local.new_assigned_to_email;
+      if (local.email_type = 'followup')
+        set em_out.subject = 
+          'Follow up to request #' + local.ticket_id + 
+          ' has been imported.';
+      else
+        set em_out.subject = 
+          'Request #' + local.ticket_id + 
+          ' has been reopened by submitter.';
+      endif
+      set local.assignedToLink = local.hyperLink + 
+        '&user_id=' + to.cgi(local.new_assigned_to);
+          
+      if (local.email_format = 1)  // html-only email
+        set em_out.contentType = 'text/html';
+        set em_out.content = 
+          '<html><head><title>\r\n' + em_out.subject + 
+          '\r\n</title></head><body>\r\n' + 
+          'Dear ' + local.new_assigned_to + ':\r\n<p>' + 
+          '<a href="' + local.assignedToLink + '">' + 
+          local.assignedToLink + '</a>\r\n<p>' +
+          local.email_body + '\r\n<p>' + app.name + '</body></html>';
+      else
+        set em_out.content = 
+          'Dear ' + local.new_assigned_to + ':\r\n\r\n' + 
+          local.assignedToLink + '\r\n' + 
+          local.email_body + '\r\n\r\n' + app.name;
+      endif
+      em_out.send;
+    endif
+  endif
+
+  set local.importedCount = 1 + local.importedCount;
+  em_in.deleteMail; 
+
+endwhile
+server.log('Total ' + local.importedCount + ' email(s) imported');

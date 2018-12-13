@@ -1,0 +1,46 @@
+
+<html>
+<head>
+<title>WML elements tree window
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>WML elements tree window</h1>
+<p>The wml elements tree window allows you to navigate the code. Each element is
+represented by icon and identifier (attribute <b>id</b>). In case of element has
+no <b>id</b> attribute defined, the editor show identifier as combination of
+element type and decimal digits.</p>
+
+<p><img border="0" src="shot16.gif" width="242" height="250"><br>
+<br>
+Click tree items twice to edit attribute <b>id</b> of selected element. Other
+way to assign identifiers in wml deck is selecting appropriate element in wml
+tree window and setting up attribute <b>id</b> identifier. Note that pcdata
+(text) and comments elements haven't attributes.</p>
+
+<p>For instance let create id for card element. Cards need an identity in order for them to be linked to from other cards and
+wml decks.  To set the identity of a card, you need to enter a value to the <b> id</b>
+attribute for the card.&nbsp;</p>
+
+<p>To do this first select card in wml elements tree window. In the Attributes
+window, enter identifier in the <b> id</b> field. Your card now have identities so they can be linked to.
+<br>
+</p>
+
+</body>
+</html>

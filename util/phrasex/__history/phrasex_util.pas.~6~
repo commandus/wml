@@ -1,0 +1,862 @@
+unit
+  phrasex_util;
+
+interface
+
+uses
+  SysUtils, Classes, Windows,
+  jclUnicode,
+  util1, wmlc, util_xml, xmlidx;
+
+const
+  MSG_VERSION = '1.0';
+  MSG_COPYRIGHT = 'phrasex ' + MSG_VERSION + ' Copyright (c) 2003 - 2007 Andrei Ivanov.';
+  REG_PATH = 'Software\ensen\phrasex\1.0';
+
+  function DoCmd: Boolean;
+
+implementation
+
+const
+  MAX_IMAGES = 12;
+  REGISTER_PRODUCTCODE = 'phrasex';
+  CAP_APOOED = 'phrasex';
+
+  DEF_EXTENSIONS = '.doc.wml.htm.html.xhtm.xhtml.oeb.pkg.txn.xml.txt.dfm';
+
+  REG_URL: String = 'http://www.regsoft.net/purchase.php3?productid=56950';
+
+  DEF_ListOfPhrasesFN = 'phrases.phr';
+  DEF_ListOfFilesFN = 'phrases.lst';
+
+type
+  TMBEnv = class(TObject)
+  private
+    ColumnFrom, ColumnTo: Integer;
+
+    FxmlPhraseThread: TxmlPhraseThread;
+    FxmlPhraseReplaceThread: TxmlPhraseReplaceThread;
+
+    FstrmPhrase: TStream;
+    DictFrom, DictTo: TWideStrings;
+    DictionaryFN,
+    ListOfPhrasesFN,
+    ListOfFilesFN,
+    sourcepath,
+    outputpath: String;
+
+    LastModifiedFiles: TStrings;
+    SkipElements: TStrings;
+
+    // LogFileName: String; // store expanded file name and stamp
+
+    // CreateLogFile,
+    UnicodeOutput,
+    doregister,
+    recurse,
+    verbose,
+    SkipAttributes,
+    MkListOfPhrases,
+    mkListOfFiles,
+    MkConversion,
+    anyExtension,
+    getQUERY_STRING,
+    getInput,
+    SkipIni,
+    showhelp: Boolean;
+
+    Default_EmptyStr: WideString;
+
+    filelist: TStrings;
+  public
+    Cnt: Integer;
+    constructor Create;
+    destructor Destroy; override;
+    procedure LoadSettings;
+    procedure Clear;
+    // procedure Report(APos, ASize: Cardinal; const AStatus, AMsg: string);
+    procedure Report();
+    procedure ThreadDone(Sender: TObject);
+  end;
+
+procedure RaiseError(ACode: Integer; const ACodeS: String);
+begin
+  Writeln('Error ', ACode, ': ', ACodeS);
+  Halt(ACode);
+end;
+
+function PrintUsage: String;
+begin
+  Result:=
+    'Usage: phrasex -[?|e|c|b|l] [Options] File(s)|Mask|Path'#13#10 +
+    '  File list: e.g. file1.txt ..\file2.xml form1.dfm'#13#10 +
+    '  File mask can include willcards e.g *.htm'#13#10 +
+    '  Commands:'#13#10 +
+    '    e - register program -u "user name" -t "registration code"'#13#10 +
+    '    c <dictionary> - convert xml files based on dictionary file'#13#10 +
+    '    b <list of phrase> - build phrase listing'#13#10 +
+    '  Options:  ? - this screen'#13#10 +
+    '    l <list of file> - create (or process last modified only) listing of files'#13#10 +
+    '    f <column number> - valid for c command (default 0) '#13#10 +
+    '    t <column number> - column number - 0..255, (default 1)'#13#10 +
+    '    i - skip attributes, PCDATA only'#13#10 +
+    '    s <elements comma separated list> - skip elements'#13#10 +
+    '    r - recurse subfolders'#13#10 +
+    '    o <Path> - output folder path'#13#10 +
+    '    v - verbose output'#13#10 +
+    '    u - unicode output (valid with b option)'#13#10 +
+    '    a - any files, otherwise:' + DEF_EXTENSIONS+#13#10 +
+    '    m - translation mode:'#13#10 +
+    '      reserved'#13#10 +
+    '    g - get command line options from QUERY_STRING environment variable <GET>'#13#10 +
+    '    p - get command line options from input <POST>'#13#10 +
+    '    w <default empty string>'#13#10 +
+    '    d - skip default settings (don''t load phrasex.ini)';
+end;
+
+const
+  OptionsHasExt: TSysCharSet = ['C', 'c', 'L', 'l', 'M', 'm', 'O', 'o', 'S', 's', 'B', 'b'];
+
+function ParseCmd(const AConfig: String; AOptionsHasExt: TSysCharSet; Rslt: TStrings): String;
+var
+  S, os: String;
+  o: Char;
+  filecount, p, i, L: Integer;
+  state: Integer;
+  Quoted: Boolean;
+begin
+  Rslt.Clear;
+  S:= AConfig;
+  state:= 0;
+  i:= 1;
+  filecount:= 0;
+  L:= Length(S);
+  // skip program name
+  while i <= L do begin
+    if S[i] = #32 then begin
+      Inc(i);
+      Break;
+    end;
+    Inc(i);
+  end;
+  Result:= Copy(S, 1, i - 2);
+
+  Quoted:= False;
+  // parse
+  while i <= L do begin
+    o:= S[i];
+    case o of
+      '''', '"': begin
+          Quoted:= not Quoted;
+          Inc(i);
+        end;
+      '-': begin
+          case state of
+            0: state:= 1;  // option started
+          end;
+          Inc(i);
+        end;
+      #0..#32: begin
+          state:= 0;
+          Inc(i);
+        end;
+      else begin
+        case state of
+          0:begin  // file name or mask
+              p:= i;
+              if Quoted then begin
+                repeat
+                  Inc(i);
+                until (i > L) or (S[i] in ['''', '"', #0]);
+                Quoted:= False;
+              end else begin
+                repeat
+                  Inc(i);
+                until (i > L) or (S[i] in [#0..#32, '-']);
+              end;
+              os:= Copy(s, p, i - p);
+              Inc(filecount);
+              Rslt.AddObject('=' + os, TObject(filecount));
+            end;
+          1: begin  // option
+              if S[i] in AOptionsHasExt then begin  // option has next parameter
+                //
+                // skip spaces if exists
+                Inc(i);
+                while (i <= L) and (S[i] <= #32) do Inc(i);
+                // get option's parameter
+                p:= i;
+                Quoted:= (i <= L) and (s[i] in ['''', '"']);
+                if Quoted then begin
+                  Inc(p);
+                  repeat
+                    Inc(i);
+                  until (i > L) or (S[i] in [#0, '''', '"']);
+                  os:= Copy(s, p, i - p);
+                  Inc(i);
+                  Quoted:= False;
+                end else begin
+                  repeat
+                    Inc(i);
+                  until (i > L) or (S[i] in [#0..#32, '-']);
+                  os:= Copy(s, p, i - p);
+                end;
+                // add option
+                Rslt.Add(o + '=' + os);
+              end else begin
+                // add option
+                Rslt.Add(o + '=');
+                Inc(i);
+              end;
+            end;
+          else begin
+            Inc(i);
+          end;
+        end; { case state }
+        //
+      end; { else case }
+    end; { case }
+  end;
+end;
+
+{ calc count of switches
+}
+function GetSwitchesCount(const ASwitches: TSysCharSet; opts: TStrings): Integer;
+var
+  i: Integer;
+  s: String;
+begin
+  Result:= 0;
+  for i:= 0 to opts.Count - 1 do begin
+    s:= opts.Names[i];
+    if (Length(s) > 0) and (s[1] in ASwitches)
+    then Result:= Result + 1;
+  end;
+end;
+
+{ extract switch values
+}
+function ExtractSwitchValue(ASwitches: TSysCharSet; opts: TStrings): String;
+var
+  i, l: Integer;
+  s: String;
+begin
+  Result:= '';
+  for i:= 0 to opts.Count - 1 do begin
+    s:= opts.Names[i];
+    l:= Length(s);
+    if ((l > 0) and (s[1] in ASwitches))
+      or ((l = 0) and (ASwitches = [])) then begin
+      Result:= Copy(opts[i], l + 2, MaxInt);
+    end;
+  end;
+end;
+
+{ extract switch values
+}
+function ExtractSwitchValues(ASwitches: TSysCharSet; opts: TStrings; ARslt: TStrings): Integer;
+var
+  i, l: Integer;
+  s: String;
+begin
+  Result:= 0;
+  for i:= 0 to opts.Count - 1 do begin
+    s:= opts.Names[i];
+    l:= Length(s);
+    if ((l > 0) and (s[1] in ASwitches))
+      or ((l = 0) and (ASwitches = [])) then begin
+      s:= Copy(opts[i], l + 2, MaxInt);
+      ARslt.AddObject(s, opts.Objects[i]);
+      Result:= Result + 1;
+    end;
+  end;
+end;
+
+function HTTPDecode(const AStr: String): String;
+var
+  Sp, Rp, Cp: PChar;
+  S: String;
+begin
+  SetLength(Result, Length(AStr));
+  Sp := PChar(AStr);
+  Rp := PChar(Result);
+//  Cp := Sp;
+  try
+    while Sp^ <> #0 do
+    begin
+      case Sp^ of
+        '+': Rp^ := ' ';
+        '%': begin
+               // Look for an escaped % (%%) or %<hex> encoded character
+               Inc(Sp);
+               if Sp^ = '%' then
+                 Rp^ := '%'
+               else
+               begin
+                 Cp := Sp;
+                 Inc(Sp);
+                 if (Cp^ <> #0) and (Sp^ <> #0) then
+                 begin
+                   S := '$' + Cp^ + Sp^;
+                   Rp^ := Chr(StrToInt(S));
+                 end
+                 else
+                   RaiseError(3, 'Invalid encoded URL');
+               end;
+             end;
+      else
+        Rp^ := Sp^;
+      end;
+      Inc(Rp);
+      Inc(Sp);
+    end;
+  except
+    on E:EConvertError do
+      RaiseError(3, 'Invalid encoded URL');
+  end;
+  SetLength(Result, Rp - PChar(Result));
+end;
+
+procedure ExtractHeaderFields(Separators, WhiteSpace: TSysCharSet; Content: PChar;
+  Strings: TStrings; Decode: Boolean; StripQuotes: Boolean = False);
+var
+  Head, Tail: PChar;
+  EOS, InQuote, LeadQuote: Boolean;
+  QuoteChar: Char;
+
+  function DoStripQuotes(const S: string): string;
+  var
+    I: Integer;
+  begin
+    Result := S;
+    if StripQuotes then
+      for I := Length(Result) downto 1 do
+        if Result[I] in ['''', '"'] then
+          Delete(Result, I, 1);
+  end;
+
+begin
+  if (Content = nil) or (Content^ = #0) then Exit;
+  Tail := Content;
+  QuoteChar := #0;
+  repeat
+    while Tail^ in WhiteSpace + [#13, #10] do Inc(Tail);
+    Head := Tail;
+    InQuote := False;
+    LeadQuote := False;
+    while True do
+    begin
+      while (InQuote and not (Tail^ in [#0, #13, #10, '"'])) or
+        not (Tail^ in Separators + [#0, #13, #10, '"']) do Inc(Tail);
+      if Tail^ = '"' then
+      begin
+        if (QuoteChar <> #0) and (QuoteChar = Tail^) then
+          QuoteChar := #0
+        else
+        begin
+          LeadQuote := Head = Tail;
+          QuoteChar := Tail^;
+          if LeadQuote then Inc(Head);
+        end;
+        InQuote := QuoteChar <> #0;
+        if InQuote then
+          Inc(Tail)
+        else Break;
+      end else Break;
+    end;
+    if not LeadQuote and (Tail^ <> #0) and (Tail^ = '"') then
+      Inc(Tail);
+    EOS := Tail^ = #0;
+    Tail^ := #0;
+    if Head^ <> #0 then
+      if Decode then
+        Strings.Add(DoStripQuotes(HTTPDecode(Head)))
+      else Strings.Add(DoStripQuotes(Head));
+    Inc(Tail);
+  until EOS;
+end;
+
+procedure EmptyNames(AName: String; AStrings: TStrings);
+var
+  i: Integer;
+  p: Integer;
+  s: String;
+begin
+  for i:= 0 to AStrings.Count - 1 do begin
+    s:= AStrings[i];
+    p:= Pos('=', s);
+    if p = 0 then begin
+      s:= s + '=';
+      AStrings[i]:= s;
+    end else begin
+      if CompareText(AName, Copy(s, 1, p - 1)) = 0 then begin
+        Delete(s, 1, p);
+        AStrings[i]:= '=' + s;
+      end;
+    end;
+  end;
+end;
+
+function ProcessFile(const AFN: String; AEnv: TObject): Boolean;
+var
+  s, ofn, p, f, ext, np: String;
+  SamePlace: Boolean;
+  i: Integer;
+  dt, fdt: TDateTime;
+begin
+  Result:= True;
+
+  ext:= ExtractFileExt(AFN);
+  f:= ExtractFileName(AFN);
+  p:= ExtractFilePath(AFN);
+
+  if not TMBEnv(AEnv).AnyExtension then begin
+    if Pos(LowerCase(ext), DEF_EXTENSIONS) = 0
+    then Exit;
+  end;
+
+  if TMBEnv(AEnv).mkListOfFiles then begin
+    // get last modification file timestamp
+    fdt:= FileDateToDateTime(FileAge(AFN));
+
+    s:= TMBEnv(AEnv).LastModifiedFiles.Values[AFN];
+    if Length(s) = 0 then begin
+      // add new entry
+      TMBEnv(AEnv).LastModifiedFiles.Values[AFN]:= DateTimeToStr(fdt);
+    end else begin
+      try
+        dt:= StrToDateTime(s);
+      except
+        Double(dt):= 0.0;
+      end;
+      if fdt > dt then begin
+        // file is changed, process file
+        // and store new modificztion date time
+        TMBEnv(AEnv).LastModifiedFiles.Values[AFN]:= DateTimeToStr(fdt);
+      end else begin
+        // file is not modified, skip
+        if TMBEnv(AEnv).verbose
+        then Writeln(Format('no changes, skip file %s..', [AFN]));
+
+        Exit;
+      end;
+    end;
+  end;
+
+  SamePlace:= (Length(TMBEnv(AEnv).outputpath) = 0) or (TMBEnv(AEnv).outputpath = '.');
+
+  ofn:= AFN;
+  i:= Pos('.', f);
+  if i <= 0 then begin
+    i:= Length(f) + 1;
+  end;
+
+  if SamePlace then begin
+    np:= '';
+  end else begin
+    ofn:= ConcatPath(TMBEnv(AEnv).outputpath, util1.DiffPath(TMBEnv(AEnv).sourcepath, ofn), '\');
+    np:= ExtractFilePath(ofn);
+  end;
+
+  if Pos('file://', LowerCase(ofn)) = 1
+  then ofn:= Copy(ofn, Length('file://') + 1, MaxInt);
+
+  if TMBEnv(AEnv).verbose then begin
+    Writeln(Format('%s'#9'->'#9'%s', [AFN, ofn]));
+  end;
+  TMBEnv(AEnv).Cnt:= TMBEnv(AEnv).Cnt + 1;
+
+  // DO SMTH!
+  with TMBEnv(AEnv) do begin
+    if MkListOfPhrases then begin
+      FxmlPhraseThread:= TxmlPhraseThread.Create(True, False, UnicodeOutput,
+      SkipAttributes, SkipElements, '"' + AFn + '"', FstrmPhrase, Report, Default_EmptyStr);
+      with FxmlPhraseThread do begin
+        FreeOnTerminate:= False;
+        OnTerminate:= ThreadDone;
+        Resume;
+      end;
+      FxmlPhraseThread.WaitFor;
+      FreeAndNil(FxmlPhraseThread);
+    end;
+    
+    if MkConversion then begin
+      if (Length(np) = 0) or DirectoryExists(np) then begin
+        // folder exists
+      end else begin
+        // create folder
+        if CreateDir(np) then begin
+          if TMBEnv(AEnv).verbose
+          then Writeln(Format('Folder %s created.', [np]));
+        end else begin
+          if TMBEnv(AEnv).verbose
+          then RaiseError(2, Format('Cannot create folder %s.', [np]));
+        end;
+      end;
+
+      FxmlPhraseReplaceThread:= TxmlPhraseReplaceThread.Create(True, False, UnicodeOutput, SkipAttributes, SkipElements, '"'+AFn+'"',
+        DictFrom, DictTo, Report);
+      with FxmlPhraseReplaceThread do begin
+        FreeOnTerminate:= False;
+        OnTerminate:= ThreadDone;
+        Resume;
+      end;
+      FxmlPhraseReplaceThread.WaitFor;
+      // force UTF-8
+      s:= util_xml.WideString2EncodedString(convPCDATA, wmlc.csUTF8, FxmlPhraseReplaceThread.Rslt, []);
+      if SamePlace then begin
+        //
+        util1.String2File(AFn, s, True);
+      end else begin
+        // copy file
+        util1.String2File(ofn, s, True);
+      end;
+      FreeAndNil(FxmlPhraseReplaceThread);
+    end;
+  end;
+
+end;
+
+function PrintSettings(AEnv: TMBEnv): String;
+const
+  R: array[Boolean] of String = ('', 'recurse subdirectories, ');
+  V: array[Boolean] of String = ('', 'verbose output, ');
+  D: array[Boolean] of String = ('', 'ini file settings skipped, ');
+  Q: array[Boolean] of String = ('', 'HTTP GET method, ');
+  G: array[Boolean] of String = ('', 'HTTP POST method, ');
+  X: array[Boolean] of String = ('known xml docs only, ', 'any file, ');
+  L: array[Boolean] of String = ('', 'create listing, ');
+  C: array[Boolean] of String = ('', 'conversion, ');
+  B: array[Boolean] of String = ('', 'build phrases listing, ');
+  U: array[Boolean] of String = ('', 'unicode output, ');
+  ATTRONLY: array[Boolean] of String = ('', 'attributes only, ');
+
+
+var
+  p: Integer;
+begin
+  with AEnv do begin
+    Result:=
+      'Switches:'#13#10+
+      '  output folder: ' + AEnv.outputpath + #13#10 +
+      '  translation mode: ' + #13#10'  ' +
+        R[recurse] + V[verbose] + C[MkConversion] + Q[getQUERY_STRING] + G[getInput] + D[SkipIni] +
+          X[anyExtension] + L[mkListOfFiles] + B[MkListOfPhrases] + U[UnicodeOutput] + ATTRONLY[SkipAttributes]+#13#10 +
+      'File(s) or file mask:'#13#10;
+    for p:= 0 to AEnv.filelist.Count - 1 do begin
+      Result:= Result + '  ' + filelist[p] + #13#10;
+    end;
+    Result:= Result + 'Default empty string:  ' + Default_EmptyStr + #13#10;
+  end;
+end;
+
+function CheckParameters(AOpts: TStrings; AEnv: TMBEnv): Boolean;
+var
+  i: Integer;
+  s: String;
+begin
+  ExtractSwitchValues([], Aopts, AEnv.filelist);
+  { check '.', '..' and other directory specs }
+  for i:= 0 to AEnv.filelist.Count - 1 do begin
+    if DirectoryExists(AEnv.filelist[i]) then begin
+      s:= ConcatPath(AEnv.filelist[i], '*.*', '\');
+      AEnv.filelist[i]:= s;
+    end;
+  end;
+  with AEnv do begin
+    outputpath:= ExtractSwitchValue(['o', 'O'], AOpts);
+    if Length(outputpath) > 0
+    then outputpath:= ExpandFileName(outputpath);
+    doregister:= GetSwitchesCount(['e', 'E'], AOpts) > 0;
+    // FormatStr:= ExtractSwitchValue(['m', 'M'], AOpts);
+    // if Length(FormatStr) = 0 then FormatStr:= DEF_FORMATSTR;
+
+    MkListOfPhrases:= GetSwitchesCount(['b', 'B'], AOpts) > 0;
+    if MkListOfPhrases
+    then ListOfPhrasesFN:= ExtractSwitchValue(['b', 'B'], AOpts);
+    if Length(ListOfPhrasesFN) = 0 then ListOfPhrasesFN:= DEF_ListOfPhrasesFN;
+    ListOfPhrasesFN:= ExpandFileName(ListOfPhrasesFN);
+
+    mkConversion:=  GetSwitchesCount(['C', 'c'], AOpts) > 0;
+    if mkConversion
+    then DictionaryFN:= ExtractSwitchValue(['C', 'c'], AOpts);
+    DictionaryFN:= ExpandFileName(DictionaryFN);
+
+    ColumnFrom:= StrToIntDef(ExtractSwitchValue(['F', 'f'], AOpts), 0);
+    ColumnTo:= StrToIntDef(ExtractSwitchValue(['T', 't'], AOpts), 1);
+
+    mkListOfFiles:= GetSwitchesCount(['L', 'l'], AOpts) > 0;
+    if mkListOfFiles
+    then ListOfFilesFN:= ExtractSwitchValue(['L', 'l'], AOpts);
+    if Length(ListOfFilesFN) = 0 then ListOfFilesFN:= DEF_ListOfFilesFN;
+    ListOfFilesFN:= ExpandFileName(ListOfFilesFN);
+
+    recurse:= GetSwitchesCount(['R', 'r'], AOpts) > 0;
+    SkipAttributes:= GetSwitchesCount(['I', 'i'], AOpts) > 0;
+    SkipElements.CommaText:= ExtractSwitchValue(['S', 's'], AOpts);
+
+    UnicodeOutput:= GetSwitchesCount(['U', 'u'], AOpts) > 0;
+    verbose:= GetSwitchesCount(['V', 'v'], AOpts) > 0;
+
+    {
+    CreateLogFile:= GetSwitchesCount(['J', 'j'], AOpts) > 0;
+    if CreateLogFile
+    then LogFileName:= ExtractSwitchValue(['J', 'j'], AOpts)
+    else LogFileName:= '';
+    }
+
+    anyExtension:= GetSwitchesCount(['A', 'a'], AOpts) > 0;
+    showhelp:= GetSwitchesCount(['?'], AOpts) > 0;
+    SkipIni:= GetSwitchesCount(['D', 'd'], AOpts) > 0;
+    getQUERY_STRING:= GetSwitchesCount(['G', 'g'], AOpts) > 0;
+    getInput:= GetSwitchesCount(['P', 'p'], AOpts) > 0;
+    Default_EmptyStr:= ExtractSwitchValue(['W', 'w'], AOpts);
+  end;
+  if Length(AEnv.outputpath) = 0
+  then AEnv.outputpath:= '.';
+  Result:= DirectoryExists(AEnv.outputpath);
+  if not Result
+  then Writeln(output, Format('output folder %s does not exists'#13#10, [AEnv.outputpath]))
+  else Result:= (AEnv.filelist.Count > 0);
+end;
+
+constructor TMBEnv.Create;
+begin
+  inherited Create;
+  Cnt:= 0;
+  ColumnFrom:= 0;
+  ColumnTo:= 1;
+  DictFrom:= Nil;
+  DictTo:= Nil;
+  filelist:= TStringList.Create;
+  SkipElements:= TStringList.Create;
+  LastModifiedFiles:= TStringList.Create;
+  Default_EmptyStr:= '';
+end;
+
+procedure TMBEnv.Clear;
+begin
+  Cnt:= 0;
+  LastModifiedFiles.Free; 
+  SkipElements.Free;
+  filelist.Clear;
+end;
+
+destructor TMBEnv.Destroy;
+begin
+  if Assigned(DictFrom)
+  then FreeAndNil(DictFrom);
+  if Assigned(DictTo)
+  then FreeAndNil(DictTo);
+  filelist.Free;
+  inherited Destroy;
+end;
+
+procedure TMBEnv.Report(); // APos, ASize: Cardinal; const AStatus, AMsg: string
+begin
+end;
+
+procedure TMBEnv.ThreadDone(Sender: TObject);
+begin
+  {
+  if Assigned(FstrmPhrase)
+  then FreeAndNil(FstrmPhrase);
+  }
+end;
+
+// load dictionary
+procedure TMBEnv.LoadSettings;
+var
+  i: Integer;
+  sl, line: TWideStrings;
+  ws: WideString;
+begin
+  if mkConversion then begin
+    // load dictionaries
+    DictFrom:= TWideStringList.Create;
+    DictTo:= TWideStringList.Create;
+
+    sl:= TWideStringList.Create;
+    line:= TWideStringList.Create;
+    if not FileExists(DictionaryFN) then begin
+      Writeln('Can not find dictionary file: '+ DictionaryFN);
+      Halt(2);
+    end;
+    sl.LoadFromFile(DictionaryFN);
+    // save order in case of sorting input dictionary
+    for i:= 0 to sl.Count - 1 do begin
+      line.CommaText:= sl[i];
+      if ColumnFrom < line.Count
+      then DictFrom.AddObject(line[ColumnFrom], TObject(i))
+      else DictFrom.AddObject('', TObject(i));
+      if ColumnTo < line.Count
+      then DictTo.AddObject(line[ColumnTo], TObject(i))
+      else DictTo.AddObject('', TObject(i));
+    end;
+    line.Free;
+    sl.Free;
+
+    // sort
+
+  end;
+end;
+
+function DoCmd: Boolean;
+label
+  LSkipIni, Stopped;
+var
+  ElapsedTime: TDateTime;
+  f: Integer;
+  config,
+  configfn: String;
+  cvrtEnv: TMBEnv;
+  opts: TStrings;
+  skipinicount: Integer;
+begin
+  skipinicount:= 0;
+  ElapsedTime:= Now;
+  cvrtEnv:= TMBEnv.Create;
+  // validate is registered version
+  // ValidateCode;
+  //  if not FProgramIsRegistered then begin end;
+
+  opts:= TStringList.Create;
+  configfn:= ConcatPath(ExtractFilePath(ParamStr(0)), 'renum.ini', '\');
+  if FileExists(configfn) then begin
+    config:= util1.File2String(configfn);
+  end else config:= '';
+LSkipIni:
+  Inc(skipinicount);
+  f:= Pos(#32, System.CmdLine);
+  if f = 0
+  then f:= Length(CmdLine)+1;
+  config:= Copy(CmdLine, 1, f - 1) + #32 + config + #32 + Copy(CmdLine, f + 1, MaxInt);
+  ParseCmd(config, OptionsHasExt, opts);
+
+  if (not CheckParameters(opts, cvrtEnv)) or (cvrtEnv.showhelp) or (cvrtEnv.doregister) then begin
+    if cvrtEnv.doregister then begin
+      {
+      FRegUser:= ExtractSwitchValue(['u', 'U'], opts);
+      FRegCode:= ExtractSwitchValue(['t', 'T'], opts);
+      StoreIni;
+      ValidateCode;
+      Result:= False;
+      goto Stopped;
+      }
+    end;
+    Writeln(PrintUsage);
+    Result:= False;
+    goto Stopped;
+  end;
+
+  if cvrtEnv.SkipIni and (skipinicount = 1) then begin
+    opts.Clear;
+    cvrtEnv.Clear;
+    config:= '';
+    goto LSkipIni;
+  end;
+
+  if cvrtEnv.verbose
+  then ;
+
+  if cvrtEnv.getQUERY_STRING then begin
+    // read QUERY_STRING
+    ExtractHeaderFields(['&'], [], PChar(GetEnvironmentVariable('QUERY_STRING')), opts, True, True);
+    EmptyNames('src', opts);
+    if not CheckParameters(opts, cvrtEnv) then begin
+      RaiseError(6, 'Invalid parameters');
+    end;
+    cvrtEnv.verbose:= false;
+    // cvrtEnv.send2output:= true;
+    // Writeln(output, '(((', opts.Text, ')))');
+  end;
+  if cvrtEnv.getInput then begin
+    // read input
+    f:= 1;
+    while not EOF(input) do begin
+      SetLength(config, f);
+      Read(input, config[f]);
+      Inc(f);
+    end;
+    ExtractHeaderFields(['&'], [], PChar(config), opts, True, True);
+    EmptyNames('src', opts);
+    if not CheckParameters(opts, cvrtEnv) then begin
+      RaiseError(7, 'Invalid parameters');
+    end;
+    cvrtEnv.verbose:= false;
+  end;
+
+  if cvrtEnv.verbose then begin
+    Writeln(PrintSettings(cvrtEnv));
+    Writeln('load settings..');
+  end;
+
+  // load dictionary
+  cvrtEnv.LoadSettings;
+
+  if cvrtEnv.verbose then begin
+    Writeln(PrintSettings(cvrtEnv));
+    Writeln('Process file(s):');
+  end;
+
+  if cvrtEnv.MkListOfPhrases then begin
+    SysUtils.DeleteFile(cvrtEnv.ListOfPhrasesFN);
+    cvrtEnv.FstrmPhrase:= TFileStream.Create(cvrtEnv.ListOfPhrasesFN, fmCreate);
+  end;
+
+  if cvrtEnv.mkListOfFiles then begin
+    // do not create a new listing of files if exists
+    if not FileExists(cvrtEnv.ListOfFilesFN)
+    then util1.String2File(cvrtEnv.ListOfFilesFN, '', True);
+    // load file list into memory
+    cvrtEnv.LastModifiedFiles.LoadFromFile(cvrtEnv.ListOfFilesFN);
+    // sort file
+    if cvrtEnv.verbose
+    then Writeln(Format('Sort last modified file listing %s ..', [cvrtEnv.ListOfFilesFN]));
+  end;
+
+  for f:= 0 to cvrtEnv.filelist.Count - 1 do begin
+    cvrtEnv.sourcepath:= ExtractFilePath(cvrtEnv.filelist[f]);
+    if cvrtEnv.verbose
+    then Writeln(output, #13#10 + cvrtEnv.filelist[f] + #13#10);
+    if DirectoryExists(cvrtEnv.filelist[f]) then begin
+      // directory
+      Walk_Tree('*.*', cvrtEnv.filelist[f], faAnyFile, cvrtEnv.Recurse, ProcessFile, cvrtEnv);
+    end else begin
+      if (util1.IsFileMask(cvrtEnv.filelist[f])) then begin
+        Walk_Tree(ExtractFileName(cvrtEnv.filelist[f]), ExtractFilePath(cvrtEnv.filelist[f]),
+          faAnyFile, cvrtEnv.Recurse, ProcessFile, cvrtEnv);
+      end else begin
+        if FileExists(cvrtEnv.FileList[f]) then begin
+          // ordinal file (or filemask- excluded)
+          ProcessFile(cvrtEnv.filelist[f], cvrtEnv);
+        end else begin
+          // some kind of mask ?
+          Walk_Tree(ExtractFileName(cvrtEnv.filelist[f]),
+            ExtractFilePath(cvrtEnv.filelist[f]), faAnyFile, cvrtEnv.Recurse, ProcessFile, cvrtEnv);
+        end;
+      end;
+    end;
+  end;
+
+  if cvrtEnv.mkListOfFiles then begin
+    if cvrtEnv.verbose
+    then Writeln(Format('Store last modified file listing %s ..', [cvrtEnv.ListOfFilesFN]));
+    cvrtEnv.LastModifiedFiles.SaveToFile(cvrtEnv.ListOfFilesFN);
+  end;
+
+  if cvrtEnv.verbose then begin
+    DateTimeToString(config, 'nn:ss', Now - ElapsedTime);
+    config:= Format(#13#10'Elapsed time: %s', [config]);
+    Writeln(config);
+  end;
+stopped:
+  if cvrtEnv.MkListOfPhrases then begin
+    cvrtEnv.FstrmPhrase.Free;
+  end;
+
+  cvrtEnv.Free;
+  opts.Free;
+end;
+
+end.

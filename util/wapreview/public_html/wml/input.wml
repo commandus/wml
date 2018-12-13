@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="Input">
+<p><b>Name:</b><br/><input name="name"></input><br/>
+<b>Password:</b><br/><input name="password" type="password"></input></p>
+<p><a href="#card2">ok</a></p>
+</card>
+<card id="card2" title="Input">
+<p>Name: $(name)<br/>
+Password: $(password)
+</p>
+<p align="center">
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+</wml>

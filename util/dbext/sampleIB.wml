@@ -1,0 +1,39 @@
+<wml>
+  <card id="card1" title="First Card" newcontext="true">
+    <serverside action="db" opt="ib">
+      db="localhost:E:\D6\InterBase\examples\employee.gdb";user=SYSDBA;password=masterkey;
+      lc_ctype=;sql_role_name=;
+    </serverside>
+    <serverside dataset="dsdept" action="query">
+      SELECT dept_no, department FROM department
+      WHERE dept_no >= 100 ORDER BY dept_no
+    </serverside>
+    <serverside dataset="dsemp" action="query">
+      SELECT emp_no, e.dept_no, Last_Name, First_Name FROM employee e, department d
+      WHERE (e.dept_no = $(dsdept.dept_no)) AND (e.dept_no = d.dept_no)
+    </serverside>
+    <serverside action="send" opt="cookie">  
+      "name=Andrei Ivanov","pwd=password"  
+    </serverside>
+    <p loop="cookie">
+      Today $(today). Cookie name: "$(name)" pwd: "$(pwd)" Select an application
+      -- Begin --
+    </p>
+    <p id="$(dsdept.dept_no)" loop="dsdept">
+      <b>
+        $(dsdept.department)  Σ 
+      </b>
+      <br/>
+      <table columns="1">
+        <tr id="$(dsemp.emp_no)" loop="dsemp">
+          <td>
+            $(dsemp.Last_Name), $(dsemp.First_Name)
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      -- End --
+    </p>
+  </card>
+</wml>

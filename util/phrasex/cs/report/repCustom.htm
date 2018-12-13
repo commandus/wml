@@ -1,0 +1,84 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  set local.name = '';
+  set local.url = '';
+  
+  if (request.fieldExist('cus_id'))
+    <serverside dataset="sqlQuery" action="query">
+    SELECT name, rep_url
+      FROM cs_report WHERE rep_id = request.cus_id;
+    
+    if (sqlQuery.fetch <> 1)
+      error 'Report ' + request.repID + ' not found';
+    endif
+    set local.name = sqlQuery.name;
+    set local.url = sqlQuery.rep_url;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>$(appname) : 
+  <!$if (request.fieldExist('cus_id')))>Edit
+  <!$else)>New<!$endif)>
+  Custom Report
+  </title>
+</head>
+<body>
+
+<form method=GET action="repCustomOk.htm">
+<!$if (request.fieldExist('cus_id')))>
+<input type="hidden" name=cus_id value="$request.cus_id)"/>
+<!$endif)>
+<center>
+<table width=500 border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      <!$if (request.fieldExist('cus_id')))>
+      Edit
+      <!$else)>
+      New
+      <!$endif)>
+      Custom Report
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td>
+    Report Name: <br/>
+    <input type="text" name=cus_name size="60" maxlength="100" 
+      value="$local.name)">
+  </td>
+</tr>
+<tr>
+  <td>
+    Report Template Relative or Absolute HTTP Address: <br/>
+    <input type="text" name=cus_url size="60" maxlength="100"
+      value="$local.url)">
+  </td>
+</tr>
+<tr>
+  <td align="center">
+    Example: enter MyReport.htm or /cs/report/MyReport.htm<br/> 
+    for template file: webroot\cs\report\MyReport.htm
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center">
+    <input type="submit" name=command value="Run Report"/>
+    <input type="submit" name=command value="Save Report"/>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

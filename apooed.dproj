@@ -1,0 +1,127 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8d7e161d-1603-438a-9c34-45e8086667a5}</ProjectGuid>
+    <MainSource>apooed.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>apooed.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_DcuOutput>\tmp\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>\tmp\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>\tmp\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_UnitSearchPath>
+    <DCC_ResourcePath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_ResourcePath>
+    <DCC_ObjPath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_ObjPath>
+    <DCC_IncludePath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_IncludePath>
+    <DCC_Define>XML_IDX;USE_DOM;FREEWARE;GENWML;GENXHTML;GENOEB;GENHHC;GENAPP;GENXML;RELEASE</DCC_Define>
+    <DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+    <DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+    <DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_DcuOutput>\tmp\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>\tmp\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>\tmp\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_UnitSearchPath>
+    <DCC_ResourcePath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_ResourcePath>
+    <DCC_ObjPath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_ObjPath>
+    <DCC_IncludePath>\src\snapshot\lib;\src\util;\src\lib\jedi;\src\lib\SAX\Source;\src\lib\SAX\Vendors\MSXML;\src\lib\opengl;\src\xhtml;</DCC_IncludePath>
+    <DCC_Define>XML_IDX;USE_DOM;FREEWARE;GENWML;GENXHTML;GENOEB;GENHHC;GENAPP;GENXML;DEBUG</DCC_Define>
+    <DCC_UNSAFE_TYPE>True</DCC_UNSAFE_TYPE>
+    <DCC_UNSAFE_CODE>True</DCC_UNSAFE_CODE>
+    <DCC_UNSAFE_CAST>True</DCC_UNSAFE_CAST>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="RunParams">-nosplash</Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="DebugCWD">C:\src\wml</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <Language>
+      <Language Name="ProjectLang">$00000419</Language>
+    </Language>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">True</VersionInfo>
+      <VersionInfo Name="MajorVer">1</VersionInfo>
+      <VersionInfo Name="MinorVer">9</VersionInfo>
+      <VersionInfo Name="Release">9</VersionInfo>
+      <VersionInfo Name="Build">198</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1033</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="CompanyName">commandus software development group</VersionInfoKeys>
+      <VersionInfoKeys Name="FileDescription">WML, XHTML, OEB, ... editor</VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">1.9.9.198</VersionInfoKeys>
+      <VersionInfoKeys Name="InternalName">apoo-wml</VersionInfoKeys>
+      <VersionInfoKeys Name="LegalCopyright">Copyright © 2001-2006 by Andrei Ivanov. All rights reserved.</VersionInfoKeys>
+      <VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+      <VersionInfoKeys Name="OriginalFilename">apooed.exe</VersionInfoKeys>
+      <VersionInfoKeys Name="ProductName">apoo editor</VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">1.9.9.191</VersionInfoKeys>
+      <VersionInfoKeys Name="Comments">http://www.regsoft.net/purchase.php3?productid=44673</VersionInfoKeys>
+      <VersionInfoKeys Name="mailto">support@commandus.com</VersionInfoKeys>
+      <VersionInfoKeys Name="http">http://www.commandus.com/</VersionInfoKeys>
+    </VersionInfoKeys>
+    <Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclib100.bpl">Borland InterBase Express Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIntraweb_80_100.bpl">Intraweb 8.0 Design Package for Borland Development Studio 2006</Excluded_Packages>
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIndyCore100.bpl">Indy 10 Core Design Time</Excluded_Packages>
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclsmp100.bpl">Borland Sample Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIndyProtocols100.bpl">Indy 10 Protocols Design Time</Excluded_Packages>
+      <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dcltee100.bpl">TeeChart Components</Excluded_Packages>
+    </Excluded_Packages>
+    <Source>
+      <Source Name="MainSource">apooed.dpr</Source>
+    </Source>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup />
+  <ItemGroup>
+    <DelphiCompile Include="apooed.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <None Include="apooed.todo" />
+    <DCCReference Include="dm.pas">
+      <Form>dm1</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="EMemoUndoRedo.pas" />
+    <DCCReference Include="util_dom.pas" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>

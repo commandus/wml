@@ -1,0 +1,551 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  // from repCro
+  if (request.fieldExist('cro_col1') OR request.fieldExist('cro_col2') )
+    // convert user friendly column names to real column names
+    if (request.cro_col1 = 'Product')
+      set session.cro_col1 = 'product';
+    elseif (request.cro_col1 = 'Status')
+      set session.cro_col1 = 'status';
+    elseif (request.cro_col1 = 'Priority')
+      set session.cro_col1 = 'priority';
+    elseif (request.cro_col1 = 'Deadline')
+      set session.cro_col1 = 'deadline';
+    elseif (request.cro_col1 = 'Submitted To')
+      set session.cro_col1 = 'submitted_to';
+    elseif (request.cro_col1 = 'Submitted By')
+      set session.cro_col1 = 'submitted_by';
+    elseif (request.cro_col1 = 'Submitted On')
+      set session.cro_col1 = 'submitted_on';
+    elseif (request.cro_col1 = 'Assigned To')
+      set session.cro_col1 = 'assigned_to';
+    elseif (request.cro_col1 = 'Assigned By')
+      set session.cro_col1 = 'assigned_by';
+    elseif (request.cro_col1 = 'Assigned On')
+      set session.cro_col1 = 'assigned_on';
+    elseif (request.cro_col1 = 'Closed By')
+      set session.cro_col1 = 'closed_by';
+    elseif (request.cro_col1 = 'Closed On')
+      set session.cro_col1 = 'closed_on';
+    elseif (request.cro_col1 = 'Serial Number')
+      set session.cro_col1 = 'serial_num';
+    else
+      set session.cro_col1 = request.cro_col1;
+    endif
+
+    if (request.cro_col2 = 'Product')
+      set session.cro_col2 = 'product';
+    elseif (request.cro_col2 = 'Status')
+      set session.cro_col2 = 'status';
+    elseif (request.cro_col2 = 'Priority')
+      set session.cro_col2 = 'priority';
+    elseif (request.cro_col2 = 'Deadline')
+      set session.cro_col2 = 'deadline';
+    elseif (request.cro_col2 = 'Submitted To')
+      set session.cro_col2 = 'submitted_to';
+    elseif (request.cro_col2 = 'Submitted By')
+      set session.cro_col2 = 'submitted_by';
+    elseif (request.cro_col2 = 'Submitted On')
+      set session.cro_col2 = 'submitted_on';
+    elseif (request.cro_col2 = 'Assigned To')
+      set session.cro_col2 = 'assigned_to';
+    elseif (request.cro_col2 = 'Assigned By')
+      set session.cro_col2 = 'assigned_by';
+    elseif (request.cro_col2 = 'Assigned On')
+      set session.cro_col2 = 'assigned_on';
+    elseif (request.cro_col2 = 'Closed By')
+      set session.cro_col2 = 'closed_by';
+    elseif (request.cro_col2 = 'Closed On')
+      set session.cro_col2 = 'closed_on';
+    elseif (request.cro_col2 = 'Serial Number')
+      set session.cro_col2 = 'serial_num';
+    else
+      set session.cro_col2 = request.cro_col2;
+    endif
+
+    set session.cro_name = request.cro_name;
+    set session.cro_max_row = request.cro_max_row;
+    set session.cro_max_col = request.cro_max_col;
+    set session.cro_sql_where = request.cro_sql_where;
+
+    set session.cro_status = request.cro_status;
+    set session.cro_product = request.cro_product;
+    set session.cro_priority1 = request.cro_priority1;
+    set session.cro_priority2 = request.cro_priority2;
+    set session.cro_deadline1 = request.cro_deadline1;
+    set session.cro_deadline2 = request.cro_deadline2;
+    set session.cro_submitted_to = request.cro_submitted_to;
+    set session.cro_submitted_by = request.cro_submitted_by;
+    set session.cro_submitted_on1 = request.cro_submitted_on1;
+    set session.cro_submitted_on2 = request.cro_submitted_on2;
+    set session.cro_assigned_to = request.cro_assigned_to;
+    set session.cro_assigned_by = request.cro_assigned_by;
+    set session.cro_assigned_on1 = request.cro_assigned_on1;
+    set session.cro_assigned_on2 = request.cro_assigned_on2;
+    set session.cro_closed_by = request.cro_closed_by;
+    set session.cro_closed_on1 = request.cro_closed_on1;
+    set session.cro_closed_on2 = request.cro_closed_on2;
+    set session.cro_serial_num = request.cro_serial_num;
+  
+  // from repMan.htm
+  elseif (request.fieldExist('cro_id'))
+
+    <serverside dataset="sqlQuery" action="query">
+    SELECT rep_id, row_ver, name, max_row, max_col, 
+        sql_select, sql_where, htm_where
+      FROM cs_report WHERE rep_id = request.cro_id;
+    if (sqlQuery.fetch <> 1)
+      error 'Report ' + request.cro_id + ' not found';
+    endif
+
+    set session.cro_id = sqlQuery.rep_id;
+    set session.cro_row_ver = sqlQuery.row_ver;
+    set session.cro_name = sqlQuery.name;
+    set session.cro_max_row = sqlQuery.max_row;
+    set session.cro_max_col = sqlQuery.max_col;
+    set session.cro_sql_where = sqlQuery.sql_where;
+    
+    set session.cro_status = '';
+    set session.cro_product = '';
+    set session.cro_priority1 = '';
+    set session.cro_priority2 = '';
+    set session.cro_deadline1 = '';
+    set session.cro_deadline2 = '';
+    set session.cro_submitted_to = '';
+    set session.cro_submitted_by = '';
+    set session.cro_submitted_on1 = '';
+    set session.cro_submitted_on2 = '';
+    set session.cro_assigned_to = '';
+    set session.cro_assigned_by = '';
+    set session.cro_assigned_on1 = '';
+    set session.cro_assigned_on2 = '';
+    set session.cro_closed_by = '';
+    set session.cro_closed_on1 = '';
+    set session.cro_closed_on2 = '';
+    set session.cro_serial_num = '';
+
+    tokenizer tokensSelectList(sqlQuery.sql_select, ' ,');
+    set session.cro_col1 = tokensSelectList.nextToken;
+    set session.cro_col2 = tokensSelectList.nextToken;
+
+    tokenizer tokensHtmWhere(sqlQuery.htm_where, '|');
+    set local.col_name = tokensHtmWhere.nextToken;
+    while (local.col_name <> '')
+      if (local.col_name = 'status')
+        set session.cro_status = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'product')
+        set session.cro_product = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority1')
+        set session.cro_priority1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority2')
+        set session.cro_priority2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline1')
+        set session.cro_deadline1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline2')
+        set session.cro_deadline2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_to')
+        set session.cro_submitted_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_by')
+        set session.cro_submitted_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on1')
+        set session.cro_submitted_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on2')
+        set session.cro_submitted_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_to')
+        set session.cro_assigned_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_by')
+        set session.cro_assigned_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on1')
+        set session.cro_assigned_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on2')
+        set session.cro_assigned_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_by')
+        set session.cro_closed_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on1')
+        set session.cro_closed_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on2')
+        set session.cro_closed_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'serial_num')
+        set session.cro_serial_num = tokensHtmWhere.nextToken;
+      endif
+      set local.col_name = tokensHtmWhere.nextToken;
+    endwhile
+
+  endif
+
+  if (session.cro_col1 = '')
+    error 'Please select a Row field';
+  endif
+  if (session.cro_max_row < 1)
+    error 'Max Row must be greater than 0';
+  endif
+  if (session.cro_max_col < 1)
+    error 'Max Column must be greater than 0';
+  endif
+  if (string.isValidDateTime(session.cro_submitted_on1) <> 1)
+    error 'Please enter a valid date-time for Submitted On >=';
+  endif
+  if (string.isValidDateTime(session.cro_submitted_on2) <> 1)
+    error 'Please enter a valid date-time for Submitted On <';
+  endif
+  if (string.isValidDateTime(session.cro_assigned_on1) <> 1)
+    error 'Please enter a valid date-time for Assigned On >=';
+  endif
+  if (string.isValidDateTime(session.cro_assigned_on2) <> 1)
+    error 'Please enter a valid date-time for Assigned On <';
+  endif
+  if (string.isValidDateTime(session.cro_closed_on1) <> 1)
+    error 'Please enter a valid date-time for Closed On >=';
+  endif
+  if (string.isValidDateTime(session.cro_closed_on2) <> 1)
+    error 'Please enter a valid date-time for Closed On <';
+  endif
+  if (string.isValidDateTime(session.cro_deadline1) <> 1)
+    error 'Please enter a valid date-time for Deadline >=';
+  endif
+  if (string.isValidDateTime(session.cro_deadline2) <> 1)
+    error 'Please enter a valid date-time for Deadline <';
+  endif
+
+  // construct the where clause
+  set local.w = '';
+  if (session.cro_status <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'status = \'' + session.cro_status + '\'';
+  endif
+  if (session.cro_product <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'product = \'' + session.cro_product + '\'';
+  endif
+  if (session.cro_priority1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'priority >= \'' + session.cro_priority1 + '\'';
+  endif
+  if (session.cro_priority2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'priority <= \'' + session.cro_priority2 + '\'';
+  endif
+  if (session.cro_deadline1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'deadline >= ' + to.odbcDateStr(session.cro_deadline1);
+  endif
+  if (session.cro_deadline2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'deadline < ' + to.odbcDateStr(session.cro_deadline2);
+  endif
+  if (session.cro_submitted_to <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_to = \'' + to.2QuoteStr(session.cro_submitted_to) + '\'';
+  endif
+  if (session.cro_submitted_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_by = \'' + to.2QuoteStr(session.cro_submitted_by) + '\'';
+  endif
+  if (session.cro_submitted_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on >= ' + to.odbcDateStr(session.cro_submitted_on1);
+  endif
+  if (session.cro_submitted_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on < ' + to.odbcDateStr(session.cro_submitted_on2);
+  endif
+  if (session.cro_assigned_to <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_to = \'' + to.2QuoteStr(session.cro_assigned_to) + '\'';
+  endif
+  if (session.cro_assigned_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_by = \'' + to.2QuoteStr(session.cro_assigned_by) + '\'';
+  endif
+  if (session.cro_assigned_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_on >= ' + to.odbcDateStr(session.cro_assigned_on1);
+  endif
+  if (session.cro_assigned_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_on < ' + to.odbcDateStr(session.cro_assigned_on2);
+  endif
+  if (session.cro_closed_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_by = \'' + to.2QuoteStr(session.cro_closed_by) + '\'';
+  endif
+  if (session.cro_closed_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_on >= ' + to.odbcDateStr(session.cro_closed_on1);
+  endif
+  if (session.cro_closed_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_on < ' + to.odbcDateStr(session.cro_closed_on2);
+  endif
+  if (session.cro_serial_num <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'serial_num = \'' + session.cro_serial_num + '\'';
+  endif
+  if (session.cro_sql_where <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    // Using to.2QuoteStr breaks simple thing like [status <> 'closed'].
+    // The user needs to code the where clause himself.
+    set local.w = local.w + '(' + session.cro_sql_where + ')';
+  endif
+
+  // put together the non-standard <serverside dataset="crosstab statment
+  set local.sql = 'CROSSTAB ' + 
+    session.cro_col1 + ', ' + session.cro_col2 + 
+    ' FROM cs_ticket_view';
+  if (local.w <> '')
+    set local.sql = local.sql + ' WHERE ' + local.w;
+  endif
+  <serverside dataset="s1 = local.sql;
+  
+  set local.colOfTotal = s1.columnCount - 1;
+  if (s1.columnCount > to.integer(session.cro_max_col))
+    set local.htmlColCount = session.cro_max_col;
+    set local.colOverflow = 1;
+    set local.nonTotalColCount = local.htmlColCount - 2;  // ... and total
+  else
+    set local.htmlColCount = s1.columnCount;
+    set local.colOverflow = 0;
+    set local.nonTotalColCount = local.htmlColCount - 1;  // just total
+  endif
+
+  set local.rowOfTotal = s1.rowCount - 1;
+  if (s1.rowCount > to.integer(session.cro_max_row))
+    set local.htmlRowCount = session.cro_max_row;
+    set local.rowOverflow = 1;
+    set local.nonTotalRowCount = local.htmlRowCount - 2;
+  else
+    set local.htmlRowCount = s1.rowCount;
+    set local.rowOverflow = 0;
+    set local.nonTotalRowCount = local.htmlRowCount - 1;
+  endif
+
+  // convert system column names to user frienly names
+  set local.cro_col1 = '';
+  if (session.cro_col1 = 'product')
+    set local.cro_col1 = 'Product';
+  elseif (session.cro_col1 = 'status')
+    set local.cro_col1 = 'Status';
+  elseif (session.cro_col1 = 'priority')
+    set local.cro_col1 = 'Priority';
+  elseif (session.cro_col1 = 'deadline')
+    set local.cro_col1 = 'Deadline';
+  elseif (session.cro_col1 = 'submitted_to')
+    set local.cro_col1 = 'Submitted To';
+  elseif (session.cro_col1 = 'submitted_by')
+    set local.cro_col1 = 'Submitted By';
+  elseif (session.cro_col1 = 'submitted_on')
+    set local.cro_col1 = 'Submitted On';
+  elseif (session.cro_col1 = 'assigned_to')
+    set local.cro_col1 = 'Assigned To';
+  elseif (session.cro_col1 = 'assigned_by')
+    set local.cro_col1 = 'Assigned By';
+  elseif (session.cro_col1 = 'assigned_on')
+    set local.cro_col1 = 'Assigned On';
+  elseif (session.cro_col1 = 'closed_by')
+    set local.col_header = 'Closed By';
+  elseif (session.cro_col1 = 'closed_on')
+    set local.cro_col1 = 'Closed On';
+  elseif (session.cro_col1 = 'serial_num')
+    set local.cro_col1 = 'Serial Number';
+  else
+    set local.cro_col1 = local.col_name;
+  endif
+
+  if (session.cro_name <> '')
+    set local.title = to.html(session.cro_name);
+  else
+    set local.title = 'Crosstab Report Result';
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    $local.title)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="repCro.htm">Edit</a> | 
+    <a href="repCro.htm?mode=save">Save</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th > $local.cro_col1) </th>
+  <!$
+    s1.fetch;
+    set local.col_count = 1;
+    while (local.col_count < to.integer(local.nonTotalColCount))
+      response.write('  <th >');
+      response.write(to.html(s1.column(local.col_count)));
+      response.write('</th>\r\n');
+      set local.col_count = 1 + local.col_count;
+    endwhile
+    if (local.colOverflow = 1)
+      response.write('  <th >...</th>\r\n');
+    endif
+    response.write('  <th >Total</th>\r\n');
+  )>
+</tr>
+<!$
+  set local.row_count = 1;
+  set local.bgcolor = 'dummy'; 
+
+  while (local.row_count < to.integer(local.nonTotalRowCount) AND s1.fetch)
+    set local.row_count = 1 + local.row_count;
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+    response.write('<tr ' + local.bgcolor + '>\r\n');
+
+    set local.col_count = 0;
+    while (local.col_count < to.integer(local.nonTotalColCount))
+      response.write('  <td>');
+      response.write(to.html(s1.column(local.col_count)));
+      response.write('</td>\r\n');
+      set local.col_count = 1 + local.col_count;
+    endwhile
+    if (local.colOverflow = 1)
+      response.write('  <td>...</td>\r\n');
+    endif
+
+    // write the row total
+    response.write('  <td>');
+    response.write(to.html(s1.column(local.colOfTotal)));
+    response.write('</td>\r\n');
+    response.write('</tr>\r\n');
+  endwhile
+
+  if (local.rowOverflow = 1)
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+    response.write('<tr ' + local.bgcolor + '>\r\n');
+
+    set local.col_count = 0;
+    while (local.col_count < to.integer(local.htmlColCount))
+      response.write('  <td>...</td>\r\n');
+      set local.col_count = 1 + local.col_count;
+    endwhile
+    response.write('</tr>\r\n');
+    // just scroll to the last row, which is the column totals
+    while (local.row_count < to.integer(local.rowOfTotal) AND s1.fetch)
+      set local.row_count = 1 + local.row_count;
+    endwhile
+  endif
+    
+  s1.fetch;
+  if (local.bgcolor = '') 
+    set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+  else 
+    set local.bgcolor = ''; 
+  endif 
+  response.write('<tr' + local.bgcolor + '>\r\n');
+
+  set local.col_count = 0;
+  while (local.col_count < to.integer(local.nonTotalColCount))
+    response.write('  <td>');
+    response.write(to.html(s1.column(local.col_count)));
+    response.write('</td>\r\n');
+    set local.col_count = 1 + local.col_count;
+  endwhile
+  if (local.colOverflow = 1)
+    response.write('  <td>...</td>\r\n');
+  endif
+  // write the row total
+  response.write('  <td>');
+  response.write(to.html(s1.column(local.colOfTotal)));
+  response.write('</td>\r\n</tr>\r\n');
+)>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+
+</body>
+</html>

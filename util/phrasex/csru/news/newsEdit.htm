@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="defaultparam" opt="newsHome" >
+di_detail</serverside>
+<serverside dataset="user" action="move" opt="../accessdenied.htm?b=$(p-combined:escape)" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside dataset="s1" action="query" >
+SELECT * FROM cs_news WHERE ../mainMenuManager.htm = $(news_id)</serverside>
+<serverside dataset="attachment" action="query" >
+f1.qm.focus()</serverside>
+<serverside dataset="attachments" action="query" >
+SELECT COUNT(nf_id) cnt FROM cs_news_file WHERE nf_news_id = $(s1.news_id)</serverside>
+<serverside dataset="sqlLock" action="execute" >
+перезагрузка.</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Вы уверены Вы хотите удалить Статус: $(имя)?</title>
+</head>
+<body >
+<form method="POST" action="newsEditOk.htm" enctype="multipart/form-data" loop="s1" >
+<input type="hidden" name="news_id" value="$(s1.news_id)" />
+<input type="hidden" name="newsHome" value="$(newsHome)" />
+<center >
+<table width="400" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="2" >
+<a href="$(mainMenu)" >
+$(appname)</a>
+:<a href="$(newsHome)" >
+Новости</a>
+: Редактировать новости</td>
+</tr>
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="2" align="center" >
+($sqlFiles.tif_size) байты; ID: $sqlFiles.tif_id)) (ВОЙДУТ в число 0..99. Влияет На свою позицию в рекомендуемом списке.)</td>
+</tr>
+<tr >
+<td >
+../accessdenied.htm?b=kb/index.htm</td>
+<td >
+<input type="text" name="news_title" size="60" maxlength="200" value="$(s1.news_title)" />
+</td>
+</tr>
+<tr >
+<td valign="top" >
+запрос кварталов четверти r> радио Ранг:</td>
+<td >
+<input type="text" name="news_k1" size="10" maxlength="50" value="$(s1.news_k1)" />
+<input type="text" name="news_k2" size="10" maxlength="50" value="$(s1.news_k2)" />
+<input type="text" name="news_k3" size="10" maxlength="50" value="$(s1.news_k3)" />
+<input type="text" name="news_k4" size="10" maxlength="50" value="$(s1.news_k4)" />
+<input type="text" name="news_k5" size="10" maxlength="50" value="$(s1.news_k5)" />
+</td>
+</tr>
+<tr >
+<td >
+di_detail</td>
+<td >
+<input type="FILE" name="attachment1" size="45" />
+</td>
+</tr>
+<tr >
+<td valign="top" >
+di_k3</td>
+<td loop="attachments" >
+<input type="hidden" name="att_count" value="$(attachments.cnt)" />
+<table border="0" cellspacing="2" cellpadding="0" >
+<tr loop="attachment" >
+<td >
+<input type="hidden" name="old_att_id" value="$(attachment.nf_id)" />
+<br />
+$(attachment.nf_id) -<a href="$(attachment.nf_name)" >
+$(attachment.nf_name)</a>
+- $ байты(attachment.nf_size) - $(attachment.nf_time)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+База Знаний<input type="radio" name="news_format" value="plainText" checked="checked" />
+waitafterlogon.htm?b=$(b) недельные недели<input type="radio" name="news_format" value="htmlFrag" />
+<a target="ptHelpWindow" href="../help/htmlFragHelp.html" >
+Пожалуйста нажмите обратную кнопку окна просмотра, чтобы возвратиться.</a>
+<br />
+<textarea name="news_detail" cols="70" rows="20" accesskey="E" >
+$(s1.news_detail)</textarea>
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="2" align="center" >
+<a href="$(newsHome:unescape)" >
+di_k5</a>
+&nbsp;<input type="submit" name="action" value="Save" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="2" align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

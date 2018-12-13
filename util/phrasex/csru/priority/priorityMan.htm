@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=priority/priorityMan.htm" >
+id</serverside>
+<serverside dataset="s1" action="query" >
+Отредактируйте категорию email</serverside>
+<serverside action="defaultparam" opt="set_def" >
+SELECT '' FROM dual</serverside>
+<serverside dataset="sqlResetDef" action="execute" >
+Сообщение repCustom.htm repMan.htm</serverside>
+<serverside dataset="sqlSetDef" action="execute" >
+Имя Сообщения Менеджера Сообщения report/listMyTodo.htm report/listUnassigned.htm report/repMan.htm</serverside>
+<serverside dataset="total" action="query" >
+SELECT COUNT(is_def) cnt, CASE SUM(is_def) WHEN 1 THEN '' ELSE 'Please select a $(k:escape) $(closedH) as the kb_id product.' END cnt_def_str FROM cs_priority</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+catP2</title>
+</head>
+<body >
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+: Менеджер приоритетов</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<a href="priorityNew.htm" >
+Новый приоритет</a>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr class="apbg" >
+<td >
+sqlAttach1</td>
+<td >
+kbVote.htm?vote=yes&id=$(sqlArt.kb_id)</td>
+<td >
+kb_id</td>
+<td width="1%" >
+ght">Copyright &копия; 2003, Андрей Ivanov.</td>
+</tr>
+<tr loop="s1" class="$(s1.rowodd#apbg#)" >
+<td >
+$(s1.name)</td>
+<td >
+$(s1.description)</td>
+<td >
+$(s1.is_def_str)</td>
+<td nowrap="nowrap" width="1%" >
+<a href="priorityMan.htm?set_def=$(s1.name:escape)" >
+$(s1.news_id)</a>
+|<a href="priorityEdit.htm?name=$(s1.name:escape)" >
+Новый Табличный</a>
+|<a href="priorityDel.htm?name=$(s1.name:escape)" >
+kb_k3</a>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr loop="total" >
+<td >
+<b >
+$(total.cnt_def_str)</b>
+../ticket/ticketNew.htm?submitted_by=$(s1.user_id:escape)</td>
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,125 @@
+
+	APOO editor history
+	===================
+
+1. HELP
+
+  apoologo.gif cause AVE in help compiler
+
+2. serverside element
+
+<serverside [dataset=DATASRC] action=query|execute|set|db>
+  expression
+</serverside>
+
+	Action db
+
+Next examlpe establish a connection to the database having BDE alias db01:
+
+<serverside action=db [driver=bde|ado|ib]>
+  dbs=db01;user=SYSDBA;key=CHANGE_ON_INSTALL;
+</serverside>
+
+In case of Interbase you can provide Interbase alias, for example:
+
+myalias=ensen:C:\SRC\equiz\db\equiz.gdb,WIN1251
+
+In HKEY_CURRENT_USER\ or HKEY_USERS\S-1-5-21-2025429265-1606980848-1957994488-1003\
+
+TIBDatabaseInfo.DBSiteName
+
+Key=Software\Borland\InterBase\IBConsole\Servers\Local Server\Databases\employee
+
+"DatabaseFiles"="E:\\D6\\IB6\\examples\\Database\\employee.gdb"
+"Username"="SYSDBA"
+"Role"=""
+"CaseSensitiveRole"=dword:00000000
+"CharacterSet"="WIN1251"
+"Last Accessed"=hex:34,1a,5c,54,9b,36,e2,40
+
+user_name=sysdba
+password=masterkey
+sql_role_name=finance
+lc_ctype=WIN1252
+
+<serverside action=db>
+  db=employee;user=SYSDBA;key=masterkey;
+</serverside>
+
+In case of using ADO you must provide a set of arguments.
+For example,
+<serverside action=db>
+  db="FILE NAME=E:\Program Files\Common Files\System\Ole DB\Data Links\DBDEMOS.udl";user=SYSDBA;key=masterkey;
+</serverside>
+
+
+Provider=Microsoft.Jet.OLEDB.4.0;
+
+ADO connection parameters are:
+
+Argument	Meaning
+
+Provider	The name of the provider to use for the connection.
+File name	The name of a file containing connection information.
+Remote Provider	The name of the provider to use for a client-side connection.
+Remote Server	The path name of the server to use for a client-side connection.
+
+You must include <serverside action=db> element at each deck where
+database extensions are used.
+
+	Action query
+
+Next examlpe returns first 10 rows from employee table:
+
+<serverside dataset=DATASRC action=query>
+  SELECT * FROM employee
+</serverside>
+
+	Action execute
+
+Next examlpe returns first 10 rows from employee table:
+
+<serverside dataset=DATASRC action=execute>
+  INSERT INTO EMPLOYEE(EMP_NO, FIRST_NAME, LAST_NAME, DEPT_NO, JOB_CODE, JOB_GRADE, SALARY, JOB_COUNTRY)
+  VALUES (:$NO+0, ':I',':F', 110, 'Eng', 5, 32000, 'USA')
+</serverside>
+
+Execute actions used for INSERT, UPDATE and DELETE SQL DML commands. In case of
+using BDE it is possible execute stored procedure:
+
+[EXECUTE|PROCEDURE]NAME(PARAMETER [IN|OUT][DEFAULT VALUE],..)
+
+for instance, EXECUTE CALCSALARY(:MONTH IN 1, :DEPT IN 2)
+
+For Interbase please read Interbase user manual. For example,
+
+EXECUTE PROCEDURE CALCSCORE(:PNO, :SNO)
+
+	Action set
+
+Set action is used for establish
+
+	element attributes
+
+For example,
+<element ... loop=DATASRC  first=1 last=10 >
+
+In next example, dataset cursor moves 1 record down
+<element ... loop=DATASRC  move=1>
+
+Note wml does not supports negative numbers therefore that is
+impossible move cursor up (move=-1). Because a lot of databases
+does not support bidirectional cursors and implements
+only unidirectional cursors, this is no big restriction.
+ 
+
+Execute action does not return dataset therefore first and last attributes
+ignored.
+
+
+
+	var attributes
+
+$(datasets.datasetname.column:fmt=;spec=;lib=;func=)
+$(environment.envvarname)
+

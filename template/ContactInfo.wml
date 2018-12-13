@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="ContactTable" title="Contact Information" >
+<p align="left" >
+<b>
+Contact Information
+</b>
+</p>
+<p>
+<table align="left" columns="2" >
+<tr>
+<td>John </td>
+<td>(123)456-7890 </td>
+</tr>
+</table>
+</p>
+<p>
+<a href="List.jsp" >Employees Of  The Month</a>
+</p>
+<do label="Home" type="accept" >
+<go method="post" href="EmployeeList.jsp" >
+</go>
+</do>
+</card>
+</wml>

@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema 
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns:xhtml='http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd' 
+	xmlns:taxon='http://commandus.com/dtd/taxon/1.0/'
+	xmlns:oebpackage='http://openebook.org/namespaces/oeb-package/1.0/' 
+	xmlns:dc='http://purl.org/dc/elements/1.0/'
+	elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+			<xhtml:div class="heading">Taxon document Schema</xhtml:div>
+			<xhtml:div class="curation">
+				<xhtml:p>Copyright (c) 2006 Andrei Ivanov. All rights reserved.</xhtml:p>
+				<xhtml:p>Note: This document has been automatically generated from the DTD Schema, using perl script.
+					<xhtml:b>The Schema itself should always be taken as definitive</xhtml:b>
+				</xhtml:p>
+			</xhtml:div>
+		</xs:documentation>
+	</xs:annotation>
+	
+	<xs:element name='taxon'>
+		<xs:complexType>
+			<xs:sequence>
+					<xs:element name="ssScript"  minOccurs='0' maxOccurs='unbounded' >
+					<xs:complexType>
+						<xs:attribute name='dataset' type='xs:string' use='optional' />
+						<xs:attribute name='action' use='required'>
+							<xs:simpleType>
+								<xs:restriction base='xs:string'>
+									<xs:enumeration value='db' />
+									<xs:enumeration value='query' />
+									<xs:enumeration value='execute' />
+									<xs:enumeration value='move' />
+									<xs:enumeration value='defaultparam' />
+									<xs:enumeration value='defaultparams' />
+									<xs:enumeration value='send' />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name='opt' use='optional'>
+							<xs:simpleType>
+								<xs:restriction base='xs:string'>
+									<xs:enumeration value='ado' />
+									<xs:enumeration value='ib' />
+									<xs:enumeration value='bde' />
+									<xs:enumeration value='cookie' />
+									<xs:enumeration value='mail' />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='sys' minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+						</xs:sequence>
+						<xs:attribute name='href' type='xs:string' use='optional' />
+						<xs:attribute name='name' use='required'>
+							<xs:simpleType>
+								<xs:restriction base='xs:string'>
+									<xs:enumeration value='kingdom' />
+									<xs:enumeration value='subkingdom' />
+									<xs:enumeration value='phylum' />
+									<xs:enumeration value='division' />
+									<xs:enumeration value='subdivision' />
+									<xs:enumeration value='superclass' />
+									<xs:enumeration value='class' />
+									<xs:enumeration value='phylum' />
+									<xs:enumeration value='subphylum' />
+									<xs:enumeration value='infraclass' />
+									<xs:enumeration value='superorder' />
+									<xs:enumeration value='order' />
+									<xs:enumeration value='suborder' />
+									<xs:enumeration value='superfamily' />
+									<xs:enumeration value='family' />
+									<xs:enumeration value='subfamily' />
+									<xs:enumeration value='infrafamily' />
+									<xs:enumeration value='tribe' />
+									<xs:enumeration value='subtribe' />
+									<xs:enumeration value='genus' />
+									<xs:enumeration value='subgenus' />
+									<xs:enumeration value='section' />
+									<xs:enumeration value='species' />
+									<xs:enumeration value='taxon' />
+									<xs:enumeration value='outgroup' />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name='rank' type='xs:NMTOKEN' use='optional' />
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref='title' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element name='synonyms' maxOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+							<xs:element ref='name' maxOccurs='unbounded' />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='authors' minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+							<xs:element name='person' minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='name' maxOccurs='unbounded' />
+										<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='degree' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='position' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='institute' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='department' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='phone' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='mail' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='email' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='birthday' minOccurs='0' maxOccurs='1' />
+										<xs:element ref='dyingday' minOccurs='0' maxOccurs='1' />
+										<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+									</xs:sequence>
+									<xs:attribute name='href' type='xs:string' use='optional' />
+									<xs:attribute name='date' type='xs:string' use='optional' />
+									<xs:attribute name='rel' type='xs:string' use='optional' />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='distributions' minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+							<xs:element name='distribution' minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+										<xs:element ref='area' minOccurs='0' maxOccurs='1' />
+										<xs:element ref='stay' minOccurs='0' maxOccurs='1' />
+										<xs:element ref='label' minOccurs='0' maxOccurs='1' />
+										<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										<xs:element name='publications'>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+														<xs:element name='publication' minOccurs="1" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																	<xs:element name='opf' minOccurs="0" maxOccurs="1">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='href' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='record' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='href' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+																	<xs:element name='dc-metadata' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																				<xs:element ref='title' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='identifier' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='contributor' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='creator' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='subject' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='description' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='publisher' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='date' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='type' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='format' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='source' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='language' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='relation' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='coverage' minOccurs='0' maxOccurs='1' />
+																				<xs:element ref='rights' minOccurs='0' maxOccurs='1' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	
+																	<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+																	<xs:element ref='authors' minOccurs='0' maxOccurs='unbounded' />
+																</xs:sequence>
+																<xs:attribute name='href' type='xs:string' use='optional' />
+																<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											
+											
+																	
+																	<xs:element name='title' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='option' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='identifier' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='scheme' use='optional'>
+																				<xs:simpleType>
+																					<xs:restriction base='xs:string'>
+																						<xs:enumeration value='ISBN' />
+																						<xs:enumeration value='DOI' />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='contributor' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																				
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='role' use='optional'>
+																				<xs:simpleType>
+																					<xs:restriction base='xs:string'>
+																						<xs:enumeration value='adp' />
+																						<xs:enumeration value='ann' />
+																						<xs:enumeration value='arr' />
+																						<xs:enumeration value='art' />
+																						<xs:enumeration value='asn' />
+																						<xs:enumeration value='aut' />
+																						<xs:enumeration value='aqt' />
+																						<xs:enumeration value='aft' />
+																						<xs:enumeration value='aui' />
+																						<xs:enumeration value='ant' />
+																						<xs:enumeration value='bkp' />
+																						<xs:enumeration value='clb' />
+																						<xs:enumeration value='cmm' />
+																						<xs:enumeration value='com' />
+																						<xs:enumeration value='dsr' />
+																						<xs:enumeration value='edt' />
+																						<xs:enumeration value='ill' />
+																						<xs:enumeration value='lyr' />
+																						<xs:enumeration value='mdc' />
+																						<xs:enumeration value='mus' />
+																						<xs:enumeration value='nrt' />
+																						<xs:enumeration value='oth' />
+																						<xs:enumeration value='pht' />
+																						<xs:enumeration value='prt' />
+																						<xs:enumeration value='red' />
+																						<xs:enumeration value='rev' />
+																						<xs:enumeration value='spn' />
+																						<xs:enumeration value='ths' />
+																						<xs:enumeration value='trc' />
+																						<xs:enumeration value='trl' />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																			<xs:attribute name='file-as' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='creator' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='role' use='optional'>
+																				<xs:simpleType>
+																					<xs:restriction base='xs:string'>
+																						<xs:enumeration value='adp' />
+																						<xs:enumeration value='ann' />
+																						<xs:enumeration value='arr' />
+																						<xs:enumeration value='art' />
+																						<xs:enumeration value='asn' />
+																						<xs:enumeration value='aut' />
+																						<xs:enumeration value='aqt' />
+																						<xs:enumeration value='aft' />
+																						<xs:enumeration value='aui' />
+																						<xs:enumeration value='ant' />
+																						<xs:enumeration value='bkp' />
+																						<xs:enumeration value='clb' />
+																						<xs:enumeration value='cmm' />
+																						<xs:enumeration value='com' />
+																						<xs:enumeration value='dsr' />
+																						<xs:enumeration value='edt' />
+																						<xs:enumeration value='ill' />
+																						<xs:enumeration value='lyr' />
+																						<xs:enumeration value='mdc' />
+																						<xs:enumeration value='mus' />
+																						<xs:enumeration value='nrt' />
+																						<xs:enumeration value='oth' />
+																						<xs:enumeration value='pht' />
+																						<xs:enumeration value='prt' />
+																						<xs:enumeration value='red' />
+																						<xs:enumeration value='rev' />
+																						<xs:enumeration value='spn' />
+																						<xs:enumeration value='ths' />
+																						<xs:enumeration value='trc' />
+																						<xs:enumeration value='trl' />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																			<xs:attribute name='file-as' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='subject' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='description' minOccurs="0" maxOccurs="1">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute name='id' type='xs:string' use='optional' />
+																				</xs:extension> 
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='publisher' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	
+																	<xs:element name='date' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='event' use='optional'>
+																				<xs:simpleType>
+																					<xs:restriction base='xs:string'>
+																						<xs:enumeration value='creation' />
+																						<xs:enumeration value='publication' />
+																						<xs:enumeration value='modification' />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																			<xs:attribute name='value' type='xs:string' use='optional' />
+																			<xs:attribute name='ratio' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='type' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																			<xs:attribute name='value' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='format' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	
+																	<xs:element name='language' minOccurs="0" maxOccurs="1">
+																		<xs:complexType  mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='relation' minOccurs="0" maxOccurs="1">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute name='id' type='xs:string' use='optional' />
+																				</xs:extension>
+																			</xs:simpleContent>			
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='coverage' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence >
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name='rights' minOccurs="0" maxOccurs="1">
+																		<xs:complexType mixed="true">
+																			<xs:sequence>
+																				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+																			</xs:sequence>
+																			<xs:attribute name='id' type='xs:string' use='optional' />
+																		</xs:complexType>
+																	</xs:element>										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+									</xs:sequence>
+									<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+									<xs:attribute name='href' type='xs:string' use='optional' />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='plants' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='symbiosises' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='collections' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name='name'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='option' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	
+	
+	<xs:element name='degree'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='position'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='institute'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='department'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='phone'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='mail'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='email'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='birthday'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='dyingday'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='x-metadata'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='meta' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='meta'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='name' type='xs:string' use='required' />
+			<xs:attribute name='content' type='xs:string' use='required' />
+			<xs:attribute name='scheme' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name='area'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='region' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='territory' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='location' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+			<xs:attribute name='name' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='region'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ocean' />
+						<xs:enumeration value='sea' />
+						<xs:enumeration value='basin' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name='territory'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ocean' />
+						<xs:enumeration value='sea' />
+						<xs:enumeration value='basin' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='location'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='name' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='stay'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='source' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='location' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='horisont' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='section' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='square' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='depth' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='gear' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='sample' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='station' />
+						<xs:enumeration value='vessel' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='source'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='log' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='horisont'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='section'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='square'>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='depth'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name='gear'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='sample'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='label'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='latitude' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='longitude' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='base' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='point' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='latitude'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='longitude'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='base'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+			<xs:attribute name='distance' type='xs:string' use='optional' />
+			<xs:attribute name='direction' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='N' />
+						<xs:enumeration value='E' />
+						<xs:enumeration value='S' />
+						<xs:enumeration value='W' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='point'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='plants'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='symbiosis'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='person' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='publications' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='region' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='symbiosises'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='hosts' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='parasites' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='plants' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='hosts'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='parasites'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='collections'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='collection' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='collection'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='item' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='name' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='item'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='sex' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='age' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='count' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='type' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='distribution' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='sex'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='m' />
+						<xs:enumeration value='f' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='age'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='count'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>

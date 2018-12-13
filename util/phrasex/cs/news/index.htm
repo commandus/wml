@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside action="defaultparam" opt="k">
+    SELECT '' R FROM DUAL;
+  </serverside>
+  <serverside action="defaultparam" opt="d1">
+    SELECT cast('today' as DATE) - 7 FROM DUAL;
+  </serverside>
+  <serverside action="defaultparam" opt="d2">
+    SELECT cast('today' as DATE) FROM DUAL;
+  </serverside>
+  <serverside action="defaultparam" opt="first">
+    SELECT 1 FROM DUAL;
+  </serverside>
+  <serverside action="defaultparam" opt="last">
+    SELECT 10 FROM DUAL;
+  </serverside>
+  <serverside dataset="News" action="query">
+    SELECT news_id, news_title, news_created_on, news_created_by
+    FROM cs_news
+    WHERE ((upper(news_k1) = upper('$(k)')) OR
+    (upper(news_k2) = upper('$(k)')) OR
+    (upper(news_k3) = upper('$(k)')) OR
+    (upper(news_k4) = upper('$(k)')) OR
+    (upper(news_k5) = upper('$(k)')) OR
+    (upper(news_title) LIKE upper('%$(k)%')) OR
+    (news_detail LIKE '%$(k)%')) AND
+    (news_created_on IS NULL or ((news_created_on &gt;= '$(d1)') AND (news_created_on &lt;= '$(d2)')
+    )) ORDER BY news_id DESC
+  </serverside>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title>
+      apooHelpDesk Customer Support News
+    </title>
+  </head>
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <a href="../index.htm">Customer Support main menu</a> : News
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <hr/>
+        </td>
+      </tr>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="apbg" valign="top" width="1%">
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td>
+                <form action="newsView.htm" method="POST">
+                  News ID:
+                  <input name="news_id" size="15" maxlength="50"/>
+                  <br/>
+                  <input type="hidden" name="newsHome" value="$(p-combined:escape)"/>
+                  <br/>
+                  <input type="submit" value="Go"/>
+                </form>
+              </td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td>
+                <form loop="global" action="index.htm" method="POST">
+                  Keywords:
+                  <input name="k" value="$(k:unescape)" size="15" maxlength="50"/>
+                  <br/>
+                  Posted on from:
+                  <input name="d1" value="$(d1:unescape)" size="15" maxlength="50"/>
+                  <br/>
+                  to:
+                  <input name="d2" value="$(d2:unescape)" size="15" maxlength="50"/>
+                  <br/>
+                  <input type="submit" value="Search"/>
+                </form>
+              </td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td>
+                <a href="newsNew.htm">
+                  Post News
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="/hd/cs/help/index.html">
+                  Help
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <!-- right pane ---------------- -->
+        <td valign="top" width="99%">
+          Help: Use commas between keywords. All keywords are used when searching for news records.
+          <table loop="global" width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td align="right">
+                <table border="0">
+                  <tr>
+                    <td>
+                       Items: $(first) - $(last)
+                    </td>
+                    <td>
+                      <form action="index.htm" method="POST">
+                        <input type="hidden" name="first" value="=G1($(first)-10)"/>
+                        <input type="hidden" name="last" value="=G1($(first)-10)+9"/>
+                        <input type="hidden" name="k" value="$(k:escape)"/>
+                        <input type="hidden" name="d1" value="$(d1:escape)"/>
+                        <input type="hidden" name="d2" value="$(d2:escape)"/>
+                        <input type="submit" name="go" value="Previous"/>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="index.htm" method="POST">
+                        <input type="hidden" name="first" value="=$(first)+10"/>
+                        <input type="hidden" name="last" value="=$(first)+19"/>
+                        <input type="hidden" name="k" value="$(k:escape)"/>
+                        <input type="hidden" name="d1" value="$(d1:escape)"/>
+                        <input type="hidden" name="d2" value="$(d2:escape)"/>
+                        <input type="submit" name="go" value="Next"/>
+                      </form>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr class="apbg">
+              <td>
+                Title
+              </td>
+              <td>
+                Date
+              </td>
+              <td>
+                Posted By
+              </td>
+            </tr>
+            <tr loop="News" first="$(first)" last="$(last)" valign="top" class="$(News.rowodd#apbg#)">
+              <td>
+                <a href="newsView.htm?news_id=$(News.news_id:escape)&newsHome=$(p-combined:escape)">
+                  $(News.news_title)
+                </a>
+                &nbsp;
+              </td>
+              <td valign="top">
+                $(News.news_created_on)&nbsp;
+              </td>
+              <td valign="top">
+                $(News.news_created_by)&nbsp;
+              </td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td align="right">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">
+          Copyright &copy; 2003, Andrei Ivanov.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>Find Text dialog
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Find text dialog window</h1>
+<p>Choose <b>Find</b> (Ctrl+F) to display the <i> Find Text</i> dialog window.<br>
+<br>
+<img border="0" src="cmdeditfind.gif" width="392" height="415"></p>
+<p>Specify text you want to find and to set <a href="#options"> options</a> that affect the search.</p>
+<p>Find locates the placement of code containing occurrence of the string and highlights it.</p>
+<a name="options"> </a><h2>Dialog box options</h2>
+<table border="0">
+  <tr>
+    <td class="tdbanner">Option</td>
+    <td class="tdbanner">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">Text to find</td>
+    <td valign="top">A search string. You can click the down arrow next to the input box to select from a list of previously entered searches.</td>
+  </tr>
+  <tr>
+    <td valign="top">
+Case sensitive</td>
+    <td valign="top">Match unicode letter case. Differentiates uppercase from lowercase when performing a search.</td>
+  </tr>
+  <tr>
+    <td valign="top">
+Whole words only</td>
+    <td valign="top">Searches for words only. In other words, match only text at
+      end or start and (or) surrounded by white spaces. If this option off, the search
+      text might be found within other words.<br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Regular expressions</td>
+    <td valign="top">	Recognizes <a href="cmdregexp.htm">regular expressions</a>.
+      If this option is selected, new two options appears:
+      <ul>
+        <li>Space compress - handle several consecutive white spaces as one white space.
+          This applies to the pattern as well as the search text.</li>
+        <li>Ignore non-spacing chars</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Origin</td>
+    <td valign="top">Where the search starts:
+      <ul>
+        <li>
+
+From current position - the search starts at the cursor's current position;<br>
+Entire - the search covers either the entire block of selected text or the entire file.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Scope</td>
+    <td valign="top">Two options available:
+      <ul>
+        <li>
+Global - the entire file</li>
+        <li>Selected text - searches only the selected text</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Direction</td>
+    <td valign="top">	Direction to search:
+      <ul>
+        <li>
+Forward - from the current position to the end of the file;</li>
+        <li>
+Backward - from the current position to the beginning of the file.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"> Search Directory Options</td>
+    <td valign="top">Search directory options are:
+      <ul>
+        <li>Directory - specify the path of the files to be searched;</li>
+        <li>Which files - select file types to search</li>
+        <li>Include subdirectories - if selected, subdirectories from the directory path specified are also
+          searched.
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Where</td>
+    <td valign="top">Which files to search:
+      <ul>
+        <li>Search current file - searches file that is current;</li>
+        <li>Search all open files- searches files that are currently open;</li>
+        <li>Search in directories - when selected, the <i> Search Directory Options</i> are
+          available:</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Action</td>
+    <td valign="top">You can select one of four available actions:<font SIZE="1">
+      <ul>
+        <li>Show found lines in Info panel</li>
+        <li>Create description file in folder where search started</li>
+        <li>Create index files in folder where search started</li>
+        <li>Pass found text selection to the external program or DLL</li>
+      </ul>
+      <p>If <i>Pass found text selection to the external program or DLL</i>
+      option was selected, <i>Program or DLL</i> option appears.</font>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Program or DLL e.g. split.dll#splitByNumber</td>
+    <td valign="top"> Choose program from list of executable files.&nbsp;
+      <p>Note that dialog pass to the external program selection in temporary
+      created file and substitute name of temporary file at the end of command
+      string. Therefore all required parameters must be provided before last
+      option where file name is passed.</p>
+      <p>Alternatively, it is possible to call library function. Browse DLLs and
+      select what do you want to use. Then add '#' sign to the end of DLL path
+      and name of function contained in DLL. This is void function (PChar*filename).
+    </td>
+  </tr>
+</table>
+<p>See also: <a href="cmdregexp.htm">regular expressions</a> <a href="cmdeditreplace.htm"> Replace
+text dialog</a> <a href="keyboardshortcuts.htm">Keyboard shortcuts</a> <a href="cmdeditxpath.htm">XPath
+Query</a> <a href="cmdxpathexp.htm">XPath expressions</a></p>
+
+</body>
+</html>

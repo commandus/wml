@@ -1,0 +1,94 @@
+// pt7cs_dueRem.script : script for Deadline Reminder of Support
+
+if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+  file fAppInit('../appInit.ssp');
+  fAppInit.appInit();
+endif
+
+if (server.emailSenderEnabled = 0) 
+  server.log('Please enable Email Sender so that '
+             'notification emails can be sent.');
+endif
+
+file fAppFunc('appFunctions.script');
+
+sql sqlLastStatus = SELECT name FROM pt7cs_status ORDER BY seq_num DESC;
+set local.lastStatus = sqlLastStatus.name;
+sqlLastStatus.close;
+
+// remind one day before deadline. timespan(day,hour,minute)
+set local.date = server.dateTime + to.timeSpan(1, 0, 0);
+
+sql sqlNeedReminded =
+  'SELECT ticket_id, product, assigned_to, title, row_ver, deadline '
+  '  FROM pt7cs_ticket '
+  '  WHERE due_rem_flag <> \'n\' '
+  '  AND status <> \'' + local.lastStatus + '\' '
+  '  AND deadline <= ' + to.odbcDateStr(local.date);
+  
+Email_Out em;
+if (server.importerEnabled)
+  set em.from = server.importerEmail;
+else
+  set em.from = server.adminEmail;
+endif
+
+set Local.count = 0;
+
+while (sqlNeedReminded.fetch)
+
+  // do not remind over and over again
+  sql sqlTurnOffFlag =
+    UPDATE pt7cs_ticket 
+    SET due_rem_flag = 'n', row_ver = 1 + sqlNeedReminded.row_ver
+    WHERE ticket_id = sqlNeedReminded.ticket_id
+      AND row_ver = sqlNeedReminded.row_ver;
+  sqlTurnOffFlag.execute;
+  sqlTurnOffFlag.close;
+
+  set em.subject = 
+    'Request #' + sqlNeedReminded.ticket_id + 
+    ' is due on ' + sqlNeedReminded.deadline;
+    
+  // To embed secure web server address in the notification emails,
+  // change httpAddress to httpsAddress.
+     
+  set local.hyperLink = server.httpAddress + 
+    app.startPage + '?ticket_id=' + sqlNeedReminded.ticket_id;
+
+  if (sqlNeedReminded.assigned_to <> '')
+    sql sqlAssignedTo = 
+      'SELECT email FROM pt7cs_user '
+      'WHERE user_id = \'' + 
+             to.2QuoteStr(sqlNeedReminded.assigned_to) + '\'';
+    set em.to = sqlAssignedTo.email;
+    sqlAssignedTo.close;
+
+    set em.content = 
+      'Dear ' + sqlNeedReminded.assigned_to + ',\r\n\r\n' + 
+      sqlNeedReminded.title + '\r\n' + local.hyperLink +
+      '&user_id=' + to.cgi(sqlNeedReminded.assigned_to) + 
+      '\r\n\r\n' + app.name;
+  
+  elseif (sqlNeedReminded.product <> '')
+    set local.dispatcher = fAppFunc.getDispatcher(sqlNeedReminded.product);
+    if (local.dispatcher <> '')
+      sql sqlDispInfo = 
+        'SELECT email FROM pt7cs_user '
+        'WHERE user_id = \'' + to.2QuoteStr(local.dispatcher) + '\'';
+      set em.to = sqlDispInfo.email;
+      sqlDispInfo.close;
+
+      set em.content = 
+        'Dear ' + local.dispatcher + ',\r\n\r\n' +
+        'This request has not been assigned.\r\n' + local.hyperLink + 
+        '&user_id=' + to.cgi(local.dispatcher) + 
+        '\r\n\r\n' + app.name;
+    endif
+  endif
+  if (em.to <> '')
+    em.send;
+  endif
+  set local.count = 1 + local.count;
+endwhile
+server.log('Total ' + local.count + ' deadline reminder(s) sent');

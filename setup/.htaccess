@@ -1,0 +1,2 @@
+RewriteEngine	on
+RewriteRule	apoosetup.exe	apoosetup19P.exe

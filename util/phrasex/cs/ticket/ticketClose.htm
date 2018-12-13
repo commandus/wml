@@ -1,0 +1,148 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT row_ver, title, submitted_to, submitted_by, 
+      co_submitter, submitter_cc, submitted_on
+    FROM cs_ticket
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="ticketCloseOk.htm"  
+  enctype="multipart/form-data">
+
+<input type="hidden" name=backToUrl value="$request.backToUrl)"/>
+<input type="hidden" name=backToPrompt value="$request.backToPrompt)"/>
+<input type="hidden" name=ticket_id value="$request.ticket_id)"/>
+<input type="hidden" name=row_ver value="$s1.row_ver)"/>
+<input type="hidden" name=submitted_on value="$s1.submitted_on)"/>
+<input type="hidden" name=submitted_to value="$s1.submitted_to)"/>
+
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Close Request #$request.ticket_id)
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr>
+  <td colspan="3">
+    Title: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type="text" name=title size="70" maxlength="100"
+        value="$(s1.title))">
+    <!$ else )>
+      <input type="text" name=title size="60" maxlength="100"
+        value="$(s1.title))">
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td>
+    Submitted By: <br/>
+    <input type="text" name=submitted_by size="20" maxlength="50"
+      value="$s1.submitted_by)">
+  </td>
+  <td>
+    Co-Submitter: <br/>
+    <input type="text" name=co_submitter size="20" maxlength="50"
+      value="$s1.co_submitter)">
+  </td>
+  <td>
+    Other Submitters' Email: <br/>
+    <input type="text" name=submitter_cc size="20" maxlength="50"
+      value="$s1.submitter_cc)">
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    History: 
+    <textarea cols=70 rows=10 wrap=virtual><!$ 
+      // without the primary key ch_id, Access driver gets 
+      // confused if two records have the same made by and made on.
+      // Note: need all entries to make the total cost right.
+      <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+        'WHERE ch_ticket_id = ' + request.ticket_id + ' '
+          'AND ch_type <> \'log\' '
+        'ORDER BY ch_made_on DESC';
+  </serverside>
+      set local.totalCost = 0;
+      while (sqlHistory.fetch)
+        response.write('[' +  sqlHistory.ch_made_on);
+        response.write(' by ' + sqlHistory.ch_made_by);
+        // note: ch_cost < 0 means a credit. It needs to be shown.
+        if (sqlHistory.ch_cost <> 0)
+          response.write(', cost ' + sqlHistory.ch_cost + ' minutes');
+        endif
+        response.write(']\r\n');
+        response.write(to.html2(sqlHistory.ch_description) + '\r\n\r\n');
+        set local.totalCost = local.totalCost + sqlHistory.ch_cost;
+      endwhile
+    )></textarea>
+    <input type="hidden" name=total_cost value="$local.totalCost)"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Resolution
+    
+    [in <input type=radio name=note_format value="0" checked/>plain text
+    <input type=radio name=note_format 
+      value="1"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    ]
+    : <br/>
+    <textarea name=note_data cols=70 rows=12 wrap=virtual></textarea>
+    <!--there should be no space between textarea pairs-->
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    <!$ if (server.emailSenderEnabled) )>
+    <input type=checkbox name=suppress_email 
+      value="y">Suppress notification emails.&nbsp;
+    <!$ endif )>
+    New Cost: <input type="text" name=new_cost size="5" maxlength=10/> minutes
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Attach File: 
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=add_attachment1 size="5"5/>
+    <!$ else )>
+      <input type=FILE name=add_attachment1 size="45"/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="3" align="center">
+    <input type="submit" name=action value="Save"/>
+    <input type="submit" name=action value="Preview HTML"/>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

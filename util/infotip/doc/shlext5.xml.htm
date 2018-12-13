@@ -1,0 +1,510 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    
+    <title>Руководство полного идиота по написанию расширений оболочки - Часть V</title><meta name="robots" content="index,nofollow">
+    <link rel="stylesheet" href="shlext5.xml_files/article.css" type="text/css">
+    <script language="javascript" src="shlext5.xml_files/rsdn.js">
+    </script>
+    <script language="javascript" src="shlext5.xml_files/Forum.js">
+    </script></head>
+  <body marginheight="20" marginwidth="20"><!-- SpyLOG f:1211 -->
+<script language="javascript"><!--
+Mu="u1358.84.spylog.com";Md=document;Mnv=navigator;Mp=1;
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+My="";
+My+="<a href='http://"+Mu+"/cnt?cid=135884&f=3&p="+Mp+"&rn="+Mrn+"' target=_blank>";
+My+="<img src='http://"+Mu+"/cnt?cid=135884&"+Mz+"&r1="+escape(Md.referrer)+"&r="+escape(parent.document.referrer)+"&pg="+escape(window.location.href)+"' border=0 width=1 height=1 alt=' '>";
+My+="</a>";Md.write(My);//--></script><a href="http://u1358.84.spylog.com/cnt?cid=135884&amp;f=3&amp;p=1&amp;rn=0.8551986372259872" target="_blank"><img src="shlext5.xml_files/cnt.gif" alt=" " border="0" height="1" width="1"></a><noscript>
+<a href="http://u1358.84.spylog.com/cnt?cid=135884&f=3&p=1" target=_blank>
+<img src="http://u1358.84.spylog.com/cnt?cid=135884&p=1" alt=' ' border='0' width=1 height=1 >
+</a></noscript>
+<!-- SpyLOG -->
+
+<!-- HotLog -->
+<script language="javascript">
+hotlog_js="1.0";hotlog_d=document; hotlog_n=navigator;hotlog_rn=Math.random();
+hotlog_n_n=(hotlog_n.appName.substring(0,3)=="Mic")?0:1;
+hotlog_r=""+hotlog_rn+"&s=21251&r="+escape(hotlog_d.referrer)+"&pg="+
+escape(window.location.href);
+hotlog_d.cookie="hotlog=1"; hotlog_r+="&c="+(hotlog_d.cookie?"Y":"N");
+hotlog_d.cookie="hotlog=1; expires=Thu, 01-Jan-70 00:00:01 GMT"</script>
+<script language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")</script>
+<script language="javascript1.2">
+hotlog_js="1.2";hotlog_s=screen;
+hotlog_r+="&wh="+hotlog_s.width+'x'+hotlog_s.height+"&px="+((hotlog_n_n==0)?
+hotlog_s.colorDepth:hotlog_s.pixelDepth)</script>
+<script language="javascript1.3">hotlog_js="1.3"</script>
+<script language="javascript">hotlog_r+="&js="+hotlog_js;
+hotlog_d.write("<img src=\"http://hit2.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&\" border=0 width=1 height=1 alt=' '>")</script><img src="shlext5.xml_files/count.gif" alt=" " border="0" height="1" width="1">
+<noscript>
+<img src="http://hit2.hotlog.ru/cgi-bin/hotlog/count?s=21251" border=0 width=1 height=1 alt=' '>
+</noscript>
+<!-- /HotLog -->
+
+<!--begin of Rambler's Top100 code -->
+<a href="http://top100.rambler.ru/top100/">
+<img src="shlext5.xml_files/top100.gif" alt="" border="0" height="1" width="1"></a>
+<!--end of Top100 code-->
+
+<!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=555384;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="shlext5.xml_files/counter.gif" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=555384"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--><!--/COUNTER-->
+<table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext5.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext5.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext5.xml?print" target="_blank" title="Версия для печати"><img src="shlext5.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307538" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307538" target="_self" title="Перейти к обсуждению статьи"><img src="shlext5.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307538"><font color="#646464"><font size="1"> Оценка </font><font color="black">55</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307538" title="Добавить в избранное"><img onclick="AddFav(307538);return false;" src="shlext5.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307538)" title="Подписка на сообщения"><img class="i" src="shlext5.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-3" title="+1"><img onclick="RateMsg(307538,-3);return false;" src="shlext5.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=1" title="Интересно"><img onclick="RateMsg(307538,1);return false;" src="shlext5.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307538,2);return false;" src="shlext5.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=3" title="Супер"><img onclick="RateMsg(307538,3);return false;" src="shlext5.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307538,-1);return false;" src="shlext5.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307538,-4);return false;" src="shlext5.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307538,0);return false;" src="shlext5.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table><script language="javascript" src="shlext5.xml_files/orfo.js" type="text/javascript"></script><form name="orfo_form" target="orfo_frame" action="http://orphus.dklab.ru/" method="post"><input name="email" value="orfo@rsdn.ru" type="hidden"><input name="subject" value="Орфографическая ошибка" type="hidden"><input name="Referrer" value="" type="hidden"><input name="Address" value="" type="hidden"><input name="Context" value="" type="hidden"></form>	<iframe name="orfo_frame" valign="top" border="0" style="position: absolute; visibility: hidden;" height="1" width="1"></iframe><table bgcolor="#9999ff" border="0" cellpadding="0" cellspacing="0" width="1"><tbody><tr><td><a onclick="return orfo_imgclick()" target="_blank" href="http://orphus.dklab.ru/"><img src="shlext5.xml_files/orfo.gif" alt="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" title="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" __width="121" __height="21" border="0"></a></td></tr></tbody></table>
+<script language="javascript">
+function ToggleCode(id)
+{
+	el=document.getElementById(id);
+	img=document.getElementById("img"+id);
+	if(el.style.display=="none")
+	{
+	  img.src="/images/ls2.gif";
+	  el.style.display="";
+	}
+	else
+	{
+	img.src="/images/ls1.gif";
+	el.style.display="none";
+	}
+}
+</script><h1>Руководство полного идиота по написанию расширений оболочки - Часть V<br><span class="subtitle">Расширение оболочки для добавления новых страниц в набор свойств файлов</span></h1><h5><span class="title">Автор: </span><span class="value"><a target="_blank" href="mailto:mdunn@inreach.com" title="Отправить письмо">Michael Dunn</a></span><br><span class="title">Перевод: </span><span class="value">Инна Кирюшкина<br><a target="_blank" href="mailto:odissey@rsdn.ru" title="Отправить письмо">Алексей Кирюшкин</a></span><br><span class="title">Источник: </span><span class="value"><a target="_blank" title="Открыть в новом окне" href="http://www.codeproject.com/shell/shellextguide5.asp">The Code Project</a></span></h5><h6><span class="title">Опубликовано: </span><span class="value">15.08.2001</span><br><span class="title">Исправлено: </span><span class="value">12.01.2000</span><br><span class="title">Версия текста: </span><span class="value">1.0</span></h6><div style="margin-left: 2em;"><a href="#ETA"><b></b></a><br><div style="margin-left: 2em;"></div><a href="#ERA"><b>Обработчик набора свойств</b></a><br><div style="margin-left: 2em;"></div><a href="#EPA"><b>Использование AppWizard</b></a><br><div style="margin-left: 2em;"></div><a href="#ENA"><b>Интерфейс инициализации</b></a><br><div style="margin-left: 2em;"></div><a href="#ELA"><b>Добавление страниц свойств</b></a><br><div style="margin-left: 2em;"></div><a href="#EJA"><b>Неприятная ситуация с периодом жизни объектов</b></a><br><div style="margin-left: 2em;"></div><a href="#EHA"><b> Функции обратного вызова страницы свойств</b></a><br><div style="margin-left: 2em;"></div><a href="#EFA"><b>Обработчики сообщений страницы свойств</b></a><br><div style="margin-left: 2em;"></div><a href="#EDA"><b>Регистрация расширения</b></a><br><div style="margin-left: 2em;"></div><a href="#EBA"><b>Продолжение следует...</b></a><br><div style="margin-left: 2em;"></div></div><h2><a name="ETA"></a></h2>
+<p>
+<a href="http://www.rsdn.ru/article/winshell/shlext5/ShellExtGuide5_demo.zip"><img src="shlext5.xml_files/fileA.gif" align="middle" border="0" height="11" width="28">Демонстрационный проект</a>
+</p>
+<p>В пятой части руководства мы осмелимся заглянуть в мир окон свойств.
+Когда Вы выводите свойства объектов файловой системы проводник
+показывает их на странице "Общие". Оболочка позволяет нам расширить
+окно набора свойств, используя тип расширения, который называется
+обработчиком набора свойств (property sheet handler).</p>
+<p>Эта статья подразумевает, что у Вас есть основные знания по
+расширениям оболочки и Вы знакомы с классами-контейнерами STL. Если Вам
+необходимо освежить знания по STL, Вы должны прочитать <a href="http://www.rsdn.ru/article/?winshell/shlext2.xml">часть II</a>,
+так как те же методы будут использоваться в этой статье. Код использует
+несколько функций из shlwapi.dll версии 4.71, так что Вам нужен будет
+IE4 или выше (Active Desktop устанавливать не обязательно).</p>
+<h2>Обработчик набора свойств<a name="ERA"></a></h2>
+
+<p>Все знакомы с окнами свойств проводника. Точнее говоря, это набор
+свойств, который содержит одну или больше страниц. Каждый набор свойств
+имеет страницу "Общие", отображающую полный путь, дату модификации и
+другую информацию. Проводник позволяет нам добавить свои собственные
+страницы к набору свойств, используя расширение - обработчик набора
+свойств. Обработчик набора свойств может также добавить или заменить
+страницы свойств для определенных элементов панели управления, но эта
+тема здесь не будет рассматриваться.</p>
+<p>Эта статья представляет расширение, которое позволит Вам изменять
+время создания, модификации и последнего доступа к файлу прямо из его
+окна свойств, оперируя прямыми вызовами SDK без использования MFC или
+ATL/WTL. Я не пробовал использовать MFC или WTL страницы свойств в
+расширении. Поступая так можно обмануться, потому что оболочка ожидает
+получения дескриптора к набору свойств (<strong>HPROPSHEETPAGE</strong>), а MFC скрывает эту деталь в реализации <strong>CPropertyPage</strong>. (Я не знаю как реализовать это с помощью WTL.)</p>
+<p>Если Вы посмотрите свойства для файлов *.URL (ярлычки к internet
+страницам), Вы можете увидеть обработчик набора свойств в действии.
+Вкладка "CodeProject" является наглядным примером расширения из этой
+статьи. Вкладка "Web Document" показывает расширение, инсталлированное
+IE.</p>
+<p style="text-align: center;"><img src="shlext5.xml_files/ShellExtGuide5_1.jpg"><br><i style="font-size: x-small;"></i></p>
+<h2>Использование AppWizard<a name="EPA"></a></h2>
+
+<p> Запустите AppWizard и создайте новый ATL COM проект. Назовем его <strong>FileTime</strong>.
+Сохраните все начальные установки AppWizard и щелкните Finish. Чтобы
+добавить COM объект к DLL, перейдите в дерево просмотра классов,
+ClassView, щелкните правой кнопкой на пункте <strong>FileTime classes</strong> и укажите New ATL Object.</p>
+<p>В мастере ATL объектов, на первой панели уже указан Simple Object,
+поэтому просто щелкните Next. Во второй панели, в поле редактирования
+Short Name введите краткое имя <strong> FileTimeShlExt</strong> и щелкните OK. (Остальные поля заполняются автоматически.) Мы создали класс <strong> CFileTimeShlExt</strong>, который содержит основной код для реализации объекта COM. Добавим свой код к этому классу. </p>
+<h2>Интерфейс инициализации<a name="ENA"></a></h2>
+
+<p>Поскольку обработчик набора свойств оперирует всеми выделенными
+файлами сразу, в качестве интерфейса инициализации используется <strong> IShellExtInit</strong>.  Нам необходимо добавить <strong> IShellExtInit</strong> к списку интерфейсов, которые реализует <strong> CFileTimeShlExt</strong>. Инструкция, как это сделать, содержится в <a href="http://www.rsdn.ru/article/?winshell/shlext4.xml">части IV</a>. Классу также необходим список строк, в котором будут храниться имена выделенных файлов.</p>
+<div id="ERNA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">typedef</span> std::list&lt;std::basic_string&lt;TCHAR&gt; &gt; string_list;
+
+<span class="KEYWORD">protected</span>:
+    <span class="COMMENT">// IFileTimeShlExt</span>
+    string_list m_lsFiles;</pre></td></tr></tbody></table></div>
+<p>Метод <strong> Initialize() </strong> делает тоже, что и в <a href="http://www.rsdn.ru/article/?winshell/shlext2.xml">части II</a> - читает имена выделенных файлов и сохраняет их в списке строк. Вот начало функции:</p>
+<div id="ENNA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT CFileTimeShlExt::Initialize (
+    LPCITEMIDLIST pidlFolder,
+    LPDATAOBJECT  pDataObj,
+    HKEY          hProgID )
+{
+TCHAR     szFile [MAX_PATH];
+UINT      uNumFiles;
+HDROP     hdrop;
+FORMATETC etc = { CF_HDROP, NULL, DVASPECT_CONTENT, -<span class="NUMBER">1</span>, TYMED_HGLOBAL };
+STGMEDIUM stg;
+INITCOMMONCONTROLSEX iccex = { <span class="KEYWORD">sizeof</span>(INITCOMMONCONTROLSEX), ICC_DATE_CLASSES };
+
+    <span class="COMMENT">// Инициализация общих элементов управления</span>
+    InitCommonControlsEx ( &amp;iccex );</pre></td></tr></tbody></table></div>
+<p>Мы инициализируем общие элементы управления, потому что наша вкладка
+будет использовать элемент управления для выбора даты и времени
+(date/time picker (DTP)). Далее мы выполняем всю черновую работу с
+помощью интерфейса <strong> IDataObject </strong>и получаем дескриптор <strong> HDROP </strong>для перечисления выделенных файлов.</p>
+<div id="EJNA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">// Читаем список пунктов из объекта данных. Они сохранены в форме HDROP,</span>
+<span class="COMMENT">// поэтому, просто получаем HDROP и используем drag 'n' drop API</span>
+<span class="KEYWORD">if</span> ( FAILED( pDataObj-&gt;GetData ( &amp;etc, &amp;stg )))
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    <span class="COMMENT">// Получаем HDROP</span>
+    hdrop = (HDROP) GlobalLock ( stg.hGlobal );
+
+    <span class="KEYWORD">if</span> ( NULL == hdrop )
+        {
+        ReleaseStgMedium ( &amp;stg );
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+        }
+
+    <span class="COMMENT">// Определяем, сколько файлов участвует в операции</span>
+    uNumFiles = DragQueryFile ( hdrop, <span class="NUMBER">0xFFFFFFFF</span>, NULL, <span class="NUMBER">0</span> );</pre></td></tr></tbody></table></div>
+<p>Далее следует цикл, который перечисляет выделенные файлы. Расширение
+оперирует только файлами, любые директории, которые нам попадаются мы
+игнорируем.</p>
+    <div id="EFNA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="KEYWORD">for</span> ( UINT uFile = <span class="NUMBER">0</span>; uFile &lt; uNumFiles; uFile++ )
+        {
+        <span class="COMMENT">// Получаем следующее имя файла</span>
+        <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> == DragQueryFile ( hdrop, uFile, szFile, MAX_PATH ))
+            <span class="KEYWORD">continue</span>;
+
+        <span class="COMMENT">// Пропускаем каталоги. Мы могли бы использовать дескрипторы каталогов, т.к. у них       </span>
+        <span class="COMMENT">// есть время и дата создания, но в этом примере я предпочитаю этого не делать</span>
+        <span class="KEYWORD">if</span> ( PathIsDirectory ( szFile ))
+            <span class="KEYWORD">continue</span>;
+
+        <span class="COMMENT">// Добавляем имя файла к нашему списку</span>
+        m_lsFiles.push_back ( szFile );
+        }   <span class="COMMENT">// end for</span>
+    <span class="COMMENT">// Освобождаем ресурсы</span>
+    GlobalUnlock ( stg.hGlobal );
+    ReleaseStgMedium ( &amp;stg );</pre></td></tr></tbody></table></div>
+<p>Вот что здесь нового: существует предел числа страниц, которые может иметь набор свойств. Он определен как константа <strong>MAXPROPPAGES</strong> в <strong>prsht.h</strong>. Каждый файл получает свою собственную страницу, и, если наш список содержит больше файлов, чем <strong>MAXPROPPAGES</strong>, остальные придется исключить, так как <strong>MAXPROPPAGES</strong> это предел. (Хотя, если <strong>MAXPROPPAGES</strong>=100, то набор свойств все равно не сможет показать все множество вкладок, максимум - 34).</p>
+<div id="EBNA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">// Проверим, сколько файлов было отмечено, если больше чем</span>
+<span class="COMMENT">// MAXPROPPAGES, укоротим список</span>
+<span class="KEYWORD">if</span> ( m_lsFiles.size() &gt; MAXPROPPAGES )
+        {
+        m_lsFiles.resize ( MAXPROPPAGES );
+        }
+
+<span class="COMMENT">// Если мы нашли какие-нибудь файлы, пригодные для работы, вернем S_OK. </span>
+<span class="COMMENT">// В противном случае вернем E_FAIL</span>
+<span class="KEYWORD">return</span> ( m_lsFiles.size() &gt; <span class="NUMBER">0</span> ) ? S_OK : E_FAIL;
+}</pre></td></tr></tbody></table></div>
+<h2>Добавление страниц свойств<a name="ELA"></a></h2>
+
+<p>Если <strong>Initialize()</strong> возвращает S_OK, проводник запрашивает новый интерфейс - <strong> IShellPropSheetExt</strong>.<strong> IShellPropSheetExt </strong>совсем прост, с единственным методом, требующим реализации. Чтобы добавить <strong>  IShellPropSheetExt</strong> к нашему классу, откройте<strong> FileTimeShlExt.h</strong> и добавьте выделенные строки:</p>
+<div id="E4LA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">class</span> ATL_NO_VTABLE CFileTimeShlExt :
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CFileTimeShlExt, &amp;CLSID_FileTimeShlExt&gt;,
+    <span class="KEYWORD">public</span> IDispatchImpl&lt;IFileTimeShlExt, &amp;IID_IFileTimeShlExt, &amp;LIBID_FILETIMELib&gt;,
+    <span class="KEYWORD">public</span> IShellExtInit,
+    <strong>
+<span class="KEYWORD">public</span> IShellPropSheetExt</strong>
+{
+BEGIN_COM_MAP(CFileTimeShlExt)
+    COM_INTERFACE_ENTRY(IFileTimeShlExt)
+    COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IShellExtInit)
+    <strong>COM_INTERFACE_ENTRY(IShellPropSheetExt)</strong>
+END_COM_MAP()
+
+<strong>
+<span class="KEYWORD">public</span>:
+    <span class="COMMENT">// IShellPropSheetExt</span>
+    STDMETHOD(AddPages)(LPFNADDPROPSHEETPAGE, LPARAM);
+    STDMETHOD(ReplacePage)(UINT, LPFNADDPROPSHEETPAGE, LPARAM) { <span class="KEYWORD">return</span> E_NOTIMPL; }</strong>
+</pre></td></tr></tbody></table></div>
+<p>
+<strong>AddPages()</strong> - метод, который мы реализуем. Расширения используют <strong> ReplacePage()</strong>
+только для того, чтобы заменять вкладки в элементах панели управления.
+Поэтому нет необходимости здесь его реализовывать. Проводник вызывает
+нашу функцию<strong> AddPages()</strong>, чтобы мы могли добавить страницы к набору свойств, установленному проводником.</p>
+<p>Параметры функции<strong> AddPages() </strong> - указатель на функцию и LPARAM используются только оболочкой.<strong> lpfnAddPageProc </strong> указывает на функцию оболочки, которую мы вызываем, чтобы добавить вкладки.<strong>  LPARAM</strong> - загадочная величина, но она важна только для оболочки. Мы ничего с ней не делаем, просто передаем ее обратно в функцию<strong> lpfnAddPageProc.</strong>
+</p>
+<div id="EXLA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT CFileTimeShlExt::AddPages (
+    LPFNADDPROPSHEETPAGE lpfnAddPageProc,
+    LPARAM lParam )
+{
+PROPSHEETPAGE  psp;
+HPROPSHEETPAGE hPage;
+TCHAR          szPageTitle [MAX_PATH];
+string_list::const_iterator it, itEnd;
+                                  
+    <span class="KEYWORD">for</span> ( it = m_lsFiles.begin(), itEnd = m_lsFiles.end();
+          it != itEnd;
+          it++ )
+        {
+        <span class="COMMENT">// 'it' - указатель на следующее имя файла.  Создаем копию строки,</span>
+        <span class="COMMENT">// которой будет владеть страница</span>
+        LPCTSTR szFile = _tcsdup ( it-&gt;c_str() );</pre></td></tr></tbody></table></div>
+<p>В первую очередь мы должны создать копию имени файла. Причину я объясню ниже.</p>
+<p>Следующий шаг - создать строку, наименование для нашей закладки.
+Строка будет именем файла без расширения. К тому же, строка будет
+обрезана, если содержит более 24 символов. Это произвольный предел. 24
+мне просто приглянулось. Должен же быть какой-то предел, чтобы имя
+файла не вышло за пределы закладки.</p>
+        <div id="ERLA"><table class="code" width="98%"><tbody><tr><td><pre>        <span class="COMMENT">// Удаляем путь и расширение из имени файла - это будет заголовок страницы.</span>
+        <span class="COMMENT">// Укорачиваем имя до 24 символов.</span>
+        lstrcpy ( szPageTitle, it-&gt;c_str() );
+        PathStripPath ( szPageTitle );
+        PathRemoveExtension ( szPageTitle );
+        szPageTitle[<span class="NUMBER">24</span>] = <span class="CHARACTER">'\0'</span>;</pre></td></tr></tbody></table></div>
+<p>Т.к. мы используем непосредственно SDK, для создания страницы свойств придется испачкать ручки структурой<strong> PROPSHEETPAGE. </strong>Вот установки для параметров структуры:</p>
+<div id="ENLA"><table class="code" width="98%"><tbody><tr><td><pre>        psp.dwSize      = <span class="KEYWORD">sizeof</span>(PROPSHEETPAGE);
+        psp.dwFlags     = PSP_USEREFPARENT | PSP_USETITLE | PSP_DEFAULT |
+                            PSP_USEICONID | PSP_USECALLBACK;
+        psp.hInstance   = _Module.GetModuleInstance();
+        psp.pszTemplate = MAKEINTRESOURCE(IDD_FILETIME_PROPPAGE);
+        psp.pszIcon     = MAKEINTRESOURCE(IDI_ICON);
+        psp.pszTitle    = szPageTitle;
+        psp.pfnDlgProc  = PropPageDlgProc;
+        psp.lParam      = (LPARAM) szFile;
+        psp.pfnCallback = PropPageCallbackProc;
+        psp.pcRefParent = (UINT*) &amp;_Module.m_nLockCnt;</pre></td></tr></tbody></table></div>
+<p>Теперь несколько деталей, на которые нужно обратить внимание, чтобы расширение работало корректно:</p>
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<li>
+<strong>pszIcon </strong> устанавливает ID ресурса иконки 16x16,
+которая будет отображаться на закладке. Наличие иконки не обязательно,
+конечно, но я добавил, чтобы наша закладка выделялась.</li>
+<li>
+<strong>pfnDlgProc </strong> содержит адрес оконной процедуры нашей вкладки.</li>
+<li>
+<strong>lParam </strong> получает значение переменной <strong>szFile</strong> - копии имени файла, с которым связана наша вкладка.</li>
+<li>
+<strong>pfnCallback </strong> - адрес функции обратного вызова, которая
+вызывается, когда закладка создается и когда уничтожается. Роль этой
+функции я объясню позже.</li>
+<li>
+<strong>pcRefParent </strong> - адрес переменной-члена, унаследованной
+от CComModule. Эта переменная является счетчиком ссылок на DLL.
+Оболочка увеличивает этот счетчик, когда набор свойств отображен, чтобы
+держать DLL в памяти, пока набор открыт. Счетчик уменьшится после того,
+как набор свойств будет уничтожен.</li>
+</ul>
+<p>Установив параметры этой структуры, мы обращаемся к API, для создания страницы свойств.</p>
+<div id="EFLA"><table class="code" width="98%"><tbody><tr><td><pre>hPage = CreatePropertySheetPage ( &amp;psp );</pre></td></tr></tbody></table></div>
+<p>Если все отлично, мы вызываем callback функцию оболочки, которая
+добавляет вновь созданную страницу к набору свойств. Функция возвращает
+BOOL индикатор успеха или неудачи. Если это неудача, мы уничтожаем
+страницу.</p>
+<div id="EBLA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">if</span> ( NULL != hPage )
+            {
+            <span class="COMMENT">// Вызываем callback функцию оболочки, чтобы добавить страницу к набору свойств</span>
+            <span class="KEYWORD">if</span> ( !lpfnAddPageProc ( hPage, lParam ))
+                {
+                DestroyPropertySheetPage ( hPage );
+                }
+            }
+        }   <span class="COMMENT">// end for</span>
+<span class="KEYWORD">return</span> S_OK;
+}</pre></td></tr></tbody></table></div>
+<h2>Неприятная ситуация с периодом жизни объектов<a name="EJA"></a></h2>
+
+<p>Настало время выполнить мое обещание - объяснить, зачем нужен
+дубликат строки, содержащей имя файла. Дубликат необходим, потому что
+после возврата из <strong>AddPages()</strong> оболочка освобождает свой интерфейс <strong>IShellPropSheetExt</strong>, который, в свою очередь, разрушает объект<strong> CFileTimeShlExt</strong>. Это означает, что оконная процедура страницы свойств не сможет получить доступ к элементу <strong>m_lsFiles</strong> класса <strong> CFileTimeShlExt</strong>.</p>
+<p>Моим решением было сделать копию каждого имени файла и передать
+указатель на эту копию во вкладку. Вкладка, обладая памятью, отвечает
+за ее освобождение. Если есть более чем один выделенный файл, каждая
+вкладка получает копию имени файла с ней связанного. Память
+освобождается функцией<strong> PropPageCallbackProc </strong>, приведенной ниже. Эта строка в <strong>AddPages():</strong>
+</p>
+<div id="EDJA"><table class="code" width="98%"><tbody><tr><td><pre>psp.lParam = (LPARAM) szFile;</pre></td></tr></tbody></table></div>
+<p>очень важна. Она сохраняет указатель в структуре <strong> PROPSHEETPAGE </strong> и делает его доступным в оконной процедуре страницы свойств.</p>
+<h2> Функции обратного вызова страницы свойств<a name="EHA"></a></h2>
+
+<p>Теперь обратимся к странице свойств. Вот как она выглядит:</p>
+<p style="text-align: center;"><img src="shlext5.xml_files/ShellExtGuide5_2.jpg"><br><i style="font-size: x-small;"></i></p>
+<p>Держите в уме эту картинку, пока читаете объяснения о том, как она работает.</p>
+<p>Заметьте, что здесь нет контрола для отображения и корректировки
+времени последнего доступа к файлу. FAT сохраняет только дату
+последнего доступа. Другие файловые системы сохраняют также время
+последнего доступа, но я не реализовывал логику по проверке типа
+файловой системы. При изменении даты последнего доступа время всегда
+будет сохраняться как 12 часов ночи, если файловая система поддерживает
+поле времени последнего доступа. </p>
+<p>Страница имеет две функции обратного вызова и два обработчика сообщений. Их прототипы идут вначале файла <strong> FileTimeShlExt.cpp</strong>:</p>
+<div id="ETHA"><table class="code" width="98%"><tbody><tr><td><pre>BOOL CALLBACK PropPageDlgProc ( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
+UINT CALLBACK PropPageCallbackProc ( HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp );
+BOOL OnInitDialog ( HWND hwnd, LPARAM lParam );
+BOOL OnApply ( HWND hwnd, PSHNOTIFY* phdr );</pre></td></tr></tbody></table></div>
+<p>Оконная процедура приятно проста. Она обрабатывает три сообщения: <strong>WM_INITDIALOG, PSN_APPLY</strong> и <strong>DTN_DATETIMECHANGE</strong>. Вот часть <strong>WM_INITDIALOG</strong>:</p>
+<div id="EPHA"><table class="code" width="98%"><tbody><tr><td><pre>BOOL CALLBACK PropPageDlgProc ( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
+{
+BOOL bRet = FALSE;
+
+    <span class="KEYWORD">switch</span> ( uMsg )
+        {
+        <span class="KEYWORD">case</span> WM_INITDIALOG:
+            bRet = OnInitDialog ( hwnd, lParam );
+        <span class="KEYWORD">break</span>;</pre></td></tr></tbody></table></div>
+<p>
+<strong>OnInitDialog()</strong> я объясню позже. Дальше идет <strong>PSN_APPLY</strong>, которое посылается, если пользователь щелкнет OK или Apply.</p>
+<div id="ELHA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">case</span> WM_NOTIFY:
+            {
+            NMHDR* phdr = (NMHDR*) lParam;
+
+            <span class="KEYWORD">switch</span> ( phdr-&gt;code )
+                {
+                <span class="KEYWORD">case</span> PSN_APPLY:
+                    bRet = OnApply ( hwnd, (PSHNOTIFY*) phdr );
+                <span class="KEYWORD">break</span>;</pre></td></tr></tbody></table></div>
+<p>И, в конце, <strong> DTN_DATETIMECHANGE</strong>. Это самое простое,
+мы просто делаем доступной кнопку Apply посылкой сообщения набору
+свойств (который является родительским окном для нашей страницы).</p>
+<div id="EHHA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">case</span> DTN_DATETIMECHANGE:
+            <span class="COMMENT">// Если пользователь изменил содержимое DTP, разрешаем кнопку Apply</span>
+            SendMessage ( GetParent(hwnd), PSM_CHANGED, (WPARAM) hwnd, <span class="NUMBER">0</span> );
+                <span class="KEYWORD">break</span>;
+                }
+            }
+        <span class="KEYWORD">break</span>;
+        }
+
+    <span class="KEYWORD">return</span> bRet;
+}</pre></td></tr></tbody></table></div>
+<p>Пока все хорошо. Другая callback функция вызывается, когда вкладка
+создается или уничтожается. Нас интересует последний случай, так как
+именно тогда мы можем освободить дубликат строки, который был создан
+раньше, в <strong>AddPages()</strong>. Параметр <strong>ppsp</strong> указывает на структуру <strong>PROPSHEETPAGE</strong>, которую мы использовали для создания вкладки. Ее элемент <strong>lParam</strong> все еще указывает на дубликат строки, который должен быть освобожден.</p>
+<div id="EDHA"><table class="code" width="98%"><tbody><tr><td><pre>UINT CALLBACK PropPageCallbackProc ( HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp )
+{
+    <span class="KEYWORD">if</span> ( PSPCB_RELEASE == uMsg )
+        {
+        free ( (<span class="KEYWORD">void</span>*) ppsp-&gt;lParam );
+        }
+
+    <span class="KEYWORD">return</span>
+<span class="NUMBER">1</span>;
+}</pre></td></tr></tbody></table></div>
+<p>Функция всегда возвращает 1, потому что, если функция вызывается в
+период создания страницы, то возвращая 0 она может прервать дальнейший
+процесс создания. Возвращение 1 позволяет завершить процесс создания
+вкладки нормально. Возвращаемое значение игнорируется, если функция
+вызвана, когда закладка уничтожается.</p>
+<h2>Обработчики сообщений страницы свойств<a name="EFA"></a></h2>
+
+<p>Много важного происходит в <strong>OnInitDialog()</strong>. Параметр <strong>lParam</strong> опять указывает на структуру <strong>PROPSHEETPAGE</strong>, использовавшуюся при создании вкладки. Ее член <strong>lParam</strong>  указывает на это вездесущее "имя файла". Поскольку нам необходимо иметь доступ к имени файла в функции <strong>OnApply()</strong>, мы сохраняем указатель, используя <strong>SetWindowLong()</strong>.</p>
+<div id="ETFA"><table class="code" width="98%"><tbody><tr><td><pre>BOOL OnInitDialog ( HWND hwnd, LPARAM lParam )
+{        
+PROPSHEETPAGE*  ppsp = (PROPSHEETPAGE*) lParam;
+LPCTSTR         szFile = (LPCTSTR) ppsp-&gt;lParam;
+HANDLE          hFind;
+WIN32_FIND_DATA rFind;
+
+    <span class="COMMENT">// Сохраним имя файла в данных этого окна для дальнейшего использования</span>
+    SetWindowLong ( hwnd, GWL_USERDATA, (LONG) szFile );</pre></td></tr></tbody></table></div>
+<p>Затем мы получаем времена создания, модификации и доступа, используя <strong>FindFirstFile()</strong>. Если это выполнено успешно, DTP инициализируются правильными данными.</p>
+<div id="EPFA"><table class="code" width="98%"><tbody><tr><td><pre>hFind = FindFirstFile ( szFile, &amp;rFind );
+
+    <span class="KEYWORD">if</span> ( INVALID_HANDLE_VALUE != hFind )
+        {
+        <span class="COMMENT">// Инициализируем DTP</span>
+        SetCombinedDateTime ( hwnd, IDC_MODIFIED_DATE, IDC_MODIFIED_TIME,
+                              &amp;rFind.ftLastWriteTime );
+
+        SetCombinedDateTime ( hwnd, IDC_ACCESSED_DATE, <span class="NUMBER">0</span>,
+                              &amp;rFind.ftLastAccessTime );
+
+        SetCombinedDateTime ( hwnd, IDC_CREATED_DATE, IDC_CREATED_TIME,
+                              &amp;rFind.ftCreationTime );
+
+        FindClose ( hFind );
+        }</pre></td></tr></tbody></table></div>
+<p>
+<strong>SetCombinedDateTime()</strong>  - прикладная функция, которая устанавливает содержимое DTP. Код можно найти в конце FileTimeShlExt.cpp.</p>
+<p>И в дополнение - полный путь к файлу показывается в надписи вверху страницы.</p>
+<div id="EJFA"><table class="code" width="98%"><tbody><tr><td><pre>    PathSetDlgItemPath ( hwnd, IDC_FILENAME, szFile );
+    
+    <span class="KEYWORD">return</span> FALSE;      <span class="COMMENT">// Используем встроенную обработку фокуса</span>
+}</pre></td></tr></tbody></table></div>
+<p>Обработчик <strong>OnApply()</strong> напротив, читает информацию из
+DTP и устанавливает времена создания, модификации и доступа к файлам.
+Первый шаг - получить при помощи <strong>GetWindowLong()</strong> указатель на имя файла и открыть файл для записи.</p>
+<div id="EFFA"><table class="code" width="98%"><tbody><tr><td><pre>BOOL OnApply ( HWND hwnd, PSHNOTIFY* phdr )
+{
+LPCTSTR  szFile = (LPCTSTR) GetWindowLong ( hwnd, GWL_USERDATA );
+HANDLE   hFile;
+FILETIME ftModified, ftAccessed, ftCreated;
+
+    <span class="COMMENT">// Открываем файл</span>
+    hFile = CreateFile ( szFile, GENERIC_WRITE, FILE_SHARE_READ, NULL,
+                         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL );</pre></td></tr></tbody></table></div>
+<p>Если мы смогли открыть файл, считываем из DTP и пишем времена обратно в файл. <strong>GetCombinedDateTime()</strong> это пара для <strong>SetCombinedDateTime()</strong>.</p>
+<div id="EBFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">if</span> ( INVALID_HANDLE_VALUE != hFile )
+        {
+        <span class="COMMENT">// Извлекаем дату и время из DTP</span>
+        GetCombinedDateTime ( hwnd, IDC_MODIFIED_DATE, IDC_MODIFIED_TIME,
+                              &amp;ftModified );
+
+        GetCombinedDateTime ( hwnd, IDC_ACCESSED_DATE, <span class="NUMBER">0</span>,
+                              &amp;ftAccessed );
+
+        GetCombinedDateTime ( hwnd, IDC_CREATED_DATE, IDC_CREATED_TIME,
+                              &amp;ftCreated );
+
+        <span class="COMMENT">// Изменяем время создания, доступа и последней модификации файла</span>
+        SetFileTime ( hFile, &amp;ftCreated, &amp;ftAccessed, &amp;ftModified );
+        CloseHandle ( hFile );
+        }
+    <span class="KEYWORD">else</span>
+        {
+        <span class="COMMENT">// &lt;&lt;Обработка ошибок опущена&gt;&gt;</span>
+        }
+
+     <span class="COMMENT">// Возвращаем PSNRET_NOERROR, чтобы можно было закрыть набор свойств, если пользователь нажал OK.</span>
+    SetWindowLong ( hwnd, DWL_MSGRESULT, PSNRET_NOERROR );
+    <span class="KEYWORD">return</span> TRUE;
+}</pre></td></tr></tbody></table></div>
+<h2>Регистрация расширения<a name="EDA"></a></h2>
+
+<p>Это расширение может работать с файлами любых типов, поэтому мы регистрируем его под ключом <strong> HKEY_CLASSES_ROOT\*</strong>. Вот сценарий регистрации расширения:</p>
+<div id="EFDA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove *
+    {
+        NoRemove shellex
+        {
+            NoRemove PropertySheetHandlers
+            {
+                {3FCEF010-09A4-11D4-8D3B-D12F9D3D8B02}
+            }
+        }
+    }
+}</pre></td></tr></tbody></table></div>
+<p>Вы могли заметить, что GUID расширения сохранен здесь как имя ключа
+регистрации вместо строкового значения. Документация и книги, которые я
+просматривал, противоречат друг другу по поводу правильного
+обозначения, хотя во время моего беглого испытания оба варианта
+работали. Я решил идти по пути Dino Esposito ("Visual C++ Windows Shell
+Programming") и поместил GUID как имя ключа.</p>
+<p>Как и для предыдущих расширений, в Windows NT и Windows 2000 нам необходимо 
+  добавить наше расширение в список "одобренных" расширений. Код, выполняющий 
+  эту операцию, находится в функциях <strong> DllRegisterServer() </strong> и<strong> DllUnregisterServer() </strong> в демонстрационном проекте.</p>
+<h2>Продолжение следует...<a name="EBA"></a></h2>
+
+<p>В части VI мы рассмотрим другой новый тип расширений - обработчик сбрасывания, 
+  который загружается, когда объекты оболочки сбрасываются на файл.</p>
+<div align="right"><font style="font-family: arial; font-size: 9pt; color: rgb(128, 136, 160);"><i><hr color="#8088a0" size="1" width="100%">
+                Любой из материалов, опубликованных на этом сервере, не может быть воспроизведен в какой бы
+                то ни было форме и какими бы то ни было средствами без письменного разрешения владельцев авторских
+                прав. 
+             </i></font></div><table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext5.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext5.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext5.xml?print" target="_blank" title="Версия для печати"><img src="shlext5.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307538" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307538" target="_self" title="Перейти к обсуждению статьи"><img src="shlext5.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307538"><font color="#646464"><font size="1"> Оценка </font><font color="black">55</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307538" title="Добавить в избранное"><img onclick="AddFav(307538);return false;" src="shlext5.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307538)" title="Подписка на сообщения"><img class="i" src="shlext5.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-3" title="+1"><img onclick="RateMsg(307538,-3);return false;" src="shlext5.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=1" title="Интересно"><img onclick="RateMsg(307538,1);return false;" src="shlext5.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307538,2);return false;" src="shlext5.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=3" title="Супер"><img onclick="RateMsg(307538,3);return false;" src="shlext5.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307538,-1);return false;" src="shlext5.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307538,-4);return false;" src="shlext5.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307538&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307538,0);return false;" src="shlext5.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table></body></html>

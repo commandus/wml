@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Task</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Task elements</h1>
+<table border="0">
+  <tr>
+    <td><a href="#go">go <img border="0" src="sgo.gif" width="8" height="8"></a> <a href="#prev">prev <img border="0" src="sprev.gif" width="8" height="8"></a> <a href="#refresh">refresh <img border="0" src="srefresh.gif" width="8" height="8"></a> <a href="#noop">noop <img border="0" src="snoop.gif" width="8" height="8"></a></td>
+  </tr>
+</table>
+<!-- task elements -->
+<p><a name=go>go</a>
+ <img border="0" src="go.gif" width="24" height="24">
+<br id=gobrief>Declares a go task, indicating navigation to a new URI. If the URI names a WML card or deck, the execution of the task will cause that item to be displayed. This task executes a push operation on the browser's history stack.
+<br><a href="#go" style="margin-left: 32" onclick="expand('goattr')">attributes</a>
+<p id=goattr style="margin-left: 64;display=none">
+  <b>href</b>
+  <br>Specifies the destination URI.
+  <br><b>sendreferer</b>
+  <br>If true, the request for the new URI will contain the URI of the deck containing this task - this can then be used for server-based access control.
+  <br><b>method</b>
+  <br>Specifies the HTTP submission method. Possible values are POST (submission data included in request) or GET (submission data appended as a query to the URI requested).
+  <br><b>cache-control</b>
+  <br>If this attribute is present, and the value is set to “no-cache”, the client MUST reload the URL from the origin server. This attribute represents the HTTP “cachecontrol” header, when this attribute is present, the HTTP “cache-control” header MUST be added to the request with the same value as specified in the attribute.
+  <br><b>enctype</b>
+  <br>This attribute specifies the content type used to submit the parameter to the server. The default value is application/x-wwwform-urlencoded. Currently application/x-www-form-urlencoded or multipart/form-data can be specified.
+  <br><b>accept-charset</b>
+  <br>Specifies the list of character encodings for data that the origin server must accept when processing input. The value of this attribute is a comma- or space-separated list of character encoding names.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=prev>prev</a>
+ <img border="0" src="prev.gif" width="24" height="24">
+<br id=prevbrief>Declares a prev task, indicating navigation to the previous URL on the history stack.
+<br><a href="#prev" style="margin-left: 32" onclick="expand('prevattr')">attributes</a>
+<p id=prevattr style="margin-left: 64;display=none">
+  <b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=refresh>refresh</a>
+ <img border="0" src="refresh.gif" width="24" height="24">
+<br id=refreshbrief>Declares a refresh task, indicating an update of the screen and device context as specified by the setvar tags, for example. User-visible side effects of the state changes (e.g. a change in the screen display) occur during the processing of the refresh task.
+<br><a href="#refresh" style="margin-left: 32" onclick="expand('refreshattr')">attributes</a>
+<p id=refreshattr style="margin-left: 64;display=none">
+  <b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=noop>noop</a>
+ <img border="0" src="noop.gif" width="24" height="24">
+<br id=noopbrief>Specifies that nothing should be done - that is, no operation. This can be used in a card to shadow a task that has been specified in a template at the deck level.
+<br><a href="#noop" style="margin-left: 32" onclick="expand('noopattr')">attributes</a>
+<p id=noopattr style="margin-left: 64;display=none">
+  <b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<!-- user input elements -->
+
+</body>
+</html>

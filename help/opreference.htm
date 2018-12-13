@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>reference
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<p><a name=reference>reference</a>
+ <img border="0" src="opreference.gif" width="24" height="24">
+<br id=referencebrief>
+<p>The &lt;reference&gt; tag used in &lt;guide&gt; section of the Open eBook package file determines elements listed in first page of eBook (usually links to pages contains some kind of information):
+<blockquote>
+<p>Useful Open eBook guide reference types are:
+</blockquote>
+<ul type="disc">
+  <li><b>toc</b>
+</ul>
+<blockquote>
+  <p>To place the Table of Contents among the in-spine content, add it to the &lt;spine&gt; section of the package file, and in the manifest and guide sections. In addition, create an &lt;a
+  name=&quot;toc&quot;&gt;&lt;/a&gt; anchor at the appropriate location within the spine content to make it possible to jump to the TOC from the cover page link.</p>
+</blockquote>
+<ul type="disc">
+  <li><b>content</b>
+</ul>
+<blockquote>
+  <p>Link to eBook' s text content</p>
+</blockquote>
+<ul type="disc">
+  <li><b>title-page</b>
+</ul>
+<blockquote>
+  <p>Format eBook title information in separated file. Create a link to this file from the cover page using the &quot;title-page&quot; reference type. Keeping general information about book's title,
+  creators and their roles, other contributors and their roles, subject/category, publisher, publisher contact information, other books by the same author, about the author, other books in this
+  series, version/edition/revision information, ISBN or other cataloging information, colophon (convertors, designers, typefaces, etc), and abridgement information is a good practice.</p>
+  <p>Microsoft ® Reader specific guide reference types are:</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-copyright</b>
+</ul>
+<blockquote>
+  <p>In some reason the <a href="opdcrights.htm"> &lt;dc:rights&gt;</a> metadata in the package file is not displayed in the Reader. Therefore a book's trademark and the copyright statements information
+  must be linked into eBook using this x-metadata type.&nbsp;</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-titleimage-standard</b>
+</ul>
+<blockquote>
+  <p><img border="0" src="shot24.gif" width="113" height="150">Title page graphic,&nbsp;placed on the left side of the cover (title) page. See also: other.ms-firstpage reference type.</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-thumbimage-standard, other.ms-thumbimage</b>
+</ul>
+<blockquote>
+  <p><img border="0" src="shot23.gif" width="139" height="117"> Thumbnail graphics- portrait and landscape, are used in the Library.</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-coverimage-standard, other.ms-coverimage</b>
+</ul>
+<blockquote>
+  <p>The cover page graphic that appears the first time a book is opened- portrait and landscape verisions.</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-chaptertour</b>
+</ul>
+<blockquote>
+  <p>Link to the chapter tour.&nbsp;</p>
+  <p>Note: The chapter tour also requires a change to the <a href="opxmetadata.htm">x-metadata</a> portion of the package file (ms-chaptertour meta). See also: <a href="optours.htm">tours</a>.</p>
+</blockquote>
+<ul type="disc">
+  <li><b>other.ms-firstpage</b></li>
+</ul>
+<blockquote>
+  <p>Link to the first page. The first page link takes the reader from the cover page to the first page of the body of the book.&nbsp;
+  <br>Typically, this is the first page of Chapter 1, rather than the first page of the introduction, dedication, or other front matter. For the first page link to function correctly, place the anchor
+  tag &lt;a name=&quot;p1&quot;&gt; at the top of the first page the publisher chooses as the first important page of the book. Whether this is literally the first page (such as an
+  Introduction or Acknowledgements page), or is the first page of the body text, is the publisher's choice.</p>
+  <p>Note: The PocketPC devices do not acknowledge a first-page reference; the link does not appear on the cover page for this platform.</p>
+</blockquote>
+<p>Samples:</p>
+
+<p>Table of contents: &lt;reference type=&quot;toc&quot; title=&quot;Table of contents&quot; href=&quot;preface.htm#toc&quot; /&gt;</p>
+<p>Title page: &lt;reference type=&quot;title-page&quot; title=&quot;About This Book&quot; href=&quot;AboutBook.htm&quot; /&gt;</p>
+<p>Copyright and legal: &lt;reference type=&quot;other.ms-copyright&quot; title=&quot;Copyright&quot; href=&quot;copyright.htm&quot; /&gt;</p>
+<p>Portrait cover: &lt;reference type=&quot;other.ms-coverimage-standard&quot; title=&quot;portrait cover image&quot; href=&quot;hugecover.png&quot; /&gt;</p>
+<p>Chapter tour: &lt;reference type=&quot;other.ms-chaptertour&quot; title=&quot;All chapters&quot; href=&quot;&quot; /&gt;</p>
+
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id="referenceattr"><b>id</b><br>
+Provides an element with a unique name within a single document. This is especially useful in works with extensive cross-referencing and linking, such as dictionaries, encyclopedias, or travel guides.
+Use of ids&nbsp; simplifies linking and updates.<br>
+<b>class</b>
+<br>Affiliates an element with one or more classes.
+<br><b>style</b>
+<br>Attaches a list of inline (name:value paired) CSS properties to a specific tag, for example: style=&quot;name:value;name:value&quot;<br>
+Note: Media types other than &quot;text/x-oeb1-css&quot; will be ignored with a warning in a document of type &quot;text/x-oeb1-document&quot;.
+<br><b>type</b>
+<br>Specifies reference type. Useful OEB reference types are:&nbsp;
+
+</p>
+<ul>
+  <li>cover</li>
+  <li>title-page</li>
+  <li>toc</li>
+  <li>contents</li>
+  <li>index</li>
+  <li>glossary</li>
+  <li>acknowledgements</li>
+  <li>bibliography</li>
+  <li>colophon</li>
+  <li>copyright-page</li>
+  <li>dedication</li>
+  <li>epigraph</li>
+  <li>foreword</li>
+  <li>loi (list of illustrations)</li>
+  <li>lot (list of tables)</li>
+  <li>notes</li>
+  <li>preface</li>
+  <li></li>
+  <li>other.ms-chaptertour</li>
+  <li>other.ms-copyright</li>
+  <li>other.ms-coverimage-standard</li>
+  <li>other.ms-coverimage</li>
+  <li>other.ms-firstpage</li>
+  <li>other.ms-thumbimage-standard</li>
+  <li>other.ms-thumbimage</li>
+  <li>other.ms-titleimage-standard</li>
+</ul>
+<p>Microsoft ® Reader specific guide reference types are: other.ms-chaptertour, other.ms-copyright, other.ms-coverimage-standard, other.ms-coverimage, other.ms-firstpage, other.ms-thumbimage-standard, other.ms-thumbimage, other.ms-titleimage-standard</p>
+<b>title</b>
+<br>Reference title<br>
+<b>href</b>
+<br>Reference to guide item&nbsp;<br>
+
+<p>See also:
+</p>
+<p><a href="opguide.htm">&lt;guide&gt;</a></p>
+</body>
+</html>

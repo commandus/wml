@@ -1,0 +1,17 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (request.note_data = '')
+    error 'Please enter additional information';
+  endif
+
+  if (request.co_submitter <>

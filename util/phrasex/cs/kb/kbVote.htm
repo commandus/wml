@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') 
+  </serverside>
+  <serverside action="defaultparam" opt="id">
+    SELECT -1 R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="parent_id">
+    SELECT COALESCE(kb_p1, -1) kb_p1 FROM cs_kb  
+    WHERE kb_id = $(id)
+  </serverside>
+  <serverside action="execute">  
+    UPDATE cs_kb SET kb_visited = CASE
+    WHEN '$(vote)' = 'yes' THEN kb_visited + 10  
+    WHEN '$(vote)' = 'no' THEN kb_visited - 10  
+    ELSE kb_visited
+    END  
+    WHERE kb_id = $(id)
+  </serverside>
+<head loop="global">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+  <meta http-equiv="refresh" content="3; url='index.htm?kb_id=$(parent_id)'"/>
+<title>apooHelpDesk Customer Support Knowledke Base Article Vote</title>
+</head>
+<body>
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="global">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :
+    <a href="index.htm?kb_id=$(parent_id)">Back to category</a>:
+    <a href="kbView.htm?kb_id=$(id)">View article</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Thank you for your feedback. 
+    <a href="index.htm?kb_id=$(parent_id)">Go back to category</a>
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

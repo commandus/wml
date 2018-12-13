@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE package PUBLIC
+          "+//ISBN 0-9673008-1-9//DTD OEB 1.2 Package//EN"
+          "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">
+
+<!-- Package document for the OEBPS 1.2 Publication
+     of the OEBPS 1.2 Specification -->
+
+<!-- Last Revised: 28-August-2002 -->
+
+<package unique-identifier="oebps12package">
+
+<metadata>
+     <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oebpackage="http://openebook.org/namespaces/oeb-package/1.0/">
+          <dc:Identifier scheme="uri" id="oebps12package">http://openebook.org/specifications/oeb-ps/1.2/</dc:Identifier>
+          <dc:Identifier scheme="isbn">ISBN 0-9673008-1-9</dc:Identifier>
+          <dc:Title>Open eBook Publication Structure 1.2</dc:Title>
+          <dc:Language>en-US</dc:Language>
+     </dc-metadata>
+</metadata>
+
+<manifest>
+     <!-- DOCUMENTS -->
+     <item id="oeb12" href="oeb12-oebps.htm" media-type="text/x-oeb1-document" />
+     <!-- IMAGES -->
+     <item id="logo" href="oebf-logo.png" media-type="image/png" />
+</manifest>
+
+<spine>
+     <itemref idref="oeb12" />
+</spine>
+
+</package>

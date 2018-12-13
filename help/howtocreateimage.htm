@@ -1,0 +1,39 @@
+
+<html>
+<head>
+<title>How to insert an image</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to insert an image</h1>
+
+<p>In the element tree view window, select paragraph and press element button <b>img</b>
+to create new image element.<br>
+In attributes window press <b>src</b> ellipsis button and browse to the image you want and select it.
+You can see original and bitmapped image on the right side of the selection
+dialog window. Choose one of dithering algorithms for the best dithering result
+from combo box or click Preview button and then just click on image to choose
+appropriate dithering. Click Open.&nbsp;<br>
+ If the image type you select is not wbmp, editor will prompt you that it needs to be
+converted to wbmp.  You can then choose destination wbmp file to convert it.</p>
+<p><br>
+<img border="0" src="shot04.gif"></p>
+<p><b>Width</b> and <b>height</b> attributes will be set to original image width
+and height in pixels.</p>
+
+</body>
+</html>

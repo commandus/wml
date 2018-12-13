@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<title>Deck and card elements</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel="StyleSheet" href="default.css">
+</head>
+
+<body>
+
+<h1>Deck and card elements</h1>
+<table border="0">
+  <tr>
+    <td><a href="#deck">deck</a> <a href="#wml">wml</a> <a href="#card">card <img border="0" src="scard.gif" width="8" height="8"></a> <a href="#template">template <img border="0" src="stemplate.gif" width="8" height="8"></a>
+      <a href="#head">head <img border="0" src="shead.gif" width="8" height="8"></a></td>
+  </tr>
+  <tr>
+    <td><a href="#access">access <img border="0" src="saccess.gif" width="8" height="8"></a> <a href="#meta">meta <img border="0" src="smeta.gif" width="8" height="8"></a></td>
+  </tr>
+  <tr>
+    <td><a href="#xml">xml declaration</a> <a href="#doctype">!doctype document type declaration</a></td>
+  </tr>
+</table>
+<p><a name="wml">wml</a> <img border="0" src="wml.gif" width="24" height="24"><br id="wmlbrief">
+Defines a deck and encloses all the information and cards in the deck.<br>
+<a href="#wml" style="margin-left: 32" onclick="expand('wmlattr')">attributes</a>
+<p id="wmlattr" style="margin-left: 64;display=none"><b>xml:lang</b><br>
+Specifies the natural or formal language in which the document is written.<br>
+<b>id</b><br>
+Provides an element with a unique name within a single deck.<br>
+<b>class</b><br>
+Affiliates an element with one or more classes.</p>
+<p><a name="card">card</a> <img border="0" src="card.gif" width="24" height="24"><br id="cardbrief">
+Indicates the general layout and user schemes in the user agent. The card is the basic unit of navigation within a deck. It is possible to move from one card to another within the same deck or to move
+to another deck. Unless specified otherwise, upon navigation to another deck, the first card is displayed.<br>
+<a href="#card" style="margin-left: 32" onclick="expand('cardattr')">attributes</a>
+<p id="cardattr" style="margin-left: 64;display=none"><b>newcontext=&quot;false&quot;</b><br>
+If you set this attribute to true, the browser context is re-initialized upon entry to this card. The browser context is used to manage all parameters and user agent states, including variables, the
+navigation history and other implementation-dependent information related to the current state of the user agent.<br>
+<b>ordered=boolean</b><br>
+Gives an indication to the user agent about how the card content is organized.<br>
+<b>onenterforward=&quot;href&quot;</b><br>
+Navigates to the location specified by href. Occurs when the user navigates into a card using a go task.<br>
+<b>onenterbackward=&quot;href&quot;</b><br>
+Navigates to the location specified by href. Occurs when the user navigates into a card using a prev task.<br>
+<b>ontimer=&quot;href&quot;</b><br>
+Navigates to the location specified by href after a specified amount of time.<br>
+<b>xml:lang</b><br>
+Specifies the natural or formal language in which the document is written.<br>
+<b>id</b><br>
+Provides an element with a unique name within a single deck.<br>
+<b>class</b><br>
+Affiliates an element with one or more classes.</p>
+<p><a name="template">template</a> <img border="0" src="template.gif" width="24" height="24"><br id="templatebrief">
+Declares a template for cards in the deck. Event bindings specified in the template element (e.g. do or onevent) apply to all cards in that deck, although a card element may override the behaviour
+specified in the template element. In particular:<br>
+DO elements specified in the template element may be overridden in individual cards if both elements have the same NAME attribute value.<br>
+Intrinsic event bindings specified in the template element may be overridden by the specification of an event binding in a card element.<br>
+<a href="#template" style="margin-left: 32" onclick="expand('templateattr')">attributes</a>
+<p id="templateattr" style="margin-left: 64;display=none"><b>onenterforward=&quot;href&quot;</b><br>
+Navigates to the location specified by href. Occurs when the user navigates into a card using a go task. <b>onenterbackward=&quot;href&quot;</b><br>
+Navigates to the location specified by href. Occurs when the user navigates into a card using a prev task. <b>ontimer=&quot;href&quot;</b><br>
+Navigates to the location specified by href after a specified amount of time. <b>id</b><br>
+Provides an element with a unique name within a single deck. <b>class</b><br>
+Affiliates an element with one or more classes.</p>
+<p><a name="head">head</a> <img border="0" src="head.gif" width="24" height="24"><br id="headbrief">
+Contains information relating to the deck as a whole, including meta-data and access control tags.<br>
+<a href="#head" style="margin-left: 32" onclick="expand('headattr')">attributes</a>
+<p id="headattr" style="margin-left: 64;display=none"><b>id</b><br>
+Provides an element with a unique name within a single deck.<br>
+<b>class</b><br>
+Affiliates an element with one or more classes.</p>
+<p><a name="access">access</a> <img border="0" src="access.gif" width="24" height="24"><br id="accessbrief">
+Specifies access control information for the entire deck. It is an error for a deck to contain more than one access element. If a deck does not include an access element, access control is disabled.
+When access control is disabled, cards in any deck can access this deck.<br>
+A deck's domain and path attributes specify which other decks may access it. As the browser navigates from one deck to another, it performs access control checks to determine whether the destination
+deck allows access from the current deck.<br>
+If a deck has a domain and/or path attribute, the referring deck's URI must match the values of the attributes. Matching is done as follows: the access domain is suffix-matched against the domain name
+portion of the referring URI and the access path is prefix matched against the path portion of the referring URI.<br>
+Domain suffix matching is done using the entire element of each sub-domain and must match each element exactly (e.g. www.wapforum.org shall match wapforum.org, but shall not match forum.org).<br>
+Path prefix matching is done using entire path elements and must match each element exactly (e.g. /X/Y matches /X in the attribute, but does not match /XZ in the attribute).<br>
+<a href="#access" style="margin-left: 32" onclick="expand('accessattr')">attributes</a>
+<p id="accessattr" style="margin-left: 64;display=none"><b>domain</b><br>
+The domain suffix of allowed referring pages. Default value is current deck's domain.<br>
+<b>path</b><br>
+The path prefix of allowed referring pages. Default value is &quot;/&quot;.<br>
+<b>id</b><br>
+Provides an element with a unique name within a single deck.<br>
+<b>class</b><br>
+Affiliates an element with one or more classes.</p>
+<p><a name="meta">meta</a> <img border="0" src="meta.gif" width="24" height="24"><br id="metabrief">
+Contains generic meta information relating the deck.<br>
+Meta-information is specified with property names and values. This specification does not define any properties, nor does it define how browsers must interpret meta-data.<br>
+<a href="#meta" style="margin-left: 32" onclick="expand('metaattr')">attributes</a>
+<p id="metaattr" style="margin-left: 64;display=none"><b>http-equiv</b><br>
+May be used in place of name and indicates that the property should be interpreted as an HTTP header.<br>
+<b>name</b><br>
+Specifies the property name. The browser must ignore any meta-data named with this attribute. Servers should not emit WML content containing meta-data named with this attribute.<br>
+<b>content</b><br>
+This attribute specifies the property value.<br>
+<b>forua</b><br>
+Specifies that the author intended the property to reach the browser. In the case where the user agent supports the meta-data mechanism, and the property has its forua attribute set to true, the
+meta-data must be delivered to the browser.<br>
+<b>scheme</b><br>
+This attribute specifies a form or structure that may be used to interpret the property value. Scheme values vary depending on the type of meta-data.<br>
+<b>id</b><br>
+Provides an element with a unique name within a single deck.<br>
+<b>class</b><br>
+Affiliates an element with one or more classes.</p>
+
+<!-- Event elements -->
+
+<p><a name="xml">xml</a> declaration <img border="0" src="xml.gif" width="24" height="24"><br id="xmlbrief">
+A valid WML deck is a valid XML document and therefore must contain an XML declaration.<br>
+<a href="#xml" style="margin-left: 32" onclick="expand('xmlattr')">attributes</a>
+<p id="xmlattr" style="margin-left: 64;display=none"><br>
+<b>version</b><br>
+specifies the XML version number.<br>
+<b>encoding</b><br>
+specifies the XML encoding character set. UTF-8 is recommended.</p>
+
+<!-- !doctype element -->
+
+<p><a name="doctype">!doctype</a> document type declaration <img border="0" src="doctype.gif" width="24" height="24"><br id="doctypebrief">
+A valid WML deck is a valid XML document and therefore must contain document type declaration (in this case for WAP 1.1).<br>
+<a href="#doctype" style="margin-left: 32" onclick="expand('doctypeattr')">attributes</a>
+<p id="doctypeattr" style="margin-left: 64;display=none"><br>
+<b>version</b><br>
+specifies the WML DTD document.</p>
+
+<!-- serverSide element -->
+
+</body>
+
+</html>

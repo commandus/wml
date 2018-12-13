@@ -1,0 +1,44 @@
+HTTP/1.1 200 OK
+Date: Sat, 25 Sep 2004 02:58:23 GMT
+Server: Apache/2.0.47 (Unix) PHP/4.3.3
+Last-Modified: Fri, 24 Sep 2004 11:04:35 GMT
+ETag: "28c8ed-3a2-f1bc16c0"
+Accept-Ranges: bytes
+Content-Length: 930
+Connection: close
+Content-Type: text/vnd.wap.wml
+--[ HEADER END ]------
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+<card id="Home" title="WinWAP Home Page">
+<p align="center">
+   <img src="hopa.wbmp" alt="WinWAP"/>
+</p>
+<p align="center">
+   <img src="up.wbmp" alt=" "/><br/>
+   <a href="./help/help.wml">Help</a><br/>
+   <a href="feedback.wml">Send feedback</a><br/>
+   <a href="search.wml">Mobile services</a><br/>
+   <a href="http://wap.winwap.org/chat.wml">Mobile Chat</a><br/>
+   <br/>
+   <br/>
+   <a href="news.wml">News</a><br/>
+   <a href="partner.wml">Partners</a><br/>
+   <img src="dw.wbmp" alt=" "/>
+   <br/>
+   <br/>
+
+</p>
+<p align="left">
+   <small>
+    Current versions:<br/>
+    WinWAP&#169; PRO v 3.1.6.192<br/>
+    WinWAP&#169; for Pocket PC v 1.2<br/>
+    <br/>
+    <a href="about.wml">&#xA9; Copyright Slob-Trot Software Oy Ab 2003</a>
+   </small>
+</p>
+</card>
+</wml>

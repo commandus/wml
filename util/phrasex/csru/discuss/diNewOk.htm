@@ -1,0 +1,33 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$ 
+  
+
+  set local.type = request.type;
+  if (local.type = 2 AND request.msgType = 'htmlFrag')
+    set local.type = 3; // 1=group 2=plain text message 3=html message
+  endif
+
+  // don't validate session. allow use of forum without logging on.
+  if (session.isValid)
+    set local.user_id = session.userID;
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.user_id = '';
+    set local.mainMenu = app.startPage;
+  endif
+
+  if (request.di_title = '')
+    if (local.type = 1)
+      error 'Please enter group name';
+    else
+      error 'Please enter message topic';
+    endif
+  endif
+  if (request.di_detail = '')
+    if (local.type = 1)
+      error 'Please enter group description';
+    else
+      error 'Please enter message';
+    endif
+  endif
+  if (app.maxText >

@@ -1,0 +1,229 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (request.note_data = '')
+    error 'Please enter additional information';
+  endif
+
+  if (request.co_submitter <> '')
+    <serverside dataset="sqlCoSubmitter" action="query">
+    SELECT user_id, email FROM cs_user 
+      WHERE user_id = request.co_submitter;
+  </serverside>
+    if (sqlCoSubmitter.fetch <> 1)
+      error 'User [' + request.co_submitter + '] does not exist';
+    endif
+    sqlCoSubmitter.close;
+  endif
+
+  file attach1('request.add_attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  set local.note_data = '';
+  if (request.fieldExist('was_closed'))
+    set local.note_data = 'Reopened this request. ';
+  endif
+  set local.note_data = local.note_data + request.note_data;
+
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+  
+  <serverside dataset="sqlTicket" action="query">
+    SELECT title, assigned_to, product FROM cs_ticket 
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+
+  if (sqlTicket.fetch)
+    set local.title = sqlTicket.title;
+    set local.assigned_to = sqlTicket.assigned_to;
+    <serverside dataset="sqlAssignedToInfo" action="query">
+    SELECT user_id, status, email FROM cs_user 
+      WHERE user_id = local.assigned_to;
+  </serverside>
+    if (sqlAssignedToInfo.fetch)
+      set local.assigned_to_email = sqlAssignedToInfo.email;
+      
+      // always assign to the dispatcher
+      if (sqlAssignedToInfo.status = 'disabled')
+        <serverside dataset="sqlDispatcher" action="query">
+    SELECT name, dispatcher FROM cs_product '
+          'WHERE name = \'' + sqlTicket.product + '\'';
+        if (sqlDispatcher.fetch)
+          set local.assigned_to = sqlDispatcher.dispatcher;
+          set local.assigned_to_email = '';
+          <serverside dataset="sqlNewAssignedToInfo" action="query">
+    SELECT user_id, status, email FROM cs_user 
+            WHERE user_id = local.assigned_to;
+  </serverside>
+          if (sqlNewAssignedToInfo.fetch)
+            set local.assigned_to_email = sqlNewAssignedToInfo.email;
+          endif
+          sqlNewAssignedToInfo.close;
+        endif
+        sqlDispatcher.close;
+      endif
+    endif
+    sqlAssignedToInfo.close;
+  endif
+  sqlTicket.close;
+      
+  // Changes and attachment will all get saved or none does.
+  local.beginTransaction;
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddNote = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_format, ch_description)
+    VALUES(
+      local.note_id, request.ticket_id, 'public', 
+      session.userID, server.dateTime, 
+      request.note_format, local.note_data);
+  </serverside>
+  
+  // attachment has been defined above when checking its size
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  if (request.fieldExist('was_closed'))  // then reopen it
+    <serverside dataset="sqlStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+    set local.firstStatus = sqlStatus.name;
+
+    <serverside dataset="sqlReopenTicket" action="execute">    UPDATE cs_ticket SET
+        row_ver = 1 + request.row_ver,
+        co_submitter = request.co_submitter, 
+        submitter_cc = request.submitter_cc,
+        status = local.firstStatus, 
+        assigned_to = local.assigned_to, 
+        assigned_by = '', 
+        assigned_on = server.dateTime, 
+        due_rem_flag = 'y'
+      WHERE ticket_id = request.ticket_id
+        AND row_ver = request.row_ver;
+  </serverside> 
+
+  else 
+    <serverside dataset="sqlUpdateTicket" action="execute">    UPDATE cs_ticket SET
+        row_ver = 1 + request.row_ver,
+        co_submitter = request.co_submitter, 
+        submitter_cc = request.submitter_cc
+      WHERE ticket_id = request.ticket_id
+        AND row_ver = request.row_ver;
+  </serverside> 
+  endif
+
+  local.commitTransaction;
+
+  if (server.emailSenderEnabled AND local.assigned_to_email <> '')
+    Email_Out em;
+    if (server.taskEnabled('CustomerSupport Email Importer'))
+      set em.from = server.importerEmail;
+    else
+      set em.from = server.adminEmail;
+    endif
+    set em.to = local.assigned_to_email;
+
+    if (request.fieldExist('was_closed')) 
+      set em.subject = 
+        'Request #' + request.ticket_id + 
+        ' has been re-opened and assigned to you. ';
+    else
+      set em.subject = 
+        'New information for request #' + request.ticket_id + 
+        ' has been added. ';
+    endif
+
+    set local.hyperLink = server.httpAddress + 
+      app.startPage + '?ticket_id=' + request.ticket_id + 
+      '&user_id=' + $(local.assigned_to:escape);
+      
+    if (request.note_format = 1)
+      set em.contentType = 'text/html';
+      set em.content = 
+        '<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">\r\n'
+        '<body>\r\nDear ' + local.assigned_to + ',\r\n<br/>' + 
+        'New information has been added: <br/>\r\n' + 
+        request.note_data + '\r\n<br/>' + 
+        '<a href="' + local.hyperLink + '">' + local.hyperLink + '</a>'
+        '\r\n<br/>\r\n' + app.name + '\r\n</body></html>';
+    else
+      set em.content = 
+        'Dear ' + local.assigned_to + ',\r\n\r\n' +
+        local.title + '\r\n' + request.note_data + '\r\n' + 
+        local.hyperLink + 
+        '\r\n\r\n' + app.name;
+    endif
+    em.send;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Follow Up Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Follow up on 
+    <a href="euTicketView.htm?ticket_id=$request.ticket_id)">
+    request #$request.ticket_id)</a> has been saved. 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

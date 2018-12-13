@@ -1,0 +1,55 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+
+  <template>
+    <do type="accept" label="Back">
+      <prev/>
+    </do>
+  </template>
+
+	<card id="cv-exp" title="CV - Experience"> 
+		<p>
+			<table columns="1">
+				<tr><td><a href="#eja">Website Administrator</a></td></tr>
+				<tr><td><a href="#ejb">Network Engineer</a></td></tr>
+				<tr><td><a href="#ejc">Software Engineer</a></td></tr>
+			</table>
+		</p> 
+	</card> 
+
+	<card id="eja" title="CV - Experience">
+		<p>
+			<b>Website Administrator</b>, July 1998 - November 1999, Strathclyde University<br/>
+			<table columns="1">
+				<tr><td>Designed and created content for the Student's Union website.</td></tr>
+				<tr><td>Managed Windows NT and UNIX web servers running IIS and Apache.</td></tr>
+				<tr><td>Creation of a custom e-commerce system from the ground up in Perl.</td></tr>
+			</table>
+		</p>
+	</card>
+
+	<card id="ejb" title="CV - Experience">
+		<p>
+			<b>Network Engineer</b>, July 1998 - May 1999, Cowgate Books<br/>
+			<table columns="1">
+				<tr><td>Management of Windows 95 clients from a Novell server.</td></tr>
+				<tr><td>Evolution of internal network to support Internet connectivity.</td></tr>
+				<tr><td>Provided telephone support and repair callout.</td></tr>
+			</table>
+		</p>
+	</card>
+
+	<card id="ejc" title="CV - Experience">
+		<p>
+			<b>Software Engineer</b>, June 1998 - July 1998, Cowgate Books<br/>
+			<table columns="1">
+				<tr><td>Analysis and upgrade of existing database system.</td></tr>
+				<tr><td>Creation of software to allow web-based order tracking.</td></tr>
+				<tr><td>Design and creation of corporate website.</td></tr>
+			</table>
+		</p>
+	</card>
+
+</wml> 

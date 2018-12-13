@@ -1,0 +1,7 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  set local.max_row = 500;
+  set local.rep_name = 'Todo list for ' + request.userID;
+  set local.app_url = server.httpAddress + app.startPage;
+
+  <serverside dataset="sqlMyTickets" action="query">

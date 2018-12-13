@@ -1,0 +1,18 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (request.fieldExist('path') = 0 OR request.path = '')
+    error 'CGI field \'path\' is missing.';
+  endif
+
+  // Always add \r to delimitor list because browser may convert
+  // \n to \r\n for hidden input fields
+  tokenizer tokens(request.path, '\r\n');
+
+  set local.parent = '';
+  set local.name = tokens.nextToken;
+  set local.di_id = tokens.nextToken;
+
+  while (local.name <>

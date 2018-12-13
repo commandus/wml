@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userNew.htm">
+    SELECT user_id FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside dataset="check1" action="move" opt="userNew.htm?msg=Password+mistyped">
+    SELECT 1 R FROM dual WHERE '$(upwd)' = '$(upwd2)' 
+  </serverside>
+  <serverside dataset="check2" action="move" opt="userNew.htm?msg=User+ID+has+already+been+used">
+    SELECT user_id FROM cs_user WHERE user_id &lt;&gt; '$(uid)'
+  </serverside>
+  <serverside dataset="check3" action="move" opt="userNew.htm?msg=User+ID+must+be+supplied">
+    SELECT 1 R FROM dual WHERE '$(uid)' &lt;&gt; '' 
+  </serverside>
+  <serverside action="defaultparam" opt="utype">
+    SELECT CASE 
+    WHEN '$(usertype)' = 'Manager' THEN 'manager'  
+    WHEN '$(usertype)' = 'Member Staff' THEN 'MemberStaff'  
+    ELSE 'EndUser'  
+    END R  
+    FROM dual  
+  </serverside>
+  <serverside dataset="check5" action="move" opt="userNew.htm?msg=Only+Manager+can+create+managers">
+    SELECT u.user_type FROM cs_user u  
+    WHERE ('$(utype)' &lt;&gt; 'Manager') OR (((upper(u.user_id) = upper('$(user_id)')) AND (u.user_type = 'Manager')))  
+  </serverside>
+  <serverside dataset="sqlAddUser" action="execute">  
+    INSERT INTO cs_user(user_row_ver, user_type, status, user_id, 
+      user_pwd, full_name, email, email_fmt, phone, fax, company, dept, 
+      address, city, state, zipcode, country, user_note) 
+    VALUES(
+      1, '$(utype)', '$(status)', '$(uid)', 
+      '$(upwd)', '$(full_name)', 
+      '$(email)', '$(email_fmt)', 
+      '$(phone)', '$(fax)', '$(company)', '$(dept)', 
+      '$(address)', '$(city)', '$(state)', 
+      '$(zipcode)', '$(country)', '$(user_note)')  
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support New User</title>
+</head>
+<body loop="global">
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : New User Saved  
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    New User: 
+    [<a href="userView.htm?user_id=$(uid:escape)">$(uid)</a>] has been created.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="ticketNew.htm?submitted_by=$(uid:escape)">New Request from $(uid)</a> | 
+    <a href="userMan.htm">Back to User Manager</a> |   
+    <a href="userNew.htm">New User</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

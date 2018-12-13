@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=priority/priorityMan.htm" >
+id</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+att_id</title>
+</head>
+<body >
+<form method="POST" action="priorityNewOk.htm" >
+<center >
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="priorityMan.htm" >
+Менеджер приоритетов</a>
+: Новый приоритет</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td >
+$(attachment.nf_id) -</td>
+<td >
+<input type="text" name="name" size="65" maxlength="20" value="" />
+</td>
+</tr>
+<tr >
+<td >
+kbVote.htm?vote=yes&id=$(sqlArt.kb_id)</td>
+<td >
+<input type="text" name="description" size="65" maxlength="200" value="" />
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="2" align="center" >
+<input type="submit" value="Save" />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

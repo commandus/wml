@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+
+  <serverside action="defaultparam" opt="use_what">
+    SELECT 'Use Last X' R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="last_x">
+    SELECT 7 R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="x_what">
+    SELECT 'days' R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="startDate">
+    SELECT CAST('today' AS DATE) R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="endDate">
+    SELECT CAST('today' AS DATE) R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="maxCol">
+    SELECT 12 R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="scale">
+    SELECT 1 R FROM dual  
+  </serverside>  
+
+  <serverside dataset="sqlSubmitted" action="query">
+    SELECT ticket_id, submitted_on FROM cs_ticket 
+    WHERE submitted_on &gt;= '$(startDate)' AND submitted_on &lt; '$(endDate)'
+    ORDER BY submitted_on
+  </serverside>
+
+  <serverside dataset="sqlClosed" action="query">
+    SELECT ticket_id, closed_on FROM cs_ticket
+    WHERE closed_on &gt;= '$(startDate)'
+    AND closed_on &lt; '$(endDate)'  
+    ORDER BY closed_on
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support New Tickets vs. Closed Tickets Trend Report Report</title>
+</head>
+<body>
+
+<center>
+<form method="GET" action="repTrend.htm">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="repMan.htm">Report Manager</a> : New Requests vs. Closed Requests Trend Report
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    Last: <br/>
+    <input type="text" name="last_x" size="5" value="$(last_x)"/>
+  </td>
+  <td valign="bottom">
+    <br/>
+    <select name="x_what" size="1">
+      <option selected="selected">$(x_what)</option>  
+      <option>days</option>
+      <option>weeks</option>
+      <option>months</option>
+      <option>quarters</option>
+      <option>years</option>
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    Date &gt;=: <br/>
+    <input type="text" name=startDate size="15" value="$(startDate)" />
+  </td>
+  <td>
+    &lt;: <br/>
+    <input type="text" name=endDate size="15" value="$(endDate)">
+  </td>
+</tr>
+</table>
+<br/>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td nowrap="nowrap">
+    Max Columns: <br/>
+    <input type="text" name="max_col" size="13" value="$(max_col)"/>
+  </td>
+  <td>&nbsp;</td>
+  <td nowrap="nowrap" valign="bottom">
+    Column Type: <br/>
+    <select name="interval" size="1">
+      <option selected="selected">$(interval)</option>
+      <option>day</option>
+      <option>week</option>
+      <option>month</option>
+      <option>quarter</option>
+      <option>year</option>
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    Scale: <br/>
+    <input type="text" name="scale" size="5" value="$local.scale)"/>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="bottom">
+    Date Range: <br/>
+    <select name="use_what" size="1">
+      <option selected="selected">$(use_what)</option>
+      <option>Use Last X</option>
+      <option>Use Dates</option>
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="bottom">
+    <input type="submit" value="Update" />
+  </td>
+</tr>
+</table>
+
+<br/>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td class="apbg">
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr><td width="2"></td></tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="bottom">
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr><td align="center">
+      $(arSubmittedCount)  
+    </td></tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td width="16" height=$local.submittedH)></td></tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td valign="bottom">
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr><td align="center">
+      $arClosedCount.getAt(local.i))
+    </td></tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td width="16" height="$(closedH)"></td></tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <!$ set local.colspan = arLabel.getSize * 3 + 2; )>
+  <td colspan=$local.colspan) class="apbg">
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr><td height=2></td></tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td colspan="2"></td>
+<!$
+  set local.count = 0;
+  while (local.count < arLabel.getSize)
+)>
+  <td colspan="3">
+    $arLabel.getAt(local.count))&nbsp;<br/>
+    $local.interval)&nbsp;<br/>
+    <!$set local.count = 1 + local.count;)>
+    $local.count)
+  </td>
+<!$
+  endwhile
+)>
+</tr>
+</table>
+
+<br/>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td width=16 height="1"6></td></tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    New requests
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td width=16 height="1"6></td></tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    Closed requests
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+
+</form>
+</center>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+
+  if (request.tab_submitted_by <> session.userID 
+    AND request.tab_company = '' AND request.tab_serial_num = '')
+    error 'You must set the "Submitted By" to yourself, '
+      'set the Company to your company, or select a "Serial Number".';
+  endif
+
+  if (string.isValidDateTime(request.tab_submitted_on1) <> 1)
+    error 'Please enter a valid date-time for Submitted On >=';
+  endif
+  if (string.isValidDateTime(request.tab_submitted_on2) <> 1)
+    error 'Please enter a valid date-time for Submitted On <';
+  endif
+
+  // construct the <serverside dataset="where clause
+  set local.w = '';
+  if (request.tab_status <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'status = \'' + request.tab_status + '\'';
+  endif
+  if (request.tab_submitted_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      '('
+      'submitted_by = \'' + to.2QuoteStr(request.tab_submitted_by) + '\''
+      ' OR '
+      'co_submitter = \'' + to.2QuoteStr(request.tab_submitted_by) + '\''
+      ')';
+  endif
+  if (request.tab_company <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      ' company = \'' + to.2QuoteStr(request.tab_company) + '\'';
+  endif
+  if (request.tab_submitted_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on >= ' + to.odbcDateStr(request.tab_submitted_on1);
+  endif
+  if (request.tab_submitted_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on < ' + to.odbcDateStr(request.tab_submitted_on2);
+  endif
+  if (request.tab_serial_num <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'serial_num = \'' + to.2QuoteStr(request.tab_serial_num) + '\'';
+  endif
+
+  // apply product access restriction
+  set local.selectedProductAllowed = 0;
+  set local.productsAllowed = '';
+
+  <serverside dataset="sqlPublicProduct" action="query">
+    SELECT name FROM cs_product WHERE product_type <> \'private\' '
+    'ORDER BY name ASC';
+  </serverside>
+  while (sqlPublicProduct.fetch)
+    if (sqlPublicProduct.name = request.tab_product)
+      set local.selectedProductAllowed = 1;
+    endif
+    if (local.productsAllowed <> '')
+      set local.productsAllowed = local.productsAllowed + ' OR ';
+    endif
+    set local.productsAllowed = local.productsAllowed + 
+      'product = \'' + sqlPublicProduct.name + '\'';
+  endwhile
+
+  <serverside dataset="sqlBoughtPrivate" action="query">
+    SELECT DISTINCT name FROM cs_sale, cs_product '
+    'WHERE cs_sale.sa_product = cs_product.name '
+      'AND product_type = \'private\' '
+      'AND (sa_sold_to = \'' + to.2QuoteStr(session.userID) + '\' '
+        'OR sa_contact1 = \'' + to.2QuoteStr(session.userID) + '\' '
+        'OR sa_contact2 = \'' + to.2QuoteStr(session.userID) + '\')';
+  while (sqlBoughtPrivate.fetch)
+    if (sqlBoughtPrivate.name = request.tab_product)
+      set local.selectedProductAllowed = 1;
+    endif
+    if (local.productsAllowed <> '')
+      set local.productsAllowed = local.productsAllowed + ' OR ';
+    endif
+    set local.productsAllowed = local.productsAllowed + 
+      'product = \'' + sqlBoughtPrivate.name + '\'';
+  endwhile
+
+  if (request.tab_product <> '')  // a product in the query form is seleced
+    if (local.selectedProductAllowed = 0)
+      error 'You don\'t have the right to access product: ' 
+        + request.tab_product;
+    else
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'product = \'' + request.tab_product + '\'';
+    endif
+  else  
+    if (local.productsAllowed <> '')
+      set local.productsAllowed = local.productsAllowed + ' OR ';
+    endif
+    set local.productsAllowed = local.productsAllowed + 'product IS NULL';
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + '(' + local.productsAllowed + ')';
+  endif
+
+  // convert user friendly column names to real column names
+  local.setVar('Request ID',    'ticket_id');
+  local.setVar('Title',         'title');
+  local.setVar('Status',        'status');
+  local.setVar('Product',       'product');
+  local.setVar('Serial Number', 'serial_num');
+  local.setVar('Priority',      'priority');
+  local.setVar('Deadline',      'deadline');
+  local.setVar('Cost',          'cost');
+  local.setVar('Turn Around',   'turn_around');
+
+  local.setVar('Submitted To',  'submitted_to');
+  local.setVar('Submitted By',  'submitted_by');
+  local.setVar('Company',       'company');
+  local.setVar('Submitted On',  'submitted_on');
+  local.setVar('Assigned To',   'assigned_to');
+  local.setVar('Assigned By',   'assigned_by');
+  local.setVar('Assigned On',   'assigned_on');
+  local.setVar('Closed By',     'closed_by');
+  local.setVar('Closed On',     'closed_on');
+  local.setVar('Descending',    'DESC');
+  local.setVar('Ascending',     'ASC');
+
+  set local.tab_col1 = local.var(request.tab_col1, request.tab_col1);
+  set local.tab_col2 = local.var(request.tab_col2, request.tab_col2);
+  set local.tab_col3 = local.var(request.tab_col3, request.tab_col3);
+  set local.tab_col4 = local.var(request.tab_col4, request.tab_col4);
+  set local.tab_sort1 = local.var(request.tab_sort1, request.tab_sort1);
+  set local.tab_sort2 = local.var(request.tab_sort2, request.tab_sort2);
+
+  set local.tab_sort1_dir = 
+    local.var(request.tab_sort1_dir, request.tab_sort1_dir);
+  set local.tab_sort2_dir = 
+    local.var(request.tab_sort2_dir, request.tab_sort2_dir);
+
+  // construct the select list
+  set local.tab_sql_select = '';
+  if (local.tab_col1 <> '')
+    if (local.tab_sql_select <> '')
+      set local.tab_sql_select = local.tab_sql_select + ',';
+    endif
+    set local.tab_sql_select = local.tab_sql_select + local.tab_col1;
+  endif
+  if (local.tab_col2 <> '')
+    if (local.tab_sql_select <> '')
+      set local.tab_sql_select = local.tab_sql_select + ',';
+    endif
+    set local.tab_sql_select = local.tab_sql_select + local.tab_col2;
+  endif
+  if (local.tab_col3 <> '')
+    if (local.tab_sql_select <> '')
+      set local.tab_sql_select = local.tab_sql_select + ',';
+    endif
+    set local.tab_sql_select = local.tab_sql_select + local.tab_col3;
+  endif
+  if (local.tab_col4 <> '')
+    if (local.tab_sql_select <> '')
+      set local.tab_sql_select = local.tab_sql_select + ',';
+    endif
+    set local.tab_sql_select = local.tab_sql_select + local.tab_col4;
+  endif
+
+  // construct the order by
+  set local.tab_sql_orderby = '';
+  if (local.tab_sort1 <> '')
+    if (local.tab_sql_orderby <> '')
+      set local.tab_sql_orderby = local.tab_sql_orderby + ',';
+    endif
+    set local.tab_sql_orderby = local.tab_sql_orderby + 
+      local.tab_sort1 + ' ' + local.tab_sort1_dir;
+  endif
+  if (local.tab_sort2 <> '')
+    if (local.tab_sql_orderby <> '')
+      set local.tab_sql_orderby = local.tab_sql_orderby + ',';
+    endif
+    set local.tab_sql_orderby = local.tab_sql_orderby + 
+      local.tab_sort2 + ' ' + local.tab_sort2_dir;
+  endif
+
+  // put together the complete <serverside dataset="statment
+  set local.sql" action="query">
+    SELECT ticket_id, ' + local.tab_sql_select + 
+    ' FROM cs_ticket_view';
+
+  if (local.w <> '')
+    set local.sql = local.sql + ' WHERE ' + local.w;
+  endif
+  if (local.tab_sql_orderby <> '')
+    set local.sql = local.sql + ' ORDER BY ' + local.tab_sql_orderby;
+  </serverside>
+  endif
+
+  <serverside dataset="s1 = local.sql;
+
+  // convert system column names to user frienly names
+  set local.tab_col1 = '';
+  set local.tab_col2 = '';
+  set local.tab_col3 = '';
+  set local.tab_col4 = '';
+
+  tokenizer tokens(local.tab_sql_select, ' ,');
+  set local.count = 1;
+  set local.col_name = tokens.nextToken;
+
+  while (local.col_name <> '')
+    if (local.col_name = 'title')
+      set local.col_header = 'Title';
+    elseif (local.col_name = 'status')
+      set local.col_header = 'Status';
+    elseif (local.col_name = 'product')
+      set local.col_header = 'Product';
+    elseif (local.col_name = 'serial_num')
+      set local.col_header = 'Serial Number';
+    elseif (local.col_name = 'priority')
+      set local.col_header = 'Priority';
+    elseif (local.col_name = 'deadline')
+      set local.col_header = 'Deadline';
+    elseif (local.col_name = 'cost')
+      set local.col_header = 'Cost';
+    elseif (local.col_name = 'turn_around')
+      set local.col_header = 'Turn Around';
+
+    elseif (local.col_name = 'submitted_to')
+      set local.col_header = 'Submitted To';
+    elseif (local.col_name = 'submitted_by')
+      set local.col_header = 'Submitted By';
+    elseif (local.col_name = 'company')
+      set local.col_header = 'Company';
+    elseif (local.col_name = 'submitted_on')
+      set local.col_header = 'Submitted On';
+    elseif (local.col_name = 'assigned_to')
+      set local.col_header = 'Assigned To';
+    elseif (local.col_name = 'assigned_by')
+      set local.col_header = 'Assigned By';
+    elseif (local.col_name = 'assigned_on')
+      set local.col_header = 'Assigned On';
+    elseif (local.col_name = 'closed_by')
+      set local.col_header = 'Closed By';
+    elseif (local.col_name = 'closed_on')
+      set local.col_header = 'Closed On';
+    else
+      set local.col_header = local.col_name;
+    endif
+
+    if (local.count = 1)
+      set local.tab_col1 = local.col_header;
+    elseif (local.count = 2)
+      set local.tab_col2 = local.col_header;
+    elseif (local.count = 3)
+      set local.tab_col3 = local.col_header;
+    else
+      set local.tab_col4 = local.col_header;
+    endif
+    set local.count = 1 + local.count;
+    set local.col_name = tokens.nextToken;
+  endwhile
+  
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Requests Found
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td width="1%">ID&nbsp;</td>
+  <td>$local.tab_col1)&nbsp;</td>
+  <td>$local.tab_col2)&nbsp;</td>
+  <!$if (local.tab_col3 <> ''))>
+    <td>$local.tab_col3)&nbsp;</td>
+  <!$endif)>
+  <!$if (local.tab_col4 <> ''))>
+    <td>$local.tab_col4)&nbsp;</td>
+  <!$endif)>
+</tr>
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+
+  while (s1.fetch AND local.count < 500) 
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+)>
+<tr $local.bgcolor)>
+  <td valign="top" width="1%">
+    <a href="euTicketView.htm?ticket_id=$s1.ticket_id)">
+    $s1.ticket_id)</a>&nbsp;
+  </td>
+  <td valign="top">$(s1.1))&nbsp;</td>
+  <td valign="top">$(s1.2))&nbsp;</td>
+  <!$ if (local.tab_col3 <> '') )>
+    <td valign="top">$(s1.3))&nbsp;</td>
+  <!$ endif )>
+  <!$ if (local.tab_col4 <> '') )>
+    <td valign="top">$(s1.4))&nbsp;</td>
+  <!$ endif )>
+</tr>
+<!$ endwhile )>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$if (local.count >= 500))>
+      Total: $local.count) or more requests found. 
+      $local.count) requests displayed. 
+    <!$else)>
+      Total: $local.count) request(s) found and displayed. 
+    <!$endif)>
+    $server.dateTime)
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

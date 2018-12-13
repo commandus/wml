@@ -1,0 +1,153 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')    
+  </serverside>
+  <serverside action="defaultparam" opt="kb_id">
+    SELECT -1 R FROM DUAL
+  </serverside>
+  <serverside action="defaultparams">
+    select name, val from dict where lang='en' and name STARTING WITH 'kb_type_'
+  </serverside>
+  <serverside dataset="parentCat" action="query" >
+    SELECT COALESCE(kb_p1, -1) kb_p1 FROM cs_kb
+    WHERE kb_id = $(kb_id)  
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT kb_id, kb_type, kb_owner, kb_title, 
+    KB_K1, KB_K2, KB_K3, KB_K4, KB_K5, KB_SECURITY, KB_RANK,  
+    CASE kb_type
+    WHEN 0 THEN '$(kb_type_art)'
+    WHEN 1 THEN '$(kb_type_cat)'
+    WHEN 2 THEN '$(kb_type_plain)'
+    WHEN 3 THEN '$(kb_type_html)'
+    WHEN 4 THEN '$(kb_type_url)'
+    WHEN 5 THEN '$(kb_type_file)'
+    ELSE '$(kb_type_art)'
+    END itemtype FROM cs_kb WHERE kb_id = $kb_id
+  </serverside>  
+  <serverside dataset="s3" action="query">
+    SELECT kbf_id, kbf_name, kbf_size FROM cs_kb_file
+    WHERE kbf_kb_id = $(kb_id) AND kbf_type = 2
+  </serverside>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Item Detail</title>
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" loop="s1">
+            <tr>
+              <td>
+              </td>
+              <td>Creator: $(s1.KB_CREATED_BY) $(s1.KB_CREATED_ON)
+              </td>
+              <td>Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)
+              </td>
+              <td>
+              </td>
+            </tr>
+<tr>
+  <td align="right" colspan="4">
+      <a href="../help/kbHelp.html">Help</a> |  
+      <a href="kbEditCat.htm?kb_id=$(kb_id)">Edit category</a> | 
+      <a href="kbDelete.htm?kb_id=$(kb_id)">Delete category</a>
+  </td>
+</tr>
+
+<tr>
+  <td colspan="4"><h1>$(s1.kb_title)</h1></td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th align="left">Owner: </th>
+  <th align="left">Security Level: </th>
+  <th align="left">Locked By: </th>
+  <th align="left">Locked On: </th>
+</tr>
+<tr>
+  <td>$(s1.kb_owner) </td>
+  <td>$(s1.kb_security) </td>
+  <td>$(s1.kb_locked_by) </td>
+  <td>$(s1.kb_locked_on) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th align="left">Rank: </th>
+  <th align="left">Visited: </th>
+  <th align="left" colspan="2">Keywords: </th>
+</tr>
+<tr>
+  <td>$(s1.kb_rank)</td>
+  <td>$(s1.kb_visited)</td>
+  <td colspan="2">$(s1.kb_k1) $(s1.kb_k2) $(s1.kb_k3) $(s1.kb_k4) $(s1.kb_k5)</td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th align="left" colspan="4">Summary: </th>
+</tr>
+<tr>
+  <td colspan="4">$(s1.kb_summary)</td>
+</tr>
+  <tr>
+    <td colspan="4">&nbsp;</td>  
+  </tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="2" loop="s3">  
+  <tr class="apbg">
+    <th align="left" colspan="4">Content</th>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <a href="$(s1.kb_name)">$(s1.kb_name)</a>
+      <a href="$(attUrl)">$(s3.kbf_name)</a> 
+      $(s1.kb_size) bytes
+      $(s3.kbf_content)
+    </td>
+  </tr>
+  <tr class="apbg">
+    <th align="left" colspan="4">Attachments</th>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <br/>:
+        $(s3.cs_kb_file)
+        $(s3.kbf_id)
+        $(s3.kbf_content)
+        $(s3.kbf_name)
+        <a href="$(attUrl)">$(s3.kbf_name)</a>
+          $(s3.kbf_size)  bytes
+    </td>
+  </tr>
+<tr><td>
+</td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr class="apbg" loop="parentCat">
+  <td align="center">
+    <a href="index.htm?kb_id=$(ParentCat.kb_p1)">Back to parent category</a>
+  </td>
+</tr>
+
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,10 @@
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling e:\src\blog\myblogger\help\apoo.chm
+
+HHC5003: Error: Compilation failed while compiling myblogoverview.htm.
+HHC5013: Error: URL reference in the TOC cannot be resolved: "interfaceguide.htm".
+
+
+The following files were not compiled:
+myblogoverview.htm

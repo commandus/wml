@@ -1,0 +1,164 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  // To require secure access to this website, uncomment the code below
+  // if (request.protocol = 'http')
+  //   response.redirect(server.httpsAddress + request.urlFull);
+  // endif
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // From a link in an email. Re-use current session if it exists
+  if (request.fieldExist('ticket_id') AND session.isValid)
+    if (session.userType = 'EndUser')
+      set local.nextUrl = session.ticketFolder + 'euTicketView.htm';
+    else
+      set local.nextUrl = session.ticketFolder + 'ticketView.htm';
+    endif
+    response.redirect(local.nextUrl + '?ticket_id=' + request.ticket_id);
+  endif 
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="logon.htm">
+<!$if (request.fieldExist('ticket_id')) )>
+  <input type="hidden" name=ticket_id value="$request.ticket_id)"/>
+<!$endif)>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td colspan="2">
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td colspan="2">
+    To submit problems/requests/suggestions or to check the status 
+    of previous submissions, please log on.
+    To create your account,
+    click <a href="user/signUp.htm">here</a>. 
+    <!$if (server.emailSenderEnabled))>
+      If you forgot your user ID or password, 
+      click <a href="user/forgot.htm">here</a>.
+    <!$endif)>
+    If you are a staff member, please logon using the account created 
+    for you by management.
+  </td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td colspan="2" align="center" nowrap="nowrap">
+    User ID: 
+    <!$if (request.fieldExist('user_id')) )>
+      <input type="text" name=user_id size="15" maxlength="50" 
+        value="$request.user_id)"> 
+    <!$else)>
+      <input type="text" name=user_id size="15" maxlength="50"
+        value="$request.getCookie('sspUserID'))"> 
+    <!$endif)>
+    Password: 
+    <input type=password name=user_pwd size="15" maxlength="20"/> 
+    <input type="submit" value="Logon"/>
+  </td>
+</tr>
+
+<!$
+  if (request.getCookie('sspUserID') <> '') 
+    set local.def_checked = 'checked';
+  else
+    set local.def_checked = '';
+  endif
+)>
+<tr>
+  <td colspan="2" align="center" nowrap="nowrap"> 
+    <input type=checkbox $local.def_checked) 
+      name=remember_user_id value="y">
+      Remember my ID on this computer
+   </td>
+</tr>
+
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td colspan="2">
+    <!$
+    if (request.browserType = 'MSIE' AND request.browserVerMajor >= 5)
+    )>
+      Please select this browser's Tools menu, then select the Internet 
+      Options command. On the Options dialog, go to the "Temporary 
+      Internet files" group, click the Settings button. During your 
+      session with this website, you should NOT select "Never" for
+      "Check for new versions of stored pages".
+    <!$
+    elseif (request.browserType = 'MSIE' AND request.browserVerMajor <= 4)
+    )>
+      Please select this browser's View menu, then select the Internet 
+      Options command. On the Options dialog, go to the "Temporary 
+      Internet files" group, click the Settings button. During your 
+      session with this website, you should select "Every time you start 
+      Internet Explorer" for "Check for new versions of stored pages".
+    <!$
+    elseif (request.browserType = 'Navigator')
+    )>
+      Please select this browser's Edit menu, select the Preferences 
+      command, expand the Advanced node and then click the Cache node. 
+      During your session with this website, you should NOT use "Never" 
+      for "Document in cache is compared to the document on network". 
+    <!$
+    else
+    )>
+      To speed up browsing, when you return to a web page you viewed 
+      before, most browsers can be configured to ALWAYS display the same 
+      one they stored. During your session with this website, you should
+      disable this feature if you often see stale pages.
+    <!$
+    endif
+    )>
+    <!$
+    if (request.via <> '')  // browser behind proxy
+      if (
+        (request.browserType = 'MSIE' AND request.browserVerMajor >= 4) OR 
+        (request.browserType = 'Navigator' AND request.browserVerMajor >= 5)
+      )
+        ;  // good browser, do nothing. note: Netscape 6 = navigator 5
+      else
+        response.write('<li>'
+        'You are using an old browser to access this website through \r\n'
+        'a proxy server. It may not work well. \r\n'
+        'Please upgrade your browser to Internet Explorer 5, \r\n'
+        'Netscape 6, or newer versions of these browsers. \r\n'
+        'If possible, access this website directly without going \r\n'
+        'through the proxy server, or configure the proxy server \r\n'
+        'not to cache this website.');
+      endif
+    endif
+    )>
+  </td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    Powered by
+    <a href="/hd/copyright.htm">ApooHelpDesk</a>
+  </td>
+  <td align="right">
+    Copyright &copy; 2003, Andrei Ivanov.
+  </td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

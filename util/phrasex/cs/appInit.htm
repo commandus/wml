@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  //--------------------------------------------------------------------
+  // Important: if you want to make changes to this file, you must
+  // access it manually from your web browser to force the changes to
+  // go into effect. 
+  //--------------------------------------------------------------------
+  response.expires(0);  // always expires right away
+  local.appInit();
+)>
+
+<!$ 
+function appInit()
+  // Must initialize the application object for this directory
+  // before setting or using its functions and variables.
+  app.init;  
+  
+  if (server.orgName <> '')
+    set app.name = to.html(server.orgName) + ' Support';
+  else
+    set app.name = 'Support';
+  endif  
+  set app.path = local.urlPath;
+  set app.startPage = local.urlPath + 'index.htm'; 
+
+  set app.altBgColor = '#EEEEEE';  // #e5f6ff
+  set app.bulletColor = '#ffffff';
+  set app.bulletBgColor1 = '#dcdcdc';
+  set app.bulletBgColor2 = '#6699cc';
+  
+  datetime dt(server.dateTime);
+  set app.copyright = 
+    '&copy; ' + dt.getYear + ' ' + 
+    to.html(server.orgName) + '';
+
+  // used to prevent frontal attack to crack a password
+  set app.logon_minute = 0;
+  set app.logon_count = 0;
+  
+  // Oracle truncates data silently. Use this to limit user entry.
+  set app.maxText = 0;  // no limit
+  if (string.findString(to.lower(local.dbType), 'oracle') > 0)
+    // corresponds to ch_description varchar(4000) in data\oracle.sql
+    set app.maxText = 4000;  
+  endif
+  
+  //---------------- detect database's case sensitivity ----------------
+  set app.dbCaseSensitive = 0;
+
+  if (string.findString(to.lower(local.dbType), 'access') > 0)
+    set app.dbCaseSensitive = 0;
+  elseif (string.findString(to.lower(local.dbType), 'oracle') > 0)
+    set app.dbCaseSensitive = 1;
+    
+  // (ms) <serverside dataset="server can be installed as case sensitive or insensitive
+  else  
+    <serverside dataset="sqlDbCase" action="query">
+    SELECT reg_value FROM registry 
+      WHERE reg_user = 'system'
+        AND reg_section = local.urlPath
+        AND reg_key = 'dbCaseTester';
+      
+    if (sqlDbCase.fetch)
+      set local.reg_value = sqlDbCase.reg_value;
+    else
+      set local.reg_value = server.dateTime;
+      <serverside dataset="sqlDbCaseAdd = 
+        INSERT INTO registry(
+          reg_user, reg_section, reg_key, reg_value)
+        VALUES(
+          'system', local.urlPath, 'dbCaseTester', local.reg_value);
+  </serverside>
+    endif
+    sqlDbCase.close;
+
+    <serverside dataset="sqlDbCase2" action="query">
+    SELECT reg_value FROM registry 
+      WHERE reg_user = to.upper('system')
+        AND reg_section = local.urlPath
+        AND reg_key = to.lower('dbCaseTester');
+    if (sqlDbCase2.fetch AND sqlDbCase2.reg_value = local.reg_value)
+      set app.dbCaseSensitive = 0;
+    else
+      set app.dbCaseSensitive = 1;
+    endif
+    sqlDbCase2.close;
+  endif
+  
+  // ------------------- detect SELECT TOP X support -------------------
+  // The support of "SELECT TOP X FROM ..." can improve performance of
+  // the listing of the News and the Discussion module. You can set the
+  // flag here if the detection does not work with your database.
+  //
+  // Oracle does not support TOP X. However, 8.1.6 or newer allows the
+  // use of "rownum" to achieve similar result.
+  //
+  // local.dbType              local.dbVer
+  // ------------------------  -----------------------------------------
+  // ACCESS                    04.00.0000
+  // Microsoft <serverside dataset="Server      07.00.0623
+  // (ms driver:) Oracle       08.01.0000 Oracle8i Enterprise Edition 
+  //                           Release 8.1.7.0.0 - Production
+  // (oracle driver:) Oracle8  08.01.7000
+
+  set app.dbSupportTopX = 0;  // 0=no, 1=yes, 2=OracleRownum
+
+  // set the above flag if the DB type and version can be detected
+  if ((to.lower(local.dbType) = 'microsoft <serverside dataset="server' 
+      AND local.dbVer >= '07.00')
+    OR 
+      to.lower(local.dbType) = 'access')
+    set app.dbSupportTopX = 1;
+  endif
+
+  // set the above flag if the DB type and version can be detected
+  if (to.lower(local.dbType) = 'oracle'
+      AND (local.dbVer > '09' 
+        OR string.findString(local.dbVer, '8.1.6') > 0 
+        OR string.findString(local.dbVer, '8.1.7') > 0 ) )
+    set app.dbSupportTopX = 2;
+  endif
+  if ((to.lower(local.dbType) = 'oracle8' AND local.dbVer > '08.01.6')
+      OR to.lower(local.dbType) > 'oracle8')
+    set app.dbSupportTopX = 2;
+  endif
+  
+  set app.allInitialized = 1;  // must be the last to set
+endfunction
+)>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+<center>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$app.startPage)">$(appname)</a> : Initialized
+  </td>
+</tr>
+<tr><td><hr/><br/></td></tr>
+<tr>
+  <td>
+    This application is now initialized.
+    <br/>
+      app.name = $(app.name))  <br/>
+      app.copyright = $(app.copyright))  <br/>
+      app.startPage = $(app.startPage))  <br/>
+      app.path = $(app.path))  <br/>
+      app.altBgColor = $(app.altBgColor))  <br/>
+      app.bulletColor = $(app.bulletColor))  <br/>
+      app.bulletBgColor1 = $(app.bulletBgColor1))  <br/>
+      app.bulletBgColor2 = $(app.bulletBgColor2))  <br/>
+      app.maxText = $(app.maxText)) (0= no limit) <br/> 
+      app.dbCaseSensitive = $(app.dbCaseSensitive))  <br/>
+      app.dbSupportTopX = $(app.dbSupportTopX))  
+  </td>
+</tr>
+<tr><td><br/><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

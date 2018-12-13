@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="Question" title="Here is your question..." >
+<p align="left" mode="wrap">
+Where is the capital of Australia?
+</p>
+<p align="left" mode="wrap">
+</p>
+<p>
+<select name="answer" value="1" >
+<option value="1" >Sydney</option>
+<option value="2" >Melbourn</option>
+</select>
+</p>
+<p align="left" mode="wrap">
+</p>
+<do label="Send" type="accept" >
+<go method="post" href="Answer.jsp" >
+<postfield name="answer" value="$answer" />
+</go>
+</do>
+</card>
+</wml>

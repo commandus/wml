@@ -1,0 +1,212 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.fieldExist('path') = 0 OR request.path = '')
+    error 'CGI field \'path\' is missing.';
+  endif
+
+  // Always add \r to delimitor list because browser may convert
+  // \n to \r\n for hidden input fields
+  tokenizer tokens(request.path, '\r\n');
+
+  set local.parent = '';
+  set local.name = tokens.nextToken;
+  set local.di_id = tokens.nextToken;
+
+  while (local.name <> '')
+    set local.next_name = tokens.nextToken;
+    
+    if (local.next_name <> '')
+      set local.di_id = tokens.nextToken;
+      if (local.parent <> '')
+        set local.parent = local.parent + '.';
+      endif
+      set local.parent = local.parent + local.name;
+    endif
+  
+    set local.name = local.next_name;
+  endwhile
+  
+  if (local.parent = '')
+    set local.parent = 'root';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT di_id, di_p1, di_k1, di_k2, di_k3, di_k4, di_k5, 
+    di_owner, di_title, di_security, di_detail, di_locked_by 
+    FROM cs_discuss WHERE di_id = local.di_id;
+  if (s1.fetch <> 1)
+    error 'Group #' + local.di_id + ' not found.';
+  endif
+
+  // group without owner (e.g. owner has left company and his/her
+  // record is removed from user table) can be modified by anyone
+  if (s1.di_owner <> '' AND session.userType <> 'Manager'
+    AND session.userID <> s1.di_owner)
+    error 'Only managers or the owner of this group can edit this';
+  endif
+
+  if (s1.di_locked_by <> '' AND s1.di_locked_by <> session.userID)
+    error 'The record has been locked by ' + s1.di_locked_by + '. ';
+  endif 
+
+  <serverside dataset="sqlLock" action="execute">    UPDATE cs_discuss SET 
+      di_locked_by = session.userID,
+      di_locked_on = server.dateTime
+    WHERE di_id = local.di_id
+      AND (di_locked_by = session.userID OR di_locked_by IS NULL);
+  
+  // if record is already locked by somebody else, an error will be shown
+  </serverside>
+
+  set local.s" action="query">
+    SELECT user_id FROM cs_user '
+    'WHERE user_type <> \'EndUser\' ORDER BY user_id ASC';
+  </serverside>
+  <serverside dataset="sqlStaff = local.s;
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="diEditGroupOk.htm" enctype="multipart/form-data">
+<input type="hidden" name=di_id value="$s1.di_id)"/>
+<input type="hidden" name=di_p1 value="$s1.di_p1)"/>
+<input type="hidden" name=old_owner value="$s1.di_owner)"/>
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Edit Group #$s1.di_id)
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    This record is locked.
+    No one else can change it until you click Save or Cancel.
+  </td>
+</tr>
+<tr>
+  <td> 
+    Parent<br/>Groups: 
+  </td>
+  <td> 
+    <input type="text" name=di_parent size="60" 
+      value="$(local.parent)) (read-only)">
+  </td>
+</tr>
+<tr>
+  <td>Group Name:</td>
+  <td>
+    <input type="text" name=di_title size="60" maxlength="100"
+      value="$(s1.di_title))">
+  </td>
+</tr>
+<tr>
+  <td nowrap="nowrap">
+    New Parent<br/>Group ID: 
+  </td>
+  <td>
+    <input type="text" name=new_di_p1 size="5" maxlength="20"/> 
+    (enter <i>root</i> to move to root level)
+  </td>
+</tr>
+<tr>
+  <td>Security:</td>
+  <td>
+    <input type="text" name=di_security size="5" maxlength=1
+      value="$s1.di_security)"> 
+    (0 = visible to everybody; 1 = visible to internal staff only)
+  </td>
+</tr>
+<tr>
+  <td valign="top">Keywords:</td>
+  <td>
+    <input type="text" name=di_k1 size="10" maxlength="50" 
+      value="$(s1.di_k1))">
+    <input type="text" name=di_k2 size="10" maxlength="50" 
+      value="$(s1.di_k2))">
+    <input type="text" name=di_k3 size="10" maxlength="50" 
+      value="$(s1.di_k3))">
+    <input type="text" name=di_k4 size="10" maxlength="50" 
+      value="$(s1.di_k4))">
+    <input type="text" name=di_k5 size="10" maxlength="50" 
+      value="$(s1.di_k5))">
+  </td>
+</tr>
+<tr>
+  <td>
+    Owner:
+  </td>
+  <td>
+    <select name=di_owner size=1>
+      <option selected> $s1.di_owner)
+      <option>
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+</tr>
+<!$ 
+  <serverside dataset="s2" action="query">
+    SELECT dif_id, dif_name, dif_size FROM cs_di_file 
+    WHERE dif_di_id = s1.di_id;
+  </serverside>
+  if (s2.fetch)
+    set local.attUrl = 
+      to.fileUrl('cs_di_file', 'dif_id', s2.dif_id, 
+                 'dif_content', s2.dif_name);
+)>
+  <tr>
+    <td>Attachment: </td>
+    <td>
+      <a href="$local.attUrl)">$s2.dif_name)</a>
+      
+    </td>
+  </tr>
+  <tr>
+    <td>Replace It With: </td>
+    <td>
+      <input type=FILE name=attachment1 size="45"/>
+    </td>
+  </tr>
+<!$ else )>
+  <tr>
+    <td>Attach File: </td>
+    <td>
+      <input type=FILE name=attachment1 size="45"/>
+    </td>
+  </tr>
+<!$ endif )>
+<tr>
+  <td colspan="2">
+    Description:<br/>
+    <textarea name=di_detail cols=70 rows=5 
+    wrap=virtual>$(s1.di_detail))</textarea>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    <input type="submit" name="action" value="Save"/>
+    <input type="submit" name="action" value="Cancel"/>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

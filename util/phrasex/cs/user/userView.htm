@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside action="defaultparam" opt="msg">
+    SELECT '' FROM dual  
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT * FROM cs_user
+    WHERE user_id = '$(uid)'
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support View User</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : User $(uid)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0" loop="s1">
+<tr>
+  <td align="right" colspan="3" align="right">
+    <a href="../ticket/ticketNew.htm?submitted_by=$(s1.user_id:escape)">New Request</a> :  
+    <a href="../report/repTab.htm?mode=new&submitted_by=$(s1.user_id:escape)">Requests Submitted</a> :  
+    <a href="userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape)">Edit</a> : 
+    <a href="userDel.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape)">Delete</a>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="3">$(msg)</td>
+</tr>
+<tr class="apbg">
+  <th width="25%"> User Type: </th>
+  <th width="25%"> Status: </th>
+  <th width="50%" colspan="2"> Full Name: </th>
+</tr>
+<tr>
+  <td> $(s1.user_type) </td>
+  <td> $(s1.status) </td>
+  <td colspan="2"> $(s1.full_name) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th> Email Type: </th>
+  <th colspan="3"> Email: </th>
+</tr>
+<tr>
+  <td>
+    $(s1.email_fmt)
+  </td>
+  <td colspan="3">
+    <a href="mailto:$s1.email)">$(s1.email)</a>
+  </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th colspan="2"> Phone: </th>
+  <th colspan="2"> Fax: </th>
+</tr>
+<tr>
+  <td colspan="2"> $(s1.phone) </td>
+  <td colspan="2"> $(s1.fax) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th colspan="2"> Company: </th>
+  <th colspan="2"> Department: </th>
+</tr>
+<tr>
+  <td colspan="2"> $(s1.company) </td>
+  <td colspan="2"> $(s1.dept) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th colspan="2"> Address: </th>
+  <th colspan="2"> City: </th>
+</tr>
+<tr>
+  <td colspan="2"> $(s1.address) </td>
+  <td colspan="2"> $(s1.city) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th> State: </th>
+  <th> Zip Code: </th>
+  <th  colspan="2"> Country: </th>
+</tr>
+<tr>
+  <td> $(s1.state) </td>
+  <td> $(s1.zipcode) </td>
+  <td colspan="2"> $(s1.country) </td>
+</tr>
+<tr>
+  <td colspan="4">&nbsp;</td>  
+</tr>
+<tr class="apbg">
+  <th colspan="4"> Notes: </th>
+</tr>
+<tr>
+  <td colspan="4">
+    $(s1.user_note)
+  </td>
+</tr>
+
+<tr>
+  <td colspan="4" align="center">
+    <a href="$(backTo:unescape)">Back to List</a>  
+  </td>
+</tr>
+
+
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</body>
+</html>

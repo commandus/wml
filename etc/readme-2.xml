@@ -1,0 +1,13 @@
+<Product>
+  <ID>ensen-002</ID>
+  <Company>Andrei Ivanov</Company>
+  <Email>andy@sitc.ru</Email>
+  <URL>http://ensen.sitc.ru</URL>
+  <Name>apoo editor for wml, Open eBooks and LIT</Name>
+  <Category>AFLP</Category>  
+  <InstallFileName>apoosetup.exe</InstallFileName>
+  <Description>
+    APOO editor is windows application that gives you the ability create WML pages for wireless handheld internet-capable devices such a cell phone. It features validation and error checking. Compared to other similar applications, APOO editor allows detailed manipulation of markup language by hand with color highlighting.
+    With APOO editor you can create Microsoft Reader  .LIT for your handheld devices file from any Open eBook file or from downloaded HTML pages.
+</Description>
+</Product>

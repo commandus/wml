@@ -1,0 +1,35 @@
+
+<html>
+<head>
+<title>timer
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+
+<p><a name=timer>timer</a>
+ <img border="0" src="timer.gif" width="24" height="24">
+<br id=timerbrief>The timer element declares a card timer which exposes a means of processing inactivity or idle time. The timer is initialised and started at card entry and is stopped when the card is exited. Card entry is any task or user action that results in the card being activated, for example, navigating into the card. Card exit is defined as the execution of any task. The value of a timer will decrement from the initial value, triggering the delivery of an ontimer intrinsic event when it reaches zero. Note that timer resolution and the interaction of the timer with the browser's user interface and other time-based device functionality is implementation dependent.
+  <br>It is an error to have more than one timer element in a card.
+  <br>The timer timeout value is specified in units of one-tenth (1/10) of a second. The author should not expect a particular timer resolution and should provide the user with another means to invoke a timer's task. A timeout value of zero disables the timer.
+  <br>Invoking a refresh task is considered an exit. The task stops the timer, commits its value to the context, and updates the browser accordingly. Completion of the refresh task is considered an entry to the card. At that time, the timer must resume.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=timerattr>
+  <b>name</b>
+  <br>Specifies the name of the variable to be set with the value of the timer. The name variable's value is used to set the timeout period upon timer
+  initialisation. The variable named by the name attribute will be set with the current timer value when the card is exited or when the timer expires. For example, if the timer expires, the named variable is set to a value of zero.
+  <br><b>value</b>
+  <br>Indicates the default value of the variable named in the name attribute - that is the timer value. When the timer is initialised and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the name attribute is not specified, the timeout is always initialised to the value specified in the value attribute.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+</body>
+</html>

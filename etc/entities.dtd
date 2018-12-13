@@ -1,0 +1,13 @@
+<!--
+  
+  Entry resolution DTD only.  Used for quick, local entity resolution.
+
+-->
+
+<!ENTITY quot "&#34;">       <!-- quotation mark -->
+<!ENTITY amp  "&#38;#38;">   <!-- ampersand -->
+<!ENTITY apos "&#39;">       <!-- apostrophe -->
+<!ENTITY lt   "&#38;#60;">   <!-- less than -->
+<!ENTITY gt   "&#62;">       <!-- greater than -->
+<!ENTITY nbsp "&#160;">      <!-- non-breaking space -->
+<!ENTITY shy  "&#173;">      <!-- soft hyphen (discretionary hyphen) -->

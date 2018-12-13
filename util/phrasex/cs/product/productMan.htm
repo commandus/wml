@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside dataset="sqlCheckType" action="query">
+    SELECT product_type FROM cs_product
+    WHERE name = $(set_def)
+  </serverside>
+
+  <serverside action="defaultparam" opt="set_def">
+    SELECT ''
+    FROM dual  
+  </serverside>
+  <serverside dataset="sqlResetDef" action="execute">    
+    UPDATE cs_product SET is_def = 0 WHERE is_def = 1 AND '$(set_def)' &gt; ''
+  </serverside>
+  <serverside dataset="sqlSetDef" action="execute">
+    UPDATE cs_product SET is_def = 1 WHERE name = '$(set_def)' AND '$(set_def)' &gt; ''
+  </serverside>
+
+  <serverside dataset="s1" action="query">
+    SELECT name, COALESCE(dispatcher, 'n/a') dispatcher, description, is_def, product_type, CASE is_def
+    WHEN 1 THEN 'default'  
+    ELSE ''
+    END is_def_str
+    FROM cs_product ORDER BY name
+  </serverside>
+  <serverside dataset="total" action="query">
+    SELECT COUNT(is_def) cnt, CASE SUM(is_def) 
+    WHEN 1 THEN ''  
+    ELSE 'Please select a public product as the default product.'  
+    END cnt_def_str  
+    FROM cs_product  
+  </serverside>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Product Manager</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : Product Manager
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="productNew.htm">New Product</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td>Name </td>
+  <td>Description </td>
+  <td>Dispatcher </td>
+  <td>Type </td>
+  <td>Default </td>
+  <td>Command </td>
+</tr>
+
+<tr loop="s1" class="$(s1.rowodd#apbg#)">
+  <td valign="top">$(s1.name) </td>
+  <td valign="top">$(s1.description) </td>
+  <td valign="top">
+    <a href="../user/userView.htm?user_id=$(s1.dispatcher:escape)">$(s1.dispatcher)</a>&nbsp;
+  </td>
+  <td valign="top">$(s1.product_type) </td>
+  <td valign="top">
+    $(s1.is_def_str)  
+  </td>
+  <td valign="top">
+    <a href="productMan.htm?set_def=$(s1.name:escape)">Set As Default</a> | 
+    <a href="productEdit.htm?name=$(s1.name:escape)">Edit</a> | 
+    <a href="productDel.htm?name=$(s1.name:escape)">Delete</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr loop="total">
+  <td>
+    <b>$(total.cnt_def_str)</b>
+    Total: $(total.cnt) product(s) 
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

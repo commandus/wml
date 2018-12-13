@@ -1,0 +1,40 @@
+
+<html>
+<head>
+<title>WML code editor window
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>WML code editor window</h1>
+<ul>
+  <li><a href="#popup">Explorer pop- up menu</a></li>
+  <li><a href="#infotip">Explorer info tip</a></li>
+</ul>
+<p>The wml code window allows you to edit the code directly.  The code is shown in different colors, these all represent different
+elements of wml, which makes it easier to read and edit. Changes made to the wml
+code window are reflected in the element tree window and in the element
+attributes window after you stops entering code. If you want reflect code
+changes to other windows, press <b>F9</b> key.<br>
+<br>
+<img border="0" src="shot15.gif" width="309" height="317"><br>
+<br>
+In the left bottom corner you see current cursor position, in the right bottom
+corner- currently used code page encoding.</p>
+
+</body>
+</html>

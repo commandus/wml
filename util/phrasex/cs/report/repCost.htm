@@ -1,0 +1,225 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  set local.needDateRange = 0;
+  if (request.fieldExist('startDate') <> 1 
+    OR request.fieldExist('endDate') <> 1)
+
+    set local.needDateRange = 1;
+    datetime startDate(server.date);
+    datetime endDate(startDate);
+    startDate.addDay(-6); // last 6 days
+    endDate.addDay(1);    // include today
+  else
+    datetime startDate(request.startDate);
+    datetime endDate(request.endDate);
+    if (startDate.isValid <> 1)
+      error 'Please enter the starting date in ' + 
+        server.dateFormat + ' format.';
+    endif
+    if (endDate.isValid <> 1)
+      error 'Please enter the ending date in ' + 
+        server.dateFormat + ' format.';
+    endif
+  endif
+
+  set local.company = '';
+  set local.serial_num = '';
+  set local.submitted_by = '';
+  set local.worked_by = '';
+  if (request.fieldExist('company'))
+    set local.company = request.company;
+  endif
+  if (request.fieldExist('serial_num'))
+    set local.serial_num = request.serial_num;
+  endif
+  if (request.fieldExist('submitted_by'))
+    set local.submitted_by = request.submitted_by;
+  endif
+  if (request.fieldExist('worked_by'))
+    set local.worked_by = request.worked_by;
+  endif
+
+  if (local.needDateRange = 0)
+    set local.w = 
+      'ch_made_on >= ' + startDate.getOdbcDateStr + ' AND ' + 
+      'ch_made_on < ' + endDate.getOdbcDateStr;
+
+    if (local.company <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'company = \'' + to.2QuoteStr(local.company) + '\'';
+    endif
+    if (local.serial_num <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'serial_num = \'' + local.serial_num + '\'';
+    endif
+    if (local.submitted_by <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'submitted_by = \'' + to.2QuoteStr(local.submitted_by) + '\'';
+    endif
+    if (local.worked_by <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'ch_made_by = \'' + to.2QuoteStr(local.worked_by) + '\'';
+    endif
+
+    // note: ch_cost < 0 means a credit. It needs to be shown.
+    <serverside dataset="s1" action="query">
+    SELECT ticket_id, title, status, '
+        'submitted_by, ch_made_on, ch_made_by, ch_cost ' 
+      'FROM cs_ticket_view, cs_ti_change '
+      'WHERE cs_ticket_view.ticket_id = cs_ti_change.ch_ticket_id '
+        'AND ch_cost <> 0 AND ' + local.w + ' '
+      'ORDER BY ticket_id';
+  </serverside>
+  endif
+
+  set local.html_title = 'Cost Report';
+  set local.backToInfo = 
+    'backToUrl=' + $(request.urlFull:escape) + 
+    '&backToPrompt=' + $(local.html_title:escape);
+  set local.total_cost = 0; 
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method=GET action="repCost.htm">
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    $local.html_title)
+  </td>
+  <td align="right">
+    $server.dateTime)
+    <!$ if (local.needDateRange = 0) )>
+       
+      <a target=ptSqlWindow 
+        href="../showSql.htm?sql=$(s1.sql:escape)">[SQL]</a>
+      
+    <!$ endif )>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+</table>
+
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    Date &gt;=: <br/>
+    <input type="text" name=startDate size="15" 
+      value="$startDate.getDateStr)">
+  </td>
+  <td>
+    &lt;: <br/>
+    <input type="text" name=endDate size="15" 
+      value="$endDate.getDateStr)">
+  </td>
+  <td>
+    Company: <br/>
+    <input type="text" name=company size="15" 
+      value="$local.company)">
+  </td>
+  <td>
+    Serial Number: <br/>
+    <input type="text" name=serial_num size="15" 
+      value="$local.serial_num)">
+  </td>
+  <td>
+    Submitted By: <br/>
+    <input type="text" name=submitted_by size="15" 
+      value="$local.submitted_by)">
+  </td>
+  <td>
+    Worked By: <br/>
+    <input type="text" name=worked_by size="15" 
+      value="$local.worked_by)">
+  </td>
+</tr>
+<tr>
+  <td colspan=6 align="right" valign="bottom">
+    <input type="submit" value="Run Report"/>
+  </td>
+</tr>
+</table>
+
+<!$ if (local.needDateRange = 1) )>
+
+<center>Please enter date range and set some conditions</center>
+
+<!$ else )>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td>ID&nbsp;</td>
+  <td>Status&nbsp;</td>
+  <td>Title&nbsp;</td>
+  <td>Submitted&nbsp;By&nbsp;</td>
+  <td>Worked&nbsp;By&nbsp;</td>
+  <td>Worked&nbsp;On&nbsp;</td>
+  <td>Cost&nbsp;</td>
+</tr>
+<!$ 
+  set local.bgcolor = 'dummy'; 
+  while (s1.fetch) 
+    set local.total_cost = s1.ch_cost + local.total_cost; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+)>
+<tr $local.bgcolor)>
+  <td valign="top">
+    <a href=
+      "../ticket/ticketView.htm?ticket_id=$s1.ticket_id)&$local.backToInfo)"
+      >$s1.ticket_id)</a>&nbsp;
+  </td>
+  <td valign="top">$(s1.status))&nbsp;</td>
+  <td valign="top">$(s1.title))&nbsp;</td>
+  <td valign="top">$(s1.submitted_by))&nbsp;</td>
+  <td valign="top">$(s1.ch_made_by))&nbsp;</td>
+  <td valign="top">$(s1.ch_made_on))&nbsp;</td>
+  <td valign="top">$(s1.ch_cost))&nbsp;</td>
+</tr>
+<!$ endwhile )>
+</table>
+
+<!$ endif )>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    Total Cost: $local.total_cost) minutes
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+
+</form>
+</body>
+</html>

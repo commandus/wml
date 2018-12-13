@@ -1,0 +1,14 @@
+TODO:
+-----
+
+- bind Qhttp class with QMimeSource to provide direct http request,
+- bind to our wapstack,
+- add binary wml decoder,
+- add configure files,
+- finalizing the architecture,
+- support for others wml functionnalities (by example, timers, cards, edit lines, etc...),
+- support for wml script,
+- integration into a html browser such as konqueror,
+- provide configuration file for others platforms.
+
+If you want to contribute, feel free (send an e-mail to stephanl@5nine.net).

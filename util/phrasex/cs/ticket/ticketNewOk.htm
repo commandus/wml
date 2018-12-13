@@ -1,0 +1,381 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.submitted_by = '')
+    error 'Submitted By missing';
+  endif
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+  if (request.product = 'Please select a product')
+    error 'Please select a product.';
+  endif
+  if (string.isValidDateTime(request.deadline) <> 1)
+    error 'Please enter a valid date-time for Deadline';
+  endif
+
+  if (request.note_data <> '')
+    set local.note_data = request.note_data;
+  else
+    set local.note_data = 'No detail is entered.';
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+  
+  file attach1('request.attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  file attach2('request.attachment2');
+  if (attach2.name <> '' AND attach2.size = 0)  
+    error 'Attachment ' + attach2.name + ' is empty.';
+  endif
+  if (attach2.name <> '' AND attach2.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach2.name + ' exceeded 5M limit.';
+  endif
+  // all input validated at this point
+
+  set local.now = server.dateTime;
+  if (request.cost_type = 'entered')
+    set local.cost = request.cost;
+  else
+    set local.cost = to.minutes(local.now - request.start_time);
+  endif
+
+  set local.submitted_to = '';
+  // set submitted to only if the request is created by a staff
+  // member for another user. (e.g. tech support gets a call)
+  if (request.submitted_by <> session.userID) 
+    set local.submitted_to = session.userID;
+  endif
+
+  set local.assigned_by = '';
+  set local.assigned_to = request.assigned_to;
+  if (local.assigned_to <> '')
+    set local.assigned_by = session.userID;
+  endif
+
+  // apply the routing scheme defined in product manager
+  set local.notify = 'none';  // none, all, disp
+  set local.disp_empty_disabled = 0;
+
+  if (local.assigned_to = '' AND request.product <> '')
+    <serverside dataset="sqlProductInfo" action="query">
+    SELECT dispatcher, ticket_priority, on_new_ticket1, on_new_ticket2
+      FROM cs_product
+      WHERE name = request.product;
+  </serverside>
+    if (sqlProductInfo.fetch <> 1)
+      error 'Product [' + request.product + '] not found. '
+        'Please refresh the request entry form and retry.';
+    endif
+    if (request.priority <= sqlProductInfo.ticket_priority)
+      if (sqlProductInfo.on_new_ticket1 = 'to_dispatcher') 
+        set local.notify = 'disp';
+        set local.assigned_to = sqlProductInfo.dispatcher;
+      elseif (sqlProductInfo.on_new_ticket1 = 'notify_all') 
+        set local.notify = 'all';
+      endif
+    else
+      if (sqlProductInfo.on_new_ticket2 = 'to_dispatcher')
+        set local.notify = 'disp';
+        set local.assigned_to = sqlProductInfo.dispatcher;
+      elseif (sqlProductInfo.on_new_ticket2 = 'notify_all') 
+        set local.notify = 'all';
+      endif
+    endif
+    sqlProductInfo.close;
+
+    if (local.notify = 'disp' AND local.assigned_to = '')
+      set local.notify = 'all';
+      set local.disp_empty_disabled = 1;
+    endif
+  endif
+
+  set local.assigned_to_email = '';
+  if (local.assigned_to <> '')  // submitter assigned or system assigned
+    <serverside dataset="sqlAssignedTo" action="query">
+    SELECT status, email FROM cs_user 
+      WHERE user_id = local.assigned_to;
+  </serverside>
+    if (sqlAssignedTo.fetch)
+      set local.assigned_to_email = sqlAssignedTo.email;
+      if (sqlAssignedTo.status = 'disabled')
+        if (request.assigned_to <> '')  // submitter assigned
+          error 'User ' + request.assigned_to + ' is disabled. '
+            'Please assign the request to somebody else.';
+        else
+          set local.assigned_to = '';
+          set local.notify = 'all';
+          set local.disp_empty_disabled = 1;
+        endif
+      endif
+    endif
+    sqlAssignedTo.close;
+  endif
+
+  <serverside dataset="sqlFirstStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+  set local.firstStatus = sqlFirstStatus.name;
+  sqlFirstStatus.close;
+
+  set local.ticket_id = 
+    local.getUniqueID('cs_ticket', 'ticket_id', 'registry');
+
+  // Request, detail and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlTicket = 
+    INSERT INTO cs_ticket(
+      ticket_id, row_ver, status, title, 
+      submitted_by, submitted_to, submitted_on,
+      assigned_by, assigned_to, assigned_on, 
+      product, serial_num, 
+      priority, deadline, 
+      cost, due_rem_flag) 
+    VALUES(
+      local.ticket_id, 1, local.firstStatus, request.title, 
+      request.submitted_by, local.submitted_to, local.now, 
+      local.assigned_by, local.assigned_to, local.now,
+      request.product, request.serial_num, 
+      request.priority, request.deadline, 
+      local.cost, 'y');
+  </serverside>
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddDetail = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, ch_made_by, ch_made_on, 
+      ch_cost, ch_format, ch_description)
+    VALUES(
+      local.note_id, local.ticket_id, 'public',
+      session.userID, local.now, 
+      local.cost, request.note_format, local.note_data);
+  </serverside>
+
+  // assignments by system (i.e. assigned by = '') are not logged
+  if (local.assigned_by <> '' AND local.assigned_to <> '')
+    set local.change = 'Assigned to ' + local.assigned_to;
+    set local.ch_id = 
+      local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+    <serverside dataset="sqlAddAssignment = 
+      INSERT INTO cs_ti_change(
+        ch_id, ch_ticket_id, ch_type, 
+        ch_made_by, ch_made_on, ch_cost, ch_description)
+      VALUES(
+        local.ch_id, local.ticket_id, 'log',
+        session.userID, local.now, 0, local.change);
+  </serverside>
+  endif
+
+  // attachments have been defined above when checking their sizes
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAttach1 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  if (attach2.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAttach2 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach2.name, attach2.size, attach2.content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  set local.em_msg = '';
+  
+  if (server.emailSenderEnabled)
+    Email_Out em;
+    if (server.taskEnabled('CustomerSupport Email Importer'))
+      set em.from = server.importerEmail;
+    else
+      set em.from = server.adminEmail;
+    endif
+
+    set local.hyperLink = server.httpAddress + 
+      app.startPage + '?ticket_id=' + local.ticket_id;
+
+    // send submission confirmation
+    <serverside dataset="sqlSubmittedBy" action="query">
+    SELECT email FROM cs_user '
+      'WHERE user_id = \'' + to.2QuoteStr(request.submitted_by) + '\'';
+
+    if (request.submitted_by = session.userID)
+      set local.em_msg = local.em_msg + 
+        'The submission confirmation email was not sent because '
+        'you submitted the request for yourself. ';
+    elseif (sqlSubmittedBy.email = '')
+      set local.em_msg = local.em_msg + 
+        'The submission confirmation email was not sent because '
+        + request.submitted_by + ' does not have an email address. ';
+    else
+      set em.to = sqlSubmittedBy.email;
+      set em.subject = 
+        'Request #' + local.ticket_id + ': ' + request.title;
+      set em.content = 
+        'Dear ' + request.submitted_by + ',\r\n\r\n' + 
+        'The request you submitted has been accepted. '
+        'To follow up on it, please go to \r\n' + 
+        local.hyperLink + '&user_id=' + $(request.submitted_by:escape) + 
+        '\r\n\r\n' + app.name;
+      em.send;
+      set local.em_msg = local.em_msg + 
+        'The submission confirmation email has been sent to '
+        + em.to + '. ';
+    endif
+
+    // sending assignment notification
+    if (local.notify = 'all')
+      <serverside dataset="sqlStaff" action="query">
+    SELECT DISTINCT email FROM cs_user '
+        'WHERE status <> \'disabled\' AND user_type <> \'EndUser\' ';
+
+      set local.allStaff = '';
+      while (sqlStaff.fetch)
+        set local.allStaff = local.allStaff + sqlStaff.email + ';';
+      endwhile
+      sqlStaff.close;
+
+      set em.to = local.allStaff;
+      set em.subject = 
+        'Request #' + local.ticket_id + ' has been submitted. ';
+      set em.content = 'Dear All,\r\n\r\n';
+      if (local.disp_empty_disabled = 1)
+        set em.content = em.content +
+          'You got this notification because the product dispatcher '
+          'user account is not defined or is disabled.\r\n\r\n';
+      endif
+      set em.content = em.content + 
+        request.title + '\r\n' + local.hyperLink + '\r\n\r\n' + app.name;
+
+      if (em.to <> '')
+        em.send;
+        set local.em_msg = local.em_msg + 
+          'The submission confirmation email has been sent to '
+          + em.to + '. ';
+      else
+        set local.em_msg = local.em_msg + 
+          'The submission confirmation email was not sent '
+          'because none of the staff has an email address. ';
+      endif
+
+    elseif (local.assigned_to <> '')  // assigned 
+      if (request.assigned_to <> '' AND local.assigned_to = session.userID)
+        set local.em_msg = local.em_msg + 
+          'The assignment notification email was not sent because '
+          'you assigned the request to yourself explicitly. ';
+      elseif (local.assigned_to_email = '')
+        set local.em_msg = local.em_msg + 
+          'The assignment notification email was not sent because '
+          + local.assigned_to + ' does not have an email address. ';
+      else
+        set em.to = local.assigned_to_email;
+        set em.subject = 
+          'Request #' + local.ticket_id + ' has been assigned to you. ';
+        set em.content = 
+          'Dear ' + local.assigned_to + ',\r\n\r\n' +
+          request.title + '\r\n' + local.hyperLink + 
+          '&user_id=' + $(local.assigned_to:escape) + 
+          '\r\n\r\n' + app.name;
+        em.send;
+        set local.em_msg = local.em_msg + 
+          'The assignment notification email has been sent to '
+          + em.to + '. ';
+      endif
+    else  
+      set local.em_msg = local.em_msg + 
+        'The assignment notification email was not sent because '
+        'you did not assign it and because of the dispatching rule '
+        'for product ' + request.product + '. ';
+    endif
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      New Request Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    The request you submitted has been accepted and saved as 
+    <a href="ticketView.htm?ticket_id=$local.ticket_id)"
+      >#$local.ticket_id)</a>.
+
+    <!$ if (server.emailSenderEnabled) )>
+      <br/>$ to.html(local.em_msg) )
+      For details about when notification emails are sent, please click 
+      <a target="ptHelpWindow" href="../help/emailHelp.html">here</a>.
+    <!$ endif )>
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href=
+      "ticketNew.htm?submitted_by=$(request.submitted_by:escape)">
+      New Request from $(request.submitted_by))</a> 
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

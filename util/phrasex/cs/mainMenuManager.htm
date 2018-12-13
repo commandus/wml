@@ -1,0 +1,349 @@
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <head loop="cookie" >
+  <serverside dataset="User" action="move" opt="accessdenied.htm?b=index.htm">
+     SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE 
+    (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND 
+    (status &lt;&gt; 'disabled') 
+  </serverside>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title>
+      Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk
+    </title>
+  </head>
+  <body loop="cookie" onload="f1.qm.focus()">
+    <center>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="7">
+             Main menu - Customer support 
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            <hr/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+             Current user: $(user_id) [
+            <a href="logOff.htm">
+              Log off
+            </a>
+            ] 
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            <form name="f1" method="POST" action="kb/index.htm">  
+              <select name="qm" onchange="f1.action=qm.value">
+                <option value="kb/index.htm">
+                  1 Articles  
+                </option>
+                <option value="user/userFind.htm">
+                  2 New Request    
+                </option>
+                <option value="discuss/index.htm">
+                  3 Discussions  
+                </option>
+                <option value="report/repMan.htm">
+                  4 Reports  
+                </option>
+                <option value="report/listUnassigned.htm">
+                  5 Unassigned requests  
+                </option>
+                <option value="user/userMan.htm">
+                  6 Users 
+                </option>
+                <option value="product/productMan.htm">
+                  7 Products  
+                </option>
+                <option value="priority/priorityMan.htm">
+                  8 Priorities  
+                </option>
+                <option value="help/index.html">
+                  9 Help  
+                </option>
+              </select>
+              <input type="submit" />  
+            </form>  
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="7">
+            &nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="kb/index.htm">
+              Knowledge Base
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="discuss/index.htm">
+              Discussion
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             Find, add, edit or delete kb articles 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             Post or reply to discussion messages 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="user/userFind.htm">
+              New Request
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="report/repMan.htm">
+              Report Manager
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             Submit a support request 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             Manage reports, search for requests, ... 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="report/listMyTodo.htm">
+              My Todo List
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="report/listUnassigned.htm">
+              Unassigned Requests
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             List requests assigned to me 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             List requests that have not been assigned 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="news/index.htm">
+              News manager
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="user/userMan.htm">
+              User Manager
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             List, add, edit or delete news articles 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             List, add, edit or delete staff/customers 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="sale/saleMan.htm">
+              Sales Manager
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="product/productMan.htm">
+              Product Manager
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             List, add, edit or delete sales records 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             List, add, edit or delete product types 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="status/statusMan.htm">
+              Status Manager
+            </a>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="priority/priorityMan.htm">
+              Priority Manager
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+             List, add, edit or delete request statuses 
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             List, add, edit or delete request priorities 
+          </td>
+        </tr>
+        <tr>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td class="apbg">
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td nowrap="nowrap">
+            <a href="help/index.html">
+              Help
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          </td>
+          <td valign="top">
+          </td>
+          <td colspan="3">
+          </td>
+          <td valign="top">
+             Get help 
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7">
+            <br/>
+            <hr/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7" align="right">
+            Copyright &copy; 2003, Andrei Ivanov.
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<HTML >
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252" />
+    	<TITLE>Adding Toolbar Buttons</TITLE>
+<META NAME="Description" CONTENT=""/>
+<META NAME="Robots" CONTENT="all"/>
+<META NAME="Keywords" CONTENT="Adding Toolbar Buttons"/>
+<META NAME="MS.LOCALE" CONTENT="en-us"/>
+
+<META NAME="Author" CONTENT="workshop" /><!--- TOOLBAR_EXEMPT --->
+<LINK REL="stylesheet" TYPE="text/css" HREF="/library/shared/common/css/ie4.css" />
+<LINK REL="stylesheet" TYPE="text/css" HREF="/library/shared/comments/css/ie5.css" />
+
+	<style>
+	BODY
+	{
+		font-family:verdana,arial,helvetica;
+		margin:0;
+	}
+	</style>
+	
+<SCRIPT LANGUAGE="javascript" SRC="/workshop/code/common.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="/workshop/code/browdata.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="/library/toolbar/toolbar.js"></SCRIPT>
+
+<LINK REL="stylesheet" TYPE="text/css" HREF="/workshop/css/ie4.css" />
+<LINK REL="stylesheet" TYPE="text/css" HREF="/workshop/css/inetsdk.css" />
+<LINK REL="stylesheet" TYPE="text/css" HREF="/library/shared/eyebrow/css/default.css" />
+
+<META name="pagetype" content="ovw">
+<META name="devlang" content="cpp">
+<META name="src" content="/workshopx/browser/ext/tutorials/button.xml">
+<META name="pubpath" content="/workshop/browser/ext/tutorials/button.asp">
+<META name="ID" content="_inet_Adding_Toolbar_Buttons">
+<META name="MS-HAID" content="_inet_Adding_Toolbar_Buttons_cpp">
+
+<XML:NAMESPACE NS="urn:schemas-microsoft-com:time" PREFIX="t">
+<?IMPORT NAMESPACE="t" IMPLEMENTATION="#default#time2">
+<STYLE>.time { behavior: url(#default#time2); }</STYLE>
+<XML:NAMESPACE NS="urn:schemas-microsoft-com:vml" PREFIX="v">
+<STYLE>v\:* { behavior: url(#default#VML); }</STYLE>
+
+<SCRIPT>//<!--
+var gbDBG = true;
+//--></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+//<!--
+var gsHTCPath = "/workshop/code/";
+var gsGraphicsPath = "/workshop/graphics/";
+var gsCodePath = "/workshop/code/";
+//--></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+//<!--
+var gsContextMenuPath = gsHTCPath + "contextmenu.htc";
+var gsCodeDecoPath = gsHTCPath + "codedeco.htc";
+var gsStoreName="workshop";
+var gsGraphicsPath = "/workshop/graphics/";
+//--></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+//<!--
+function CMemberInfo()
+{   this.defView = 'all';
+}
+var g_oMemberInfo = new CMemberInfo();
+//--></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript1.2">
+//<!--
+function InitPage()
+{
+  if (!assert( (typeof(oBD) == 'object' && oBD != null), "browdata object unavailable!") )
+  {
+    return;
+  }
+  if ("MSIE" == oBD.browser && oBD.majorVer >= 5 && (oBD.platform.toLowerCase()!="x" && oBD.platform!="Mac" && oBD.platform!="PPC" ))
+  {
+    if (typeof(PreInit) == 'function') PreInit();
+    if (typeof(PostGBInit) == 'function') PostGBInit();
+    if (typeof(PostInit) == 'function') PostInit();
+    if (typeof(initTabbedMembers) == 'function') initTabbedMembers();
+    if (typeof(hideExamples) == 'function') hideExamples();
+  }
+  if (oBD.getsNavBar && oBD.platform!="PPC" )
+  {
+    if (typeof(SetShowMes) == 'function') SetShowMes();
+  }
+}
+
+function assert(bCond, sMsg)
+{
+  if (bCond) { return true; }
+  else { if (gbDBG) { alert(sMsg); } return false; }
+}
+
+window.onload = InitPage;
+
+//--></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript1.2">
+function PreInit()
+{
+    if (top == self)
+        location.replace("http://" + document.domain +"/library/default.asp?url=" + document.URL.substring("http://".length + document.domain.length));
+}
+</SCRIPT>
+
+   <SCRIPT LANGUAGE="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+
+		this.bot = false;
+
+		this.browser = "MSIE";
+
+		this.majorVer = 6;
+
+		this.minorVer = "0";
+
+		this.betaVer = "0";
+
+		this.platform = "NT";
+
+		this.platVer = "5.1";
+
+		this.getsNavBar = true;
+
+		this.doesActiveX = true;
+
+		this.doesPersistence = true;
+
+		this.fullVer = 6;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></SCRIPT>
+
+   <SCRIPT LANGUAGE="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
+
+		this.bot = false;
+
+		this.browser = "MSIE";
+
+		this.majorVer = 6;
+
+		this.minorVer = "0";
+
+		this.betaVer = "0";
+
+		this.platform = "NT";
+
+		this.platVer = "5.1";
+
+		this.getsNavBar = true;
+
+		this.doesActiveX = true;
+
+		this.doesPersistence = true;
+
+		this.fullVer = 6;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></SCRIPT>
+
+<script>
+	if( self == top )
+{
+	location = "/workshop/browser/ext/tutorials/button.asp";
+}
+
+</script>
+
+<xml id='xmlPageContext'><eyebrow findmenu="false">
+	<item label="MSDN Home" url="/default.asp"/>
+	<item label="MSDN Library" url="/library/default.asp"/>
+	<item label="Web Development" id="msdnlib1430" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1430_.xml"/><item label="Programming and Reusing the Browser" url="/workshop/browser/prog_browser_node_entry.asp" id="msdnlib1487" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1487_.xml"/><item label="Browser Extensions" url="/workshop/browser/ext/extensions.asp" id="progie5644" xmlsrc="/library/en-us/toc/progie/progie5644_.xml"/><item label="Overviews/Tutorials" url="/workshop/browser/ext/overview/browser_ext_ovw_entry.asp" id="progie5645"/><item label="Adding Toolbar Buttons" url="/workshop/browser/ext/tutorials/button.asp" id="progie5649"/></eyebrow></xml> </HEAD> <BODY TOPMARGIN="0"  LEFTMARGIN="0" MARGINHEIGHT="0" MARGINWIDTH="0" BGCOLOR="#FFFFFF" TEXT="#000000">
+
+       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="4" HEIGHT="24" WIDTH="100%" BGCOLOR="#FFFFFF">
+       <TR>
+        <TD CLASS="eyebrow" VALIGN="middle" ALIGN="left" WIDTH="100%">&nbsp;&nbsp;
+
+            <a class="small" target="_top" href="/default.asp">MSDN Home</a>&nbsp;>&nbsp;
+            <a class="small" target="_top" href="/library/default.asp">MSDN Library</a>&nbsp;>&nbsp;
+            <a class="small" target="_top" href="/library/default.asp?url=/workshop/browser/prog_browser_node_entry.asp">Programming and Reusing the Browser</a>&nbsp;>&nbsp;
+            <a class="small" target="_top" href="/library/default.asp?url=/workshop/browser/ext/extensions.asp">Browser Extensions</a>&nbsp;>&nbsp;
+            <a class="small" target="_top" href="/library/default.asp?url=/workshop/browser/ext/overview/browser_ext_ovw_entry.asp">Overviews/Tutorials</a><a href=""></a>
+        </TD>
+       </TR>
+       </TABLE>
+ <TABLE STYLE="table-layout:fixed" class='clsContainer' CELLPADDING='15' CELLSPACING='0' float='left' WIDTH='100%' BORDER='0'> <TR> <TD VALIGN='top'>
+<!------------------->
+<!-- BEGIN_CONTENT -->
+<!------------------->
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+<DIV CLASS="clsDocBody"><TABLE WIDTH="97%" CELLPADDING="0" CELLSPACING="0"><TR><TD><H1>Adding Toolbar Buttons
+</H1></TD><TD ALIGN="right"><A HREF="/workshop/index/default.asp" TITLE="This index is only for content formerly found in the Web Workshop." TARGET="_top">Internet Development Index</A></TD></TR></TABLE>
+<HR SIZE="1"></HR><p>This tutorial explains how to add a toolbar button to the Microsoft® Internet Explorer user interface. The toolbar button can either run a Microsoft Win32® application, run a script, or open an Explorer Bar. If you also want to create a menu item for the Win32 application or script, see the <A HREF="/workshop/browser/ext/tutorials/menu.asp">Adding Menu Items</A> tutorial.</p><UL><LI><A TARGET="_self" HREF="#toolbar_require">Requirements and Dependencies</A></LI><LI><A TARGET="_self" HREF="#toolbar_general">General Steps</A></LI><LI><A TARGET="_self" HREF="#toolbar_details">Adding the Details</A></LI><LI><A TARGET="_self" HREF="#related_topics">Related Topics</A></LI></UL><H2><A NAME="toolbar_require"></A>Requirements and Dependencies</H2><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; By default, custom toolbar buttons do not appear on the Internet Explorer toolbar. These buttons will appear in the left side of the Customize Toolbar dialog box.</DIV><p>Developers who want to add toolbar buttons to Internet Explorer must be familiar with the registry and globally unique identifiers (GUID).</p><p>This feature is only available in Internet Explorer 5 and later. Internet Explorer 4.0 allows you to add a custom Explorer Bar, but there is no method for adding a toolbar button to access your Explorer Bar.</p><p>Toolbar buttons require two sets of icons: one set with the active (color) icons and one set with the default (grayscale) icons. These icons can be stored in two .ico files or inside a resource (like a .dll or .exe file). For more information about what icons are required and for tips on designing icons for Internet Explorer, see <A HREF="/workshop/browser/ext/overview/toolbar_style.asp">Toolbar Button Style Guide</A>.</p><H2><A NAME="toolbar_general"></A>General Steps</H2><p>The steps in this section must be followed when adding any toolbar buttons to the Internet Explorer user interface. If any information is omitted, the toolbar button will not be displayed.</p><p>Icons and strings stored inside a resource can be referenced by providing the path to the resource and reference identification in the format, "path, resource_id". For example, if you wanted to use string resource 123 in Example.dll, you would use "Example.dll, 123".</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; This tutorial describes how to add a toolbar button for all users. If you want the toolbar button displayed for the current user only, substitute HKEY_CURRENT_USER for HKEY_LOCAL_MACHINE in the steps below.</DIV><ol><li>Create a valid globally unique identifier (GUID). You can use Guidgen.exe (which ships with Microsoft Visual Studio®) or Uuidgen.exe (which ships in the <A HREF="http://www.microsoft.com/msdownload/platformsdk/sdkupdate/" TARGET="_top">Platform Software Development Kit</A>(SDK)). </li><li>Create a new key (with the GUID as the name) in the registry under:
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</PRE><p>&lt;Your GUID&gt; is the valid GUID that you created in step 1.</p></li><li>Optional. Create a new string value, <I>Default Visible</I>, in the registry under: <p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\Default Visible</PRE><p>To make the toolbar button to appear on the Internet Explorer toolbar by default, set <I>Default Visible</I> to "Yes", otherwise set <I>Default Visible</I> to "No".</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp;<p>If the user has customized the toolbar, the button will not appear on the toolbar automatically. The toolbar button will be added to the choices in the Customize Toolbar dialog box and will appear if the toolbar is reset.</p></DIV></li><li>Create a new string value, <I>ButtonText</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\ButtonText</PRE><p>Set the value of <I>ButtonText</I> to the label you want for the toolbar button.</p></li><li>Create a new string value, <I>HotIcon</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\HotIcon</PRE><p>Set the value of <I>HotIcon</I> to the full path of the .ico file that contains the three color icons.</p></li><li>Create a new string value, <I>Icon</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\Icon</PRE><p>Set the value of <I>Icon</I> to the full path of the .ico file that contains the three grayscale icons.</p></li><li>Optional. Provide support for multiple native languages (like French or Japanese). 
+<p>Complete the following steps to support different native languages:</p><ol><li>Determine the LCID of the native language you want to support. These values can be found in the <B>Platform Software Development Kit</B>(SDK).
+					</li><li>Create a new key, <I>Lang####</I>, using the LCID from the previous step in place of "####" in the registry under; <p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\Lang####</PRE><p>For example, the key name should be Lang0411 for a Japanese implementation, since the LCID for Japanese is 0411.</p></li></ol></li></ol><H2><A NAME="toolbar_details"></A>Adding the Details</H2><p>After completing the initial step of creating a new registry key, you will add values under the key. The values that you will need and the other steps to follow depend on what the toolbar button is going to run. The following list contains links to the sections with the steps required to complete the addition of a toolbar button.</p><UL><LI><A TARGET="_self" HREF="#details_com">COM Objects</A></LI><LI><A TARGET="_self" HREF="#details_explorer">Explorer Bars</A></LI><LI><A TARGET="_self" HREF="#details_script">Scripts</A></LI><LI><A TARGET="_self" HREF="#details_exe">Executable Files</A></LI></UL><H3><A NAME="details_com"></A>COM Objects</H3><p>The following steps are required to complete the creation of a toolbar button that implements a Component Object Model (COM) object. If any information (that isn't optional) is omitted, the toolbar button will not be displayed.</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; This tutorial describes how to add a toolbar button for all users. If you want the toolbar button displayed for the current user only, substitute HKEY_CURRENT_USER for HKEY_LOCAL_MACHINE in the steps below.</DIV><ol><li>Register the COM object. </li><li>Create a new string value, <I>CLSID</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\CLSID</PRE><p>Set the value of <I>CLSID</I> equal to {1FBA04EE-3024-11d2-8F1F-0000F87ABD16}.</p></li><li>Create a new string value, <I>ClsidExtension</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\ClsidExtension</PRE><p>Set the value of <I>ClsidExtension</I> equal to the GUID of the COM object.</p></li></ol><p>In addition to the previous steps, the COM object must implement <A HREF="/library/en-us/com/oin_oc_9bg4.asp" TARGET="_top">IOleCommandTarget</A>.</p><p>If your COM object needs to access the Dynamic HTML (DHTML) Object Model of the page that Internet Explorer is currently displaying, you must implement <A HREF="/workshop/components/com/reference/ifaces/iobjectwithsite/iobjectwithsite.asp">IObjectWithSite</A>.</p><p>The implementations of <B>IOleCommandTarget</B>'s methods are standard, except for <A HREF="/library/en-us/com/oin_oc_33j7.asp" TARGET="_top">IOleCommandTarget::Exec</A>. The COM object's <B>IOleCommandTarget::Exec</B> method is called with <I>nCmdID</I>=1 if the toolbar button is clicked and <I>nCmdID</I>=2 if the menu item is clicked. This difference allows developers to provide different behaviors for the toolbar button and the menu item.</p><p>When <B>IObjectWithSite</B> is implemented, Internet Explorer will call <A HREF="/workshop/components/com/reference/ifaces/iobjectwithsite/setsite.asp">IObjectWithSite::SetSite</A> and pass it a pointer to <A HREF="/library/en-us/shellcc/platform/shell/reference/ifaces/IShellBrowser/IShellBrowser.asp" TARGET="_top">IShellBrowser</A>.</p><H3><A NAME="details_explorer"></A>Explorer Bars</H3><p>The following steps are required to complete the creation of a toolbar button that opens an Explorer Bar. If any information (that isn't optional) is omitted, the toolbar button will not be displayed.</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; This tutorial describes how to add a toolbar button for all users. If you want the toolbar button displayed for the current user only, substitute HKEY_CURRENT_USER for HKEY_LOCAL_MACHINE in the steps below.</DIV><ol><li>Create a new string value, <I>CLSID</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\CLSID</PRE><p>Set the value of <I>CLSID</I> equal to {E0DD6CAB-2D10-11D2-8F1A-0000F87ABD16}.</p></li><li>Create a new string value, <I>BandCLSID</I>, in the registry under: 
+
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\BandCLSID</PRE><p>Set the value of <I>BandCLSID</I> to the CLSID of the Explorer Bar you want to open.</p></li></ol><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; All Explorer Bars have a menu item added to the <B>View</B> menu automatically.</DIV><H3><A NAME="details_script"></A>Scripts</H3><p>The following steps are required to complete the creation of a toolbar button that runs a script. If any information (that isn't optional) is omitted, the toolbar button will not be displayed.</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; This tutorial describes how to add a toolbar button for all users. If you want the toolbar button displayed for the current user only, substitute HKEY_CURRENT_USER for HKEY_LOCAL_MACHINE in the steps below.</DIV><ol><li>Create a new string value, <I>CLSID</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\CLSID</PRE><p>Set the value of <I>CLSID</I> equal to {1FBA04EE-3024-11D2-8F1F-0000F87ABD16}.</p></li><li>Create a new string value, <I>Script</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\Script</PRE><p>Set the value of <I>Script</I> to the full path of the script that will be run.</p></li></ol><p>To add a menu item in the <B>Tools</B> menu with the same functionality, see the <A HREF="/workshop/browser/ext/tutorials/menu.asp#menu_item_details">Scripts</A> section of the <B>Adding Menu Items</B> tutorial.</p><H3><A NAME="details_exe"></A>Executable Files</H3><p>The following steps are required to complete the creation of a toolbar button that runs an .exe file. If any information (that isn't optional) is omitted, the toolbar button will not be displayed.</p><DIV CLASS="clsNote"><B>
+Note</B>&nbsp;&nbsp; This tutorial describes how to add a toolbar button for all users. If you want the toolbar button displayed for the current user only, substitute HKEY_CURRENT_USER for HKEY_LOCAL_MACHINE in the steps below.</DIV><ol><li>Create a new string value, <I>CLSID</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\CLSID</PRE><p>Set the value of <I>CLSID</I> equal to {1FBA04EE-3024-11D2-8F1F-0000F87ABD16}.</p></li><li>Create a new string value, <I>Exec</I>, in the registry under: 
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;</p><p>The result should look like:</p><PRE CLASS="clsCode" AUTOHILITE="1">HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Extensions\&lt;Your GUID&gt;\Exec</PRE><p>Set the value of <I>Exec</I> to the full path of the .exe file that will be run.</p></li></ol><p>To add an item to the <B>Tools</B> menu with the same functionality, see the <B>Executable Files</B> section of the <B>Adding Menu Items</B> tutorial.</p><H2><A NAME="related_topics">Related Topics</A></H2><P></P><UL><LI><A HREF="/workshop/browser/ext/overview/overview.asp">Browser Extensions</A></LI><LI><A HREF="/workshop/browser/ext/overview/toolbar_style.asp">Toolbar Button Style Guide</A></LI><LI><A HREF="/workshop/browser/accessory/overview/overview.asp">Web Accessories</A></LI><LI><A HREF="/workshop/browser/ext/tutorials/menu.asp">Adding Menu Items</A></LI></UL><info><product rid="prod_IE" minver=" "></product><platform rid="plat_win" minver=" "></platform><platform rid="plat_nt" minver=" "></platform></info></DIV>
+
+<!----------------->
+<!-- END_CONTENT -->
+<!----------------->
+ </TD> </TR> </TABLE>
+<TABLE ID='idFooter' STYLE='background-color:white;width:100%' cellSpacing='0' cellPadding='0' border='0'>
+	<TR VALIGN='MIDDLE'>
+		<TD ID='idFooterRow1' STYLE='background-color:#003399;height:20;width:100%' NOWRAP>
+
+		&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:bold xx-small Verdana;color:#FFFFFF;' HREF='http://register.microsoft.com/contactus30/contactus.asp?domain=msdn' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">Contact Us</A>
+
+					&nbsp;<SPAN STYLE='font:bold xx-small Verdana;color:#FFFFFF'>&nbsp;|</SPAN>
+				
+		&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:bold xx-small Verdana;color:#FFFFFF;' HREF='mailto:?subject=An article from MSDN&body=Here is an interesting article from MSDN:  http://msdn.microsoft.com/workshop/browser/ext/tutorials/button.asp' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">E-Mail this Page</A>
+
+					&nbsp;<SPAN STYLE='font:bold xx-small Verdana;color:#FFFFFF'>&nbsp;|</SPAN>
+				
+		&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:bold xx-small Verdana;color:#FFFFFF;' HREF='/flash/' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">MSDN Flash Newsletter</A>
+
+					&nbsp;<SPAN STYLE='font:bold xx-small Verdana;color:#FFFFFF'>&nbsp;|</SPAN>
+				
+		&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:bold xx-small Verdana;color:#FFFFFF;' HREF='/isapi/gomscom.asp?target=/legal/' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">Legal</A>
+
+		</TD>
+	</TR>
+	<TR VALIGN='MIDDLE'>
+		<TD ID='idFooterRow2' STYLE='background-color:#003399;height:30;width:100%' NOWRAP>
+			<SPAN STYLE='font:xx-small Verdana;color:#FFFFFF'>&nbsp;&#169; 2003 Microsoft Corporation. All rights reserved.&nbsp;</SPAN>
+&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:normal xx-small Verdana;color:#FFFFFF;' HREF=' /isapi/gomscom.asp?target=/info/cpyright.htm' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">Terms of Use</A>&nbsp;&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:normal xx-small Verdana;color:#FFFFFF;' HREF='/isapi/gomscom.asp?target=/info/privacy.htm' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">Privacy Statement </A>&nbsp;&nbsp;<A TARGET='_top' STYLE='text-decoration:none;cursor:hand;font:normal xx-small Verdana;color:#FFFFFF;' HREF='/isapi/gomscom.asp?target=/enable/' onmouseout="this.style.color = '#FFFFFF'" onmouseover="this.style.color = '#FF3300'">Accessibility </A>
+		</TD>
+	</TR>
+</TABLE>
+ </BODY> </HTML>

@@ -1,0 +1,603 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.fieldExist('tab_id'))  // from RepMan.htm | Edit
+
+    <serverside dataset="sqlQuery" action="query">
+    SELECT row_ver, rep_id, name, max_row,
+        sql_select, sql_orderby, sql_where, htm_where
+      FROM cs_report WHERE rep_id = request.tab_id;
+    
+    if (sqlQuery.fetch <> 1)
+      error 'Report ' + request.tab_id + ' not found';
+    endif
+
+    set session.tab_id = sqlQuery.rep_id;
+    set session.tab_row_ver = sqlQuery.row_ver;
+    set session.tab_name = sqlQuery.name;
+    set session.tab_max_row = sqlQuery.max_row;
+    set session.tab_sql_where = sqlQuery.sql_where;
+    set session.tab_sql_select = sqlQuery.sql_select;
+    set session.tab_sql_orderby = sqlQuery.sql_orderby;
+
+    set session.tab_status = '';
+    set session.tab_product = '';
+    set session.tab_priority1 = '';
+    set session.tab_priority2 = '';
+    set session.tab_deadline1 = '';
+    set session.tab_deadline2 = '';
+    set session.tab_submitted_to = '';
+    set session.tab_submitted_by = '';
+    set session.tab_submitted_on1 = '';
+    set session.tab_submitted_on2 = '';
+    set session.tab_assigned_to = '';
+    set session.tab_assigned_by = '';
+    set session.tab_assigned_on1 = '';
+    set session.tab_assigned_on2 = '';
+    set session.tab_closed_by = '';
+    set session.tab_closed_on1 = '';
+    set session.tab_closed_on2 = '';
+    set session.tab_serial_num = '';
+    set session.tab_company = '';
+    set session.tab_keywords = '';
+
+    tokenizer tokensHtmWhere(sqlQuery.htm_where, '|');
+    set local.col_name = tokensHtmWhere.nextToken;
+    while (local.col_name <> '')
+      if (local.col_name = 'status')
+        set session.tab_status = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'product')
+        set session.tab_product = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority1')
+        set session.tab_priority1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority2')
+        set session.tab_priority2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline1')
+        set session.tab_deadline1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline2')
+        set session.tab_deadline2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_to')
+        set session.tab_submitted_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_by')
+        set session.tab_submitted_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on1')
+        set session.tab_submitted_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on2')
+        set session.tab_submitted_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_to')
+        set session.tab_assigned_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_by')
+        set session.tab_assigned_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on1')
+        set session.tab_assigned_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on2')
+        set session.tab_assigned_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_by')
+        set session.tab_closed_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on1')
+        set session.tab_closed_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on2')
+        set session.tab_closed_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'serial_num')
+        set session.tab_serial_num = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'company')
+        set session.tab_company = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'keywords')
+        set session.tab_keywords = tokensHtmWhere.nextToken;
+      endif
+      set local.col_name = tokensHtmWhere.nextToken;
+    endwhile
+
+  elseif (request.fieldExist('mode') AND request.mode = 'new')
+    set session.tab_id = 0;
+    set session.tab_max_row = 500;
+    set session.tab_name = '';
+    set session.tab_sql_where = '';
+    set session.tab_sql_select = 'status, title, submitted_by';
+    set session.tab_sql_orderby = 'ticket_id ASC';
+    set session.tab_status = '';
+    set session.tab_product = '';
+    set session.tab_priority1 = '';
+    set session.tab_priority2 = '';
+    set session.tab_deadline1 = '';
+    set session.tab_deadline2 = '';
+    set session.tab_submitted_to = '';
+    if (request.fieldExist('submitted_by'))
+      set session.tab_submitted_by = request.submitted_by;
+    else
+      set session.tab_submitted_by = '';
+    endif
+    set session.tab_submitted_on1 = '';
+    set session.tab_submitted_on2 = '';
+    set session.tab_assigned_to = '';
+    set session.tab_assigned_by = '';
+    set session.tab_assigned_on1 = '';
+    set session.tab_assigned_on2 = '';
+    set session.tab_closed_by = '';
+    set session.tab_closed_on1 = '';
+    set session.tab_closed_on2 = '';
+    set session.tab_serial_num = '';
+    set session.tab_company = '';
+    set session.tab_keywords = '';
+  endif
+
+  <serverside dataset="sqlStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+  <serverside dataset="sqlProducts" action="query">
+    SELECT name FROM cs_product ORDER BY name ASC;
+  </serverside>
+  <serverside dataset="sqlPriorities" action="query">
+    SELECT name FROM cs_priority ORDER BY name ASC;
+  </serverside>
+  <serverside dataset="sqlStaff" action="query">
+    SELECT user_id FROM cs_user 
+    WHERE user_type <> 'EndUser' ORDER BY user_id ASC;
+  </serverside>
+  </serverside>
+
+  // convert system column names to user frienly names
+  set local.tab_col1 = '';
+  set local.tab_col2 = '';
+  set local.tab_col3 = '';
+  set local.tab_col4 = '';
+  set local.tab_sort1 = '';
+  set local.tab_sort1_dir = '';
+  set local.tab_sort2 = '';
+  set local.tab_sort2_dir = '';
+
+  // setup the map from column name to UI name for local.var(..)
+  local.setVar('ticket_id', 'Request ID');
+  local.setVar('title', 'Title');
+  local.setVar('status', 'Status');
+  local.setVar('product', 'Product');
+  local.setVar('serial_num', 'Serial Number');
+  local.setVar('priority', 'Priority');
+  local.setVar('deadline', 'Deadline');
+  local.setVar('cost', 'Cost');
+  local.setVar('turn_around', 'Turn Around');
+
+  local.setVar('submitted_to', 'Submitted To');
+  local.setVar('submitted_by', 'Submitted By');
+  local.setVar('submitted_on', 'Submitted On');
+  local.setVar('assigned_to', 'Assigned To');
+  local.setVar('assigned_by', 'Assigned By');
+  local.setVar('assigned_on', 'Assigned On');
+  local.setVar('closed_by', 'Closed By');
+  local.setVar('closed_on', 'Closed On');
+  local.setVar('DESC', 'Descending');
+  local.setVar('ASC', 'Ascending');
+
+  tokenizer tokens(session.tab_sql_select, ' ,');
+  set local.count = 1;
+  set local.col_name = tokens.nextToken;
+
+  while (local.col_name <> '')
+    set local.col_header = local.var(local.col_name, local.col_name);
+    if (local.count = 1)
+      set local.tab_col1 = local.col_header;
+    elseif (local.count = 2)
+      set local.tab_col2 = local.col_header;
+    elseif (local.count = 3)
+      set local.tab_col3 = local.col_header;
+    else
+      set local.tab_col4 = local.col_header;
+    endif
+    
+    set local.count = 1 + local.count;
+    set local.col_name = tokens.nextToken;
+  endwhile
+
+  tokenizer tksOrderBy(session.tab_sql_orderby, ' ,');
+  set local.count = 1;
+  set local.col_name = tksOrderBy.nextToken;
+
+  while (local.col_name <> '')
+    set local.col_header = local.var(local.col_name, local.col_name);
+    if (local.count = 1)
+      set local.tab_sort1 = local.col_header;
+    elseif (local.count = 2)
+      set local.tab_sort1_dir = local.col_header;
+    elseif (local.count = 3)
+      set local.tab_sort2 = local.col_header;
+    else
+      set local.tab_sort2_dir = local.col_header;
+    endif
+
+    set local.count = 1 + local.count;
+    set local.col_name = tksOrderBy.nextToken;
+  endwhile
+
+  if (request.fieldExist('mode') AND request.mode = 'new')
+    set local.html_title = 'New Tabular Report';
+  elseif (request.fieldExist('mode') AND request.mode = 'save')
+    set local.html_title = 'Save Tabular Report';
+  else
+    set local.html_title = 'Edit Tabular Report';
+  endif
+  if (session.tab_id <> 0)
+    set local.html_title = local.html_title + ' #' + session.tab_id;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<!$if (request.fieldExist('mode') AND request.mode = 'save') )>
+<form method="POST" action="repTabSave.htm">
+<!$else)>
+<form method=GET action="repTabRun.htm">
+<!$endif)>
+
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="4">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      $local.html_title)
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+
+<!$if (request.fieldExist('mode') = 0 OR request.mode <> 'save') )>
+  <tr class="apbg">
+    <td colspan="4" align="right">
+      <a target="ptHelpWindow" href="../help/repEditHelp.html">Help</a>
+    </td>
+  </tr>
+<!$endif)>
+
+<tr>
+  <td colspan="3">
+    Report Name:<br/>
+    <input type="text" name=tab_name size=48 maxlength="50" 
+      value="$(session.tab_name))">
+  </td>
+  <td>
+    Max Requests:<br/>
+    <input type="text" name=tab_max_row size=17 maxlength="4" 
+    value="$session.tab_max_row)">
+  </td>
+</tr>
+<tr>
+  <td>Field 1:<br/>
+    <select name=tab_col1 size=1>
+      <option selected>$local.tab_col1)
+      <option>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>Field 2:<br/>
+    <select name=tab_col2 size=1>
+      <option selected>$local.tab_col2)
+      <option>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>Field 3:<br/>
+    <select name=tab_col3 size=1>
+      <option selected>$local.tab_col3)
+      <option>
+      <option>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>Field 4:<br/>
+    <select name=tab_col4 size=1>
+      <option selected>$local.tab_col4)
+      <option>
+      <option>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+</tr>
+<tr>
+  <td>Sort By 1:<br/>
+    <select name=tab_sort1 size=1>
+      <option selected>$local.tab_sort1)
+      <option>
+      <option>Request ID
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td><br/>
+    <select name=tab_sort1_dir size=1>
+      <option selected>$local.tab_sort1_dir)
+      <option>Ascending
+      <option>Descending
+    </select>
+  </td>
+  <td>Sort By 2:<br/>
+    <select name=tab_sort2 size=1>
+      <option selected>$local.tab_sort2)
+      <option>
+      <option>Request ID
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td><br/>
+    <select name=tab_sort2_dir size=1>
+      <option selected>$local.tab_sort2_dir)
+      <option>Ascending
+      <option>Descending
+    </select>
+  </td>
+</tr>
+
+<tr class="apbg">
+  <td colspan="4">
+    Find requests that match all conditions: 
+    (date format: $server.dateFormat))
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Status:<br/>
+    <select name=tab_status size=1>
+      <option selected>$session.tab_status)
+      <!$while (sqlStatus.fetch))>
+        <option>$sqlStatus.name)
+      <!$endwhile)>
+      <option>
+    </select>
+  </td>
+  <td valign="bottom">
+    Company:<br/>
+    <input type="text" name=tab_company size="15" 
+    value="$session.tab_company)">
+  </td>
+  <td colspan="2" valign="bottom">
+    Words in title/history
+    <input type="text" name=tab_keywords size=35 
+    value="$session.tab_keywords)">
+  </td>
+</tr>
+<tr>
+  <td colspan="2" valign="bottom">
+    Product:<br/>
+    <select name=tab_product size=1>
+      <option selected>$session.tab_product)
+      <!$while (sqlProducts.fetch))>
+        <option>$sqlProducts.name)
+      <!$endwhile)>
+      <option>
+    </select>
+  </td>
+  <td colspan="2" valign="bottom">
+    Serial Number:<br/>
+    <input type="text" name=tab_serial_num size="30" 
+    value="$session.tab_serial_num)">
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Priority >=:<br/>
+    <select name=tab_priority1 size=1>
+      <option selected>$session.tab_priority1)
+      <!$while (sqlPriorities.fetch))>
+        <option>$sqlPriorities.name)
+      <!$endwhile)>
+      <option>
+    </select>
+  </td>
+  <td valign="bottom">
+    Priority <=:<br/>
+    <select name=tab_priority2 size=1>
+      <option selected>$session.tab_priority2)
+      <!$sqlPriorities.close)>
+      <!$while (sqlPriorities.fetch))>
+        <option>$sqlPriorities.name)
+      <!$endwhile)>
+      <option>
+    </select>
+  </td>
+  <td valign="bottom">
+    Deadline >=:<br/>
+    <input type="text" name=tab_deadline1 size=17
+    value="$session.tab_deadline1)">
+  </td>
+  <td valign="bottom">
+    Deadline <:<br/>
+    <input type="text" name=tab_deadline2 size=17
+    value="$session.tab_deadline2)">
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Submitted To:<br/>
+    <select name=tab_submitted_to size=1>
+      <option selected>$session.tab_submitted_to)
+      <option>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td valign="bottom">
+    Submitted By:<br/>
+    <input type="text" name=tab_submitted_by size="15" maxlength="50"
+      value="$session.tab_submitted_by)">
+  </td>
+  <td valign="bottom">
+    Submitted On >=:<br/>
+    <input type="text" name=tab_submitted_on1 size=17 
+      value="$session.tab_submitted_on1)">
+  </td>
+  <td valign="bottom">
+    Submitted On <:<br/>
+    <input type="text" name=tab_submitted_on2 size=17
+      value="$session.tab_submitted_on2)">
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Assigned To:<br/>
+    <select name=tab_assigned_to size=1>
+      <option selected>$session.tab_assigned_to)
+      <option>
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td valign="bottom">
+    Assigned By:<br/>
+    <select name=tab_assigned_by size=1>
+      <option selected>$session.tab_assigned_by)
+      <option>
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td valign="bottom">
+    Assigned On >=:<br/>
+    <input type="text" name=tab_assigned_on1 size=17
+      value="$session.tab_assigned_on1)">
+  </td>
+  <td valign="bottom">
+    Assigned On <:<br/>
+    <input type="text" name=tab_assigned_on2 size=17 
+      value="$session.tab_assigned_on2)">
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td valign="bottom">
+    Closed By:<br/>
+    <select name=tab_closed_by size=1>
+      <option selected>$session.tab_closed_by)
+      <option>
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td valign="bottom">
+    Closed On >=:<br/>
+    <input type="text" name=tab_closed_on1 size=17 
+      value="$session.tab_closed_on1)">
+  </td>
+  <td valign="bottom">
+    Closed On <:<br/>
+    <input type="text" name=tab_closed_on2 size=17 
+      value="$session.tab_closed_on2)">
+  </td>
+</tr>
+<tr>
+  <td colspan="4">
+    <serverside dataset="Where Clause:<br/>
+    <input type="text" name=tab_sql_where size="65" maxlength=250
+      value="$(session.tab_sql_where))">
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="4">
+    <!$if (request.fieldExist('mode') AND request.mode = 'save') )>
+      <input type="submit" value="Save the design (not the report result)"/>
+    <!$else)>
+      <input type="submit" value="Run Report"/>
+    <!$endif)>
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td colspan="4" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

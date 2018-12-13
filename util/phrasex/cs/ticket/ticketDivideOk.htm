@@ -1,0 +1,185 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+
+  set local.note_data = request.note_data;
+  if (local.note_data = '')
+    set local.note_data = 'No note is entered.';
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  // By grouping the <serverside dataset="statements below into a "transaction", 
+  // we can be sure that all of them succeed or none does. 
+  // There should be no open <serverside dataset="object before calling this function.
+  local.beginTransaction;
+
+  if (request.attach_id1 <> '')
+    <serverside dataset="sqlAttach1" action="query">
+    SELECT tif_id, tif_size, tif_name, tif_content
+      FROM cs_ti_file WHERE tif_id = request.attach_id1;
+    if (sqlAttach1.fetch <> 1)
+      error 'Attachment #' + request.attach_id1 + ' not found.';
+    endif
+  endif
+  if (request.attach_id2 <> '')
+    <serverside dataset="sqlAttach2" action="query">
+    SELECT tif_id, tif_size, tif_name, tif_content
+      FROM cs_ti_file WHERE tif_id = request.attach_id2;
+    if (sqlAttach2.fetch <> 1)
+      error 'Attachment #' + request.attach_id2 + ' not found.';
+    endif
+  endif
+  if (request.attach_id3 <> '')
+    <serverside dataset="sqlAttach3" action="query">
+    SELECT tif_id, tif_size, tif_name, tif_content
+      FROM cs_ti_file WHERE tif_id = request.attach_id3;
+    if (sqlAttach3.fetch <> 1)
+      error 'Attachment #' + request.attach_id3 + ' not found.';
+    endif
+  endif
+
+  <serverside dataset="sqlOld" action="query">
+    SELECT status, priority, deadline, product, 
+      submitted_by, submitted_to, submitted_on,
+      assigned_by, assigned_to, assigned_on, closed_by, closed_on
+    FROM cs_ticket WHERE ticket_id = request.old_ticket_id;
+
+  set local.ticket_id = 
+    local.getUniqueID('cs_ticket', 'ticket_id', 'registry');
+
+  <serverside dataset="sqlTicket = 
+    INSERT INTO cs_ticket(
+      ticket_id, row_ver, status, title, 
+      submitted_by, submitted_to, submitted_on,
+      assigned_by, assigned_to, assigned_on, 
+      closed_by, closed_on,
+      product, priority, deadline, cost, due_rem_flag) 
+    VALUES(
+      local.ticket_id, 1, sqlOld.status, request.title, 
+      sqlOld.submitted_by, sqlOld.submitted_to, sqlOld.submitted_on, 
+      sqlOld.assigned_by, sqlOld.assigned_to, sqlOld.assigned_on,
+      sqlOld.closed_by, sqlOld.closed_on,
+      sqlOld.product, sqlOld.priority, sqlOld.deadline, 0, 'y');
+  </serverside>
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddDetail = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_cost, ch_format, ch_description)
+    VALUES(
+      local.note_id, local.ticket_id, 'public',
+      session.userID, server.dateTime, request.new_cost, 
+      request.note_format, local.note_data);
+  </serverside>
+
+  if (request.attach_id1 <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment1 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        sqlAttach1.tif_name, sqlAttach1.tif_size, sqlAttach1.tif_content);
+  </serverside>
+  endif
+
+  if (request.attach_id2 <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment2 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        sqlAttach2.tif_name, sqlAttach2.tif_size, sqlAttach2.tif_content);
+  </serverside>
+  endif
+
+  if (request.attach_id3 <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment3 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        sqlAttach3.tif_name, sqlAttach3.tif_size, sqlAttach3.tif_content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  set local.backToInfo = 
+    'backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+  $(appname) : New Request Saved
+</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    New Request Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    The new request based on #$request.old_ticket_id) has been 
+    saved as 
+    <a href=
+      "ticketView.htm?ticket_id=$local.ticket_id)&$local.backToInfo)"
+      >request #$local.ticket_id)</a>.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+
+  // Always add \r to delimitor list because browser may convert
+  // \n to \r\n for hidden input fields
+  tokenizer tokens(request.path, '\r\n');
+  set local.parent = '';
+  set local.name = tokens.nextToken;
+  set local.id = tokens.nextToken;
+
+  while (local.name <>

@@ -1,0 +1,698 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    
+    <title>Руководство полного идиота по написанию расширений оболочки - Часть VIII</title><meta name="robots" content="index,nofollow">
+    <link rel="stylesheet" href="shlext8.xml_files/article.css" type="text/css">
+    <script language="javascript" src="shlext8.xml_files/rsdn.js">
+    </script>
+    <script language="javascript" src="shlext8.xml_files/Forum.js">
+    </script></head>
+  <body marginheight="20" marginwidth="20"><!-- SpyLOG f:1211 -->
+<script language="javascript"><!--
+Mu="u1358.84.spylog.com";Md=document;Mnv=navigator;Mp=1;
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+My="";
+My+="<a href='http://"+Mu+"/cnt?cid=135884&f=3&p="+Mp+"&rn="+Mrn+"' target=_blank>";
+My+="<img src='http://"+Mu+"/cnt?cid=135884&"+Mz+"&r1="+escape(Md.referrer)+"&r="+escape(parent.document.referrer)+"&pg="+escape(window.location.href)+"' border=0 width=1 height=1 alt=' '>";
+My+="</a>";Md.write(My);//--></script><a href="http://u1358.84.spylog.com/cnt?cid=135884&amp;f=3&amp;p=1&amp;rn=0.9619838900394981" target="_blank"><img src="shlext8.xml_files/cnt.gif" alt=" " border="0" height="1" width="1"></a><noscript>
+<a href="http://u1358.84.spylog.com/cnt?cid=135884&f=3&p=1" target=_blank>
+<img src="http://u1358.84.spylog.com/cnt?cid=135884&p=1" alt=' ' border='0' width=1 height=1 >
+</a></noscript>
+<!-- SpyLOG -->
+
+<!-- HotLog -->
+<script language="javascript">
+hotlog_js="1.0";hotlog_d=document; hotlog_n=navigator;hotlog_rn=Math.random();
+hotlog_n_n=(hotlog_n.appName.substring(0,3)=="Mic")?0:1;
+hotlog_r=""+hotlog_rn+"&s=21251&r="+escape(hotlog_d.referrer)+"&pg="+
+escape(window.location.href);
+hotlog_d.cookie="hotlog=1"; hotlog_r+="&c="+(hotlog_d.cookie?"Y":"N");
+hotlog_d.cookie="hotlog=1; expires=Thu, 01-Jan-70 00:00:01 GMT"</script>
+<script language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")</script>
+<script language="javascript1.2">
+hotlog_js="1.2";hotlog_s=screen;
+hotlog_r+="&wh="+hotlog_s.width+'x'+hotlog_s.height+"&px="+((hotlog_n_n==0)?
+hotlog_s.colorDepth:hotlog_s.pixelDepth)</script>
+<script language="javascript1.3">hotlog_js="1.3"</script>
+<script language="javascript">hotlog_r+="&js="+hotlog_js;
+hotlog_d.write("<img src=\"http://hit2.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&\" border=0 width=1 height=1 alt=' '>")</script><img src="shlext8.xml_files/count.gif" alt=" " border="0" height="1" width="1">
+<noscript>
+<img src="http://hit2.hotlog.ru/cgi-bin/hotlog/count?s=21251" border=0 width=1 height=1 alt=' '>
+</noscript>
+<!-- /HotLog -->
+
+<!--begin of Rambler's Top100 code -->
+<a href="http://top100.rambler.ru/top100/">
+<img src="shlext8.xml_files/top100.gif" alt="" border="0" height="1" width="1"></a>
+<!--end of Top100 code-->
+
+<!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=555384;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="shlext8.xml_files/counter.gif" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=555384"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--><!--/COUNTER-->
+<table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext8.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext8.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext8.xml?print" target="_blank" title="Версия для печати"><img src="shlext8.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307554" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">5</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307554" target="_self" title="Перейти к обсуждению статьи"><img src="shlext8.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307554"><font color="#646464"><font size="1"> Оценка </font><font color="black">30</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307554" title="Добавить в избранное"><img onclick="AddFav(307554);return false;" src="shlext8.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307554)" title="Подписка на сообщения"><img class="i" src="shlext8.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-3" title="+1"><img onclick="RateMsg(307554,-3);return false;" src="shlext8.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=1" title="Интересно"><img onclick="RateMsg(307554,1);return false;" src="shlext8.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307554,2);return false;" src="shlext8.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=3" title="Супер"><img onclick="RateMsg(307554,3);return false;" src="shlext8.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307554,-1);return false;" src="shlext8.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307554,-4);return false;" src="shlext8.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307554,0);return false;" src="shlext8.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table><script language="javascript" src="shlext8.xml_files/orfo.js" type="text/javascript"></script><form name="orfo_form" target="orfo_frame" action="http://orphus.dklab.ru/" method="post"><input name="email" value="orfo@rsdn.ru" type="hidden"><input name="subject" value="Орфографическая ошибка" type="hidden"><input name="Referrer" value="" type="hidden"><input name="Address" value="" type="hidden"><input name="Context" value="" type="hidden"></form>	<iframe name="orfo_frame" valign="top" border="0" style="position: absolute; visibility: hidden;" height="1" width="1"></iframe><table bgcolor="#9999ff" border="0" cellpadding="0" cellspacing="0" width="1"><tbody><tr><td><a onclick="return orfo_imgclick()" target="_blank" href="http://orphus.dklab.ru/"><img src="shlext8.xml_files/orfo.gif" alt="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" title="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" __width="121" __height="21" border="0"></a></td></tr></tbody></table>
+<script language="javascript">
+function ToggleCode(id)
+{
+	el=document.getElementById(id);
+	img=document.getElementById("img"+id);
+	if(el.style.display=="none")
+	{
+	  img.src="/images/ls2.gif";
+	  el.style.display="";
+	}
+	else
+	{
+	img.src="/images/ls1.gif";
+	el.style.display="none";
+	}
+}
+</script><h1>Руководство полного идиота по написанию расширений оболочки - Часть VIII<br><span class="subtitle">Руководство по написанию расширения, 
+добавляющего колонки в окно детального просмотра Проводника.</span></h1><h5><span class="title">Автор: </span><span class="value"><a target="_blank" href="mailto:mdunn@inreach.com" title="Отправить письмо">Michael Dunn</a></span><br><span class="title">Перевод: </span><span class="value">Инна Кирюшкина<br><a target="_blank" href="mailto:odissey@rsdn.ru" title="Отправить письмо">Алексей Кирюшкин</a></span><br><span class="title">Источник: </span><span class="value"><a target="_blank" title="Открыть в новом окне" href="http://www.codeproject.com/shell/shellextguide8.asp">The Code Project</a></span></h5><h6><span class="title">Опубликовано: </span><span class="value">05.01.2002</span><br><span class="title">Исправлено: </span><span class="value">12.01.2000</span><br><span class="title">Версия текста: </span><span class="value">1.0</span></h6><div style="margin-left: 2em;"><a href="#EXA"><b></b></a><br><div style="margin-left: 2em;"></div><a href="#EVA"><b>Введение</b></a><br><div style="margin-left: 2em;"></div><a href="#ETA"><b>Детальный просмотр в Windows 2000</b></a><br><div style="margin-left: 2em;"></div><a href="#ERA"><b>Использование AppWizard</b></a><br><div style="margin-left: 2em;"></div><a href="#EPA"><b>Интерфейс расширения</b></a><br><div style="margin-left: 2em;"></div><a href="#ENA"><b>Инициализация</b></a><br><div style="margin-left: 2em;"></div><a href="#ELA"><b>Перечисление новых столбцов</b></a><br><div style="margin-left: 2em;"></div><a href="#EJA"><b>Отображение данных в столбцах</b></a><br><div style="margin-left: 2em;"></div><a href="#EHA"><b>Небольшое отступление - обработка тэгов ID3</b></a><br><div style="margin-left: 2em;"></div><a href="#EFA"><b>Как это все выглядит?</b></a><br><div style="margin-left: 2em;"></div><a href="#EDA"><b>Регистрация расширения оболочки</b></a><br><div style="margin-left: 2em;"></div><a href="#EBA"><b>Еще одна полезная штучка - InfoTips</b></a><br><div style="margin-left: 2em;"></div></div><h2><a name="EXA"></a></h2>
+<a href="http://www.rsdn.ru/article/winshell/shlext8/ShellExtGuide8_demo.zip"><img src="shlext8.xml_files/fileA.gif" align="middle" border="0" height="11" width="28">Демонстрационный проект</a>
+<h2>Введение<a name="EVA"></a></h2>
+
+
+<p>Часть Руководства Идиота, составленная по просьбам читателей продолжается! В этой части я возьмусь за тему добавления столбцов
+в окно детального просмотра списка файлов в Проводнике Windows 2000. Этот тип расширений не существует на NT4 или
+Win 9x,  поэтому у вас должна быть установлена Win 2K, чтобы запустить демонстрационный проект.
+</p>
+
+<h2>Детальный просмотр в Windows 2000<a name="ETA"></a></h2>
+
+
+<p>Windows 2000 добавляет много настроечных опций к детальному просмотру в Проводнике.
+Возможны 37 различных столбцов. Вы можете включать и исключать столбцы двумя путями.
+Во-первых,  в контекстном меню выводятся 8 столбцов,  если вы щелкаете правой кнопкой 
+мыши на заголовке столбца:</p>
+
+<p style="text-align: center;"><img src="shlext8.xml_files/ShellExtGuide8_1.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>Если вы выбираете <strong>More...</strong>, Проводник отображает диалог,  где вы можете выбирать
+уже из всех доступных столбцов:
+</p>
+
+<p style="text-align: center;"><img src="shlext8.xml_files/ShellExtGuide8_2.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>Проводник позволяет нам добавить столбцы к списку в этом диалоге с помощью специального
+расширения. Однако расширения не могут добавлять столбцы к списку в контекстном меню.</p>
+
+<p>Демонстрационный проект для этой статьи - расширение, добавляющее для MP3 файлов 
+столбцы,  отображающие различные поля из тэгов ID3 (версии 1), которые могут быть сохранены
+в файлах MP3.</p>
+
+<h2>Использование AppWizard<a name="ERA"></a></h2>
+
+
+<p>Запустите AppWizard и создайте новый ATL COM проект. Назовем его <strong>MP3TagViewer</strong>.
+Щелкните ОК, чтобы перейти к первому (и единственному) диалогу мастера. Сохраните все
+установки по умолчанию и щелкните Finish. Теперь у нас есть пустой ATL
+проект, который построит DLL, но нам необходимо еще добавить наш COM объект-расширение.
+В дереве ClassView щелкните правой кнопкой мыши на пункте <strong>MP3TagViewer classes</strong> и
+укажите <strong>New ATL Object</strong>.
+</p>
+
+
+<p>В мастере ATL Object на первой панели уже выбран <strong>Simple Object</strong>, поэтому просто 
+щелкните Next. На второй панели в поле редактирования Short Name введите <strong>MP3ColExt</strong>
+и щелкните ОК (остальные поля заполнятся автоматически). Эти действия создадут класс
+<strong>CMP3ColExt</strong>, который содержит основной код для реализации COM объектов. Мы 
+добавим наш код в этот класс.
+</p>
+
+
+<h2>Интерфейс расширения<a name="EPA"></a></h2>
+
+
+<p>Наше расширение для добавления столбцов реализует только один интерфейс, <strong>IColumnProvider</strong>. Нет
+отдельной инициализации через <strong>IShellExtInit </strong>или <strong>IPersistFile</strong>, как
+в других расширениях,  т.к. это расширение для папки, которое никак не использует текущий выбранный
+элемент. Оба интерфейса, <strong>IShellExtInit </strong>и <strong>IPersistFile </strong> связаны
+с понятием чего-то выбранного. В нашем случае инициализация выполняется через метод
+интерфейса <strong>IColumnProvider</strong>.</p>
+
+<p>Чтобы добавить поддержку <strong>IColumnProvider</strong> к нашему COM-объекту, откройте
+MP3ColExt.h и добавьте выделенные строки:</p>
+
+<div id="EHPA"><table class="code" width="98%"><tbody><tr><td><pre><strong><span class="PREPROCESSOR">#include</span> &lt;comdef.h&gt;
+<span class="PREPROCESSOR">#include</span> &lt;shlobj.h&gt;
+<span class="PREPROCESSOR">#include</span> &lt;shlguid.h&gt;
+
+<span class="KEYWORD">struct</span> <span class="KEYWORD">__declspec</span>(<span class="KEYWORD">uuid</span>(<span class="STRING">"E8025004-1C42-11d2-BE2C-00A0C9A83DA1"</span>)) IColumnProvider;
+</strong>
+<span class="COMMENT">/////////////////////////////////////////////////////////////////////////////</span>
+<span class="COMMENT">// CMP3ColExt</span>
+
+<span class="KEYWORD">class</span> ATL_NO_VTABLE CMP3ColExt : 
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CMP3ColExt, &amp;CLSID_MP3ColExt&gt;,
+    <span class="KEYWORD">public</span> IMP3ColExt,
+    <strong><span class="KEYWORD">public</span> IColumnProvider</strong>
+{
+BEGIN_COM_MAP(CMP3ColExt)
+    COM_INTERFACE_ENTRY(IMP3ColExt)
+    <strong>COM_INTERFACE_ENTRY(IColumnProvider)</strong>
+END_COM_MAP()
+
+<span class="KEYWORD">public</span>:
+    <strong><span class="COMMENT">// IColumnProvider </span>
+    STDMETHOD (Initialize)(LPCSHCOLUMNINIT psci) { <span class="KEYWORD">return</span> S_OK; }
+    STDMETHOD (GetColumnInfo)(DWORD dwIndex, SHCOLUMNINFO* psci);
+    STDMETHOD (GetItemData)(LPCSHCOLUMNID pscid, LPCSHCOLUMNDATA pscd, VARIANT* pvarData);</strong>
+};</pre></td></tr></tbody></table></div>
+
+
+<p>Обратите внимание,  что объявление <strong>IColumnProvider</strong> находится перед объявлением
+класса. Этот порядок необходим для работы макроса <strong>COM_INTERFACE_ENTRY</strong>. Кто-то в 
+Microsoft забыл определить UUID для <strong>IColumnProvider</strong> в comdef.h, поэтому нам необходимо сделать
+это объявление самим. В ATL есть макрос <strong>COM_INTERFACE_ENTRY_IID</strong> для использования в такой 
+ситуации,  когда для символа нет UUID, назначенного посредством __declspec(uuid()), однако, когда я 
+использовал этот макрос, все заканчивалось передачей проводником недействительного указателя в IDispatch::GetTypeInfo(), 
+и,  в результате,  аварией расширения.</p>
+
+<p>Нам также необходимо сделать некоторые изменения в stdafx.h. Поскольку мы используем
+новые возможности Win 2000, мы должны определить несколько макросов, чтобы получить доступ к декларациям и
+прототипам, связанным с этими возможностями:</p>
+
+<div id="EBPA"><table class="code" width="98%"><tbody><tr><td><pre><span class="PREPROCESSOR">#define</span> WINVER       <span class="NUMBER">0x0500</span>     <span class="COMMENT">// W2K/98</span>
+<span class="PREPROCESSOR">#define</span> _WIN32_WINNT <span class="NUMBER">0x0500</span>     <span class="COMMENT">// W2K</span>
+<span class="PREPROCESSOR">#define</span> _WIN32_IE    <span class="NUMBER">0x0500</span>     <span class="COMMENT">// IE 5+</span>
+</pre></td></tr></tbody></table></div>
+
+<h2>Инициализация<a name="ENA"></a></h2>
+
+
+<p>У интерфейса <strong>IColumnProvider</strong> три метода. Первый из них - <strong>Initialize()</strong>, имеющий
+следующий прототип:</p>
+
+<div id="EDNA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT IColumnProvider::Initialize ( LPCSHCOLUMNINIT psci );</pre></td></tr></tbody></table></div>
+
+<p>Оболочка передает нам структуру <strong>SHCOLUMNINIT</strong>, которая в этот момент содержит всего одно поле -
+полный путь к папке, которая отображается в проводнике. Нам не нужна эта 
+информация,  поэтому наше расширение просто возвращает S_OK.</p>
+
+<h2>Перечисление новых столбцов<a name="ELA"></a></h2>
+
+
+<p>Когда Проводник видит,  что наш обработчик зарегистрирован, он вызывает расширение, чтобы
+получить информацию о каждом столбце, который поддерживает наше расширение. Это делается через
+метод <strong>GetColumnInfo()</strong>. Вот его прототип:</p>
+
+<div id="E0HB0LA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT IColumnProvider::GetColumnInfo ( DWORD dwIndex, SHCOLUMNINFO* psci );</pre></td></tr></tbody></table></div>
+
+<p><strong>dwIndex</strong> - это начинающийся с 0 счетчик, который показывает,  каким столбцом
+интересуется Проводник. Другой параметр - это указатель на структуру <strong>SHCOLUMNINFO</strong>, 
+которую наше расширение заполняет параметрами столбца.</p>
+
+<p>Первый член структуры <strong>SHCOLUMNINFO</strong> - другая структура - <strong>SHCOLUMNID</strong>.
+<strong>SHCOLUMNID</strong> - это пара GUID/DWORD,  в которой GUID это <strong>"format ID"</strong>,  а
+DWORD - <strong>"property ID"</strong>. Эта пара чисел однозначно идентифицирует любой столбец 
+в системе. Расширение может повторно использовать уже имеющийся 
+столбец (например,  Автор), в этом случае <strong>format ID</strong> и <strong>property ID</strong> принимают
+предопределенные значения. Расширение,  которое добавляет новые столбцы, может использовать
+свой собственный GUID для <strong>format ID</strong> (т.к. CLSID гарантированно уникален) и простой 
+счетчик для <strong>property ID</strong>.</p>
+
+<p>Наше расширение будет использовать оба метода. Мы будем повторно использовать столбцы
+Author (Автор), Title (Название), и Comments (Комментарии), и добавим еще три: MP3 Album (Альбом), 
+MP3 Year (Год), и MP3 Genre (Жанр).</p>
+
+<p>Вот начало нашего метода <strong>GetColumnInfo()</strong>:</p>
+
+<div id="E4LA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CMP3ColExt::GetColumnInfo ( DWORD dwIndex, SHCOLUMNINFO* psci )
+{
+    <span class="COMMENT">// У нас 6 столбцов, поэтому, если dwIndex = 6 или больше, возвращаем S_FALSE</span>
+    <span class="COMMENT">// чтобы показать,  что все столбцы перечислены.</span>
+    <span class="KEYWORD">if</span> ( dwIndex &gt; <span class="NUMBER">5</span> )
+        <span class="KEYWORD">return</span> S_FALSE;
+</pre></td></tr></tbody></table></div>
+
+
+<p>Если <strong>dwIndex</strong> больше или равен 6, мы возвращаем S_FALSE, чтобы
+остановить перечисление, в противном случае мы заполняем структуру <strong>SHCOLUMNINFO</strong>.
+Для <strong>dwIndex</strong> от 0 до 2 мы возвращаем данные одного из наших новых столбцов.
+Для значений от 3 до 5 мы возвращаем данные одного из повторно используемых встроенных
+столбцов. Вот как мы задаем наш первый столбец, который показывает название альбома
+из соответствующего поля тэга ID3:</p>
+
+<div id="EZLA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">switch</span> ( dwIndex )
+        {
+        <span class="KEYWORD">case</span> <span class="NUMBER">0</span>:    <span class="COMMENT">// MP3 Album - дополнительный столбец</span>
+            {
+            psci-&gt;scid.fmtid = *_Module.pguidVer;   <span class="COMMENT">// Удобно использовать этот GUID</span>
+            psci-&gt;scid.pid   = <span class="NUMBER">0</span>;                   <span class="COMMENT">// Можно сделать любой ID, но самое простое - использовать номер столбца</span>
+            psci-&gt;vt         = VT_LPSTR;            <span class="COMMENT">// Возвращаем данные в виде строки</span>
+            psci-&gt;fmt        = LVCFMT_LEFT;         <span class="COMMENT">// Текст выровнен по левой границе</span>
+            psci-&gt;csFlags    = SHCOLSTATE_TYPE_STR; <span class="COMMENT">// Данные сортируются как строки</span>
+            psci-&gt;cChars     = <span class="NUMBER">32</span>;                  <span class="COMMENT">// Начальная ширина колонки в символах</span>
+
+            lstrcpynW ( psci-&gt;wszTitle, L<span class="STRING">"MP3 Album"</span>, MAX_COLUMN_NAME_LEN );
+            lstrcpynW ( psci-&gt;wszDescription, L<span class="STRING">"Album name of an MP3"</span>, MAX_COLUMN_DESC_LEN );
+            }
+        <span class="KEYWORD">break</span>;
+</pre></td></tr></tbody></table></div>
+
+<p> Мы используем GUID модуля нашего расширения как <strong>format ID</strong>, и номер столбца 
+как <strong>property ID</strong>. Член структуры SHCOLUMNINIT <strong>vt</strong> индицирует,  какой тип 
+данных мы возвратим Проводнику. Значение VT_LPSTR указывает, что это будет строка в C-стиле. 
+<strong>fmt</strong> может быть одной из LVCFMT_* констант, и указывает на тип выравнивания текста столбца. 
+В данном случае текст будет выровнен по левой границе.
+</p>
+
+<p><strong>csFlags</strong> содержит несколько флажков для столбца. Однако, 
+не все флажки, кажется,  поддерживаются оболочкой. Ниже приведены существующие флажки 
+и объяснение их эффектов:
+</p>
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<li>
+<strong>SHCOLSTATE_TYPE_STR, SHCOLSTATE_TYPE_INT, and SHCOLSTATE_TYPE_DATE</strong><br>
+Указывает,  в какой тип данных должны преобразовываться данные столбца, когда
+Проводник сортирует столбец. Есть три возможности - в строку,  в целое,  в дату.
+</li>
+<li>
+<strong>SHCOLSTATE_ONBYDEFAULT</strong><br> 
+Документация говорит,  что включение этого флага заставит столбец появляться по умолчанию
+в окне просмотра папки, пока пользователь не удалит этот столбец. 
+Но я не смог этого добиться.</li>
+<li>
+<strong>SHCOLSTATE_SLOW</strong><br> 
+Согласно документации, включение этого флага указывает,  что для накопления 
+данных столбца требуется некоторое время, и Проводник создаст один или более
+фоновых потоков, для того чтобы в это время можно было продолжать работу с 
+интерфейсом Проводника. В моих тестах я не видел никакого эффекта от установки этого флага.
+Проводник всегда использовал только один поток,  чтобы собрать данные для столбцов расширения.
+</li>
+<li>
+<strong>SHCOLSTATE_SECONDARYUI</strong><br> 
+Документация сообщает, что установка этого флага предотвращает появление названия 
+этого столбца в контекстном меню заголовка. Это означает,  что если вы не установите
+этот флаг, название столбца появится в контекстном меню. Однако названия
+дополнительных столбцов никогда не появляются в контекстном меню,  так что
+сейчас этот флаг не имеет никакого эффекта. </li>
+<li>
+<strong>SHCOLSTATE_HIDDEN</strong><br> 
+Установка этого флага предотвращает появление названия столбца в диалоге настройки
+столбцов. Так как сейчас нет никакой другой возможности выбрать скрытый таким образом
+столбец, этот флаг делает столбец бесполезным.</li>
+
+</ul>
+
+
+<p><strong>cChars</strong> содержит заданную по умолчанию ширину для столбца в символах. 
+Установите его равным максимуму из длины наименования столбца и самой длинной строки, 
+которая может появится в столбце. Вы должны также добавить 2 или 3 к этому числу, 
+чтобы гарантировать, к что ширина столбца достаточна,  чтобы отобразить весь текст. 
+(Если Вы не сделаете этого небольшого дополнения, заданная по умолчанию ширина столбца 
+может быть недостаточно широка, и текст получится сокращенным.)
+</p>
+
+<p>Заключительные два члена - строки в Unicode, которые содержат название столбца 
+(текст, который показывается в заголовке) и описание столбца. 
+В настоящее время описание не используется оболочкой, и пользователь никогда не видит его.
+</p>
+
+<p>Столбцы #1 и #2 довольно похожи, однако столбец #1 иллюстрирует момент относительно 
+типа данных и метода сортировки. Этот столбец показывает год. Вот код, который его определяет:
+</p>
+
+<div id="ELLA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">case</span> <span class="NUMBER">1</span>:     <span class="COMMENT">// MP3 year - дополнительный столбец</span>
+            {
+            psci-&gt;scid.fmtid = *_Module.pguidVer;   <span class="COMMENT">// Удобно использовать этот GUID</span>
+            psci-&gt;scid.pid   = <span class="NUMBER">1</span>;                   <span class="COMMENT">// Можно сделать любой ID, но самое простое - использовать номер столбца</span>
+            psci-&gt;vt         = VT_LPSTR;            <span class="COMMENT">// Возвращаем данные в виде строки</span>
+            psci-&gt;fmt        = LVCFMT_RIGHT;        <span class="COMMENT">// Текст выровнен по правой границе</span>
+            psci-&gt;csFlags    = SHCOLSTATE_TYPE_INT; <span class="COMMENT">// Данные сортируются как числа</span>
+            psci-&gt;cChars     = <span class="NUMBER">6</span>;                   <span class="COMMENT">// Начальная ширина колонки в символах</span>
+
+            lstrcpynW ( psci-&gt;wszTitle, L<span class="STRING">"MP3 Year"</span>, MAX_COLUMN_NAME_LEN );
+            lstrcpynW ( psci-&gt;wszDescription, L<span class="STRING">"Year of an MP3"</span>, MAX_COLUMN_DESC_LEN );
+            }
+        <span class="KEYWORD">break</span>;
+</pre></td></tr></tbody></table></div>
+
+<p>Заметьте, что <strong>vt</strong> = <strong>VT_LPSTR</strong>, т.е. мы передаем Проводнику строку, 
+но <strong>csFlags</strong> = <strong>SHCOLSTATE_TYPE_INT</strong>, а это означает, что когда данные сортируются, это должно 
+происходить в цифровой форме. Поскольку есть такая возможность, возвратить номер вместо строки, 
+а тэг ID3 хранит год как строку, такое определение столбца избавляет нас от неприятностей,  
+связанных с преобразованием года в цифровую форму.
+</p>
+
+<p>Когда <strong>dwIndex</strong> имеет значение от 3 до 5, мы возвращаем информацию о встроенных столбцах 
+повторного использования. Столбец 3 показывает поле Artist тэга ID3 в столбце Author:
+</p>
+
+<div id="EFLA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">case</span> <span class="NUMBER">3</span>:     <span class="COMMENT">// MP3 artist - повторное использование встроенного столбца Author</span>
+            {
+            psci-&gt;scid.fmtid = FMTID_SummaryInformation;  <span class="COMMENT">// Предопределенный FMTID</span>
+            psci-&gt;scid.pid   = <span class="NUMBER">4</span>;                   <span class="COMMENT">// Предопределенный - Author</span>
+            psci-&gt;vt         = VT_LPSTR;            <span class="COMMENT">// Возвращаем данные в виде строки</span>
+            psci-&gt;fmt        = LVCFMT_LEFT;         <span class="COMMENT">// Текст выровнен по левой границе</span>
+            psci-&gt;csFlags    = SHCOLSTATE_TYPE_STR; <span class="COMMENT">// Данные сортируются как строки</span>
+            psci-&gt;cChars     = <span class="NUMBER">32</span>;                  <span class="COMMENT">// Начальная ширина колонки в символах</span>
+            }
+        <span class="KEYWORD">break</span>;
+</pre></td></tr></tbody></table></div>
+
+<p><strong>FMTID_SummaryInformation</strong> - предопределенный символ, а ID поля Author (4) 
+приведено в MSDN. См. страницу 
+<a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/com/stgasstg_7agk.asp" target="_blank"><img src="shlext8.xml_files/extA.gif" align="middle" border="0" height="11" width="17">"The Summary Information Property Set"</a>. 
+При повторном использовании столбца мы не возвращаем заголовок или описание, так как оболочка сама позаботится об этом.
+</p>
+
+<p> Наконец, после блока оператора switch мы возвращаем S_OK, чтобы показать, что 
+мы заполнили структуру <strong>SHCOLUMNINFO</strong>.
+</p>
+<h2>Отображение данных в столбцах<a name="EJA"></a></h2>
+
+
+<p>Последний метод интерфейса <strong>IColumnProvider</strong>, <strong>GetItemData()</strong>, который
+Проводник вызывает,  чтобы показать в столбцах данные о файле, имеет следующий прототип:</p>
+
+<div id="EDJA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT IColumnProvider::GetItemData (
+    LPCSHCOLUMNID   pscid,
+    LPCSHCOLUMNDATA pscd,
+    VARIANT*        pvarData );
+</pre></td></tr></tbody></table></div>
+
+<p>Структура <strong>SHCOLUMNID</strong> показывает,  данные какого столбца нужны Проводнику.
+Она содержит ту же самую информацию,  которую мы дали Проводнику в <strong>GetColumnInfo()</strong>.
+Структура <strong>SHCOLUMNDATA</strong> содержит подробности о файле или каталоге,  включая его путь.
+Мы можем использовать эту информацию,  чтобы решить, хотим ли мы предоставить какие-либо данные
+для этого файла или каталога. <strong>pvarData</strong> - это указатель на VARIANT,  в котором мы сохраним
+данные для показа их Проводником. VARIANT - это воплощение в C "свободного" типа переменных, 
+существующего в VB и других скриптовых языках. Переменная VARIANT состоит фактически из 
+двух частей - типа и данных. В ATL есть удобный класс <strong>CComVariant</strong>, 
+делающий все черную работу по инициализации и установке переменных
+типа VARIANT. Я продемонстрирую его использование ниже.</p>
+
+<h2>Небольшое отступление - обработка тэгов ID3<a name="EHA"></a></h2>
+
+
+<p>Сейчас самое время показать,  как наше расширение будет читать и сохранять информацию из
+тэгов ID3. Тэг ID3v1 - это структура фиксированной длины, добавленная в конец файла MP3, которая выглядит
+примерно так:</p>
+
+<div id="E0XB0HA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">struct</span> CID3v1Tag
+{
+    <span class="KEYWORD">char</span> szTag[<span class="NUMBER">3</span>];      <span class="COMMENT">// Всегда 'T','A','G'</span>
+    <span class="KEYWORD">char</span> szTitle[<span class="NUMBER">30</span>];
+    <span class="KEYWORD">char</span> szArtist[<span class="NUMBER">30</span>];
+    <span class="KEYWORD">char</span> szAlbum[<span class="NUMBER">30</span>];
+    <span class="KEYWORD">char</span> szYear[<span class="NUMBER">4</span>];
+    <span class="KEYWORD">char</span> szComment[<span class="NUMBER">30</span>];
+    <span class="KEYWORD">char</span> byGenre;
+};
+</pre></td></tr></tbody></table></div>
+
+<p>Все поля - простые символьные,  строки не обязательно заканчиваются нулем и 
+требуют немного специальной обработки. Первое поле, <strong>szTag</strong>, содержит символы "TAG", 
+идентифицирующие тэг ID3. <strong>byGenre</strong> - это номер, который идентифицирует жанр песни. (Существует 
+<a href="http://www.id3.org/id3v2.4.0-frames.txt" target="_blank"><img src="shlext8.xml_files/extA.gif" align="middle" border="0" height="11" width="17">предопределенный список жанров и их числовых идентификаторов</a>, 
+доступный на ID3.org.)</p>
+
+<p>Нам также будет нужна дополнительная структура, содержащая тэг ID3 и имя файла, из
+которого был взят этот тэг. Эта структура будет использоваться в кэше, о котором я вскоре расскажу.</p>
+
+<div id="E0RB0HA"><table class="code" width="98%"><tbody><tr><td><pre><span class="PREPROCESSOR">#include</span> &lt;string&gt;
+<span class="PREPROCESSOR">#include</span> &lt;list&gt;
+<span class="KEYWORD">typedef</span> std::basic_string&lt;TCHAR&gt; tstring;   <span class="COMMENT">// a TCHAR string</span>
+
+<span class="KEYWORD">struct</span> CID3CacheEntry
+{
+    tstring   sFilename;
+    CID3v1Tag rTag;
+};
+
+<span class="KEYWORD">typedef</span> std::list&lt;CID3CacheEntry&gt; list_ID3Cache;
+</pre></td></tr></tbody></table></div>
+
+<p>Объект <strong>CID3CacheEntry</strong> содержит имя файла и тэг ID3, сохраненный в этом файле.
+<strong>list_ID3Cache</strong> - это связанный список структур <strong>CID3CacheEntry</strong>.</p>
+
+<p>OK, вернемся к нашему расширению. Вот начало нашей функции <strong>GetItemData()</strong>. Сначала 
+мы проверяем структуру <strong>SHCOLUMNID</strong>, чтобы удостовериться, что нас вызывают для одного из 
+наших собственных столбцов. 
+</p>
+
+<div id="E0LB0HA"><table class="code" width="98%"><tbody><tr><td><pre><span class="PREPROCESSOR">#include</span> &lt;atlconv.h&gt;
+
+STDMETHODIMP CMP3ColExt::GetItemData (
+    LPCSHCOLUMNID   pscid,
+    LPCSHCOLUMNDATA pscd,
+    VARIANT*        pvarData )
+{
+USES_CONVERSION;
+LPCTSTR   szFilename = OLE2CT(pscd-&gt;wszFile);
+<span class="KEYWORD">char</span>      szField[<span class="NUMBER">31</span>];
+TCHAR     szDisplayStr[<span class="NUMBER">31</span>];
+<span class="KEYWORD">bool</span>      bUsingBuiltinCol = <span class="KEYWORD">false</span>;
+CID3v1Tag rTag;
+<span class="KEYWORD">bool</span>      bCacheHit = <span class="KEYWORD">false</span>;
+
+    <span class="COMMENT">// Проверить, что <strong>format id</strong> и номер столбца - те, что мы ожидаем.</span>
+    <span class="KEYWORD">if</span> ( pscid-&gt;fmtid == *_Module.pguidVer )
+        {
+        <span class="KEYWORD">if</span> ( pscid-&gt;pid &gt; <span class="NUMBER">2</span> )
+            <span class="KEYWORD">return</span> S_FALSE;
+        }
+</pre></td></tr></tbody></table></div>
+
+<p>Если <strong>format ID</strong> - это наш собственый GUID, <strong>property ID</strong> должен быть
+0, 1, или 2, как и те ID, что мы мы использовали в <strong>GetColumnInfo()</strong>. Если по
+каким либо причинам ID выходит за эти рамки мы возвращаем S_FALSE, чтобы 
+сообщить оболочке, что мы не имеем никаких данных, и столбец должен быть пустым.</p>
+
+<p>Далее, мы сравниваем <strong>format ID</strong> с <strong>FMTID_SummaryInformation</strong> и проверяем
+идентификатор свойства <strong>property ID</strong>, чтобы посмотреть, является ли оно свойством, 
+которое мы предоставляем. </p>
+
+
+<div id="E0FB0HA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">else</span> <span class="KEYWORD">if</span> ( pscid-&gt;fmtid == FMTID_SummaryInformation )
+        {
+        bUsingBuiltinCol = <span class="KEYWORD">true</span>;
+
+        <span class="KEYWORD">if</span> ( pscid-&gt;pid != <span class="NUMBER">2</span>  &amp;&amp;  pscid-&gt;pid != <span class="NUMBER">4</span>  &amp;&amp;  pscid-&gt;pid != <span class="NUMBER">6</span> )
+            <span class="KEYWORD">return</span> S_FALSE;
+        }
+    <span class="KEYWORD">else</span>
+        {
+        <span class="KEYWORD">return</span> S_FALSE;
+        }
+</pre></td></tr></tbody></table></div>
+
+<p>Далее,  мы проверяем атрубуты файла, имя которого нам было передано. Если это каталог или файл
+"в оффлайне" (т.е. был перемещен на другой носитель,  например ленту), мы спокойно вываливаемся.
+Также мы проверяем расширение файла и возвращаем S_FALSE, если оно не MP3.</p>
+
+<div id="E0BB0HA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// Если нас вызывают с каталогом (вместо файла) мы можем</span>
+    <span class="COMMENT">// выйти немедленно.</span>
+    <span class="COMMENT">// Также выходим,  если файл "в оффлайне" (например сохранен на ленте,  или </span>
+    <span class="COMMENT">// другом носителе).  </span>
+    <span class="KEYWORD">if</span> ( pscd-&gt;dwFileAttributes &amp; (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_OFFLINE) )
+        <span class="KEYWORD">return</span> S_FALSE;
+
+    <span class="COMMENT">// Проверяем расширение файла. Если не MP3,  мы можем выйти.</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> != lstrcmpiW ( pscd-&gt;pwszExt, L<span class="STRING">".mp3"</span> ))
+        <span class="KEYWORD">return</span> S_FALSE;
+</pre></td></tr></tbody></table></div>
+
+<p>В этом месте мы решили,  что хотим работать с файлом. Начинаем использовать наш кэш
+тэгов ID3. Документация MSDN говорит,  что оболочка группирует запросы к <strong>GetItemData()</strong>
+по имени файла,  это означает,  что вызывы <strong>GetItemData()</strong> с одним и тем же именем файла будут идти подряд. 
+Мы можем воспользоваться этим поведением и кэшировать тэг ID3 
+для отдельного файла, так что нам не придется читать тэг из этого файла снова при следующих запросах. 
+</p>
+
+<p>Сначала мы просматриваем наш кэш (сохраняемый как переменная-член <strong>m_ID3Cache</strong>), 
+сравнивая имя файла в кэше с именем, переданным в функцию. Если мы находим имя в нашем кэше,  мы 
+используем связанный с ним тэг ID3.</p>
+
+<div id="E2HA"><table class="code" width="98%"><tbody><tr><td><pre>    
+<span class="COMMENT">// Искать имя файла в нашем кэше.</span>
+list_ID3Cache::const_iterator it, itEnd;
+
+    <span class="KEYWORD">for</span> ( it = m_ID3Cache.begin(), itEnd = m_ID3Cache.end();
+          !bCacheHit &amp;&amp; it != itEnd; it++ )
+        {
+        <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> == lstrcmpi ( szFilename, it-&gt;sFilename.c_str() ))
+            {
+            CopyMemory ( &amp;rTag, &amp;it-&gt;rTag, <span class="KEYWORD">sizeof</span>(CID3v1Tag) );
+            bCacheHit = <span class="KEYWORD">true</span>;
+            }
+        }
+</pre></td></tr></tbody></table></div>
+
+
+<p>Если <strong>bCacheHit</strong> = false после этого цикла,  мы должны читать файл и 
+смотреть, имеет ли он тэг ID3. Вспомогательная функция <strong>ReadTagFromFile()</strong> 
+делает грязную работу по чтению последних 128 байтов файла и возвращает TRUE в 
+случае успеха или FALSE если произошла ошибка чтения файла. Заметьте,  что <strong>ReadTagFromFile()</strong>
+возвращает последние 128 байт, независимо от того, являются ли они действительно тэгом ID3.
+</p>
+
+<div id="EXHA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">// Если тэга файла нет в нашем кэше, читаем тэг из файла.</span>
+    <span class="KEYWORD">if</span> ( !bCacheHit )
+        {
+        <span class="KEYWORD">if</span> ( !ReadTagFromFile ( szFilename, &amp;rTag ))
+            <span class="KEYWORD">return</span> S_FALSE;
+</pre></td></tr></tbody></table></div>
+
+<p>Итак, теперь у нас есть тэг ID3. Мы проверяем размер нашего кэша, и если он содержит 5 вхождений, 
+удаляем самое старое, чтобы освободить место для нового. (5 - это произвольный маленький номер.) 
+Мы создаем новый объект <strong>CID3CacheEntry</strong> и добавляем его в список. 
+</p>
+
+<div id="ETHA"><table class="code" width="98%"><tbody><tr><td><pre>        <span class="COMMENT">// Мы храним тэги только для последних 5 кэшируемых файлов - удаляем самое старое</span>
+        <span class="COMMENT">// вхождение, если кэш имеет больший чем 4 вхождения.</span>
+        <span class="KEYWORD">while</span> ( m_ID3Cache.size() &gt; <span class="NUMBER">4</span> )
+            {
+            m_ID3Cache.pop_back();
+            }
+
+        <span class="COMMENT">// Добавим новый тэг ID3 к нашему кэшу.</span>
+        CID3CacheEntry entry;
+
+        entry.sFilename = szFilename;
+        CopyMemory ( &amp;entry.rTag, &amp;rTag, <span class="KEYWORD">sizeof</span>(CID3v1Tag) );
+        
+        m_ID3Cache.push_front ( entry );
+        }   <span class="COMMENT">// end if(!bCacheHit)</span>
+</pre></td></tr></tbody></table></div>
+
+<p>Наш следующий шаг - проверить первые три байта сигнатуры, чтобы определить, ID3-тэг это или нет. 
+Если нет, мы можем вернуть S_FALSE немедленно. </p>
+
+<div id="EPHA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">// Проверяем, имеем ли мы действительно тэг ID3, ища сигнатуру.</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> != StrCmpNA ( rTag.szTag, <span class="STRING">"TAG"</span>, <span class="NUMBER">3</span> ))
+        <span class="KEYWORD">return</span> S_FALSE;
+</pre></td></tr></tbody></table></div>
+
+<p>Затем мы читаем из тэга ID3 поле, которое соответствует свойству, затребованному оболочкой.
+Для этого нужно только протестировать идентификаторы свойств. Например,  для поля Title:</p>
+
+<div id="ELHA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// Форматировать строку подробностей.</span>
+    <span class="KEYWORD">if</span> ( bUsingBuiltinCol )
+        {
+        <span class="KEYWORD">switch</span> ( pscid-&gt;pid )
+            {
+            <span class="KEYWORD">case</span> <span class="NUMBER">2</span>:                     <span class="COMMENT">// заголовок песни</span>
+                CopyMemory ( szField, rTag.szTitle, countof(rTag.szTitle) );
+                szField[<span class="NUMBER">30</span>] = <span class="CHARACTER">'\0'</span>;
+            <span class="KEYWORD">break</span>;
+        ...
+        }
+</pre></td></tr></tbody></table></div>
+
+<p>Обратите внимание,  что наш буфер <strong>szField</strong> - длиной 31 символ, что на 1 символ
+длинее,  чем соответствующее поле ID3v1. Таким образом мы гарантируем, что строка всегда будет
+должным образом закончена нулевым символом в конце. Флажок <strong>bUsingBuiltinCol</strong> был 
+установлен ранее, когда мы проверили пару FMTID/PID. Этот флажок нам нужен, т.к. одного PID 
+не достаточно, чтобы идентифицировать столбец - столбцы Title и MP3 Genre оба имеют PID=2. 
+</p>
+
+<p>В этом месте <strong>szField</strong> содержит строку,  которую мы считали из тэга ID3.
+Редактор ID3 тэгов программы WinAmp дополняет строки пробелами вместо нулевых символов, 
+поэтому мы правим строки, удаляя конечные пробелы:</p>
+
+<div id="EFHA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// WinAmp дополняет строки с пробелами вместо нулей, так что удаляем любые </span>
+    <span class="COMMENT">// завершающие строку пробелы.</span>
+    StrTrimA ( szField, <span class="STRING">" "</span> );
+</pre></td></tr></tbody></table></div>
+
+<p>И  наконец  мы создаем объект <strong>CComVariant</strong> и сохраняем в нем строку <strong>szDisplayStr</strong>.
+Мы вызываем <strong>CComVariant::Detach()</strong>, чтобы скопировать данные из CComVariant в 
+VARIANT,  предоставленный Проводником.</p>
+
+<div id="EBHA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">// Создать VARIANT со строкой подробностей, и возвратить его назад оболочке.</span>
+CComVariant vData ( szField );
+
+    vData.Detach ( pvarData );
+
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+<h2>Как это все выглядит?<a name="EFA"></a></h2>
+
+
+<p>Наши новые столбцы появляются в конце списка в диалоге "Настройка cтолбцов": </p>
+
+<p style="text-align: center;"><img src="shlext8.xml_files/ShellExtGuide8_3.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>Вот как выглядят столбцы. Файлы сортируются по заполненному нами столбцу Author. 
+</p>
+
+<p style="text-align: center;"><img src="shlext8.xml_files/ShellExtGuide8_4.gif"><br><i style="font-size: x-small;"></i></p>
+
+<h2>Регистрация расширения оболочки<a name="EDA"></a></h2>
+
+
+<p>Так как наш обработчик расширяет возможности папок, он регистрируется под ключом <strong>HKCR\Folders</strong>. 
+Вот секция для добавления к RGS файлу, который зарегистрирует наше расширение: 
+</p>
+
+<div id="EBDA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove Folder
+    {
+        NoRemove Shellex
+        {
+            NoRemove ColumnHandlers
+            {
+                ForceRemove {AC146E80-<span class="NUMBER">3679</span>-<span class="NUMBER">4BCA</span>-<span class="NUMBER">9BE4</span>-E36512573E6C} = s <span class="CHARACTER">'MP3 ID3v1 viewer column ext'</span>
+            }
+        }
+    }
+}
+</pre></td></tr></tbody></table></div>
+
+<h2>Еще одна полезная штучка - InfoTips<a name="EBA"></a></h2>
+
+
+<p>Другая интересная вещь, которую может делать наш обработчик - настраивать 
+всплывающее описание, InfoTip, для файла заданного типа. 
+Вот RGS-сценарий, который создает заказной InfoTip для MP3 файлов: </p>
+
+<div id="EFBA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove .mp3
+    {
+        val InfoTip = s <span class="CHARACTER">'prop:Type;Author;Title;Comment;{AC146E80-3679-4BCA-9BE4-E36512573E6C},0;{AC146E80-3679-4BCA-9BE4-E36512573E6C},1;{AC146E80-3679-4BCA-9BE4-E36512573E6C},2;Size'</span>
+    }
+}
+</pre></td></tr></tbody></table></div>
+
+<p>Обратите внимание, что поля Author, Title, и Comment указаны в строке <strong>prop:</strong>. 
+Когда Вы задерживаете курсор мыши над MP3 файлом, Проводник вызывает наше расширение, чтобы 
+получить и показать строки из этих полей. Документация в MSDN утверждает, 
+что наши заказные поля также могут появляться в InfoTips (именно поэтому наш GUID 
+и идентификаторы свойств появились в вышеприведенной строке), однако, в Win2K это не работает. 
+Только встроенные свойства появляются в InfoTips. Вот как выглядит InfoTip: 
+</p>
+
+<p style="text-align: center;"><img src="shlext8.xml_files/ShellExtGuide8_5.gif"><br><i style="font-size: x-small;"></i></p>
+
+<div align="right"><font style="font-family: arial; font-size: 9pt; color: rgb(128, 136, 160);"><i><hr color="#8088a0" size="1" width="100%">
+                Любой из материалов, опубликованных на этом сервере, не может быть воспроизведен в какой бы
+                то ни было форме и какими бы то ни было средствами без письменного разрешения владельцев авторских
+                прав. 
+             </i></font></div><table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext8.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext8.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext8.xml?print" target="_blank" title="Версия для печати"><img src="shlext8.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307554" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">5</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307554" target="_self" title="Перейти к обсуждению статьи"><img src="shlext8.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307554"><font color="#646464"><font size="1"> Оценка </font><font color="black">30</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307554" title="Добавить в избранное"><img onclick="AddFav(307554);return false;" src="shlext8.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307554)" title="Подписка на сообщения"><img class="i" src="shlext8.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-3" title="+1"><img onclick="RateMsg(307554,-3);return false;" src="shlext8.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=1" title="Интересно"><img onclick="RateMsg(307554,1);return false;" src="shlext8.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307554,2);return false;" src="shlext8.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=3" title="Супер"><img onclick="RateMsg(307554,3);return false;" src="shlext8.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307554,-1);return false;" src="shlext8.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307554,-4);return false;" src="shlext8.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307554&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307554,0);return false;" src="shlext8.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table></body></html>

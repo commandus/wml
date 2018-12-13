@@ -1,0 +1,1485 @@
+"- $(attachment.nf_size) bytes - $(attachment.nf_time)","- $ байты(attachment.nf_size) - $(attachment.nf_time)"
+""". That is normal. Do not refresh, repost or reload.",""". Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+"Copyright &copy; 2003, Andrei Ivanov.","Copyright &copy; 2003, Андрей Ivanov."
+"&copy; 2003, Andrei Ivanov.","&copy; 2003, Андрей Ivanov."
+bytes,байт
+"Enter a number 0..99. Affects its position on the recommended list.","Введите число от 0 до 99 отражающее положение в списке рекомендованного"
+"(Method 1) Enter","(Метод 1) Ввод текста"
+"(Method 2) Enter a HTTP address","(Метод 2) Ввод HTTP адреса"
+"(Method 3) Upload a file","(Метод 3) Загрузить файл"
+read-only,"только для чтения"
+"sessions are automatically removed ","сеансы автоматически удалены"
+"minutes after they are created","минут после создания"
+"sales displayed","продаж отображено."
+Category,Категория
+"Delete $(uid) User","Удалить пользователя $(uid)"
+"Delete News","Удалить Новости"
+"Delete Priority","Удалить Приоритет"
+"Delete Product","Удалить Продукт"
+"Delete Sale","Удалить Продажу"
+"Delete Session","Удалить Сеанс"
+"Delete Status","Удалить Статус"
+"Discussion Groups","Дискуссионная Группа"
+"Edit Category $(kb_id)","Редактировать категорию $(kb_id)"
+"Edit History","Редактировать историю"
+"Edit News","Редактировать новости"
+"Edit Priority","Редактировать приоритеты"
+"Edit Product","Редактировать услуги и товары"
+"Edit Sale","Редактировать продажу"
+"Edit Status","Редактировать статус"
+"Edit User $(uid)","Редактировать пользователя $(uid)"
+"Knowledge base","База Знаний"
+"Log off","Завершить сеанс"
+"New Article Saved","Новая статья сохранена"
+"New Category","Новая категория"
+"New Category Saved","Новая категория сохранена"
+"New Priority","Новый приоритет"
+"New Priority Saved","Новый приоритет сохранен"
+"New Product","Новый продукт"
+"New Product Saved","Новый продукт сохранен"
+"New Requests vs. Closed Requests Trend Report","Тренд новые запросы - Удовлетворенные запросы"
+"New Status","Новый cтатус"
+"New Status Saved","Новый статус сохранен"
+"New User","Новый пользователь"
+"New User Saved","Новый пользователь сохранен"
+News,Новости
+"Open Requests","Открытые запросы"
+"Priority Deleted","Приоритет удален"
+"Priority Manager","Менеджер приоритетов"
+"Priority Updated","Приоритет исправлен"
+"Product Deleted","Продукт удален"
+"Product Manager","Менеджер продуктов"
+"Product Updated","Продукт исправлен"
+"Report Manager","Менеджер отчетов"
+Result,Результат
+"Sales Manager","Менеджер продаж"
+"Status Deleted","Статус удален"
+"Status Manager","Менеджер статусов"
+"Status Updated","Статус исправлен"
+"System Information","Системная Информация"
+"User $(old_user_id) Updated","Пользователь $(old_user_id) исправлен"
+User,Пользователь
+"User Manager","Менеджер пользователей"
+"and all its decendants have been deleted.","и все наследованные удалены."
+"and all its sub-categories and articles?","и все под-категории и статьи?"
+"has been created.",создан.
+"has been updated. Please update all reports that use $(old_user_id).","исправлен. Пожалуйста исправьте все отчеты, которые используют $(old_user_id)."
+"If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.","Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера."
+"Edit User","Отредактировать пользователя"
+"Andrei Ivanov","Андрей Иванов"
+"1 Articles","1 Статьи"
+"2 New Request","2 Новый Запрос"
+"3 Discussion","3 Дискуссии"
+"4 Reports","4 Отчеты"
+"5 Unassigned requests","5 Запросы с неназначенными исполнителями"
+"6 Users","6 Пользователи"
+"7 Products","7 Продукты"
+"8 Priorities","8 Приоритеты"
+"9 Help","9 Справка"
+"Access is denied","В доступе отказано"
+"Advanced Search","Продвинутый поиск"
+"All open requests listing report","Отчет о всех невыполненных запросах"
+"and Company starts with:","и предприятие начинается с:"
+"and Department starts with:","и отдел начинается с:"
+"and Email Address starts with:","и email начинается с:"
+"and Phone Number starts with:","и Номер телефона начинается с:"
+"and User Name starts with:","и Имя Пользователя начинается с:"
+ApooHelpDesk,"Справочная Апу"
+"apooHelpDesk Customer Support $(today)","apooHelpDesk ПОДДЕРЖКА Клиента $(сегодня) apooHelpDesk Поддержка Клиента Удаляет Новости apooHelpDesk Поддержки Клиента Удалять Приоритет apooHelpDesk Поддержки Клиента Удалять Продукт apooHelpDesk Поддержки Клиента Удалять Статус apooHelpDesk Поддержки Клиента Удалять Потребителя apooHelpDesk Дискуссии Поддержки Клиента Группирует apooHelpDesk Пост Дискуссии Поддержки Клиента apooHelpDesk Категории Редактирования Поддержки Клиента apooHelpDesk Новостей Редактирования Поддержки Клиента apooHelpDesk Приоритета Редактирования Поддержки Клиента apooHelpDesk Продукта Редактирования Поддержки Клиента apooHelpDesk Статуса Редактирования Поддержки Клиента apooHelpDesk Потребителя Редактирования Поддержки Клиента apooHelpDesk Поддержки Клиента Knowledke Базового Голоса Статьи apooHelpDesk Поддержки Клиента Новых Новостей apooHelpDesk Поддержки Клиента Нового Приоритета apooHelpDesk Поддержки Клиента Нового Приоритета Сохраняющий apooHelpDesk Поддержку Клиента Нового Продукта apooHelpDesk Поддержки Клиента Нового Продукта Сохраненную"
+"apooHelpDesk Customer Support Delete News","apooHelpDesk ПОДДЕРЖКА Клиента Нового Статуса apooHelpDesk Поддержки Клиента Нового Статуса Сохранила apooHelpDesk Поддержку Клиента Новых Билетов vs. Закрывающую Сообщение Сообщения Направления Билетов apooHelpDesk Поддержки Клиента Нового Потребителя apooHelpDesk Новостей Поддержки Клиента apooHelpDesk Приоритета Поддержки Клиента Удаляющее apooHelpDesk Менеджера Приоритета Поддержки Клиента apooHelpDesk Приоритета Поддержки Клиента Корректирующего apooHelpDesk Продукт Поддержки Клиента Удаляющий apooHelpDesk Продукт Поддержки Клиента Редактирующий apooHelpDesk Менеджера Продукта Поддержки Клиента apooHelpDesk Менеджера Сообщения Поддержки Клиента apooHelpDesk Сообщения Поддержки Открытых Запросов Клиента apooHelpDesk Менеджера Статуса Поддержки Клиента apooHelpDesk Статуса Поддержки Клиента Корректирующего apooHelpDesk Список Потребителя Поддержки Клиента apooHelpDesk Менеджера Потребителя Поддержки Клиента apooHelpDesk Потребителя Поддержки Клиента Корректирующий apooHelpDesk Новости Вида Поддержки Клиента: $(news_id) apooHelpDesk Потребитель Вида Поддержки Клиента"
+"apooHelpDesk Customer Support Delete Priority","apooHelpDesk ПОДДЕРЖКА Клиента: Доступ Отвергнутый apooHelpDesk Удалять Пункт Базы Знаний apooHelpDesk Удалять Пункт Базы Знаний Подтверждения apooHelpDesk Детали Пункта"
+"apooHelpDesk Customer Support Delete Product","apooHelpDesk СТАТЬЯ Базы Знаний Сохранила на $(kb_id) apooHelpDesk Редактировании Базы Знаний Статьи apooHelpDesk Новой Статьи Базы Знаний apooHelpDesk Новой Статьи Базы Знаний Сохраненном в $(parent_id) apooHelpDesk Виде Базы Знаний Статьи apooHelpDesk Статуса Удаляющем Приложение"
+"apooHelpDesk Customer Support Delete Status","назначены статус с самым большим номером последовательности."
+"apooHelpDesk Customer Support Delete User","Вы уверены Вы хотите удалить $(s1.itemtype) $(kb_id) [ Вы уверены Вы хотите удалиться все сеансы $request.user_id)?"
+"apooHelpDesk Customer Support Discussion Groups","Вы уверены Вы хотите удалить новости Вы уверены Вы хотите удалить Приоритет: $(имя)?"
+"apooHelpDesk Customer Support Discussion Post","Вы уверены Вы хотите удалить Продукт: $(имя)?"
+"apooHelpDesk Customer Support Edit Category","Вы уверены Вы хотите удалить Продажу: $request.sa_serial)?"
+"apooHelpDesk Customer Support Edit News","Вы уверены Вы хотите удалить Статус: $(имя)?"
+"apooHelpDesk Customer Support Edit Priority","Вы уверены Вы хотите удалить Потребителя: $(uid)?"
+"apooHelpDesk Customer Support Edit Product","Статья: [$(kb_title)] сохранен как статья $(kb_id) (тип: $(kb_type))."
+"apooHelpDesk Customer Support Edit Status",Статьи
+"apooHelpDesk Customer Support Edit User","Статьи Рекомендовались Возрастанием Редакторов"
+"apooHelpDesk Customer Support Knowledke Base Article Vote","назначьте это в диспетчере и уведомьте его/ее Назначенный На Присвоенном"
+"apooHelpDesk Customer Support New News",att_count
+"apooHelpDesk Customer Support New Priority",att_id
+"apooHelpDesk Customer Support New Priority Saved","Подключите файл:"
+"apooHelpDesk Customer Support New Product","Подключите Файл:"
+"apooHelpDesk Customer Support New Product Saved","Присоединение присоединения(s):"
+"apooHelpDesk Customer Support New Status",attachment1
+"apooHelpDesk Customer Support New Status Saved","Присоединения Присоединений:"
+"apooHelpDesk Customer Support New Tickets vs. Closed Tickets Trend Report Report",b
+"apooHelpDesk Customer Support New User","Обратная Сторона"
+"apooHelpDesk Customer Support News","Обратная Сторона на Обратной Стороне категории, чтобы Указать Обратно в родительской категории Обратно Приоритетному Менеджеру Обратно Менеджеру Продукта Обратно Менеджеру Статуса Обратно Менеджеру Потребителя backTo backToPrompt backToUrl нижней Категории Категории Категорий:"
+"apooHelpDesk Customer Support Priority Deleted",catP1
+"apooHelpDesk Customer Support Priority Manager",catP2
+"apooHelpDesk Customer Support Priority Updated",catP3
+"apooHelpDesk Customer Support Product Deleted",catP4
+"apooHelpDesk Customer Support Product Edited",catP5
+"apooHelpDesk Customer Support Product Manager",центр
+"apooHelpDesk Customer Support Report Manager",check1
+"apooHelpDesk Customer Support Report Open Requests",check2
+"apooHelpDesk Customer Support Status Manager",check3
+"apooHelpDesk Customer Support Status Updated",check5
+"apooHelpDesk Customer Support User List",check6
+"apooHelpDesk Customer Support User Manager","проверенный городской Город:"
+"apooHelpDesk Customer Support User Updated",cla_company
+"apooHelpDesk Customer Support View News: $(news_id)",cla_dept
+"apooHelpDesk Customer Support View User",cla_email
+"apooHelpDesk Customer Support: Access Denied",cla_full_name
+"apooHelpDesk Delete Knowledge Base Item",cla_phone
+"apooHelpDesk Delete Knowledge Base Item Confirmation",
+"apooHelpDesk Item Detail","нажмите здесь col"
+"apooHelpDesk Knowledge Base Article Saved in $(kb_id)",col1
+"apooHelpDesk Knowledge Base Edit Article",col2
+"apooHelpDesk Knowledge Base New Article",col3
+"apooHelpDesk Knowledge Base New Article Saved in $(parent_id)","colspan=""3"">"
+"apooHelpDesk Knowledge Base View Article","Тип Столбца:"
+"apooHelpDesk Status Deleted","Компания компании Command:"
+Application,"Сконфигурируйте мое окно просмотра паутины Содержания Подтверждения configureBrowser.htm"
+"are assigned the status with the largest sequence number.","ДОВОЛЬНЫЙ-Язык Довольный-Тип Продолжает печенье"
+"Are you sure you want to delete $(s1.itemtype) $(kb_id) [","Авторское Право &копия; 2003, Андрей Ivanov."
+"Are you sure you want to delete all sessions of $request.user_id)?","Стойте Страны страны Сообщения:"
+"Are you sure you want to delete news","Создайте Новую категорию - статьи Базы Знаний - поддержка Клиента - apooHelpDesk Созданное: $(s1.news_updated_by) Созданное: $ Создатель(s1.news_created_on): $(curCat.KB_CREATED_BY) $(curCat.KB_CREATED_ON) Создатель: $(s1.KB_CREATED_BY) $(s1.KB_CREATED_ON) cs_news_file/nf_id/nf_content/$(attachment.nf_id) curCat Текущий потребитель: $(user_id) [ Поддержка Клиента поддержки Базы Знаний меню Клиента Клиента меню основы Поддержки d>"
+"Are you sure you want to delete Priority: $(name) ?",d1
+"Are you sure you want to delete Product: $(name) ?",d2
+"Are you sure you want to delete Sale: $request.sa_serial) ?","Ежедневные регистрационные файлы показывают деятельность/ошибки с Даты заданий фона"
+"Are you sure you want to delete Status: $(name) ?","Дата &gt;=:"
+"Are you sure you want to delete User: $(uid) ?","Область Даты:"
+"Article: [$(kb_title)] has been saved as article $(kb_id) (type: $(kb_type)).","дневные дни db"
+Articles,"db=$(DB_HD) Умолчание Конечного Срока defaultparam defaultparams Удаляется"
+"Articles Recommended by Editors","Категория Delete"
+Ascending,"УДАЛИТЕСЬ ИЗ cs_kb ГДЕ kb_id = $(kb_id);"
+"assign it to the dispatcher and notify him/her","УДАЛИТЕСЬ ИЗ cs_news ГДЕ news_id = $(news_id) УДАЛЯЕТСЯ ИЗ cs_news_file ГДЕ nf_id = $(old_att_id) УДАЛЯЕТСЯ ИЗ cs_priority ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_product ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_status ГДЕ имя = '$(имя) Отдел Отдела:"
+"Assigned On",отд
+"Assigned To","Сход Описания Описания:"
+att_count,"Подробная Деталь:"
+att_id,Детали:
+"Attach a file:","dex.htm?path=$(request.path:escape)"">OK"
+"Attach File:",di_detail
+attachment,di_group
+Attachment(s):,di_id
+attachment1,di_k1
+Attachments,di_k2
+Attachments:,di_k3
+b,di_k4
+Back,di_k5
+"Back to category",di_title
+"Back to List",di_title0
+"Back to parent category","Эта подсказка статьи?"
+"Back to Priority Manager",dif_i??
+"Back to Product Manager",diGroup.htm?di_id=$request.di_id)
+"Back to Status Manager","diGroup.htm?path=$(path:escape) diNew.htm?type=1&path=$(path:escape) diNewOk.htm diNew.htm?type=2&path=$(path:escape)"
+"Back to User Manager","ding=""0"">"
+backTo,"выведенная из строя Дискуссия Дискуссии discuss/index.htm Группирует diSearch.htm?path=$(path:escape) Диспетчер диспетчера diSearchOk.htm:"
+backToPrompt,Дисплей:
+backToUrl,diTopic.htm?$local.cgiParam)
+bottom,"diTopic.htm?mid=$(sqlMsg.di_id)&topic_id=$(sqlMsg.di_topic_id)&path=$(path:escape)#$(sqlMsg.di_id) Вы хотите удалить $(s1.itemtype) $(kb_id) [ Вы хотите удалить новости"
+Categories,do_nothing
+Category,"не назначайте или уведомляйте, что кто-нибудь не назначать, уведомляйте все сотрудники и менеджеры dy> e"
+Category:,Редактирование
+catP1,"Отредактируйте категорию email"
+catP2,"Email Адрес"
+catP3,"Email Формат для ToDo Напоминания:"
+catP4,"Email Тип:"
+catP5,Email:
+center,email_fmt
+check1,"Конечный Пользователь endDate endwhile )> en-он"
+check2,"euTicketNew.htm ВЫПОЛНЯТЬСЯ"
+check3,f1
+check5,f1.action=qm.value
+check6,f1.qm.focus()
+checked,f1.uid.focus()
+city,f1.user_id.focus()
+City:,"Отказавшееся регистрироваться на поскольку ваш идентификатор не вводится, выводится из строя или пароль ненабран."
+cla_company,"Факс факса faq.htm:"
+cla_dept,"Область 1:"
+cla_email,"Область 2:"
+cla_full_name,"Область 3:"
+cla_phone,"ФАЙЛ Оказывается"
+cla_user_id,"Найдите, добавьте, отредактируйте или удалите первые статьи kb"
+"click here","Забудьте ID или пароль Часто Задавал Вопросы Полное Имя:"
+col,full_name
+col1,g
+col2,gen_nf
+col3,"генератор ПОЛУЧАЕТСЯ"
+"colspan=""3"">","Подсказка Get"
+"Column Type:","ght &копия; 2003, Андрей Ivanov."
+Command,"ght"">Copyright &копия; 2003, Андрей Ivanov."
+company,"глобальный Идти"
+Company:,"Возвратитесь К категория Gro??"
+"Configure my web browser",группа
+configureBrowser.htm,"Групповое описание:"
+Confirmation,"Подсказка Groups"
+Content,"Помогите настольному основному меню help/index.html"
+Content-Language,"Подсказка: запятые Использования между ключевыми словами. Все ключевые слова используются при поиске записей новостей."
+Content-Type,спрятанное
+Continue,"Намек: 1. Частные продукты доступны на их конечных пользователях, всех сотрудниках и менеджерах. Они не доступны, чтобы закончиться пользователи, которые не используют их. 2. Запросы усиленные Эскалатором придут в диспетчер."
+cookie,"ht &копия; 2003, Андрей Ivanov."
+"Copyright &copy; 2003, Andrei Ivanov.","ht.htm"">ApooHelpDesk"
+"Cost Report",HTML
+country,"HTML htmlFrag ФРАГМЕНТА"
+Country:,"http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib"
+"Create New category - Knowledge Base articles - Customer support - apooHelpDesk","ic_id + '#' + request.di_id; )>"
+"Created by: $(s1.news_updated_by)",id
+"Created: $(s1.news_created_on)","если (session.varExist('sa_max_row') если нет,"
+"Creator: $(curCat.KB_CREATED_BY) $(curCat.KB_CREATED_ON)","Если Вы используете ваше окно просмотра Обратной Стороны/Пересылать кнопку возвращаться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Страница Истекла], [, Вы хотите вновь послать данные формы Потери Данных] or []. Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+"Creator: $(s1.KB_CREATED_BY) $(s1.KB_CREATED_ON)","Важно: Новые запросы назначены статус с index.htm"
+cs_news_file/nf_id/nf_content/$(attachment.nf_id),"index.htm?kb_id=$(catP1.kb_id) index.htm?kb_id=$(catP2.kb_id) index.htm?kb_id=$(catP3.kb_id) index.htm?kb_id=$(catP4.kb_id) index.htm?kb_id=$(catP5.kb_id) index.htm?kb_id=$(kb_id) index.htm?kb_id=$(parent_id) index.htm?kb_id=$(ParentCat.kb_p1) index.htm?kb_id=$(s1.kb_p1) index.htm?kb_id=$(sqlParent.kb_p1)"
+curCat,index.htm?kb_id=$kb_id
+"Current user: $(user_id) [",index.htm?kb_id=$parent_id
+"Customer support","index.htm?path=$(full:escape) index.htm?path=$(local.path:escape)&days=$local.later) index.htm?path=$(path:escape)"
+"Customer Support Knowledge Base menu","ВКЛЮЧИТЕСЬ В cs_kb( kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security, kb_rank, kb_name, kb_size) ВЕЛИЧИНЫ( $(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), $(sqlParent.kb_p4), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', $(kb_type), '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title)', '$(kb_summary)', $(kb_security), $(kb_rank), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1) ВКЛЮЧАЮТСЯ В cs_kb(kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security) ВЕЛИЧИНЫ($(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', 1, '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title:unescape)', '$(kb_summary:unescape)', $(kb_security)) ВКЛЮЧАЮТСЯ В cs_kb_file( kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЕЛИЧИНЫ($(kb_id), $(kb_type), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1, СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ) ВКЛЮЧАТЬСЯ В cs_kb_file(kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЫБОР $(kb_id), 2, sqlFiles.tif_name, sqlFiles.tif_size, sqlFiles.tif_content ИЗ cs_ti_file sqlFiles ГДЕ sqlFiles.tif_ch_id В ( ВЫБОР ch_id ИЗ cs_ti_change ГДЕ ch_ticket_id = $(ticket_id)) ВКЛЮЧАТЬСЯ В cs_news(; '' ВКЛЮЧАТЬСЯ В cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) ВЕЛИЧИНЫ($(nf_id), $(news_id), СЛЕПОК('today' КАК ДАТА), СЛЕПОК('now' КАК ВРЕМЯ), 1, '$(attachment1:unescape)') ВКЛЮЧАТЬСЯ В cs_priority (row_ver, имя, описание) ВЕЛИЧИНЫ(1, '$(имя)', '$(описание)') ВКЛЮЧАЮТСЯ В cs_priority (row_ver, имя, is_def, описание) ВЕЛИЧИНЫ(1, '$(имя)', 0, '$(описание)') Новый приоритет: [$(имя)] сохранен."
+"Customer Support main menu","ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')"
+d>,"ВКЛЮЧИТЕСЬ В cs_user(user_row_ver, user_type, статус, user_id, user_pwd, full_name, email, email_fmt, телефон, факс, компания, отд, адрес, город, состояние, индекс, страна, user_note) ВЕЛИЧИНЫ( 1, '$(utype)', '$(статус)', '$(uid)', '$(upwd)', '$(full_name)', '$(email)', '$(email_fmt)', '$(телефон)', '$(факс)', '$(компания)', '$(отд)', '$(адрес)', '$(город)', '$(состояние)', '$(индекс)', '$(страна)', '$(user_note)') интервал Адреса IP"
+d1,is_def
+d2,IsDi_Id
+"Daily log files show activities/errors from background tasks",IsNotLevel5
+Date,"Пункты: $(сначала) - $(последний раз) k"
+"Date &gt;=:","kb/faq.htm kb/index.htm"
+"Date Range:","kb/kbView.htm?kb_id=$(NewsArt.kb_id) kb/kbView.htm?kb_id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=yes&amp;id=$(NewsArt.kb_id) kb/recommended.htm kb/kbVote.htm?vote=yes&amp;id=$(NewsArt1.kb_id)"
+day,kb_attachment1
+days,kb_cat
+db,kb_content
+db=$(DB_HD),kb_content_file
+Deadline,kb_content_url
+Default,kb_id
+defaultparam,kb_k1
+defaultparams,kb_k2
+Delete,kb_k3
+"Delete category",kb_k4
+"DELETE FROM cs_kb WHERE kb_id = $(kb_id);",kb_k5
+"DELETE FROM cs_news WHERE news_id = $(news_id)",kb_owner
+"DELETE FROM cs_news_file WHERE nf_id = $(old_att_id)",kb_p1
+"DELETE FROM cs_priority WHERE name = '$(name)'",kb_rank
+"DELETE FROM cs_product WHERE name = '$(name)'",kb_security
+"DELETE FROM cs_status WHERE name = '$(name)'",kb_summary
+Department,kb_title
+Department:,kb_type
+dept,"kbAdvSearch.htm?kb_id=$(kb_id) kbDelete.htm?kb_id=$(kb_id) kbDelete2.htm?kb_id=$(kb_id) kbDeleteOk.htm?kb_id=$(kb_id) kbDetail.htm?kb_id=$(kb_id) kbEditArt.htm?kb_id=$(sqlArt.kb_id) kbEditArtOk.htm kbEditCat.htm?kb_id=$(kb_id) kbEditCatOk.htm kbKeySearchOk.htm kbNewArt.htm?kb_id=$(kb_id) kbNewArtOk.htm kbNewCat.htm?kb_id=$(kb_id) kbNewCatOk.htm kbView.htm?kb_id=$(id) kbView.htm?kb_id=$(sqlArt.kb_id) kbVote.htm?vote=no&id=$(sqlArt.kb_id)"
+Descending,kbVote.htm?vote=no&id=$sqlArt.kb_id)
+Description,kbVote.htm?vote=yes&id=$(sqlArt.kb_id)
+Description:,kbVote.htm?vote=yes&id=$sqlArt.kb_id)
+Detail,"Ключевые Слова Ключевых Слов:"
+Detail:,"База Знаний"
+Details:,"Статьи Базы Знаний - поддержка Клиента - apooHelpDesk Знание ID:"
+"dex.htm?path=$(request.path:escape)"">OK",l
+di_detail,"l)"">$request.backToPrompt)"
+di_group,"l=$(sqlMyTickets.sql:escape)"">[SQL] последний"
+di_id,"Последний Последний Доступ:"
+di_k1,last_x
+di_k2,"Последующие Сообщения оставили Список Связей"
+di_k3,"Запросы Списка присвоили мне запросов Списка, который не назначен Список пользователи, которые удовлетворяют Все условия:"
+di_k4,"Список, дополнение, редактируют или удалять Список статей новостей, дополнение, редактировать или удалять Список типа продукта, дополнение, редактировать или удалять Список приоритетов запроса, дополнение, редактировать или удалять Список статусов запроса, дополнение, редактировать или удалять Список записей продажи, дополнение, редактировать или удалять персонал/клиенты listOpen.htm Заблокированный:"
+di_k5,"Заблокированное На:"
+di_title,"Регистрационные Файлы:"
+di_title0,"Зарегистрируйте Протокол на logOff.htm logon.htm LTR M"
+"Did this article help?",mailto:$s1.email)
+dif_i??,"Основное меню - поддержка Клиента mainMenu$(User.user_type).htm Управлять сообщениями, искать запросы,..."
+diGroup.htm?di_id=$request.di_id),"Меню Менеджера Менеджера Столбцов Max:"
+diGroup.htm?path=$(path:escape),"Пользователи Max:"
+diNew.htm?type=1&path=$(path:escape),max_col
+diNew.htm?type=2&path=$(path:escape),max_row
+diNewOk.htm,"maxCol Сообщение сообщения ID:"
+"ding=""0"">",Сообщение:
+disabled,"Сообщения $(сначала) - $(последний раз) месячные месяцы перемещения минут msg msgType"
+discuss/index.htm,"мультичасть/форма-данные Мой Счет Мой Todo Список n n/a"
+Discussion,n_col1
+"Discussion Groups",n_col2
+diSearch.htm?path=$(path:escape),n_col3
+diSearchOk.htm,n_sort1
+dispatcher,n_sort1_dir
+Dispatcher:,n_sort2
+Display:,n_sort2_dir
+diTopic.htm?$local.cgiParam),"Имя Имени:"
+diTopic.htm?mid=$(sqlMsg.di_id)&topic_id=$(sqlMsg.di_topic_id)&path=$(path:escape)#$(sqlMsg.di_id),"Имя: $(curCat.KB_NAME) Размер: $(curCat.KB_SIZE) Новая статья Новой Статьи: [$(kb_title)] сохранен как статья $(kb_id) (тип: $(kb_type))."
+"Do you want to delete $(s1.itemtype) $(kb_id) [","Новая Категория"
+"Do you want to delete news","Новая категория: [$(kb_title)] сохранен как категория $(kb_id)."
+do_nothing,"Новая Стоимость:"
+"don't assign or notify anybody","Новый Crosstab Новый Новый Групповой Новый Приоритетный Новый Продукт Заказа Нового Запроса"
+"don't assign, notify all staff members and managers","Новая Отправка Запроса Управляет:"
+dy>,"Новый Запрос из $(request.submitted_by)) Новый Запрос с $(uid) Нового Продажного Нового Статуса"
+e,"Новый статус: [$(request.name))] сохранен."
+Edit,"Новый Табличный"
+"Edit category","Новые Билеты vs. Закрыли Сообщение Направления Нового Потребителя Нового Потребителя Билетов: ["
+email,new_cost
+"Email Address",Новости
+"Email format for ToDo Reminder:","Новости $(news_id) удаляющие Новости $(news_id) удалена."
+"Email Type:","Новости $(news_id) скорректирована."
+Email:,"Новости [$(news_title)] сохранен как $(news_id)."
+email_fmt,"Новости ID:"
+"End User","новости ID: $ менеджер Новостей(s1.news_id) news/index.htm"
+endDate,news/newsView.htm?news_id=$(News.news_id)
+"endwhile )>",news_detail
+en-us,news_format
+euTicketNew.htm,news_id
+execute,news_k1
+"Failed to log on because your identifier is not entered, disabled or password is mistyped.",news_k2
+faq.htm,news_k3
+fax,news_k4
+Fax:,news_k5
+"Field 1:",news_title
+"Field 2:",NewsArt
+"Field 3:",NewsArt1
+FILE,"newsDelete.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape) newsDelete2.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) newsDeleteOk.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) newsEdit.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape) newsEditOk.htm newsHome newsNew.htm newsNewOk.htm newsView.htm"
+Find,"newsView.htm?news_id=$(News.news_id:escape)&newsHome=$(p-combined:escape) newsView.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) Следующий"
+"Find, add, edit or delete kb articles",nf_id
+first,никакое
+"Forgot ID or password","Примечание, все ссылки на $(uid) очистится. Например, изменение $(uid) сделанное на запросе станет одно сделанное неизвестным человеком. Если это не - что Вы хотите, Вы можете захотеть отредактировать этого потребителя считать и изменять свой статус, чтобы [disabled]."
+"Frequently Asked Questions",Примечания:
+"Full Name:",notify_all
+full_name,"nowrap OK"
+g,old_att_id
+gen_nf,old_name
+generator,old_owner
+GET,old_sa_serial
+"Get help",old_type
+"ght &copy; 2003, Andrei Ivanov.",old_user_id
+"ght"">Copyright &copy; 2003, Andrei Ivanov.",on_new_ticket1
+global,on_new_ticket2
+Go,"opyright &копия; 2003, Андрей Ivanov."
+"Go back to category",ortTopX))
+Gro??,"ot освежать, вновь пост или перезагрузка."
+group,Владелец:
+"Group description:","Владелец: $(curCat.KB_OWNER)"
+Groups,p_id
+Help,Родитель
+"Help desk main menu","Родительская Группа Родители Категории"
+help/index.html,parent_id
+"Help: Use commas between keywords. All keywords are used when searching for news records.","parentCat Пароль пароля (Снова):"
+hidden,"Пароль Снова:"
+"Hint: 1. Private products are accessible to their end users, all staff members and managers. They are not accessible to end users who do not use them. 2. Requests escalated by the Escalator will go to the dispatcher.",Пароль:
+"ht &copy; 2003, Andrei Ivanov.","телефон маршрута"
+"ht.htm"">ApooHelpDesk","Телефон Номера Телефона:"
+HTML,"открытый текст простого текста"
+"HTML fragment","Пожалуйста нажмите обратную кнопку окна просмотра, чтобы возвратиться."
+htmlFrag,"Пожалуйста закройте это окно просмотра паутины, чтобы предохранить других людей от использования обратной кнопки, чтобы увидеть информацию, которую Вы сохранили или извлеклись в течение этого сеанса."
+http://$(_host)$(_scriptname)$(_pathinfo),"Пожалуйста попытайтесь снова."
+http://$(_host)$(_scriptname)/hd/index.htm,ПОСТ
+http://www.w3.org/1999/xhtml,"Новости Поста Сообщения Поста"
+i,"Пост или ответ в сообщениях дискуссии Объявлялись Объявленным на от:"
+ib,"Объявление Мощнналось Предыдущим"
+"ic_id + '#' + request.di_id; )>","Предварительный Просмотр HTML Предшествующего Приоритетного Приоритетного Имени Приоритета Менеджера Приоритета priority/priorityMan.htm: [$(имя)] удален."
+id,"Приоритет: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name)."
+"if (session.varExist('sa_max_row')","priorityDelOk.htm priorityDel.htm?name=$(s1.name:escape)"
+"if not,","priorityEdit.htm?name=$(s1.name:escape) priorityEditOk.htm priorityMan.htm"
+"If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.","priorityMan.htm?set_def=$(s1.name:escape) частный Продукт priorityNew.htm Продукта priorityNewOk.htm Менеджера Продукта product/productMan.htm:"
+"Important: New requests are assigned the status with the","Продукт: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name)."
+interval,"Продукт: [$имя)] удален."
+"IP Address",product_type
+is_def,"productDelOk.htm productDel.htm?name=$(s1.name:escape)"
+IsDi_Id,"productEdit.htm?name=$(s1.name:escape) productEditOk.htm productMan.htm"
+IsNotLevel5,"productMan.htm?set_def=$(s1.name:escape) productNew.htm productNewOk.htm ptHelpWindow публика"
+"Items: $(first) - $(last)","py; 2003, Андрей Ivanov."
+keywords,qm
+Keywords:,"запрос кварталов четверти r> радио Ранг:"
+"Knowledge Base","Ранг: $(curCat.KB_RANK) Посещенное: $(curCat.KB_VISITED) Рекомендуемые Статьи recommended.htm Освежать ответчиков Ivanov."
+"Knowledge Base articles - Customer support - apooHelpDesk",перезагрузка.
+"Knowledge ID:","rep$(s1.rep_type).htm?cro_id=$(s1.rep_id) rep$(s1.rep_type)Del.htm?repID=$s1.rep_id) rep$(repCost.htm s1.rep_type)Run.htm?cro_id=$(s1.rep_id)"
+l,repCro.htm?mode=new
+"l)"">$request.backToPrompt)","Сообщение repCustom.htm repMan.htm"
+"l=$(sqlMyTickets.sql:escape)"">[SQL]","Имя Сообщения Менеджера Сообщения report/listMyTodo.htm report/listUnassigned.htm report/repMan.htm"
+last,repTab.htm?mode=new
+"Last Access","ЗАПРОС repTimeSheet.htm repTrend.htm ID:"
+Last:,"Запросы Подали Возврату категории право"
+last_x,"right"">Copyright &копия; 2003, Андрей Ivanov."
+"Later Messages",row_ver
+left,"Выполняйте s"
+Links,"Коммерческие Менеджеры sale/saleMan.htm saleNew.htm saleSearchOk.htm Сохраняют шкале Шкалу:"
+List,Поиск
+"List requests assigned to me","Продажа Поиска, которая удовлетворяет ВСЕ условия:"
+"List requests that have not been assigned",search_for
+"List the users that satisfy All conditions:","Уровень Безопасности:"
+"List, add, edit or delete news articles",Безопасность:
+"List, add, edit or delete product types","ВЫБОР '' С двойного ВЫБОРА '' R С ДВОЙНОГО ВЫБОРА '' R ОТ ДВОЙНОГО;"
+"List, add, edit or delete request priorities","ВЫБОР $(сначала) + 10 R С ДВОЙНОГО ВЫБОРА * ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) * ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР * ИЗ cs_kb_file ГДЕ kbf_kb_id = $ ВЫБОР(kb_id) * ИЗ cs_news ГДЕ news_id = $ ВЫБОР(news_id) * ИЗ cs_user ГДЕ user_id = '$(uid) ВЫБОР 1 С ДВОЙНОГО ВЫБОРА 1 ОТ ДВОЙНОГО;"
+"List, add, edit or delete request statuses","ВЫБЕРИТЕ 1 R С двойного ВЫБОРА -1 R С двойного ВЫБОРА 1 R ОТ ДВОЙНОГО ГДЕ '$(тип) = '1 ВЫБОР 1 R ОТ двойного ГДЕ '$(uid) &lt;&gt; '' ВЫБОР 1 R ОТ двойного ГДЕ '$(upwd) = '$(upwd2) ВЫБОР 1 R ОТ ДВОЙНОГО ГДЕ ('$(тип)' &lt;&gt; '1') И ('$(topic_id)' &lt;&gt; '') ВЫБОР 1 R ОТ ДВОЙНОГО ГДЕ ('$(тип)' &lt;&gt; '1') И ('$(topic_id)' = '') ВЫБОР 1 R ОТ ДВОЙНОГО;"
+"List, add, edit or delete sales records","ВЫБОР -1 R ОТ ДВОЙНОГО;"
+"List, add, edit or delete staff/customers","ВЫБЕРИТЕ 10 С ДВОЙНОГО ВЫБОРА 10 ОТ ДВОЙНОГО;"
+listOpen.htm,"ВЫБЕРИТЕ 12 R С двойного ВЫБОРА -2 R С ДВОЙНОГО ВЫБОРА 50 R С ДВОЙНОГО ВЫБОРА 7 R С двойного ВЫБОРА 'Возрастающего R ОТ ДВОЙНОГО"
+"Locked By:","СЛУЧАЙ ВЫБОРА, КОГДА '$(col1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col1) = 'Компания, ТОГДА 'компания, КОГДА '$(col1) = 'Отдел, ТОГДА 'отд, КОГДА '$(col1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col2) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col2) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col2) = 'Компания, ТОГДА 'компания, КОГДА '$(col2) = 'Отдел, ТОГДА 'отд, КОГДА '$(col2) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col2) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col3) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col3) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col3) = 'Компания, ТОГДА 'компания, КОГДА '$(col3) = 'Отдел, ТОГДА 'отд, КОГДА '$(col3) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col3) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort_col) = 'Продукт, ТОГДА 'продукт, КОГДА '$(sort_col) = 'Приоритет, ТОГДА 'приоритет, КОГДА '$(sort_col) = 'Конечный Срок, ТОГДА 'конечный срок, КОГДА '$(sort_col) = 'Поданное На', ТОГДА 'submitted_on, КОГДА '$(sort_col) = 'Назначенное На', ТОГДА 'assigned_on, КОГДА '$(sort_col) = 'Статус, ТОГДА 'статус ЕЩЕ '' КОНЕЦ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(sort1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(sort1) = 'Компания, ТОГДА 'компания, КОГДА '$(sort1) = 'Отдел, ТОГДА 'отд, КОГДА '$(sort1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(sort1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1_dir) = 'Сход, ТОГДА 'DESC ЕЩЕ '' КОНЕЦ R ОТ ДВОЙНОГО"
+"Locked On:","СЛУЧАЙ ВЫБОРА, КОГДА '$(sort2) = 'Потребитель ID', ТОГДА ', user_id', КОГДА '$(sort2) = 'Имя Потребителя', ТОГДА ', full_name', КОГДА '$(sort2) = 'Компания, ТОГДА ', компания', КОГДА '$(sort2) = 'Отдел, ТОГДА ', отд', КОГДА '$(sort2) = 'Email Адрес', ТОГДА ', email', КОГДА '$(sort2) = 'Номер Телефона', ТОГДА ', телефон' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(тип) = '1, ТОГДА 'Новая Группа', КОГДА '$(topic_id) = '', ТОГДА 'Новое Сообщение' ЕЩЕ 'Новая Тема' ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(usertype) = 'Менеджер, ТОГДА 'менеджер, КОГДА '$(usertype) = 'Персонал Члена', ТОГДА 'MemberStaff ЕЩЕ 'КОНЕЦ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(компания)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЯЯ(компания) ПОДОБНО ($(компания)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(отд)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЕЕ(отд) ПОДОБНО ($(отд)%'''') И ' ЕЩЕ '1 = 1' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(email)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(email) ПОДОБНО (''$(email)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(full_name)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(full_name) ПОДОБНО (''$(full_name)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'открытый текст') ЗАТЕМ 2, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'htmlFrag') ЗАТЕМ 3, КОГДА ('$(kb_content_url)' &lt;&gt; '') ЗАТЕМ 4, КОГДА ('$(kb_content_file)' &lt;&gt; '') ЗАТЕМ 5 ЕЩЕ 2 КОНЦОВ kb_type ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(телефон)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(телефон) ПОДОБНО ($(телефон)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(sort2)' &lt;&gt; '') И ('$(sort2_dir)' = 'Сход') ЗАТЕМ 'DESC ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(uid)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(user_id) ПОДОБНО (''$(uid)%'') И ' ЕЩЕ '' КОНЕЦ R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_kb_new, 1) КАК ЦЕЛОЕ) R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_news_new, 1) КАК ЦЕЛОЕ) С двойного СЛЕПКА ВЫБОРА(GEN_ID(cs_nf_new, 1) КАК ЦЕЛОЕ) С двойного слепка ВЫБОРА('today' как ДАТА) - 7 ОТ ДВОЙНОГО;"
+"Log Files:","СЛЕПОК ВЫБОРА('today' как ДАТА) ОТ ДВОЙНОГО;"
+"Log off","СЛЕПОК ВЫБОРА('today' КАК ДАТА) R С двойного ВЫБОРА СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(id) СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_if = $(kb_id)"
+"Log on","ВЫБОР СОЕДИНЯЕТ(kb_p1, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p1, СОЕДИНЯТЬ(kb_p2, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p2, СОЕДИНЯТЬ(kb_p3, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p3, СОЕДИНЯТЬ(kb_p4, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p4 ИЗ cs_kb ГДЕ kb_id = $ СЧЕТ ВЫБОРА(parent_id)(*) ИЗ cs_discuss ГДЕ di_type = 1 И"
+logOff.htm,"ВЫБЕРИТЕ СЧЕТ(is_def) cnt, СУММА СЛУЧАЯ(is_def), КОГДА 1, ТОГДА '' ЕЩЕ 'Пожалуйста выбирать общественный продукт как встроенный продукт.' КОНЕЦ cnt_def_str С СЧЕТА ВЫБОРА cs_priority(is_def) cnt, СУММА СЛУЧАЯ(is_def), КОГДА 1, ТОГДА '' ЕЩЕ 'Пожалуйста выбирать общественный продукт как встроенный продукт.' КОНЕЦ cnt_def_str С СЧЕТА ВЫБОРА cs_product(nf_id) cnt ИЗ cs_news_file ГДЕ nf_news_id = $ СЧЕТ ВЫБОРА(s1.news_id)(seq_num) cnt С СЧЕТА ВЫБОРА cs_status(ticket_id) cnt, СЛЕПОК('today' КАК ДАТА) dt ИЗ cs_ticket ГДЕ статус &lt;&gt; '$ СЧЕТ ВЫБОРА(sqlLastStatus)(user_id) cnt ИЗ cs_user ГДЕ $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $ ВЫБОР(cla_dept) 'дни R С двойного ВЫБОРА di_id ОТ (ВЫБОР di_id ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 ЗАКАЗ di_id ГДЕ ROWNUM &lt;= 10 ВЫБОР di_id ИЗ cs_discuss ГДЕ (di_id = $(di_id)) И (di_p5 НЕДЕЙСТВИТЕЛЬНО) ВЫБОР di_id, di_p1, di_p2, di_p3, di_p4, di_p5, di_type, di_title ИЗ cs_discuss ГДЕ di_id = $ ВЫБОР(di_id) di_id, di_title ИЗ cs_discuss ГДЕ (cs_discuss.di_id = $(di_id)) ВЫБОР di_id, di_title, di_detail ИЗ cs_discuss ГДЕ di_type = 1 ЗАКАЗ ВЫБОРОМ di_title di_id, di_topic_id, di_title, di_created_on, СОЕДИНЯТЬ(di_created_by, 'неизвестный') di_created_by ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 ЗАКАЗ ВЫБОРОМ di_id DESC 'Email Адреса' R С ДВОЙНОГО ВЫБОРА 'Ввода ваша id' R ОТ ДВОЙНОГО;"
+logon.htm,"ВЫБОР СНАЧАЛА 1 имя ИЗ ЗАКАЗА cs_status ВЫБОРОМ seq_num DESC GEN_ID(cs_nf_new, 1) nf_id С двойного ВЫБОРА 'index.htm R С ДВОЙНОГО ВЫБОРА 'index.htm R ОТ ДВОЙНОГО;"
+LTR,"ВЫБОР kb_id, kb_p1, kb_title, kb_security ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_p4, kb_type ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_title ИЗ cs_kb ГДЕ (kb_type = 1) И (kb_p1 = $(kb_id)) И (kb_security &lt; 1) ЗАКАЗ ВЫБОРОМ kb_title ASC kb_id, kb_title, KB_RANK, KB_VISITED, KB_OWNER, KB_CREATED_BY, KB_CREATED_ON, KB_UPDATED_BY, KB_UPDATED_ON, KB_TITLE, KB_SUMMARY, KB_NAME, KB_SIZE ИЗ cs_kb ГДЕ (kb_id = $(kb_id)) И (kb_security &lt; 1) ВЫБОР kb_id, kb_title, kb_security ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_title, kb_security, СОЕДИНЯТЬ(kb_p1, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p1, СОЕДИНЯТЬ(kb_p2, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p2, СОЕДИНЯТЬ(kb_p3, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p3, СОЕДИНЯТЬ(kb_p4, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p4, СОЕДИНЯТЬ(kb_p5, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p5 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(parent_id) kb_id, kb_type, kb_owner, kb_title, СЛУЧАЙ kb_type, КОГДА 1, ТОГДА '$(kb_type_cat) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР kb_id, kb_type, kb_owner, kb_title, KB_K1, KB_K2, KB_K3, KB_K4, KB_K5, KB_SECURITY, KB_RANK, СЛУЧАЙ kb_type, КОГДА 0, ТОГДА '$(kb_type_art), КОГДА 1, ТОГДА '$(kb_type_cat), КОГДА 2, ТОГДА '$(kb_type_plain), КОГДА 3, ТОГДА '$(kb_type_html), КОГДА 4, ТОГДА '$(kb_type_url), КОГДА 5, ТОГДА '$(kb_type_file) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР kb_id, kb_type, kb_title, kb_summary, kb_updated_on, kb_name, kb_size ИЗ cs_kb ГДЕ (kb_type &gt; 1) И (kb_security &lt; 1) И (kb_p1 = $(kb_id)) ЗАКАЗ ВЫБОРОМ kb_title ASC kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size ИЗ ЗАКАЗА cs_kb ВЫБОРОМ kb_rank ASC kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size ИЗ ЗАКАЗА cs_kb ВЫБОРОМ kb_visited DESC kb_title ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_type, kb_p1, kb_owner, kb_title, СЛУЧАЙ kb_type, КОГДА 1, ТОГДА '$(kb_type_cat) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kbf_id, kbf_name, kbf_size ИЗ cs_kb_file ГДЕ kbf_kb_id = $(kb_id) И kbf_type = 2 ВЫБОРА MAX(di_id) maxID, MIN(di_id) minID ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 И имя ВЫБОРА ИЗ ЗАКАЗА cs_product ПО ИМЕНИ ASC;"
+M,"ИМЯ ВЫБОРА ИЗ cs_product ГДЕ ('$(статус)' &lt;&gt; 'выводить') ИЛИ (диспетчер = '$(uid)') имя ВЫБОРА ИЗ cs_product ГДЕ диспетчер = '$ имя ВЫБОРА(uid), СОЕДИНЯЕТ(диспетчер, 'n') диспетчер, описание, is_def, product_type, СЛУЧАЙ is_def, КОГДА 1 ТОГДА 'умолчание ЕЩЕ '' КОНЕЦ is_def_str ИЗ ЗАКАЗА cs_product ПО ИМЕНИ имени ВЫБОРА, is_def ИЗ ЗАКАЗА cs_priority is_def DESC, имя ВЫБОРА имени, is_def ИЗ ЗАКАЗА cs_priority ПО ИМЕНИ имени ВЫБОРА, is_def, описание, СЛУЧАЙ is_def, КОГДА 1 ТОГДА 'умолчание ЕЩЕ '' КОНЕЦ is_def_str ИЗ ЗАКАЗА cs_priority ПО ИМЕНИ ИМЕНИ ВЫБОРА, ROW_VER, ДИСПЕТЧЕР, PRODUCT_TYPE, IS_DEF, TICKET_PRIORITY, ON_NEW_TICKET1, ON_NEW_TICKET2, ОПИСАНИЕ, СЛУЧАЙ on_new_ticket1, КОГДА 'notify_all ТОГДА '', КОГДА 'do_nothing ТОГДА '' ЕЩЕ 'проверяющее КОНЕЦ t1a, СЛУЧАЙ on_new_ticket1, КОГДА 'notify_all ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t1b, СЛУЧАЙ on_new_ticket1, КОГДА 'do_nothing ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t1c, СЛУЧАЙ on_new_ticket2, КОГДА 'notify_all ТОГДА '', КОГДА 'do_nothing ТОГДА '' ЕЩЕ 'проверяющее КОНЕЦ t2a, СЛУЧАЙ on_new_ticket2, КОГДА 'notify_all ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t2b, СЛУЧАЙ on_new_ticket2, КОГДА 'do_nothing ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t2c ИЗ cs_product ГДЕ имя = '$(имя) имя ВЫБОРА, row_ver, is_def, описание ИЗ cs_priority ГДЕ имя = '$ имя ВЫБОРА(name:unescape), row_ver, seq_num, описание ИЗ cs_status ГДЕ имя = '$(имя) имя ВЫБОРА, seq_num, описание ИЗ ЗАКАЗА cs_status именем выбора seq_num, val от dict где lang='en' и имя НАЧИНАЯ С 'ВЫБОРА kb_type_ news_id, news_title ИЗ cs_news ГДЕ news_id = $ ВЫБОР(news_id) news_id, news_title, news_created_on, news_created_by ИЗ ЗАКАЗА cs_news ВЫБОРОМ news_id DESC news_id, news_title, news_created_on, news_created_by ИЗ cs_news ГДЕ ((верхний(news_k1) = верхний('$(k)')) ИЛИ (верхний(news_k2) = верхний('$(k)')) ИЛИ (верхний(news_k3) = верхний('$(k)')) ИЛИ (верхний(news_k4) = верхний('$(k)')) ИЛИ (верхний(news_k5) = верхний('$(k)')) ИЛИ (верхний(news_title) ПОДОБНО верхнему('%$(k)%')) ИЛИ (news_detail ПОДОБНО '%$(k)%')) И (news_created_on НЕДЕЙСТВИТЕЛЬНО или ((news_created_on &gt;= '$(d1)') И (news_created_on &lt;= '$(d2)') )) ЗАКАЗ ВЫБОРОМ news_id DESC nf_id, nf_name, nf_size ИЗ cs_news_file ГДЕ nf_news_id = $ ВЫБОР(news_id) nf_id, nf_name, nf_size ИЗ cs_news_file ГДЕ nf_news_id = $"
+mailto:$s1.email),"ВЫБОР p.di_id di_id, СОЕДИНЯЮТ(p.di_title , '--') di_title ИЗ cs_discuss d, cs_discuss p ГДЕ (d.di_id = $(di_id)) И (p.di_id = d.di_p5) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p1) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p2) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p3) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p4) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p5) ВЫБОР 'пароля R ОТ ДВОЙНОГО;"
+"Main menu - Customer support","ВЫБЕРИТЕ 'Номер Телефона' R С ДВОЙНОГО ВЫБОРА 'Продукта R ОТ двойного"
+mainMenu$(User.user_type).htm,"ВЫБОР product_type ИЗ cs_product ГДЕ имя = $ ВЫБОР(set_def) rep_id, имя, rep_type, rep_url ИЗ ЗАКАЗА cs_report ПО ИМЕНИ ВЫБОРА 'Выбора ""КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ"" для людей Вы поддерживаете, ваши клиенты и бета тестеры.' С двойного ВЫБОРА 'Выбора [EndUser] для людей Вы поддерживаете, ваши клиенты и бета тестеры.' С двойного ВЫБОРА ticket_id, closed_on ИЗ cs_ticket ГДЕ closed_on &gt;= '$(startDate) И closed_on &lt; '$(endDate) ЗАКАЗ ВЫБОРОМ closed_on ticket_id, submitted_on ИЗ cs_ticket ГДЕ submitted_on &gt;= '$(startDate) И submitted_on &lt; '$(endDate) ЗАКАЗ ВЫБОРОМ submitted_on ticket_id, названием, submitted_by, assigned_to ИЗ cs_ticket ГДЕ статус &lt;&gt; '$ ЗАКАЗ(sqlLastStatus) $(sort_col) $(sort_dir), ВЫБОР ticket_id u.user_type ИЗ cs_user u ГДЕ ('$(utype)' &lt;&gt; 'Менеджер') ИЛИ (((верхний(u.user_id) = верхний('$(user_id)')) И (u.user_type = 'Менеджер'))) ВЫБОР 'Использования Последнего X' R С двойного ВЫБОРА 'Потребителя ID' R С ДВОЙНОГО ВЫБОРА 'Имени Потребителя' R С ДВОЙНОГО ВЫБОРА user_id ИЗ cs_user ГДЕ ('$(uid)' = '$(old_user_id)') ИЛИ (user_id = '$(uid)') ВЫБОР user_id ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И ((user_type = 'Менеджер') ИЛИ (user_type = 'StaffMember')) ВЫБОР user_id ИЗ cs_user ГДЕ user_id &lt;&gt; '$ ВЫБОР(uid) user_id ИЗ cs_user ГДЕ user_type &lt;&gt; 'ЗАКАЗ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ ВЫБОРОМ user_id user_id ИЗ cs_user ГДЕ user_type &lt;&gt; 'ЗАКАЗ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ ВЫБОРОМ user_id ASC user_id СОЕДИНЯЕТ($(n_col1), '-- никакие данные --') c1, СОЕДИНЯЕТ($(n_col2), '-- никакие данные --') c2, СОЕДИНЯЕТ($(n_col3), '-- никакие данные --') c3 ИЗ cs_user ГДЕ $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $ ЗАКАЗ(cla_dept) $(n_sort1) $(n_sort1_dir) $(n_sort2) $ ВЫБОРОМ(n_sort2_dir) user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') ВЫБОР user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И ((user_type = 'Менеджер') ИЛИ (user_type = 'StaffMember')) ВЫБОР user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И (user_type = 'Менеджер') выбранное посылать Seq.#"
+"Manage reports, search for requests, ...",seq_num
+Manager,"Номер Последовательности Серийного Номера Серийного Номера:"
+"Manager menu","Последовательное# начинает с:"
+"Max Columns:",Сеансы:
+"Max Users:","Установитесь Как Умолчание"
+max_col,set_def
+max_row,"Знак по для нового счета"
+maxCol,"минимальный номер последовательности. Запросы близко системную Сортировку На 1:"
+message,"Сортировка На 2:"
+"Message ID:",Сортировка:
+Message:,sort_col
+"Messages $(first) - $(last)",sort_dir
+multipart/form-data,sort1
+"My Account",sort1_dir
+"My Todo List",sort2
+n,sort2_dir
+n/a,"sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt"
+Name,sqlAttach1
+Name:,sqlCascade1
+"Name: $(curCat.KB_NAME) Size: $(curCat.KB_SIZE)",sqlCascade2
+"New Article",sqlCascade3
+"New article: [$(kb_title)] has been saved as article $(kb_id) (type: $(kb_type)).","sqlCat sqlCheckType sqlClosed sqlCountSubGroup sqlDelAtt sqlDeleteKB sqlDelPriority sqlDeleteNews sqlDelProduct sqlDelStatus sqlGroup sqlInsertPriority sqlLastStatus sqlLock sqlMaxMinIDs sqlMsg sqlMsgIDs sqlOpen sqlParent sqlPriorities"
+"New Category","sqlProducts sqlResetDef sqlSetDef sqlStaff sqlSubmitted sqlUpdatePriority sqlUpdateNews sqlUpdateProduct sqlUpdateStatus sqlUpdateUser sqlUpdContent"
+"New category: [$(kb_title)] has been saved as category $(kb_id) .","Тема ssage(s) посетила: $local.visited) Персонал времени(s) Время Начала Члена startDate государственного Состояния:"
+"New Cost:",Статус
+"New Crosstab","Менеджер Статуса Статуса status/statusMan.htm:"
+"New Custom","Статус: [$(имя)] удален."
+"New Group","Статус: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $ статус(old_name)."
+"New Priority","statusDelOk.htm statusDel.htm?name=$(s1.name:escape)"
+"New Product","statusEdit.htm?name=$(s1.name:escape) StatusEditOk.htm statusMan.htm statusNew.htm stylesheet подвергаться"
+"New Request","Представьте запрос Представлять запрос поддержки Поданный Представленным На Итоге:"
+"New Request Dispatching Rules:","Итог: $(curCat.KB_SUMMARY) Система systemInfo.htm t t type=""submit"" name=action value=""Preview HTML""/>"
+"New Request from $(request.submitted_by))","t) запрос(s). Максимум 500 может быть отображен."
+"New Request from $(uid)","td> текст text/css"
+"New Sale","текст/html; charset=utf-8 textType Благодарю вас за вашу обратную связь."
+"New Status","Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+"New status: [$(request.name))] has been saved.","Эта запись временно заблокирована."
+"New Tabular","Этот раздел заполнится с наиболее недавно объявленными статьями новостей."
+"New Tickets vs. Closed Tickets Trend Report","Этот раздел заполнится с три наиболее часто посещающее общественные статьи не в вышеуказанном рекомендуемом списке статьи из базы знаний."
+"New User","Этот раздел заполнится с верхними общественными статьями из базы знаний рекомендующейся редакторами."
+"New User: [",ticket_id
+new_cost,ticket_priority
+News,ticketHistEditOk.htm
+"News $(news_id) deleted","ticketNew.htm?submitted_by=$(request.submitted_by:escape) ticketNew.htm?submitted_by=$(uid:escape)"
+"News $(news_id) has been deleted.",tif_name)
+"News $(news_id) has been updated.","Название Сообщения Листа Названия Времени:"
+"News [$(news_title)] has been saved as $(news_id).","Чтобы отменить и возвратиться к Приоритетный Менеджер, пожалуйста, чтобы отменить и возвращаться к Менеджер Продукта, пожалуйста, чтобы отменить и возвращаться к Коммерческие Менеджеры, пожалуйста используйте Обратную кнопку окна просмотра."
+"News ID:","Чтобы отменить и возвратиться к Сеансовый Менеджер, пожалуйста используйте Обратную кнопку окна просмотра."
+"news ID: $(s1.news_id)","Чтобы отменить и возвратиться к Менеджер Статуса, пожалуйста, чтобы отменить и возвращаться к Менеджер Потребителя, пожалуйста используйте Обратную кнопку окна просмотра."
+"News manager","to.integer(session.usr_max_row)))> Итог: $local.count) или больше пользователей found. $local.count) пользователи отображенные."
+news/index.htm,для:
+news/newsView.htm?news_id=$(News.news_id),to_dispatcher
+news_detail,"Сегодня $(сегодня) верхняя тема"
+news_format,"Сообщение Темы:"
+news_id,topic_id
+news_k1,итог
+news_k2,"Итог Стоит: $local.total_cost) Итог минут: $ приоритет(total.cnt) Итог(ies): $ продукт(total.cnt) Итог(s): $ статус(total.cnt) Итог(es): $ пользователи(total.cnt) обнаруживались."
+news_k3,"Итог: $(total.cnt). Сообщение сгенерировало $(total.dt) tr> Тип типа:"
+news_k4,"type=""submit"" value=""Search""/>"
+news_k5,uid
+news_title,"Неназначенная Коррекция Запросов"
+NewsArt,"КОРРЕКЦИЯ cs_kb УСТАНАВЛИВАЕТ kb_id = $(kb_id), kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = $(kb_type), kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'сегодня', kb_title = '$(kb_title)', kb_summary = '$(kb_summary)', kb_security = $(kb_security), kb_rank = $(kb_rank), kb_name = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, kb_size = -1 КОРРЕКЦИЯ cs_kb УСТАНОВЛЕННАЯ kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = 1, kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'сегодня', kb_title = '$(kb_title:unescape)', kb_summary = '$(kb_summary:unescape)', kb_security = $(kb_security), kb_locked_by = НЕДЕЙСТВИТЕЛЬНЫЙ, kb_locked_on = НЕДЕЙСТВИТЕЛЬНЫЙ ГДЕ kb_id = $ КОРРЕКЦИЯ(kb_id) cs_kb УСТАНОВЛЕННАЯ kb_locked_by = $(user_id), kb_locked_on = 'сегодня ГДЕ kb_id = $ КОРРЕКЦИЯ(kb_id) cs_kb УСТАНАВЛИВАЮЩАЯ kb_visited = СЛУЧАЙ, КОГДА '$(голос) = 'да, ТОГДА kb_visited + 10, КОГДА '$(голос) = 'никакое, ТОГДА kb_visited - 10 ЕЩЕ КОНЦОВ kb_visited ГДЕ kb_id = $ КОРРЕКЦИЯ(id) cs_kb УСТАНАВЛИВАЕТ kb_visited = kb_visited + 1"
+NewsArt1,"КОРРЕКЦИЯ cs_kb_file УСТАНАВЛИВАЕТ kbf_kb_id =$(kb_id), kbf_type = $(kb_type), kbf_name = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, kbf_size = -1, kbf_content = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ГДЕ kbf_kb_id = $ КОРРЕКЦИЯ(kb_id) cs_news УСТАНАВЛИВАЕТ news_locked_by = '$(user_id)', news_locked_on = 'сегодня ГДЕ news_id = $(news_id) И (news_locked_by = '$(user_id) ИЛИ news_locked_by НЕДЕЙСТВИТЕЛЬНО);"
+newsDelete.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape),"КОРРЕКЦИЯ cs_news УСТАНАВЛИВАЕТ news_locked_by = НЕДЕЙСТВИТЕЛЬНЫЙ, news_locked_on = НЕДЕЙСТВИТЕЛЬНЫЙ, news_k1 = '$(news_k1)', news_k2 = '$(news_k2)', news_k3 = '$(news_k3)', news_k4 = '$(news_k4)', news_k5 = '$(news_k5)', news_updated_by = '$(user_id)', news_updated_on = 'сегодня', news_title = '$(news_title)', news_format = '$(news_format)', news_detail = '$(news_detail) ГДЕ news_id = $(news_id);"
+newsDelete2.htm?news_id=$(news_id)&newsHome=$(newsHome:escape),"КОРРЕКЦИЯ cs_news УСТАНАВЛИВАЕТ news_visited = news_visited + 1 ГДЕ news_id = $ КОРРЕКЦИЯ(news_id) cs_priority УСТАНОВЛЕННАЯ is_def = 0 ГДЕ is_def = 1 И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_priority УСТАНОВЛЕННАЯ is_def = 1 ГДЕ имя = '$(set_def) И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_priority УСТАНОВЛЕННАЯ row_ver = 1 + $(row_ver), имя = '$(имя)', описание = '$(описание) ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_product УСТАНОВЛЕННАЯ is_def = 0 ГДЕ is_def = 1 И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_product УСТАНОВЛЕННАЯ is_def = 1 ГДЕ имя = '$(set_def) И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_product УСТАНОВЛЕННАЯ row_ver = $(row_ver) + 1, имя = '$(имя)', диспетчер = '$(диспетчер)', product_type = '$(product_type)', is_def = $(is_def), ticket_priority = '$(ticket_priority)', on_new_ticket1 = '$(on_new_ticket1)', on_new_ticket2 = '$(on_new_ticket2)', описание = 'описания ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_product УСТАНОВЛЕННАЯ ticket_priority = НЕДЕЙСТВИТЕЛЬНЫМ, row_ver = row_ver + 1 ГДЕ ticket_priority = '$(имя) КОРРЕКЦИЯ cs_sale УСТАНОВЛЕННОЕ sa_product = НЕДЕЙСТВИТЕЛЬНЫМ, row_ver = row_ver + 1 ГДЕ sa_product = '$(имя) КОРРЕКЦИЯ cs_status УСТАНОВЛЕННОЕ row_ver = $(row_ver) + 1, имя = '$(имя)', seq_num = $(seq_num), описание = '$(описание) ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_ticket УСТАНАВЛИВАЮЩАЯ приоритет = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ приоритет = '$(имя) КОРРЕКЦИЯ cs_ticket УСТАНАВЛИВАЮЩИЙ продукт = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ продукт = '$(имя) КОРРЕКЦИЯ cs_ticket УСТАНАВЛИВАЮЩИЙ статус = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ статус = '$(имя) КОРРЕКЦИЯ cs_user УСТАНОВЛЕННЫЙ user_type = '$(user_type)', статус = '$(статус)', user_id = '$(uid)', user_pwd = '$(upwd)', email = '$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', компания = '$(компания)', отд = '$(отд)', телефон = '$(телефон)', факс = '$(факс)', адрес = '$(адрес)', город = '$(город)', состояние = '$(состояние)', индекс = '$(индекс)', страна = '$(страна)', user_note = '$(user_note) ГДЕ user_id = '$(old_user_id) Скорректированное: $(s1.news_updated_by) Скорректированное: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON) Скорректированное: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON) Скорректированное: $(s1.news_updated_on) upwd"
+newsDeleteOk.htm?news_id=$(news_id)&newsHome=$(newsHome:escape),upwd2
+newsEdit.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape),"Url)"">$request.backToPrompt)"
+newsEditOk.htm,"Использование Дат Последнего X Использования"
+newsHome,"Используйте один из следующих трех методов, чтобы ввести содержание статьи"
+newsNew.htm,use_what
+newsNewOk.htm,"Потребитель Потребителя ID"
+newsView.htm,"Потребитель ID начинает с:"
+newsView.htm?news_id=$(News.news_id:escape)&newsHome=$(p-combined:escape),"Потребитель ID:"
+newsView.htm?news_id=$(news_id)&newsHome=$(newsHome:escape),"Потребитель ID: (Необходимое) Имя Потребителя Менеджера Типа Потребителя Потребителя:"
+Next,"Потребитель user/forgot.htm user/signUp.htm user/userFind.htm user/userMan.htm: ["
+nf_id,user_id
+no,user_note
+"Note, all references to $(uid) will be cleared. For example, a change $(uid) made to a request will become one made by an unknown person. If this is not what you want, you may want to edit this user account and change its status to [disabled].",user_pwd
+Notes:,user_row_ver
+notify_all,user_type
+nowrap,"userDel.htm?uid=$(userDelOk.htm s1.user_id:escape)&backTo=$(backTo:escape)"
+OK,"userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm"
+old_att_id,userNew.htm?msg=Only+Manager+can+create+managers
+old_name,userNew.htm?msg=Password+mistyped
+old_owner,userNew.htm?msg=User+ID+has+already+been+used
+old_sa_serial,userNew.htm?msg=User+ID+must+be+supplied
+old_type,"userNewOk.htm usertype"
+old_user_id,userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)
+on_new_ticket1,userView.htm?msg=Only+Manager+can+modify+managers
+on_new_ticket2,"userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape) userView.htm?user_id=$(uid:escape)"
+"opyright &copy; 2003, Andrei Ivanov.",usr_col1
+ortTopX)),usr_col2
+"ot refresh, repost or reload.",usr_col3
+Owner:,usr_company
+"Owner: $(curCat.KB_OWNER)",usr_dept
+p_id,usr_email
+Parent,usr_full_name
+"Parent Category",usr_max_row
+"Parent Group",usr_phone
+parent_id,usr_sort1
+parentCat,usr_sort1_dir
+password,usr_sort2
+"Password (Again):",usr_sort2_dir
+"Password Again:",usr_user_id
+Password:,"utype v."
+path,"value=""Save""/>"
+phone,"Статья Вида видимая на каждом видимом на внутреннем персонале только Посетила:"
+"Phone Number","посещенное: $ время(s1.news_visited)(s) Ожидается 3 секунды."
+Phone:,"Ожидайтесь секунду."
+"plain text","waitafterlogon.htm?b=$(b) недельные недели"
+plainText,"Добро пожаловать $(user_id) - apooHelpDesk Ввод Поддержки Клиента в процессе развития Добро пожаловать, $(user_id) - Основное меню - поддержка Клиента - apooHelpDesk"
+"Please click browser's back button to go back.","Когда новый запрос в этом продукте подается но явно не назначается, если приоритет равняется или выше чем (то есть &gt;=) Почему Вы требовали пароль."
+"Please close this web browser to prevent other people from using its back button to see the information you have saved or retrieved during this session.",x_what
+"Please try again.","летние годы да"
+POST,"yright &копия; 2003, Андрей Ivanov."
+"Post Message","Почтовый Индекс:"
+"Post News",индекс
+"Post or reply to discussion messages","Сategory: [$(kb_title)] отредактирован $(kb_id)."
+"Posted By",-
+"Posted on from:","- $ байты(attachment.nf_size) - $(attachment.nf_time)"
+Poster,""" ?"
+"Powered by",""" name=action value=""Preview HTML""/>"
+Prev,"""$(s1.news_title)"""
+"Preview HTML",""". Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+Previous,""">Авторское Право &копия; 2003, Андрей Ivanov."
+Priority,"""user_id=$(user_id)"",""user_pwd=$(user_pwd)"" ""user_id=guest"",""user_pwd=guest"" $(appname) $(arSubmittedCount)"
+"Priority Manager",$(attachment.nf_id)
+"Priority Name","$(attachment.nf_id) -"
+priority/priorityMan.htm,$(attachment.nf_name)
+"Priority: [$(name)] has been deleted.","$ байты(attachment.nf_size);"
+"Priority: [$(name)] has been updated. Please update all reports that use $(old_name).","$(attachments.cnt) $(attUrl)"
+priorityDel.htm?name=$(s1.name:escape),$(b:unescape)
+priorityDelOk.htm,$(backTo)
+priorityEdit.htm?name=$(s1.name:escape),$(backTo:escape)
+priorityEditOk.htm,$(backTo:unescape)
+priorityMan.htm,$(catP1.kb_title)
+priorityMan.htm?set_def=$(s1.name:escape),$(catP2.kb_title)
+priorityNew.htm,$(catP3.kb_title)
+priorityNewOk.htm,$(catP4.kb_title)
+private,$(catP5.kb_title)
+Product,$(closedH)
+"Product Manager",$(col1)
+product/productMan.htm,$(col2)
+Product:,$(col3)
+"Product: [$(name)] has been updated. Please update all reports that use $(old_name).","$(компания) $(CSS)"
+"Product: [$name)] has been deleted.",$(d1:escape)
+product_type,$(d1:unescape)
+productDel.htm?name=$(s1.name:escape),$(d2:escape)
+productDelOk.htm,$(d2:unescape)
+productEdit.htm?name=$(s1.name:escape),$(отд)
+productEditOk.htm,$(di_id:escape)
+productMan.htm,"$(email) $(endDate) $(сначала)"
+productMan.htm?set_def=$(s1.name:escape),$(full_name)
+productNew.htm,$(group_name)
+productNewOk.htm,$(интервал)
+ptHelpWindow,$(IsDi_Id.di_title)
+public,$(k:escape)
+"py; 2003, Andrei Ivanov.",$(k:unescape)
+qm,$(kb_id)
+quarter,"$(kb_id) $(sqlParent.kb_title)"
+quarters,"$(последний раз)"
+query,$(last_x)
+r>,$(mainMenu)
+radio,$(max_col)
+Rank:,$(max_row)
+"Rank: $(curCat.KB_RANK) Visited: $(curCat.KB_VISITED)","$(msg) $(имя)"
+"Recommended Articles",$(News.news_created_by)&nbsp;
+recommended.htm,$(News.news_created_on)&nbsp;
+Refresh,$(News.news_title)
+"rei Ivanov.",$(News.rowodd#apbg#)
+reload.,$(news_id)
+rep$(s1.rep_type).htm?cro_id=$(s1.rep_id),"$(NewsArt.kb_summary)) $ байты(NewsArt.kb_size);"
+rep$(s1.rep_type)Del.htm?repID=$s1.rep_id),$(NewsArt.kb_title)
+rep$(s1.rep_type)Run.htm?cro_id=$(s1.rep_id),"$(NewsArt1.kb_summary) $ байты(NewsArt1.kb_size); Посещенное $(NewsArt1.kb_visited);"
+repCost.htm,$(NewsArt1.kb_title)
+repCro.htm?mode=new,$(newsHome)
+repCustom.htm,$(newsHome:unescape)
+repMan.htm,$(p_id)
+Report,$(parentCat.kb_title)
+"Report Manager",$(маршрут)
+"Report Name",$(path:escape)
+report/listMyTodo.htm,$(p-combined:escape)
+report/listUnassigned.htm,$(телефон)
+report/repMan.htm,"$(request.referer)) $(request.sql)) $(response.error))"
+repTab.htm?mode=new,$(s1.address)
+repTimeSheet.htm,$(s1.c1)
+repTrend.htm,$(s1.c2)
+"Request ID:",$(s1.c3)
+"Requests Submitted",$(s1.city)
+"Return to category",$(s1.company)
+right,$(s1.country)
+"right"">Copyright &copy; 2003, Andrei Ivanov.",$(s1.dept)
+row_ver,$(s1.description)
+Run,$(s1.dispatcher)
+s,$(s1.email)
+s1,$(s1.email_fmt)
+s2,$(s1.fax)
+s3,$(s1.full_name)
+sa_product,$(s1.is_def)
+sa_serial,$(s1.is_def_str)
+sale/saleMan.htm,"$(s1.itemtype) $(kb_id) ["
+saleNew.htm,$(s1.kb_id)
+"Sales Manager",$(s1.kb_k1)
+saleSearchOk.htm,"$(s1.kb_k1) $(s1.kb_k2) $(s1.kb_k3) $(s1.kb_k4) $(s1.kb_k5)"
+Save,$(s1.kb_k2)
+scale,$(s1.kb_k3)
+Scale:,$(s1.kb_k4)
+Search,$(s1.kb_k5)
+"Search sales that satisfy ALL conditions:",$(s1.kb_locked_by)
+search_for,$(s1.kb_locked_on)
+"Security Level:",$(s1.kb_name)
+Security:,$(s1.kb_owner)
+selected,$(s1.kb_p1)
+send,$(s1.kb_rank)
+Seq.#,$(s1.kb_security)
+seq_num,"$ байты(s1.kb_size) $(s3.kbf_content)"
+"Sequence Number",$(s1.kb_summary)
+"Serial Number",$(s1.kb_title)
+"Serial Number:",$(s1.kb_visited)
+"Serial# starts with:",$(s1.name)
+Sessions:,$(s1.news_detail)
+"Set As Default",$(s1.news_id)
+set_def,$(s1.news_k1)
+"Sign up for new account",$(s1.news_k2)
+"smallest sequence number. Requests closed by the system",$(s1.news_k3)
+"Sort By 1:",$(s1.news_k4)
+"Sort By 2:",$(s1.news_k5)
+"Sort By:",$(s1.news_title)
+sort_col,$(s1.phone)
+sort_dir,$(s1.product_type)
+sort1,$(s1.rep_id)
+sort1_dir,$(s1.rep_type)
+sort2,$(s1.row_ver)
+sort2_dir,$(s1.rowodd#apbg#)
+sqlAddArt,$(s1.sa_serial))
+sqlAddCat,$(s1.seq_num)
+sqlAddContent,$(s1.state)
+sqlAddCount,$(s1.status)
+sqlAddNews,$(s1.t1a)
+sqlAddProduct,$(s1.t1b)
+sqlAddStatus,$(s1.t1c)
+sqlAddTicketFile,$(s1.t2a)
+sqlAddUser,$(s1.t2b)
+sqlArt,$(s1.t2c)
+sqlAttach1,$(s1.ticket_priority)
+sqlCascade1,$(s1.user_id)
+sqlCascade2,$(s1.user_note)
+sqlCascade3,$(s1.user_pwd)
+sqlCat,$(s1.user_type)
+sqlCheckType,$(s1.zipcode)
+sqlClosed,$(s2.kbf_content)
+sqlCountSubGroup,$(s2.kbf_name)
+sqlDelAtt,$(s3.kbf_name)
+sqlDeleteKB,"$ байты(s3.kbf_size)"
+sqlDeleteNews,$(sort_col)
+sqlDelPriority,$(sort_dir)
+sqlDelProduct,$(sort1)
+sqlDelStatus,$(sort1_dir)
+sqlGroup,$(sort2)
+sqlInsertPriority,$(sort2_dir)
+sqlLastStatus,"$(sqlArt.kb_summary) (Эта помощь статьи?"
+sqlLock,$(sqlArt.kb_title)
+sqlMaxMinIDs,$(sqlCat.kb_title)
+sqlMsg,$(sqlGroup.di_detail)
+sqlMsgIDs,$(sqlGroup.di_title)
+sqlOpen,$(sqlMsg.di_created_by)
+sqlParent,$(sqlMsg.di_created_on)
+sqlPriorities,$(sqlMsg.di_title)
+sqlProducts,$(sqlOpen.assigned_to)
+sqlResetDef,$(sqlOpen.Column1)
+sqlSetDef,$(sqlOpen.submitted_by)
+sqlStaff,$(sqlOpen.ticket_id)
+sqlSubmitted,$(sqlOpen.title)
+sqlUpdateNews,$(sqlParent.kb_title)
+sqlUpdatePriority,$(sqlPriorities.name)
+sqlUpdateProduct,$(sqlStaff.user_id)
+sqlUpdateStatus,$(startDate)
+sqlUpdateUser,$(ticket_id)
+sqlUpdContent,"$(ticketFolder)ticketView.htm?$(param) $(название) $(тема)"
+"ssage(s) Topic visited: $local.visited) time(s)",$(topic_id)
+"Staff Member",$(total.cnt_def_str)
+"Start Time","$(тип) $(uid)"
+startDate,$(use_what)
+state,$(user_id)
+State:,$(user_pwd)
+Status,$(usr_col1)
+"Status Manager",$(usr_col2)
+status/statusMan.htm,$(usr_col3)
+Status:,$(usr_company)
+"Status: [$(name)] has been deleted.",$(usr_dept)
+"Status: [$(name)] has been updated. Please update all reports that use $(old_name) status.",$(usr_email)
+statusDel.htm?name=$(s1.name:escape),$(usr_full_name)
+statusDelOk.htm,$(usr_max_row)
+statusEdit.htm?name=$(s1.name:escape),$(usr_phone)
+StatusEditOk.htm,$(usr_sort1)
+statusMan.htm,$(usr_sort1_dir)
+statusNew.htm,$(usr_sort2)
+stylesheet,$(usr_sort2_dir)
+submit,$(usr_user_id)
+"Submit a request",$(x_what)
+"Submit a support request","$arClosedCount.getAt(local.i)) $local.path) $local.scale) $local.submittedH) $local.userViewUrl) $request.backToPrompt) $request.backToUrl)"
+"Submitted By",$request.sa_serial)
+"Submitted On",$request.ticket_id)
+Summary:,$request.url)
+"Summary: $(curCat.KB_SUMMARY)",$request.user_id)
+System,$s1.row_ver)
+systemInfo.htm,$s1.sa_product)
+t,$s1.status)
+"t type=""submit"" name=action value=""Preview HTML""/>",$s1.user_id)
+"t) request(s). Maximum 500 can be displayed.",$s1.user_row_ver)
+td>,$session.mainMenu)
+text,$session.sa_product)
+text/css,$session.sa_serial)
+"text/html; charset=utf-8",$session.ticketFolder)ticketView.htm
+textType,"&копия; 2003, Андрей Ivanov."
+"Thank you for your feedback.",&lt;:
+"That is normal. Do not refresh, repost or reload.",&nbsp;
+"This record is temporarily locked.","($sqlFiles.tif_size) байты; ID: $sqlFiles.tif_id)) (ВОЙДУТ в число 0..99. Влияет На свою позицию в рекомендуемом списке.)"
+"This section will be populated with the most recently posted news articles.","(Метод 1) Ввод (Метод 2) Входит в HTTP адрес:"
+"This section will be populated with the three most frequently visited public articles not in the above recommended article list from the knowledge base.","(Метод 3) Загружает файл:"
+"This section will be populated with the top public articles from the knowledge base recommended by the editors.","(только для чтения)"
+ticket_id,"(сеансы автоматически удалены $server.sessionTimeout) минуты после того, как они создались)"
+ticket_priority,)
+ticketHistEditOk.htm,)>
+ticketNew.htm?submitted_by=$(request.submitted_by:escape),","
+ticketNew.htm?submitted_by=$(uid:escape),". $local.count) продажа отображенная."
+tif_name),../../select.htm
+"Time Sheet Report",../accessdenied.htm?b=$(p-combined:escape)
+title,../accessdenied.htm?b=discuss/index.htm
+Title:,../accessdenied.htm?b=kb/index.htm
+"To cancel and go back to Priority Manager, please",../accessdenied.htm?b=priority/priorityMan.htm
+"To cancel and go back to Product Manager, please",../accessdenied.htm?b=product/productMan.htm
+"To cancel and go back to Sales Manager, please use the browser's Back button.",../accessdenied.htm?b=status/statusMan.htm
+"To cancel and go back to Session Manager, please use the browser's Back button.",../accessdenied.htm?b=user/userMan.htm
+"To cancel and go back to Status Manager, please",../accessdenied.htm?b=user/userNew.htm
+"To cancel and go back to User Manager, please use the browser's Back button.",../help/diHelp.html
+"to.integer(session.usr_max_row)))> Total: $local.count) or more users found. $local.count) users displayed.",../help/htmlFragHelp.html
+to:,../help/kbHelp.html
+to_dispatcher,../help/listOpenHelp.html
+"Today $(today)",../help/productHelp.html
+top,../help/repManHelp.html
+topic,../help/statusEditHelp.html
+"Topic Message:",../index.htm
+topic_id,../mainMenuManager.htm
+total,../report/repTab.htm?mode=new&submitted_by=$(s1.user_id:escape)
+"Total Cost: $local.total_cost) minutes",../select.htm
+"Total: $(total.cnt) priority(ies)",../ticket/ticketNew.htm?submitted_by=$(s1.user_id:escape)
+"Total: $(total.cnt) product(s)",../user/userView.htm?user_id=$(s1.dispatcher:escape)
+"Total: $(total.cnt) status(es)",/
+"Total: $(total.cnt) users found.",/body>
+"Total: $(total.cnt). Report generated $(total.dt)","/hd/copyright.htm /hd/cs/help/index.html /log/day01.txt /log/day02.txt /log/day03.txt /log/day04.txt /log/day05.txt /log/day06.txt /log/day07.txt /log/day08.txt /log/day09.txt /log/day10.txt /log/day11.txt /log/day12.txt /log/day13.txt /log/day14.txt /log/day15.txt /log/day16.txt /log/day17.txt /log/day18.txt"
+tr>,"/log/day19.txt /log/day20.txt /log/day21.txt /log/day22.txt /log/day23.txt /log/day24.txt /log/day25.txt /log/day26.txt /log/day27.txt /log/day28.txt /log/day29.txt /log/day30.txt /log/day31.txt"
+type,/td>
+Type:,/tr>
+"type=""submit"" value=""Search""/>",:
+uid,": """
+"Unassigned Requests",": $(news_title)"
+Update,": $(s1.itemtype) $(kb_id) Удаляет : $(s1.itemtype) $(kb_id) Удаляет Подтверждение"
+"Updated by: $(s1.news_updated_by)",": $(s1.news_title)"
+"Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)",": $(s3.cs_kb_file) $(s3.kbf_id) $(s3.kbf_content) $(s3.kbf_name)"
+"Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)",": Категория $(kb_id) Отредактировала : Удалите $ Пользователя(uid) : Удалите Новости : Удалите Приоритет : Удалите Продукт : Удалите Продажу : Удалитесь Сеанс : Удалите Статус : Дискуссия Группирует : Категория Редактирования $(kb_id) : История Редактирования : Новости Редактирования : Приоритет Редактирования : Продукт Редактирования : Продажа Редактирования $s1.sa_serial) : Статус Редактирования : Пользователь Редактирования $(uid) : База Знаний : $(curCat.kb_title) : Протокол : Новая Статья Сохранила"
+"Updated: $(s1.news_updated_on)",": Новая Категория : Новая Категория Сохранила : Новый Приоритет : Новый Приоритет Сохранил : Новый Продукт : Новый Продукт Сохранил"
+upwd,": Новые Запросы vs. Закрыли Сообщение Направления Запросов : Новый Статус : Новый Статус Сохранил : Новый Пользователь : Новый Пользователь Сохранил : Новости"
+upwd2,": Открытые Запросы : Приоритет Удалил : Приоритетный Менеджер : Приоритет Скорректировал : Продукт Удалил : Менеджер Продукта : Продукт Скорректировал : Менеджер Сообщения : Результат : Коммерческие Менеджеры : Статус Удалил : Менеджер Статуса : Статус Скорректировал : Системная Информация : Пользователь $(old_user_id) Скорректировал : Пользователь $(uid) : Менеджер Пользователя"
+"Url)"">$request.backToPrompt)",?
+"Use Dates",?kb_id=$(sqlCat.kb_id)
+"Use Last X",]
+"Use one of the following three methods to input article content","] и все decendants удален."
+use_what,"] и все под-категории и статьи?"
+User,"] создан."
+"User ID","] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_user_id). Если Вы используете ваше окно просмотра Обратной Стороны/Пересылать кнопку возвращаться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Страница Истекла], [, Вы хотите вновь послать данные формы Потери Данных] or []. Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+"User ID starts with:",|
+"User ID:","| Отредактируйте Пользователя"
+"User ID: (Required)",+4
+"User Manager","=""действие"" value=""Cancel""/> =""apbg""> =""Список""/>"
+"User Name","=""right"">Copyright &копия; 2003, Андрей Ivanov."
+"User Type:",=$(first)+10
+user/forgot.htm,=$(first)+19
+user/signUp.htm,"=$(sqlUnassigned.sql:escape)"">[SQL] =G1($(first)-10) =G1($(first)-10)+9"
+user/userFind.htm,>
+user/userMan.htm,"> 0) )>"
+"User: [",0
+user_id,"003, Андрей Ivanov."
+user_note,1
+user_pwd,"1 Статьи"
+user_row_ver,1%
+user_type,"1) // одна инициализация времени устанавливает session.sa_max_row = 500; установите session.sa_col1 = 'Продукт; установите session.sa_col2 = 'Проданное, чтобы'; установите session.sa_col3 = 'Проданное На'; установите session.sa_sort1 = 'Серийный Номер'; установите session.sa_sort1_dir = 'Возрастание; установите session.sa_sort2 = ''; установите session.sa_sort2_dir = 'Возрастание; установите session.sa_serial = ''; установите session.sa_product = ''; установите session.sa_sold_to = ''; установите session.sa_sold_on1 = ''; установите session.sa_sold_on2 = ''; endif 1; url=mainMenu$(User.user_type).htm?user_id=$(user_id)&user_pwd=$(user_pwd)"
+userDel.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),10
+userDelOk.htm,10%
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),100
+userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape),100%
+userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape),11
+userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape),12
+userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape),13
+userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),14
+userEdit.htm?uid=$(user_id),15
+userEditOk.htm,16
+userMan.htm,17
+userManOk.htm,18
+userNew.htm,19
+userNew.htm?msg=Only+Manager+can+create+managers,2
+userNew.htm?msg=Password+mistyped,"2 Новый Запрос"
+userNew.htm?msg=User+ID+has+already+been+used,20
+userNew.htm?msg=User+ID+must+be+supplied,200
+userNewOk.htm,"2003, Андрей Ivanov."
+usertype,21
+userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),22
+userView.htm?msg=Only+Manager+can+modify+managers,23
+userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape),24
+userView.htm?user_id=$(uid:escape),25
+usr_col1,25%
+usr_col2,26
+usr_col3,27
+usr_company,28
+usr_dept,29
+usr_email,3
+usr_full_name,"3 Дискуссии 3, Андрей Ivanov."
+usr_max_row,"3; url=$(b:unescape) 3; url='index.htm?kb_id=$(parent_id)'"
+usr_phone,30
+usr_sort1,31
+usr_sort1_dir,35
+usr_sort2,4
+usr_sort2_dir,"4 Сообщения"
+usr_user_id,400
+utype,45
+v.,5
+"value=""Save""/>","5 Неназначенных запросов"
+"View article",50
+"visible to everybody",50%
+"visible to internal staff only",55
+Visited:,6
+"visited: $(s1.news_visited) time(s)","6 Пользователей"
+"Wait a 3 seconds.",60
+"Wait a second.",60%
+waitafterlogon.htm?b=$(b),65
+week,7
+weeks,"7 Продуктов"
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress",70
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk",8
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)","8 Приоритетов"
+"Why you asked for password.",80
+x_what,80%
+year,9
+years,"9 Подсказка"
+yes,90%
+"yright &copy; 2003, Andrei Ivanov.",99
+"Zip Code:",99%
+zipcode,"Доступ отвергнут"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",accessdenied.htm?b=index.htm
+"UPDATE cs_kb SET kb_visited = CASE WHEN '$(vote)' = 'yes' THEN kb_visited + 10 WHEN '$(vote)' = 'no' THEN kb_visited - 10 ELSE kb_visited END WHERE kb_id = $(id)","активный адрес Адреса действия:"
+"'$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', company = '$(company)', dept = '$(dept)', phone = '$(phone)', fax = '$(fax)', address = '$(address)', city = '$(city)', state = '$(state)', zipcode = '$(zipcode)', country = '$(country)', user_note = '$(user_note)' WHERE user_id = '$(old_user_id)'","Улучшенный Поиск"
+"Updated by: $(s1.news_updated_by)","align=""right"">Copyright &копия; 2003, Андрей Ivanov."
+"Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)","Все открытые запросы перечисляя сообщение и Компания начинает с:"
+"Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)","и Отдел начинает с:"
+"Updated: $(s1.news_updated_on)","и Email Адрес начинает с:"
+upwd,"и Номер Телефона начинает с:"
+upwd2,"и Имя Пользователя начинает с:"
+"Url)"">$request.backToPrompt)",apbg
+"Use Dates","apoo редактор, http://commandus.com/ ApooHelpDesk"
+"Use Last X","apooHelpDesk ПОДДЕРЖКА Клиента $(сегодня) apooHelpDesk Поддержка Клиента Удаляет Новости apooHelpDesk Поддержки Клиента Удалять Приоритет apooHelpDesk Поддержки Клиента Удалять Продукт apooHelpDesk Поддержки Клиента Удалять Статус apooHelpDesk Поддержки Клиента Удалять Потребителя apooHelpDesk Дискуссии Поддержки Клиента Группирует apooHelpDesk Пост Дискуссии Поддержки Клиента apooHelpDesk Категории Редактирования Поддержки Клиента apooHelpDesk Новостей Редактирования Поддержки Клиента apooHelpDesk Приоритета Редактирования Поддержки Клиента apooHelpDesk Продукта Редактирования Поддержки Клиента apooHelpDesk Статуса Редактирования Поддержки Клиента apooHelpDesk Потребителя Редактирования Поддержки Клиента apooHelpDesk Поддержки Клиента Knowledke Базового Голоса Статьи apooHelpDesk Поддержки Клиента Новых Новостей apooHelpDesk Поддержки Клиента Нового Приоритета apooHelpDesk Поддержки Клиента Нового Приоритета Сохраняющий apooHelpDesk Поддержку Клиента Нового Продукта apooHelpDesk Поддержки Клиента Нового Продукта Сохраненную"
+"Use one of the following three methods to input article content","apooHelpDesk ПОДДЕРЖКА Клиента Нового Статуса apooHelpDesk Поддержки Клиента Нового Статуса Сохранила apooHelpDesk Поддержку Клиента Новых Билетов vs. Закрывающую Сообщение Сообщения Направления Билетов apooHelpDesk Поддержки Клиента Нового Потребителя apooHelpDesk Новостей Поддержки Клиента apooHelpDesk Приоритета Поддержки Клиента Удаляющее apooHelpDesk Менеджера Приоритета Поддержки Клиента apooHelpDesk Приоритета Поддержки Клиента Корректирующего apooHelpDesk Продукт Поддержки Клиента Удаляющий apooHelpDesk Продукт Поддержки Клиента Редактирующий apooHelpDesk Менеджера Продукта Поддержки Клиента apooHelpDesk Менеджера Сообщения Поддержки Клиента apooHelpDesk Сообщения Поддержки Открытых Запросов Клиента apooHelpDesk Менеджера Статуса Поддержки Клиента apooHelpDesk Статуса Поддержки Клиента Корректирующего apooHelpDesk Список Потребителя Поддержки Клиента apooHelpDesk Менеджера Потребителя Поддержки Клиента apooHelpDesk Потребителя Поддержки Клиента Корректирующий apooHelpDesk Новости Вида Поддержки Клиента: $(news_id) apooHelpDesk Потребитель Вида Поддержки Клиента"
+use_what,"apooHelpDesk ПОДДЕРЖКА Клиента: Доступ Отвергнутый apooHelpDesk Удалять Пункт Базы Знаний apooHelpDesk Удалять Пункт Базы Знаний Подтверждения apooHelpDesk Детали Пункта"
+User,"apooHelpDesk СТАТЬЯ Базы Знаний Сохранила на $(kb_id) apooHelpDesk Редактировании Базы Знаний Статьи apooHelpDesk Новой Статьи Базы Знаний apooHelpDesk Новой Статьи Базы Знаний Сохраненном в $(parent_id) apooHelpDesk Виде Базы Знаний Статьи apooHelpDesk Статуса Удаляющем Приложение"
+"User ID","назначены статус с самым большим номером последовательности."
+"User ID starts with:","Вы уверены Вы хотите удалить $(s1.itemtype) $(kb_id) [ Вы уверены Вы хотите удалиться все сеансы $request.user_id)?"
+"User ID:","Вы уверены Вы хотите удалить новости Вы уверены Вы хотите удалить Приоритет: $(имя)?"
+"User ID: (Required)","Вы уверены Вы хотите удалить Продукт: $(имя)?"
+"User Manager","Вы уверены Вы хотите удалить Продажу: $request.sa_serial)?"
+"User Name","Вы уверены Вы хотите удалить Статус: $(имя)?"
+"User Type:","Вы уверены Вы хотите удалить Потребителя: $(uid)?"
+user/forgot.htm,"Статья: [$(kb_title)] сохранен как статья $(kb_id) (тип: $(kb_type))."
+user/signUp.htm,Статьи
+user/userFind.htm,"Статьи Рекомендовались Возрастанием Редакторов"
+user/userMan.htm,"назначьте это в диспетчере и уведомьте его/ее Назначенный На Присвоенном"
+"User: [",att_count
+"View article",att_id
+"visible to everybody","Подключите файл:"
+"visible to internal staff only","Подключите Файл:"
+Visited:,"Присоединение присоединения(s):"
+"visited: $(s1.news_visited) time(s)",attachment1
+"Wait a 3 seconds.","Присоединения Присоединений:"
+"Wait a second.",b
+waitafterlogon.htm?b=$(b),"Обратная Сторона"
+week,"Обратная Сторона на Обратной Стороне категории, чтобы Указать Обратно в родительской категории Обратно Приоритетному Менеджеру Обратно Менеджеру Продукта Обратно Менеджеру Статуса Обратно Менеджеру Потребителя backTo backToPrompt backToUrl нижней Категории Категории Категорий:"
+weeks,catP1
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress",catP2
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk",catP3
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",catP4
+"Why you asked for password.",catP5
+x_what,центр
+year,check1
+years,check2
+yes,check3
+"yright &copy; 2003, Andrei Ivanov.",check5
+"Zip Code:",check6
+zipcode,"проверенный городской Город:"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",cla_company
+user_note,cla_dept
+htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape),cla_email
+usertype,cla_full_name
+"value=""Save""/>",cla_phone
+"View article",cla_user_id
+"visible to everybody","нажмите здесь col"
+"visible to internal staff only",col1
+Visited:,col2
+"visited: $(s1.news_visited) time(s)",col3
+"Wait a 3 seconds.","colspan=""3"">"
+"Wait a second.","Тип Столбца:"
+waitafterlogon.htm?b=$(b),"Компания компании Command:"
+week,"Сконфигурируйте мое окно просмотра паутины Содержания Подтверждения configureBrowser.htm"
+weeks,"ДОВОЛЬНЫЙ-Язык Довольный-Тип Продолжает печенье"
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress","Авторское Право &копия; 2003, Андрей Ivanov."
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk","Стойте Страны страны Сообщения:"
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)","Создайте Новую категорию - статьи Базы Знаний - поддержка Клиента - apooHelpDesk Созданное: $(s1.news_updated_by) Созданное: $ Создатель(s1.news_created_on): $(curCat.KB_CREATED_BY) $(curCat.KB_CREATED_ON) Создатель: $(s1.KB_CREATED_BY) $(s1.KB_CREATED_ON) cs_news_file/nf_id/nf_content/$(attachment.nf_id) curCat Текущий потребитель: $(user_id) [ Поддержка Клиента поддержки Базы Знаний меню Клиента Клиента меню основы Поддержки d>"
+"Why you asked for password.",d1
+x_what,d2
+year,"Ежедневные регистрационные файлы показывают деятельность/ошибки с Даты заданий фона"
+years,"Дата &gt;=:"
+yes,"Область Даты:"
+"yright &copy; 2003, Andrei Ivanov.","дневные дни db"
+"Zip Code:","db=$(DB_HD) Умолчание Конечного Срока defaultparam defaultparams Удаляется"
+zipcode,"Категория Delete"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .","УДАЛИТЕСЬ ИЗ cs_kb ГДЕ kb_id = $(kb_id);"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .","УДАЛИТЕСЬ ИЗ cs_news ГДЕ news_id = $(news_id) УДАЛЯЕТСЯ ИЗ cs_news_file ГДЕ nf_id = $(old_att_id) УДАЛЯЕТСЯ ИЗ cs_priority ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_product ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_status ГДЕ имя = '$(имя) Отдел Отдела:"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",отд
+"Enter your id' R FROM DUAL;","Сход Описания Описания:"
+"SELECT FIRST 1 name FROM cs_status ORDER BY seq_num DESC","Подробная Деталь:"
+"SELECT GEN_ID(cs_nf_new, 1) nf_id FROM dual",Детали:
+"SELECT 'index.htm' R FROM DUAL","dex.htm?path=$(request.path:escape)"">OK"
+"SELECT 'index.htm' R FROM DUAL;",di_detail
+"SELECT kb_id, kb_p1, kb_title, kb_security FROM cs_kb WHERE kb_id = $(kb_id)",di_group
+"SELECT kb_id, kb_p4, kb_type FROM cs_kb WHERE kb_id = $(kb_id)",di_id
+"SELECT kb_id, kb_title FROM cs_kb WHERE (kb_type = 1) AND (kb_p1 = $(kb_id)) AND (kb_security &lt; 1) ORDER BY kb_title ASC",di_k1
+"SELECT kb_id, kb_title, KB_RANK, KB_VISITED, KB_OWNER, KB_CREATED_BY, KB_CREATED_ON, KB_UPDATED_BY, KB_UPDATED_ON, KB_TITLE, KB_SUMMARY, KB_NAME, KB_SIZE FROM cs_kb WHERE (kb_id = $(kb_id)) AND (kb_security &lt; 1)",di_k2
+"SELECT kb_id, kb_title, kb_security FROM cs_kb WHERE kb_id = $(kb_id)",di_k3
+"SELECT kb_id, kb_title, kb_security, COALESCE(kb_p1, 'NULL') kb_p1, COALESCE(kb_p2, 'NULL') kb_p2, COALESCE(kb_p3, 'NULL') kb_p3, COALESCE(kb_p4, 'NULL') kb_p4, COALESCE(kb_p5, 'NULL') kb_p5 FROM cs_kb WHERE kb_id = $(parent_id)",di_k4
+"SELECT kb_id, kb_type, kb_owner, kb_title, CASE kb_type WHEN 1 THEN '$(kb_type_cat)' ELSE '$(kb_type_art)' END itemtype FROM cs_kb WHERE kb_id = $kb_id",di_k5
+"SELECT kb_id, kb_type, kb_owner, kb_title, KB_K1, KB_K2, KB_K3, KB_K4, KB_K5, KB_SECURITY, KB_RANK, CASE kb_type WHEN 0 THEN '$(kb_type_art)' WHEN 1 THEN '$(kb_type_cat)' WHEN 2 THEN '$(kb_type_plain)' WHEN 3 THEN '$(kb_type_html)' WHEN 4 THEN '$(kb_type_url)' WHEN 5 THEN '$(kb_type_file)' ELSE '$(kb_type_art)' END itemtype FROM cs_kb WHERE kb_id = $kb_id",di_title
+"SELECT kb_id, kb_type, kb_title, kb_summary, kb_updated_on, kb_name, kb_size FROM cs_kb WHERE (kb_type &gt; 1) AND (kb_security &lt; 1) AND (kb_p1 = $(kb_id)) ORDER BY kb_title ASC",di_title0
+"SELECT kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size FROM cs_kb ORDER BY kb_rank ASC","Эта подсказка статьи?"
+"SELECT kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size FROM cs_kb ORDER BY kb_visited DESC",dif_i??
+"SELECT kb_title FROM cs_kb WHERE kb_id = $(kb_id)",diGroup.htm?di_id=$request.di_id)
+"SELECT kb_type, kb_p1, kb_owner, kb_title, CASE kb_type WHEN 1 THEN '$(kb_type_cat)' ELSE '$(kb_type_art)' END itemtype FROM cs_kb WHERE kb_id = $(kb_id)","diGroup.htm?path=$(path:escape) diNew.htm?type=1&path=$(path:escape) diNewOk.htm diNew.htm?type=2&path=$(path:escape)"
+"SELECT kbf_id, kbf_name, kbf_size FROM cs_kb_file WHERE kbf_kb_id = $(kb_id) AND kbf_type = 2","ding=""0"">"
+"SELECT MAX(di_id) maxID, MIN(di_id) minID FROM cs_discuss WHERE di_type &lt;&gt; 1 AND","выведенная из строя Дискуссия Дискуссии discuss/index.htm Группирует diSearch.htm?path=$(path:escape) Диспетчер диспетчера diSearchOk.htm:"
+"SELECT name FROM cs_product ORDER BY name ASC;",Дисплей:
+"SELECT name FROM cs_product WHERE ('$(status)' &lt;&gt; 'disabled') OR (dispatcher = '$(uid)')",diTopic.htm?$local.cgiParam)
+"SELECT name FROM cs_product WHERE dispatcher = '$(uid)'","diTopic.htm?mid=$(sqlMsg.di_id)&topic_id=$(sqlMsg.di_topic_id)&path=$(path:escape)#$(sqlMsg.di_id) Вы хотите удалить $(s1.itemtype) $(kb_id) [ Вы хотите удалить новости"
+"SELECT name, COALESCE(dispatcher, 'n/a') dispatcher, description, is_def, product_type, CASE is_def WHEN 1 THEN 'default' ELSE '' END is_def_str FROM cs_product ORDER BY name",do_nothing
+"SELECT name, is_def FROM cs_priority ORDER BY is_def DESC, name","не назначайте или уведомляйте, что кто-нибудь не назначать, уведомляйте все сотрудники и менеджеры dy> e"
+"SELECT name, is_def FROM cs_priority ORDER BY name",Редактирование
+"SELECT name, is_def, description, CASE is_def WHEN 1 THEN 'default' ELSE '' END is_def_str FROM cs_priority ORDER BY name","Отредактируйте категорию email"
+"SELECT NAME, ROW_VER, DISPATCHER, PRODUCT_TYPE, IS_DEF, TICKET_PRIORITY, ON_NEW_TICKET1, ON_NEW_TICKET2, DESCRIPTION, CASE on_new_ticket1 WHEN 'notify_all' THEN '' WHEN 'do_nothing' THEN '' ELSE 'checked' END t1a, CASE on_new_ticket1 WHEN 'notify_all' THEN 'checked' ELSE '' END t1b, CASE on_new_ticket1 WHEN 'do_nothing' THEN 'checked' ELSE '' END t1c, CASE on_new_ticket2 WHEN 'notify_all' THEN '' WHEN 'do_nothing' THEN '' ELSE 'checked' END t2a, CASE on_new_ticket2 WHEN 'notify_all' THEN 'checked' ELSE '' END t2b, CASE on_new_ticket2 WHEN 'do_nothing' THEN 'checked' ELSE '' END t2c FROM cs_product WHERE name = '$(name)'","Email Адрес"
+"SELECT name, row_ver, is_def, description FROM cs_priority WHERE name = '$(name:unescape)'","Email Формат для ToDo Напоминания:"
+"SELECT name, row_ver, seq_num, description FROM cs_status WHERE name = '$(name)'","Email Тип:"
+"SELECT name, seq_num, description FROM cs_status ORDER BY seq_num",Email:
+"select name, val from dict where lang='en' and name STARTING WITH 'kb_type_'",email_fmt
+"SELECT news_id, news_title FROM cs_news WHERE news_id = $(news_id)","Конечный Пользователь endDate endwhile )> en-он"
+"SELECT news_id, news_title, news_created_on, news_created_by FROM cs_news ORDER BY news_id DESC","euTicketNew.htm ВЫПОЛНЯТЬСЯ"
+"SELECT news_id, news_title, news_created_on, news_created_by FROM cs_news WHERE ((upper(news_k1) = upper('$(k)')) OR (upper(news_k2) = upper('$(k)')) OR (upper(news_k3) = upper('$(k)')) OR (upper(news_k4) = upper('$(k)')) OR (upper(news_k5) = upper('$(k)')) OR (upper(news_title) LIKE upper('%$(k)%')) OR (news_detail LIKE '%$(k)%')) AND (news_created_on IS NULL or ((news_created_on &gt;= '$(d1)') AND (news_created_on &lt;= '$(d2)') )) ORDER BY news_id DESC",f1
+"SELECT nf_id, nf_name, nf_size FROM cs_news_file WHERE nf_news_id = $(news_id)",f1.action=qm.value
+"SELECT nf_id, nf_name, nf_size FROM cs_news_file WHERE nf_news_id = $(s1.news_id)",f1.qm.focus()
+"SELECT p.di_id di_id, COALESCE(p.di_title , '--') di_title FROM cs_discuss d, cs_discuss p WHERE (d.di_id = $(di_id)) AND (p.di_id = d.di_p1)",f1.uid.focus()
+"SELECT p.di_id di_id, COALESCE(p.di_title , '--') di_title FROM cs_discuss d, cs_discuss p WHERE (d.di_id = $(di_id)) AND (p.di_id = d.di_p2)",f1.user_id.focus()
+"SELECT p.di_id di_id, COALESCE(p.di_title , '--') di_title FROM cs_discuss d, cs_discuss p WHERE (d.di_id = $(di_id)) AND (p.di_id = d.di_p3)","Отказавшееся регистрироваться на поскольку ваш идентификатор не вводится, выводится из строя или пароль ненабран."
+"SELECT p.di_id di_id, COALESCE(p.di_title , '--') di_title FROM cs_discuss d, cs_discuss p WHERE (d.di_id = $(di_id)) AND (p.di_id = d.di_p4)","Факс факса faq.htm:"
+"SELECT p.di_id di_id, COALESCE(p.di_title , '--') di_title FROM cs_discuss d, cs_discuss p WHERE (d.di_id = $(di_id)) AND (p.di_id = d.di_p5)","Область 1:"
+"SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND (p.kb_id = c.kb_p1)","Область 2:"
+"SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND (p.kb_id = c.kb_p2)","Область 3:"
+"SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND (p.kb_id = c.kb_p3)","ФАЙЛ Оказывается"
+"SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND (p.kb_id = c.kb_p4)","Найдите, добавьте, отредактируйте или удалите первые статьи kb"
+"SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND (p.kb_id = c.kb_p5)","Забудьте ID или пароль Часто Задавал Вопросы Полное Имя:"
+"SELECT 'password' R FROM DUAL;",full_name
+"SELECT 'Phone Number' R FROM DUAL",g
+"SELECT 'Product' R FROM dual",gen_nf
+"SELECT product_type FROM cs_product WHERE name = $(set_def)","генератор ПОЛУЧАЕТСЯ"
+"SELECT rep_id, name, rep_type, rep_url FROM cs_report ORDER BY name","Подсказка Get"
+"SELECT 'Select ""EndUser"" for people you support, your customers and beta testers.' FROM dual","ght &копия; 2003, Андрей Ivanov."
+"SELECT 'Select [EndUser] for people you support, your customers and beta testers.' FROM dual","ght"">Copyright &копия; 2003, Андрей Ivanov."
+"SELECT ticket_id, closed_on FROM cs_ticket WHERE closed_on &gt;= '$(startDate)' AND closed_on &lt; '$(endDate)' ORDER BY closed_on","глобальный Идти"
+"SELECT ticket_id, submitted_on FROM cs_ticket WHERE submitted_on &gt;= '$(startDate)' AND submitted_on &lt; '$(endDate)' ORDER BY submitted_on","Возвратитесь К категория Gro??"
+"SELECT ticket_id, title, submitted_by, assigned_to FROM cs_ticket WHERE status &lt;&gt; '$(sqlLastStatus)' ORDER BY $(sort_col) $(sort_dir), ticket_id",группа
+"SELECT u.user_type FROM cs_user u WHERE ('$(utype)' &lt;&gt; 'Manager') OR (((upper(u.user_id) = upper('$(user_id)')) AND (u.user_type = 'Manager')))","Групповое описание:"
+"SELECT 'Use Last X' R FROM dual","Подсказка Groups"
+"SELECT 'User ID' R FROM DUAL","Помогите настольному основному меню help/index.html"
+"SELECT 'User Name' R FROM DUAL","Подсказка: запятые Использования между ключевыми словами. Все ключевые слова используются при поиске записей новостей."
+"SELECT user_id FROM cs_user WHERE ('$(uid)' = '$(old_user_id)') OR (user_id = '$(uid)')",спрятанное
+"SELECT user_id FROM cs_user WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))","Намек: 1. Частные продукты доступны на их конечных пользователях, всех сотрудниках и менеджерах. Они не доступны, чтобы закончиться пользователи, которые не используют их. 2. Запросы усиленные Эскалатором придут в диспетчер."
+"SELECT user_id FROM cs_user WHERE user_id &lt;&gt; '$(uid)'","ht &копия; 2003, Андрей Ivanov."
+"SELECT user_id FROM cs_user WHERE user_type &lt;&gt; 'EndUser' ORDER BY user_id","ht.htm"">ApooHelpDesk"
+"SELECT user_id FROM cs_user WHERE user_type &lt;&gt; 'EndUser' ORDER BY user_id ASC",HTML
+"SELECT user_id, COALESCE($(n_col1), '-- no data --') c1, COALESCE($(n_col2), '-- no data --') c2, COALESCE($(n_col3), '-- no data --') c3 FROM cs_user WHERE $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $(cla_dept) ORDER BY $(n_sort1) $(n_sort1_dir) $(n_sort2) $(n_sort2_dir)","HTML htmlFrag ФРАГМЕНТА"
+"SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND (status &lt;&gt; 'disabled')","http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib"
+"SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))","ic_id + '#' + request.di_id; )>"
+"SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')",id
+selected,"если (session.varExist('sa_max_row') если нет,"
+send,"Если Вы используете ваше окно просмотра Обратной Стороны/Пересылать кнопку возвращаться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Страница Истекла], [, Вы хотите вновь послать данные формы Потери Данных] or []. Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+Seq.#,"Важно: Новые запросы назначены статус с index.htm"
+seq_num,"index.htm?kb_id=$(catP1.kb_id) index.htm?kb_id=$(catP2.kb_id) index.htm?kb_id=$(catP3.kb_id) index.htm?kb_id=$(catP4.kb_id) index.htm?kb_id=$(catP5.kb_id) index.htm?kb_id=$(kb_id) index.htm?kb_id=$(parent_id) index.htm?kb_id=$(ParentCat.kb_p1) index.htm?kb_id=$(s1.kb_p1) index.htm?kb_id=$(sqlParent.kb_p1)"
+"Sequence Number",index.htm?kb_id=$kb_id
+"Serial Number",index.htm?kb_id=$parent_id
+"Serial Number:","index.htm?path=$(full:escape) index.htm?path=$(local.path:escape)&days=$local.later) index.htm?path=$(path:escape)"
+"Serial# starts with:","ВКЛЮЧИТЕСЬ В cs_kb( kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security, kb_rank, kb_name, kb_size) ВЕЛИЧИНЫ( $(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), $(sqlParent.kb_p4), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', $(kb_type), '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title)', '$(kb_summary)', $(kb_security), $(kb_rank), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1) ВКЛЮЧАЮТСЯ В cs_kb(kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security) ВЕЛИЧИНЫ($(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', 1, '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title:unescape)', '$(kb_summary:unescape)', $(kb_security)) ВКЛЮЧАЮТСЯ В cs_kb_file( kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЕЛИЧИНЫ($(kb_id), $(kb_type), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1, СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ) ВКЛЮЧАТЬСЯ В cs_kb_file(kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЫБОР $(kb_id), 2, sqlFiles.tif_name, sqlFiles.tif_size, sqlFiles.tif_content ИЗ cs_ti_file sqlFiles ГДЕ sqlFiles.tif_ch_id В ( ВЫБОР ch_id ИЗ cs_ti_change ГДЕ ch_ticket_id = $(ticket_id)) ВКЛЮЧАТЬСЯ В cs_news(; '' ВКЛЮЧАТЬСЯ В cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) ВЕЛИЧИНЫ($(nf_id), $(news_id), СЛЕПОК('today' КАК ДАТА), СЛЕПОК('now' КАК ВРЕМЯ), 1, '$(attachment1:unescape)') ВКЛЮЧАТЬСЯ В cs_priority (row_ver, имя, описание) ВЕЛИЧИНЫ(1, '$(имя)', '$(описание)') ВКЛЮЧАЮТСЯ В cs_priority (row_ver, имя, is_def, описание) ВЕЛИЧИНЫ(1, '$(имя)', 0, '$(описание)') Новый приоритет: [$(имя)] сохранен."
+Sessions:,"ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')"
+"Set As Default","ВКЛЮЧИТЕСЬ В cs_user(user_row_ver, user_type, статус, user_id, user_pwd, full_name, email, email_fmt, телефон, факс, компания, отд, адрес, город, состояние, индекс, страна, user_note) ВЕЛИЧИНЫ( 1, '$(utype)', '$(статус)', '$(uid)', '$(upwd)', '$(full_name)', '$(email)', '$(email_fmt)', '$(телефон)', '$(факс)', '$(компания)', '$(отд)', '$(адрес)', '$(город)', '$(состояние)', '$(индекс)', '$(страна)', '$(user_note)') интервал Адреса IP"
+set_def,is_def
+"Sign up for new account",IsDi_Id
+"smallest sequence number. Requests closed by the system",IsNotLevel5
+"Sort By 1:","Пункты: $(сначала) - $(последний раз) k"
+"Sort By 2:","kb/faq.htm kb/index.htm"
+"Sort By:","kb/kbView.htm?kb_id=$(NewsArt.kb_id) kb/kbView.htm?kb_id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=yes&amp;id=$(NewsArt.kb_id) kb/recommended.htm kb/kbVote.htm?vote=yes&amp;id=$(NewsArt1.kb_id)"
+sort_col,kb_attachment1
+sort_dir,kb_cat
+sort1,kb_content
+sort1_dir,kb_content_file
+sort2,kb_content_url
+sort2_dir,kb_id
+sqlAddArt,kb_k1
+sqlAddCat,kb_k2
+sqlAddContent,kb_k3
+sqlAddCount,kb_k4
+sqlAddNews,kb_k5
+sqlAddProduct,kb_owner
+sqlAddStatus,kb_p1
+sqlAddTicketFile,kb_rank
+sqlAddUser,kb_security
+sqlArt,kb_summary
+sqlAttach1,kb_title
+sqlCascade1,kb_type
+sqlCascade2,"kbAdvSearch.htm?kb_id=$(kb_id) kbDelete.htm?kb_id=$(kb_id) kbDelete2.htm?kb_id=$(kb_id) kbDeleteOk.htm?kb_id=$(kb_id) kbDetail.htm?kb_id=$(kb_id) kbEditArt.htm?kb_id=$(sqlArt.kb_id) kbEditArtOk.htm kbEditCat.htm?kb_id=$(kb_id) kbEditCatOk.htm kbKeySearchOk.htm kbNewArt.htm?kb_id=$(kb_id) kbNewArtOk.htm kbNewCat.htm?kb_id=$(kb_id) kbNewCatOk.htm kbView.htm?kb_id=$(id) kbView.htm?kb_id=$(sqlArt.kb_id) kbVote.htm?vote=no&id=$(sqlArt.kb_id)"
+sqlCascade3,kbVote.htm?vote=no&id=$sqlArt.kb_id)
+sqlCat,kbVote.htm?vote=yes&id=$(sqlArt.kb_id)
+sqlCheckType,kbVote.htm?vote=yes&id=$sqlArt.kb_id)
+sqlClosed,"Ключевые Слова Ключевых Слов:"
+sqlCountSubGroup,"База Знаний"
+sqlDelAtt,"Статьи Базы Знаний - поддержка Клиента - apooHelpDesk Знание ID:"
+sqlDeleteKB,l
+sqlDeleteNews,"l)"">$request.backToPrompt)"
+sqlDelPriority,"l=$(sqlMyTickets.sql:escape)"">[SQL] последний"
+sqlDelProduct,"Последний Последний Доступ:"
+sqlDelStatus,last_x
+sqlGroup,"Последующие Сообщения оставили Список Связей"
+sqlInsertPriority,"Запросы Списка присвоили мне запросов Списка, который не назначен Список пользователи, которые удовлетворяют Все условия:"
+sqlLastStatus,"Список, дополнение, редактируют или удалять Список статей новостей, дополнение, редактировать или удалять Список типа продукта, дополнение, редактировать или удалять Список приоритетов запроса, дополнение, редактировать или удалять Список статусов запроса, дополнение, редактировать или удалять Список записей продажи, дополнение, редактировать или удалять персонал/клиенты listOpen.htm Заблокированный:"
+sqlLock,"Заблокированное На:"
+sqlMaxMinIDs,"Регистрационные Файлы:"
+sqlMsg,"Зарегистрируйте Протокол на logOff.htm logon.htm LTR M"
+sqlMsgIDs,mailto:$s1.email)
+sqlOpen,"Основное меню - поддержка Клиента mainMenu$(User.user_type).htm Управлять сообщениями, искать запросы,..."
+sqlParent,"Меню Менеджера Менеджера Столбцов Max:"
+sqlPriorities,"Пользователи Max:"
+sqlProducts,max_col
+sqlResetDef,max_row
+sqlSetDef,"maxCol Сообщение сообщения ID:"
+sqlStaff,Сообщение:
+sqlSubmitted,"Сообщения $(сначала) - $(последний раз) месячные месяцы перемещения минут msg msgType"
+sqlUpdateNews,"мультичасть/форма-данные Мой Счет Мой Todo Список n n/a"
+sqlUpdatePriority,n_col1
+sqlUpdateProduct,n_col2
+sqlUpdateStatus,n_col3
+sqlUpdateUser,n_sort1
+sqlUpdContent,n_sort1_dir
+"ssage(s) Topic visited: $local.visited) time(s)",n_sort2
+"Staff Member",n_sort2_dir
+"Start Time","Имя Имени:"
+startDate,"Имя: $(curCat.KB_NAME) Размер: $(curCat.KB_SIZE) Новая статья Новой Статьи: [$(kb_title)] сохранен как статья $(kb_id) (тип: $(kb_type))."
+state,"Новая Категория"
+State:,"Новая категория: [$(kb_title)] сохранен как категория $(kb_id)."
+Status,"Новая Стоимость:"
+"Status Manager","Новый Crosstab Новый Новый Групповой Новый Приоритетный Новый Продукт Заказа Нового Запроса"
+status/statusMan.htm,"Новая Отправка Запроса Управляет:"
+Status:,"Новый Запрос из $(request.submitted_by)) Новый Запрос с $(uid) Нового Продажного Нового Статуса"
+"Status: [$(name)] has been deleted.","Новый статус: [$(request.name))] сохранен."
+"Status: [$(name)] has been updated. Please update all reports that use $(old_name) status.","Новый Табличный"
+statusDel.htm?name=$(s1.name:escape),"Новые Билеты vs. Закрыли Сообщение Направления Нового Потребителя Нового Потребителя Билетов: ["
+statusDelOk.htm,new_cost
+statusEdit.htm?name=$(s1.name:escape),Новости
+StatusEditOk.htm,"Новости $(news_id) удаляющие Новости $(news_id) удалена."
+statusMan.htm,"Новости $(news_id) скорректирована."
+statusNew.htm,"Новости [$(news_title)] сохранен как $(news_id)."
+stylesheet,"Новости ID:"
+submit,"новости ID: $ менеджер Новостей(s1.news_id) news/index.htm"
+"Submit a request",news/newsView.htm?news_id=$(News.news_id)
+"Submit a support request",news_detail
+"Submitted By",news_format
+"Submitted On",news_id
+Summary:,news_k1
+"Summary: $(curCat.KB_SUMMARY)",news_k2
+System,news_k3
+systemInfo.htm,news_k4
+t,news_k5
+"t type=""submit"" name=action value=""Preview HTML""/>",news_title
+"t) request(s). Maximum 500 can be displayed.",NewsArt
+td>,NewsArt1
+text,"newsDelete.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape) newsDelete2.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) newsDeleteOk.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) newsEdit.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape) newsEditOk.htm newsHome newsNew.htm newsNewOk.htm newsView.htm"
+text/css,"newsView.htm?news_id=$(News.news_id:escape)&newsHome=$(p-combined:escape) newsView.htm?news_id=$(news_id)&newsHome=$(newsHome:escape) Следующий"
+"text/html; charset=utf-8",nf_id
+textType,никакое
+"Thank you for your feedback.","Примечание, все ссылки на $(uid) очистится. Например, изменение $(uid) сделанное на запросе станет одно сделанное неизвестным человеком. Если это не - что Вы хотите, Вы можете захотеть отредактировать этого потребителя считать и изменять свой статус, чтобы [disabled]."
+"That is normal. Do not refresh, repost or reload.",Примечания:
+"This record is temporarily locked.",notify_all
+"This section will be populated with the most recently posted news articles.","nowrap OK"
+"This section will be populated with the three most frequently visited public articles not in the above recommended article list from the knowledge base.",old_att_id
+"This section will be populated with the top public articles from the knowledge base recommended by the editors.",old_name
+ticket_id,old_owner
+ticket_priority,old_sa_serial
+ticketHistEditOk.htm,old_type
+ticketNew.htm?submitted_by=$(request.submitted_by:escape),old_user_id
+ticketNew.htm?submitted_by=$(uid:escape),on_new_ticket1
+tif_name),on_new_ticket2
+"Time Sheet Report","opyright &копия; 2003, Андрей Ivanov."
+title,ortTopX))
+Title:,"ot освежать, вновь пост или перезагрузка."
+"To cancel and go back to Priority Manager, please",Владелец:
+"To cancel and go back to Product Manager, please","Владелец: $(curCat.KB_OWNER)"
+"To cancel and go back to Sales Manager, please use the browser's Back button.",p_id
+"To cancel and go back to Session Manager, please use the browser's Back button.",Родитель
+"To cancel and go back to Status Manager, please","Родительская Группа Родители Категории"
+"To cancel and go back to User Manager, please use the browser's Back button.",parent_id
+"to.integer(session.usr_max_row)))> Total: $local.count) or more users found. $local.count) users displayed.","parentCat Пароль пароля (Снова):"
+to:,"Пароль Снова:"
+to_dispatcher,Пароль:
+"Today $(today)","телефон маршрута"
+top,"Телефон Номера Телефона:"
+topic,"открытый текст простого текста"
+"Topic Message:","Пожалуйста нажмите обратную кнопку окна просмотра, чтобы возвратиться."
+topic_id,"Пожалуйста закройте это окно просмотра паутины, чтобы предохранить других людей от использования обратной кнопки, чтобы увидеть информацию, которую Вы сохранили или извлеклись в течение этого сеанса."
+total,"Пожалуйста попытайтесь снова."
+"Total Cost: $local.total_cost) minutes",ПОСТ
+"Total: $(total.cnt) priority(ies)","Новости Поста Сообщения Поста"
+"Total: $(total.cnt) product(s)","Пост или ответ в сообщениях дискуссии Объявлялись Объявленным на от:"
+"Total: $(total.cnt) status(es)","Объявление Мощнналось Предыдущим"
+"Total: $(total.cnt) users found.","Предварительный Просмотр HTML Предшествующего Приоритетного Приоритетного Имени Приоритета Менеджера Приоритета priority/priorityMan.htm: [$(имя)] удален."
+"Total: $(total.cnt). Report generated $(total.dt)","Приоритет: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name)."
+tr>,"priorityDelOk.htm priorityDel.htm?name=$(s1.name:escape)"
+type,"priorityEdit.htm?name=$(s1.name:escape) priorityEditOk.htm priorityMan.htm"
+Type:,"priorityMan.htm?set_def=$(s1.name:escape) частный Продукт priorityNew.htm Продукта priorityNewOk.htm Менеджера Продукта product/productMan.htm:"
+"type=""submit"" value=""Search""/>","Продукт: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name)."
+uid,"Продукт: [$имя)] удален."
+"Unassigned Requests",product_type
+Update,"productDelOk.htm productDel.htm?name=$(s1.name:escape)"
+"UPDATE cs_kb SET kb_id = $(kb_id), kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = $(kb_type), kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'today', kb_title = '$(kb_title)', kb_summary = '$(kb_summary)', kb_security = $(kb_security), kb_rank = $(kb_rank), kb_name = CASE WHEN $(kb_type) = 4 THEN '$(kb_content_url)' WHEN $(kb_type) = 5 THEN '$(kb_content_file)' ELSE '' END, kb_size = -1","productEdit.htm?name=$(s1.name:escape) productEditOk.htm productMan.htm"
+"UPDATE cs_kb SET kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = 1, kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'today', kb_title = '$(kb_title:unescape)', kb_summary = '$(kb_summary:unescape)', kb_security = $(kb_security), kb_locked_by = NULL, kb_locked_on = NULL WHERE kb_id = $(kb_id)","productMan.htm?set_def=$(s1.name:escape) productNew.htm productNewOk.htm ptHelpWindow публика"
+"UPDATE cs_kb SET kb_locked_by = $(user_id), kb_locked_on = 'today' WHERE kb_id = $(kb_id)","py; 2003, Андрей Ivanov."
+"UPDATE cs_kb SET kb_visited = CASE WHEN '$(vote)' = 'yes' THEN kb_visited + 10 WHEN '$(vote)' = 'no' THEN kb_visited - 10 ELSE kb_visited END WHERE kb_id = $(id)",qm
+"UPDATE cs_kb SET kb_visited = kb_visited + 1","запрос кварталов четверти r> радио Ранг:"
+"UPDATE cs_kb_file SET kbf_kb_id =$(kb_id), kbf_type = $(kb_type), kbf_name = CASE WHEN $(kb_type) = 4 THEN '$(kb_content_url)' WHEN $(kb_type) = 5 THEN '$(kb_content_file)' ELSE '' END, kbf_size = -1, kbf_content = CASE WHEN $(kb_type) = 4 THEN '$(kb_content_url)' WHEN $(kb_type) = 5 THEN '$(kb_content_file)' ELSE '$(kb_content)' END WHERE kbf_kb_id = $(kb_id)","Ранг: $(curCat.KB_RANK) Посещенное: $(curCat.KB_VISITED) Рекомендуемые Статьи recommended.htm Освежать ответчиков Ivanov."
+"UPDATE cs_news SET news_locked_by = '$(user_id)', news_locked_on = 'today' WHERE news_id = $(news_id) AND (news_locked_by = '$(user_id)' OR news_locked_by IS NULL);",перезагрузка.
+"UPDATE cs_news SET news_locked_by = NULL, news_locked_on = NULL, news_k1 = '$(news_k1)', news_k2 = '$(news_k2)', news_k3 = '$(news_k3)', news_k4 = '$(news_k4)', news_k5 = '$(news_k5)', news_updated_by = '$(user_id)', news_updated_on = 'today', news_title = '$(news_title)', news_format = '$(news_format)', news_detail = '$(news_detail)' WHERE news_id = $(news_id);","rep$(s1.rep_type).htm?cro_id=$(s1.rep_id) rep$(s1.rep_type)Del.htm?repID=$s1.rep_id) rep$(repCost.htm s1.rep_type)Run.htm?cro_id=$(s1.rep_id)"
+"UPDATE cs_news SET news_visited = news_visited + 1 WHERE news_id = $(news_id)",repCro.htm?mode=new
+"UPDATE cs_priority SET is_def = 0 WHERE is_def = 1 AND '$(set_def)' &gt; ''","Сообщение repCustom.htm repMan.htm"
+"UPDATE cs_priority SET is_def = 1 WHERE name = '$(set_def)' AND '$(set_def)' &gt; ''","Имя Сообщения Менеджера Сообщения report/listMyTodo.htm report/listUnassigned.htm report/repMan.htm"
+"UPDATE cs_priority SET row_ver = 1 + $(row_ver), name = '$(name)', description = '$(description)' WHERE name = '$(old_name)'",repTab.htm?mode=new
+"UPDATE cs_product SET is_def = 0 WHERE is_def = 1 AND '$(set_def)' &gt; ''","ЗАПРОС repTimeSheet.htm repTrend.htm ID:"
+"UPDATE cs_product SET is_def = 1 WHERE name = '$(set_def)' AND '$(set_def)' &gt; ''","Запросы Подали Возврату категории право"
+"UPDATE cs_product SET row_ver = $(row_ver) + 1, name = '$(name)', dispatcher = '$(dispatcher)', product_type = '$(product_type)', is_def = $(is_def), ticket_priority = '$(ticket_priority)', on_new_ticket1 = '$(on_new_ticket1)', on_new_ticket2 = '$(on_new_ticket2)', description = 'description' WHERE name = '$(old_name)'","right"">Copyright &копия; 2003, Андрей Ivanov."
+"UPDATE cs_product SET ticket_priority = NULL, row_ver = row_ver + 1 WHERE ticket_priority = '$(name)'",row_ver
+"UPDATE cs_sale SET sa_product = NULL, row_ver = row_ver + 1 WHERE sa_product = '$(name)'","Выполняйте s"
+"UPDATE cs_status SET row_ver = $(row_ver) + 1, name = '$(name)', seq_num = $(seq_num), description = '$(description)' WHERE name = '$(old_name)'",s1
+"UPDATE cs_ticket SET priority = NULL, row_ver = row_ver + 1 WHERE priority = '$(name)'",s2
+"UPDATE cs_ticket SET product = NULL, row_ver = row_ver + 1 WHERE product = '$(name)'",s3
+"UPDATE cs_ticket SET status = NULL, row_ver = row_ver + 1 WHERE status = '$(name)'",sa_product
+"UPDATE cs_user SET user_type = '$(user_type)', status = '$(status)', user_id = '$(uid)', user_pwd = '$(upwd)', email = '$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', company = '$(company)', dept = '$(dept)', phone = '$(phone)', fax = '$(fax)', address = '$(address)', city = '$(city)', state = '$(state)', zipcode = '$(zipcode)', country = '$(country)', user_note = '$(user_note)' WHERE user_id = '$(old_user_id)'",sa_serial
+"Updated by: $(s1.news_updated_by)","Коммерческие Менеджеры sale/saleMan.htm saleNew.htm saleSearchOk.htm Сохраняют шкале Шкалу:"
+"Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)",Поиск
+"Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)","Продажа Поиска, которая удовлетворяет ВСЕ условия:"
+"Updated: $(s1.news_updated_on)",search_for
+upwd,"Уровень Безопасности:"
+upwd2,Безопасность:
+"Url)"">$request.backToPrompt)","ВЫБОР '' С двойного ВЫБОРА '' R С ДВОЙНОГО ВЫБОРА '' R ОТ ДВОЙНОГО;"
+"Use Dates","ВЫБОР $(сначала) + 10 R С ДВОЙНОГО ВЫБОРА * ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) * ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР * ИЗ cs_kb_file ГДЕ kbf_kb_id = $ ВЫБОР(kb_id) * ИЗ cs_news ГДЕ news_id = $ ВЫБОР(news_id) * ИЗ cs_user ГДЕ user_id = '$(uid) ВЫБОР 1 С ДВОЙНОГО ВЫБОРА 1 ОТ ДВОЙНОГО;"
+"Use Last X","ВЫБЕРИТЕ 1 R С двойного ВЫБОРА -1 R С двойного ВЫБОРА 1 R ОТ ДВОЙНОГО ГДЕ '$(тип) = '1 ВЫБОР 1 R ОТ двойного ГДЕ '$(uid) &lt;&gt; '' ВЫБОР 1 R ОТ двойного ГДЕ '$(upwd) = '$(upwd2) ВЫБОР 1 R ОТ ДВОЙНОГО ГДЕ ('$(тип)' &lt;&gt; '1') И ('$(topic_id)' &lt;&gt; '') ВЫБОР 1 R ОТ ДВОЙНОГО ГДЕ ('$(тип)' &lt;&gt; '1') И ('$(topic_id)' = '') ВЫБОР 1 R ОТ ДВОЙНОГО;"
+"Use one of the following three methods to input article content","ВЫБОР -1 R ОТ ДВОЙНОГО;"
+use_what,"ВЫБЕРИТЕ 10 С ДВОЙНОГО ВЫБОРА 10 ОТ ДВОЙНОГО;"
+User,"ВЫБЕРИТЕ 12 R С двойного ВЫБОРА -2 R С ДВОЙНОГО ВЫБОРА 50 R С ДВОЙНОГО ВЫБОРА 7 R С двойного ВЫБОРА 'Возрастающего R ОТ ДВОЙНОГО"
+"User ID","СЛУЧАЙ ВЫБОРА, КОГДА '$(col1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col1) = 'Компания, ТОГДА 'компания, КОГДА '$(col1) = 'Отдел, ТОГДА 'отд, КОГДА '$(col1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col2) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col2) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col2) = 'Компания, ТОГДА 'компания, КОГДА '$(col2) = 'Отдел, ТОГДА 'отд, КОГДА '$(col2) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col2) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col3) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col3) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col3) = 'Компания, ТОГДА 'компания, КОГДА '$(col3) = 'Отдел, ТОГДА 'отд, КОГДА '$(col3) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col3) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort_col) = 'Продукт, ТОГДА 'продукт, КОГДА '$(sort_col) = 'Приоритет, ТОГДА 'приоритет, КОГДА '$(sort_col) = 'Конечный Срок, ТОГДА 'конечный срок, КОГДА '$(sort_col) = 'Поданное На', ТОГДА 'submitted_on, КОГДА '$(sort_col) = 'Назначенное На', ТОГДА 'assigned_on, КОГДА '$(sort_col) = 'Статус, ТОГДА 'статус ЕЩЕ '' КОНЕЦ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(sort1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(sort1) = 'Компания, ТОГДА 'компания, КОГДА '$(sort1) = 'Отдел, ТОГДА 'отд, КОГДА '$(sort1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(sort1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1_dir) = 'Сход, ТОГДА 'DESC ЕЩЕ '' КОНЕЦ R ОТ ДВОЙНОГО"
+"User ID starts with:","СЛУЧАЙ ВЫБОРА, КОГДА '$(sort2) = 'Потребитель ID', ТОГДА ', user_id', КОГДА '$(sort2) = 'Имя Потребителя', ТОГДА ', full_name', КОГДА '$(sort2) = 'Компания, ТОГДА ', компания', КОГДА '$(sort2) = 'Отдел, ТОГДА ', отд', КОГДА '$(sort2) = 'Email Адрес', ТОГДА ', email', КОГДА '$(sort2) = 'Номер Телефона', ТОГДА ', телефон' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(тип) = '1, ТОГДА 'Новая Группа', КОГДА '$(topic_id) = '', ТОГДА 'Новое Сообщение' ЕЩЕ 'Новая Тема' ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(usertype) = 'Менеджер, ТОГДА 'менеджер, КОГДА '$(usertype) = 'Персонал Члена', ТОГДА 'MemberStaff ЕЩЕ 'КОНЕЦ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(компания)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЯЯ(компания) ПОДОБНО ($(компания)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(отд)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЕЕ(отд) ПОДОБНО ($(отд)%'''') И ' ЕЩЕ '1 = 1' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(email)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(email) ПОДОБНО (''$(email)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(full_name)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(full_name) ПОДОБНО (''$(full_name)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'открытый текст') ЗАТЕМ 2, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'htmlFrag') ЗАТЕМ 3, КОГДА ('$(kb_content_url)' &lt;&gt; '') ЗАТЕМ 4, КОГДА ('$(kb_content_file)' &lt;&gt; '') ЗАТЕМ 5 ЕЩЕ 2 КОНЦОВ kb_type ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(телефон)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(телефон) ПОДОБНО ($(телефон)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(sort2)' &lt;&gt; '') И ('$(sort2_dir)' = 'Сход') ЗАТЕМ 'DESC ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(uid)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(user_id) ПОДОБНО (''$(uid)%'') И ' ЕЩЕ '' КОНЕЦ R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_kb_new, 1) КАК ЦЕЛОЕ) R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_news_new, 1) КАК ЦЕЛОЕ) С двойного СЛЕПКА ВЫБОРА(GEN_ID(cs_nf_new, 1) КАК ЦЕЛОЕ) С двойного слепка ВЫБОРА('today' как ДАТА) - 7 ОТ ДВОЙНОГО;"
+"User ID:","СЛЕПОК ВЫБОРА('today' как ДАТА) ОТ ДВОЙНОГО;"
+"User ID: (Required)","СЛЕПОК ВЫБОРА('today' КАК ДАТА) R С двойного ВЫБОРА СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(id) СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) СОЕДИНЯЕТ(kb_p1, -1) kb_p1 ИЗ cs_kb ГДЕ kb_if = $(kb_id)"
+"User Manager","ВЫБОР СОЕДИНЯЕТ(kb_p1, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p1, СОЕДИНЯТЬ(kb_p2, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p2, СОЕДИНЯТЬ(kb_p3, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p3, СОЕДИНЯТЬ(kb_p4, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p4 ИЗ cs_kb ГДЕ kb_id = $ СЧЕТ ВЫБОРА(parent_id)(*) ИЗ cs_discuss ГДЕ di_type = 1 И"
+"User Name","ВЫБЕРИТЕ СЧЕТ(is_def) cnt, СУММА СЛУЧАЯ(is_def), КОГДА 1, ТОГДА '' ЕЩЕ 'Пожалуйста выбирать общественный продукт как встроенный продукт.' КОНЕЦ cnt_def_str С СЧЕТА ВЫБОРА cs_priority(is_def) cnt, СУММА СЛУЧАЯ(is_def), КОГДА 1, ТОГДА '' ЕЩЕ 'Пожалуйста выбирать общественный продукт как встроенный продукт.' КОНЕЦ cnt_def_str С СЧЕТА ВЫБОРА cs_product(nf_id) cnt ИЗ cs_news_file ГДЕ nf_news_id = $ СЧЕТ ВЫБОРА(s1.news_id)(seq_num) cnt С СЧЕТА ВЫБОРА cs_status(ticket_id) cnt, СЛЕПОК('today' КАК ДАТА) dt ИЗ cs_ticket ГДЕ статус &lt;&gt; '$ СЧЕТ ВЫБОРА(sqlLastStatus)(user_id) cnt ИЗ cs_user ГДЕ $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $ ВЫБОР(cla_dept) 'дни R С двойного ВЫБОРА di_id ОТ (ВЫБОР di_id ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 ЗАКАЗ di_id ГДЕ ROWNUM &lt;= 10 ВЫБОР di_id ИЗ cs_discuss ГДЕ (di_id = $(di_id)) И (di_p5 НЕДЕЙСТВИТЕЛЬНО) ВЫБОР di_id, di_p1, di_p2, di_p3, di_p4, di_p5, di_type, di_title ИЗ cs_discuss ГДЕ di_id = $ ВЫБОР(di_id) di_id, di_title ИЗ cs_discuss ГДЕ (cs_discuss.di_id = $(di_id)) ВЫБОР di_id, di_title, di_detail ИЗ cs_discuss ГДЕ di_type = 1 ЗАКАЗ ВЫБОРОМ di_title di_id, di_topic_id, di_title, di_created_on, СОЕДИНЯТЬ(di_created_by, 'неизвестный') di_created_by ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 ЗАКАЗ ВЫБОРОМ di_id DESC 'Email Адреса' R С ДВОЙНОГО ВЫБОРА 'Ввода ваша id' R ОТ ДВОЙНОГО;"
+"User Type:","ВЫБОР СНАЧАЛА 1 имя ИЗ ЗАКАЗА cs_status ВЫБОРОМ seq_num DESC GEN_ID(cs_nf_new, 1) nf_id С двойного ВЫБОРА 'index.htm R С ДВОЙНОГО ВЫБОРА 'index.htm R ОТ ДВОЙНОГО;"
+"User: [","ВЫБОР kb_id, kb_p1, kb_title, kb_security ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_p4, kb_type ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_title ИЗ cs_kb ГДЕ (kb_type = 1) И (kb_p1 = $(kb_id)) И (kb_security &lt; 1) ЗАКАЗ ВЫБОРОМ kb_title ASC kb_id, kb_title, KB_RANK, KB_VISITED, KB_OWNER, KB_CREATED_BY, KB_CREATED_ON, KB_UPDATED_BY, KB_UPDATED_ON, KB_TITLE, KB_SUMMARY, KB_NAME, KB_SIZE ИЗ cs_kb ГДЕ (kb_id = $(kb_id)) И (kb_security &lt; 1) ВЫБОР kb_id, kb_title, kb_security ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_id, kb_title, kb_security, СОЕДИНЯТЬ(kb_p1, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p1, СОЕДИНЯТЬ(kb_p2, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p2, СОЕДИНЯТЬ(kb_p3, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p3, СОЕДИНЯТЬ(kb_p4, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p4, СОЕДИНЯТЬ(kb_p5, 'НЕДЕЙСТВИТЕЛЬНЫЙ') kb_p5 ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(parent_id) kb_id, kb_type, kb_owner, kb_title, СЛУЧАЙ kb_type, КОГДА 1, ТОГДА '$(kb_type_cat) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР kb_id, kb_type, kb_owner, kb_title, KB_K1, KB_K2, KB_K3, KB_K4, KB_K5, KB_SECURITY, KB_RANK, СЛУЧАЙ kb_type, КОГДА 0, ТОГДА '$(kb_type_art), КОГДА 1, ТОГДА '$(kb_type_cat), КОГДА 2, ТОГДА '$(kb_type_plain), КОГДА 3, ТОГДА '$(kb_type_html), КОГДА 4, ТОГДА '$(kb_type_url), КОГДА 5, ТОГДА '$(kb_type_file) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $kb_id ВЫБОР kb_id, kb_type, kb_title, kb_summary, kb_updated_on, kb_name, kb_size ИЗ cs_kb ГДЕ (kb_type &gt; 1) И (kb_security &lt; 1) И (kb_p1 = $(kb_id)) ЗАКАЗ ВЫБОРОМ kb_title ASC kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size ИЗ ЗАКАЗА cs_kb ВЫБОРОМ kb_rank ASC kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, kb_name, kb_size ИЗ ЗАКАЗА cs_kb ВЫБОРОМ kb_visited DESC kb_title ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kb_type, kb_p1, kb_owner, kb_title, СЛУЧАЙ kb_type, КОГДА 1, ТОГДА '$(kb_type_cat) ЕЩЕ '$ КОНЕЦ(kb_type_art) itemtype ИЗ cs_kb ГДЕ kb_id = $ ВЫБОР(kb_id) kbf_id, kbf_name, kbf_size ИЗ cs_kb_file ГДЕ kbf_kb_id = $(kb_id) И kbf_type = 2 ВЫБОРА MAX(di_id) maxID, MIN(di_id) minID ИЗ cs_discuss ГДЕ di_type &lt;&gt; 1 И имя ВЫБОРА ИЗ ЗАКАЗА cs_product ПО ИМЕНИ ASC;"
+"value=""Save""/>","ИМЯ ВЫБОРА ИЗ cs_product ГДЕ ('$(статус)' &lt;&gt; 'выводить') ИЛИ (диспетчер = '$(uid)') имя ВЫБОРА ИЗ cs_product ГДЕ диспетчер = '$ имя ВЫБОРА(uid), СОЕДИНЯЕТ(диспетчер, 'n') диспетчер, описание, is_def, product_type, СЛУЧАЙ is_def, КОГДА 1 ТОГДА 'умолчание ЕЩЕ '' КОНЕЦ is_def_str ИЗ ЗАКАЗА cs_product ПО ИМЕНИ имени ВЫБОРА, is_def ИЗ ЗАКАЗА cs_priority is_def DESC, имя ВЫБОРА имени, is_def ИЗ ЗАКАЗА cs_priority ПО ИМЕНИ имени ВЫБОРА, is_def, описание, СЛУЧАЙ is_def, КОГДА 1 ТОГДА 'умолчание ЕЩЕ '' КОНЕЦ is_def_str ИЗ ЗАКАЗА cs_priority ПО ИМЕНИ ИМЕНИ ВЫБОРА, ROW_VER, ДИСПЕТЧЕР, PRODUCT_TYPE, IS_DEF, TICKET_PRIORITY, ON_NEW_TICKET1, ON_NEW_TICKET2, ОПИСАНИЕ, СЛУЧАЙ on_new_ticket1, КОГДА 'notify_all ТОГДА '', КОГДА 'do_nothing ТОГДА '' ЕЩЕ 'проверяющее КОНЕЦ t1a, СЛУЧАЙ on_new_ticket1, КОГДА 'notify_all ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t1b, СЛУЧАЙ on_new_ticket1, КОГДА 'do_nothing ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t1c, СЛУЧАЙ on_new_ticket2, КОГДА 'notify_all ТОГДА '', КОГДА 'do_nothing ТОГДА '' ЕЩЕ 'проверяющее КОНЕЦ t2a, СЛУЧАЙ on_new_ticket2, КОГДА 'notify_all ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t2b, СЛУЧАЙ on_new_ticket2, КОГДА 'do_nothing ТОГДА 'проверенное ЕЩЕ '' КОНЕЦ t2c ИЗ cs_product ГДЕ имя = '$(имя) имя ВЫБОРА, row_ver, is_def, описание ИЗ cs_priority ГДЕ имя = '$ имя ВЫБОРА(name:unescape), row_ver, seq_num, описание ИЗ cs_status ГДЕ имя = '$(имя) имя ВЫБОРА, seq_num, описание ИЗ ЗАКАЗА cs_status именем выбора seq_num, val от dict где lang='en' и имя НАЧИНАЯ С 'ВЫБОРА kb_type_ news_id, news_title ИЗ cs_news ГДЕ news_id = $ ВЫБОР(news_id) news_id, news_title, news_created_on, news_created_by ИЗ ЗАКАЗА cs_news ВЫБОРОМ news_id DESC news_id, news_title, news_created_on, news_created_by ИЗ cs_news ГДЕ ((верхний(news_k1) = верхний('$(k)')) ИЛИ (верхний(news_k2) = верхний('$(k)')) ИЛИ (верхний(news_k3) = верхний('$(k)')) ИЛИ (верхний(news_k4) = верхний('$(k)')) ИЛИ (верхний(news_k5) = верхний('$(k)')) ИЛИ (верхний(news_title) ПОДОБНО верхнему('%$(k)%')) ИЛИ (news_detail ПОДОБНО '%$(k)%')) И (news_created_on НЕДЕЙСТВИТЕЛЬНО или ((news_created_on &gt;= '$(d1)') И (news_created_on &lt;= '$(d2)') )) ЗАКАЗ ВЫБОРОМ news_id DESC nf_id, nf_name, nf_size ИЗ cs_news_file ГДЕ nf_news_id = $ ВЫБОР(news_id) nf_id, nf_name, nf_size ИЗ cs_news_file ГДЕ nf_news_id = $"
+"View article","ВЫБОР p.di_id di_id, СОЕДИНЯЮТ(p.di_title , '--') di_title ИЗ cs_discuss d, cs_discuss p ГДЕ (d.di_id = $(di_id)) И (p.di_id = d.di_p5) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p1) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p2) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p3) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p4) ВЫБОР p.kb_id kb_id, СОЕДИНЯЕТ(p.kb_title , '--') kb_title ИЗ cs_kb c, cs_kb p ГДЕ (c.kb_id = $kb_id) И (p.kb_id = c.kb_p5) ВЫБОР 'пароля R ОТ ДВОЙНОГО;"
+"visible to everybody","ВЫБЕРИТЕ 'Номер Телефона' R С ДВОЙНОГО ВЫБОРА 'Продукта R ОТ двойного"
+"visible to internal staff only","ВЫБОР product_type ИЗ cs_product ГДЕ имя = $ ВЫБОР(set_def) rep_id, имя, rep_type, rep_url ИЗ ЗАКАЗА cs_report ПО ИМЕНИ ВЫБОРА 'Выбора ""КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ"" для людей Вы поддерживаете, ваши клиенты и бета тестеры.' С двойного ВЫБОРА 'Выбора [EndUser] для людей Вы поддерживаете, ваши клиенты и бета тестеры.' С двойного ВЫБОРА ticket_id, closed_on ИЗ cs_ticket ГДЕ closed_on &gt;= '$(startDate) И closed_on &lt; '$(endDate) ЗАКАЗ ВЫБОРОМ closed_on ticket_id, submitted_on ИЗ cs_ticket ГДЕ submitted_on &gt;= '$(startDate) И submitted_on &lt; '$(endDate) ЗАКАЗ ВЫБОРОМ submitted_on ticket_id, названием, submitted_by, assigned_to ИЗ cs_ticket ГДЕ статус &lt;&gt; '$ ЗАКАЗ(sqlLastStatus) $(sort_col) $(sort_dir), ВЫБОР ticket_id u.user_type ИЗ cs_user u ГДЕ ('$(utype)' &lt;&gt; 'Менеджер') ИЛИ (((верхний(u.user_id) = верхний('$(user_id)')) И (u.user_type = 'Менеджер'))) ВЫБОР 'Использования Последнего X' R С двойного ВЫБОРА 'Потребителя ID' R С ДВОЙНОГО ВЫБОРА 'Имени Потребителя' R С ДВОЙНОГО ВЫБОРА user_id ИЗ cs_user ГДЕ ('$(uid)' = '$(old_user_id)') ИЛИ (user_id = '$(uid)') ВЫБОР user_id ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И ((user_type = 'Менеджер') ИЛИ (user_type = 'StaffMember')) ВЫБОР user_id ИЗ cs_user ГДЕ user_id &lt;&gt; '$ ВЫБОР(uid) user_id ИЗ cs_user ГДЕ user_type &lt;&gt; 'ЗАКАЗ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ ВЫБОРОМ user_id user_id ИЗ cs_user ГДЕ user_type &lt;&gt; 'ЗАКАЗ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ ВЫБОРОМ user_id ASC user_id СОЕДИНЯЕТ($(n_col1), '-- никакие данные --') c1, СОЕДИНЯЕТ($(n_col2), '-- никакие данные --') c2, СОЕДИНЯЕТ($(n_col3), '-- никакие данные --') c3 ИЗ cs_user ГДЕ $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $ ЗАКАЗ(cla_dept) $(n_sort1) $(n_sort1_dir) $(n_sort2) $ ВЫБОРОМ(n_sort2_dir) user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') ВЫБОР user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И ((user_type = 'Менеджер') ИЛИ (user_type = 'StaffMember')) ВЫБОР user_id, user_pwd, user_type, статус ИЗ cs_user ГДЕ (верхний(user_id) = верхний('$(user_id)')) И (user_pwd = '$(user_pwd)') И (статус &lt;&gt; 'выведенное из строя') И (user_type = 'Менеджер') выбранное посылать Seq.#"
+Visited:,seq_num
+"visited: $(s1.news_visited) time(s)","Номер Последовательности Серийного Номера Серийного Номера:"
+"Wait a 3 seconds.","Последовательное# начинает с:"
+"Wait a second.",Сеансы:
+waitafterlogon.htm?b=$(b),"Установитесь Как Умолчание"
+week,set_def
+weeks,"Знак по для нового счета"
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress","минимальный номер последовательности. Запросы близко системную Сортировку На 1:"
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk","Сортировка На 2:"
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",Сортировка:
+"Why you asked for password.",sort_col
+x_what,sort_dir
+year,sort1
+years,sort1_dir
+yes,sort2
+"yright &copy; 2003, Andrei Ivanov.",sort2_dir
+"Zip Code:","sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt"
+zipcode,sqlAttach1
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",sqlCascade1
+"'$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', company = '$(company)', dept = '$(dept)', phone = '$(phone)', fax = '$(fax)', address = '$(address)', city = '$(city)', state = '$(state)', zipcode = '$(zipcode)', country = '$(country)', user_note = '$(user_note)' WHERE user_id = '$(old_user_id)'",sqlCascade2
+"Updated by: $(s1.news_updated_by)",sqlCascade3
+"Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)","sqlCat sqlCheckType sqlClosed sqlCountSubGroup sqlDelAtt sqlDeleteKB sqlDelPriority sqlDeleteNews sqlDelProduct sqlDelStatus sqlGroup sqlInsertPriority sqlLastStatus sqlLock sqlMaxMinIDs sqlMsg sqlMsgIDs sqlOpen sqlParent sqlPriorities"
+"Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)","sqlProducts sqlResetDef sqlSetDef sqlStaff sqlSubmitted sqlUpdatePriority sqlUpdateNews sqlUpdateProduct sqlUpdateStatus sqlUpdateUser sqlUpdContent"
+"Updated: $(s1.news_updated_on)","Тема ssage(s) посетила: $local.visited) Персонал времени(s) Время Начала Члена startDate государственного Состояния:"
+upwd,Статус
+upwd2,"Менеджер Статуса Статуса status/statusMan.htm:"
+"Url)"">$request.backToPrompt)","Статус: [$(имя)] удален."
+"Use Dates","Статус: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $ статус(old_name)."
+"Use Last X","statusDelOk.htm statusDel.htm?name=$(s1.name:escape)"
+"Use one of the following three methods to input article content","statusEdit.htm?name=$(s1.name:escape) StatusEditOk.htm statusMan.htm statusNew.htm stylesheet подвергаться"
+use_what,"Представьте запрос Представлять запрос поддержки Поданный Представленным На Итоге:"
+User,"Итог: $(curCat.KB_SUMMARY) Система systemInfo.htm t t type=""submit"" name=action value=""Preview HTML""/>"
+"User ID","t) запрос(s). Максимум 500 может быть отображен."
+"User ID starts with:","td> текст text/css"
+"User ID:","текст/html; charset=utf-8 textType Благодарю вас за вашу обратную связь."
+"User ID: (Required)","Это нормально. Не освежать, вновь посылайте или перезагружайтесь."
+"User Manager","Эта запись временно заблокирована."
+"User Name","Этот раздел заполнится с наиболее недавно объявленными статьями новостей."
+"User Type:","Этот раздел заполнится с три наиболее часто посещающее общественные статьи не в вышеуказанном рекомендуемом списке статьи из базы знаний."
+user/forgot.htm,"Этот раздел заполнится с верхними общественными статьями из базы знаний рекомендующейся редакторами."
+user/signUp.htm,ticket_id
+user/userFind.htm,ticket_priority
+user/userMan.htm,ticketHistEditOk.htm
+"User: [","ticketNew.htm?submitted_by=$(request.submitted_by:escape) ticketNew.htm?submitted_by=$(uid:escape)"
+user_id,tif_name)
+user_note,"Название Сообщения Листа Названия Времени:"
+user_pwd,"Чтобы отменить и возвратиться к Приоритетный Менеджер, пожалуйста, чтобы отменить и возвращаться к Менеджер Продукта, пожалуйста, чтобы отменить и возвращаться к Коммерческие Менеджеры, пожалуйста используйте Обратную кнопку окна просмотра."
+user_row_ver,"Чтобы отменить и возвратиться к Сеансовый Менеджер, пожалуйста используйте Обратную кнопку окна просмотра."
+user_type,"Чтобы отменить и возвратиться к Менеджер Статуса, пожалуйста, чтобы отменить и возвращаться к Менеджер Потребителя, пожалуйста используйте Обратную кнопку окна просмотра."
+userDel.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),"to.integer(session.usr_max_row)))> Итог: $local.count) или больше пользователей found. $local.count) пользователи отображенные."
+userDelOk.htm,для:
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),to_dispatcher
+userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape),"Сегодня $(сегодня) верхняя тема"
+userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape),"Сообщение Темы:"
+userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape),topic_id
+userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape),итог
+userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),"Итог Стоит: $local.total_cost) Итог минут: $ приоритет(total.cnt) Итог(ies): $ продукт(total.cnt) Итог(s): $ статус(total.cnt) Итог(es): $ пользователи(total.cnt) обнаруживались."
+userEdit.htm?uid=$(user_id),"Итог: $(total.cnt). Сообщение сгенерировало $(total.dt) tr> Тип типа:"
+userEditOk.htm,"type=""submit"" value=""Search""/>"
+userMan.htm,uid
+userManOk.htm,"Неназначенная Коррекция Запросов"
+userNew.htm,"КОРРЕКЦИЯ cs_kb УСТАНАВЛИВАЕТ kb_id = $(kb_id), kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = $(kb_type), kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'сегодня', kb_title = '$(kb_title)', kb_summary = '$(kb_summary)', kb_security = $(kb_security), kb_rank = $(kb_rank), kb_name = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, kb_size = -1 КОРРЕКЦИЯ cs_kb УСТАНОВЛЕННАЯ kb_k1 = '$(kb_k1)', kb_k2 = '$(kb_k2)', kb_k3 = '$(kb_k3)', kb_k4 = '$(kb_k4)', kb_k5 = '$(kb_k5)', kb_type = 1, kb_owner = '$(kb_owner)', kb_updated_by = '$(user_id)', kb_updated_on = 'сегодня', kb_title = '$(kb_title:unescape)', kb_summary = '$(kb_summary:unescape)', kb_security = $(kb_security), kb_locked_by = НЕДЕЙСТВИТЕЛЬНЫЙ, kb_locked_on = НЕДЕЙСТВИТЕЛЬНЫЙ ГДЕ kb_id = $ КОРРЕКЦИЯ(kb_id) cs_kb УСТАНОВЛЕННАЯ kb_locked_by = $(user_id), kb_locked_on = 'сегодня ГДЕ kb_id = $ КОРРЕКЦИЯ(kb_id) cs_kb УСТАНАВЛИВАЮЩАЯ kb_visited = СЛУЧАЙ, КОГДА '$(голос) = 'да, ТОГДА kb_visited + 10, КОГДА '$(голос) = 'никакое, ТОГДА kb_visited - 10 ЕЩЕ КОНЦОВ kb_visited ГДЕ kb_id = $ КОРРЕКЦИЯ(id) cs_kb УСТАНАВЛИВАЕТ kb_visited = kb_visited + 1"
+userNew.htm?msg=Only+Manager+can+create+managers,"КОРРЕКЦИЯ cs_kb_file УСТАНАВЛИВАЕТ kbf_kb_id =$(kb_id), kbf_type = $(kb_type), kbf_name = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, kbf_size = -1, kbf_content = СЛУЧАЙ, КОГДА $(kb_type) = 4, ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5, ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ГДЕ kbf_kb_id = $ КОРРЕКЦИЯ(kb_id) cs_news УСТАНАВЛИВАЕТ news_locked_by = '$(user_id)', news_locked_on = 'сегодня ГДЕ news_id = $(news_id) И (news_locked_by = '$(user_id) ИЛИ news_locked_by НЕДЕЙСТВИТЕЛЬНО);"
+userNew.htm?msg=Password+mistyped,"КОРРЕКЦИЯ cs_news УСТАНАВЛИВАЕТ news_locked_by = НЕДЕЙСТВИТЕЛЬНЫЙ, news_locked_on = НЕДЕЙСТВИТЕЛЬНЫЙ, news_k1 = '$(news_k1)', news_k2 = '$(news_k2)', news_k3 = '$(news_k3)', news_k4 = '$(news_k4)', news_k5 = '$(news_k5)', news_updated_by = '$(user_id)', news_updated_on = 'сегодня', news_title = '$(news_title)', news_format = '$(news_format)', news_detail = '$(news_detail) ГДЕ news_id = $(news_id);"
+userNew.htm?msg=User+ID+has+already+been+used,"КОРРЕКЦИЯ cs_news УСТАНАВЛИВАЕТ news_visited = news_visited + 1 ГДЕ news_id = $ КОРРЕКЦИЯ(news_id) cs_priority УСТАНОВЛЕННАЯ is_def = 0 ГДЕ is_def = 1 И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_priority УСТАНОВЛЕННАЯ is_def = 1 ГДЕ имя = '$(set_def) И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_priority УСТАНОВЛЕННАЯ row_ver = 1 + $(row_ver), имя = '$(имя)', описание = '$(описание) ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_product УСТАНОВЛЕННАЯ is_def = 0 ГДЕ is_def = 1 И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_product УСТАНОВЛЕННАЯ is_def = 1 ГДЕ имя = '$(set_def) И '$(set_def) &gt; '' КОРРЕКЦИЯ cs_product УСТАНОВЛЕННАЯ row_ver = $(row_ver) + 1, имя = '$(имя)', диспетчер = '$(диспетчер)', product_type = '$(product_type)', is_def = $(is_def), ticket_priority = '$(ticket_priority)', on_new_ticket1 = '$(on_new_ticket1)', on_new_ticket2 = '$(on_new_ticket2)', описание = 'описания ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_product УСТАНОВЛЕННАЯ ticket_priority = НЕДЕЙСТВИТЕЛЬНЫМ, row_ver = row_ver + 1 ГДЕ ticket_priority = '$(имя) КОРРЕКЦИЯ cs_sale УСТАНОВЛЕННОЕ sa_product = НЕДЕЙСТВИТЕЛЬНЫМ, row_ver = row_ver + 1 ГДЕ sa_product = '$(имя) КОРРЕКЦИЯ cs_status УСТАНОВЛЕННОЕ row_ver = $(row_ver) + 1, имя = '$(имя)', seq_num = $(seq_num), описание = '$(описание) ГДЕ имя = '$ КОРРЕКЦИЯ(old_name) cs_ticket УСТАНАВЛИВАЮЩАЯ приоритет = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ приоритет = '$(имя) КОРРЕКЦИЯ cs_ticket УСТАНАВЛИВАЮЩИЙ продукт = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ продукт = '$(имя) КОРРЕКЦИЯ cs_ticket УСТАНАВЛИВАЮЩИЙ статус = НЕДЕЙСТВИТЕЛЬНЫЙ, row_ver = row_ver + 1 ГДЕ статус = '$(имя) КОРРЕКЦИЯ cs_user УСТАНОВЛЕННЫЙ user_type = '$(user_type)', статус = '$(статус)', user_id = '$(uid)', user_pwd = '$(upwd)', email = '$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', компания = '$(компания)', отд = '$(отд)', телефон = '$(телефон)', факс = '$(факс)', адрес = '$(адрес)', город = '$(город)', состояние = '$(состояние)', индекс = '$(индекс)', страна = '$(страна)', user_note = '$(user_note) ГДЕ user_id = '$(old_user_id) Скорректированное: $(s1.news_updated_by) Скорректированное: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON) Скорректированное: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON) Скорректированное: $(s1.news_updated_on) upwd"
+userNew.htm?msg=User+ID+must+be+supplied,upwd2
+userNewOk.htm,"Url)"">$request.backToPrompt)"
+usertype,"Использование Дат Последнего X Использования"
+userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),"Используйте один из следующих трех методов, чтобы ввести содержание статьи"
+userView.htm?msg=Only+Manager+can+modify+managers,use_what
+userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape),"Потребитель Потребителя ID"
+userView.htm?user_id=$(uid:escape),"Потребитель ID начинает с:"
+usr_col1,"Потребитель ID:"
+usr_col2,"Потребитель ID: (Необходимое) Имя Потребителя Менеджера Типа Потребителя Потребителя:"
+usr_col3,"Потребитель user/forgot.htm user/signUp.htm user/userFind.htm user/userMan.htm: ["
+usr_company,user_id
+usr_dept,user_note
+usr_email,user_pwd
+usr_full_name,user_row_ver
+usr_max_row,user_type
+usr_phone,"userDel.htm?uid=$(userDelOk.htm s1.user_id:escape)&backTo=$(backTo:escape)"
+usr_sort1,"userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm"
+usr_sort1_dir,userNew.htm?msg=Only+Manager+can+create+managers
+usr_sort2,userNew.htm?msg=Password+mistyped
+usr_sort2_dir,userNew.htm?msg=User+ID+has+already+been+used
+usr_user_id,userNew.htm?msg=User+ID+must+be+supplied
+utype,"userNewOk.htm usertype"
+v.,userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)
+"value=""Save""/>",userView.htm?msg=Only+Manager+can+modify+managers
+"View article","userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape) userView.htm?user_id=$(uid:escape)"
+"visible to everybody",usr_col1
+"visible to internal staff only",usr_col2
+Visited:,usr_col3
+"visited: $(s1.news_visited) time(s)",usr_company
+"Wait a 3 seconds.",usr_dept
+"Wait a second.",usr_email
+waitafterlogon.htm?b=$(b),usr_full_name
+week,usr_max_row
+weeks,usr_phone
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress",usr_sort1
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk",usr_sort1_dir
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",usr_sort2
+"Why you asked for password.",usr_sort2_dir
+x_what,usr_user_id
+year,"utype v."
+years,"value=""Save""/>"
+yes,"Статья Вида видимая на каждом видимом на внутреннем персонале только Посетила:"
+"yright &copy; 2003, Andrei Ivanov.","посещенное: $ время(s1.news_visited)(s) Ожидается 3 секунды."
+"Zip Code:","Ожидайтесь секунду."
+zipcode,"waitafterlogon.htm?b=$(b) недельные недели"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .","Добро пожаловать $(user_id) - apooHelpDesk Ввод Поддержки Клиента в процессе развития Добро пожаловать, $(user_id) - Основное меню - поддержка Клиента - apooHelpDesk"
+user_note,"Когда новый запрос в этом продукте подается но явно не назначается, если приоритет равняется или выше чем (то есть &gt;=) Почему Вы требовали пароль."
+"s been edited $(kb_id) .",x_what
+week,"летние годы да"
+"'$(email)', email_fmt = '$(email_fmt)', full_name = '$(full_name)', company = '$(company)', dept = '$(dept)', phone = '$(phone)', fax = '$(fax)', address = '$(address)', city = '$(city)', state = '$(state)', zipcode = '$(zipcode)', country = '$(country)', user_note = '$(user_note)' WHERE user_id = '$(old_user_id)'","yright &копия; 2003, Андрей Ivanov."
+"Updated by: $(s1.news_updated_by)","Почтовый Индекс:"
+"Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)",индекс
+"Updated: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON)","Сategory: [$(kb_title)] отредактирован $(kb_id)."
+"Updated: $(s1.news_updated_on)","Родительская Группа Родители Категории"
+upwd,"email_fmt = '$(email_fmt)', full_name = '$(full_name)', компания = '$(компания)', отд = '$(отд)', телефон = '$(телефон)', факс = '$(факс)', адрес = '$(адрес)', город = '$(город)', состояние = '$(состояние)', индекс = '$(индекс)', страна = '$(страна)', user_note = '$(user_note) ГДЕ user_id = '$(old_user_id) Скорректированное: $(s1.news_updated_by) Скорректированное: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON) Скорректированное: $(s1.KB_UPDATED_BY) $(s1.KB_UPDATED_ON) Скорректированное: $(s1.news_updated_on) upwd"
+upwd2,upwd2
+"Url)"">$request.backToPrompt)","Url)"">$request.backToPrompt)"
+"Use Dates","Использование Дат Последнего X Использования"
+"Use Last X","Используйте один из следующих трех методов, чтобы ввести содержание статьи"
+"Use one of the following three methods to input article content",use_what
+use_what,"Потребитель Потребителя ID"
+User,"Потребитель ID начинает с:"
+"User ID","Потребитель ID:"
+"User ID starts with:","Потребитель ID: (Необходимое) Имя Потребителя Менеджера Типа Потребителя Потребителя:"
+"User ID:","Потребитель user/forgot.htm user/signUp.htm user/userFind.htm user/userMan.htm: ["
+"User ID: (Required)",user_id
+"User Manager",user_note
+"User Name",user_pwd
+"User Type:",user_row_ver
+user/forgot.htm,user_type
+user/signUp.htm,"userDel.htm?uid=$(userDelOk.htm s1.user_id:escape)&backTo=$(backTo:escape)"
+user/userFind.htm,"userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm"
+user/userMan.htm,userNew.htm?msg=Only+Manager+can+create+managers
+"User: [",userNew.htm?msg=Password+mistyped
+user_id,userNew.htm?msg=User+ID+has+already+been+used
+user_note,userNew.htm?msg=User+ID+must+be+supplied
+user_pwd,"userNewOk.htm usertype"
+user_row_ver,userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)
+user_type,userView.htm?msg=Only+Manager+can+modify+managers
+userDel.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),"userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape) userView.htm?user_id=$(uid:escape)"
+userDelOk.htm,usr_col1
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),usr_col2
+userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape),usr_col3
+userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape),usr_company
+userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape),usr_dept
+userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape),usr_email
+userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),usr_full_name
+userEdit.htm?uid=$(user_id),usr_max_row
+userEditOk.htm,usr_phone
+userMan.htm,usr_sort1
+userManOk.htm,usr_sort1_dir
+userNew.htm,usr_sort2
+userNew.htm?msg=Only+Manager+can+create+managers,usr_sort2_dir
+userNew.htm?msg=Password+mistyped,usr_user_id
+userNew.htm?msg=User+ID+has+already+been+used,"utype v."
+userNew.htm?msg=User+ID+must+be+supplied,"value=""Save""/>"
+userNewOk.htm,"Статья Вида видимая на каждом видимом на внутреннем персонале только Посетила:"
+usertype,"посещенное: $ время(s1.news_visited)(s) Ожидается 3 секунды."
+userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),"Ожидайтесь секунду."
+userView.htm?msg=Only+Manager+can+modify+managers,"waitafterlogon.htm?b=$(b) недельные недели"
+userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape),"Добро пожаловать $(user_id) - apooHelpDesk Ввод Поддержки Клиента в процессе развития Добро пожаловать, $(user_id) - Основное меню - поддержка Клиента - apooHelpDesk"
+userView.htm?user_id=$(uid:escape),"Когда новый запрос в этом продукте подается но явно не назначается, если приоритет равняется или выше чем (то есть &gt;=) Почему Вы требовали пароль."
+usr_col1,x_what
+usr_col2,"летние годы да"
+usr_col3,"yright &копия; 2003, Андрей Ivanov."
+usr_company,"Почтовый Индекс:"
+usr_dept,индекс
+usr_email,"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+usr_full_name,"(то есть &gt;=) Почему Вы требовали пароль."
+usr_max_row,x_what
+usr_phone,"летние годы да"
+usr_sort1,"yright &копия; 2003, Андрей Ivanov."
+usr_sort1_dir,"Почтовый Индекс:"
+usr_sort2,индекс
+usr_sort2_dir,"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+usr_user_id,"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+utype,"yright &копия; 2003, Андрей Ivanov."
+v.,lready+been+used
+"value=""Save""/>",userNew.htm?msg=User+ID+must+be+supplied
+"View article","userNewOk.htm usertype"
+"visible to everybody",userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)
+"visible to internal staff only",userView.htm?msg=Only+Manager+can+modify+managers
+Visited:,"userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape) userView.htm?user_id=$(uid:escape)"
+"visited: $(s1.news_visited) time(s)",usr_col1
+"Wait a 3 seconds.",usr_col2
+"Wait a second.",usr_col3
+waitafterlogon.htm?b=$(b),usr_company
+week,usr_dept
+weeks,usr_email
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress",usr_full_name
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk",usr_max_row
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",usr_phone
+"Why you asked for password.",usr_sort1
+x_what,usr_sort1_dir
+year,usr_sort2
+years,usr_sort2_dir
+yes,usr_user_id
+"yright &copy; 2003, Andrei Ivanov.","utype v."
+"Zip Code:","value=""Save""/>"
+zipcode,"Статья Вида видимая на каждом видимом на внутреннем персонале только Посетила:"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .","посещенное: $ время(s1.news_visited)(s) Ожидается 3 секунды."
+user_note,"Ожидайтесь секунду."
+htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape),"waitafterlogon.htm?b=$(b) недельные недели"
+userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape),"Добро пожаловать $(user_id) - apooHelpDesk Ввод Поддержки Клиента в процессе развития Добро пожаловать, $(user_id) - Основное меню - поддержка Клиента - apooHelpDesk"
+userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape),"Когда новый запрос в этом продукте подается но явно не назначается, если приоритет равняется или выше чем (то есть &gt;=) Почему Вы требовали пароль."
+userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape),x_what
+userEdit.htm?uid=$(user_id),"летние годы да"
+userEditOk.htm,"yright &копия; 2003, Андрей Ivanov."
+userMan.htm,"Почтовый Индекс:"
+userManOk.htm,индекс
+userNew.htm,"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+userNew.htm?msg=Only+Manager+can+create+managers,"(то есть &gt;=) Почему Вы требовали пароль."
+userNew.htm?msg=Password+mistyped,x_what
+userNew.htm?msg=User+ID+has+already+been+used,"летние годы да"
+userNew.htm?msg=User+ID+must+be+supplied,"yright &копия; 2003, Андрей Ivanov."
+userNewOk.htm,"Почтовый Индекс:"
+usertype,индекс
+userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape),"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+userView.htm?msg=Only+Manager+can+modify+managers,"Сategory: [$(kb_title)] отредактирован $(kb_id)."
+userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape),
+userView.htm?user_id=$(uid:escape),
+usr_col1,
+usr_col2,
+usr_col3,
+usr_company,
+usr_dept,
+usr_email,
+usr_full_name,
+usr_max_row,
+usr_phone,
+usr_sort1,
+usr_sort1_dir,
+usr_sort2,
+usr_sort2_dir,
+usr_user_id,
+utype,
+v.,
+"value=""Save""/>",
+"View article",
+"visible to everybody",
+"visible to internal staff only",
+Visited:,
+"visited: $(s1.news_visited) time(s)",
+"Wait a 3 seconds.",
+"Wait a second.",
+waitafterlogon.htm?b=$(b),
+week,
+weeks,
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress",
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk",
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",
+"Why you asked for password.",
+x_what,
+year,
+years,
+yes,
+"yright &copy; 2003, Andrei Ivanov.",
+"Zip Code:",
+zipcode,
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+" edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"s been edited $(kb_id) .",
+"come, $(user_id) - Main menu - Customer support - apooHelpDesk",
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)",
+"Why you asked for password.",
+x_what,
+year,
+years,
+yes,
+"yright &copy; 2003, Andrei Ivanov.",
+"Zip Code:",
+zipcode,
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+" edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"Сategory: [$(kb_title)] has been edited $(kb_id) .",
+"s been edited $(kb_id) .",

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=status/statusMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')  
+  </serverside>
+  <serverside dataset="sqlAddStatus" action="execute">  
+    INSERT INTO cs_status(row_ver, name, seq_num, description)
+    VALUES(1, '$(name)', $(seq_num), '$(description)')
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support New Status Saved</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="statusMan.htm">Status Manager</a> : New Status Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    New status: [$(request.name))] has been saved.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing].
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="statusNew.htm">New Status</a> | 
+    <a href="statusMan.htm">Back to Status Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

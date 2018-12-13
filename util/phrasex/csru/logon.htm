@@ -1,0 +1,26 @@
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="send" opt="cookie" >
+"user_id=guest","user_pwd=guest"</serverside>
+<serverside dataset="User" action="move" opt="accessdenied.htm?b=index.htm" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside action="send" opt="cookie" >
+"user_id=$(user_id)","user_pwd=$(user_pwd)"</serverside>
+<head loop="User" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title loop="cookie" >
+70</title>
+<meta http-equiv="refresh" content="1; url=mainMenu$(User.user_type).htm?user_id=$(user_id)&user_pwd=$(user_pwd)" />
+</head>
+<body loop="User" >
+<center >
+60%<br />
+<a href="mainMenu$(User.user_type).htm" >
+Намек: 1. Частные продукты доступны на их конечных пользователях, всех сотрудниках и менеджерах. Они не доступны, чтобы закончиться пользователи, которые не используют их. 2. Запросы усиленные Эскалатором придут в диспетчер.</a>
+</center>
+</body>
+</html>

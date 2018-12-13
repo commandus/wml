@@ -1,0 +1,52 @@
+Gotcha #1: XML, not SGML
+
+You can run into problems if you ever forget that WML is an XML
+language, not a plain SGML language. If you find your pages won't
+parse or display properly, make sure that standalone tags have a
+trailing slash in their name like <br/>.
+
+Workaround:
+
+Check your own code!
+
+--
+
+Gotcha #2: No "back" button ... or is there
+
+In a HTML browser there is always a facility to go backwards through
+the stack of visited pages, but a WAP browser promises no such
+feature. To get around this, you can implement your own global "back"
+button with the deck template and the <prev/> tag.
+
+However, the Nokia WAP Toolkit shows a problem with this - some WAP
+browsers do have a back button. Nokia's toolkit shows two (fictional)
+phones, the 6150 and the 6110. The 6150 has no back button at all,
+while the 6110's action button changes to a back button after 2
+seconds inactivity. This means that if you implement a global back
+button for all browsers, on the larger browsers there will be two
+visible.
+
+Workaround:
+
+It's probably possible to implement some WMLscript for this purpose,
+but that seems like a bit of overkill.
+
+--
+
+Gotcha #3: Mishandled URLs
+
+While playing with the Ericsson WAP SDK I noticed that it doesn't handle
+some URLs properly. I had written several small files called "1.wml"
+through to "12.wml" and had used <a href="1.wml"> to reference them.
+However, Ericsson's virtual phone told me that it didn't know what
+protocol to use.
+
+If a URL begins with a number it appears that it forgets what protocol
+(http, local file) it uses and the path.
+
+Workaround:
+
+Don't start URLs with numbers. Or don't use Ericsson R320S mobile phones
+to view your WAP pages.
+
+--

@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>guide
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<p><a name=guide>guide</a>
+ <img border="0" src="opguide.gif" width="24" height="24">
+<br id=guidebrief>
+<p>The &lt;guide&gt; section of the Open eBook package file determines which elements appear on the first page of an eBook:
+<ul type="disc">
+  <li>Table of Contents (toc)
+  <li>Content (content)
+  <li>Copyright notices, legal and about this Book (title-page)
+  <li>Rights page (other.ms-copyright)
+  <li>Title page graphic (other.ms-titleimage-standard)&nbsp;
+  <li>Thumbnail graphic- portrait or landscape (other.ms-thumbimage-standard, other.ms-thumbimage)
+  <li>Cover page graphic- portrait or landscape (other.ms-coverimage-standard, other.ms-coverimage)
+  <li>Chapter tour (other.ms-chaptertour)
+  <li>Link to the first page (other.ms-firstpage)</li>
+</ul>
+<p>The &lt;guide&gt; supports only a small group of possible id types and elements derived from the OEB standard.</p>
+
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id="guideattr"><b>id</b><br>
+Provides an element with a unique name within a single document. This is especially useful in works with extensive cross-referencing and linking, such as dictionaries, encyclopedias, or travel guides.
+Use of ids&nbsp; simplifies linking and updates.<br>
+<b>class</b>
+<br>Affiliates an element with one or more classes.
+<br><b>style</b>
+<br>Attaches a list of inline (name:value paired) CSS properties to a specific tag, for example: style=&quot;name:value;name:value&quot;<br>
+Note: Media types other than &quot;text/x-oeb1-css&quot; will be ignored with a warning in a document of type &quot;text/x-oeb1-document&quot;.
+</p>
+<p>See also:
+</p>
+<p><a href="opreference.htm">&lt;reference&gt;</a></p>
+</body>
+</html>

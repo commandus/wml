@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="Timer">
+<onevent type="onenterforward">
+  <refresh>
+    <setvar name="timer" value="20"/>
+  </refresh>
+  <go href="#card1"/>
+</onevent>
+</card>
+<card id="card1" title="Timer">
+<p>Wait for how many 10th's of a second?<input name="timer" value="$timer"></input><br/>
+<a href="#card2">start timer</a></p>
+</card>
+<card id="card2" title="Input" ontimer="#card3">
+<timer name="timer"/>
+<p>Waiting for $(timer) 10th/second...
+</p>
+</card>
+<card id="card3" title="Timer">
+<p align="center"><b>Done Timer!</b></p>
+<p align="center">
+<a href="#card1">again</a><br/>
+<a href="demo.wml#demo">more demos</a>
+</p>
+
+</card>
+</wml>

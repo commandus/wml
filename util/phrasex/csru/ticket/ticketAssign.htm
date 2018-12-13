@@ -1,0 +1,23 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$ 
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  <serverside dataset="s1" action="query">
+<option >
+<!$  
+        <serverside dataset="sqlStaff" action="query">
+</td>
+</tr>
+<tr >
+<td colspan="3" align="right" >
+Статус<input type="text" name="new_cost" size="5" maxlength="10" />
+minutes</td>
+</tr>
+<tr >
+<td colspan="3" >
+di_detail<!$ if (request.browserType = 'MSIE') )>

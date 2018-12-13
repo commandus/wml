@@ -1,0 +1,117 @@
+
+<html>
+<head>
+<title>Event</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Event</h1>
+
+<table border="0">
+  <tr>
+    <td> <a href="#do">do <img border="0" src="sdo.gif" width="8" height="8"></a> <a href="#onevent">onevent</a>  
+      <a href="#postfield">postfield <img border="0" src="spostfield.gif" width="8" height="8"></a>
+      <a href="#timer">timer <img border="0" src="stimer.gif" width="8" height="8"></a></td>
+  </tr>
+</table>
+
+<!-- Event elements -->
+
+<p><a name=do>do</a>
+ <img border="0" src="do.gif" width="24" height="24">
+<br id=dobrief>Provides a general mechanism for performing actions on the current card.
+  <br>The representation of the do tag is dependent on the device and the author must only assume that the tag is mapped to a unique user interface widget, such as a button, that the user can activate. The do tag may appear at both the card and deck-level:
+  <br>Card-level: the do tag may appear inside a card tag and may be located anywhere in the text flow.
+  <br>Deck-level: the do tag may appear inside a deck template, indicating a deck-level do tag. A deck-level do tag applies to all cards in the deck, and is equivalent to having specified the do within each card. For the purposes of rendering, the browser must behave as if deck-level do tags are located at the end of the card's text flow.
+  <br>A card-level do tag overrides (or "shadows") a deck-level do tag if they have the same name. For a single card, the active do tags are defined as the do tags specified in the card, plus any do tags specified in the deck's template and not overridden in the card.
+  <br>Non-active do tags and active do tags with a noop task are not displayed. All active do tags with a task other than noop will be shown in some manner. When the user activates the do tag, the associated task is executed.
+<br><a href="#do" style="margin-left: 32" onclick="expand('doattr')">attributes</a>  
+<p id=doattr style="margin-left: 64;display=none">
+  <b>type</b>
+  <br>Provides a hint to the browser about the author's intended use of the tag and how the tag should be mapped to the physical user interface: 'accept' (positive acknowledgement); 'prev' (backward history navigation); 'help' (request for help); 'reset' (clearing or resetting state); 'options' (request for options or additional operations); 'delete' (delete item or choice); 'unknown' a generic do element.
+  <br><b>label</b>
+  <br>Specifies a textual string suitable for labeling the user widget. To work well on a variety of browsers, labels should be six characters or shorter in length.
+  <br><b>name</b>
+  <br>Specifies the name of the do event binding.
+  <br><b>optional</b>
+  <br>If true, the browser may ignore this element.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=onevent>onevent</a>
+ <img border="0" src="onevent.gif" width="24" height="24">
+<br id=oneventbrief>Binds a task to a particular intrinsic event for the immediately enclosing element.
+  <br>For example, specifying an onevent element inside a card element associates an intrinsic event binding with that card element.
+  <br>The browser will ignore any onevent element specifying a type that does not correspond to a legal intrinsic event for the immediately enclosing element.
+<br><a href="#onevent" style="margin-left: 32" onclick="expand('oneventattr')">attributes</a>  
+<p id=oneventattr style="margin-left: 64;display=none">
+  <b>name</b>
+  <br>Indicates the name of the intrinsic event.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+
+<p><a name=postfield>postfield</a>
+ <img border="0" src="postfield.gif" width="24" height="24">
+<br id=postfieldbrief>Specifies a field name and value for transmission to an origin server during a URI request.
+The actual encoding of the name and value will depend on the method used to communicate with the origin server.
+<br><a href="#postfield" style="margin-left: 32" onclick="expand('postfieldattr')">attributes</a>  
+<p id=postfieldattr style="margin-left: 64;display=none">
+  <b>name</b>
+  <br>Specifies the variable name.
+  <br><b>value</b>
+  <br>Specifies the variable value.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=timer>timer</a>
+ <img border="0" src="timer.gif" width="24" height="24">
+<br id=timerbrief>The timer element declares a card timer which exposes a means of processing inactivity or idle time. The timer is initialised and started at card entry and is stopped when the card is exited. Card entry is any task or user action that results in the card being activated, for example, navigating into the card. Card exit is defined as the execution of any task. The value of a timer will decrement from the initial value, triggering the delivery of an ontimer intrinsic event when it reaches zero. Note that timer resolution and the interaction of the timer with the browser's user interface and other time-based device functionality is implementation dependent.
+  <br>It is an error to have more than one timer element in a card.
+  <br>The timer timeout value is specified in units of one-tenth (1/10) of a second. The author should not expect a particular timer resolution and should provide the user with another means to invoke a timer's task. A timeout value of zero disables the timer.
+  <br>Invoking a refresh task is considered an exit. The task stops the timer, commits its value to the context, and updates the browser accordingly. Completion of the refresh task is considered an entry to the card. At that time, the timer must resume.
+<br><a href="#timer" style="margin-left: 32" onclick="expand('timerattr')">attributes</a>
+<p id=timerattr style="margin-left: 64;display=none">
+  <br><b>name</b>
+  <br>Specifies the name of the variable to be set with the value of the timer. The name variable's value is used to set the timeout period upon timer initialisation. The variable named by the name attribute will be set with the current timer value when the card is exited or when the timer expires. For example, if the timer expires, the named variable is set to a value of zero.
+  <br><b>value</b>
+  <br>Indicates the default value of the variable named in the name attribute - that is the timer value. When the timer is initialised and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the name attribute is not specified, the timeout is always initialised to the value specified in the value attribute.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<!-- container(document) element -->
+
+</body>
+</html>

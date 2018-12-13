@@ -1,0 +1,84 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  set local.max_row = 500;
+  set local.rep_name = 'Todo list for ' + request.userID;
+  set local.app_url = server.httpAddress + app.startPage;
+
+  <serverside dataset="sqlMyTickets" action="query">
+    SELECT ticket_id, submitted_by, title '
+    'FROM cs_ticket_view '
+    'WHERE status <> \'' + request.lastStatus + '\' '
+      'AND assigned_to = \'' + to.2QuoteStr(request.userID) + '\' '
+    'ORDER BY ticket_id ASC';
+  </serverside>  
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+  <base href="$local.app_url)">
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$local.app_url)">$(appname)</a> : 
+    $local.rep_name)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td valign="top">ID&nbsp;</td>
+  <td valign="top">Title</td>
+  <td valign="top" nowrap="nowrap">Submitted By&nbsp;</td>
+</tr>
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+
+  while (sqlMyTickets.fetch AND local.count < to.integer(local.max_row)) 
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+    set local.viewUrl = 
+      '/cs/ticket/ticketView.htm?ticket_id=' + sqlMyTickets.ticket_id;
+)>
+<tr $local.bgcolor)>
+  <td valign="top">
+    <a href="$local.viewUrl)">$sqlMyTickets.ticket_id)</a>&nbsp;
+  </td>
+  <td valign="top">$(sqlMyTickets.title))</td>
+  <td valign="top">$(sqlMyTickets.submitted_by))&nbsp;</td>
+</tr>
+<!$ endwhile )>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$if (local.count >= to.integer(local.max_row)))>
+      Total: $local.count) or more requests found. 
+      $local.count) requests displayed. 
+    <!$else)>
+      Total: $local.count) request(s) found and displayed. 
+    <!$endif)>
+    $server.dateTime)
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>
+<!$ 
+  return local.count; // must be after the html ending tag
+)>

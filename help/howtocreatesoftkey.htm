@@ -1,0 +1,51 @@
+
+<html>
+<head>
+<title>How to create a soft key</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to create a soft key</h1>
+
+<p>Mobile devices have the ability to have different functions assigned to certain buttons
+called <i>soft keys</i>.  WML allows you to assign certain functions to them.<br>
+<br>
+You must have created a paragraph in the card to create a soft key in.&nbsp;</p>
+
+<p> Select
+paragraph (shown as p0, figure below) and press <b>do</b> element button to
+create new <b>do</b> element.</p>
+<p><img border="0" src="shot01.gif"><br>
+<br>
+<br>
+Click on attribute <b>type</b> and select value from the drop-down menu one of
+the known types or enter new one. Certain keys are standard on most phones (like
+prev and accept), while others may not be available on some models.</p>
+<p>Assign value to <b>label</b> attribute.</p>
+<p>Assign an action for the <b>do</b> element by pressing one of the element
+buttons:</p>
+<ul>
+  <li><b>go</b>. This element will link to the specified card when the soft key is
+    pressed;</li>
+  <li><b>refresh</b>. This element refreshes the variables on the card;</li>
+  <li><b>prev</b>. This element will link the to the previous card viewed;</li>
+  <li><b>noop</b>. This element causes nothing to happen when the the soft key is pressed.  This can be useful when you wish to override a template that has assigned a function to the
+    soft key.</li>
+</ul>
+
+</body>
+</html>

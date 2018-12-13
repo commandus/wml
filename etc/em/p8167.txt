@@ -1,0 +1,251 @@
+object TWMLBEmulator
+  Name = 'Motorola Timeport P8167'
+  Left = 0
+  Top = 0
+  Width = 0
+  Height = 0
+  ImgNormal = 'imagenormalp8167.jpg'
+  ImgOver = 'imageoverp8167.jpg'
+  ImgPressed = 'imagepressedp8167.jpg'
+  Platforms = [wpWAP1_1, wpopenwave3_0]
+  cxprefix = 6
+  cyprefix = 8
+  HighlightMode = 2
+  xdevicebrowser = 90
+  DeviceSupports = [dsAccesskeys]
+  DeviceAcceptTypes = [mtWML, mtWBMP]
+  Display.x0 = 128
+  Display.y0 = 52
+  Display.x1 = 96
+  Display.y1 = 31
+  Display.BackColor = 11054994
+  Display.Font.Charset = DEFAULT_CHARSET
+  Display.Font.Color = clBlack
+  Display.Font.Height = -13
+  Display.Font.Name = 'Courier'
+  Display.Font.Pitch = fpFixed
+  Display.Font.Style = []
+  Display.Align = alLeft
+  Display.xofs = 0
+  Display.yofs = 0
+  TitleBar.x0 = 0
+  TitleBar.y0 = 0
+  TitleBar.x1 = 0
+  TitleBar.y1 = 0
+  TitleBar.BackColor = clBlack
+  TitleBar.Font.Charset = DEFAULT_CHARSET
+  TitleBar.Font.Color = clWindowText
+  TitleBar.Font.Height = -13
+  TitleBar.Font.Name = 'Courier'
+  TitleBar.Font.Pitch = fpFixed
+  TitleBar.Font.Style = []
+  TitleBar.Align = alLeft
+  BrowserArea.x0 = 120
+  BrowserArea.y0 = 39
+  BrowserArea.x1 = 0
+  BrowserArea.y1 = 0
+  BrowserArea.BackColor = 11054994
+  BrowserArea.Font.Charset = DEFAULT_CHARSET
+  BrowserArea.Font.Color = clBlack
+  BrowserArea.Font.Height = -13
+  BrowserArea.Font.Name = 'Courier'
+  BrowserArea.Font.Pitch = fpFixed
+  BrowserArea.Font.Style = []
+  BrowserArea.Align = alLeft
+  SoftButtons.DisplayArea.x0 = 0
+  SoftButtons.DisplayArea.y0 = 0
+  SoftButtons.DisplayArea.x1 = 0
+  SoftButtons.DisplayArea.y1 = 0
+  SoftButtons.DisplayArea.BackColor = 11054994
+  SoftButtons.DisplayArea.Font.Charset = DEFAULT_CHARSET
+  SoftButtons.DisplayArea.Font.Color = clBlack
+  SoftButtons.DisplayArea.Font.Height = -13
+  SoftButtons.DisplayArea.Font.Name = 'Courier'
+  SoftButtons.DisplayArea.Font.Pitch = fpFixed
+  SoftButtons.DisplayArea.Font.Style = []
+  SoftButtons.DisplayArea.Align = alLeft
+  SoftButtons.SoftButtonsStyle = 1
+  SoftButtons.SoftButtonsPresentationStyle = 1
+  SoftButtons = <
+    item
+      DisplayArea.x0 = 48
+      DisplayArea.y0 = 13
+      DisplayArea.x1 = 9
+      DisplayArea.y1 = 39
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end
+    item
+      DisplayArea.x0 = 40
+      DisplayArea.y0 = 13
+      DisplayArea.x1 = 65
+      DisplayArea.y1 = 39
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end>
+  Buttons = <
+    item
+      Comment = 'Up/*'
+      x0 = 43
+      y0 = 305
+      x1 = 104
+      y1 = 334
+      Value = '3'
+    end
+    item
+      Comment = 'Down/#'
+      x0 = 170
+      y0 = 305
+      x1 = 230
+      y1 = 334
+      Value = '4'
+    end
+    item
+      Comment = 'SideUp'
+      x0 = 3
+      y0 = 71
+      x1 = 26
+      y1 = 103
+      Value = '3'
+    end
+    item
+      Comment = 'SideAction'
+      x0 = 3
+      y0 = 111
+      x1 = 26
+      y1 = 147
+      Value = '1'
+    end
+    item
+      Comment = 'SideDown'
+      x0 = 3
+      y0 = 158
+      x1 = 26
+      y1 = 189
+      Value = '4'
+    end
+    item
+      Comment = 'OK/Soft1'
+      x0 = 45
+      y0 = 338
+      x1 = 89
+      y1 = 367
+      Value = '1'
+    end
+    item
+      Comment = 'Menu/Soft2'
+      x0 = 93
+      y0 = 339
+      x1 = 135
+      y1 = 367
+      Value = '0'
+    end
+    item
+      Comment = 'Clr/Back'
+      x0 = 139
+      y0 = 338
+      x1 = 180
+      y1 = 367
+      Value = '8'
+    end
+    item
+      Comment = '0'
+      x0 = 108
+      y0 = 305
+      x1 = 166
+      y1 = 334
+      Value = '4'
+    end
+    item
+      Comment = '1'
+      x0 = 43
+      y0 = 205
+      x1 = 104
+      y1 = 235
+      Value = '4'
+    end
+    item
+      Comment = '2'
+      x0 = 108
+      y0 = 205
+      x1 = 166
+      y1 = 235
+      Value = '5'
+    end
+    item
+      Comment = '3'
+      x0 = 170
+      y0 = 205
+      x1 = 230
+      y1 = 235
+      Value = '5'
+    end
+    item
+      Comment = '4'
+      x0 = 43
+      y0 = 239
+      x1 = 104
+      y1 = 268
+      Value = '5'
+    end
+    item
+      Comment = '5'
+      x0 = 108
+      y0 = 239
+      x1 = 166
+      y1 = 268
+      Value = '5'
+    end
+    item
+      Comment = '6'
+      x0 = 170
+      y0 = 239
+      x1 = 230
+      y1 = 268
+      Value = '5'
+    end
+    item
+      Comment = '7'
+      x0 = 43
+      y0 = 272
+      x1 = 104
+      y1 = 301
+      Value = '5'
+    end
+    item
+      Comment = '8'
+      x0 = 108
+      y0 = 272
+      x1 = 166
+      y1 = 301
+      Value = '5'
+    end
+    item
+      Comment = '9'
+      x0 = 170
+      y0 = 272
+      x1 = 230
+      y1 = 301
+      Value = '5'
+    end>
+  CharacterSet.Height = 0
+  CharacterSet.Width = 0
+  CharacterSet.VariableWidth = False
+  CharacterSet = <>
+  AnchorDelimiterLeft = ' ['
+  AnchorDelimiterRight = ']'
+end

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+<card id="faq" title="ЧЗВ WinWAP">
+<p align="center">
+  <img src="../wwhelp.wbmp" alt="WinWAP"/></p>
+<p>
+  <br/>
+  <big>Темы ЧЗВ :</big>
+  <br/>
+  <br/>
+  <a href="404.wml">Я получаю ошибку  404 (не найдено) и знаю, что адрес  URL правильный</a> <br/>
+  <a href="wsp.wml">Как можно соединиться с Шлюзом  WAP?</a> <br/>
+  <br/>
+  <do label="Назад"> <go href="@prev"/> </do>
+  <do label="Интерактивные ЧЗВ  (FAQ)"> <go href="http://wap.winwap.org/help/faq/index.wml"/> </do>
+</p>
+</card>
+</wml>

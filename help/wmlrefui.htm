@@ -1,0 +1,158 @@
+
+<html>
+<head>
+<title>User input elements</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>User input elements</h1>
+
+<table border="0">
+  <tr>
+    <td><a href="#input">input <img border="0" src="sinput.gif" width="8" height="8"></a> <a href="#select">select <img border="0" src="sselect.gif" width="8" height="8"></a> <a href="#option">option</a>
+<a href="#optgroup">optgroup</a> <a href="#fieldset">fieldset</a></td>
+  </tr>
+</table>
+
+<!-- user input elements -->
+
+<p><a name=input>input</a>
+ <img border="0" src="input.gif" width="24" height="24">
+<br id=inputbrief>The input element specifies a text entry object. The user input is constrained by the optional format attribute.
+<br><a href="#input" style="margin-left: 32" onclick="expand('inputattr')">attributes</a>
+<p id=inputattr style="margin-left: 64;display=none">
+  <br><b>name</b>
+  <br>Specifies the name of the variable to set with the result of the user's text input. The name variable's value is used to pre-load the text entry object. If this value does not conform to the input mask, the browser will unset the variable and attempt to
+  initialize the variable with the value attribute.
+  <br><b>type</b>
+  <br>Specifies the type of text-input area. The following values are allowed: text (text entry control) or password (a text entry control where each character is displayed in an illegible form, such as with asterisks). Default is text.
+  <br><b>value</b>
+  <br>The value attribute indicates the default value of the variable named in the name attribute. When the element is displayed and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the value attribute specifies a value that does not conform to the input mask specified by the format attribute, the browser must ignore the value attribute. In the case where no valid value can be established, the name variable is left unset.
+  <br><b>format</b>
+  <br>Specifies an input mask for user input entries. The string consists of mask control characters and static text that is displayed in the input area. The format control characters specify the data format expected to be entered by the user. The format codes are:
+    <br> 'A' (entry of any upper-case, non-numeric character);
+    <br> 'a' (entry of any lower-case, non-numeric character);
+    <br> 'N' (entry of any numeric character);
+    <br> 'X' (entry of any upper-case character);
+    <br> 'x' (entry of any lower-case character);
+    <br> 'M' or 'm' (entry of any character);
+    <br> '*f' (entry of any number of characters where f is one of the above format codes);
+    <br> 'nf' (entry of n characters where n is from 1 to 9 and f is one of the above format codes);
+    <br> '\c' (display the character, c, in the entry field: these characters are considered part of the input's value).
+  <br><b>emptyok</b>
+  <br>Indicates that this input element accepts empty input although a non-empty format string has been specified. Default is false.
+  <br><b>size</b>
+  <br>Specifies the width, in characters, of the text-input area.
+  <br><b>maxlength</b>
+  <br>Specifies the maximum number of characters that can be entered by the user in the text-entry area.
+  <br><b>tabindex</b>
+  <br>Specifies the tabbing position of the current element. The tabbing position indicates the relative order in which elements are traversed when tabbing within a single WML card.
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>accesskey</b>
+  <br>Assigns an access key (a single character from the document character set) to an element to allow the user to activate a particular element by using a single key. The phones usually have "0"-"9", "*" and "#" keys. Activating an access key assigned to an element gives focus to the element. When the user activates a
+  <b>input</b>, it allows input. The access key may be recognized directly, or it may be necessary to press it in conjunction with a "command" key.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=select>select</a>
+ <img border="0" src="select.gif" width="24" height="24">
+<br id=selectbrief style="margin-left: 64;display=none">The select element lets users pick from a list of options. Each option is specified by an option element. Each option element may have one line of formatted text. Option elements may be organised into hierarchical groups using the optgroup element.
+<br><a href="#select" style="margin-left: 32" onclick="expand('selectattr')">attributes</a>
+<p id=selectattr style="margin-left: 64;display=none">
+  <br><b>name</b>
+  <br>Specifies the name of the variable to set with the result of the selection. The name variable's value is used to pre-load the text entry object.
+  <br><b>value</b>
+  <br>Indicates the default value of the variable named in the name attribute. When the element is displayed, and the variable named in the name attribute is not set, the name variable may be assigned the value specified in the value attribute, depending on the values defined in iname and ivalue. If the name variable already contains a value, the value attribute is ignored. Any application of the default value is done before the list is pre-selected with the value of the name variable. If this element allows the selection of multiple options, the result of the user's choice is a list of all selected values, separated by the semicolon character. The name variable is set with this result. Similarly, the value attribute is interpreted as a semicolon-separated list of pre-selected options.
+  <br><b>iname</b>
+  <br>Indicates the name of the variable to be set with the index result of the selection. The index result is the position of the currently selected option in the select list. An index of zero indicates that no option is selected. Index numbering begins at one and increases monotonically.
+  <br><b>ivalue</b>
+  <br>Indicates the default-selected option element. When the element is displayed, if the variable named in the iname attribute is not set, it is assigned the default-selected entry. If the variable already contains a value, the ivalue attribute is ignored. If the iname attribute is not specified, the ivalue value is applied every time the element is displayed. If this element allows the selection of multiple options, the index result of the user's choice is a list of the indices of all the selected options, separated by the semicolon character. The iname variable is set with this result. Similarly, the ivalue attribute is interpreted as a semicolon-separated list of pre-selected options.
+  <br><b>multiple</b>
+  <br>Indicates that the select list should accept multiple selections. When not set, the select list should only accept a single selected option. Default is false.
+  <br><b>tabindex</b>
+  <br>Specifies the tabbing position of the current element. The tabbing position indicates the relative order in which elements are traversed when tabbing within a single WML card.
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=option>option</a>
+ <img border="0" src="option.gif" width="24" height="24">
+<br id=optionbrief>This element specifies a single choice option in a select element.
+<br><a href="#option" style="margin-left: 32" onclick="expand('optionattr')">attributes</a>
+<p id=optionattr style="margin-left: 64;display=none">
+  <br><b>value</b>
+  <br> Specifies the value to be used when setting the name variable. When the user selects this option, the resulting value specified in the value attribute is used to set the select element's name variable. The value attribute may contain variable references, which are evaluated before the name variable is set.
+  <br><b>onpick</b>
+  <br>The URI that is loaded when the user selects or deselects this option.
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=optgroup>optgroup</a>
+ <img border="0" src="optgroup.gif" width="24" height="24">
+<br id=optgroupbrief>The optgroup element allows the author to group related option elements into a hierarchy. The browser may use this hierarchy to facilitate layout and presentation on a wide variety of devices.
+<br><a href="#optgroup" style="margin-left: 32" onclick="expand('optgroupattr')">attributes</a>
+<p id=optgroupattr style="margin-left: 64;display=none">
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=fieldset>fieldset</a>
+ <img border="0" src="fieldset.gif" width="24" height="24">
+<br id=fieldsetbrief>Allows the grouping of related fields and text. This grouping allows the
+optimizing of layout and navigation. Fieldset elements may nest, providing the author with a means of specifying
+behavior across a wide variety of devices.
+<br><a href="#fieldset" style="margin-left: 32" onclick="expand('fieldsetattr')">attributes</a>
+<p id=fieldsetattr style="margin-left: 64;display=none">
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<!-- anchors & images elements -->
+
+</body>
+</html>

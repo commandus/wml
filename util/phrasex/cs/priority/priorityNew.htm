@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=priority/priorityMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')  
+  </serverside>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support New Priority</title>
+</head>
+<body>
+
+<form method="POST" action="priorityNewOk.htm">
+<center>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="priorityMan.htm">Priority Manager</a> : New Priority  
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>  
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    Priority Name 
+  </td>
+  <td>
+    <input type="text" name="name" size="65" maxlength="20" value="" />
+  </td>
+</tr>
+<tr>
+  <td>
+    Description
+  </td>
+  <td>
+    <input type="text" name="description" size="65" maxlength="200" value="" />
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    <input type="submit" value="Save"/>
+  </td>
+</tr>
+</table>  
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$local.mainMenu)">$(appname)</a> : 
+      How to configure your web browser
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    This website generates its content dynamically. Hence you need to
+    configure your browser's cache correctly to avoid stale pages.
+    Please follow the instructions below. 
+    <br/>
+    <!$
+      if (request.browserType = 'MSIE' AND request.browserVerMajor >= 5)
+    )>
+      Select the Internet Options command on this browser's Tools menu,
+      then click the Settings button in Temporary Internet files. 
+      During your session with this website, you should NOT select
+      "Never" for "Check for new versions of stored pages".
+    <!$
+      elseif (request.browserType = 'MSIE' AND request.browserVerMajor <= 4)
+    )>
+      Select the Internet Options command on this browser's View menu, 
+      then click the Settings button in Temporary Internet files. 
+      During your session with this website, you should select 
+      "Every time you start Internet Explorer" for 
+      "Check for new versions of stored pages".
+    <!$
+      elseif (request.browserType = 'Navigator')
+    )>
+      Select the Preferences command on this browser's Edit menu, 
+      expand the Advanced node and then click the Cache node. 
+      During your session with this website, you should NOT use "Never" 
+      for "Document in cache is compared to the document on network". 
+    <!$
+      else
+    )>
+      To speed up browsing, when you return to a web page you viewed 
+      before, most browsers can be configured to ALWAYS display the same 
+      one they stored. During your session with this website, you should
+      disable this feature if you often see stale pages.
+    <!$
+      endif
+    )>
+    <!$
+    if (request.via <> '')  // browser behind proxy
+      if (
+        (request.browserType = 'MSIE' AND request.browserVerMajor >= 4) OR 
+        (request.browserType = 'Navigator' AND request.browserVerMajor >= 5)
+      )
+        ;  // good browser, do nothing. note: Netscape 6 = navigator 5
+      else
+        response.write('<li>'
+        'You are using an old browser to access this website through \r\n'
+        'a proxy server. It may not work well. \r\n'
+        'Please upgrade your browser to Internet Explorer 5, \r\n'
+        'Netscape 6, or newer versions of these browsers. \r\n'
+        'If possible, access this website directly without going \r\n'
+        'through the proxy server, or configure the proxy server \r\n'
+        'not to cache this website.');
+      endif
+    endif
+    )>
+    </ul>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

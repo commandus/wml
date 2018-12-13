@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<device>
+	<name>Motorola i1000</name>
+	<progid>Intava.Simulator.Openwave</progid>
+	<platformid>wap:1.1|openwave:3.1</platformid>
+	<display>
+		<x>128</x>
+		<y>78</y>
+		<devicex>96</devicex>
+		<devicey>48</devicey>
+		<fgcolor red="0" green="0" blue="0"/>
+		<bgcolor red="146" green="175" blue="168"/>
+		<browserarea>
+			<x>128</x>
+			<y>65</y>
+			<xoffset>0</xoffset>
+			<yoffset>0</yoffset>
+			<fgcolor red="0" green="0" blue="0"/>
+			<bgcolor red="146" green="175" blue="168"/>
+		</browserarea>
+		<softbuttons>
+			<fgcolor red="146" green="175" blue="168"/>
+			<bgcolor red="0" green="0" blue="0"/>
+			<font name="Courier" height="13" variablewidth="0"/>
+			<drawstyle>1</drawstyle>
+			<presentationstyle>2</presentationstyle>
+			<softbutton1>
+				<x>40</x>
+				<y>13</y>
+				<xoffset>0</xoffset>
+				<yoffset>65</yoffset>
+				<align>0</align>
+			</softbutton1>
+			<softbutton2>
+				<x>40</x>
+				<y>13</y>
+				<xoffset>88</xoffset>
+				<yoffset>65</yoffset>
+				<align>0</align>
+			</softbutton2>
+		</softbuttons>
+		<scrollbararea>
+			<x>12</x>
+			<y>13</y>
+			<xoffset>58</xoffset>
+			<yoffset>65</yoffset>
+			<fgcolor red="0" green="0" blue="0"/>
+			<bgcolor red="146" green="175" blue="168"/>
+			<scrollbarimages>
+			</scrollbarimages>
+		</scrollbararea>
+	</display>
+	<userinterface>
+		<displayoffsetx>102</displayoffsetx>
+		<displayoffsety>106</displayoffsety>
+		<buttons>
+			<button comment="Up" x1="21" y1="75" x2="36" y2="101">38</button>
+			<button comment="Down" x1="21" y1="114" x2="36" y2="142">40</button>
+			<button comment="Up(Left)" x1="116" y1="273" x2="167" y2="313">38</button>
+			<button comment="Down(Right)" x1="168" y1="273" x2="219" y2="313">40</button>
+			<button comment="Soft1" x1="75" y1="232" x2="136" y2="266">13</button>
+			<button comment="Soft2" x1="196" y1="232" x2="259" y2="266">0</button>
+			<button comment="*/Back" x1="75" y1="418" x2="133" y2="459">8</button>
+			<button comment="#" x1="200" y1="419" x2="259" y2="459">35</button>
+			<button comment="0" x1="135" y1="430" x2="198" y2="464">48</button>
+			<button comment="1" x1="62" y1="303" x2="120" y2="339">49</button>
+			<button comment="2" x1="135" y1="315" x2="198" y2="347">50</button>
+			<button comment="3" x1="214" y1="303" x2="273" y2="339">51</button>
+			<button comment="4" x1="66" y1="340" x2="125" y2="378">52</button>
+			<button comment="5" x1="135" y1="352" x2="198" y2="386">53</button>
+			<button comment="6" x1="210" y1="341" x2="269" y2="378">54</button>
+			<button comment="7" x1="71" y1="380" x2="129" y2="417">55</button>
+			<button comment="8" x1="135" y1="391" x2="198" y2="425">56</button>
+			<button comment="9" x1="205" y1="380" x2="264" y2="417">57</button>
+		</buttons>
+		<uiimages>
+		</uiimages>
+	</userinterface>
+	<parser>
+		<font name="courier" height="13" variablewidth="0"/>
+		<cxprefix>6</cxprefix>
+		<cyprefix>8</cyprefix>
+		<supportbold>0</supportbold>
+		<supportitalics>0</supportitalics>
+		<supportunderline>0</supportunderline>
+		<supportstrong>0</supportstrong>
+		<supportemphasis>0</supportemphasis>
+		<supportbig>0</supportbig>
+		<supportsmall>0</supportsmall>
+		<supportimages>0</supportimages>
+		<supportlocalsrcimages>0</supportlocalsrcimages>
+		<supportaccesskeys>1</supportaccesskeys>
+		<anchordelimleft> [</anchordelimleft>
+		<anchordelimright>]</anchordelimright>
+		<highlightmode>2</highlightmode>
+		<xdevicebrowser>98</xdevicebrowser>
+		<characterset height="8" width="6" variablewidth="0"/>
+	</parser>
+	<accepttypes>
+		<accepttype>text/wml</accepttype>
+		<accepttype>image/bmp</accepttype>
+		<accepttype>image/wbmp</accepttype>
+	</accepttypes>
+	<requestheaders>IntavaSimulator</requestheaders>
+</device>

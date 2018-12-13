@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="View Source">
+<p>A link at the bottom of the browser
+allows you to view the source for the
+WML deck.</p>
+<p>You may also find some useful messages
+on the java console for your web browser...
+</p>
+<p align="center"><a href="demo.wml#demo">
+more demos</a></p>
+</card>
+</wml>

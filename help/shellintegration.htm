@@ -1,0 +1,54 @@
+
+<html>
+<head>
+<title>Shell integration
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Shell integration</h1>
+<ul>
+  <li><a href="#popup">Explorer pop- up menu</a></li>
+  <li><a href="#infotip">Explorer info tip</a></li>
+</ul>
+<p><a name="popup">Explorer pop- up menu</a></p>
+<p>You can double click on wml icon in Explorer to open wml file or
+choose command <i>Edit wml file</i> in pop-up menu if this feature is activated.
+Figure below demonstrates Explorer pop- up menu.</p>
+<p><img border="0" src="shot11.gif" width="316" height="381"></p>
+<p> If you want use this
+feature, activate it. To do this, start the editor, select <i>File associations</i> in <i>Options</i>
+menu.
+Dialog window <i>Shell integration</i> appears. Select <i>WML file
+types</i> tab. From the list of file types mark up wml files check box, then press
+Ok button.</p>
+<p><img border="0" src="shot12.gif" width="366" height="323"></p>
+<p>&nbsp;</p>
+<p><a name="infotip">Explorer info tip</a></p>
+<p>Other suitable feature is info tip for wml files shown below.</p>
+<p><img border="0" src="shot14.gif" width="389" height="298"></p>
+<p>Using info tip is practice way to see what size of deck is. If you want use this
+feature, activate it.</p>
+<p>To do this, start the editor. Then select <i>File associations</i> in <i>Options</i>
+menu. Dialog window <i>Shell integration</i> appears. Select <i>Explorer info
+tip</i> tab. Press button <i>Register</i>. If you disable this feature, press
+button Unregister. </p>
+<p><img border="0" src="shot13.gif" width="366" height="323"></p>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+-,-
+"&apoo extension","расширение &apoo"
+&Close,&Закрыть
+&Contents,&Contents
+&Dates,&Даты
+"&Enter code","&Ввести код"
+&Excerpt,
+"&File support","&Файл поддержка"
+"&joomla extension","расширение &Joomla"
+&Keywords,"&Ключевые слова"
+"&Multiple blogs","&Несколько блогов"
+&Name,Имя
+&Pings,&Пинги
+"&Product code","Код продукта"
+&Publish,&Публиковать
+&Quit,В&ыход
+"&Request code","Запросить активационный &код"
+&Trackbacks,&Следы
+". . .",". . ."
+"< Back","< Назад"
+"1. Enter button to connect internet registrar","1. Нажмите кнопку для соединения с вебсайтом регистратора"
+"2. Copy name and code from the message","2. Скопируйте имя и код из полученного по e-mail сообщения"
+3,3
+80,80
+"About Bloxy","О Блокси"
+Action1,Action1
+ActionMainMenuBar,ActionMainMenuBar
+ActionToolBar1,ActionToolBar1
+"Add blog to the proxy list","Добавить блог в список"
+Address,Адрес
+"All protocols","Все протоколы"
+"Allow loading full post","Разрешить загрузку всего поста"
+"Basic authentication","Аутентификация basic"
+Beep,"Звуковой сигнал"
+"Blog properties","Свойства блога"
+"Blog user details","Анкета пользователя блога"
+"Blog user name and password","Имя и пароль пользователя блога"
+"Blogger API properties","Свойства Blogger API"
+"Blogger API type properties","Свойства типа Blogger API"
+bloxy,блокси
+"Bug report","Отчет об ошибках"
+bugreport.txt,bugreport.txt
+C&ustom,&Настроенный
+"Cache storage settings","Настройки хранилища кэша"
+Cancel,Отказ
+"Cancel and close dialog","Отказаться и закрыть диалоговое окно"
+"Case sensitive","С учетом регистра букв"
+"Clear log","Очистить журнал"
+"Clear proxy cache","Очистить кэш прокси"
+"Close application (recommended)","Закрыть приложение (рекомендуется)"
+"Close window","Закрыть окно"
+Co&mments,Ко&мментарии
+"Code page",Кодировка
+"Context Help","Контекстная справка"
+"Continue anyway","Продолжить все равно"
+"Control Panel","Панель управления"
+"Cut and paste registration code from message you received","Скопировать и вставить активационный код из полученного сообщения"
+Database,"База данных"
+"Database connection settings","Настройки соединения с СУБД"
+"Database name or alias","Имя базы данных или алиас"
+"Database server address","Адрес сервера БД"
+"Database user name","Имя пользоавтеля СУБД"
+Dialect,Диалект
+Done,Готово
+"Edit connection settings","Редактировать настройки соединения"
+e-mail,e-mail
+"Enable HTTP proxy","Включить прокси HTTP"
+"End point","Адрес (end-point)"
+"Enter received code","Ввыести полученный код"
+"Fatal appication error occured","Фатальный сбой приложения"
+"Fatal application error","Фатальная ошибка"
+"Fatal error occured","Случился фатальный сбой приложения"
+"First name",Имя
+"Force character set code page","Принудить использовать кодировку"
+"Force codepage","Принудительная кодировка"
+"Has &categories","в &категориях"
+"home page","домашняя страница"
+Host,Хост
+"HTTP proxy","Прокси HTTP"
+"HTTP proxy setings","Настройки прокси HTTP"
+http://commandus.com/,http://commandus.com/
+http://www.commandus.com/,http://www.commandus.com/
+"Internet connection settings","Настройки Интернет-соединения"
+"Last info","Последняя информация"
+"Last name",Фамилия
+license.txt,license.txt
+"Load blogger types","Загрузить типы blog движков"
+"Load program at startup","Загрузужать программу при входе в Windows"
+Log,Журнал
+mailto:support@commandus.com,mailto:support@commandus.com
+"Next >","Далее >"
+"Nick name",Ник
+Ok,Готово
+Password,Пароль
+Plot,График
+Port,Порт
+"product code","код продукта"
+Properties,Свойства
+Provider,Провайдер
+"Read me","Важно - прочти меня"
+readme.txt,readme.txt
+Register,Регистрация
+"Register your copy now","Зарегистрируйте копию программы"
+"Registration &code","Активационный &код"
+"Registration code","Активационный код"
+"Registration name","Регистрационное имя"
+"Request registration code","Запросить код активации"
+Role,Роль
+"Select code page","Выберите кодировку"
+"Send report by e-mail","Отправить e-mail с отчетом"
+"Set codepage","Установить кодировку"
+"Set default user properties","Установить свойства пользователя по умолчанию"
+"Set internet connection settings","Установить свойства Интернет-соединения"
+Settings,Настройки
+"Show &subject","Показать &тему"
+"Show data to be sent","Показать отправляемые данные"
+"SQL dialect number","Номер диалекта языка SQL"
+SSL,SSL
+Start,Начало
+"Start minimized","Запускать минимизированным в иконку в трее"
+Status,Статус
+"Sync &all","Синхронизировать &все"
+ToolBar,Toolbar
+"Use SSL","Использовать SSL"
+User,Пользователь
+"User name","Имя пользователя"
+UTF-8,UTF-8
+"View debugging log","Показать журнал сообщений (для отладки)"
+"View window","Показать окно"
+"Visit program's web site","Открыть веб-сайт программы"
+"Visit web site","Открыть веб-сайт"
+"&Allow loading full post","&Разрешить загрузку текста полностью"
+"&Cache storage settings","&Настройки хранилиша кэша"
+"&Clear proxy cache","&Очистить кэш прокси"
+"&Control Panel","&Панель управления"
+&File,&Файл
+"&Force character set code page","&Установить принудительную перекодировку"
+&Help,&Справка
+"&Internet connection settings","&Настройки Интернет-соединения"
+"&Load program at startup","&Загрузкить программу при входе в Windows"
+&Options,&Настройки
+"&Set default user properties","&Установить свойства пользователя по умолчанию"
+&View,&Показать
+"&View debugging log","&Показать журнал сообщений (отладка)"
+"&Visit web site","&Веб-сайт программы"
+8080,8080
+"A&bout Bloxy","&О программе блокси"
+"Allow loading full post from the web","Разрешить загрузку текста полностью"
+"C&ontext Help","&Контекстная справка"
+"C&ontrol Panel","&Панель управления"
+"Close window|Minimize window to tray","&Закоыть окно|спрятать в трее"
+"Contents|Help Contents","Содержание|Содержание справки"
+"Display information about program version","Показать сведения о версиях компонентов программы"
+"Internet connection settings, HTTP proxy","Настройки Интернет-соединения, HTTP прокси"
+"License agreement","Лицензионное соглашение"
+menu,Меню
+"Open control panel in the default web browser window","Открыть панель управления в окне браузера (по умолчанию)"
+Pro&xy,&Прокси
+"Quit|Quits the application","&Выход|Завершение раобы приложения"
+"S&tart minimized","&Запускать спрятанным в трее"
+"Set character set other than UTF-8","Установить кодировку, отличную от UTF-8"
+"Show more detailed information|data sent to the client","Показывать более детальную информацию|Показывать данные, отсылаемы клиенту"
+"Show/Hide debugging window","Показать/Скрыть окно журнала пакетов"
+"Synchronyze all blogs and RSS/ATOM feeds","Синхпронизировать все блоги и ленты новостей"
+"View main program window","Показать окно программы"

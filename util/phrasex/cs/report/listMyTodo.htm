@@ -1,0 +1,149 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  if (request.fieldExist('sort_col') AND request.sort_col <> '')
+    // convert user friendly column names to real column names
+    local.setVar('Product',      'product');
+    local.setVar('Priority',     'priority');
+    local.setVar('Deadline',     'deadline');
+    local.setVar('Submitted On', 'submitted_on');
+    local.setVar('Assigned On',  'assigned_on');
+    local.setVar('Status',       'status');
+    local.setVar('Descending',   'DESC');
+    local.setVar('Ascending',    'ASC');
+   
+    set local.sort_col = local.var(request.sort_col, request.sort_col);
+    set local.sort_dir = local.var(request.sort_dir, request.sort_dir);
+    set local.ui_sort_col = request.sort_col;
+    set local.ui_sort_dir = request.sort_dir;
+  else
+    set local.sort_col = 'submitted_on';
+    set local.sort_dir = 'ASC';
+    set local.ui_sort_col = 'Submitted On';
+    set local.ui_sort_dir = 'Ascending';
+  endif
+
+  set local.max_row = 500;
+  set local.rep_name = 'Todo list for ' + session.userID;
+
+  <serverside dataset="sqlLastStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num DESC;
+  </serverside>
+
+  <serverside dataset="sqlMyTickets" action="query">
+    SELECT ticket_id, ' + local.sort_col + ', submitted_by, title '
+    'FROM cs_ticket_view '
+    'WHERE status <> \'' + sqlLastStatus.name + '\' '
+      'AND assigned_to = \'' + to.2QuoteStr(session.userID) + '\' '
+    'ORDER BY ' + local.sort_col + ' ' + local.sort_dir + 
+      ', ticket_id ASC';  // needed. e.g. if all priority is the same
+
+  set local.backToInfo = 
+    'backToUrl=' + $(request.urlFull:escape) + 
+    '&backToPrompt=' + $(local.rep_name:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    $local.rep_name)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<form method=GET action="listMyTodo.htm">
+<tr>
+  <td align="right">
+    Sort By:
+    <select name=sort_col size=1>
+      <option selected>$local.ui_sort_col)
+      <option>Product
+      <option>Priority
+      <option>Deadline
+      <option>Submitted On
+      <option>Assigned On
+      <option>Status
+    </select>
+    <select name=sort_dir size=1>
+      <option selected>$local.ui_sort_dir)
+      <!$ if (local.ui_sort_dir = 'Ascending') )>
+        <option>Descending
+      <!$ else )>
+        <option>Ascending
+      <!$ endif )>
+    </select>
+    <input type="submit" value="Go"/>
+    <a target="ptHelpWindow" href="../help/listMyTodoHelp.html">Help</a>
+  </td>
+  </td>
+</tr>
+</form>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th > ID&nbsp; </th>
+  <th > Title </th>
+  <th  nowrap="nowrap"> $(local.ui_sort_col))&nbsp; </th>
+  <th  nowrap="nowrap"> Submitted By&nbsp; </th>
+</tr>
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+
+  while (sqlMyTickets.fetch AND local.count < to.integer(local.max_row)) 
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+    set local.viewUrl = 
+      session.ticketFolder + 'ticketView.htm?' + 
+      'ticket_id=' + sqlMyTickets.ticket_id + '&' + local.backToInfo;
+)>
+<tr $local.bgcolor)>
+  <td valign="top">
+    <a href="$local.viewUrl)">$sqlMyTickets.ticket_id)</a>&nbsp;
+  </td>
+  <td valign="top">$(sqlMyTickets.title))</td>
+  <td valign="top">
+    $(sqlMyTickets.Column(1)))&nbsp;</td>
+  <td valign="top">$(sqlMyTickets.submitted_by))&nbsp;</td>
+</tr>
+<!$ endwhile )>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$if (local.count >= to.integer(local.max_row)))>
+      Total: $local.count) or more requests found. 
+      $local.count) requests displayed. 
+    <!$else)>
+      Total: $local.count) request(s) found and displayed. 
+    <!$endif)>
+    $server.dateTime)
+    <a target=ptSqlWindow 
+      href="../showSql.htm?sql=$(sqlMyTickets.sql:escape)">[SQL]</a>
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

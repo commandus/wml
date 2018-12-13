@@ -1,0 +1,40 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  response.expires(0); 
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td>
+    $(appname) : Preview HTML Fragment
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td class="apbg">
+    If you don't see the copyright notice at the end of this page,
+    then there is a problem in the HTML fragment you entered.
+  </td>
+</tr>
+<tr>
+  <td><br/>
+    <!$ if (request.note_format = 1) )>
+    $request.note_data)
+    <!$ else )>
+    $(request.note_data))
+    <!$ endif )>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</body>
+</html>

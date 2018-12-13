@@ -1,0 +1,60 @@
+
+<html>
+<head>
+<title>Text</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Text</h1>
+
+<table border="0">
+  <tr>
+    <td><a href="#pcdata">pcdata <img border="0" src="spcdata.gif" width="8" height="8"></a>
+      <a href="#comment">comment</a>
+      <a href="#pre">pre </a>
+</td>
+  </tr>
+</table>
+
+<!-- pcdata element -->
+
+<p><a name=pcdata>pcdata</a>
+ <img border="0" src="pcdata.gif" width="24" height="24">
+<br id=textbrief>Defines text to be displayed to the user.
+</p>
+
+<!-- xml element -->
+
+<p><a name=comment>comment</a>
+ <img border="0" src="comment.gif" width="24" height="24">
+<br id=commentbrief>WML comments follow the XML commenting style.
+  <br>Comments are intended to be used by the WML author and are not displayed to the user by the user agent. Note that WML comments cannot be nested.
+</p>
+
+<!-- pre element -->
+
+<p><a name=pre>pre</a>
+<img border="0" src="pre.gif" width="24" height="24">
+<br id=prebrief>The pre element tells visual user agents that the enclosed text is "preformatted". When handling preformatted text, user agents may:
+<ul>
+  <li>leave white space intact</li>
+  <li>render text with a fixed-pitch font</li>
+  <li>disable automatic word wrap.</li>
+</ul>
+</p>
+</body>
+</html>

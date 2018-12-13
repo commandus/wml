@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="Demonstration">
+<p>This demonstration highlights some of the features of the <b>wapreview</b> wml browser.
+</p>
+<p align="center"><a href="#demo">ok</a></p>
+</card>
+<card id="demo" title="Demonstration">
+<p align="center">
+<br/><a href="format.wml">formatting</a>
+<br/><a href="input.wml">input</a>
+<br/><a href="timer.wml">timers</a>
+<br/><a href="images.wml">images</a>
+<br/><a href="variables.wml">variables</a>
+<br/><a href="events.wml">events</a>
+<br/><a href="get.wml">get URL</a>
+<br/><a href="post.wml">post URL</a>
+<br/><a href="select.wml">select lists</a>
+<br/><a href="table.wml">tables</a>
+<br/><a href="source.wml">view source</a>
+
+<br/><br/><a href="menu.wml">back to menu</a>
+</p>
+</card>
+</wml>

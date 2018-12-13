@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+##############################################################################
+#
+# This is a CGI to front an application to convert WBMP images to GIF format.
+# see http://wapreview.sourceforge.net
+#
+# Copyright (C) 2000 Robert Fuller, Applepie Solutions Ltd. 
+#                    <robert.fuller@applepiesolutions.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+##############################################################################
+#
+#
+$|=1;
+use LWP::Simple;
+$convert = "/opt2/applepie/bin/wbmp2gif";
+die "no converter" unless -x $convert;
+my $query = $ENV{QUERY_STRING};
+$query =~ s/\%(..)/chr(hex($1))/eg;
+my %params = split /[\=\&]/, $query;
+my $url = $params{img};
+$url =~ s/(^http:\/)([^\/])/$1\/$2/;
+
+sub notFound{
+  print "Content-Type: text/plain\n\n${url} not found";
+  exit;
+}
+
+unless($url){
+  notFound();
+}
+
+if($url !~ /^http:\/\//i){
+  notFound();
+}
+
+$image=get("$url");
+unless($image){
+  notFound();
+}
+
+print "Content-Type: image/gif\n\n";
+open C, "|$convert" || die "couldn't open file";
+print C $image;
+close C;
+
+exit;

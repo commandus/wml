@@ -1,0 +1,32 @@
+
+<html>
+<head>
+<title>template
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+<p><a name=template>template</a>
+ <img border="0" src="template.gif" width="24" height="24">
+<br id=templatebrief>Declares a template for cards in the deck. Event bindings specified in the template element (e.g. do or onevent) apply to all cards in that deck, although a card element may override the behaviour specified in the template element. In particular:
+  <br>DO elements specified in the template element may be overridden in individual cards if both elements have the same NAME attribute value.
+  <br>Intrinsic event bindings specified in the template element may be overridden by the specification of an event binding in a card element.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=templateattr>
+  <b>onenterforward="href"</b>
+  <br>Navigates to the location specified by href. Occurs when the user navigates into a card using a go task.
+  <b>onenterbackward="href"</b>
+  <br>Navigates to the location specified by href. Occurs when the user navigates into a card using a prev task.
+  <b>ontimer="href"</b>
+  <br>Navigates to the location specified by href after a specified amount of time.
+  <b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+</body>
+</html>

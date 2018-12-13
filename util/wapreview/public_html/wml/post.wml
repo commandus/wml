@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+  <card title="POST URL">
+    <p>
+     Your name:<br/>
+     <input name="name" value="freddy"/><br/>
+     <do type="accept">
+      <go method="post" href="http://applepiesolutions.com/cgi-bin/echo.wml">
+        <postfield name="name" value="$(name)"/>
+      </go>
+    </do>
+    </p>
+  <p align="center">
+(go to the options screen first...)<br/>
+<a href="demo.wml#demo">more demos</a>
+</p>
+  </card>
+</wml>

@@ -1,0 +1,70 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userID <> request.user_id 
+    AND session.userType <> 'Manager')
+    error 'Only managers or ' + request.user_id + 
+      ' can edit ' + request.user_id;
+  endif
+  if (request.user_pwd <> request.user_pwd2)
+    error 'The two passwords you entered do not match.';
+  endif
+
+  <serverside dataset="sqlUpdateUser" action="execute">    UPDATE cs_user SET
+      user_row_ver = 1 + request.user_row_ver,
+      user_pwd = to.encrypted(request.user_pwd),
+      email = request.email, 
+      full_name = request.full_name, 
+      company = request.company, 
+      dept = request.dept, 
+      phone = request.phone,
+      fax = request.fax,
+      address = request.address,
+      city = request.city,
+      state = request.state,
+      zipcode = request.zipcode,
+      country = request.country
+    WHERE user_id = request.user_id
+      AND user_row_ver = request.user_row_ver;
+  
+  sqlUpdateUser.execute; 
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      User Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    User: [$request.user_id)] has been updated. 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+</body>
+</html>

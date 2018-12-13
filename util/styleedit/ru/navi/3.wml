@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+<card id="navi" title="Навигация в  WinWAP">
+<p align="center">
+   <img src="../wwbyst.wbmp" alt="WinWAP"/>
+</p>
+<p>
+  <big>Щелчок на кнопке</big>
+  <br/>
+  В зависимости от содержания материала, связь может отображаться либо как подчеркнутый текст, либо как Кнопка. Поведение кнопок такое же, что и у подчеркнутых связей. Они приводят вас к указанному адресу URL.
+  <br/>
+  <br/>
+  Техническое примечание: тэги <b>do</b> появляются в виде кнопок ниже текста  <br/>
+  <do label="Назад"> <go href="@prev"/> </do>
+</p>
+</card>
+</wml>

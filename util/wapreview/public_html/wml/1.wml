@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="wapreview" ontimer="#card2">
+<timer value="10"/>
+<p align="center">
+Welcome to wapreview!
+</p>
+</card><card id="card2" title="Introduction">
+<p align="center">
+The <b>wapreview wml browser</b> was produced by<br/>
+<a href="#robert">Robert Fuller</a><br/>
+in conjunction with<br/>
+<a href="applepiesolutions.com/">applepie solutions</a><br/>
+It was presented as an MSC thesis project for<br/>
+<a href="#gmit">GMIT</a><br/>
+under the supervision of<br/>
+<a href="#des">Des Chambers</a>
+</p>
+<p align="center">
+<a href="menu.wml">ok</a>
+</p>
+</card><card id="gmit" title="GMIT">
+<p align="center">
+Galway Mayo Institue of Technology, Galway, Ireland<br/>
+http://www.gmit.ie
+</p>
+</card><card id="robert" title="Robert Fuller">
+<p align="center">
+fuller@iol.ie
+</p>
+</card>
+<card id="des" title="Des Chambers">
+<p align="center">
+Des.Chambers@<br/>nuigalway.ie
+</p>
+</card>
+</wml>

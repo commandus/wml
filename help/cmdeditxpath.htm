@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>XPath query dialog window
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>XPath query dialog window</h1>
+<p>Choose <b>XPath Query</b> (Ctrl+Q) to display the <i>XPath Query</i> dialog window.<br>
+<br>
+<img border="0" src="cmdeditxpath.gif" width="392" height="362" alt="XPath query dialog"></p>
+<p>Specify XPath expression you want to find in document(s) and to set <a href="#where">where</a> that affect the search.</p>
+<p>XPath query locates the placement of code containing occurrence of the xml
+elements and highlights it.</p>
+<a name="where"> </a><h2>Dialog box options</h2>
+<table border="0">
+  <tr>
+    <td class="tdbanner">Option</td>
+    <td class="tdbanner">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">XPath query</td>
+    <td valign="top">An XPath query expression. You can click the down arrow next to the input box to select from a list of previously entered
+      expressions.</td>
+  </tr>
+  <tr>
+    <td valign="top">
+Where</td>
+    <td valign="top">Search current file, all open files or in directories. If <i>Search
+      in directory</i> option is selected, <i>Directory</i>, <i>Include
+      subdirectories</i>, <i>Which files</i>, <i>Action</i> options appears.</td>
+  </tr>
+  <tr>
+    <td valign="top">
+Directory</td>
+    <td valign="top">Directory path where to find files
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Include subdirectories</td>
+    <td valign="top"> Check option to scan all subdirectories
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Which files</td>
+    <td valign="top">Select file type where to search
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Action</td>
+    <td valign="top">You can select one of four available actions:<font SIZE="1">
+      <ul>
+        <li>Show found lines in Info panel</li>
+        <li>Create description file in folder where search started</li>
+        <li>Create index files in folder where search started</li>
+        <li>Pass found text selection to the external program or DLL</li>
+      </ul>
+      <p>If <i>Pass found text selection to the external program or DLL</i>
+      option was selected, <i>Program or DLL</i> option appears.</font>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+Program or DLL e.g. split.dll#splitByNumber</td>
+    <td valign="top"> Choose program from list of executable files.&nbsp;
+      <p>Note that dialog pass to the external program selection in temporary
+      created file and substitute name of temporary file at the end of command
+      string. Therefore all required parameters must be provided before last
+      option where file name is passed.</p>
+      <p>Alternatively, it is possible to call library function. Browse DLLs and
+      select what do you want to use. Then add '#' sign to the end of DLL path
+      and name of function contained in DLL. This is void function (PChar*filename).
+    </td>
+  </tr>
+</table>
+<p>See also: <a href="cmdxpathexp.htm">XPath expressions</a> <a href="cmdregexp.htm">regular expressions</a>
+<a href="cmdeditfind.htm">Find
+text dialog</a> <a href="cmdeditreplace.htm">Replace
+text dialog</a> <a href="keyboardshortcuts.htm">Keyboard shortcuts</a></p>
+
+</body>
+</html>

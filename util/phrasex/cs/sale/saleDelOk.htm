@@ -1,0 +1,62 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType <> 'Manager')
+    error 'Only managers can delete a sale';
+  endif
+
+  // MS Access doesn't have trigger capability, have to do it here
+  // remove all references to this sale
+  <serverside dataset="sqlCascade1" action="execute">    UPDATE cs_ticket SET serial_num = NULL ' +
+    'WHERE serial_num = \'' + to.2QuoteStr(request.sa_serial) + '\'';
+  </serverside>
+
+  <serverside dataset="sqlDeleteSale" action="execute">    DELETE FROM cs_sale '
+    'WHERE sa_serial = \'' + to.2QuoteStr(request.sa_serial) + '\'';
+  </serverside>
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Sale Deleted
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Sale: [$request.sa_serial)] has been deleted.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="saleSearchOk.htm">Refresh Search Result</a> | 
+    <a href="saleMan.htm">Sales Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

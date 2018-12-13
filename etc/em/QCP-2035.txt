@@ -1,0 +1,717 @@
+object TWMLBEmulator
+  Name = 'Kyocera QCP-2035'
+  Left = 0
+  Top = 0
+  Width = 0
+  Height = 0
+  ImgNormal = 'imagenormalQCP-2035.jpg'
+  ImgOver = 'imageoverQCP-2035.jpg'
+  ImgPressed = 'imagepressedQCP-2035.jpg'
+  Platforms = [wpWAP1_1, wpopenwave3_1]
+  cxprefix = 5
+  cyprefix = 11
+  HighlightMode = 1
+  xdevicebrowser = 86
+  DeviceSupports = [dsBold, dsAccesskeys]
+  DeviceAcceptTypes = [mtWML, mtWBMP]
+  Display.x0 = 116
+  Display.y0 = 70
+  Display.x1 = 89
+  Display.y1 = 48
+  Display.BackColor = 11054994
+  Display.Font.Charset = DEFAULT_CHARSET
+  Display.Font.Color = clBlack
+  Display.Font.Height = -14
+  Display.Font.Name = 'Arial Narrow'
+  Display.Font.Pitch = fpVariable
+  Display.Font.Style = []
+  Display.Align = alLeft
+  Display.xofs = 0
+  Display.yofs = 0
+  TitleBar.x0 = 0
+  TitleBar.y0 = 0
+  TitleBar.x1 = 0
+  TitleBar.y1 = 0
+  TitleBar.BackColor = clBlack
+  TitleBar.Font.Charset = DEFAULT_CHARSET
+  TitleBar.Font.Color = clWindowText
+  TitleBar.Font.Height = -14
+  TitleBar.Font.Name = 'Arial Narrow'
+  TitleBar.Font.Pitch = fpVariable
+  TitleBar.Font.Style = []
+  TitleBar.Align = alLeft
+  BrowserArea.x0 = 110
+  BrowserArea.y0 = 51
+  BrowserArea.x1 = 0
+  BrowserArea.y1 = 0
+  BrowserArea.BackColor = 11054994
+  BrowserArea.Font.Charset = DEFAULT_CHARSET
+  BrowserArea.Font.Color = clBlack
+  BrowserArea.Font.Height = -14
+  BrowserArea.Font.Name = 'Arial Narrow'
+  BrowserArea.Font.Pitch = fpVariable
+  BrowserArea.Font.Style = []
+  BrowserArea.Align = alLeft
+  SoftButtons.DisplayArea.x0 = 0
+  SoftButtons.DisplayArea.y0 = 0
+  SoftButtons.DisplayArea.x1 = 0
+  SoftButtons.DisplayArea.y1 = 0
+  SoftButtons.DisplayArea.BackColor = clBlack
+  SoftButtons.DisplayArea.Font.Charset = DEFAULT_CHARSET
+  SoftButtons.DisplayArea.Font.Color = 11054994
+  SoftButtons.DisplayArea.Font.Height = -11
+  SoftButtons.DisplayArea.Font.Name = 'Arial Narrow'
+  SoftButtons.DisplayArea.Font.Pitch = fpVariable
+  SoftButtons.DisplayArea.Font.Style = []
+  SoftButtons.DisplayArea.Align = alLeft
+  SoftButtons.SoftButtonsStyle = 2
+  SoftButtons.SoftButtonsPresentationStyle = 2
+  SoftButtons = <
+    item
+      DisplayArea.x0 = 53
+      DisplayArea.y0 = 14
+      DisplayArea.x1 = 0
+      DisplayArea.y1 = 54
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end
+    item
+      DisplayArea.x0 = 52
+      DisplayArea.y0 = 14
+      DisplayArea.x1 = 53
+      DisplayArea.y1 = 54
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end>
+  Buttons = <
+    item
+      Comment = 'Up'
+      x0 = 292
+      y0 = 292
+      x1 = 115
+      y1 = 311
+      Value = '3'
+    end
+    item
+      Comment = 'Down'
+      x0 = 342
+      y0 = 342
+      x1 = 115
+      y1 = 362
+      Value = '4'
+    end
+    item
+      Comment = 'Left'
+      x0 = 312
+      y0 = 312
+      x1 = 84
+      y1 = 341
+      Value = '3'
+    end
+    item
+      Comment = 'Right'
+      x0 = 312
+      y0 = 312
+      x1 = 143
+      y1 = 341
+      Value = '3'
+    end
+    item
+      Comment = 'OK'
+      x0 = 280
+      y0 = 280
+      x1 = 158
+      y1 = 311
+      Value = '1'
+    end
+    item
+      Comment = 'Back'
+      x0 = 280
+      y0 = 280
+      x1 = 80
+      y1 = 311
+      Value = '8'
+    end
+    item
+      Comment = '#'
+      x0 = 468
+      y0 = 468
+      x1 = 167
+      y1 = 493
+      Value = '3'
+    end
+    item
+      Comment = '*'
+      x0 = 468
+      y0 = 468
+      x1 = 76
+      y1 = 493
+      Value = '4'
+    end
+    item
+      Comment = '0'
+      x0 = 473
+      y0 = 473
+      x1 = 122
+      y1 = 496
+      Value = '4'
+    end
+    item
+      Comment = '1'
+      x0 = 380
+      y0 = 380
+      x1 = 76
+      y1 = 405
+      Value = '4'
+    end
+    item
+      Comment = '2'
+      x0 = 386
+      y0 = 386
+      x1 = 121
+      y1 = 409
+      Value = '5'
+    end
+    item
+      Comment = '3'
+      x0 = 381
+      y0 = 381
+      x1 = 168
+      y1 = 405
+      Value = '5'
+    end
+    item
+      Comment = '4'
+      x0 = 410
+      y0 = 410
+      x1 = 76
+      y1 = 435
+      Value = '5'
+    end
+    item
+      Comment = '5'
+      x0 = 415
+      y0 = 415
+      x1 = 121
+      y1 = 439
+      Value = '5'
+    end
+    item
+      Comment = '6'
+      x0 = 410
+      y0 = 410
+      x1 = 167
+      y1 = 436
+      Value = '5'
+    end
+    item
+      Comment = '7'
+      x0 = 439
+      y0 = 439
+      x1 = 76
+      y1 = 464
+      Value = '5'
+    end
+    item
+      Comment = '8'
+      x0 = 445
+      y0 = 445
+      x1 = 122
+      y1 = 467
+      Value = '5'
+    end
+    item
+      Comment = '9'
+      x0 = 439
+      y0 = 439
+      x1 = 167
+      y1 = 464
+      Value = '5'
+    end>
+  CharacterSet.Height = 11
+  CharacterSet.Width = 0
+  CharacterSet.VariableWidth = True
+  CharacterSet = <
+    item
+      Comment = ' '
+      Width = 3
+      CharValue = 51
+    end
+    item
+      Width = 2
+      CharValue = 51
+    end
+    item
+      Width = 4
+      CharValue = 51
+    end
+    item
+      Width = 6
+      CharValue = 51
+    end
+    item
+      Width = 5
+      CharValue = 51
+    end
+    item
+      Width = 11
+      CharValue = 51
+    end
+    item
+      Width = 6
+      CharValue = 51
+    end
+    item
+      Width = 2
+      CharValue = 51
+    end
+    item
+      Width = 3
+      CharValue = 52
+    end
+    item
+      Width = 3
+      CharValue = 52
+    end
+    item
+      Width = 4
+      CharValue = 52
+    end
+    item
+      Comment = '+'
+      Width = 6
+      CharValue = 52
+    end
+    item
+      Comment = ','
+      Width = 3
+      CharValue = 52
+    end
+    item
+      Comment = '-'
+      Width = 4
+      CharValue = 52
+    end
+    item
+      Comment = '.'
+      Width = 2
+      CharValue = 52
+    end
+    item
+      Comment = '/'
+      Width = 3
+      CharValue = 52
+    end
+    item
+      Comment = '0'
+      Width = 5
+      CharValue = 52
+    end
+    item
+      Comment = '1'
+      Width = 4
+      CharValue = 52
+    end
+    item
+      Comment = '2'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '3'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '4'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '5'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '6'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '7'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '8'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = '9'
+      Width = 5
+      CharValue = 53
+    end
+    item
+      Comment = ':'
+      Width = 3
+      CharValue = 53
+    end
+    item
+      Comment = ';'
+      Width = 3
+      CharValue = 53
+    end
+    item
+      Width = 6
+      CharValue = 54
+    end
+    item
+      Comment = '='
+      Width = 6
+      CharValue = 54
+    end
+    item
+      Width = 6
+      CharValue = 54
+    end
+    item
+      Comment = '?'
+      Width = 5
+      CharValue = 54
+    end
+    item
+      Width = 10
+      CharValue = 54
+    end
+    item
+      Comment = 'A'
+      Width = 7
+      CharValue = 54
+    end
+    item
+      Comment = 'B'
+      Width = 7
+      CharValue = 54
+    end
+    item
+      Comment = 'C'
+      Width = 8
+      CharValue = 54
+    end
+    item
+      Comment = 'D'
+      Width = 7
+      CharValue = 54
+    end
+    item
+      Comment = 'E'
+      Width = 7
+      CharValue = 54
+    end
+    item
+      Comment = 'F'
+      Width = 6
+      CharValue = 55
+    end
+    item
+      Comment = 'G'
+      Width = 8
+      CharValue = 55
+    end
+    item
+      Comment = 'H'
+      Width = 8
+      CharValue = 55
+    end
+    item
+      Comment = 'I'
+      Width = 3
+      CharValue = 55
+    end
+    item
+      Comment = 'J'
+      Width = 5
+      CharValue = 55
+    end
+    item
+      Comment = 'K'
+      Width = 7
+      CharValue = 55
+    end
+    item
+      Comment = 'L'
+      Width = 5
+      CharValue = 55
+    end
+    item
+      Comment = 'M'
+      Width = 9
+      CharValue = 55
+    end
+    item
+      Comment = 'N'
+      Width = 8
+      CharValue = 55
+    end
+    item
+      Comment = 'O'
+      Width = 8
+      CharValue = 55
+    end
+    item
+      Comment = 'P'
+      Width = 7
+      CharValue = 56
+    end
+    item
+      Comment = 'Q'
+      Width = 8
+      CharValue = 56
+    end
+    item
+      Comment = 'R'
+      Width = 7
+      CharValue = 56
+    end
+    item
+      Comment = 'S'
+      Width = 7
+      CharValue = 56
+    end
+    item
+      Comment = 'T'
+      Width = 5
+      CharValue = 56
+    end
+    item
+      Comment = 'U'
+      Width = 8
+      CharValue = 56
+    end
+    item
+      Comment = 'V'
+      Width = 7
+      CharValue = 56
+    end
+    item
+      Comment = 'W'
+      Width = 9
+      CharValue = 56
+    end
+    item
+      Comment = 'X'
+      Width = 6
+      CharValue = 56
+    end
+    item
+      Comment = 'Y'
+      Width = 7
+      CharValue = 56
+    end
+    item
+      Comment = 'Z'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = '['
+      Width = 3
+      CharValue = 57
+    end
+    item
+      Width = 3
+      CharValue = 57
+    end
+    item
+      Comment = ']'
+      Width = 3
+      CharValue = 57
+    end
+    item
+      Comment = '^'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = '_'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = '`'
+      Width = 3
+      CharValue = 57
+    end
+    item
+      Comment = 'a'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = 'b'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = 'c'
+      Width = 5
+      CharValue = 57
+    end
+    item
+      Comment = 'd'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'e'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'f'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = 'g'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'h'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'i'
+      Width = 2
+      CharValue = 49
+    end
+    item
+      Comment = 'j'
+      Width = 2
+      CharValue = 49
+    end
+    item
+      Comment = 'k'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'l'
+      Width = 2
+      CharValue = 49
+    end
+    item
+      Comment = 'm'
+      Width = 8
+      CharValue = 49
+    end
+    item
+      Comment = 'n'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'o'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'p'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'q'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'r'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = 's'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 't'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = 'u'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = 'v'
+      Width = 6
+      CharValue = 49
+    end
+    item
+      Comment = 'w'
+      Width = 8
+      CharValue = 49
+    end
+    item
+      Comment = 'x'
+      Width = 6
+      CharValue = 49
+    end
+    item
+      Comment = 'y'
+      Width = 6
+      CharValue = 49
+    end
+    item
+      Comment = 'z'
+      Width = 5
+      CharValue = 49
+    end
+    item
+      Comment = '{'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = '|'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = '}'
+      Width = 3
+      CharValue = 49
+    end
+    item
+      Comment = '~'
+      Width = 6
+      CharValue = 49
+    end
+    item
+      Comment = ''
+      Width = 6
+      CharValue = 49
+    end>
+  AnchorDelimiterLeft = '['
+  AnchorDelimiterRight = ']'
+end

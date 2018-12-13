@@ -1,0 +1,273 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of forums without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  if (request.topic_id <> '')
+    set local.topic_id = request.topic_id;
+  else  // selected an anchor message. topic_id must be null
+    set local.topic_id = request.mid;
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT di_id, di_topic_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+      di_type, di_owner, di_created_on, di_created_by, di_visited, 
+      di_title, di_detail
+    FROM cs_discuss
+    WHERE di_id = local.topic_id OR di_topic_id = local.topic_id
+    ORDER BY di_id ASC;
+  </serverside>
+    // order by di_id ensures the anchor message is fetched first
+
+  set local.topic = s1.di_title; 
+
+  set local.links = 
+    '<a href="' + local.mainMenu + '">' + app.name + '</a> : ' + 
+    '<a href="index.htm">Discussion</a> : ';
+
+  set local.path = '';
+  if (request.fieldExist('path'))
+
+    // Always add \r to delimitor list because browser may convert
+    // \n to \r\n for hidden input fields
+    tokenizer tokens(request.path, '\r\n');
+    set local.name = tokens.nextToken;
+    set local.id = tokens.nextToken;
+
+    while (local.name <> '' AND local.id <> '')
+      set local.path = local.path + '\n' + local.name + '\n' + local.id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        local.name + '</a>';
+      set local.name = tokens.nextToken;
+      if (local.name <> '')
+        set local.links = local.links + '.';
+      else
+        set local.links = local.links + ' : ';
+      endif
+      set local.id = tokens.nextToken;
+    endwhile
+
+  else  // from search result
+
+    <serverside dataset="sqlAnchor" action="query">
+    SELECT di_id, di_p1, di_p2, di_p3, di_p4, di_p5
+      FROM cs_discuss
+      WHERE di_id = local.topic_id;
+  </serverside>
+
+    if (sqlAnchor.fetch <> 1)
+      error 'Topic #' + local.topic_id + ' not found.';
+    endif
+
+    if (sqlAnchor.di_p5 <> '')
+      <serverside dataset="sqlP5" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = sqlAnchor.di_p5;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP5.di_title + '\n' + sqlP5.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP5.di_title + '</a>.';
+    endif
+    if (sqlAnchor.di_p4 <> '')
+      <serverside dataset="sqlP4" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = sqlAnchor.di_p4;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP4.di_title + '\n' + sqlP4.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP4.di_title + '</a>.';
+    endif
+    if (sqlAnchor.di_p3 <> '')
+      <serverside dataset="sqlP3" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = sqlAnchor.di_p3;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP3.di_title + '\n' + sqlP3.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP3.di_title + '</a>.';
+    endif
+    if (sqlAnchor.di_p2 <> '')
+      <serverside dataset="sqlP2" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = sqlAnchor.di_p2;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP2.di_title + '\n' + sqlP2.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP2.di_title + '</a>.';
+    endif
+    if (sqlAnchor.di_p1 <> '')
+      <serverside dataset="sqlP1" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = sqlAnchor.di_p1;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP1.di_title + '\n' + sqlP1.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP1.di_title + '</a> : '; 
+    endif
+
+  endif
+  set local.links = local.links + 'Topic #' + local.topic_id;
+
+  <serverside dataset="sqlAddCount" action="execute">    UPDATE cs_discuss '
+    'SET di_visited = di_visited + 1 '
+    'WHERE di_id = ' + local.topic_id;
+  </serverside>
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<a name=top>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<!$ 
+  set local.count = 0; 
+  set local.visited = 0;
+  while (s1.fetch) 
+    set local.count = 1 + local.count; 
+    if (s1.di_topic_id = '') 
+      set local.visited = s1.di_visited; 
+    endif
+    set local.replyUrl = 
+      'diNew.htm?type=2&topic_id=' + local.topic_id + 
+      '&path=' + $(local.path) + '&topic=' + to.cgi(local.topic:escape);
+
+)>
+<a name=$s1.di_id)>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <td colspan="2">
+    <!$ if (s1.di_id = request.mid) )><b><!$ endif )>
+    $local.count). $(local.topic))
+    <!$ if (s1.di_id = request.mid) )></b><!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td>
+    Posted on $s1.di_created_on) 
+    by $(s1.di_created_by))
+    Message ID: $s1.di_id) 
+  </td>
+  <td align="right">
+    <!$ set local.hasCommand = 0; )>
+    <!$ if (s1.di_topic_id <> '') )>
+    <!$ set local.hasCommand = 1; )>
+      <a href="#top">Top</a>
+    <!$ endif )>
+
+    <!$ if (s1.di_p1 <> '' OR 
+      (session.isValid AND session.userType <> 'EndUser') ) )>
+      <!$ if (local.hasCommand = 1) )> | <!$endif)>
+      <!$ set local.hasCommand = 1; )>
+      <a href="$local.replyUrl)">Reply</a>
+    <!$ endif )>
+
+    <!$ if (session.isValid AND 
+      (session.userType = 'Manager' OR session.userID = s1.di_owner) )
+    )>
+      <!$ if (local.hasCommand = 1) )> | <!$endif)>
+      <!$ set local.hasCommand = 1; )>
+      <a href=
+      "diEditMsg.htm?di_id=$s1.di_id)&path=$(local.path:escape)"
+      >Edit</a>
+    <!$ endif )>
+
+    <!$ if (session.isValid AND session.userType = 'Manager') )>
+      <!$ if (local.hasCommand = 1) )> | <!$endif)>
+      <!$ 
+        set local.delUrl = 
+          'diDelete.htm?di_id=' + s1.di_id + 
+          '&backToUrl=' + $(request.urlFull:escape);
+        if (s1.di_topic_id = '')
+          set local.delWhat = 'Topic';
+        else
+          set local.delWhat = 'Message';
+        endif
+      )>
+      <a href="$local.delUrl)">Delete $local.delWhat)</a>
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td colspan="2"><br/>
+    <!$ if (s1.di_type = 2) )>
+      $(s1.di_detail))
+    <!$ else )>
+      $s1.di_detail)
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    <!$ 
+      set local.att_count = 0;
+      <serverside dataset="s2" action="query">
+    SELECT dif_id, dif_name, dif_size FROM cs_di_file 
+        WHERE dif_di_id = s1.di_id;
+  </serverside>
+      while (s2.fetch)
+        if (local.att_count = 0)
+          response.write('<br/>Attachment(s): '); 
+        endif
+        set local.att_count = 1 + local.att_count;
+        set local.attUrl = 
+          to.fileUrl('cs_di_file', 'dif_id', s2.dif_id, 
+                     'dif_content', s2.dif_name);
+    )>
+      <a href="$local.attUrl)">$s2.dif_name)</a>
+      ; 
+    <!$ endwhile )>
+  </td>
+</tr>
+</table>
+<br/>
+<!$ endwhile )>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <td>
+    Total $local.count) message(s)
+    Topic visited: $local.visited) time(s)
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+</body>
+</html>

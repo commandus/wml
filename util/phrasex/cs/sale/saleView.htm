@@ -1,0 +1,104 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT sa_serial, sa_product, sa_sold_to, sa_sold_on, 
+    sa_contact1, sa_contact2, sa_notes
+    FROM cs_sale WHERE sa_serial = request.sa_serial;
+
+  if (s1.fetch = 0)
+    error 'Sale ' + request.sa_serial + ' not found. ';
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Sale $s1.sa_serial)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th  colspan="2"> Serial Number: </th> 
+  <th  colspan="2"> Product: </th>
+</tr>
+<tr>
+  <td colspan="2">$(s1.sa_serial))</td>
+  <td colspan="2">$(s1.sa_product))</td>
+</tr>
+<tr>
+  <td colspan="4">
+</tr>
+<tr class="apbg">
+  <th >Sold To: </th>
+  <th >Sold On: </th>
+  <th >Contact 1: </th>
+  <th >Contact 2: </th>
+</tr>
+<tr>
+  <td> 
+    <!$if (s1.sa_sold_to = ''))>
+      $(s1.sa_sold_to))
+    <!$else)>
+      <a href=
+        "../user/userView.htm?user_id=$(s1.sa_sold_to:escape)">
+      $(s1.sa_sold_to))</a>
+    <!$endif)>
+  </td>
+  <td> $(s1.sa_sold_on)) </td>
+  <td> 
+    <!$if (s1.sa_contact1 = ''))>
+      $(s1.sa_contact1))
+    <!$else)>
+      <a href=
+        "../user/userView.htm?user_id=$(s1.sa_contact1:escape)">
+      $(s1.sa_contact1))</a>
+    <!$endif)>
+  </td>
+  <td> 
+    <!$if (s1.sa_contact2 = ''))>
+      $(s1.sa_contact2))
+    <!$else)>
+      <a href=
+        "../user/userView.htm?user_id=$(s1.sa_contact2:escape)">
+      $(s1.sa_contact2))</a>
+    <!$endif)>
+  </td>
+</tr>
+<tr>
+  <td colspan="4">
+</tr>
+<tr class="apbg">
+  <th  colspan="4"> Notes: </th>
+</tr>
+<tr>
+  <td colspan="4"> $(s1.sa_notes)) </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

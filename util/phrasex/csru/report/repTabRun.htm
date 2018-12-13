@@ -1,0 +1,50 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  // from RepTab
+  if (request.fieldExist('tab_col1') OR request.fieldExist('tab_col12'))
+
+    // convert user friendly column names to real column names
+    local.setVar('Request ID',    'ticket_id');  // name, value
+    local.setVar('Title',         'title');
+    local.setVar('Status',        'status');
+    local.setVar('Product',       'product');
+    local.setVar('Priority',      'priority');
+    local.setVar('Deadline',      'deadline');
+    local.setVar('Serial Number', 'serial_num');
+    local.setVar('Cost',          'cost');
+    local.setVar('Turn Around',   'turn_around');
+
+    local.setVar('Submitted To',  'submitted_to');
+    local.setVar('Submitted By',  'submitted_by');
+    local.setVar('Company',       'company');
+    local.setVar('Submitted On',  'submitted_on');
+    local.setVar('Assigned To',   'assigned_to');
+    local.setVar('Assigned By',   'assigned_by');
+    local.setVar('Assigned On',   'assigned_on');
+    local.setVar('Closed By',     'closed_by');
+    local.setVar('Closed On',     'closed_on');
+    local.setVar('Descending',    'DESC');
+    local.setVar('Ascending',     'ASC');
+
+    set local.tab_col1 = local.var(request.tab_col1, request.tab_col1);
+    set local.tab_col2 = local.var(request.tab_col2, request.tab_col2);
+    set local.tab_col3 = local.var(request.tab_col3, request.tab_col3);
+    set local.tab_col4 = local.var(request.tab_col4, request.tab_col4);
+    set local.tab_sort1 = local.var(request.tab_sort1, request.tab_sort1);
+    set local.tab_sort2 = local.var(request.tab_sort2, request.tab_sort2);
+
+    set local.tab_sort1_dir = 
+      local.var(request.tab_sort1_dir, request.tab_sort1_dir);
+    set local.tab_sort2_dir = 
+      local.var(request.tab_sort2_dir, request.tab_sort2_dir);
+
+    set session.tab_sql_select = '';
+    if (local.tab_col1 <>
+몭ꮫꮫꮫꮫ

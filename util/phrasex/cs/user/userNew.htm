@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>  
+  <serverside action="defaultparam" opt="msg">
+    SELECT 'Select [EndUser] for people you support, your customers  and beta testers.' FROM dual  
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support New User</title>
+</head>
+<body onload="f1.uid.focus()">
+<form name="f1" method="GET" action="userNewOk.htm" loop="global">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : New User
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="3">
+    $(msg)  
+  </td>
+</tr>
+<tr>  
+  <td colspan="2">
+    User Type: <br/>
+    <select name="usertype" size="1">
+      <option>End User</option>
+      <option>Staff Member</option>
+      <option>Manager</option>
+    </select>
+  </td>
+  <td>
+    Status: <br/>
+    <select name="status" size="1">
+      <option selected="selected">active</option>
+      <option>disabled</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    User ID: (Required) <br/>
+    <input type="text" name="uid" size="30" maxlength="50"/>
+  </td>
+  <td>
+    Full Name:<br/>
+    <input type="text" name="full_name" size="30" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Password: <br/>
+    <input type="password" name="upwd" size="30" maxlength="20"/>
+  </td>
+  <td>
+    Password Again: <br/>
+    <input type="password" name="upwd2" size="30" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Phone:<br/>
+    <input type="text" name="phone" size="30" maxlength="50"/>
+  </td>
+  <td>
+    Fax:<br/>
+    <input type="text" name="fax" size="30" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Company:<br/>
+    <input type="text" name="company" size="30" maxlength="50"/>
+  </td>
+  <td>
+    Department:<br/>
+    <input type="text" name="dept" size="30" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Address: <br/>
+    <input type="text" name="address" size="30" maxlength="50"/>
+  </td>
+  <td>
+    City: <br/>
+    <input type="text" name="city" size="30" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    State:  <br/>
+    <input type="text" name="state" size="15" maxlength="50"/>
+  </td>
+  <td>
+    Zip Code: <br/>
+    <input type="text" name="zipcode" size="15" maxlength="50"/>
+  </td>
+  <td colspan="2">
+    Country: <br/>
+    <input type="text" name="country" size="30" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Email: <br/>
+    <input type="text" name="email" size="65" maxlength="20" />
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    Email format for ToDo Reminder: 
+    <select name="email_fmt" size="1">
+      <option selected="selected">Plain Text</option>
+      <option>HTML</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Notes:<br/>
+    <textarea name="user_note" cols="60" rows="3"></textarea>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="3" align="center">
+    <a href="userMan.htm">Back</a>   
+    <input type="submit" value="Save" />
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+</center>
+</form>
+</body>
+</html>

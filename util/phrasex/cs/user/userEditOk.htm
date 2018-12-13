@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userNew.htm">
+    SELECT user_id FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside dataset="check1" action="move" opt="userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT 1 R FROM dual WHERE '$(upwd)' = '$(upwd2)' 
+  </serverside>
+  <serverside dataset="check2" action="move" opt="userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT user_id FROM cs_user WHERE ('$(uid)' = '$(old_user_id)') OR (user_id = '$(uid)')  
+  </serverside>
+  <serverside dataset="check3" action="move" opt="userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT 1 R FROM dual WHERE '$(uid)' &lt;&gt; '' 
+  </serverside>
+  <serverside action="defaultparam" opt="utype">
+    SELECT CASE 
+    WHEN '$(usertype)' = 'Manager' THEN 'manager'  
+    WHEN '$(usertype)' = 'Member Staff' THEN 'MemberStaff'  
+    ELSE 'EndUser'  
+    END R  
+    FROM dual  
+  </serverside>
+  <serverside dataset="check5" action="move" opt="userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT u.user_type FROM cs_user u  
+    WHERE ('$(utype)' &lt;&gt; 'Manager') OR (((upper(u.user_id) = upper('$(user_id)')) AND (u.user_type = 'Manager')))  
+  </serverside>  
+  <serverside dataset="check6" action="move" opt="userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT name FROM cs_product
+    WHERE ('$(status)' &lt;&gt; 'disabled') OR (dispatcher = '$(uid)')  
+  </serverside>
+  <serverside dataset="sqlUpdateUser" action="execute">
+      UPDATE cs_user SET
+      user_type = '$(user_type)', 
+      status = '$(status)', 
+      user_id = '$(uid)',
+      user_pwd = '$(upwd)',
+      email = '$(email)',
+      email_fmt = '$(email_fmt)',
+      full_name = '$(full_name)',
+      company = '$(company)',
+      dept = '$(dept)',
+      phone = '$(phone)',
+      fax = '$(fax)',
+      address = '$(address)',
+      city = '$(city)',
+      state = '$(state)',
+      zipcode = '$(zipcode)',
+      country = '$(country)',  
+      user_note = '$(user_note)'
+    WHERE user_id = '$(old_user_id)'  
+</serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support User Updated</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : User $(old_user_id) Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    User: 
+    [<a href="$local.userViewUrl)">$(uid)</a>]  has been updated.
+    Please update all reports that use $(old_user_id).
+    If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.
+    <br/>
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$(backTo:unescape)">Back to List</a> | 
+    <a href="userMan.htm">User Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

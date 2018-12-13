@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm" >
+id</serverside>
+<serverside action="defaultparam" opt="kb_id" >
+SELECT -2 R FROM DUAL</serverside>
+<serverside action="defaultparams" >
+email_fmt</serverside>
+<serverside dataset="s1" action="query" >
+diGroup.htm?path=$(path:escape) diNew.htm?type=1&path=$(path:escape) diNewOk.htm diNew.htm?type=2&path=$(path:escape)</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+cla_phone</title>
+</head>
+<body >
+<center >
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="s1" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="index.htm" >
+ВКЛЮЧИТЕСЬ В cs_kb( kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security, kb_rank, kb_name, kb_size) ВЕЛИЧИНЫ( $(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), $(sqlParent.kb_p4), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', $(kb_type), '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title)', '$(kb_summary)', $(kb_security), $(kb_rank), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1) ВКЛЮЧАЮТСЯ В cs_kb(kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security) ВЕЛИЧИНЫ($(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', 1, '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title:unescape)', '$(kb_summary:unescape)', $(kb_security)) ВКЛЮЧАЮТСЯ В cs_kb_file( kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЕЛИЧИНЫ($(kb_id), $(kb_type), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1, СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ) ВКЛЮЧАТЬСЯ В cs_kb_file(kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЫБОР $(kb_id), 2, sqlFiles.tif_name, sqlFiles.tif_size, sqlFiles.tif_content ИЗ cs_ti_file sqlFiles ГДЕ sqlFiles.tif_ch_id В ( ВЫБОР ch_id ИЗ cs_ti_change ГДЕ ch_ticket_id = $(ticket_id)) ВКЛЮЧАТЬСЯ В cs_news(; '' ВКЛЮЧАТЬСЯ В cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) ВЕЛИЧИНЫ($(nf_id), $(news_id), СЛЕПОК('today' КАК ДАТА), СЛЕПОК('now' КАК ВРЕМЯ), 1, '$(attachment1:unescape)') ВКЛЮЧАТЬСЯ В cs_priority (row_ver, имя, описание) ВЕЛИЧИНЫ(1, '$(имя)', '$(описание)') ВКЛЮЧАЮТСЯ В cs_priority (row_ver, имя, is_def, описание) ВЕЛИЧИНЫ(1, '$(имя)', 0, '$(описание)') Новый приоритет: [$(имя)] сохранен.</a>
+: $(s1.itemtype) $(kb_id) kb_k3</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+$(s1.itemtype) $(kb_id) [<b >
+$(s1.kb_title)</b>
+] и все наследованные удалены.</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td align="center" >
+<a href="index.htm?kb_id=$(s1.kb_p1)" >
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+<serverside dataset="sqlDeleteKB" action="execute" >
+kb_k5</serverside>
+</html>

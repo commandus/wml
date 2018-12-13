@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside action="defaultparam" opt="use_what" >
+Подсказка Groups</serverside>
+<serverside action="defaultparam" opt="last_x" >
+SELECT 7 R FROM dual</serverside>
+<serverside action="defaultparam" opt="x_what" >
+SELECT 'days' R FROM dual</serverside>
+<serverside action="defaultparam" opt="startDate" >
+SELECT CAST('today' AS DATE) R FROM dual</serverside>
+<serverside action="defaultparam" opt="endDate" >
+SELECT CAST('today' AS DATE) R FROM dual</serverside>
+<serverside action="defaultparam" opt="maxCol" >
+SELECT 12 R FROM dual</serverside>
+<serverside action="defaultparam" opt="scale" >
+SELECT 1 R FROM dual</serverside>
+<serverside dataset="sqlSubmitted" action="query" >
+Возвратитесь К категория Gro??</serverside>
+<serverside dataset="sqlClosed" action="query" >
+глобальный Идти</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+b</title>
+</head>
+<body >
+<center >
+<form method="GET" action="repTrend.htm" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="repMan.htm" >
+Менеджер отчетов</a>
+: Тренд новые запросы - Удовлетворенные запросы</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+Запросы Подали Возврату категории право<br />
+<input type="text" name="last_x" size="5" value="$(last_x)" />
+</td>
+<td valign="bottom" >
+<br />
+<select name="x_what" size="1" >
+<option selected="selected" >
+$(x_what)</option>
+<option >
+kb_cat</option>
+<option >
+7 Продуктов</option>
+<option >
+months</option>
+<option >
+$(последний раз)</option>
+<option >
+9 Подсказка</option>
+</select>
+</td>
+<td >
+&nbsp;</td>
+<td >
+kb/faq.htm kb/index.htm<br />
+<input type="text" name="startDate" size="15" value="$(startDate)" />
+</td>
+<td >
+&lt;:<br />
+<input type="text" name="endDate" size="15" value="$(endDate)" >
+</td>
+</tr>
+</table>
+<br />
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td nowrap="nowrap" >
+Сеансы:<br />
+<input type="text" name="max_col" size="13" value="$(max_col)" />
+</td>
+<td >
+&nbsp;</td>
+<td nowrap="nowrap" valign="bottom" >
+ght &копия; 2003, Андрей Ivanov.<br />
+<select name="interval" size="1" >
+<option selected="selected" >
+$(interval)</option>
+<option >
+kb_attachment1</option>
+<option >
+7</option>
+<option >
+month</option>
+<option >
+$(kb_id) $(sqlParent.kb_title)</option>
+<option >
+9</option>
+</select>
+</td>
+<td >
+&nbsp;</td>
+<td >
+$(s1.kb_k4)<br />
+<input type="text" name="scale" size="5" value="$local.scale)" />
+</td>
+<td >
+&nbsp;</td>
+<td valign="bottom" >
+kb/kbView.htm?kb_id=$(NewsArt.kb_id) kb/kbView.htm?kb_id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt.kb_id) kb/kbVote.htm?vote=no&amp;id=$(NewsArt1.kb_id) kb/kbVote.htm?vote=yes&amp;id=$(NewsArt.kb_id) kb/recommended.htm kb/kbVote.htm?vote=yes&amp;id=$(NewsArt1.kb_id)<br />
+<select name="use_what" size="1" >
+<option selected="selected" >
+$(use_what)</option>
+<option >
+]</option>
+<option >
+?kb_id=$(sqlCat.kb_id)</option>
+</select>
+</td>
+<td >
+&nbsp;</td>
+<td valign="bottom" >
+<input type="submit" value="Update" />
+</td>
+</tr>
+</table>
+<br />
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td width="2" >
+</td>
+</tr>
+</table>
+</td>
+<td >
+&nbsp;</td>
+<td valign="bottom" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td align="center" >
+$(arSubmittedCount)</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td width="16" height="$local.submittedH)" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td valign="bottom" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td align="center" >
+$arClosedCount.getAt(local.i))</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td width="16" height="$(closedH)" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<!$ set local.colspan = arLabel.getSize * 3 + 2; )>

@@ -1,0 +1,16 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  // could be from userView.htm or other places
+  if (request.fieldExist('submitted_by'))
+    set local.submitted_by = request.submitted_by;
+  else
+    set local.submitted_by = session.userID;
+  endif
+
+  <serverside dataset="sqlPriorities" action="query">
+<option selected="" >
+<!$
+        if (local.submitted_by <>

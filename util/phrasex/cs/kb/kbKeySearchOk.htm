@@ -1,0 +1,218 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  set local.mainMenu = app.startPage;
+  set local.isEndUser = 1;  // guests are treated as end users
+  set local.security = ' AND kb_security < 1';
+
+  // don't validate session. allow use of KB without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+    if (session.userType <> 'EndUser')
+      set local.isEndUser = 0;
+      set local.security = '';
+    endif
+  endif
+
+  set local.kbLinkType = 'content';
+  if (session.isValid AND session.varExist('kbLinkType'))
+    set local.kbLinkType = session.kbLinkType;
+  endif
+  if (local.kbLinkType = 'content')
+    set local.catLinkSsp = 'index.htm';
+    set local.artLinkSsp = 'kbView.htm';
+  else
+    set local.catLinkSsp = 'kbDetail.htm';
+    set local.artLinkSsp = 'kbDetail.htm';
+  endif
+
+  // construct the where clause 
+  set local.where = '';
+  set local.keywords = to.2QuoteStr(request.keywords);
+
+  tokenizer words(local.keywords, ',;');
+  set local.word = string.trim(words.nextToken);
+
+  while (local.word <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    if (app.dbCaseSensitive = 1)
+      set local.where = local.where + 
+        '(upper(kb_k1) = \'' + upper(local.word) + '\' OR'
+        ' upper(kb_k2) = \'' + upper(local.word) + '\' OR'
+        ' upper(kb_k3) = \'' + upper(local.word) + '\' OR'
+        ' upper(kb_k4) = \'' + upper(local.word) + '\' OR'
+        ' upper(kb_k5) = \'' + upper(local.word) + '\' OR'
+        ' upper(kb_title) LIKE \'%' + upper(local.word) + '%\' OR'
+        ' upper(kb_summary) LIKE \'%' + upper(local.word) + '%\')';
+    else
+      set local.where = local.where + 
+        '(kb_k1 = \'' + local.word + '\' OR'
+        ' kb_k2 = \'' + local.word + '\' OR'
+        ' kb_k3 = \'' + local.word + '\' OR'
+        ' kb_k4 = \'' + local.word + '\' OR'
+        ' kb_k5 = \'' + local.word + '\' OR'
+        ' kb_title LIKE \'%' + local.word + '%\' OR'
+        ' kb_summary LIKE \'%' + local.word + '%\')';
+    endif
+    set local.word = string.trim(words.nextToken);
+  endwhile;
+  if (local.where = '')
+    error 'Please enter some conditions before searching.';
+  endif
+
+  // search within current category
+  if (request.kb_id <> '')  
+    set local.where = 
+      '(' + local.where + ') AND '
+      '(kb_p1 = ' + request.kb_id +
+      ' OR kb_p2 = ' + request.kb_id +
+      ' OR kb_p3 = ' + request.kb_id +
+      ' OR kb_p4 = ' + request.kb_id +
+      ' OR kb_p5 = ' + request.kb_id + ')';
+  endif
+
+  <serverside dataset="sqlCat" action="query">
+    SELECT kb_id, kb_p1, kb_title, kb_summary '
+    'FROM cs_kb WHERE kb_type = 1 AND ' + 
+    local.where + local.security + ' ORDER BY kb_title';
+  </serverside>
+
+  <serverside dataset="sqlArt =  
+    'SELECT kb_id, kb_p1, kb_type, kb_title, kb_summary, kb_name, kb_size '
+    'FROM cs_kb '
+    'WHERE kb_type <> 1 AND ' + 
+    local.where + local.security + ' ORDER BY kb_visited DESC';
+  </serverside>
+
+  file fKbIndex('index.htm');
+  array arRet = fKbIndex.getKbPathAndLinks(request.kb_id, 0);    
+
+  set local.title = arRet.getAt(0);
+  if (local.title <> '')
+    set local.title = local.title + ' : ';
+  endif
+  set local.title = 
+    app.name + ' : KB : ' + local.title + 'Search Result';
+    
+  set local.links = arRet.getAt(1);
+  if (local.links <> '')
+    set local.links = local.links + ' : ';
+  endif
+  set local.links = 
+    '<a href="' + local.mainMenu + '">' + app.name + '</a> : '
+    '<a href="index.htm">KB</a> : ' + local.links + 'Search Result';
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method=GET action="kbKeySearchOk.htm">
+<input type="hidden" name=kb_id value="$request.kb_id)"/>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<form method=GET action="kbKeySearchOk.htm">
+<tr>
+  <td align="center">
+    Keywords: 
+    <input type="text" name=keywords size="30" maxlength="50"
+      value="$(request.keywords))"> 
+    <input type="hidden" name=kb_id value="$request.kb_id)"/> 
+    <input type="submit" value="Search"/> 
+  </td>
+</tr>
+<!-- put it outside a row to avoid the extra line after a form -->
+</form>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <th >
+    Categories
+  </th>
+</tr>
+<tr>
+  <td><ol>
+  <!$
+    set local.count = 0;
+    while (sqlCat.fetch)
+      set local.count = 1 + local.count;
+      set local.catUrl = local.catLinkSsp + '?kb_id=' + sqlCat.kb_id;
+  )>
+    <li>
+    <a href="$local.catUrl)">
+      <!$ if (sqlCat.kb_p1 <> request.kb_id) )>
+        ...
+      <!$ endif )>
+      $(sqlCat.kb_title))</a>
+    <br/>
+    
+  <!$ endwhile )>
+  <!$ if (local.count = 0) )>
+    No category is found.
+  <!$ endif )>
+  </ol></td>
+</tr>
+</table>
+
+<!$if (request.browserType = 'Navigator'))>
+  <br/>
+<!$endif)>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <th >
+    Articles
+  </th>
+</tr>
+<tr>
+  <td><ol>
+  <!$
+    set local.count = 0;
+    while (sqlArt.fetch)
+      set local.artUrl = local.artLinkSsp + '?kb_id=' + sqlArt.kb_id;
+      set local.count = 1 + local.count;
+  )>
+    <li>
+    <a href="$local.artUrl)">$(sqlArt.kb_title))</a>
+    <br/>
+    $(sqlArt.kb_summary))
+    (
+    <!$ if (sqlArt.kb_type = 5 AND sqlArt.kb_name <> '') )>
+      $sqlArt.kb_size) bytes;
+    <!$ endif )>
+    Did this article help? 
+    <a href="kbVote.htm?vote=yes&id=$sqlArt.kb_id)">yes</a> | 
+    <a href="kbVote.htm?vote=no&id=$sqlArt.kb_id)">no</a> 
+    )
+    
+  <!$ endwhile )>
+  <!$ if (local.count = 0) )>
+    No article is found.
+  <!$ endif )>
+  </ol></td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

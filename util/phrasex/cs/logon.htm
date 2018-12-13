@@ -1,0 +1,32 @@
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <serverside action="db" opt="ib">
+     db=$(DB_HD) 
+  </serverside>
+  <serverside action="send" opt="cookie">
+     "user_id=guest","user_pwd=guest" 
+  </serverside>
+  <serverside dataset="User" action="move" opt="accessdenied.htm?b=index.htm">
+     SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE 
+    (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND 
+    (status &lt;&gt; 'disabled') 
+  </serverside>
+  <serverside action="send" opt="cookie">
+     "user_id=$(user_id)","user_pwd=$(user_pwd)" 
+  </serverside>
+  <head loop="User">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title loop="cookie">
+      Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress
+    </title>
+    <meta http-equiv="refresh" content="1; url=mainMenu$(User.user_type).htm?user_id=$(user_id)&user_pwd=$(user_pwd)"/>
+  </head>
+  <body loop="User">
+    <center>
+      Wait a second.<br/>  
+      <a href="mainMenu$(User.user_type).htm">Continue</a>
+    </center>
+  </body>
+</html>

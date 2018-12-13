@@ -1,0 +1,106 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT sa_serial, row_ver, sa_product, sa_sold_to,
+      sa_sold_on, sa_contact1, sa_contact2, sa_notes
+    FROM cs_sale
+    WHERE sa_serial = request.sa_serial;
+  </serverside>
+
+  if (s1.fetch = 0)
+    error 'Sale ' + request.sa_serial + ' not found. ';
+  endif
+
+  <serverside dataset="sqlProducts" action="query">
+    SELECT name FROM cs_product ORDER BY name ASC;
+  </serverside>
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="SaleEditOk.htm">
+<!-- very important to send the id and row version -->
+<input type="hidden" name=old_sa_serial value="$(s1.sa_serial))"/>
+<input type="hidden" name=row_ver value="$s1.row_ver)"/>
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Edit Sale $s1.sa_serial)
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    Serial Number:<br/>
+    <input type="text" name=sa_serial size="30" maxlength="50" 
+      value="$(s1.sa_serial))">
+  </td>
+  <td>
+    Product:<br/>
+    <select name=sa_product size=1>
+      <option selected>$s1.sa_product)
+      <option>
+      <!$while (sqlProducts.fetch))>
+        <option>$sqlProducts.name)
+      <!$endwhile)> 
+    </select>
+  </td>
+</tr>
+<tr>
+  <td>
+    Sold To: <br/>
+    <input type="text" name=sa_sold_to size="30" maxlength="50"
+      value="$s1.sa_sold_to)">
+  </td>
+  <td>
+    Sold On: 
+    <input type="text" name=sa_sold_on size="30" maxlength="50"
+      value="$s1.sa_sold_on)">
+  </td>
+</tr>
+<tr>
+  <td>
+    Contact 1: <br/>
+    <input type="text" name=sa_contact1 size="30" maxlength="50"
+      value="$s1.sa_contact1)">
+  </td>
+  <td>
+    Contact 2: <br/>
+    <input type="text" name=sa_contact2 size="30" maxlength="50"
+      value="$s1.sa_contact2)">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Notes: <br/>
+    <textarea name=sa_notes cols=65 rows=4
+      wrap=virtual>$(s1.sa_notes))</textarea>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    <input type="submit" value="Save"/>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

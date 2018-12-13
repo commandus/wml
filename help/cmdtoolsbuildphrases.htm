@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Build phrases list dialog window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Build Build phrases list dialog window</h1>
+<p>Choose <i> Tools|Build phrases list of all documents</i> command to display the <i>Build
+phrases list</i> dialog window.<br>
+<br>
+<img border="0" src="cmdtoolsbuildphrases.gif" width="377" height="367" alt="dialog window"></p>
+<p>Specify file name of list of documents you want to include to the phrases
+list and set <a href="#options">options</a> that affect the search.</p>
+<p>Then press <b>Start</b> button or press <b>Enter</b> key. Building of index
+files will be started.</p>
+<p>If you want to cancel building, press <b>Stop</b> button. After index files
+created, press <b>Cancel</b> button</p>
+<p>Created list of phrases is useful to translate set of documents by editing
+list of phrases and corresponding translation. Created list stored in the same
+folder where input listing of file (.lst) file resides and this file is looking
+like as following example:</p>
+<p>Aedes (Ochlerotatus) mercurator<br>
+Aedes (Ochlerotatus) punctor<br>
+Aedes (Ochlerotatus) rempeli<br>
+Aedini<br>
+aino Viol.<br>
+Anasimyia<br>
+...</p>
+<p>Note that all phrases are stored in alphabetical order (case insensitive or,
+if appropriate option is set, case sensitive).</p>
+<p>Input (.lst) file contains numbered list of files to be included in the
+phrase list. First line indicates date and time when this listing was created.
+Each line below the first line consists of number (ordered form 1), tabulator
+symbol and relative or absolute path of the file. For example, this is short
+listing:</p>
+<p>25.05.2004 21:12:28<br>
+1 0002.txn<br>
+2 0003.txn<br>
+</p>
+<p>In the dialog you can enter new file name of listing or select existing
+listing file. To do that, click <b>...</b> button to browse folders.&nbsp;</p>
+<p>In case of listing file does not exists, you are prompted to create new ones.
+Press &quot;Yes&quot; to include all files recursively (in other words, include
+all subfolders in desired directory) or &quot;No&quot; to include files just in
+selected directory.&nbsp;</p>
+<p>Note that only files with extension of current document type filter of the
+Project window will be included in the new created listing.</p>
+<p>If you would like include more files, you can use Find text dialog. Find text
+dialog have option to scan directories and create listing file. Also you can
+specify text to find in documents, so you may omit some documents from listing.</p>
+<p>Other way is - create some listing files and then merge them in one big
+listing file. There are no matter of&nbsp; number of file, also you can leave
+date and time stamp in the merged listing. Please note that just first line
+contains valid date and time stamp.&nbsp;</p>
+<a name="options"> </a><h2>Dialog box options</h2>
+<table border="0">
+  <tr>
+    <td class="tdbanner">Option</td>
+    <td class="tdbanner">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">Case sensitive</td>
+    <td valign="top">This option is intended to include phrases case-sensitive.
+      It is not recommended to checking up this option in any case.</td>
+  </tr>
+  <tr>
+    <td valign="top">Output unicode text (UTF-8)</td>
+    <td valign="top">If you documents contains text in different character code
+      pages, different from ANSI and default codepage of your Windows version,
+      provide this option. Otherwise, all text in your documents will be
+      included to the phrases list converted to ANSI character set (plus
+      extended characters, visible in your version of Windows). For example, if
+      your text includes Greek characters or mathematic formulas, mark up this
+      check box.
+      <p>Note: case sensitive option is ignored if this option is set.</td>
+  </tr>
+</table>
+<p>See also: <a href="cmdtoolsbuildindex.htm">Build index list</a></p>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html><head>
+<meta name="Robots" content="noindex"><title>Deeptree Controlbar</title><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+  
+<script language="javascript">
+
+function synctoc()
+{top.location.href = top.frames.fraRightFrame.frames.fraContent.document.location.href;}
+
+function hidetoc()
+{var docContent = top.frames.fraRightFrame.frames.fraContent.document;
+top.location.href = '/library/default.asp?url=' + docContent.location.pathname + docContent.location.search + '&hidetoc=true';}
+</script></head>
+
+
+
+
+
+
+
+
+<body topmargin="0" leftmargin="0" bgcolor="#cccccc" marginheight="0" marginwidth="0">
+
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tbody><tr>
+      <td align="right">
+        <a href="javascript:synctoc();"><img src="dtbarDL_data/synctoc1.gif" alt="Synchronize the TOC with the current page" title="Synchronize the TOC with the current page" border="0"></a>
+        <img src="dtbarDL_data/1pix.gif" height="20" width="10">
+        <a href="javascript:hidetoc();"><img src="dtbarDL_data/hidetoc1.gif" alt="Hide TOC" title="Hide TOC" border="0"></a>
+        <img src="dtbarDL_data/1pix.gif" height="20" width="4">
+      </td>
+    </tr>
+  </tbody></table>
+
+</body></html>

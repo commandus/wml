@@ -1,0 +1,66 @@
+
+<html>
+<head>
+<title>How to use variables
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to use variables</h1>
+
+<p> WML variables as parameters gives an&nbsp; ability to&nbsp; create contents
+dynamically and navigating based on user input.&nbsp;</p>
+<p>The <b> setvar</b> element specifies a variable and can be used in the <a href="wmlreftask.htm"> task</a>
+elements. User input elements use variables too:</p>
+<ul>
+  <li><a href="howtocreateinput.htm"> input</a> element.&nbsp; The <a href="wmlrefui.htm#select">value</a>
+    attribute of the select element sets the variable to whatever the user
+    enters;</li>
+  <li><a href="howtocreateselectionlist.htm">select</a> element . The <a href="wmlrefui.htm#input"> name</a>
+    attribute of the&nbsp; select element&nbsp; sets the variable to whatever the user
+    selects.&nbsp;</li>
+</ul>
+<p>Variable names consist of a US-ASCII letter or underscore followed by a zero
+or more letters, digits, or underscores. Variable names are case-sensitive.&nbsp;</p>
+
+<p> Parentheses are required anywhere the end of a variable cannot be inferred from the surrounding
+context. The following examples demonstrate legal variables:</p>
+
+<p>$var<br>
+$(var).<br>
+$(var:e).<br>
+$(var:unesc).<br>
+$(var:N).</p>
+
+<p> A single dollar sign entity, even when specified as &amp;#x24;, results in a variable substitution.
+Two dollar signs are replaced by a single $ character. For example:</p>
+
+<p>
+This is a $$ character.</p>
+
+<p>
+would be displayed as:</p>
+
+<p>
+This is a $ character.</p>
+
+<p>A single dollar sign entity, even when specified as <b> &amp;#x24;</b>, results in a variable substitution.
+To include the $ character in URL-escaped strings, specify it with the URL-escaped
+form %24.</p>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>XPath expressions
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>XPath expressions</h1>
+<p>Regular expressions are operators that customize a search string. The product recognizes these regular expressions:
+</p>
+<p>Regular expressions is useful in <a href="cmdeditfind.htm"> Find Text</a> 
+and <a href="cmdeditreplace.htm">Replace Text</a> dialogs.</p>
+<a name="options"> </a>
+<table border="0">
+  <tr>
+    <td class="tdbanner">Operator</td>
+    <td class="tdbanner">Meaning</td>
+  </tr>
+  <tr>
+    <td valign="top">.</td>
+    <td>match any character
+      <p>Note: this operator normally does not match separators, but a flag is<br>
+  //        available that will allow this operator to match a separator</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+*</td>
+    <td>match zero or more of the last sub expression</td>
+  </tr>
+  <tr>
+    <td valign="top">
++</td>
+    <td>		match one or more of the last sub expression</td>
+  </tr>
+  <tr>
+    <td valign="top">
+?</td>
+    <td>match zero or one of the last sub expression
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+()</td>
+    <td>	sub expression grouping
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+{m, n}</td>
+    <td>match at least m occurrences and up to n occurrences
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+{m}</td>
+    <td>match exactly m occurrences
+      <p>
+Note: in case {m, n} operator both values can be 0 (zero) or omitted which denotes an&nbsp;<br>
+      unlimited bound {,} and {0,} and {0, 0} corresponds to * {, 1} and {0, 1} corresponds&nbsp;<br>
+to ? {1,} and {1, 0} corresponds to +
+    </td>
+  </tr>
+  <tr>
+    <td class="tdbanner">
+Literals</td>
+    <td>	
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+c</td>
+    <td>		literal UCS2 character
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"> 
+\x....</td>
+    <td>		hexadecimal number of up to 4 digits
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+\X....</td>
+    <td>		hexadecimal number of up to 4 digits</td>
+  </tr>
+  <tr>
+    <td valign="top">
+\u....</td>
+    <td> number of up to 4 digits</td>
+  </tr>
+  <tr>
+    <td valign="top">
+\U....</td>
+    <td>		number of up to 4 digits</td>
+  </tr>
+  <tr>
+    <td valign="top">
+\d</td>
+    <td>		any decimal digit</td>
+  </tr>
+  <tr>
+    <td valign="top">
+\D</td>
+    <td>		any character that is not a decimal digit</td>
+  </tr>
+  <tr>
+    <td valign="top">
+           \s</td>
+    <td>		any white space character</td>
+  </tr>
+  <tr>
+    <td valign="top">
+           \S</td>
+    <td>		any character that is not a white space character</td>
+  </tr>
+  <tr>
+    <td valign="top">
+           \w</td>
+    <td>		any "word" character</td>
+  </tr>
+  <tr>
+    <td valign="top">
+           \W</td>
+    <td>		any "non-word" character</td>
+  </tr>
+  <tr>
+    <td class="tdbanner">
+Character classes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td valign="top">
+[...]</td>
+    <td>		denotes a character class</td>
+  </tr>
+  <tr>
+    <td valign="top">
+[^...]</td>
+    <td>		denotes a negated character class</td>
+  </tr>
+  <tr>
+    <td valign="top">  \pN0,N1,..., Nn</td>
+    <td> <a href="cmdcharacterclass.htm"> Character properties class</a></td>
+  </tr>
+  <tr>
+    <td valign="top">  \PN0,N1,..., Nn</td>
+    <td> Negated character properties class
+      <p>Note: character property classes are \p or \P (the latter denotes a negated property class)&nbsp;<br>
+followed by a comma separated list of integers starting with 0.</td>
+  </tr>
+  <tr>
+    <td valign="top">:alnum:<br>
+      :alpha:<br>
+      :cntrl:<br>
+      :digit:<br>
+      :graph:<br>
+      :lower:<br>
+      :print:<br>
+      :punct:<br>
+      :space:<br>
+      :upper:<br>
+      :xdigit:</td>
+    <td valign="top">   POSIX character classes.
+      <p>
+Character classes can contain literals, POSIX classes and/or character property classes.&nbsp;<br>
+POSIX classes are delimited by :POSIX:&nbsp;</p>
+      <p>
+Note: upper, lower and title case classes need to have case sensitive search enabled&nbsp;<br>
+to match correctly.</td>
+  </tr>
+</table>
+
+<p>	See also:&nbsp;<a href="cmdeditxpath.htm">XPath Query</a> <a href="cmdeditfind.htm">Find text dialog</a>  <a href="cmdeditreplace.htm">Replace
+text dialog</a> 
+</p>
+
+</body>
+</html>

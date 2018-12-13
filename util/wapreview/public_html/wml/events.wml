@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="Events">
+<onevent type="onenterforward">
+  <refresh>
+    <setvar name="foo" value="bar"/>
+  </refresh>
+</onevent>
+<onevent type="onenterbackward">
+  <refresh>
+    <setvar name="foo" value="Barbara"/>
+  </refresh>
+</onevent>
+<p>The onenterforward event for this card sets
+the value of $$foo to "bar".<br/>
+The onenterbackward event for this card sets the
+value of $$foo to "Barbara".<br/>
+The value of $$foo is now [$foo].
+</p>
+<p align="center">
+<a href="#continue">continue this demo</a>
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+<card id="continue" title="Events">
+<p>
+Press the back link to cause an onenterbackward
+event in this demo.<br/>
+Follow <a href="#card0">this link</a> to cause an
+onenterforward event in this demo.
+</p>
+</card>
+</wml>

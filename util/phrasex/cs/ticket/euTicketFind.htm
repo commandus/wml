@@ -1,0 +1,283 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  <serverside dataset="sqlCurUser" action="query">
+    SELECT company FROM cs_user WHERE user_id = session.userID;
+
+  <serverside dataset="sqlStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+
+  <serverside dataset="sqlPublicProduct" action="query">
+    SELECT name FROM cs_product WHERE product_type <> \'private\' '
+    'ORDER BY name ASC';
+  </serverside>
+
+  <serverside dataset="sqlBoughtPrivate" action="query">
+    SELECT DISTINCT sa_product FROM cs_sale, cs_product '
+    'WHERE cs_sale.sa_product = cs_product.name AND'
+    ' product_type = \'private\' AND'
+    ' (sa_sold_to = \'' + to.2QuoteStr(session.userID) + '\''
+    ' OR sa_contact1 = \'' + to.2QuoteStr(session.userID) + '\''
+    ' OR sa_contact2 = \'' + to.2QuoteStr(session.userID) + '\')';
+
+  <serverside dataset="sqlSales" action="query">
+    SELECT sa_serial FROM cs_sale
+    WHERE sa_sold_to = session.userID 
+      OR sa_contact1 = session.userID
+      OR sa_contact2 = session.userID;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="400" border="0" cellspacing="0" cellpadding="2">
+<tr>
+  <td colspan="4">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Find Requests
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<form method=GET action="euTicketView.htm">
+<tr>
+  <td colspan="4" align="right">
+    Request ID: 
+    <input type="text" name=ticket_id size=8><input type="submit" value="go"/>
+  </td>
+</tr>
+</form>
+
+<form method=GET action="euTicketFindOk.htm">
+<tr class="apbg">
+  <td colspan="4">
+    Find maximum 500 requests that satisfy ALL conditions:
+  </td>
+</tr>
+<tr>
+  <td>Display:<br/>
+    <select name=tab_col1 size=1>
+      <option>Title
+      <option selected>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Company
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>and:<br/>
+    <select name=tab_col2 size=1>
+      <option>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Company
+      <option selected>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>and:<br/>
+    <select name=tab_col3 size=1>
+      <option>
+      <option selected>Title
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Company
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td>and:<br/>
+    <select name=tab_col4 size=1>
+      <option selected>
+      <option>Title
+      <option>Status
+      <option>Company
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+</tr>
+<tr>
+  <td>Sort By 1:<br/>
+    <select name=tab_sort1 size=1>
+      <option selected>Request ID
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Company
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td><br/>
+    <select name=tab_sort1_dir size=1>
+      <option selected>Ascending
+      <option>Descending
+    </select>
+  </td>
+  <td>Sort By 2:<br/>
+    <select name=tab_sort2 size=1>
+      <option selected>
+      <option>Request ID
+      <option>Status
+      <option>Product
+      <option>Serial Number
+      <option>Priority
+      <option>Deadline
+      <option>Cost
+      <option>Turn Around
+      <option>Submitted To
+      <option>Submitted By
+      <option>Company
+      <option>Submitted On
+      <option>Assigned To
+      <option>Assigned By
+      <option>Assigned On
+      <option>Closed By
+      <option>Closed On
+    </select>
+  </td>
+  <td><br/>
+    <select name=tab_sort2_dir size=1>
+      <option selected>Ascending
+      <option>Descending
+    </select>
+  </td>
+</tr>
+<tr class="apbg">
+  <td>
+    Conditions:
+  </td>
+  <td colspan="3" align="right">
+    (date format: $server.dateFormat))
+  </td>
+</tr>
+<tr>
+  <td>
+    Status:<br/>
+    <select name=tab_status size=1>
+      <option selected>
+      <!$while (sqlStatus.fetch))>
+        <option>$(sqlStatus.name))
+      <!$endwhile)>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Submitted By:<br/> 
+    <input type="text" name=tab_submitted_by size="15"
+      value="$(session.userID))">
+  </td>
+  <td valign="bottom">
+    Company:<br/> 
+    <input type="text" name=tab_company size="15"
+      value="$(sqlCurUser.company))">
+  </td>
+  <td valign="bottom"> 
+    Submitted On >=:<br/>
+    <input type="text" name=tab_submitted_on1 size=17/>
+  </td>
+  <td valign="bottom">
+    Submitted On <:<br/>
+    <input type="text" name=tab_submitted_on2 size=17/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2" valign="bottom">
+    Product:<br/>
+    <select name=tab_product size=1>
+      <option>
+      <!$while (sqlPublicProduct.fetch))>
+        <option>$(sqlPublicProduct.name))
+      <!$endwhile)>
+      <!$while (sqlBoughtPrivate.fetch))>
+        <option>$(sqlBoughtPrivate.sa_product))
+      <!$endwhile)>
+    </select>
+  </td>
+  <td colspan="2" valign="bottom">
+    Serial Number: <br/>
+    <select name=tab_serial_num size=1>
+      <option selected>
+      <!$ while (sqlSales.fetch) )>
+        <option>$(sqlSales.sa_serial))
+      <!$ endwhile )>
+    </select>
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="4">
+    <input type="submit" value="Find"/>
+  </td>
+</tr>
+</form>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td colspan="4" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

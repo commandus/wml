@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="Variables">
+<p>Assign a value to the variable $$foo<br/>
+<input name="foo"/>
+<br/><a href="#value">show me</a>
+</p>
+</card>
+<card id="value" title="value">
+<p>
+$$foo [$foo]<br/>
+$$(foo) [$(foo)]<br/>
+$$(foo:escape) [$(foo:escape)]<br/>
+$$(foo:noesc) [$(foo:noesc)]<br/>
+$$(foo:unesc) [$(foo:unesc)]<br/>
+<em>note: escape/noesc/unesc are not interpreted</em>
+</p>
+<p align="center">
+<a href="#card0">again</a><br/>
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+</wml>

@@ -1,0 +1,166 @@
+-
+&Allow loading full post
+&apoo extension
+&Cache storage settings
+&Clear proxy cache
+&Close
+&Contents
+&Control Panel
+&Dates
+&Enter code
+&Excerpt
+&File
+&File support
+&Force character set code page
+&Help
+&Internet connection settings
+&joomla extension
+&Keywords
+&Load program at startup
+&Multiple blogs
+&Name
+&Options
+&Pings
+&Product code
+&Publish
+&Quit
+&Request code
+&Set default user properties
+&Trackbacks
+&View
+&View debugging log
+&Visit web site
+. . .
+< Back
+1. Enter button to connect internet registrar
+2. Copy name and code from the message
+3
+80
+8080
+A&bout Bloxy
+About Bloxy
+Action1
+ActionMainMenuBar
+ActionToolBar1
+Add blog to the proxy list
+Address
+All protocols
+Allow loading full post
+Allow loading full post from the web
+Basic authentication
+Beep
+Blog properties
+Blog user details
+Blog user name and password
+Blogger API properties
+Blogger API type properties
+bloxy
+Bug report
+bugreport.txt
+C&ontext Help
+C&ontrol Panel
+C&ustom
+Cache storage settings
+Cancel
+Cancel and close dialog
+Case sensitive
+Clear log
+Clear proxy cache
+Close application (recommended)
+Close window
+Close window|Minimize window to tray
+Co&mments
+Code page
+Contents|Help Contents
+Context Help
+Continue anyway
+Control Panel
+Cut and paste registration code from message you received
+Database
+Database connection settings
+Database name or alias
+Database server address
+Database user name
+Dialect
+Display information about program version
+Done
+Edit connection settings
+e-mail
+Enable HTTP proxy
+End point
+Enter received code
+Fatal appication error occured
+Fatal application error
+Fatal error occured
+First name
+Force character set code page
+Force codepage
+Has &categories
+home page
+Host
+HTTP proxy
+HTTP proxy setings
+http://commandus.com/
+http://www.commandus.com/
+Internet connection settings
+Internet connection settings, HTTP proxy
+Last info
+Last name
+License agreement
+license.txt
+Load blogger types
+Load program at startup
+Log
+mailto:support@commandus.com
+menu
+Next >
+Nick name
+Ok
+Open control panel in the default web browser window
+Password
+Plot
+Port
+Pro&xy
+product code
+Properties
+Provider
+Quit|Quits the application
+Read me
+readme.txt
+Register
+Register your copy now
+Registration &code
+Registration code
+Registration name
+Request registration code
+Role
+S&tart minimized
+Select code page
+Send report by e-mail
+Set character set other than UTF-8
+Set codepage
+Set default user properties
+Set internet connection settings
+Settings
+Show &subject
+Show data to be sent
+Show more detailed information|data sent to the client
+Show/Hide debugging window
+SQL dialect number
+SSL
+Start
+Start minimized
+Status
+Sync &all
+Synchronyze all blogs and RSS/ATOM feeds
+Use SSL
+User
+User name
+UTF-8
+View debugging log
+View main program window
+View window
+Visit program's web site
+Visit web site
+Домашняя страница
+Обратная связь

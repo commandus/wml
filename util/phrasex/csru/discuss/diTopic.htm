@@ -1,0 +1,17 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$ 
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of forums without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  if (request.topic_id <>

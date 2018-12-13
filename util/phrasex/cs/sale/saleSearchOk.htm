@@ -1,0 +1,240 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  if (request.fieldExist('max_row'))  // from search form, not refresh
+    if (request.max_row < 1)
+      error 'Max Records must be greater than 0';
+    endif
+    if (request.col1 = request.col2 
+      OR request.col1 = request.col2 OR request.col2 = request.col3)
+      error 'Field 1, 2 and 3 must be different';
+    endif
+    set session.sa_max_row = request.max_row;
+    set session.sa_col1 = request.col1; 
+    set session.sa_col2 = request.col2;
+    set session.sa_col3 = request.col3;
+    set session.sa_sort1 = request.sort1;
+    set session.sa_sort1_dir = request.sort1_dir;
+    set session.sa_sort2 = request.sort2;
+    set session.sa_sort2_dir = request.sort2_dir;
+    set session.sa_serial = request.sa_serial;
+    set session.sa_product = request.sa_product;
+    set session.sa_sold_to = request.sa_sold_to;
+    set session.sa_sold_on1 = request.sa_sold_on1;
+    set session.sa_sold_on2 = request.sa_sold_on2;
+  endif
+
+  // convert user friendly column names to real column names
+  if (session.sa_col1 = 'Product')
+    set local.col1 = 'sa_product';
+  elseif (session.sa_col1 = 'Sold To')
+    set local.col1 = 'sa_sold_to';
+  elseif (session.sa_col1 = 'Sold On')
+    set local.col1 = 'sa_sold_on';
+  else
+    set local.col1 = session.sa_col1;
+  endif
+  if (session.sa_col2 = 'Product')
+    set local.col2 = 'sa_product';
+  elseif (session.sa_col2 = 'Sold To')
+    set local.col2 = 'sa_sold_to';
+  elseif (session.sa_col2 = 'Sold On')
+    set local.col2 = 'sa_sold_on';
+  else
+    set local.col2 = session.sa_col2;
+  endif
+  if (session.sa_col3 = 'Product')
+    set local.col3 = 'sa_product';
+  elseif (session.sa_col3 = 'Sold To')
+    set local.col3 = 'sa_sold_to';
+  elseif (session.sa_col3 = 'Sold On')
+    set local.col3 = 'sa_sold_on';
+  else
+    set local.col3 = session.sa_col3;
+  endif
+
+  if (session.sa_sort1 = 'Serial Number')
+    set local.sort1 = 'sa_serial';
+  elseif (session.sa_sort1 = 'Product')
+    set local.sort1 = 'sa_product';
+  elseif (session.sa_sort1 = 'Sold To')
+    set local.sort1 = 'sa_sold_to';
+  elseif (session.sa_sort1 = 'Sold On')
+    set local.sort1 = 'sa_sold_on';
+  else
+    set local.sort1 = session.sa_sort1;
+  endif
+  if (session.sa_sort1_dir = 'Descending')
+    set local.sort1_dir = 'DESC';
+  else
+    set local.sort1_dir = 'ASC';
+  endif
+  if (session.sa_sort2 = 'Serial Number')
+    set local.sort2 = 'sa_serial';
+  elseif (session.sa_sort2 = 'Product')
+    set local.sort2 = 'sa_product';
+  elseif (session.sa_sort2 = 'Sold To')
+    set local.sort2 = 'sa_sold_to';
+  elseif (session.sa_sort2 = 'Sold On')
+    set local.sort2 = 'sa_sold_on';
+  else
+    set local.sort2 = session.sa_sort2;
+  endif
+  if (session.sa_sort2_dir = 'Descending')
+    set local.sort2_dir = 'DESC';
+  else
+    set local.sort2_dir = 'ASC';
+  endif
+   
+  // construct the <serverside dataset="statement
+  set local.s = 'sa_serial';
+  if (local.col1 <> '')
+    set local.s = local.s + ',' + local.col1;
+  endif
+  if (local.col2 <> '')
+    set local.s = local.s + ',' + local.col2;
+  endif
+  if (local.col3 <> '')
+    set local.s = local.s + ',' + local.col3;
+  endif
+
+  set local.w = '';
+  if (session.sa_serial <> '')
+    set local.w = local.w + 'sa_serial LIKE \'' + session.sa_serial + '%\'';
+  endif
+  if (session.sa_product <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 'sa_product = \'' + session.sa_product + '\'';
+  endif
+  if (session.sa_sold_to <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'sa_sold_to = \'' + to.2QuoteStr(session.sa_sold_to) + '\'';
+  endif
+  if (session.sa_sold_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'sa_sold_on >= ' + to.OdbcDateStr(session.sa_sold_on1);
+  endif
+  if (session.sa_sold_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'sa_sold_on <= ' + to.OdbcDateStr(session.sa_sold_on2);
+  endif
+
+  set local.o = '';
+  if (local.sort1 <> '')
+    set local.o = local.o + local.sort1 + ' ' + local.sort1_dir;
+  endif
+  if (local.sort2 <> '')
+    if (local.o <> '')
+      set local.o = local.o + ', ';
+    endif
+    set local.o = local.o + local.sort2 + ' ' + local.sort2_dir;
+  endif
+
+  set local.sql" action="query">
+    SELECT ' + local.s + ' FROM cs_sale';
+  if (local.w <> '')
+    set local.sql = local.sql + ' WHERE ' + local.w;
+  endif
+  if (local.o <> '')
+    set local.sql = local.sql + ' ORDER BY ' + local.o;
+  </serverside>
+  endif
+
+  <serverside dataset="s1 = local.sql;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    <a href="saleMan.htm">Sales Manager</a> : 
+    Search Result
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="saleNew.htm">New Sale</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td nowrap="nowrap">Serial#</td>
+  <td>$session.sa_col1)</td>
+  <td>$session.sa_col2)</td>
+  <td>$session.sa_col3)</td>
+  <td width="1%">Command</td>
+</tr>
+
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+
+  while (s1.fetch AND local.count < to.integer(session.sa_max_row)) 
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+)>
+<tr $local.bgcolor)>
+  <td nowrap="nowrap">
+    <a href="saleView.htm?sa_serial=$(s1.sa_serial:escape)">
+    $(s1.sa_serial))</a></td>
+  <td>$(s1.1))</td>
+  <td>$(s1.2))</td>
+  <td>$(s1.3))</td>
+  <td width="1%" nowrap="nowrap">
+    <a href="saleEdit.htm?sa_serial=$(s1.sa_serial:escape)">Edit</a> 
+    <!$if (session.userType = 'Manager'))>
+    | <a href="saleDel.htm?sa_serial=$(s1.sa_serial:escape)">Delete</a>
+    <!$endif)>
+  </td>
+</tr>
+<!$endwhile)>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$if (local.count >= to.integer(session.sa_max_row)))>
+      Total: $local.count) or more sales found. 
+      $local.count) sales displayed. 
+    <!$else)>
+      Total: $local.count) sale(s) found and displayed. 
+    <!$endif)>
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

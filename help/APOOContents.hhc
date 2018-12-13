@@ -1,0 +1,890 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Introduction">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Preface">
+			<param name="Local" value="preface.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WAP Overview">
+			<param name="Local" value="wapoverview.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Wireless Overview">
+			<param name="Local" value="wirelessoverview.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WML overview">
+			<param name="Local" value="wmloverview.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="National languages support">
+			<param name="Local" value="languagesupport.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Automatic conversion of the document on loading and saving">
+			<param name="Local" value="optionsautoconversion.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="web page">
+			<param name="Local" value="index.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="About team">
+			<param name="Local" value="z-about.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Affiliates">
+			<param name="Local" value="z-aboutinet.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="How to">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="insert an image">
+			<param name="Local" value="howtocreateimage.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="add or change an FTP location">
+			<param name="Local" value="howtoftp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="create an input element">
+			<param name="Local" value="howtocreateinput.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="insert a special symbol">
+			<param name="Local" value="howtosymbol.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="edit a file using FTP">
+			<param name="Local" value="howtoftpedit.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="create a link between cards">
+			<param name="Local" value="howtocreatelink.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="create a selection list">
+			<param name="Local" value="howtocreateselectionlist.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="create a soft key">
+			<param name="Local" value="howtocreatesoftkey.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="move element">
+			<param name="Local" value="howtomoveelement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="use variables">
+			<param name="Local" value="howtousevariables.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="create a new card">
+			<param name="Local" value="howtocreatecard.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="find text">
+			<param name="Local" value="cmdeditfind.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="replace text">
+			<param name="Local" value="cmdeditreplace.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="set up ftp proxy">
+			<param name="Local" value="howtoftpproxy.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="How to create eBook">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Overview">
+				<param name="Local" value="oeboverview.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="How to create headings">
+				<param name="Local" value="obhowtocreateheadings.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Package file (.opf)">
+				<param name="Local" value="opref.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="How to preserve formatting">
+				<param name="Local" value="obhowtopreserveformat.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="How to specify role of authors">
+				<param name="Local" value="opmarcrole.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="How to specify author's role">
+				<param name="Local" value="opmarcrole.htm">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Installation">
+		<param name="Local" value="setup.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Minimum System Requirements">
+			<param name="Local" value="setup.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="License agreement">
+			<param name="Local" value="license.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Configure MIME types in Apache and IIS">
+			<param name="Local" value="webserver.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Register evaluation copy">
+			<param name="Local" value="register.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Contacts">
+			<param name="Local" value="about.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML">
+		<param name="Local" value="wmlrefprologue.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="XML prologue">
+			<param name="Local" value="wmlrefprologue.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="XML declaration">
+			<param name="Local" value="exml.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="XML document type declaration">
+			<param name="Local" value="edoctype.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Comments">
+			<param name="Local" value="ecomment.htm">
+			<param name="Local" value="opcomment.htm">
+			<param name="Local" value="obcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Server side scripts">
+			<param name="Local" value="obscript.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WML reference">
+		<param name="Local" value="wmlreference.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Deck and card elements">
+			<param name="Local" value="wmlrefdeck.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="document sign">
+				<param name="Local" value="edeck.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="wml">
+				<param name="Local" value="ewml.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="card">
+				<param name="Local" value="ecard.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="template">
+				<param name="Local" value="etemplate.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="head">
+				<param name="Local" value="ehead.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="access">
+				<param name="Local" value="eaccess.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="meta">
+				<param name="Local" value="emeta.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="User input elements">
+			<param name="Local" value="wmlrefui.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="input">
+				<param name="Local" value="einput.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="select">
+				<param name="Local" value="eselect.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="option">
+				<param name="Local" value="eoption.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="optgroup">
+				<param name="Local" value="eoptgroup.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="fieldset">
+				<param name="Local" value="efieldset.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Task elements">
+			<param name="Local" value="wmlreftask.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="go">
+				<param name="Local" value="ego.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="prev">
+				<param name="Local" value="eprev.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="refresh">
+				<param name="Local" value="erefresh.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="noop">
+				<param name="Local" value="enoop.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Event">
+			<param name="Local" value="wmlrefevent.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="do">
+				<param name="Local" value="edo.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="onevent">
+				<param name="Local" value="eonevent.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="postfield">
+				<param name="Local" value="epostfield.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="timer">
+				<param name="Local" value="etimer.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Anchors and image elements">
+			<param name="Local" value="wmlrefanchor.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="a">
+				<param name="Local" value="ea.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="anchor">
+				<param name="Local" value="eanchor.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="img">
+				<param name="Local" value="eimg.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Text layout formatting elements">
+			<param name="Local" value="wmlrefbr.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="p">
+				<param name="Local" value="ep.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="br">
+				<param name="Local" value="ebr.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="table">
+				<param name="Local" value="etable.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="tr">
+				<param name="Local" value="etr.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="td">
+				<param name="Local" value="etd.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Emphasis elements">
+			<param name="Local" value="wmlrefemph.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="em">
+				<param name="Local" value="eem.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="strong">
+				<param name="Local" value="estrong.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="b">
+				<param name="Local" value="eb.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="i">
+				<param name="Local" value="ei.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="u">
+				<param name="Local" value="eu.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="big">
+				<param name="Local" value="ebig.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="small">
+				<param name="Local" value="esmall.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Text">
+			<param name="Local" value="wmlreftext.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="pcdata">
+				<param name="Local" value="epcdata.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="comment">
+				<param name="Local" value="ecomment.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="pre">
+				<param name="Local" value="epre.htm">
+				</OBJECT>
+		</UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Variables">
+			<param name="Local" value="wmlrefvar.htm">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="setvar">
+				<param name="Local" value="esetvar.htm">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="eBook markup reference">
+		<param name="Local" value="obref.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="!--">
+			<param name="Local" value="obcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="!DOCTYPE">
+			<param name="Local" value="obdoctype.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="?xml">
+			<param name="Local" value="obxml.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="comment">
+			<param name="Local" value="obcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="a">
+			<param name="Local" value="oba.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="b">
+			<param name="Local" value="obb.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="base">
+			<param name="Local" value="obbase.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="big">
+			<param name="Local" value="obbig.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="blockquote">
+			<param name="Local" value="obblockquote.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="body">
+			<param name="Local" value="obbody.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="br">
+			<param name="Local" value="obbr.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="caption">
+			<param name="Local" value="obcaption.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="center">
+			<param name="Local" value="obcenter.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="cite">
+			<param name="Local" value="obcite.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="code">
+			<param name="Local" value="obcode.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="comment">
+			<param name="Local" value="obcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dd">
+			<param name="Local" value="obdd.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dfn">
+			<param name="Local" value="obdfn.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="div">
+			<param name="Local" value="obdiv.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dl">
+			<param name="Local" value="obdl.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="!doctype">
+			<param name="Local" value="obdoctype.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dt">
+			<param name="Local" value="obdt.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="em">
+			<param name="Local" value="obem.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="font">
+			<param name="Local" value="obfont.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h1">
+			<param name="Local" value="obh1.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h2">
+			<param name="Local" value="obh2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h3">
+			<param name="Local" value="obh3.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h4">
+			<param name="Local" value="obh4.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h5">
+			<param name="Local" value="obh5.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="h6">
+			<param name="Local" value="obh6.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="head">
+			<param name="Local" value="obhead.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="hr">
+			<param name="Local" value="obhr.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="html">
+			<param name="Local" value="obhtml.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="i">
+			<param name="Local" value="obi.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="img">
+			<param name="Local" value="obimg.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="kbd">
+			<param name="Local" value="obkbd.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="li">
+			<param name="Local" value="obli.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="link">
+			<param name="Local" value="oblink.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="menu">
+			<param name="Local" value="obmenu.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="meta">
+			<param name="Local" value="obmeta.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ol">
+			<param name="Local" value="obol.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="p">
+			<param name="Local" value="obp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="pre">
+			<param name="Local" value="obpre.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="q">
+			<param name="Local" value="obq.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="samp">
+			<param name="Local" value="obsamp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="script">
+			<param name="Local" value="obscript.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="small">
+			<param name="Local" value="obsmall.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="span">
+			<param name="Local" value="obspan.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="strike">
+			<param name="Local" value="obstrike.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="strikethrough">
+			<param name="Local" value="obstrikethrough.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="strong">
+			<param name="Local" value="obstrong.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="style">
+			<param name="Local" value="obstyle.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="sub">
+			<param name="Local" value="obsub.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="sup">
+			<param name="Local" value="obsup.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="table">
+			<param name="Local" value="obtable.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="td">
+			<param name="Local" value="obtd.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="th">
+			<param name="Local" value="obth.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="title">
+			<param name="Local" value="obtitle.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="tr">
+			<param name="Local" value="obtr.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="tt">
+			<param name="Local" value="obtt.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="u">
+			<param name="Local" value="obu.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ul">
+			<param name="Local" value="obul.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="var">
+			<param name="Local" value="obvar.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="?xml">
+			<param name="Local" value="obxml.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="eBook package file markup reference">
+		<param name="Local" value="opref.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="!--">
+			<param name="Local" value="opcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="!DOCTYPE">
+			<param name="Local" value="opdoctype.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="?xml">
+			<param name="Local" value="opxml.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="comment">
+			<param name="Local" value="opcomment.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Contributor">
+			<param name="Local" value="opdccontributor.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Coverage">
+			<param name="Local" value="opdccoverage.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Creator">
+			<param name="Local" value="opdccreator.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Date">
+			<param name="Local" value="opdcdate.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Description">
+			<param name="Local" value="opdcdescription.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Format">
+			<param name="Local" value="opdcformat.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Identifier">
+			<param name="Local" value="opdcidentifier.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Language">
+			<param name="Local" value="opdclanguage.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc-metadata">
+			<param name="Local" value="opdcmetadata.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Publisher">
+			<param name="Local" value="opdcpublisher.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Relation">
+			<param name="Local" value="opdcrelation.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Rights">
+			<param name="Local" value="opdcrights.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Source">
+			<param name="Local" value="opdcsource.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Subject">
+			<param name="Local" value="opdcsubject.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Title">
+			<param name="Local" value="opdctitle.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:Type">
+			<param name="Local" value="opdctype.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="dc:xmlns">
+			<param name="Local" value="opdcxmlns.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="guide">
+			<param name="Local" value="opguide.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="item">
+			<param name="Local" value="opitem.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="itemref">
+			<param name="Local" value="opitemref.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="manifest">
+			<param name="Local" value="opmanifest.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="meta">
+			<param name="Local" value="opmeta.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ref">
+			<param name="Local" value="opref.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="reference">
+			<param name="Local" value="opreference.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="site">
+			<param name="Local" value="opsite.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="spine">
+			<param name="Local" value="opspine.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="tour">
+			<param name="Local" value="optour.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="tours">
+			<param name="Local" value="optours.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="x-metadata">
+			<param name="Local" value="opxmetadata.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Interface walkthrough">
+		<param name="Local" value="interfaceguide.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Project window">
+			<param name="Local" value="windowproject.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Tools panel">
+			<param name="Local" value="windowtools.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="New element buttons panel">
+			<param name="Local" value="windowmenu.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WML code window">
+			<param name="Local" value="windowcode.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WML elements tree window">
+			<param name="Local" value="windowelements.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WML element attributes window">
+			<param name="Local" value="windowattributes.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Information window">
+			<param name="Local" value="windowerror.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Shell integration">
+			<param name="Local" value="shellintegration.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Generate LIT window">
+			<param name="Local" value="windowgeneratelit.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Keyboard shortcuts">
+			<param name="Local" value="keyboardshortcuts.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Commands">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Find text">
+				<param name="Local" value="cmdeditfind.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="Replace text">
+				<param name="Local" value="cmdeditreplace.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="XPath query">
+				<param name="Local" value="cmdeditxpath.htm">
+				</OBJECT>
+		</UL>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Glossary">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Regular expressions">
+			<param name="Local" value="cmdregexp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="XPath expressions">
+			<param name="Local" value="cmdxpathexp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="List of supported codepages">
+			<param name="Local" value="codepages.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

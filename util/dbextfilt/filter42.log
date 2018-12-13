@@ -1,0 +1,16 @@
+04:14:54 PM: Dr.Bob's Delphi 6.01 ISAPI Filter Loaded
+04:15:07 PM: PREPROC HEADERS
+04:15:07 PM: URL MAP: /tdm/home.htm to c:\inetpub\wwwroot\tdm\home.htm
+04:15:07 PM: AUTHENTICATION: User=  (257) Password=  (257)
+04:15:07 PM: SEND RAW DATA
+04:15:07 PM: SEND RAW DATA
+04:15:07 PM: LOG: Client=192.168.92.201 Target=/tdm/home.htm
+04:15:07 PM: END OF NET SESSION
+04:15:11 PM: PREPROC HEADERS
+04:15:11 PM: URL MAP: /tdm/home.htm to c:\inetpub\wwwroot\tdm\home.htm
+04:15:11 PM: AUTHENTICATION: User= guest (257) Password= guest (257)
+04:15:11 PM: SEND RAW DATA
+04:15:11 PM: SEND RAW DATA
+04:15:11 PM: URL MAP:  to c:\inetpub\wwwroot
+04:15:11 PM: LOG: Client=192.168.92.201 Target=/tdm/home.htm
+04:15:17 PM: END OF NET SESSION

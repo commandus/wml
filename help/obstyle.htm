@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>style
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<p><a name=style>style</a>
+ <img border="0" src="ostyle.gif" width="24" height="24">
+<br id=stylebrief>Allows an eBook source to contain cascading style 
+information. The style tag encloses rules which, when applied to the tags and 
+attributes contained within the document, determine the final layout for the 
+eBook. 
+<br>Note: If you add a &lt;style&gt; tag outside the &lt;head&gt; section of an HTML document, it generates a blank page at that location.<p>Sample:
+<p>&lt;style&gt;<br>
+&nbsp;a {text-decoration: none}<br>
+&nbsp;h1 {page-break-before: left; margin-top: 20%; color: green}<br>
+&nbsp;.fl {text-indent: 0em; color: red}<br>
+&lt;/style&gt;<br>
+
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id="styleattr"><b>type</b>=text/x-oeb1-css|text/css 
+<br>
+<p id="styleattr">The type attribute has two values: 
+<ul>
+  <li>text/x-oeb1-css for OEB compliant style sheets, and&nbsp;</li>
+  <li>text/css for non-OEB-compliant, 
+standard CSS style sheets.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  sessMan.prepareForFetch;
+)>
+<form method="GET" action="systemInfo.htm" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="$session.mainMenu)" >
+$(appname)</a>
+: Системная Информация</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td valign="top" >
+<table width="100%" border="0" cellspacing="2" cellpadding="1" >
+<tr class="apbg" >
+<td >
+СЛЕПОК ВЫБОРА('today' как ДАТА) ОТ ДВОЙНОГО;</td>
+</tr>
+</table>
+</td>
+<td >
+<table width="100%" border="0" cellspacing="2" cellpadding="1" >
+<tr class="apbg" >
+<td >
+IsNotLevel5</td>
+</tr>
+<tr >
+<td >
+<a href="/log/day01.txt" >
+1</a>
+<a href="/log/day02.txt" >
+2</a>
+<a href="/log/day03.txt" >
+3</a>
+<a href="/log/day04.txt" >
+4</a>
+<a href="/log/day05.txt" >
+5</a>
+<a href="/log/day06.txt" >
+6</a>
+<a href="/log/day07.txt" >
+7</a>
+<a href="/log/day08.txt" >
+8</a>
+<a href="/log/day09.txt" >
+9</a>
+<a href="/log/day10.txt" >
+10</a>
+<a href="/log/day11.txt" >
+11</a>
+<a href="/log/day12.txt" >
+12</a>
+<a href="/log/day13.txt" >
+13</a>
+<a href="/log/day14.txt" >
+14</a>
+<a href="/log/day15.txt" >
+15</a>
+<a href="/log/day16.txt" >
+16</a>
+<a href="/log/day17.txt" >
+17</a>
+<a href="/log/day18.txt" >
+18</a>
+<a href="/log/day19.txt" >
+19</a>
+<a href="/log/day20.txt" >
+20</a>
+<a href="/log/day21.txt" >
+21</a>
+<a href="/log/day22.txt" >
+22</a>
+<a href="/log/day23.txt" >
+23</a>
+<a href="/log/day24.txt" >
+24</a>
+<a href="/log/day25.txt" >
+25</a>
+<a href="/log/day26.txt" >
+26</a>
+<a href="/log/day27.txt" >
+27</a>
+<a href="/log/day28.txt" >
+28</a>
+<a href="/log/day29.txt" >
+29</a>
+<a href="/log/day30.txt" >
+30</a>
+<a href="/log/day31.txt" >
+31</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+&nbsp;</td>
+</tr>
+<tr >
+<td valign="top" >
+<table width="100%" border="0" cellspacing="2" cellpadding="1" >
+<tr class="apbg" >
+<td >
+$(s1.news_detail)</td>
+</tr>
+<tr >
+<td >
+(sessions are automatically removed $server.sessionTimeout) minutes after they are created)</td>
+</tr>
+</table>
+</td>
+<td valign="top" >
+<table width="100%" border="0" cellspacing="2" cellpadding="1" >
+<tr class="apbg" >
+<td >
+] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_user_id). Если Вы используете ваше окно просмотра Обратной Стороны/Пересылать кнопку возвращаться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Страница Истекла], [, Вы хотите вновь послать данные формы Потери Данных] or []. Это нормально. Не освежать, вновь посылайте или перезагружайтесь.</td>
+<td >
+product_type</td>
+<td >
+$(тип) $(uid)</td>
+<td >
+ЗАПРОС repTimeSheet.htm repTrend.htm ID:</td>
+<td >
+Сконфигурируйте мое окно просмотра паутины Содержания Подтверждения configureBrowser.htm</td>
+<td width="1%" nowrap="nowrap" >
+ght">Copyright &копия; 2003, Андрей Ivanov.</td>
+</tr>
+<!$
+      set local.count = 0;
+      set local.lastUser = '';
+      set local.bgcolor = 'dummy'; 
+
+      while (sessMan.fetch AND local.count < 500)
+        if (sessMan.user_id <>
+<!$if (sessMan.user_id <>

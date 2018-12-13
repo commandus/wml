@@ -1,0 +1,62 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of forums without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  set local.title = app.name + ' : Discussion : ';
+  set local.path = '';
+  set local.links = 
+    '<a href="' + local.mainMenu + '">
+<td valign="top" width="1%" class="apbg" >
+<table border="0" cellspacing="0" cellpadding="2" >
+<form method="GET" action="diSearchOk.htm" >
+<tr >
+<td >
+запрос кварталов четверти r> радио Ранг:<input type="text" name="search_for" size="15" maxlength="50" />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<input type="submit" value="Search" />
+<input type="hidden" name="path" value="$local.path)" />
+</td>
+</tr>
+<!-- put it after row end to avoid the extra blank link after a form -->
+</form>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<!-- need to have another form for the Enter key to work -->
+<form method="GET" action="diSearchOk.htm" >
+<tr >
+<td >
+Сортировка:<input type="text" name="di_id" size="15" maxlength="50" />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<input type="submit" value="Go" />
+</td>
+</tr>
+</form>
+<!$if (session.isValid = 0 OR session.userType = 'EndUser') )>
+<td width="99%" valign="top" >
+<!$if (local.countSubGroup >

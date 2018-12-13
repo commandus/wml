@@ -1,0 +1,10 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (request.fieldExist('kb_id') = 0)
+    error 'kb_id missing.';
+  endif
+
+  <serverside dataset="s1" action="query">

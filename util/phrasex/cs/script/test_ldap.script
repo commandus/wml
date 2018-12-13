@@ -1,0 +1,92 @@
+// Sample SSP scripts to list users in Active Directory
+// Requires Perfect Tracker 7 and Windows 2000
+// (c) Avensoft, Inc. 2003.  
+ 
+// Important: You must set the following five variables to their correct
+// values in your environment before running this script!
+
+set local.ldapServerIP = '192.168.1.2';
+set local.domain = 'avensoft-net';
+set local.logonName = 'bill';
+set local.password = 'bill';
+set local.usersContainer = 'CN=Users,DC=avensoft,DC=net';
+
+ldap ldap1;
+if (ldap1.init(local.ldapServerIP) != 1)
+  error ldap1.last_err_str;
+endif
+
+server.logstr('DNS host name: ');
+server.log(ldap1.get_host_name);
+
+// set local.commonName = 'Bill Huang';
+// set local.dn = local.commonName || ',' || local.usersContainer;
+// if (ldap1.simple_bind_s(local.dn, local.password) != 1)
+//  error ldap1.last_err_str;
+// endif
+// 1. bind_s is prefered because it takes the logon name instead of the 
+//    DN (distinguished name). Users may not know his DN. That causes
+//    problem when they logon to LDAP enabled Perfect Tracker.
+// 2. bind calls have 30 second timeout for ActiveDirectory
+
+if (ldap1.bind_s(local.logonName, local.domain, local.password) != 1)
+  error ldap1.last_err_str;
+endif
+
+if (ldap1.set_time_limit(5) != 1)
+  error ldap1.last_err_str;
+endif
+
+set local.filter = '(objectClass=user)';
+
+// 2=subtree, ''=all attributes, 0=names and value, 10=timeout sec.
+if (ldap1.search_st(
+  local.usersContainer, 2, local.filter, '', 0, 10) != 1)
+  error ldap1.last_err_str;
+endif
+
+set local.has_entry = ldap1.first_entry;
+while (local.has_entry = 1)
+  local.attr_name = ldap1.first_attribute;
+  while (local.attr_name != '')
+    server.logstr(local.attr_name);
+    server.logstr(' = ');
+    ldap1.get_values(local.attr_name);
+    set local.i = 0;
+    while (local.i < ldap1.count_values)
+      server.log(ldap1.value(local.i));
+      set local.i = local.i + 1;
+    endwhile
+    local.attr_name = ldap1.next_attribute;
+  endwhile
+  local.has_entry = ldap1.next_entry;
+endwhile
+server.log('LDAP testing has finished.');
+
+// attribute        LDAP user object attribute description
+// ------------------------------------------------------------------
+// objectGUID     = 16 byte binary internal ID, never changes
+//                  need to convert it into hexidecimal value before 
+//                  storing it in the database.
+// sAMAccountName = windows logon user ID
+// displayName    = full name
+// cn             = full name
+// sn             = family name. last name.
+// givenName      =
+// mail           = email address
+// homePhone      =
+// mobile         =
+// pager          =
+// facsimileTelephoneNumber =
+// company        =
+// department     =
+// streetAddress  = 
+// l              = city
+// st             = state
+// postalCode     = zip code
+// c              = 2 letter country code. e.g. US
+// co             = long country name. e.g. United States
+// info           = notes
+// userPassword   = Not supported in Active Directory
+// street         = Not supported in Active Directory
+// ------------------------------------------------------------------

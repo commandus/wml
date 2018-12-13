@@ -1,0 +1,35 @@
+<html>
+<title>wapreview installation guide</title>
+<head>
+</head>
+<body bgcolor="#FFFFFF">
+<center><h1>Wapreview installation guide</h1></center>
+Follow these steps to install the Internet version of the WAPReview WML Browser:<br>
+<em><b>WARNING:</b>To minimise security risks, the java wricproxy class runs on port 5000 and accepts connections from the local host only.  If you are making availabil an internet version of the browser, use the perl version of the proxy server as described here.</em> 
+<ol>
+<br><li>Obtain and unzip the latest WAPReview kit from http://wapreview.sourceforge.net (or from <a href="http://www.applepiesolutions.com/swap">http://www.applepiesolutions.com/swap</a>)
+<p><li>cd to wapreview/public_html/src/wbmp2gif, and build the image converter following the instructions in the README.txt file.
+<p><li>Copy the newly build image converter executable to a suitable directory on your server, ensuring that it has appropriate executable permissions.
+<p><li>Copy lwpproxy.cgi and wbmp2gif from wapreview/public_html/src/cgi-bin into a cgi directory belonging to your webserver.  Modify wbmp2gif so that it references the wbmp2gif executable you just built. Ensure both the cgi's are executable, and that the perl reference is correct.
+<p><li>Install the perl LWP package available from http://www.cpan.org .  Test the package is installed by executing the command 'perl -e "use LWP::UserAgent;"'
+<p><li>copy the following files into the webserver directory from which you want to serve the wapbrowser:<br>
+<code>
+&nbsp;&nbsp;wapreview/public_html/wapreview.html wapreview/public_html/wapreview.js<br>
+&nbsp;&nbsp;wapreview/public_html/wapreview.jar<br>
+&nbsp;&nbsp;wapreview/public_html/*.jpg<br>
+&nbsp;&nbsp;wapreview/public_html/*.gif<br>
+</code>
+<p><li>Modify wapreview.html so that the parameters for the gateway and image converter correspond to the URLs for the CGI's you installed in step 4.  Also modify the variable 'homebase' to reference the wml page you want to appear when the browser is first launched.
+<p><li>Add the following HTML to the web page from which you want to launch the wap browser, and modify the URL to reference the wapreview.html page you installed in step 6.<br>
+<code>
+&lt;script&gt;<br>
+function wapreview(){<br>
+&nbsp;&nbsp;open('http://www.YOUR.URL/wapreview.html',<br> &nbsp;&nbsp;'aplpibrowser','height=450,width=165,resizable=no,titlebar=no,toolbar=no');<br>
+}<br>
+&lt;/script&gt;<br> 
+&lt;a href="javascript:wapreview()"&gt;start WAP browser&lt;/a&gt;<br>
+</code>
+<p><li>Test your installation.
+</ol>
+</body>
+</html>

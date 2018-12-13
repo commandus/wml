@@ -1,0 +1,169 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="euTicketNewOk.htm"
+  enctype="multipart/form-data">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      New Request
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr>
+  <td colspan="3" align="right">
+    from $session.userID)
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Title: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type="text" name=title size="70" maxlength="100"/>
+    <!$ else )>
+      <input type="text" name=title size="60" maxlength="100"/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td>
+    Product: <br/>
+    <select name=product size=1>
+    <!$
+      set local.count = 0;
+      <serverside dataset="sqlPublicProduct" action="query">
+    SELECT name, is_def FROM cs_product '
+        'WHERE product_type <> \'private\' '
+        'ORDER BY name ASC';
+  </serverside>
+      while (sqlPublicProduct.fetch)
+        set local.count = 1 + local.count;
+        if (sqlPublicProduct.is_def = 1)
+          response.write('\r\n<option selected>');
+        else
+          response.write('\r\n<option>');
+        endif
+        response.write(to.html2(sqlPublicProduct.name));
+      endwhile
+
+      <serverside dataset="sqlBoughtPrivate" action="query">
+    SELECT DISTINCT sa_product FROM cs_sale, cs_product '
+        'WHERE cs_sale.sa_product = cs_product.name '
+          'AND product_type = \'private\' '
+          'AND (sa_sold_to = \'' + to.2QuoteStr(session.userID) + '\' '
+            'OR sa_contact1 = \'' + to.2QuoteStr(session.userID) + '\' '
+            'OR sa_contact2 = \'' + to.2QuoteStr(session.userID) + '\')';
+      while (sqlBoughtPrivate.fetch)
+        set local.count = 1 + local.count;
+        response.write('\r\n<option>');
+        response.write(to.html2(sqlBoughtPrivate.sa_product));
+      endwhile
+
+      // If there is at least one item on the list, something will be
+      // selected internally by the browser. If not, browser won't send 
+      // the field to next URL. Hence we need to add a blank item here.
+      if (local.count = 0)
+        response.write('\r\n<option selected>');
+      // Override default product. Force user to select.
+      elseif (local.count > 1)
+        response.write('\r\n<option selected>Please select a product');
+      endif
+    )>
+    </select>
+  </td>
+  <td>
+    Serial Number: <br/>
+    <select name=serial_num size=1>
+      <!$
+        // an empty option is needed to make sure this form field 
+        // is always sent to the server in case nothing is selected
+      )>
+      <option selected>
+      <!$
+        <serverside dataset="sqlSales" action="query">
+    SELECT sa_serial FROM cs_sale
+          WHERE sa_sold_to = session.userID 
+            OR sa_contact1 = session.userID
+            OR sa_contact2 = session.userID;
+        while (sqlSales.fetch)
+          response.write('<option>' + sqlSales.sa_serial + '\r\n');
+        endwhile
+      )>
+    </select>
+  </td>
+  <td>
+    Priority: <br/>
+    <select name=priority size=1>
+      <!$
+        <serverside dataset="sqlPriorities" action="query">
+    SELECT name, is_def FROM cs_priority ORDER BY name ASC;
+  </serverside>
+        while (sqlPriorities.fetch)
+      )>
+        <!$ if (sqlPriorities.is_def = 1) )>
+          <option selected>$sqlPriorities.name)
+        <!$ else )>
+          <option>$sqlPriorities.name)
+        <!$ endif )>
+      <!$ endwhile )>
+      <option>  
+    </select>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Detail 
+    [in <input type=radio name=note_format value="0" checked/>plain text
+    <input type=radio name=note_format 
+      value="1"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    ]: <br/>
+    <textarea name=note_data cols=70 rows=14 wrap=virtual></textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Attach File1: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=attachment1 size="65"/>
+    <!$ else )>
+      <input type=FILE name=attachment1 size="5"5/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Attach File2: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=attachment2 size="65"/>
+    <!$ else )>
+      <input type=FILE name=attachment2 size="5"5/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="3" align="center">
+    <input type="submit" name=action value="Submit"/>
+    <input type="submit" name=action value="Preview HTML"/>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

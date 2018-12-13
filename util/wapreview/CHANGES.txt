@@ -1,0 +1,10 @@
+12/March/2001
+-Fixed a bug where variables were not expanded in 'go' tasks
+ thanks to Jens Karstedt for bringing this to my attention.
+-Improved handling of errors for wricproxy server.
+03/March/2001
+-Fixed a bug with the ontimer event,
+ thanks to Jens Karstedt for bringing this to my attention.
+-Added some benign *BeanInfo classes to keep some browsers quiet.
+-I notice that some of the images and other binary files in
+ CVS on sourceforge may be corrupt.  The zip file is ok.

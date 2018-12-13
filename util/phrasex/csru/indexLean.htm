@@ -1,0 +1,24 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$ 
+  
+
+  // To require secure access to this website, uncomment the code below
+  // if (request.protocol = 'http')
+  //   response.redirect(server.httpsAddress + request.urlFull);
+  // endif
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // From a link in an email. Re-use current session if it exists
+  if (request.fieldExist('ticket_id') AND session.isValid)
+    if (session.userType = 'EndUser')
+      set local.nextUrl = session.ticketFolder + 'euTicketView.htm';
+    else
+      set local.nextUrl = session.ticketFolder + 'ticketView.htm';
+    endif
+    response.redirect(local.nextUrl + '?ticket_id=' + request.ticket_id);
+  endif 
+)>

@@ -1,0 +1,16 @@
+body	{color: #000000; font-size: 10pt; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+p	{color: #000000; font-size: 10pt; margin-left: 0px; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+dl	{font-size: 10pt; color: #000000; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+a	{font-size: 10pt; text-decoration: underline; font-weight: bold; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+a:link	{color: #000040 }
+a:visited	{color: #000040;}
+a:active	{color: #FF6666;}
+a:hover	{color: #FF6666;}
+h1	{font-size: 18pt; text-align: Left; margin-left: -1; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+h2	{font-size: 15pt; text-align: Left; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+h3	{font-size: 12pt; text-align: Left; font-weight: bold; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+div	{font-size: 10pt; margin-left: 60px; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+td	{color: black; font-size: 10pt; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+li	{list-style-image: url('li.gif')}
+.tdbanner	{color: white; background-color:#D0D0D0; font-size: 10pt; font-weight: bold; text-align: Center; font-family: "Franklin Gothic Book", Tahoma, Verdana }
+.tdgrad	{color: black; background-image:url(gradient.jpg); background-repeat:repeat-x; background-color:#D0D0D0; font-size: 10pt; font-weight: bold; text-align: Center; font-family: "Franklin Gothic Book", Tahoma, Verdana }

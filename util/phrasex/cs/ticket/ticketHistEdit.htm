@@ -1,0 +1,141 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userType <> 'Manager')
+    error 'Only managers can edit history.';
+  endif
+
+  // without the primary key ch_id, Access driver gets 
+  // confused if two records have the same made by, made on, etc.
+  <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+    'WHERE ch_id = ' + request.ch_id;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<!-- enctype must be multipart/form-data for file upload to work! -->
+<form method="POST" action="ticketHistEditOk.htm"
+  enctype="multipart/form-data">
+
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Edit History
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td colspan="2">
+    Detail 
+    <!$ if (sqlHistory.ch_format = 1) )>
+      [in <input type=radio name=note_format value="0"/>plain text
+       <input type=radio name=note_format 
+         value="1" checked><a target="ptHelpWindow" 
+           href="../help/htmlFragHelp.html">HTML fragment</a>
+      ]
+    <!$ else )>
+      [in <input type=radio name=note_format value="0" checked/>plain text
+       <input type=radio name=note_format 
+         value="1"><a target="ptHelpWindow" 
+           href="../help/htmlFragHelp.html">HTML fragment</a>
+      ]
+    <!$ endif )>
+    
+    : <br/>
+    <textarea name=note_data cols=70 rows=20 wrap=virtual
+      >$ to.html2(sqlHistory.ch_description) )</textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="2" align="right">
+    Cost: 
+    <input type="text" name=ch_cost size="5" maxlength=10 
+      value="$sqlHistory.ch_cost)"> minutes; 
+    $sqlHistory.ch_made_on) by 
+    <!$ if (sqlHistory.ch_made_by = '') )>
+      system
+    <!$ else )>
+      $sqlHistory.ch_made_by)
+    <!$ endif )>
+  </td>
+</tr>
+<tr><td></td><td><hr/></td></tr>
+<tr>
+  <td valign="top"> Attachments: </td>
+  <td>
+    <table>
+    <!$ 
+      <serverside dataset="sqlFiles" action="query">
+    SELECT tif_id, tif_name, tif_size FROM cs_ti_file '
+        'WHERE tif_ch_id = ' + sqlHistory.ch_id + 
+        ' ORDER BY tif_name';
+  </serverside>
+      set local.count = 0;
+      while (sqlFiles.fetch)
+        set local.count = local.count + 1;
+    )>
+    <tr>
+      <td> #$sqlFiles.tif_id) </td>
+      <td>
+        <input type="hidden" name=old_att_name$local.count) 
+          value="$sqlFiles.tif_name)">
+        <input type="hidden" name=att_id$local.count) 
+          value="$sqlFiles.tif_id)">
+        <input type="text" name=att_name$local.count) 
+          size=40 maxlength="20"0 value="$sqlFiles.tif_name)">
+      </td>
+      <td>
+        $sqlFiles.tif_size) bytes
+      </td>
+      <td align="right">
+        <input type=checkbox name=del_att 
+          value="$sqlFiles.tif_id)">Delete
+      </td>
+    </tr>     
+    <!$ endwhile )>
+    </table>
+    <input type="hidden" name=att_count value="$local.count)"/>
+    <!$ if (local.count = 0) )>
+      None
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td>
+    Attach File: 
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=attachment1 size="5"5/>
+    <!$ else )>
+      <input type=FILE name=attachment1 size="45"/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    <input type="submit" name=action value="Save"/>
+    <input type="submit" name=action value="Preview HTML"/>
+    <input type="hidden" name=backToUrl value="$request.backToUrl)"/>
+    <input type="hidden" name=backToPrompt value="$request.backToPrompt)"/>
+    <input type="hidden" name=ch_id value="$request.ch_id)"/>
+    <input type="hidden" name=ticket_id value="$sqlHistory.ch_ticket_id)"/>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

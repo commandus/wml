@@ -1,0 +1,251 @@
+object TWMLBEmulator
+  Name = 'Sanyo SCP-4000'
+  Left = 0
+  Top = 0
+  Width = 0
+  Height = 0
+  ImgNormal = 'imagenormalSCP-4000.jpg'
+  ImgOver = 'imageoverSCP-4000.jpg'
+  ImgPressed = 'imagepressedSCP-4000.jpg'
+  Platforms = [wpWAP1_1, wpopenwave3_1]
+  cxprefix = 6
+  cyprefix = 10
+  HighlightMode = 2
+  xdevicebrowser = 90
+  DeviceSupports = [dsImages, dsLocalsrcimages, dsAccesskeys]
+  DeviceAcceptTypes = [mtWML, mtWBMP]
+  Display.x0 = 128
+  Display.y0 = 70
+  Display.x1 = 95
+  Display.y1 = 51
+  Display.BackColor = 11054994
+  Display.Font.Charset = DEFAULT_CHARSET
+  Display.Font.Color = clBlack
+  Display.Font.Height = -13
+  Display.Font.Name = 'Courier'
+  Display.Font.Pitch = fpFixed
+  Display.Font.Style = []
+  Display.Align = alLeft
+  Display.xofs = 0
+  Display.yofs = 0
+  TitleBar.x0 = 0
+  TitleBar.y0 = 0
+  TitleBar.x1 = 0
+  TitleBar.y1 = 0
+  TitleBar.BackColor = clBlack
+  TitleBar.Font.Charset = DEFAULT_CHARSET
+  TitleBar.Font.Color = clWindowText
+  TitleBar.Font.Height = -13
+  TitleBar.Font.Name = 'Courier'
+  TitleBar.Font.Pitch = fpFixed
+  TitleBar.Font.Style = []
+  TitleBar.Align = alLeft
+  BrowserArea.x0 = 122
+  BrowserArea.y0 = 52
+  BrowserArea.x1 = 0
+  BrowserArea.y1 = 0
+  BrowserArea.BackColor = 11054994
+  BrowserArea.Font.Charset = DEFAULT_CHARSET
+  BrowserArea.Font.Color = clBlack
+  BrowserArea.Font.Height = -13
+  BrowserArea.Font.Name = 'Courier'
+  BrowserArea.Font.Pitch = fpFixed
+  BrowserArea.Font.Style = []
+  BrowserArea.Align = alLeft
+  SoftButtons.DisplayArea.x0 = 0
+  SoftButtons.DisplayArea.y0 = 0
+  SoftButtons.DisplayArea.x1 = 0
+  SoftButtons.DisplayArea.y1 = 0
+  SoftButtons.DisplayArea.BackColor = clBlack
+  SoftButtons.DisplayArea.Font.Charset = DEFAULT_CHARSET
+  SoftButtons.DisplayArea.Font.Color = 11054994
+  SoftButtons.DisplayArea.Font.Height = -13
+  SoftButtons.DisplayArea.Font.Name = 'Courier'
+  SoftButtons.DisplayArea.Font.Pitch = fpFixed
+  SoftButtons.DisplayArea.Font.Style = []
+  SoftButtons.DisplayArea.Align = alLeft
+  SoftButtons.SoftButtonsStyle = 2
+  SoftButtons.SoftButtonsPresentationStyle = 1
+  SoftButtons = <
+    item
+      DisplayArea.x0 = 56
+      DisplayArea.y0 = 13
+      DisplayArea.x1 = 0
+      DisplayArea.y1 = 56
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end
+    item
+      DisplayArea.x0 = 56
+      DisplayArea.y0 = 13
+      DisplayArea.x1 = 62
+      DisplayArea.y1 = 56
+      DisplayArea.BackColor = clBlack
+      DisplayArea.Font.Charset = DEFAULT_CHARSET
+      DisplayArea.Font.Color = clWindowText
+      DisplayArea.Font.Height = -11
+      DisplayArea.Font.Name = 'MS Sans Serif'
+      DisplayArea.Font.Style = []
+      DisplayArea.Align = alLeft
+      DisplayArea.xofs = 0
+      DisplayArea.yofs = 0
+    end>
+  Buttons = <
+    item
+      Comment = 'Up'
+      x0 = 401
+      y0 = 401
+      x1 = 157
+      y1 = 419
+      Value = '3'
+    end
+    item
+      Comment = 'Down'
+      x0 = 439
+      y0 = 439
+      x1 = 157
+      y1 = 459
+      Value = '4'
+    end
+    item
+      Comment = 'Left'
+      x0 = 420
+      y0 = 420
+      x1 = 127
+      y1 = 438
+      Value = '3'
+    end
+    item
+      Comment = 'Right'
+      x0 = 420
+      y0 = 420
+      x1 = 157
+      y1 = 438
+      Value = '4'
+    end
+    item
+      Comment = 'OK'
+      x0 = 366
+      y0 = 366
+      x1 = 86
+      y1 = 399
+      Value = '1'
+    end
+    item
+      Comment = 'Clr/Back'
+      x0 = 366
+      y0 = 366
+      x1 = 215
+      y1 = 399
+      Value = '8'
+    end
+    item
+      Comment = '*/Left'
+      x0 = 612
+      y0 = 612
+      x1 = 100
+      y1 = 647
+      Value = '3'
+    end
+    item
+      Comment = '#/Right'
+      x0 = 612
+      y0 = 612
+      x1 = 213
+      y1 = 646
+      Value = '4'
+    end
+    item
+      Comment = '0/Space'
+      x0 = 612
+      y0 = 612
+      x1 = 156
+      y1 = 647
+      Value = '4'
+    end
+    item
+      Comment = '1'
+      x0 = 490
+      y0 = 490
+      x1 = 97
+      y1 = 527
+      Value = '4'
+    end
+    item
+      Comment = '2'
+      x0 = 491
+      y0 = 491
+      x1 = 157
+      y1 = 527
+      Value = '5'
+    end
+    item
+      Comment = '3'
+      x0 = 491
+      y0 = 491
+      x1 = 217
+      y1 = 527
+      Value = '5'
+    end
+    item
+      Comment = '4'
+      x0 = 531
+      y0 = 531
+      x1 = 98
+      y1 = 567
+      Value = '5'
+    end
+    item
+      Comment = '5'
+      x0 = 530
+      y0 = 530
+      x1 = 156
+      y1 = 566
+      Value = '5'
+    end
+    item
+      Comment = '6'
+      x0 = 530
+      y0 = 530
+      x1 = 216
+      y1 = 567
+      Value = '5'
+    end
+    item
+      Comment = '7'
+      x0 = 572
+      y0 = 572
+      x1 = 98
+      y1 = 608
+      Value = '5'
+    end
+    item
+      Comment = '8'
+      x0 = 572
+      y0 = 572
+      x1 = 156
+      y1 = 607
+      Value = '5'
+    end
+    item
+      Comment = '9'
+      x0 = 571
+      y0 = 571
+      x1 = 215
+      y1 = 607
+      Value = '5'
+    end>
+  CharacterSet.Height = 0
+  CharacterSet.Width = 0
+  CharacterSet.VariableWidth = False
+  CharacterSet = <>
+  AnchorDelimiterLeft = ' ['
+  AnchorDelimiterRight = ']'
+end

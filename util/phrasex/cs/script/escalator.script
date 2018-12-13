@@ -1,0 +1,126 @@
+// pt7cs_escalator.script : script for Issue Escalator of Support
+
+if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+  file fAppInit('../appInit.ssp');
+  fAppInit.appInit();
+endif
+
+file fAppFunc('appFunctions.script');
+
+sql sqlLastStatus = SELECT name FROM pt7cs_status ORDER BY seq_num DESC;
+set local.lastStatus = sqlLastStatus.name;
+sqlLastStatus.close;
+
+Email_Out em;
+if (server.importerEnabled)
+  set em.from = server.importerEmail;
+else
+  set em.from = server.adminEmail;
+endif
+
+set local.count = 0;
+
+// escalate 3 days after it is assigned. timespan(day,hour,minute)
+set local.date = server.dateTime - to.timeSpan(3, 0, 0);
+
+// use strings to construct complex sql statements 
+sql sqlNeedEscalated =
+  'SELECT ticket_id, product, assigned_to, title, row_ver '
+  'FROM pt7cs_ticket '
+  'WHERE priority = \'1-High\' '
+  '  AND status <> \'' + local.lastStatus + '\' '
+  '  AND assigned_on < ' + to.odbcDateStr(local.date);
+  
+while (sqlNeedEscalated.fetch)
+
+  set local.dispatcher_id = '';
+  set local.dispatcher_email = '';
+
+  if (sqlNeedEscalated.product <> '')
+    set local.dispatcher_id = 
+      fAppFunc.getDispatcher(sqlNeedEscalated.product);
+    if (local.dispatcher_id <> '')
+      sql sqlDispInfo = 
+        'SELECT user_id, status, email from pt7cs_user '
+        'WHERE user_id = \'' + to.2QuoteStr(local.dispatcher_id) + '\'';
+      if (sqlDispInfo.fetch AND sqlDispInfo.status <> 'disabled')
+        set local.dispatcher_email = sqlDispInfo.email;
+      endif
+      sqlDispInfo.close;
+    endif
+  endif
+
+  set local.escalated = 0;
+  if (local.dispatcher_id <> '' AND 
+      sqlNeedEscalated.assigned_to <> local.dispatcher_id)
+    set local.escalated = 1;
+    sql sqlReAssign = 
+      UPDATE pt7cs_ticket SET 
+        assigned_by = '',
+        assigned_to = local.dispatcher_id, 
+        assigned_on = server.dateTime,
+        row_ver = 1 + sqlNeedEscalated.row_ver
+      WHERE ticket_id = sqlNeedEscalated.ticket_id
+        AND row_ver = sqlNeedEscalated.row_ver;
+    sqlReAssign.execute;
+    sqlReAssign.close;
+  
+    // log the escalation
+    set local.change = 'Escalated to [' + local.dispatcher_id + ']';
+    set local.ch_id = 
+      local.getUniqueID('pt7cs_ti_change', 'ch_id', 'pt7_registry');
+    sql sqlAddChange = 
+      INSERT INTO pt7cs_ti_change(
+        ch_id, ch_ticket_id, ch_type, ch_made_on, 
+        ch_format, ch_description)
+      VALUES(
+        local.ch_id, sqlNeedEscalated.ticket_id, 'log', server.dateTime, 
+        0, local.change);
+    sqlAddChange.execute;
+    sqlAddChange.close;
+    set local.count = 1 + local.count;
+  endif
+
+  if (server.emailSenderEnabled <> 1)
+    continue;  // back to while
+  endif
+
+  // To embed secure web server address in the notification emails,
+  // change httpAddress to httpsAddress.
+     
+  set local.hyperLink = server.httpAddress + 
+    app.startPage + '?ticket_id=' + sqlNeedEscalated.ticket_id;
+
+  if (local.escalated = 1 AND local.dispatcher_email <> '')
+    set em.to = local.dispatcher_email;
+    set em.subject = 
+      'Request #' + sqlNeedEscalated.ticket_id + 
+      ' has been escalated to you.';
+    set em.Content = 
+      'Dear ' + local.dispatcher_id + ',\r\n\r\n' + 
+      sqlNeedEscalated.title + '\r\n' + 
+      local.hyperLink + '&user_id=' + to.cgi(local.dispatcher_id) + 
+      '\r\n\r\n' + app.name;
+    em.send;  
+  endif     
+
+  if (local.escalated = 1 AND sqlNeedEscalated.assigned_to <> '')
+    sql sqlOldAssignTo = 
+      SELECT email FROM pt7cs_user 
+      WHERE user_id = sqlNeedEscalated.assigned_to;
+    set em.to = sqlOldAssignTo.email;
+    sqlOldAssignTo.close;
+    if (em.to <> '')
+      set em.subject = 'You are no longer responsible for #' + 
+        sqlNeedEscalated.ticket_id;
+      set em.content = 
+        'Dear ' + sqlNeedEscalated.assigned_to + ',\r\n\r\n' + 
+         sqlNeedEscalated.title + '\r\n' + local.hyperLink + 
+        '&user_id=' + to.cgi(sqlNeedEscalated.assigned_to) + 
+        '\r\n\r\n' + app.name;
+      em.Send;
+    endif
+  endif    
+
+endwhile
+server.log('Total ' + local.count + ' request(s) escalated');

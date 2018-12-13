@@ -1,0 +1,607 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  // enter ID directly
+  if (request.fieldExist('di_id'))
+    if (string.isValidNumber(request.di_id) <> 1)
+      error 'The message ID should be a number.';
+    endif
+    <serverside dataset="sqlDirect" action="query">
+    SELECT di_topic_id, di_type FROM cs_discuss 
+      WHERE di_id = request.di_id;
+  </serverside>
+    if (sqlDirect.di_type = 1)  // group
+      response.redirect('index.htm?di_id=' + request.di_id);
+    else
+      // IE doesn't understand #section in redirected requests yet.
+      response.redirect('diTopic.htm?mid=' + request.di_id + 
+        '&topic_id=' + sqlDirect.di_topic_id + 
+        '#' + request.di_id);
+    endif
+  endif
+
+  // validate user input
+  if (request.fieldExist('search_for'))
+    // must convert user entered text that will be used in a <serverside dataset="string
+    set local.search_for = to.2QuoteStr(request.search_for);
+    if (local.search_for = '')
+      error 'Please enter some condition before searching.';
+    endif
+  else
+    set local.di_k1 = to.2QuoteStr(request.di_k1);
+    set local.di_k2 = to.2QuoteStr(request.di_k2);
+    set local.di_k3 = to.2QuoteStr(request.di_k3);
+  endif
+
+  // don't validate session. allow use of forum without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  set local.title = app.name + ' : Discussion';
+  set local.path = '';
+  set local.links = 
+    '<a href="' + local.mainMenu + '">' + app.name + '</a> : ' +
+    '<a href="index.htm">Discussion</a> : ';
+
+  set local.di_id = '';
+
+  // construct the links "app.name : DI : ..." from 
+  // path=\nName\nID\nName\nID or di_id
+  if (request.path <> '')
+    // Always add \r to delimitor list because browser may convert
+    // \n to \r\n for hidden input fields
+    tokenizer tokens(request.path, '\r\n');
+    set local.name = tokens.nextToken;
+    set local.id = tokens.nextToken;
+
+    while (local.name <> '' AND local.id <> '')
+      set local.path = local.path + '\n' + local.name + '\n' + local.id;
+      set local.title = local.title + ' : ' + local.name;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        local.name + '</a>';
+
+      set local.name = tokens.nextToken;
+      if (local.name <> '')  // not the last pair
+        set local.links = local.links + '.';
+        set local.id = tokens.nextToken;
+      else
+        set local.links = local.links + ' : ';
+        set local.di_id = local.id;
+      endif
+    endwhile
+  endif
+  set local.title = local.title + ' : Search Result';
+  set local.links = local.links + 'Search Result';
+
+  // construct the where clause for keyword or doc id search
+  set local.w1 = '';
+  if (request.fieldExist('search_for'))
+    tokenizer words(local.search_for, ',;');
+    set local.word = string.trim(words.nextToken);
+    while (local.word <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      if (app.dbCaseSensitive = 1 AND 
+        string.findString(to.lower(local.dbType), 'oracle') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.word + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.word + '%\') OR'
+          ' upper(di_detail) LIKE upper(\'%' + local.word + '%\') )';
+
+      elseif (app.dbCaseSensitive = 1 AND
+        string.findString(to.lower(local.dbType), 'sql server') > 0)
+
+        // (ms) <serverside dataset="server does not allow upper(text_column). Hence case
+        // insenstive search on the di_detail field are not provided. Trick:
+        // SELECT * FROM a WHERE LOWER(SUBSTRING(c, 1, 8000)) LIKE '%what%'
+        // Also check out Full-Text Indexing to see if it suits your needs.
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.word + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.word + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.word + '%\') OR'
+          ' di_detail LIKE \'%' + local.word + '%\' )';
+
+      else
+        set local.w1 = local.w1 + 
+          '(di_k1 = \'' + local.word + '\' OR'
+          ' di_k2 = \'' + local.word + '\' OR'
+          ' di_k3 = \'' + local.word + '\' OR'
+          ' di_k4 = \'' + local.word + '\' OR'
+          ' di_k5 = \'' + local.word + '\' OR'
+          ' di_title LIKE \'%' + local.word + '%\' OR'
+          ' di_detail LIKE \'%' + local.word + '%\')';
+      endif
+      set local.word = string.trim(words.nextToken);
+    endwhile;
+
+  else  // from advanced search
+    if (local.di_k1 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      if (app.dbCaseSensitive = 1 AND 
+        string.findString(to.lower(local.dbType), 'oracle') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k1 + '%\') OR'
+          ' upper(di_detail) LIKE upper(\'%' + local.di_k1 + '%\') )';
+
+      elseif (app.dbCaseSensitive = 1 AND
+        string.findString(to.lower(local.dbType), 'sql server') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k1 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k1 + '%\') OR'
+          ' di_detail LIKE \'%' + local.di_k1 + '%\' )';
+
+      else
+        set local.w1 = local.w1 + 
+          '(di_k1 = \'' + local.di_k1 + '\' OR'
+          ' di_k2 = \'' + local.di_k1 + '\' OR'
+          ' di_k3 = \'' + local.di_k1 + '\' OR'
+          ' di_k4 = \'' + local.di_k1 + '\' OR'
+          ' di_k5 = \'' + local.di_k1 + '\' OR'
+          ' di_title LIKE \'%' + local.di_k1 + '%\' OR'
+          ' di_detail LIKE \'%' + local.di_k1 + '%\')';
+      endif
+    endif
+    if (local.di_k2 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      if (app.dbCaseSensitive = 1 AND 
+        string.findString(to.lower(local.dbType), 'oracle') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k2 + '%\') OR'
+          ' upper(di_detail) LIKE upper(\'%' + local.di_k2 + '%\') )';
+
+      elseif (app.dbCaseSensitive = 1 AND
+        string.findString(to.lower(local.dbType), 'sql server') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k2 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k2 + '%\') OR'
+          ' di_detail LIKE \'%' + local.di_k2 + '%\' )';
+      else
+        set local.w1 = local.w1 + 
+          '(di_k1 = \'' + local.di_k2 + '\' OR'
+          ' di_k2 = \'' + local.di_k2 + '\' OR'
+          ' di_k3 = \'' + local.di_k2 + '\' OR'
+          ' di_k4 = \'' + local.di_k2 + '\' OR'
+          ' di_k5 = \'' + local.di_k2 + '\' OR'
+          ' di_title LIKE \'%' + local.di_k2 + '%\' OR'
+          ' di_detail LIKE \'%' + local.di_k2 + '%\')';
+      endif
+    endif
+    if (local.di_k3 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      if (app.dbCaseSensitive = 1 AND 
+        string.findString(to.lower(local.dbType), 'oracle') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k3 + '%\') OR'
+          ' upper(di_detail) LIKE upper(\'%' + local.di_k3 + '%\') )';
+
+      elseif (app.dbCaseSensitive = 1 AND
+        string.findString(to.lower(local.dbType), 'sql server') > 0)
+        set local.w1 = local.w1 + 
+          '(upper(di_k1) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k2) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k3) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k4) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_k5) = upper(\'' + local.di_k3 + '\') OR'
+          ' upper(di_title) LIKE upper(\'%' + local.di_k3 + '%\') OR'
+          ' di_detail LIKE \'%' + local.di_k3 + '%\' )';
+      else
+        set local.w1 = local.w1 + 
+          '(di_k1 = \'' + local.di_k3 + '\' OR'
+          ' di_k2 = \'' + local.di_k3 + '\' OR'
+          ' di_k3 = \'' + local.di_k3 + '\' OR'
+          ' di_k4 = \'' + local.di_k3 + '\' OR'
+          ' di_k5 = \'' + local.di_k3 + '\' OR'
+          ' di_title LIKE \'%' + local.di_k3 + '%\' OR'
+          ' di_detail LIKE \'%' + local.di_k3 + '%\')';
+      endif
+    endif
+
+    if (request.di_owner <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_owner = \'' + to.2QuoteStr(request.di_owner) + '\'';
+    endif
+    if (request.di_visited1 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 'di_visited >= ' + request.di_visited1;
+    endif
+    if (request.di_visited2 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 'di_visited < ' + request.di_visited2;
+    endif
+
+    if (request.di_created_by <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_created_by = \'' + to.2QuoteStr(request.di_created_by) + '\'';
+    endif
+    if (request.di_updated_by <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_updated_by = \'' + to.2QuoteStr(request.di_updated_by) + '\'';
+    endif
+    if (request.di_locked_by <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_locked_by = \'' + to.2QuoteStr(request.di_locked_by) + '\'';
+    endif
+    if (request.di_created_on1 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_created_on >= ' + to.odbcDateStr(request.di_created_on1);
+    endif
+    if (request.di_created_on2 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_created_on < ' + to.odbcDateStr(request.di_created_on2);
+    endif
+    if (request.di_updated_on1 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_updated_on >= ' + to.odbcDateStr(request.di_updated_on1);
+    endif
+    if (request.di_updated_on2 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_updated_on < ' + to.odbcDateStr(request.di_updated_on2);
+    endif
+    if (request.di_locked_on1 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_locked_on >= ' + to.odbcDateStr(request.di_locked_on1);
+    endif
+    if (request.di_locked_on2 <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      set local.w1 = local.w1 + 
+        'di_locked_on < ' + to.odbcDateStr(request.di_locked_on2);
+    endif
+    if (request.di_sql_where <> '')
+      if (local.w1 <> '')
+        set local.w1 = local.w1 + ' AND ';
+      endif
+      // Using to.2QuoteStr breaks simple thing like [status <> 'closed'].
+      // The user needs to code the where clause himself.
+      set local.w1 = local.w1 + '(' + request.di_sql_where + ')';
+    endif
+  endif
+
+  set local.where = '';
+  // search within current group if not searching by ID
+  if (local.di_id <> '')  
+    set local.footer = 'End of search result within group #' + local.di_id;
+    set local.where = 
+      'di_p1 = ' + local.di_id +
+      ' OR di_p2 = ' + local.di_id +
+      ' OR di_p3 = ' + local.di_id +
+      ' OR di_p4 = ' + local.di_id +
+      ' OR di_p5 = ' + local.di_id;
+  else  // search all from root
+    set local.footer = 'End of search result from root';
+  endif
+
+  if (local.w1 <> '')  
+    if (local.where <> '')
+      set local.where = '(' + local.where + ') AND (' + local.w1 + ')';
+    else
+      set local.where = local.w1;
+    endif
+  endif
+
+  if (local.where = '')
+    error 'Please enter some conditions before searching.';
+  endif
+  set local.security = ' AND di_security < 1';
+  if (session.isValid AND session.userType <> 'EndUser')
+    set local.security = '';
+  endif
+
+  // construct the order by clause
+  set local.o = '';
+  set local.di_sort1 = '';
+  if (request.fieldExist('di_sort1') AND request.di_sort1 <> '')
+    set local.di_sort1_UI = request.di_sort1;
+    // convert user friendly column names to real column names
+    if (request.di_sort1 = 'Owner')
+      set local.di_sort1 = 'di_owner';
+    elseif (request.di_sort1 = 'Visit Count')
+      set local.di_sort1 = 'di_visited';
+    elseif (request.di_sort1 = 'Locked By')
+      set local.di_sort1 = 'di_locked_by';
+    elseif (request.di_sort1 = 'Locked On')
+      set local.di_sort1 = 'di_locked_on';
+    elseif (request.di_sort1 = 'Updated By')
+      set local.di_sort1 = 'di_updated_by';
+    elseif (request.di_sort1 = 'Updated On')
+      set local.di_sort1 = 'di_updated_on';
+    elseif (request.di_sort1 = 'Created By')
+      set local.di_sort1 = 'di_created_by';
+    elseif (request.di_sort1 = 'Created On')
+      set local.di_sort1 = 'di_created_on';
+    else
+      error 'unknown column name: ' + request.di_sort1;
+    endif
+    if (request.di_sort1_dir = 'Descending')
+      set local.di_sort1_dir = 'DESC';
+    else
+      set local.di_sort1_dir = 'ASC';
+    endif
+    set local.o = local.di_sort1 + ' ' + local.di_sort1_dir;
+  endif
+
+  set local.di_sort2 = '';
+  if (request.fieldExist('di_sort2') AND request.di_sort2 <> '')
+    if (request.fieldExist('di_sort1') = 0 OR request.di_sort1 = '')
+      error 'Please sepcify primary sorting order. ';
+    endif
+    set local.di_sort2_UI = request.di_sort2;
+    // convert user friendly column names to real column names
+    if (request.di_sort2 = 'Owner')
+      set local.di_sort2 = 'di_owner';
+    elseif (request.di_sort2 = 'Visit Count')
+      set local.di_sort2 = 'di_visited';
+    elseif (request.di_sort2 = 'Locked By')
+      set local.di_sort2 = 'di_locked_by';
+    elseif (request.di_sort2 = 'Locked On')
+      set local.di_sort2 = 'di_locked_on';
+    elseif (request.di_sort2 = 'Updated By')
+      set local.di_sort2 = 'di_updated_by';
+    elseif (request.di_sort2 = 'Updated On')
+      set local.di_sort2 = 'di_updated_on';
+    elseif (request.di_sort2 = 'Created By')
+      set local.di_sort2 = 'di_created_by';
+    elseif (request.di_sort2 = 'Created On')
+      set local.di_sort2 = 'di_created_on';
+    else
+      error 'unknown column name: ' + request.di_sort2;
+    endif
+    if (request.di_sort2_dir = 'Descending')
+      set local.di_sort2_dir = 'DESC';
+    else
+      set local.di_sort2_dir = 'ASC';
+    endif
+    if (local.o <> '')
+      set local.o = local.o + ',';
+    endif
+    set local.o = local.o + local.di_sort2 + ' ' + local.di_sort2_dir;
+  endif
+
+  if (local.o <> '')
+    set local.o1 = ' ORDER BY ' + local.o;
+  </serverside>
+    set local.o2 = ' ORDER BY ' + local.o;
+  </serverside>
+  else
+    set local.o1 = ' ORDER BY di_title ASC';
+  </serverside>
+    set local.o2 = ' ORDER BY di_id DESC';
+  </serverside> // created_on has no second
+  endif
+
+  // construct the complete <serverside dataset="statement. 
+  // add order by columns to select list
+  set local.s" action="query">
+    SELECT ';
+  if (local.di_sort1 <> '')
+    set local.s = local.s + local.di_sort1 + ', ';
+    if (local.di_sort2 <> '')
+      set local.s = local.s + local.di_sort2 + ', ';
+    endif
+  endif
+  set local.s = local.s + 
+    'di_id, di_p1, di_title, di_detail '
+    'FROM cs_discuss WHERE di_type = 1 AND ' + 
+    local.where + local.security + local.o1;
+  <serverside dataset="sqlGroup = local.s;
+
+  set local.s" action="query">
+    SELECT ';
+  if (local.di_sort1 <> '')
+    set local.s = local.s + local.di_sort1 + ', ';
+    if (local.di_sort2 <> '')
+      set local.s = local.s + local.di_sort2 + ', ';
+    endif
+  endif
+  set local.s = local.s + 
+    'di_id, di_topic_id, di_created_on, di_created_by, di_title '
+    'FROM cs_discuss '
+    'WHERE di_type <> 1 AND ' + 
+    local.where + local.security + local.o2;
+  <serverside dataset="sqlMsg = local.s;
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <th  valign="top">Groups: </th>
+  <td>
+    <table width="100%" border="0" cellspacing="2" cellpadding="0">
+    <tr class="apbg">
+      <td>Name</td>
+      <td>Description</td>
+      <!$ if (local.di_sort1 <> '') )>
+        <td>$local.di_sort1_UI)</td>
+      <!$ endif )>
+      <!$ if (local.di_sort2 <> '') )>
+        <td>$local.di_sort2_UI)</td>
+      <!$ endif )>
+    </tr>
+    <!$ 
+      set local.count = 0;
+      set local.bgcolor = 'dummy';
+      while (local.count < 100 AND sqlGroup.fetch) 
+        set local.count = 1 + local.count;
+        if (local.bgcolor = '')
+          set local.bgcolor = ' class="apbg"';
+        else
+          set local.bgcolor = '';
+        endif
+    )>
+    <tr $local.bgcolor) >
+      <td>
+        <!$ 
+          if (sqlGroup.di_p1 = local.di_id) 
+            set local.full = 
+              local.path + '\n' + sqlGroup.di_title + 
+              '\n' + sqlGroup.di_id;
+        )>
+          <a href="index.htm?path=$(local.full:escape)">
+          $(sqlGroup.di_title))</a>
+        <!$ else )>
+          <a href="index.htm?di_id=$sqlGroup.di_id)">...
+          $(sqlGroup.di_title))</a>
+        <!$ endif )>
+      </td>
+      <td>$(sqlGroup.di_detail))</td>
+      <!$ if (local.di_sort1 <> '') )>
+        <td>$sqlGroup.column(local.di_sort1))</td>
+      <!$ endif )>
+      <!$ if (local.di_sort2 <> '') )>
+        <td>$sqlGroup.column(local.di_sort2))</td>
+      <!$ endif )>
+    </tr>
+    <!$ 
+      endwhile
+    )>
+
+    <!$ if (local.count = 0) )>
+      <tr><td colspan="2">No group is found</td></tr>
+    <!$ endif )>
+    </table>
+  </td>
+</tr>
+<tr><td></td><td><hr/></td></tr>
+<tr>
+  <th  valign="top">Messages: </th>
+  <td>
+    <table width="100%" border="0" cellspacing="2" cellpadding="0">
+    <tr class="apbg">
+      <td>Topic</td>
+      <td>Date</td>
+      <td>Poster</td>
+    </tr>
+    <!$ 
+      set local.count = 0;
+      set local.bgcolor = 'dummy';
+      while (local.count < 200 AND sqlMsg.fetch) 
+        set local.count = 1 + local.count;
+        if (local.bgcolor = '')
+          set local.bgcolor = ' class="apbg"';
+        else
+          set local.bgcolor = '';
+        endif
+        set local.topicUrl = 
+          'diTopic.htm?mid=' + sqlMsg.di_id + 
+          '&topic_id=' + sqlMsg.di_topic_id + '#' + sqlMsg.di_id;
+    )>
+    <tr $local.bgcolor) >
+      <td>
+        <a href="$local.topicUrl)">$sqlMsg.di_title)</a>
+      </td>
+      <td>$sqlMsg.di_created_on)&nbsp;</td>
+      <td>$sqlMsg.di_created_by)</td>
+    </tr>
+    <!$ endwhile )>
+
+    <!$ if (local.count = 0) )>
+      <tr><td colspan="3">No message is found</td></tr>
+    <!$ elseif (local.count > 200) )>
+      <tr><td colspan="3">
+        More than 200 messages are found. 
+        Only the first 200 message are shown
+      </td></tr>
+    <!$ endif )>
+    </table>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

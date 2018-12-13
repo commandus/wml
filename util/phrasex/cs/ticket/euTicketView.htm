@@ -1,0 +1,222 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  // User can get here from a link in a report sent by email
+  if (session.isValid = 0)
+    response.redirect(app.startPage + '?ticket_id=' + request.ticket_id);
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT * FROM cs_ticket '
+    'WHERE ticket_id = ' + request.ticket_id;
+
+  if (s1.fetch = 0)
+    error 'Request #' + request.ticket_id + ' not found.';
+  endif
+
+  // A customer can view his/her requests or other requests submitted
+  // on a serial number registered under his/her name
+
+  if (s1.submitted_by <> session.userID
+    AND s1.co_submitter <> session.userID)
+    set local.deny = 1;
+    if (s1.serial_num <> '')
+      <serverside dataset="sqlSoldTo" action="query">
+    SELECT sa_sold_to, sa_contact1, sa_contact2 
+        FROM cs_sale
+        WHERE sa_serial = s1.serial_num;
+  </serverside>
+      if (sqlSoldTo.sa_sold_to = session.userID OR
+        sqlSoldTo.sa_contact1 = session.userID OR
+        sqlSoldTo.sa_contact2 = session.userID
+        )
+        set local.deny = 0;
+      endif
+    endif
+    if (local.deny = 1)
+      error 
+        'You cannot view this request because it was neither submitted '
+        'by you nor submitted on a serial number registered under you. ';
+    endif
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Request #$s1.ticket_id)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="euTicketFollowUp.htm?ticket_id=$s1.ticket_id)">Follow Up</a> 
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th  colspan="3"> Title: </th>
+</tr>
+<tr>
+  <td colspan="3">$(s1.title))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th  width="33%"> Status: </th>
+  <th  width="33%"> Product: </th>
+  <th  width="33%"> Serial Number: </th>
+</tr>
+<tr>
+  <td>$(s1.status))</td>
+  <td>$(s1.product))</td>
+  <td>$(s1.serial_num))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th > Submitted To: </th>
+  <th > Submitted By: </th>
+  <th > Submitted On: </th>
+</tr>
+<tr>
+  <td>$(s1.submitted_to))</td>
+  <td>$(s1.submitted_by))</td>
+  <td>$(s1.submitted_on))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th > Co-Submitter </th>
+  <th  colspan="2"> Other Submitters' Email: </th>
+</tr>
+<tr>
+  <td> 
+    $(s1.co_submitter))
+  </td>
+  <td colspan="2">
+    $(s1.submitter_cc))
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th > Assigned To: </th>
+  <th > Assigned By: </th>
+  <th > Assigned On: </th>
+</tr>
+<tr>
+  <td>$(s1.assigned_to))</td>
+  <td>$(s1.assigned_by))</td>
+  <td>$(s1.assigned_on))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th > Cost: </th>
+  <th > Priority: </th>
+  <th > Deadline: </th>
+</tr>
+<tr>
+  <td>$s1.cost) minutes</td>
+  <td>$(s1.priority))</td>
+  <td>$(s1.deadline))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th > </th>
+  <th > Closed By: </th>
+  <th > Closed On: </th>
+</tr>
+<tr>
+  <td></td>
+  <td>$(s1.closed_by))</td>
+  <td>$(s1.closed_on))</td>
+</tr>
+<tr>
+  <td colspan="3">
+</tr>
+<tr class="apbg">
+  <th colspan="3" >History: </th>
+</tr>
+<tr>
+  <td colspan="3">
+  <!$ 
+    // without the primary key ch_id, Access driver gets 
+    // confused if two records have the same made by and made on
+    <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+      'WHERE ch_ticket_id = ' + request.ticket_id +
+      ' AND ch_type <> \'internal\' ORDER BY ch_made_on DESC';
+  </serverside>
+    while (sqlHistory.fetch)
+  )>
+    [$sqlHistory.ch_made_on) by 
+    $(sqlHistory.ch_made_by))
+    <!$ if (sqlHistory.ch_cost <> 0) )>
+      , cost $sqlHistory.ch_cost) minutes
+    <!$ endif )>
+    ]<br/>
+    <!$ if (sqlHistory.ch_format = 1) )>
+      $sqlHistory.ch_description)
+    <!$ else )>
+      $(sqlHistory.ch_description))
+    <!$ endif )>
+    <br/>
+    <!$
+      <serverside dataset="sqlFiles" action="query">
+    SELECT tif_id, tif_name, tif_size '
+        'FROM cs_ti_file '
+        'WHERE tif_ch_id = ' + sqlHistory.ch_id;
+
+      set local.headerShown = 0; 
+      while (sqlFiles.fetch) 
+        set local.attUrl = 
+          to.fileUrl('cs_ti_file', 'tif_id', sqlFiles.tif_id, 
+                     'tif_content', sqlFiles.tif_name);
+    )>
+      <!$ if (local.headerShown = 0) )>
+        Attachments: 
+      <!$ set local.headerShown = 1; )>
+      <!$ endif )>
+
+      <a href="$local.attUrl)">$sqlFiles.tif_name)</a>
+      ($sqlFiles.tif_size) bytes)
+    <!$ 
+      endwhile 
+      sqlFiles.close;
+    )>
+    <br/>
+  <!$ endwhile )>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+
+</body>
+</html>

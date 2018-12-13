@@ -1,0 +1,214 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  set local.type = request.type;
+  if (local.type = 2 AND request.msgType = 'htmlFrag')
+    set local.type = 3; // 1=group 2=plain text message 3=html message
+  endif
+
+  // don't validate session. allow use of forum without logging on.
+  if (session.isValid)
+    set local.user_id = session.userID;
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.user_id = '';
+    set local.mainMenu = app.startPage;
+  endif
+
+  if (request.di_title = '')
+    if (local.type = 1)
+      error 'Please enter group name';
+    else
+      error 'Please enter message topic';
+    endif
+  endif
+  if (request.di_detail = '')
+    if (local.type = 1)
+      error 'Please enter group description';
+    else
+      error 'Please enter message';
+    endif
+  endif
+  if (app.maxText > 0 AND string.length(request.di_detail) > app.maxText)
+    set local.extra = string.length(request.di_detail) - app.maxText;
+    error 
+      'The field in your database for storing messages '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'Please shorten your message by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  file attach1('request.attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  if (local.type = 1)
+    set local.title = 'New group saved';
+  elseif (request.action = 'Preview HTML')
+    if (request.fieldExist('topic_id'))      // new message
+      set local.title = 'Preview new message';
+    else
+      set local.title = 'Preview new topic';
+    endif  
+  elseif (request.action = 'Save')
+    if (request.fieldExist('topic_id'))      // new message
+      set local.title = 'New message saved';
+    else
+      set local.title = 'New topic saved';
+    endif  
+  else
+    error 'diNewMsgOk.htm can only handle Save and Preview.';
+  endif  
+  // ------------------ everything is validated now ------------------
+
+  if (request.action = 'Save')
+    if (request.p_id = '')
+      set local.di_p1 = '';
+      set local.di_p2 = '';
+      set local.di_p3 = '';
+      set local.di_p4 = '';
+      set local.di_p5 = '';
+    else
+      <serverside dataset="sqlParent" action="query">
+    SELECT di_p1, di_p2, di_p3, di_p4 FROM cs_discuss
+        WHERE di_id = request.p_id;
+  </serverside>
+      if (sqlParent.fetch <> 1)
+        error 'Parent Group #' + request.p_id + ' does not exist.';
+      endif
+      if (local.type = 1 AND sqlParent.di_p4 <> '')
+        error 'The level of the new group has exceeded the maximum of 5.';
+      endif
+      set local.di_p1 = request.p_id;
+      set local.di_p2 = sqlParent.di_p1;
+      set local.di_p3 = sqlParent.di_p2;
+      set local.di_p4 = sqlParent.di_p3;
+      set local.di_p5 = sqlParent.di_p4;
+      sqlParent.close;
+    endif
+
+    set local.di_id = 
+      local.getUniqueID('cs_discuss', 'di_id', 'registry');
+
+    if (request.fieldExist('topic_id'))      // new message
+      set local.di_topic_id = request.topic_id;
+    else                                // new group/topic
+      set local.di_topic_id = '';
+    endif
+
+    local.beginTransaction;
+
+    <serverside dataset="sqlAdd = 
+      INSERT INTO cs_discuss(
+        di_id, di_topic_id, di_p1, di_p2, 
+        di_p3, di_p4, di_p5, di_k1, 
+        di_k2, di_k3, di_k4, di_k5, 
+        di_type, di_visited, di_security, di_owner,
+        di_created_by, di_created_on, 
+        di_updated_by, di_updated_on, 
+        di_title, di_detail)
+      VALUES(
+        local.di_id, local.di_topic_id, local.di_p1, local.di_p2, 
+        local.di_p3, local.di_p4, local.di_p5, request.di_k1, 
+        request.di_k2, request.di_k3, request.di_k4, request.di_k5, 
+        local.type, 0, request.di_security, local.user_id, 
+        local.user_id, server.dateTime, 
+        local.user_id, server.dateTime, 
+        request.di_title, request.di_detail);
+  </serverside>
+
+    // attachments have been defined above when checking their sizes
+    if (attach1.name <> '')
+      set local.dif_id = 
+        local.getUniqueID('cs_di_file', 'dif_id', 'registry');
+      <serverside dataset="sqlAttach1 = 
+        INSERT INTO cs_di_file(
+          dif_id, dif_di_id, dif_time, 
+          dif_name, dif_size, dif_content)
+        VALUES(
+          local.dif_id, local.di_id, server.dateTime, 
+          attach1.name, attach1.size, attach1.content);
+  </serverside>
+    endif
+
+    local.commitTransaction;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<!$ if (request.action = 'Preview HTML') )>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td class="apbg">
+    If you don't see the copyright notice at the end of this page,
+    then there is a problem in the HTML fragment you entered.
+  </td>
+</tr>
+<tr>
+  <td><br/>
+    <!$ if (local.type = 2) )>
+      $(request.di_detail))
+    <!$ else )>
+      $request.di_detail)
+    <!$ endif )>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+<!$ else )>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$local.mainMenu)">$(appname)</a> : 
+    $local.title)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    $local.title) [$(request.di_title))] 
+    has been saved as #$local.di_id). 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="index.htm?path=$(request.path:escape)">OK</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+<!$ endif )>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+<card id="help" title="СПРАВКА к WinWAP">
+<p align="center">
+   <img src="wwhelp.wbmp" alt="WinWAP"/>
+</p>
+<p>
+  <big>Темы Справки :</big>
+  <br/>
+  <br/>
+  <a href="opts.wml">Опции и установки броузера</a> <br/>
+  <a href="intro.wml">Введение</a> <br/>
+  <a href="navi.wml">Навигация</a> <br/>
+  <a href="img.wml">Изображения</a> <br/>
+  <br/>
+  <a href="registration.wml">Как зарегистрировать WinWAP</a> <br/>
+  <br/>
+  <a href="faq/index.wml">Часто задаваемые вопросы</a> <br/>
+  <br/>
+  <do label="Интерактивная Справка"> <go href="http://wap.winwap.org/help/help.wml"/> </do>
+  <do label="Интерактивная информация"> <go href="http://wap.winwap.org/index.wml"/> </do>
+  <do label="Домашняя страница"> <go href="http://wap.winwap.org/home.wml"/> </do>
+</p>
+</card>
+</wml>

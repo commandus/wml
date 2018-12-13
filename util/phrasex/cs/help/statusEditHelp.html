@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>apooHelpDesk</title>apooHelpDesk</title>
+  Help : Edit Status
+</title>
+</head>
+<body>
+<center>
+<table width="90%">
+<tr>
+  <td><font size=+1>
+    Help : Edit Status
+  </font></td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>
+The status with the smallest sequence number and the status with the largest
+sequence number are used by the system. When a request is submitted, it is given
+the status with the smallest sequence number. Also, when you enter a Resolution
+on the New Request page, the system closes this request immediately by assigning&nbsp;
+it the status with the largest sequence number.
+<br/>When saving changes to a request, if the system detects that the status for
+this request has been changed to the status with the largest sequence number, it
+considers this request closed and sets the ClosedBy field to the current user
+and the ClosedOn field to the current time. If the system detects that the
+status for this request has been changed to the status with the smallest
+sequence number, it considers the request reopened.
+</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right"><a href="index.html">index</a></td></tr>
+</table>
+</center>
+</body>
+</html>

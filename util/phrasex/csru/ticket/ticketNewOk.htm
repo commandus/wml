@@ -1,0 +1,25 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.submitted_by = '')
+    error 'Submitted By missing';
+  endif
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+  if (request.product = 'Please select a product')
+    error 'Please select a product.';
+  endif
+  if (string.isValidDateTime(request.deadline) <>

@@ -1,0 +1,420 @@
+﻿"User Manager","Управление пользователями"
+"&copy; 2003, Andrei Ivanov.","&copy; 2003, Андрей Ivanov."
+"(Method 1) Enter","(Метод 1) Ввод текста"
+"(Method 2) Enter a HTTP address","(Метод 2) Ввод HTTP адреса"
+"(Method 3) Upload a file","(Метод 3) Загрузить файл"
+"Сategory: [$(kb_title)] has been edited $(kb_id) .","Категория [$(kb_title)] отредактирована как $(kb_id)."
+"1 Articles","1 Статьи"
+"2 New Request","2 Новый Запрос"
+"3 Discussion","3 Дискуссии"
+"4 Reports","4 Отчеты"
+"5 Unassigned requests","5 Запросы с неназначенными исполнителями"
+"6 Users","6 Пользователи"
+"7 Products","7 Продукты"
+"8 Priorities","8 Приоритеты"
+"9 Help","9 Справка"
+"Access Denied","В доступе отказано"
+"Access is denied","В доступе отказано"
+"Advanced Search","Продвинутый поиск"
+"All open requests listing report","Отчет о всех невыполненных запросах"
+"and all its decendants have been deleted.","и все наследованные удалены."
+"and all its sub-categories and articles?","и все под-категории и статьи?"
+"and Company starts with:","и предприятие начинается с"
+"and Department starts with:","и отдел начинается с"
+"and Email Address starts with:","и email начинается с"
+"and Phone Number starts with:","и Номер телефона начинается с"
+"and User Name starts with:","и Имя Пользователя начинается с"
+"Andrei Ivanov","Андрей Иванов"
+"apooHelpDesk Customer Support","apooHelpDesk Customer support"
+"are assigned the status with the largest sequence number.","назначен статус с наибольшим номером"
+"Are you sure you want to delete all sessions of ","Вы уверены что хотите удалить все сессии"
+"Are you sure you want to delete news","Вы уверены что хотите удалить новости"
+"Are you sure you want to delete Priority","Вы уверены Вы хотите удалить Приоритет"
+"Are you sure you want to delete Product","Вы уверены Вы хотите удалить Продукт"
+"Are you sure you want to delete Sale","Вы уверены Вы хотите удалить Продажу"
+"Are you sure you want to delete Status","Вы уверены Вы хотите удалить Статус"
+"Are you sure you want to delete User","Вы уверены Вы хотите удалить пользователя"
+"Are you sure you want to delete","Вы уверены что хотите удалить"
+"Article: [$(kb_title)] has been saved as article $(kb_id) (type: $(kb_type)).","Статья [$(kb_title)] сохранена как статья $(kb_id) (тип: $(kb_type))."
+"Articles Recommended by Editors","Статьи, рекомендованные редакторами"
+"assign it to the dispatcher and notify him/her","назначить диспетчеру и уведомить"
+"Assigned On",Назначено
+"Assigned To",Назначено
+"Attach a file","Присоединить файл"
+"Attach File","Присоединить файл"
+"Back to category","Назад к категории"
+"Back to List","Назад к списку"
+"Back to parent category","Назад к категории"
+"Back to Priority Manager","Назад к управлению приоритетами"
+"Back to Product Manager","Назад к управлению продуктами"
+"Back to Status Manager","Назад к управлению статусами"
+"Back to User Manager","Назад к управлению пользователями"
+"Base Article Vote","База знаний Голосовать за статью"
+"click here","нажмите здесь"
+"Column Type:","Тип Столбца:"
+"Configure my web browser","Конфигурировать просмотр браузера"
+"Copyright &copy; 2003, Andrei Ivanov","Copyright &copy; 2003, Андрей Иванов"
+"Copyright &copy; 2003, Andrei Ivanov.","Copyright &copy; 2003, Андрей Ivanov."
+"Cost Report","Отчет стоимости"
+"Create New category","Создать новую категорию"
+"Created by",Создано
+"Current user",Пользователь
+"Customer support","Customer support"
+"Daily log files show activities/errors from background tasks","Дневной журнал активности"
+"Date Range","Дата от и до"
+"Delete $(uid) User","Удалить пользователя $(uid)"
+"Delete category","Удалить категорию"
+"Delete Knowledge Base Item","Элемент базы знаний"
+"Delete News","Удалить новость"
+"Delete Priority","Удалить приоритет"
+"Delete Product","Удалить продукт"
+"Delete Sale","Удалить Продажу"
+"Delete Session","Удалить Сеанс"
+"Delete Status","Удалить статус"
+"Delete User","Удалить пользователя"
+"Did this article help?","Статья помогла?"
+"Discussion Groups",Диспуты
+"Discussion Post","Отправить сообщение в дискуссию"
+"Do you want to delete news","Вы хотите удалить новость"
+"Do you want to delete","Вы хотите удалить"
+"don't assign or notify anybody","не назначать или уведомлять"
+"don't assign, notify all staff members and managers","не назначать, уведомлять всех сотрудников и менеджеров"
+"Edit Category $(kb_id)","Редактировать категорию $(kb_id)"
+"Edit category","Редактировать категорию"
+"Edit History","Редактировать историю"
+"Edit News","Редактировать новость"
+"Edit Priority","Редактировать приоритет"
+"Edit Priority","Редактировать приоритеты"
+"Edit Product","Редактировать услуги и товары"
+"Edit Product","Редактировать продукт"
+"Edit Sale","Редактировать продажу"
+"Edit Status","Редактировать статус"
+"Edit User $(uid)","Редактировать пользователя $(uid)"
+"Edit User","Редактировать пользователя"
+edited,отредактировано
+"Email Address",e-mail
+"Email format for ToDo Reminder","Формат email сообщения ToDo напоминания"
+"Email Type","Тип email"
+"End User",Пользователь
+"Enter a number 0..99. Affects its position on the recommended list.","Введите число от 0 до 99 отражающее положение в списке рекомендованного"
+"Enter your id' R FROM DUAL;","apooHelpDesk ПОДДЕРЖКА Клиента $(сегодня) apooHelpDesk Поддержка Клиента Удаляет Новости apooHelpDesk Поддержки Клиента Удалять Приоритет apooHelpDesk Поддержки Клиента Удалять Продукт apooHelpDesk Поддержки Клиента Удалять Статус apooHelpDesk Поддержки Клиента Удалять Потребителя apooHelpDesk Дискуссии Поддержки Клиента Группирует apooHelpDesk Пост Дискуссии Поддержки Клиента apooHelpDesk Категории Редактирования Поддержки Клиента apooHelpDesk Новостей Редактирования Поддержки Клиента apooHelpDesk Приоритета Редактирования Поддержки Клиента apooHelpDesk Продукта Редактирования Поддержки Клиента apooHelpDesk Статуса Редактирования Поддержки Клиента apooHelpDesk Потребителя Редактирования Поддержки Клиента apooHelpDesk Поддержки Клиента Knowledke Базового Голоса Статьи apooHelpDesk Поддержки Клиента Новых Новостей apooHelpDesk Поддержки Клиента Нового Приоритета apooHelpDesk Поддержки Клиента Нового Приоритета Сохраняющий apooHelpDesk Поддержку Клиента Нового Продукта apooHelpDesk Поддержки Клиента Нового Продукта Сохраненную"
+"Failed to log on because your identifier is not entered, disabled or password is mistyped.","Отказ регистриции - ваш идентификатор не введен или отключен, или пароль введен неверно"
+"Find, add, edit or delete kb articles","Найти, добавить, редактировать или удалить статьи базы знаний"
+"Forgot ID or password","Забыл(а) имя или пароль"
+"Frequently Asked Questions","Часто задаваемые вопросы"
+"Full Name","Полное Имя"
+"Get help",Подсказка
+"Go back to category","Вернуться к категории"
+"Group description","Описание группы"
+"has been created.",создан.
+"has been updated. Please update all reports that use","исправлен. Пожалуйста исправьте все отчеты, которые используют"
+"Help desk main menu","Справочное бюро - Главное меню "
+"Help: Use commas between keywords. All keywords are used when searching for news records.","Подсказка: Ключевые слова используются при поиске новостей."
+"Hint: 1. Private products are accessible to their end users, all staff members and managers. They are not accessible to end users who do not use them. 2. Requests escalated by the Escalator will go to the dispatcher.","Подсказка: 1. Частные продукты доступны их конечным пользователям, сотрудникам и менеджерам. Они не доступны конечным пользоватям, которые не используют их. 2. Форсированные запросы буду направлены диспетчеру."
+"HTML fragment","Теги HTML"
+"If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.","Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера."
+"If you use your browser's Back/Forward button to come back to this page later on, your browser may display [Warning: Page has Expired], [Do you want to repost the form data] or [Data Missing]. That is normal. Do not refresh, repost or reload.","Если Вы нажмете в браузере кнопки Вперед/Назад чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Действие страницы Истекло], [Вы хотите послать данные вновь] . Это нормально. Не обновляйте страницу."
+"Important: New requests are assigned the status with the","Важно: Новым запросам назначается статус"
+"IP Address","IP адрес"
+"Items: ","Записи: "
+"Knowledge Base Article Saved in","Статья базы знаний сохранена"
+"Knowledge Base articles - Customer support - apooHelpDesk","Статьи Базы Знаний - Customer Support - apooHelpDesk"
+"Knowledge Base articles","Статьи базы знаний"
+"Knowledge Base Edit Article","Редактирование статьи базы знаний"
+"Knowledge Base Item Confirmation","Элемент базы знаний - Подтверждение"
+"Knowledge Base Item Detail","Подробности элемента"
+"Knowledge Base menu","Меню базы знаний"
+"Knowledge Base New Article Saved in ","Новая статья базы знаний сохранена в"
+"Knowledge Base New Article","Новая статья базы знаний"
+"Knowledge Base View Article","Чтение статьи базы знаний"
+"Knowledge Base","База Знаний"
+"Knowledge base","База Знаний"
+"Knowledge ID:","Статья :"
+"Last Access","Последний доступ"
+"Later Messages","Последующие Сообщения"
+"List requests assigned to me","Список переданных мне запросов,"
+"List requests that have not been assigned","Список запросов с не назначенными исполнителями"
+"List the users that satisfy All conditions","Список пользователей, удовлетворяющих условиям"
+"List, add, edit or delete news articles","Смотреть, добавлять, редактировать или удалять новости"
+"List, add, edit or delete product types","Смотреть, добавлять, редактировать или удалять типы продуктов и услуг"
+"List, add, edit or delete request priorities","Смотреть, добавлять, редактировать или удалять приоритеты"
+"List, add, edit or delete request statuses","Смотреть, добавлять, редактировать или удалять статусы запросов"
+"List, add, edit or delete sales records","Смотреть, добавлять, редактировать или удалять продажи"
+"List, add, edit or delete staff/customers","Смотреть, добавлять, редактировать или удалять сотрудников и потребителей"
+"Locked By",Заблокировано
+"Locked On:",Заблокировано
+"Log Files:","Файлы журналов:"
+"Log off","Завершить сессию"
+"Log off","Завершить сеанс"
+"Log on","Log on"
+"Main menu - Customer support","Основное меню - Customer Support"
+"main menu","Главное меню"
+"Manage reports, search for requests, ...","Управление отчетами, поиск запросов,..."
+"Manager menu","Меню Менеджера"
+"Max Columns","Всего колонок"
+"Max Users","Всего пользователей"
+"Message ID",Сообщение
+"minutes after they are created","минут после создания"
+"My Account","Мой профиль"
+"My Todo List","Мой ToDo список"
+"New Article Saved","Новая статья сохранена"
+"New Article","Новая статья"
+"New article: [$(kb_title)] has been saved as article $(kb_id) (type: $(kb_type)).","Новая статья [$(kb_title)] сохранена как $(kb_id) (type: $(kb_type))."
+"New Category Saved","Новая категория сохранена"
+"New Category","Новая категория"
+"New category: [$(kb_title)] has been saved as category $(kb_id) .","Новая категория [$(kb_title)] сохранена как категория $(kb_id)."
+"New Cost","Новая Стоимость"
+"New Crosstab","Новый Crosstab"
+"New Custom","Новый произвольный"
+"New Group","Новая группа"
+"New News","Добавить новость"
+"New Priority Saved","Новый приоритет сохранен"
+"New Priority","Новый приоритет"
+"New Product Saved","Новый продукт сохранен"
+"New Product","Новый продукт"
+"New Request Dispatching Rules","Новое правило обработки запроса"
+"New Request from","Новый Запрос из $(request.submitted_by))"
+"New Request","Новый запрос"
+"New Requests vs. Closed Requests Trend Report","Тренд новые запросы - Удовлетворенные запросы"
+"New Sale","Новая продажа"
+"New Status Saved","Новый статус сохранен"
+"New Status","Новый статус"
+"New status: [$(request.name))] has been saved.","Новый статус: [$(request.name))] сохранен."
+"New Tabular","Новый Табличный"
+"New Tickets vs. Closed Tickets Trend Report Report","Отчет - тренд заявки/выполненные заявки"
+"New Tickets vs. Closed Tickets Trend Report","Новые Отчет тренда новых запросов/выполненных запросов"
+"New User Saved","Новый пользователь сохранен"
+"New User","Новый пользователь"
+"News $(news_id) deleted","Новость $(news_id) удалена."
+"News $(news_id) has been deleted.","Новость $(news_id) удалена."
+"News $(news_id) has been updated.","Новость $(news_id) скорректирована."
+"News [$(news_title)] has been saved as $(news_id).","Новость [$(news_title)] сохранена как $(news_id)."
+"News ID",Новость
+"News manager","Управление новостями"
+"Note, all references to $(uid) will be cleared. For example, a change $(uid) made to a request will become one made by an unknown person. If this is not what you want, you may want to edit this user account and change its status to [disabled].","Примечание, все ссылки на $(uid) очистятся. Например, изменение $(uid) запроса сделает как от неизвестного человека. Вместо удаления Вы можете отредактировать сменить потребителю статус на [отключен]."
+"Open Requests","Открытые запросы"
+"Parent Category","Категория верхнего уровня"
+"Parent Group","Группа верхнего уровня"
+"Password (Again)","Пароль (еще раз)"
+"Password Again:","Пароль (еще раз)"
+"Phone Number",Телефон
+"plain text",Текст
+"Please click browser's back button to go back.","Пожалуйста нажмите кнопку [Назад] браузера для возврата."
+"Please close this web browser to prevent other people from using its back button to see the information you have saved or retrieved during this session.","Пожалуйста закройте браузер, чтобы не допустить просмотра конфиденциальной информации посторонними лицами."
+"Please try again.","Пожалуйста попытайтесь снова минуту спустя."
+"Post Message","Отправить сообщение"
+"Post News","Отправить новость"
+"Post or reply to discussion messages","Отправить новое сообщение или ответить"
+"Posted By","Кем отправлено"
+"Posted on from","Отправлено от"
+"Powered by","Powered by"
+"Preview HTML","Предварительный Просмотр HTML"
+"Priority Deleted","Приоритет удален"
+"Priority Manager","Управление приоритетами"
+"Priority Name","Название приоритета"
+"Priority Updated","Приоритет исправлен"
+"Priority: [$(name)] has been deleted.","Приоритет [$(name)] удален"
+"Priority: [$(name)] has been updated. Please update all reports that use $(old_name).","Приоритет [$(name)] скорректирован. Пожалуйста обновите все отчеты, которые используют $(old_name)."
+"Product Deleted","Продукт удален"
+"Product Edited","Продукт отредактирован"
+"Product Manager","Управление продуктами"
+"Product Updated","Продукт исправлен"
+"Product: [$(name)] has been updated. Please update all reports that use $(old_name).","Продукт: [$(name)] скорректирован. Пожалуйста обновите все отчеты, которые используют $(old_name)."
+"Product: [$name)] has been deleted.","Продукт [$name)] удален."
+"Recommended Articles","Рекомендованные статьи"
+"Report Manager","Управление отчетами"
+"Report Name","Название отчета"
+"Report Open Requests","Отчет невополненные заявки"
+"Request ID",Запрос
+"Requests closed by the system","Запросы закрыты системой"
+"Requests Submitted","Кем поданы запросы"
+"Return to category","Вернуться к категории"
+"is equal to or higher than","равен или больше"
+"sales displayed","продаж отображено"
+"Sales Manager","Управление продажами"
+"Search sales that satisfy ALL conditions","Поиск продаж, которые удовлетворяют условиям"
+"Security Level","Уровень Безопасности"
+"Sequence Number","N п/п"
+"Serial Number","Серийный номер"
+"Serial# starts with:","Сер.ном. нач-ся с"
+"sessions are automatically removed ","сеансы автоматически удалены"
+"Set As Default","Установить по умолчанию"
+"Set As Default","Вы уверены Вы хотите удалить Статус: $(имя)?"
+"Sign up for new account","Зарегистрироваться как новый пользователь"
+"Sign up for new account","Статья: [$(kb_title)] сохранен как статья $(kb_id) (тип: $(kb_type))."
+"smallest sequence number. Requests closed by the system",Статьи
+"smallest sequence number.","минимальный последовательный номер. Запросы близко системную Сортировку На 1:"
+"Sort By","Сортировать по"
+"Staff Member",Сотрудник
+"Start Time","Дата с"
+"Status Deleted","Статус удален"
+"Status Manager","Управление статусами"
+"Status Updated","Статус исправлен"
+"Status: [$(name)] has been deleted.","Статус [$(name)] удален."
+"Status: [$(name)] has been updated. Please update all reports that use $(old_name) status.","Статус [$(name)] обновлен. Пожалуйста обновите все отчеты, которые используют статус $(old_name)"
+"Submit a request","Отправить запрос"
+"Submit a support request","Отправить запрос для поддержки"
+"Submitted By","Кем отправлено"
+"Submitted On","Когда отправлено"
+Summary,Кратко
+"System Information","Системная Информация"
+"Maximum 500 can be displayed.","Отображается не более 500 записей"
+"Thank you for your feedback.","Спасибо за сотрудничество"
+"That is normal. Do not refresh, repost or reload.","Это нормально. Не обновляйте страницу."
+"This record is temporarily locked.","Запись временно заблокирована."
+"This section will be populated with the most recently posted news articles.","Этот раздел будет опубликован вместе с только что полученными новостями"
+"This section will be populated with the three most frequently visited public articles not in the above recommended article list from the knowledge base.","Этот раздел будет опубликован вместе с наиболее часто читаемыми статьями, но не будет рекомендована."
+"This section will be populated with the top public articles from the knowledge base recommended by the editors.","Этот раздел будет опубликован вместе с рекомендованными редакторами."
+"Time Sheet Report","Отчет планирования по времени"
+"To cancel and go back to Priority Manager, please","Чтобы отменить и возвратиться к Управлению приоритетов, пожалуйста,"
+"To cancel and go back to Sales Manager, please","Чтобы отменить и возвратиться к Управлению продажами, пожалуйста,"
+"To cancel and go back to Session Manager, please","Чтобы отменить и возвратиться к Управлению сессиями, пожалуйста,"
+"To cancel and go back to Status Manager, please","Чтобы отменить и возвратиться к Управлению статусами, пожалуйста,"
+"To cancel and go back to User Manager, please use the browser's Back button.","Чтобы отменить и возвратиться к Управлению пользователями, пожалуйста,"
+"Today $(today)","Сегодня $(today)"
+"Topic Message","Сообщение по теме"
+"Topic visited: $(visited) time(s)","Посещений по теме: $(visited) "
+"Total Cost:","Итого времени:"
+minutes,минут
+Total:,Итого:
+priority(ies),приоритетов(а)
+product(s),продуктов(а)
+"Total: $(total.cnt) status(es)",статусов(а)
+"users found.","пользователей найдено."
+"Report generated ","Отчет создан"
+"Unassigned Requests","Неназначенные к исполнению запросы"
+"Updated by","Кем обновлено"
+Updated:,Обновлено:
+"Use Dates","Использовать даты"
+"Use Last X","Использовать последний X"
+"Use one of the following three methods to input article content",userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)
+"User $(old_user_id) Updated","Пользователь $(old_user_id) обновлен"
+"User ID starts with","Пользователь, начало имени"
+"User ID",Пользователь
+"User ID: (Required)","Пользователь (*):"
+"User List","Список пользователей"
+"User Manager","Управление пользователями"
+"User Name","Имя пользователя"
+"User Type","Тип пользователя"
+"User Updated","Пользователь обновлен"
+"User: ",Пользователь:
+"View article","Смотреть статью"
+"View News","Смотреть новость"
+"View User","Смотреть пользователя"
+"visible to everybody","видно всем"
+"visible to internal staff only","видно только сотрудникам"
+visited:,посещений:
+"Wait a 3 seconds.","Подождите 3 секунды."
+"Wait a second.","Одна секунда."
+"Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress","Добро пожаловаться, $(user_id) - apooHelpDesk Customer Support - Регистрация"
+"Welcome, $(user_id) - Main menu - Customer support - apooHelpDesk","Добро пожаловаться, $(user_id) - Главное меню - Customer Support - apooHelpDesk"
+"When a new request on this product is submitted but not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=)","При поступлении заявки на продукт, если исполнитель не назначен, и если приоритет более высокий или равен"
+"Why you asked for password.","Зачем нужен пароль"
+"Zip Code","почтовый индекс"
+ApooHelpDesk,"Справочная Апу"
+Application,Приложение
+Artickes,Статьи
+Ascending,"по возрастанию"
+Attachment(s):,файл(ы)
+attachment,"присоединенный файл"
+attachment1,attachment1
+Attachments,"присоединенные файлы"
+Back,Назад
+bytes,байт
+Categories,Категории
+Category,Категория
+Category,Категории
+city,город
+Command,Команда
+company,Компания
+Confirmation,Подтверждение
+Continue,Продолжить
+country,Страна
+Created,Создано
+Creator,Создатель
+Date,Дата
+day,день
+days,дней
+Deadline,"Дата окончания"
+Default,"по умолчанию"
+Delete,Удалить
+Department,Отдел
+Descending,"По убыванию"
+Description,Описание
+Detail,Подробности
+Details,Подробности
+disabled,отключен
+Discussion,Дискуссия
+dispatcher,диспетчер
+Display,Отображать
+do_nothing,ничего_не_делать
+Edit,Редактировать
+fax,Факс
+Field,Поле
+Find,Найти
+Go,Перейти
+group,группа
+Groups,Группы
+Help,Подсказка
+interval,интервал
+keywords,"Ключевые Слова"
+Last:,Последний
+Links,Ссылки
+List,Список
+Manager,Менеджер
+message,Сообщение
+n/a,Н/Д
+Name,Имя
+News,Новости
+Next,Следующее
+Notes,Примечания
+OK,Готово
+Owner,Владелец
+Parent,Родитель
+password,Пароль
+Phone,Телефон
+Poster,Отправитель
+Prev,Пред.
+Previous,Предыдущий
+Priority,Приоритет
+private,частный
+Product,Продукт
+public,публичный
+quarter,квартал
+quarters,кварталы
+Rank,Ранг
+read-only,"только для чтения"
+Refresh,Обновить
+Report,Отчет
+Result,Результат
+Run,Выполнить
+Save,Сохранить
+scale,масштаб
+Search,Поиск
+Security,Безопасность
+Seq.#,"N п/п"
+Sessions,Сессии
+State,Состояние
+Status,Статус
+Summary:,Кратко:
+System,Система
+text,текст
+Title:,Заголовок:
+to:,кому:
+topic,тема
+Type:,Тип:
+User,Пользователь
+cannot+disable+because+he+or+she+is+an+dispatcher,Нельзя+отключить+так+как+это++диспетчер
+User+ID+has+been+deleted+or+used,"Пользователь+или+удален,+или+уже+используется"
+Only+Manager+can+create+managers,Только+менеджер+может+создавать+менеджеров
+Password+mistyped,Пароль+введен+с+ошибками
+User+ID+has+already+been+used,Идентификатор+пользователя+должен+занят
+User+ID+must+be+supplied,Идентификатор+пользователя+должен+быть+задан
+cannot+remove+because+$(uid)+is+an+dispatcher,нельзя+удалить+$(uid)+так+это+диспетчер
+Only+Manager+can+modify+managers,Только+менеджер+может+изменять+записи+менеджеров
+Visited,Обращений
+week,неделя
+weeks,недель
+years,лет
+yes,да
+zipcode,индекс

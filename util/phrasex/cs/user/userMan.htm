@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT * FROM cs_kb WHERE kb_id = $kb_id
+  </serverside>  
+  <serverside action="defaultparam" opt="usr_max_row">
+    SELECT 50 R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_col1">
+    SELECT 'Email Address' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_col2">
+    SELECT 'Phone Number' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_col3">
+    SELECT 'User Name' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_sort1">
+    SELECT 'User ID' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_sort1_dir">
+    SELECT 'Ascending' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_sort2">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_sort2_dir">
+    SELECT 'Ascending' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_user_id">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_full_name">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_phone">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_email">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_company">
+    SELECT '' R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="usr_dept">
+    SELECT '' R FROM DUAL
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support User Manager</title>
+</head>
+<body loop="global">
+
+<form method="POST" action="userManOk.htm">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="4">
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : User Manager
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr>
+  <td colspan="4" align="right" valign="bottom">
+    <a href="userEdit.htm?uid=$(user_id)">My Account</a> | <a href="userNew.htm">New User</a>
+  </td>
+</tr>
+<tr>
+  <td colspan="4" class="apbg">
+    List the users that satisfy All conditions:
+  </td>
+</tr>
+<tr>
+  <td colspan="2" valign="bottom">
+    User ID starts with: <br/>
+    <input type="text" name="uid" size="35" maxlength="50" value="$(usr_user_id)" />
+  </td>
+  <td colspan="2" valign="bottom">
+    and Email Address starts with: <br/>
+    <input type="text" name="email" size="35" maxlength="50" value="$(usr_email)" />
+  </td>
+</tr>
+<tr>
+  <td colspan="2" valign="bottom">
+    and User Name starts with: <br/>
+    <input type="text" name="full_name" size="35" maxlength="50" value="$(usr_full_name)" />
+  </td>
+  <td colspan="2" valign="bottom">
+    and Phone Number starts with: <br/>
+    <input type="text" name="phone" size="35" maxlength="50" value="$(usr_phone)" />
+  </td>
+</tr>
+<tr>
+  <td colspan="2" valign="bottom">
+    and Company starts with: <br/>
+    <input type="text" name="company" size="35" maxlength="50" value="$(usr_company)" />
+  </td>
+  <td colspan="2" valign="bottom">
+    and Department starts with: <br/>
+    <input type="text" name="dept" size="35" maxlength="50" value="$(usr_dept)" />
+  </td>
+</tr>
+<tr>
+  <td colspan="4" class="apbg">
+    Display:
+  </td>
+</tr>
+<tr>
+  <td>Field 1:<br/>
+    <select name="col1" size="1">
+      <option selected="selected">$(usr_col1)</option>
+      <option>Email Address</option>
+      <option>Phone Number</option>
+      <option>User Name</option>
+      <option>Company</option>
+      <option>Department</option>
+    </select>
+  </td>
+  <td>Field 2:<br/>
+    <select name="col2" size="1">
+      <option selected="selected">$(usr_col2)</option>
+      <option>Email Address</option>
+      <option>Phone Number</option>
+      <option>User Name</option>
+      <option>Company</option>
+      <option>Department</option>
+    </select>
+  </td>
+  <td>Field 3:<br/>
+    <select name="col3" size="1">
+      <option selected="selected">$(usr_col3)</option>
+      <option>Email Address</option>
+      <option>Phone Number</option>
+      <option>User Name</option>
+      <option>Company</option>
+      <option>Department</option>
+    </select>
+  </td>
+  <td>
+    Max Users:<br/>
+    <input type="text" name="max_row" size="15" maxlength="4" value="$(usr_max_row)" />
+  </td>
+</tr>
+<tr>
+  <td>Sort By 1:<br/>
+    <select name="sort1" size="1">
+      <option selected="selected">$(usr_sort1)</option>
+      <option>User ID</option>
+      <option>Email Address</option>
+      <option>Serial Number</option>
+      <option>User Name</option>
+      <option>Company</option>
+      <option>Department</option>
+      <option>Phone Number</option>
+    </select>
+  </td>
+  <td><br/>
+    <select name="sort1_dir" size="1">
+      <option selected="selected">$(usr_sort1_dir)</option>
+      <option>Ascending</option>
+      <option>Descending</option>
+    </select>
+  </td>
+  <td>Sort By 2:<br/>
+    <select name="sort2" size="1">
+      <option selected="selected">$(usr_sort2)</option>
+      <option></option>
+      <option>User ID</option>
+      <option>Email Address</option>
+      <option>Serial Number</option>
+      <option>User Name</option>
+      <option>Company</option>
+      <option>Department</option>
+      <option>Phone Number</option>
+    </select>
+  </td>
+  <td><br/>
+    <select name="sort2_dir" size="1">
+      <option selected="selected">$(usr_sort2_dir)</option>
+      <option>Ascending</option>
+      <option>Descending</option>
+    </select>
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="4">
+    <input type="submit" value="List"/>
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td colspan="4" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

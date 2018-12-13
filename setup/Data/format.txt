@@ -1,0 +1,134 @@
+;
+; first section defines default format
+;
+[us]
+Phone=4155551212|\(NNN\)NNN\-NNNN
+Extension=15450|NNNNN
+Social Security=555555555|NNN\-NN\-NNNN
+Short Zip Code=90504|NNNNN
+Long Zip Code=905040000|NNNNN\-NNNN
+Date=062794|NN\/NN\/NN
+Long Time=090515PM|NN\:NN\:NN\AA
+Short Time=1345|NN\:NN
+
+[france]
+Telephone=2998877665|NN\-NN\-NN\-NN\-NN
+Bank Card=5555444433332222|NNNN\ NNNN\ NNNN\ NNNN
+Social Security=166107811122233|NNNNNNNNNNNNN\-NN
+Zip Code=92130|NNNNN
+Short Date=2712|NN\/NN
+Long Date 1=271296|NN\/NN\/NN
+Long Date 2=27Déc1996|NN\ Aaa\ NNNN
+Long Time=134515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[germany]
+Phone=0610399988|\(NNN\ NN\)\ NNNNN
+Extension=2010|NNNN
+Banking=50850150|NNN\ NNN\ NN
+BRD ZIP Code=63225|\D\-NNNNN
+Intl ZIP Code=CH50000|AA\-NNNNN
+Date=301193|NN\/NN\/NN
+Short Time=1345|NN\:NN
+Long Time=193059|NN\:NN\:NN
+
+[italy]
+Phone=02123456789012|\(NNNN\)\ NNNN\ NNNN
+Phone with Extension=0212345678123456|\(NNNN\)\ NNNN\ NNNN\.NNNN
+Local Phone=12345678|NNNN\ NNNN
+Company Tax #=00010010023|NNNNNNNNNNN
+Tax Payer #=TRMDNC55P27B242Z|AAAAAANNANNANNNA
+Zip Code=00100|NNNNN
+Short Date=250202|NN\/NN\/NN
+Long Date 1=250202|NN\/NN\/\1\9NN
+Long Date 2=25Gen02|NN\ Aaa\ \1\9NN
+Long Time=210515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[japan]
+Phone=03535083931234|NNNNNN\-NNNN\-NNNN
+Zip Code=1510073|NNN\-NNNN
+Date=062794|NN\/NN\/NN
+Time=090515PM|NN\:NN\:NNAA
+
+[korea]
+Phone=02538189012|\(NNNN\)NNN\-NNNN
+Handphone(Beeper)=0005381895|NNN\-NNN\-NNNN
+Social Security=9507271234567|NNNNNN\-NNNNNNN
+Zip Code=135080|NNN\-NNN
+Date 1=950727|NN\-NN\-NN
+Date 2=19950727|NNNN\-NN\-NN
+Date 3=950727|NN\³\â\NN\¿\ùNN\À\Ï
+Date 4=19950727|NNNN\³\âNN\¿\ùNN\À\Ï
+Long Time=042520PM |NN\:NN\:NN\ AA
+Long Korean time=042520PM |NN\½\ÃNN\º\ÐNN\Ã\Ê\ AA
+Short Time=1625|NN\:NN
+Short Korean Time=1625|NN\½\ÃNN\º\Ð
+
+[netherland]
+Phone=20540540123|\0NNNN\-NNNNNNN
+Social Security=123456789|NNNNNNNNN
+Zip Code=1234AB|NNNN\ AA
+Date=270695|NN\/NN\/NN
+Long Time=214515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[norway]
+Phone=22831310|NN\ NN\ NN\ NN
+Social Security=01016512345|NNNNNNN\ NNNN
+Organization Number=01016512345|NNNNNNN\ NNNN
+Zip Code=0250|NNNN
+Date=170595|NN\/NN\-NN
+Date (Windows)=170595|NN\/NN\/NN
+Long Time=210515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+Banking=12341212345|NNNN\ NN\ NNNN
+
+[espanol]
+Phone=4155551212|\(NNN\)NNNNNNN
+Social Security=123456789123456|NNNNNNNNNNNNN
+Zip Code=90504|NNNNN
+Date=250895|NN\/NN\/NN
+Long Time=210515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[sweden]
+Social Security=6011012110|NNNNNN\-NNNN
+Organization Number=6011012110|NNNNNN\-NNNN
+Zip Code=64700|NNN\ NN
+Date=950223|NN\/NN\/NN
+Long Date=19950223|NNNN\/NN\/NN
+Long Time=210515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[denmark]
+Phone=48140001|NN\ NN\ NN\ NN
+Phone with Country=48140001|\+\4\5\ NN\ NN\ NN\ NN
+Social Security=1234567890|NNNNNN\-NNNN
+Zip Code=3450|NNNN
+Zip Code with Country=DK3450|AA\-NNNN
+Date=260195|NN\.NN\.\1\9NN
+Date (Windows)=260195|NN\/NN\/NN
+Long Time=210515|NN\:NN\:NN
+Short Time=1345|NN\:NN
+
+[taiwan]
+Zip Code=107|NNN
+Organization No=86692741|NNNNNNNN
+Social Security=A324534422|ANNNNNNNNN
+ROC Date=00850930|NNNN\.NN\.NN
+Date=100196|NN\/NN\/NN
+Phone=03532455768|\(NNN\)NNNN\-NNNN
+Mobile Phone=090789879|NNN\-NNNNNN
+Pager=060345678|NNN\-NNNNNN
+
+[uk]
+Phone=17145612345|\0NNNN\ NNNNNNN
+Extension=15450|NNNNN
+Postcode=WT3114TA|XXXX\ XXXX
+Short Postcode=EC12|XXXX
+National Insurance| GM134152A |XXNNNNNNX
+Date=270195|NN\/NN\/NN
+Long Time=090515PM|NN\:NN\:NNAA
+Short Time=1345|NN\:NN
+

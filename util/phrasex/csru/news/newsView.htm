@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="defaultparam" opt="newsHome" >
+di_detail</serverside>
+<serverside dataset="s1" action="query" >
+SELECT * FROM cs_news WHERE ../mainMenuManager.htm = $(news_id)</serverside>
+<serverside dataset="sqlAddCount" action="execute" >
+repCro.htm?mode=new</serverside>
+<serverside dataset="attachment" action="query" >
+f1.action=qm.value</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+cla_dept</title>
+</head>
+<body loop="s1" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../../select.htm" >
+$(appname)</a>
+:<a href="index.htm" >
+Новости</a>
+: $(s1.news_title)</td>
+</tr>
+<tr >
+<td >
+<h2 >
+$(s1.news_title)</h2>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<table class="apbg" border="0" cellspacing="2" cellpadding="2" >
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+если (session.varExist('sa_max_row') если нет,</td>
+</tr>
+<tr >
+<td >
+: Новая Категория : Новая Категория Сохранила : Новый Приоритет : Новый Приоритет Сохранил : Новый Продукт : Новый Продукт Сохранил</td>
+</tr>
+<tr >
+<td >
+id</td>
+</tr>
+<tr >
+<td >
+: $(s1.news_title)</td>
+</tr>
+<tr >
+<td >
+Чтобы отменить и возвратиться к Менеджер Статуса, пожалуйста, чтобы отменить и возвращаться к Менеджер Потребителя, пожалуйста используйте Обратную кнопку окна просмотра.</td>
+</tr>
+<tr >
+<td >
+6 Пользователей</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td class="apbg" >
+<a href="$(newsHome:unescape)" >
+di_k5</a>
+<br />
+<a href="newsEdit.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape)" >
+Новый Табличный</a>
+<br />
+<a href="newsDelete.htm?news_id=$(s1.news_id:escape)&newsHome=$(newsHome:escape)" >
+kb_k3</a>
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+</table>
+</td>
+<td >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<br />
+Статьи Базы Знаний - поддержка Клиента - apooHelpDesk Знание ID:</td>
+</tr>
+<tr >
+<td >
+<font size="+4" >
+$(s1.news_detail)</font>
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+<td >
+</td>
+</tr>
+<tr loop="attachment" >
+<td >
+di_id<a href="cs_news_file/nf_id/nf_content/$(attachment.nf_id)" >
+$(attachment.nf_name)</a>
+$(attachment.nf_size) bytes;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

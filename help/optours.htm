@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>tours
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<p><a name=tours>tours</a>
+ <img border="0" src="optours.gif" width="24" height="24">
+<br id=toursbrief>A chapter tour rag <a href="optour.htm"> &lt;tour&gt;</a> defines order in which reader will jump ahead to the next indicated chapter from any given chapter. Microsoft Reader
+requires <a href="opxmetadata.htm">x-metadata</a> reference &quot;ms-chaptertour&quot; to a chapter tour declared in tours section as shown:
+<p>&lt;metadata&gt;<br>
+&nbsp;&lt;x-metadata&gt;<br>
+&nbsp; &lt;meta name=&quot;ms-chaptertour&quot; content=&quot;AllChapTour&quot; /&gt;<br>
+&nbsp;&lt;/x-metadata&gt;<br>
+&lt;/metadata&gt;
+<p>Note: Tours are supported in Microsoft Reader version 1.5.
+<p>A publisher can use the chapter tour declaration to connect a series of book sections: chapters, illustrations, parts, poems, volumes. The tour also need not be linear; it can jump forward and
+backward in a book. Each eBook is allowed one tour.<p>Sample:
+<br>&lt;tours&gt;<br>
+&nbsp;&lt;tour id=&quot;AllChapTour&quot; title=&quot;All chapters&quot;&gt;<br>
+&nbsp; &lt;site title=&quot;Chapter One&quot; href=&quot;book.htm#ch1&quot; /&gt;<br>
+&nbsp; &lt;site title=&quot;Chapter Two&quot; href=&quot;book.htm#ch2&quot; /&gt;<br>
+&nbsp;&lt;/tour&gt;<br>
+&lt;/tours&gt;
+
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id="toursattr"><b>id</b><br>
+Provides an element with a unique name within a single document. This is especially useful in works with extensive cross-referencing and linking, such as dictionaries, encyclopedias, or travel guides.
+Use of ids&nbsp; simplifies linking and updates.<br>
+<b>class</b>
+<br>Affiliates an element with one or more classes.
+<br><b>style</b>
+<br>Attaches a list of inline (name:value paired) CSS properties to a specific tag, for example: style=&quot;name:value;name:value&quot;<br>
+Note: Media types other than &quot;text/x-oeb1-css&quot; will be ignored with a warning in a document of type &quot;text/x-oeb1-document&quot;.
+</p>
+<p>See also:
+</p>
+<p><a href="opxmetadata.htm">&lt;x-metadata&gt;</a>, <a href="opguide.htm">&lt;guide&gt;</a>, <a href="optour.htm">&lt;tour&gt;</a>, <a href="opsite.htm">&lt;site&gt;</a></p>
+</body>
+</html>

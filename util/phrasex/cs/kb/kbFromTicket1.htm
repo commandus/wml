@@ -1,0 +1,96 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  set local.title = 'Copy Request #' + request.ticket_id + ' to KB';
+  set local.kb_id = '';
+  if (request.fieldExist('kb_id'))
+    set local.kb_id = request.kb_id;
+  endif
+
+  set local.kb_id = '';
+  set local.title = app.name + ' : Knowledge Base';
+  set local.links = 
+    '<a href="' + session.mainMenu + '">' + app.name + '</a> : '
+    'Knowledge Base';
+  set local.where = 'kb_p1 IS NULL';
+
+  if (request.fieldExist('kb_id') AND request.kb_id <> '')
+    set local.kb_id = request.kb_id;
+
+    file fKbIndex('index.htm');
+    array arRet = fKbIndex.getKbPathAndLinks(request.kb_id, 0);    
+
+    set local.title = app.name + ' : KB : ' + arRet.getAt(0);
+    set local.links = 
+      '<a href="' + session.mainMenu + '">' + app.name + '</a> : '
+      '<a href="index.htm">KB</a> : ' + arRet.getAt(1);
+    set local.where = 'kb_p1 = ' + local.kb_id;
+  endif
+  
+  <serverside dataset="sqlCat" action="query">
+    SELECT kb_id, kb_p5, kb_title, kb_summary FROM cs_kb '
+    'WHERE kb_type = 1 AND ' + local.where + ' ORDER BY kb_title';
+  </serverside>
+
+  set local.copyUrl =  
+    'kbFromTicket2.htm?kb_id=' + local.kb_id + 
+    '&ticket_id=' + request.ticket_id;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td nowrap="nowrap">
+    $local.links)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td align="right">
+    <a href="$local.copyUrl)">
+    Copy request #$request.ticket_id) to current category</a>
+  </td>
+</tr>
+<tr class="apbg">
+  <td>Sub Categories</td>
+</tr>
+<tr>
+  <td><ul>
+  <!$ 
+    set local.count = 0;
+    while (sqlCat.fetch)
+      set local.count = 1 + local.count; 
+      set local.catUrl = 
+        'kbFromTicket1.htm?kb_id=' + sqlCat.kb_id +
+        '&ticket_id=' + request.ticket_id;
+  )>
+    <li>
+    <a href="$local.catUrl)">$(sqlCat.kb_title))</a>
+    <br/>
+    
+  <!$ endwhile )>
+  <!$ if (local.count = 0) )>
+    <li>None
+  <!$ endif )>
+  </ul></td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</body>
+</html>

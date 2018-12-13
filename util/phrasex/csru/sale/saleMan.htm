@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=status/statusMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+priorityDelOk.htm priorityDel.htm?name=$(s1.name:escape)< >
+1) // one time initialization set session.sa_max_row = 500; set session.sa_col1 = 'Product'; set session.sa_col2 = 'Sold To'; set session.sa_col3 = 'Sold On'; set session.sa_sort1 = 'Serial Number'; set session.sa_sort1_dir = 'Ascending'; set session.sa_sort2 = ''; set session.sa_sort2_dir = 'Ascending'; set session.sa_serial = ''; set session.sa_product = ''; set session.sa_sold_to = ''; set session.sa_sold_on1 = ''; set session.sa_sold_on2 = ''; endif<serverside dataset="sqlProducts" action="query" >
+Дисплей:</serverside>
+)><head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Справочная Апу</title>
+</head>
+<body >
+<form method="GET" action="saleSearchOk.htm" >
+<center >
+<table border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="4" >
+<a href="$session.mainMenu)" >
+$(appname)</a>
+: Менеджер продаж</td>
+</tr>
+<tr >
+<td colspan="4" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="4" align="right" >
+<a href="saleNew.htm" >
+текст/html; charset=utf-8 textType Благодарю вас за вашу обратную связь.</a>
+</td>
+</tr>
+<tr >
+<td colspan="4" class="apbg" >
+$(s1.kb_locked_by)</td>
+</tr>
+<tr >
+<td colspan="2" >
+$(s1.name)<br />
+<input type="text" name="sa_serial" size="30" maxlength="50" value="$session.sa_serial)" >
+</td>
+<td colspan="2" >
+$(col3)<br />
+<select name="sa_product" size="1" >
+<option selected="" >
+$session.sa_product)<option >
+<!$while (sqlProducts.fetch))>

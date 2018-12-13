@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside action="defaultparam" opt="kb_id" >
+SELECT -1 R FROM DUAL</serverside>
+<serverside dataset="sqlAddCat" action="execute" >
+productMan.htm?set_def=$(s1.name:escape) productNew.htm productNewOk.htm ptHelpWindow публика</serverside>
+<!-- The level of the new category has exceeded the maximum of 5 -->
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Вы уверены Вы хотите удалить Продажу: $request.sa_serial)?</title>
+</head>
+<body loop="global" >
+<center >
+<table width="60%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="index.htm" >
+ВКЛЮЧИТЕСЬ В cs_kb( kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security, kb_rank, kb_name, kb_size) ВЕЛИЧИНЫ( $(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), $(sqlParent.kb_p4), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', $(kb_type), '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title)', '$(kb_summary)', $(kb_security), $(kb_rank), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1) ВКЛЮЧАЮТСЯ В cs_kb(kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_k1, kb_k2, kb_k3, kb_k4, kb_k5, kb_type, kb_owner, kb_created_by, kb_created_on, kb_updated_by, kb_updated_on, kb_title, kb_summary, kb_security) ВЕЛИЧИНЫ($(kb_id), $(parent_id), $(sqlParent.kb_p1), $(sqlParent.kb_p2), $(sqlParent.kb_p3), '$(kb_k1)', '$(kb_k2)', '$(kb_k3)', '$(kb_k4)', '$(kb_k5)', 1, '$(user_id)', '$(user_id)', 'сегодня', '$(user_id)', 'сегодня', '$(kb_title:unescape)', '$(kb_summary:unescape)', $(kb_security)) ВКЛЮЧАЮТСЯ В cs_kb_file( kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЕЛИЧИНЫ($(kb_id), $(kb_type), СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '' КОНЕЦ, -1, СЛУЧАЙ, КОГДА $(kb_type) = 4 ТОГДА '$(kb_content_url), КОГДА $(kb_type) = 5 ТОГДА '$(kb_content_file) ЕЩЕ '$ КОНЕЦ(kb_content) ) ВКЛЮЧАТЬСЯ В cs_kb_file(kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) ВЫБОР $(kb_id), 2, sqlFiles.tif_name, sqlFiles.tif_size, sqlFiles.tif_content ИЗ cs_ti_file sqlFiles ГДЕ sqlFiles.tif_ch_id В ( ВЫБОР ch_id ИЗ cs_ti_change ГДЕ ch_ticket_id = $(ticket_id)) ВКЛЮЧАТЬСЯ В cs_news(; '' ВКЛЮЧАТЬСЯ В cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) ВЕЛИЧИНЫ($(nf_id), $(news_id), СЛЕПОК('today' КАК ДАТА), СЛЕПОК('now' КАК ВРЕМЯ), 1, '$(attachment1:unescape)') ВКЛЮЧАТЬСЯ В cs_priority (row_ver, имя, описание) ВЕЛИЧИНЫ(1, '$(имя)', '$(описание)') ВКЛЮЧАЮТСЯ В cs_priority (row_ver, имя, is_def, описание) ВЕЛИЧИНЫ(1, '$(имя)', 0, '$(описание)') Новый приоритет: [$(имя)] сохранен.</a>
+: Категория $(kb_id) Edited</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+accessdenied.htm?b=index.htm<br />
+Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера.</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td align="center" >
+<a href="index.htm?kb_id=$kb_id" >
+$(s1.company)</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+</html>

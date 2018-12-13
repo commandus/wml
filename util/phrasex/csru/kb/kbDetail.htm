@@ -1,0 +1,160 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm" >
+id</serverside>
+<serverside action="defaultparam" opt="kb_id" >
+SELECT -1 R FROM DUAL</serverside>
+<serverside action="defaultparams" >
+email_fmt</serverside>
+<serverside dataset="parentCat" action="query" >
+SELECT COALESCE(kb_p1, -1) kb_p1 FROM cs_kb WHERE kb_id = $(kb_id)</serverside>
+<serverside dataset="s1" action="query" >
+di_title</serverside>
+<serverside dataset="s3" action="query" >
+ding="0"></serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+нажмите здесь col</title>
+</head>
+<body >
+<table width="100%" border="0" cellspacing="0" cellpadding="2" loop="s1" >
+<tr >
+<td >
+</td>
+<td >
+Важно: Новые запросы назначены статус с index.htm</td>
+<td >
+: Категория $(kb_id) Отредактировала : Удалите $ Пользователя(uid) : Удалите Новости : Удалите Приоритет : Удалите Продукт : Удалите Продажу : Удалитесь Сеанс : Удалите Статус : Дискуссия Группирует : Категория Редактирования $(kb_id) : История Редактирования : Новости Редактирования : Приоритет Редактирования : Продукт Редактирования : Продажа Редактирования $s1.sa_serial) : Статус Редактирования : Пользователь Редактирования $(uid) : База Знаний : $(curCat.kb_title) : Протокол : Новая Статья Сохранила</td>
+<td >
+</td>
+</tr>
+<tr >
+<td align="right" colspan="4" >
+<a href="../help/kbHelp.html" >
+Родитель</a>
+|<a href="kbEditCat.htm?kb_id=$(kb_id)" >
+Новые Билеты vs. Закрыли Сообщение Направления Нового Потребителя Нового Потребителя Билетов: [</a>
+|<a href="kbDelete.htm?kb_id=$(kb_id)" >
+kb_k4</a>
+</td>
+</tr>
+<tr >
+<td colspan="4" >
+<h1 >
+$(s1.kb_title)</h1>
+</td>
+</tr>
+<tr >
+<td colspan="4" >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<th align="left" >
+usr_company</th>
+<th align="left" >
+$(s1.kb_name)</th>
+<th align="left" >
+СЛУЧАЙ ВЫБОРА, КОГДА '$(col1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col1) = 'Компания, ТОГДА 'компания, КОГДА '$(col1) = 'Отдел, ТОГДА 'отд, КОГДА '$(col1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col2) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col2) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col2) = 'Компания, ТОГДА 'компания, КОГДА '$(col2) = 'Отдел, ТОГДА 'отд, КОГДА '$(col2) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col2) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(col3) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(col3) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(col3) = 'Компания, ТОГДА 'компания, КОГДА '$(col3) = 'Отдел, ТОГДА 'отд, КОГДА '$(col3) = 'Email Адрес', ТОГДА 'email, КОГДА '$(col3) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort_col) = 'Продукт, ТОГДА 'продукт, КОГДА '$(sort_col) = 'Приоритет, ТОГДА 'приоритет, КОГДА '$(sort_col) = 'Конечный Срок, ТОГДА 'конечный срок, КОГДА '$(sort_col) = 'Поданное На', ТОГДА 'submitted_on, КОГДА '$(sort_col) = 'Назначенное На', ТОГДА 'assigned_on, КОГДА '$(sort_col) = 'Статус, ТОГДА 'статус ЕЩЕ '' КОНЕЦ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1) = 'Потребитель ID', ТОГДА 'user_id, КОГДА '$(sort1) = 'Имя Потребителя', ТОГДА 'full_name, КОГДА '$(sort1) = 'Компания, ТОГДА 'компания, КОГДА '$(sort1) = 'Отдел, ТОГДА 'отд, КОГДА '$(sort1) = 'Email Адрес', ТОГДА 'email, КОГДА '$(sort1) = 'Номер Телефона', ТОГДА 'телефон ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(sort1_dir) = 'Сход, ТОГДА 'DESC ЕЩЕ '' КОНЕЦ R ОТ ДВОЙНОГО</th>
+<th align="left" >
+СЛУЧАЙ ВЫБОРА, КОГДА '$(sort2) = 'Потребитель ID', ТОГДА ', user_id', КОГДА '$(sort2) = 'Имя Потребителя', ТОГДА ', full_name', КОГДА '$(sort2) = 'Компания, ТОГДА ', компания', КОГДА '$(sort2) = 'Отдел, ТОГДА ', отд', КОГДА '$(sort2) = 'Email Адрес', ТОГДА ', email', КОГДА '$(sort2) = 'Номер Телефона', ТОГДА ', телефон' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(тип) = '1, ТОГДА 'Новая Группа', КОГДА '$(topic_id) = '', ТОГДА 'Новое Сообщение' ЕЩЕ 'Новая Тема' ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА '$(usertype) = 'Менеджер, ТОГДА 'менеджер, КОГДА '$(usertype) = 'Персонал Члена', ТОГДА 'MemberStaff ЕЩЕ 'КОНЕЦ КОНЕЧНОГО ПОЛЬЗОВАТЕЛЯ R ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(компания)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЯЯ(компания) ПОДОБНО ($(компания)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(отд)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНЕЕ(отд) ПОДОБНО ($(отд)%'''') И ' ЕЩЕ '1 = 1' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(email)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(email) ПОДОБНО (''$(email)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(full_name)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(full_name) ПОДОБНО (''$(full_name)%'') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'открытый текст') ЗАТЕМ 2, КОГДА ('$(kb_content)' &lt;&gt; '') И ('$(textType)' = 'htmlFrag') ЗАТЕМ 3, КОГДА ('$(kb_content_url)' &lt;&gt; '') ЗАТЕМ 4, КОГДА ('$(kb_content_file)' &lt;&gt; '') ЗАТЕМ 5 ЕЩЕ 2 КОНЦОВ kb_type ИЗ двойного СЛУЧАЯ ВЫБОРА, КОГДА ('$(телефон)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(телефон) ПОДОБНО ($(телефон)%'''') И ' ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(sort2)' &lt;&gt; '') И ('$(sort2_dir)' = 'Сход') ЗАТЕМ 'DESC ЕЩЕ '' КОНЕЦ R ИЗ ДВОЙНОГО СЛУЧАЯ ВЫБОРА, КОГДА ('$(uid)' &lt;&gt; '') ЗАТЕМ 'ВЕРХНИЙ(user_id) ПОДОБНО (''$(uid)%'') И ' ЕЩЕ '' КОНЕЦ R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_kb_new, 1) КАК ЦЕЛОЕ) R С ДВОЙНОГО СЛЕПКА ВЫБОРА(GEN_ID(cs_news_new, 1) КАК ЦЕЛОЕ) С двойного СЛЕПКА ВЫБОРА(GEN_ID(cs_nf_new, 1) КАК ЦЕЛОЕ) С двойного слепка ВЫБОРА('today' как ДАТА) - 7 ОТ ДВОЙНОГО;</th>
+</tr>
+<tr >
+<td >
+$(s1.kb_owner)</td>
+<td >
+$(s1.kb_security)</td>
+<td >
+$(s1.kb_locked_by)</td>
+<td >
+$(s1.kb_locked_on)</td>
+</tr>
+<tr >
+<td colspan="4" >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<th align="left" >
+$(max_row)</th>
+<th align="left" >
+6</th>
+<th align="left" colspan="2" >
+запрос кварталов четверти r> радио Ранг:</th>
+</tr>
+<tr >
+<td >
+$(s1.kb_rank)</td>
+<td >
+$(s1.kb_visited)</td>
+<td colspan="2" >
+$(s1.kb_k1) $(s1.kb_k2) $(s1.kb_k3) $(s1.kb_k4) $(s1.kb_k5)</td>
+</tr>
+<tr >
+<td colspan="4" >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<th align="left" colspan="4" >
+$request.url)</th>
+</tr>
+<tr >
+<td colspan="4" >
+$(s1.kb_summary)</td>
+</tr>
+<tr >
+<td colspan="4" >
+&nbsp;</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" loop="s3" >
+<tr class="apbg" >
+<th align="left" colspan="4" >
+Помогите настольному основному меню help/index.html</th>
+</tr>
+<tr >
+<td colspan="4" >
+<a href="$(s1.kb_name)" >
+$(s1.kb_name)</a>
+<a href="$(attUrl)" >
+$(s3.kbf_name)</a>
+$(s1.kb_size) байт $(s3.kbf_content)</td>
+</tr>
+<tr class="apbg" >
+<th align="left" colspan="4" >
+di_k2</th>
+</tr>
+<tr >
+<td colspan="4" >
+<br />
+: $(s3.cs_kb_file) $(s3.kbf_id) $(s3.kbf_content) $(s3.kbf_name)<a href="$(attUrl)" >
+$(s3.kbf_name)</a>
+$(s3.kbf_size) байт</td>
+</tr>
+<tr >
+<td >
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr class="apbg" loop="parentCat" >
+<td align="center" >
+<a href="index.htm?kb_id=$(ParentCat.kb_p1)" >
+Эта подсказка статьи?</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

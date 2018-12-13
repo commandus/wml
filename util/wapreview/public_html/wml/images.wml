@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="Images">
+<p>Read the <a href="#note">note</a>...</p>
+<p align="center">
+<img src="aplpi.wbmp" alt="applepie"/>
+<br/><b>Applepie Solutions</b><br/>
+and<br/>
+<img src="gmit.wbmp" alt="GMIT"/>
+<br/><b>Galway Mayo Institue of Technology</b>
+</p>
+<p align="center">
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+<card id="note" title="note">
+<p>Images sometimes do not appear in Microsoft Internet Explorer.  This is due to an incomplete HTTP request cause by Explorer (possibly related to HTTP 1/1 keep-alive?)<br/>
+They will probably appear now when you <a href="#card0">go back</a>.
+</p>
+</card>
+</wml>

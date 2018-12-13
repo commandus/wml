@@ -1,0 +1,21 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+
+  set local.note_data = request.note_data;
+  if (local.note_data = '')
+    set local.note_data = 'No note is entered.';
+  endif
+  if (app.maxText >

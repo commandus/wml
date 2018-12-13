@@ -1,0 +1,39 @@
+<html>
+<body bgcolor=ffffcc>
+<font face="verdana"size=2>
+<h1>Hello, ISAPI Filter world!</h1>
+<p>
+It's now <#time> on <#date> and this page has been processed by the ISAPI Filter Scripting engine for the <#counter>th time!
+<p>
+<table border="1">
+<tr><td bgcolor=white><b>Server Variable</b></td><td bgcolor=white><b>Value</b></td></tr>
+<tr><td>AUTH_TYPE</td><td><#AUTH_TYPE></td></tr>
+<tr><td>CONTENT_LENGTH</td><td><#CONTENT_LENGTH></td></tr>
+<tr><td>CONTENT_TYPE</td><td><#CONTENT_TYPE></td></tr>
+<tr><td>PATH_INFO</td><td><#PATH_INFO></td></tr>
+<tr><td>PATH_TRANSLATED</td><td><#PATH_TRANSLATED></td></tr>
+<tr><td>QUERY_STRING</td><td><#QUERY_STRING></td></tr>
+<tr><td>REMOTE_ADDR</td><td><#REMOTE_ADDR></td></tr>
+<tr><td>REMOTE_HOST</td><td><#REMOTE_HOST></td></tr>
+<tr><td>REMOTE_USER</td><td><#REMOTE_USER></td></tr>
+<tr><td>UNMAPPED_REMOTE_USER</td><td><#UNMAPPED_REMOTE_USER></td></tr>
+<tr><td>REQUEST_METHOD</td><td><#REQUEST_METHOD></td></tr>
+<tr><td>SCRIPT_NAME</td><td><#SCRIPT_NAME></td></tr>
+<tr><td>SERVER_NAME</td><td><#SERVER_NAME></td></tr>
+<tr><td>SERVER_PORT</td><td><#SERVER_PORT></td></tr>
+<tr><td>SERVER_PORT_SECURE</td><td><#SERVER_PORT_SECURE></td></tr>
+<tr><td>SERVER_PROTOCOL</td><td><#SERVER_PROTOCOL></td></tr>
+<tr><td>SERVER_SOFTWARE</td><td><#SERVER_SOFTWARE></td></tr>
+<tr><td>ALL_HTTP</td><td><#ALL_HTTP></td></tr>
+<tr><td>HTTP_ACCEPT</td><td><#HTTP_ACCEPT></td></tr>
+<tr><td>HTTP_USER_AGENT</td><td><#HTTP_USER_AGENT></td></tr>
+<tr><td>URL</td><td><#URL></td></tr>
+</table>
+<p>
+<br>Random = <#random>, <#random>, <#random>, <#random>, <#random>, <#random>
+<br>Random(6) = <#random max=6>
+<br>Random(42) = <#random max=42>
+<p>
+<#copyright>
+</body>
+</html>

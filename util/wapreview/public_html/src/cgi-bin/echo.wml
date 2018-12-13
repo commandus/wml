@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+##############################################################################
+#
+# Simple application to show GET and POST params
+# see http://wapreview.sourceforge.net
+#
+# Copyright (C) 2000 Robert Fuller, Applepie Solutions Ltd. 
+#                    <robert.fuller@applepiesolutions.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+##############################################################################
+#
+#
+$|=1;
+my $query = $ENV{QUERY_STRING};
+#$query =~ s/\%(..)/chr(hex($1))/eg;
+my %gets = split /[\=\&]/, $query;
+print "Content-type: text/vnd.wap.wml\n\n";
+print "<?xml version=\"1.0\"?>\n<!DOCTYPE wml PUBLIC \"-//WAPFORUM//DTD WML 1.1//EN\" \"http://www.wapforum.org/DTD/wml_1.1.xml\">\n";
+print '<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="parameters received">
+<p align="center"><b>GETs received:</b><br/>';
+my $gets = 0;
+foreach(sort keys(%gets)){
+    print "$_=[",$gets{$_},"]<br/>\n";
+    $gets++;
+}
+print "(none)<br/>\n" unless($gets);
+print "</p><p align=\"center\">\n<b>POSTs received</b><br/>\n";
+my $posts = 0;
+my ($key,$val);
+while(<>){
+    chomp;
+    ($key, $val) = split(/\=/,$_);
+    #$key =~s/\%(..)/chr(hex($1))/eg;
+    #$val=~s/\%(..)/chr(hex($1))/eg;
+    print "${key}=[",${val},"]<br/>";
+$posts++;
+}
+print "(none)<br/>\n" unless($posts);
+print "<br/></p></card></wml>";
+exit;

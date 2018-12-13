@@ -1,0 +1,57 @@
+/****************************************************************************
+
+
+  Copyright © 2001, 2002 Andrei Ivanov. All rights reserved.
+
+  Part of apoo editor (wmledit3) project
+
+  File: resource.rc
+  
+
+*****************************************************************************/
+#define HTML 23    // HTML resource identifier, used for html, gif and so on
+#define WML  WML   // WML resource identifier
+#define GIF  GIF   // GIF resource identifier
+#define JPEG JPEG  // JPEG resource identifier
+#define INI  INI   // INI file resource identifier
+#define CRD  CRD   // credit text resource identifier
+
+MAINICON	Icon	c32.ico
+16		Icon	c32.ico
+16s		Icon	c16.ico
+2		Icon	b32.ico
+2s		Icon	b16.ico
+
+cf		INI	cf.ini
+banner		GIF	banner.gif
+logo		GIF	logo.gif
+buttons16	GIF	buttons16.gif
+buttons24	GIF	buttons24.gif
+buttonsmenu	GIF	buttonsmenu.gif
+/*
+i1205205	GIF	i1205205.gif
+i5965851	GIF	i5965851.gif
+i54884		GIF	i54884.gif
+i43634		GIF	i43634.gif
+i890178		GIF	i890178.gif
+i1199311	GIF	i1199311.gif
+i1169313	GIF	i1169313.gif
+*/
+i_banner	JPEG	i_banner.jpg
+i_homer		JPEG	i_homer.jpg
+i_kenny		JPEG	i_kenny.jpg
+i_krusty	JPEG	i_krusty.jpg
+i_lisa		JPEG	i_lisa.jpg
+i_simpsons	JPEG	i_simpsons.jpg
+
+logo		HTML	i1199311.gif
+
+cover		GIF	cover.gif
+thumb		GIF	thumb.gif
+title		GIF	title.gif
+cover0		GIF	cover0.gif
+thumb0		GIF	thumb0.gif
+about		HTML	about.htm
+credit		CRD	credit.txt
+
+info1		GIF	info1.gif

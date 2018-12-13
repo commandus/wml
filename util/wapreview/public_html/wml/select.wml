@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card0" title="select lists">
+<p align="center">Choose one fruit:
+<select name="fruit">
+<option title="Orange" value="Orange"/>
+<option title="Apple" value="Apple"/>
+<option title="Banana" value="Banana"/>
+</select>
+<br/>Choose some colors:
+<select name="colors" value="green" multiple="true">
+<option title="red" value="red"/>
+<option title="orange" value="orange"/>
+<option title="green" value="green"/>
+<option title="violet" value="violet"/>
+</select>
+</p>
+<p align="center">
+<a href="#show">ok</a>
+</p>
+</card>
+<card id="show" title="select lists">
+<p>The fruits you picked were: [$fruit]
+<br/>Your colors are [$colors]
+</p>
+<p align="center"><a href="#card0">again</a><br/>
+<a href="demo.wml#demo">
+more demos</a></p>
+</card>
+</wml>

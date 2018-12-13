@@ -1,0 +1,52 @@
+
+<html>
+<head>
+<title>!doctype</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+
+<p><a name=doctype>!doctype</a> <img border="0" src="doctype.gif" width="24" height="24">
+<br id=doctypebrief>XML document type declaration. A valid WML deck is a valid XML document and therefore must contain document type declaration.&nbsp;
+
+
+<p><font FACE="Courier">
+Each XML document starts with XML declaration and
+</font>
+ document type declaration. For instance, if you use version WML 1.3 you
+must&nbsp;
+
+
+<font FACE="Courier">
+<p>&lt;?xml version=&quot;1.0&quot;?&gt;</p>
+<p>&lt;!DOCTYPE wml PUBLIC &quot;-//WAPFORUM//DTD WML 1.3//EN&quot;
+</font>
+ <font FACE="Courier">
+&quot;http://www.wapforum.org/DTD/wml13.dtd&quot;&gt;
+</font>
+</p>
+
+
+<p><font FACE="Courier"> XML declaration and
+</font>
+ document type declaration are part of the XML document named prologue and it is an error to omit the
+prologue.
+
+
+<p>Because only version number is changeable, you must set attribute version to
+1.0, 1.1, 1.2 or 1.3 in the <a href="windowattributes.htm">Element attributes
+window</a>.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=doctypeattr>
+<b>version</b>
+<br>specifies WML version and appropriate WML DTD document. Values 1.0, 1.1, 1.2
+or 1.3 are correct, but it is recommends to use version 1.1 or higher.
+</p>
+
+<p id="doctypeattr">See also: <a href="exml.htm">XML declaration</a></p>
+
+</body>
+</html>

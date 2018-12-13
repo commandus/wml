@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+<card id="faq" title="Ошибка 404">
+<p align="center">
+   <img src="../wwbyst.wbmp" alt="WinWAP"/>
+</p>
+<p>
+  <br/>
+  <big>Соединение со Шлюзом  WAP</big>
+  <br/>
+  <br/>
+  <b>Вопрос: </b>Как можно соединиться со шлюзом  WAP (то же, что мой мобильный телефон)?
+  <br/>
+  <br/>
+  <b>Ответ: </b>Вы можете соединиться со шлюзом  WAP, введя адрес шлюза и режим соединения из тэга Шлюз в опциях. Вы можете узнать у вашего оператора мобильной связи установки для его стандартного шлюза и добавить этот шлюз к селектору шлюзов.
+  <do label="Назад"> <go href="@prev"/> </do>
+  <do label="Интерактивные ЧЗВ  (FAQ)"> <go href="http://www.winwap.org/help/faq/index.wml"/> </do>
+</p>
+</card>
+</wml>

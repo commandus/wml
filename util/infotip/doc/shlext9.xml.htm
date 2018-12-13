@@ -1,0 +1,666 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    
+    <title>Руководство полного идиота по написанию расширений оболочки - Часть IX</title><meta name="robots" content="index,nofollow">
+    <link rel="stylesheet" href="shlext9.xml_files/article.css" type="text/css">
+    <script language="javascript" src="shlext9.xml_files/rsdn.js">
+    </script>
+    <script language="javascript" src="shlext9.xml_files/Forum.js">
+    </script></head>
+  <body marginheight="20" marginwidth="20"><!-- SpyLOG f:1211 -->
+<script language="javascript"><!--
+Mu="u1358.84.spylog.com";Md=document;Mnv=navigator;Mp=1;
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+My="";
+My+="<a href='http://"+Mu+"/cnt?cid=135884&f=3&p="+Mp+"&rn="+Mrn+"' target=_blank>";
+My+="<img src='http://"+Mu+"/cnt?cid=135884&"+Mz+"&r1="+escape(Md.referrer)+"&r="+escape(parent.document.referrer)+"&pg="+escape(window.location.href)+"' border=0 width=1 height=1 alt=' '>";
+My+="</a>";Md.write(My);//--></script><a href="http://u1358.84.spylog.com/cnt?cid=135884&amp;f=3&amp;p=1&amp;rn=0.09214745606652297" target="_blank"><img src="shlext9.xml_files/cnt.gif" alt=" " border="0" height="1" width="1"></a><noscript>
+<a href="http://u1358.84.spylog.com/cnt?cid=135884&f=3&p=1" target=_blank>
+<img src="http://u1358.84.spylog.com/cnt?cid=135884&p=1" alt=' ' border='0' width=1 height=1 >
+</a></noscript>
+<!-- SpyLOG -->
+
+<!-- HotLog -->
+<script language="javascript">
+hotlog_js="1.0";hotlog_d=document; hotlog_n=navigator;hotlog_rn=Math.random();
+hotlog_n_n=(hotlog_n.appName.substring(0,3)=="Mic")?0:1;
+hotlog_r=""+hotlog_rn+"&s=21251&r="+escape(hotlog_d.referrer)+"&pg="+
+escape(window.location.href);
+hotlog_d.cookie="hotlog=1"; hotlog_r+="&c="+(hotlog_d.cookie?"Y":"N");
+hotlog_d.cookie="hotlog=1; expires=Thu, 01-Jan-70 00:00:01 GMT"</script>
+<script language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")</script>
+<script language="javascript1.2">
+hotlog_js="1.2";hotlog_s=screen;
+hotlog_r+="&wh="+hotlog_s.width+'x'+hotlog_s.height+"&px="+((hotlog_n_n==0)?
+hotlog_s.colorDepth:hotlog_s.pixelDepth)</script>
+<script language="javascript1.3">hotlog_js="1.3"</script>
+<script language="javascript">hotlog_r+="&js="+hotlog_js;
+hotlog_d.write("<img src=\"http://hit2.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&\" border=0 width=1 height=1 alt=' '>")</script><img src="shlext9.xml_files/count.gif" alt=" " border="0" height="1" width="1">
+<noscript>
+<img src="http://hit2.hotlog.ru/cgi-bin/hotlog/count?s=21251" border=0 width=1 height=1 alt=' '>
+</noscript>
+<!-- /HotLog -->
+
+<!--begin of Rambler's Top100 code -->
+<a href="http://top100.rambler.ru/top100/">
+<img src="shlext9.xml_files/top100.gif" alt="" border="0" height="1" width="1"></a>
+<!--end of Top100 code-->
+
+<!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=555384;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="shlext9.xml_files/counter.gif" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=555384"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--><!--/COUNTER-->
+<table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext9.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext9.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext9.xml?print" target="_blank" title="Версия для печати"><img src="shlext9.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307560" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307560" target="_self" title="Перейти к обсуждению статьи"><img src="shlext9.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307560"><font color="#646464"><font size="1"> Оценка </font><font color="black">65</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307560" title="Добавить в избранное"><img onclick="AddFav(307560);return false;" src="shlext9.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307560)" title="Подписка на сообщения"><img class="i" src="shlext9.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-3" title="+1"><img onclick="RateMsg(307560,-3);return false;" src="shlext9.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=1" title="Интересно"><img onclick="RateMsg(307560,1);return false;" src="shlext9.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307560,2);return false;" src="shlext9.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=3" title="Супер"><img onclick="RateMsg(307560,3);return false;" src="shlext9.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307560,-1);return false;" src="shlext9.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307560,-4);return false;" src="shlext9.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307560,0);return false;" src="shlext9.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table><script language="javascript" src="shlext9.xml_files/orfo.js" type="text/javascript"></script><form name="orfo_form" target="orfo_frame" action="http://orphus.dklab.ru/" method="post"><input name="email" value="orfo@rsdn.ru" type="hidden"><input name="subject" value="Орфографическая ошибка" type="hidden"><input name="Referrer" value="" type="hidden"><input name="Address" value="" type="hidden"><input name="Context" value="" type="hidden"></form>	<iframe name="orfo_frame" valign="top" border="0" style="position: absolute; visibility: hidden;" height="1" width="1"></iframe><table bgcolor="#9999ff" border="0" cellpadding="0" cellspacing="0" width="1"><tbody><tr><td><a onclick="return orfo_imgclick()" target="_blank" href="http://orphus.dklab.ru/"><img src="shlext9.xml_files/orfo.gif" alt="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" title="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" __width="121" __height="21" border="0"></a></td></tr></tbody></table>
+<script language="javascript">
+function ToggleCode(id)
+{
+	el=document.getElementById(id);
+	img=document.getElementById("img"+id);
+	if(el.style.display=="none")
+	{
+	  img.src="/images/ls2.gif";
+	  el.style.display="";
+	}
+	else
+	{
+	img.src="/images/ls1.gif";
+	el.style.display="none";
+	}
+}
+</script><h1>Руководство полного идиота по написанию расширений оболочки - Часть IX<br><span class="subtitle">Руководство по написанию расширения для настройки иконок,  отображаемых для файлов заданного типа.
+</span></h1><h5><span class="title">Автор: </span><span class="value"><a target="_blank" href="mailto:mdunn@inreach.com" title="Отправить письмо">Michael Dunn</a></span><br><span class="title">Перевод: </span><span class="value">Инна Кирюшкина<br><a target="_blank" href="mailto:odissey@rsdn.ru" title="Отправить письмо">Алексей Кирюшкин</a></span><br><span class="title">Источник: </span><span class="value"><a target="_blank" title="Открыть в новом окне" href="http://www.codeproject.com/shell/shellextguide9.asp">The Code Project</a></span></h5><h6><span class="title">Опубликовано: </span><span class="value">05.02.2002</span><br><span class="title">Исправлено: </span><span class="value">12.01.2000</span><br><span class="title">Версия текста: </span><span class="value">1.0</span></h6><div style="margin-left: 2em;"><a href="#ENA"><b></b></a><br><div style="margin-left: 2em;"></div><a href="#ELA"><b>Введение</b></a><br><div style="margin-left: 2em;"></div><a href="#EJA"><b>Файловые иконки в Проводнике</b></a><br><div style="margin-left: 2em;"></div><a href="#EHA"><b>Использование AppWizard</b></a><br><div style="margin-left: 2em;"></div><a href="#EFA"><b>Интерфейс расширения</b></a><br><div style="margin-left: 2em;"><a href="#EHFA">Интерфейс инициализации</a><br><a href="#EFFA">Интерфейс IExtractIcon</a><br><a href="#EDFA">Извлечение методом 1</a><br><a href="#EBFA">Извлечение методом 2</a><br></div><a href="#EDA"><b>Регистрация расширения</b></a><br><div style="margin-left: 2em;"></div><a href="#EBA"><b>Продолжение следует...?</b></a><br><div style="margin-left: 2em;"></div></div><h2><a name="ENA"></a></h2>
+<a href="http://www.rsdn.ru/article/winshell/shlext9/ShellExtGuide9_demo.zip"><img src="shlext9.xml_files/fileA.gif" align="middle" border="0" height="11" width="28">Демонстрационный проект</a>
+<h2>Введение<a name="ELA"></a></h2>
+
+
+<p>Итак,  мы дошли до 9-й части! Эта статья также написана по просьбам читателей. Мы 
+обсудим  как показать пользовательскую иконку для всех файлов некоторого типа (в нашем случае - для
+текстовых файлов). Пример расширения будет работать на любой версии Windows 9x и NT/2000.
+(Я еще не использовал Me и не имел возможности протестировать в ней мой код,  но думаю, 
+там он тоже будет хорошо работать.)</p>
+
+<h2>Файловые иконки в Проводнике<a name="EJA"></a></h2>
+
+
+<p>Все знают,  что каждый тип файла представлен в Проводнике конкретной иконкой. BMP файлы
+показываются со значком "кисти в краске", HTML страницы - значком "страничка с логотипом IE"
+и т.д. Проводник определяет какую иконку использовать просматривая реестр и читая ключ под 
+HKEY_CLASSES_ROOT,  связанный с данным типом файлов. В результате использования этого метода
+одна иконка ассоциируется со всеми файлами конкретного типа.</p>
+
+<p>Однако это не единственный путь для задания вида иконки. Проводник позволяет настраивать 
+вид иконки от файла к файлу при помощи соответствующего расширения. Фактически такой пример уже встроен в Windows.
+Откройте в Проводнике каталог Windows (или любой другой каталог, содержащий много EXE файлов) и
+вы увидите,  что каждый EXE файл имеет собственную иконку. (За исключением EXE файлов, ресурсы
+которых не содержат иконок. Для них генерируется одна общая иконка.)</p>
+
+<p>Демонстрационный проект этой статьи - расширение,  отображающее для текстового файла
+одну из четырех иконок в зависимости от размера этого файла. Отображаются следующие иконки:</p>
+
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_1.gif" align="left"><br><i style="font-size: x-small;"></i></p> - 8K или больше
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_2.gif" align="left"><br><i style="font-size: x-small;"></i></p> - от 4K до 8K
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_3.gif" align="left"><br><i style="font-size: x-small;"></i></p> - от 1 байта до 4K
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_4.gif" align="left"><br><i style="font-size: x-small;"></i></p> - 0 байт
+
+<h2>Использование AppWizard<a name="EHA"></a></h2>
+
+
+<p>Запустите AppWizard и создайте новый ATL COM проект. Назовем его <strong>TxtFileIcons</strong>.
+Щелкните ОК, чтобы перейти к первому (и единственному) диалогу мастера. Сохраните все
+установки по умолчанию и щелкните Finish. Теперь у нас есть пустой ATL
+проект, который построит DLL, но нам необходимо еще добавить наш COM объект-расширение.
+В дереве ClassView щелкните правой кнопкой мыши на пункте <strong>TxtFileIcons classes</strong> и
+укажите <strong>New ATL Object</strong>.
+</p>
+
+<p>В мастере ATL Object на первой панели уже выбран <strong>Simple Object</strong>, поэтому просто 
+щелкните Next. На второй панели в поле редактирования Short Name введите <strong>TxtIconShlExt</strong>
+и щелкните ОК (остальные поля заполнятся автоматически). Эти действия создадут класс
+<strong>CTxtIconShlExt</strong>, который содержит основной код для реализации COM объектов. Мы 
+добавим наш код в этот класс.
+</p>
+
+
+<h2>Интерфейс расширения<a name="EFA"></a></h2>
+
+
+<p>Хэндлер иконок реализует два интерфейса, <strong>IPersistFile</strong> и <strong>IExtractIcon</strong>.
+Вспомните,  что <strong>IPersistFile</strong> используется,  чтобы инициализировать расширения, 
+которые оперируют одиночными файлами,  в отличии от <strong>IShellExtInit</strong>, 
+который предназначен для расширений,  действующих на всех отмеченных файлах сразу.
+<strong>IExtractIcon</strong> имеет два метода, оба они используются для информирования Проводника о том, какую иконку 
+использовать для данного файла.</p>
+
+<p>Имейте ввиду,  что Проводник создает COM объект, для каждого показываемого файла. Это
+означает,  что для каждого файла создается экземпляр класса C++. Попытайтесь
+избежать трудоемких операций,  требующих больших затрат времени в вашем расширении,  чтобы не замедлять 
+появление интерфейса Проводника.</p>
+
+<h3>Интерфейс инициализации<a name="EHFA"></a></h3>
+
+
+<p>Чтобы добавить поддержку <strong>IPersistFile</strong> к нашему COM объекту, откройте <strong>TxtIconShlExt.h</strong>
+и добавьте выделенные строки:</p>
+
+<div id="EDHFA"><table class="code" width="98%"><tbody><tr><td><pre><strong><span class="PREPROCESSOR">#include</span> &lt;comdef.h&gt;
+<span class="PREPROCESSOR">#include</span> &lt;shlobj.h&gt;
+<span class="PREPROCESSOR">#include</span> &lt;atlconv.h&gt;</strong>
+
+<span class="COMMENT">/////////////////////////////////////////////////////////////////////////////</span>
+<span class="COMMENT">// CTxtIconShlExt</span>
+
+<span class="KEYWORD">class</span> ATL_NO_VTABLE CTxtIconShlExt : 
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CTxtIconShlExt, &amp;CLSID_TxtIconShlExt&gt;,
+    <span class="KEYWORD">public</span> IDispatchImpl&lt;ITxtIconShlExt, &amp;IID_ITxtIconShlExt, &amp;LIBID_TXTFILEICONSLib&gt;,
+    <strong><span class="KEYWORD">public</span> IPersistFile</strong>
+{
+BEGIN_COM_MAP(CTxtIconShlExt)
+    COM_INTERFACE_ENTRY(ITxtIconShlExt)
+    COM_INTERFACE_ENTRY(IDispatch)
+    <strong>COM_INTERFACE_ENTRY(IPersistFile)</strong>
+END_COM_MAP()
+
+<span class="KEYWORD">public</span>:
+    <strong><span class="COMMENT">// IPersistFile</span>
+    STDMETHOD(GetClassID)( CLSID* )       { <span class="KEYWORD">return</span> E_NOTIMPL; }
+    STDMETHOD(IsDirty)()                  { <span class="KEYWORD">return</span> E_NOTIMPL; }
+    STDMETHOD(Save)( LPCOLESTR, BOOL )    { <span class="KEYWORD">return</span> E_NOTIMPL; }
+    STDMETHOD(SaveCompleted)( LPCOLESTR ) { <span class="KEYWORD">return</span> E_NOTIMPL; }
+    STDMETHOD(GetCurFile)( LPOLESTR* )    { <span class="KEYWORD">return</span> E_NOTIMPL; }
+    STDMETHOD(Load)( LPCOLESTR wszFile, DWORD <span class="COMMENT">/*dwMode*/</span> )
+        { 
+        USES_CONVERSION;
+        lstrcpyn ( m_szFilename, OLE2CT(wszFile), MAX_PATH );
+        <span class="KEYWORD">return</span> S_OK;
+        }
+
+<span class="KEYWORD">protected</span>:
+    TCHAR     m_szFilename [MAX_PATH];  <span class="COMMENT">// Полный путь к рассматриваемому файлу </span>
+    DWORDLONG m_ldwFileSize;            <span class="COMMENT">// Размер файла; Используется при извлечении методом 2.</span>
+   </strong>
+};</pre></td></tr></tbody></table></div>
+
+<p>Как и в других расширениях, которые используют <strong>IPersistFile</strong>, только один метод нуждается 
+в реализации - <strong>Load()</strong>,  поскольку с помощью него Проводник сообщает нам,  с каким файлом мы работаем.
+Реализация <strong>Load()</strong> сделана inline,  это просто копирование имени файла в переменную
+<strong>m_szFilename</strong> для дальнейшего использования.</p>
+
+
+
+<h3>Интерфейс IExtractIcon<a name="EFFA"></a></h3>
+
+
+<p>Хэндлер иконок также реализует интерфейс <strong>IExtractIcon</strong>, который Проводник вызывает,  когда
+ему нужна иконка для файла. Поскольку наше расширение предназначено для текстовых файлов, Проводник вызывает
+<strong>IExtractIcon</strong> как только текстовый файл появится в его окне или меню "Start" ("Пуск"). Чтобы добавить
+<strong>IExtractIcon</strong> к нашему COM объекту откройте  <strong>TxtIconShlExt.h</strong> и добавьте выделенные строки:
+</p>
+
+<div id="EHFFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="COMMENT">/////////////////////////////////////////////////////////////////////////////</span>
+<span class="COMMENT">// CTxtIconShlExt</span>
+
+<span class="KEYWORD">class</span> ATL_NO_VTABLE CTxtIconShlExt : 
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CTxtIconShlExt, &amp;CLSID_TxtIconShlExt&gt;,
+    <span class="KEYWORD">public</span> IDispatchImpl&lt;ITxtIconShlExt, &amp;IID_ITxtIconShlExt, &amp;LIBID_TXTFILEICONSLib&gt;,
+    <span class="KEYWORD">public</span> IPersistFile,
+    <strong><span class="KEYWORD">public</span> IExtractIcon</strong>
+{
+BEGIN_COM_MAP(CTxtIconShlExt)
+    COM_INTERFACE_ENTRY(ITxtIconShlExt)
+    COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IPersistFile)
+    <strong>COM_INTERFACE_ENTRY(IExtractIcon)</strong>
+END_COM_MAP()
+
+<span class="KEYWORD">public</span>:
+    <strong><span class="COMMENT">// IExtractIcon</span>
+    STDMETHOD(GetIconLocation)( UINT uFlags, LPTSTR szIconFile, UINT cchMax,
+                                <span class="KEYWORD">int</span>* piIndex, UINT* pwFlags );
+    STDMETHOD(Extract)( LPCTSTR pszFile, UINT nIconIndex, HICON* phiconLarge,
+                        HICON* phiconSmall, UINT nIconSize );</strong>
+};</pre></td></tr></tbody></table></div>
+
+<p>Есть два способа передать иконку Проводнику. Во-первых, <strong>GetIconLocation()</strong> может
+вернуть пару имя_файла/индекс,  которая состоит из имени файла содержащего иконку и начинающегося с 0
+индекса иконки в этом файле. Например, C:\windows\system\shell32.dll/9 одно из возможных значений, 
+которое говорит Проводнику использовать иконку #9 (считая с 0) из shell32.dll. Это не означает
+использовать иконку чей идентификатор ресурса равен 9, это означает просмотреть идентификаторы 
+ресурсов иконок по порядку (от меньшего к большему) и использовать девятый. Метод <strong>Extract()</strong>
+при этом ничего не делает,  кроме возврата S_FALSE, чтобы сообщить Проводнику, что ему самому нужно 
+извлечь иконку.</p>
+
+<p>Особенностью этого метода является то,  что Проводник может вызвать,  а может и не вызывать 
+<strong>Extract()</strong> после вызова <strong>GetIconLocation()</strong>. У Проводника есть кэш иконок,  в котором 
+хранятся недавно использованные исконки. Если <strong>GetIconLocation()</strong> передает пару - имя файла/индекс, 
+которая недавно использовалась и иконка все еще в кэше,  Проводник извлечет иконку от туда и не 
+будет вызывать <strong>Extract()</strong> поскольку в этом нет необходимости.</p>
+
+<p>Второй метод заключается в том,  чтобы вернуть из <strong>GetIconLocation()</strong> флаг 
+"не смотреть в кэш", заставляющий Проводник всегда вызывать <strong>Extract()</strong>. Далее уже 
+<strong>Extract()</strong> отвечает за загрузку иконки и возврат дескрипторов (HICON) большой (32х32) и малой 
+(16х16) иконок для использования Проводником.
+ </p>
+
+
+
+<h3>Извлечение методом 1<a name="EDFA"></a></h3>
+
+
+<p>Первый вызываемый метод <strong>IExtractIcon</strong> - <strong>GetIconLocation()</strong>. Эта функция просматривает файл
+(чье имя было сохранено в <strong>IPersistFile::Load()</strong>) и возвращает пару имя файла/индекс, 
+как это обсуждалось выше. Вот прототип <strong>GetIconLocation()</strong>:</p>
+
+<div id="E0RB0DFA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT IExtractIcon::GetIconLocation (
+    UINT   uFlags,
+    LPTSTR szIconFile,
+    UINT   cchMax,
+    <span class="KEYWORD">int</span>*   piIndex,
+    UINT*  pwFlags );
+</pre></td></tr></tbody></table></div>
+
+<p>Параметры:</p>
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<li>
+<strong>uFlags</strong><br>
+Некоторые флаги, которые могут изменить поведение расширения. <strong>GIL_ASYNC</strong> передается, 
+чтобы запросить,  не займет ли процесс извлечения много времени. Если так, расширение может запросить 
+извлечение в фоновом потоке, чтобы не задерживать интерфейс Проводника.
+Другие флаги,  <strong>GIL_FORSHELL</strong> и <strong>GIL_OPENICON</strong>, кажется имеют значение только для
+расширений пространства имен.<br> Нам не стоит беспокоиться насчет флагов, поскольку наш код не 
+требует больших затрат времени на выполнение.
+</li><br>
+
+<li>
+<strong>szIconFile, cchMax</strong><br>
+<strong>szIconFile</strong> - буфер, предоставленный оболочкой, в который помещается имя файла, содержащего
+иконку для использования проводником. <strong>cchMax</strong> - размер буфера в символах.
+</li><br>
+
+<li>
+<strong>piIndex</strong><br>
+Указатель на int,  в котором мы сохраним индекс иконки в файле (чье имя мы внесли в <strong>szIconFile</strong>)
+</li><br>
+
+<li>
+<strong>pwFlags</strong><br>
+Указатель на UINT, в котором мы можем передать флаги, изменяющие поведение Проводника. Эти флаги описаны ниже.
+</li><br>
+
+</ul>
+
+<p>
+<strong>GetIconLocation()</strong> заполняет параметры <strong>szIconFile</strong> и <strong>piIndex</strong> и возвращает S_OK.
+Можно также вернуть S_FALSE, если мы все-же решим, что не хотим обеспечивать указанную иконку.
+В этом случае Проводник установит иконку "неизвестный файл": 
+</p>
+
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_5.gif"><br><i style="font-size: x-small;"></i></p> 
+
+<p>
+В параметре <strong>pwFlags</strong> Проводнику могут быть переданы следующие флаги:
+</p>
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<li>
+<strong>GIL_DONTCACHE</strong><br>
+Сообщает Проводнику, что не надо проверять кэш иконок. В результате всегда будет вызываться
+<strong>IExtractIcon::Extract()</strong>. Я расскажу об этом флаге подробнее позже, когда буду описывать
+извлечение методом 2.
+</li><br>
+
+<li>
+<strong>GIL_NOTFILENAME</strong><br>
+Согласно MSDN, этот флаг требует от Проводника проигнорировать пару <strong>szIconFile/piIndex</strong>, 
+возвращаемую <strong>GetIconLocation()</strong>. Очевидно, таким образом расширения должны заставить 
+Проводник всегда вызывать <strong>IExtractIcon::Extract()</strong>, однако этот флаг никак не влияет 
+на то, что происходит после возврата из <strong>GetIconLocation()</strong>.
+</li><br>
+
+<li>
+<strong>GIL_SIMULATEDOC</strong><br>
+Этот флаг заставляет Проводник взять исконку, переданную расширением, вставить ее внутрь
+иконки в виде чистого листочка и использовать то что получилось как иконку для файла. Я
+продемонстрирую работу этого флага позже. 
+</li>
+
+</ul>
+
+<p>В методе 1 <strong>GetIconLocation()</strong> получает размер файла и основываясь на нем 
+возвращает индекс от 0 до 3 включительно. У этого метода есть один недостаток - нам нужно
+отслеживать ID ресурсов и быть уверенным, что они в правильном порядке. Наше расширение
+имеет только 4 иконки, так что эта бухгалтерия не сложна, но если иконок будет больше, или
+вы будете удалять и добавлять иконки в вашем проекте, вы должны будете внимательно следить
+за идентификаторами ваших ресурсов.
+</p>
+
+<p>Вот реализация нашей функции <strong>GetIconLocation()</strong>. Сначала мы открываем файл и 
+получаем его размер. Если при этом произойдет ошибка, мы вернем S_FALSE и Проводник будет 
+использовать иконку по умолчанию.
+</p>
+
+<div id="E6DFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CTxtIconShlExt::GetIconLocation (
+    UINT   uFlags,
+    LPTSTR szIconFile,
+    UINT   cchMax,
+    <span class="KEYWORD">int</span>*   piIndex,
+    UINT*  pwFlags )
+{
+DWORD     dwFileSizeLo, dwFileSizeHi;
+DWORDLONG ldwSize;
+HANDLE    hFile;
+
+    hFile = CreateFile ( m_szFilename, GENERIC_READ, FILE_SHARE_READ, NULL,
+                         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL );
+
+    <span class="KEYWORD">if</span> ( INVALID_HANDLE_VALUE == hFile )
+        <span class="KEYWORD">return</span> S_FALSE;   <span class="COMMENT">// Сообщаем оболочке, что нужно использовать иконку по умолчанию</span>
+                                        
+    dwFileSizeLo = GetFileSize ( hFile, &amp;dwFileSizeHi );
+
+    CloseHandle ( hFile );
+
+    <span class="KEYWORD">if</span> ( (DWORD) -<span class="NUMBER">1</span> == dwFileSizeLo  &amp;&amp;  GetLastError() != NO_ERROR )
+        <span class="KEYWORD">return</span> S_FALSE;   <span class="COMMENT">// Сообщаем оболочке, что нужно использовать иконку по умолчанию</span>
+                                        
+
+    ldwSize = ((DWORDLONG) dwFileSizeHi)&lt;&lt;<span class="NUMBER">32</span> | dwFileSizeLo;
+</pre></td></tr></tbody></table></div>
+
+<p>Далее мы получаем путь к нашей DLL,  поскольку иконки находятся в ней и
+копируем его в буффер <strong>szIconFile</strong>.
+</p>
+
+<div id="E2DFA"><table class="code" width="98%"><tbody><tr><td><pre>TCHAR szModulePath[MAX_PATH];
+
+    GetModuleFileName ( _Module.GetModuleInstance(), szModulePath, MAX_PATH );
+    lstrcpyn ( szIconFile, szModulePath, cchMax );
+</pre></td></tr></tbody></table></div>
+
+<p>На следующем шаге мы проверяем размер файла и записываем в <strong>piIndex</strong> индекс иконки, 
+соответствующей этому размеру.
+</p>
+
+<div id="EXDFA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> == ldwSize )
+        *piIndex = <span class="NUMBER">0</span>;
+    <span class="KEYWORD">else</span> <span class="KEYWORD">if</span> ( ldwSize &lt; <span class="NUMBER">4096</span> )
+        *piIndex = <span class="NUMBER">1</span>;
+    <span class="KEYWORD">else</span> <span class="KEYWORD">if</span> ( ldwSize &lt; <span class="NUMBER">8192</span> )
+        *piIndex = <span class="NUMBER">2</span>;
+    <span class="KEYWORD">else</span> 
+        *piIndex = <span class="NUMBER">3</span>;
+</pre></td></tr></tbody></table></div>
+
+<p>В конце мы устанавливаем <strong>pwFlags</strong> в 0, чтобы получить от Проводника поведение по
+умолчанию. Это означает, что он проверит кэш иконок, чтобы определить, есть ли иконка
+<strong>szIconFile/piIndex</strong> в кэше, и, если да, то <strong>IExtractIcon::Extract()</strong> вызываться не будет.
+Мы возвращаем S_OK чтобы показать, что <strong>GetIconLocation()</strong> завершилась успешно.
+</p>
+
+<div id="ETDFA"><table class="code" width="98%"><tbody><tr><td><pre>    *pwFlags = <span class="NUMBER">0</span>;
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+
+<p>Поскольку мы сообщили Проводнику, где найти иконку, наша реализация <strong>Extract()</strong>
+возвращает S_FALSE, чтобы он самостоятельно извлек иконку. Параметры <strong>Extract()</strong>
+я буду обсуждать в следующем разделе.
+</p>
+
+<div id="EPDFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CTxtIconShlExt::Extract (
+    LPCTSTR pszFile, 
+    UINT    nIconIndex, 
+    HICON*  phiconLarge,
+    HICON*  phiconSmall,
+    UINT    nIconSize )
+{
+    <span class="KEYWORD">return</span> S_FALSE;   <span class="COMMENT">// Сообщаем оболочке что извлечение ей нужно сделать самостоятельно</span>
+}
+</pre></td></tr></tbody></table></div>
+
+<p>И вот как выглядят наши иконки в действии:
+</p>
+
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_6.gif"><br><i style="font-size: x-small;"></i></p>
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_7.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>Если изменить <strong>GetIconLocation()</strong> так чтобы <strong>pwFlags</strong> был установлен в
+<strong>GIL_SIMULATEDOC</strong>, иконки будут выглядеть так:
+</p>
+
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_8.gif"><br><i style="font-size: x-small;"></i></p>
+<p style="text-align: center;"><img src="shlext9.xml_files/ShellExtGuide9_9.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>Заметьте,  что в режиме больших иконок использована маленькая версия нашей иконки (16х16).
+При просмотре в режиме мелких значков Проводник дополнительно уменьшает нашу маленькую 
+иконку, что выглядит не очень красиво.
+</p>
+
+
+
+<h3>Извлечение методом 2<a name="EBFA"></a></h3>
+
+
+<p>Метод 2 заключается в том, что наше расширение само извлекает иконки, игнорируя  
+кэш иконок Проводника. При использовании этого метода функция <strong>IExtractIcon::Extract()</strong> всегда вызывается
+и именно она отвечает за загрузку иконок и возврат двух HICON Проводнику - для большой и для маленькой иконок.
+Достоинства этого метода заключаются в том, что вам не нужно волноваться об упорядочивании идентификаторов
+ресурсов ваших иконок. Оборотная сторона заключается в том,  что не используется кэш
+иконок Проводника, что предположительно должно несколько замедлять загрузку списка файлов в окно Проводника, 
+если вы зайдете в каталог
+со множеством текстовых файлов.
+</p>
+
+<p><strong>GetIconLocation()</strong> подобна реализованой в методе 1, но делает меньше работы, т.к.
+нужно только получить размер файла.
+</p>
+
+<div id="EXBFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CTxtIconShlExt::GetIconLocation (
+    UINT   uFlags,
+    LPTSTR szIconFile,
+    UINT   cchMax,
+    <span class="KEYWORD">int</span>*   piIndex,
+    UINT*  pwFlags )
+{
+DWORD  dwFileSizeLo, dwFileSizeHi;
+HANDLE hFile;
+
+    hFile = CreateFile ( m_szFilename, GENERIC_READ, FILE_SHARE_READ, NULL,
+                         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL );
+
+    <span class="KEYWORD">if</span> ( INVALID_HANDLE_VALUE == hFile )
+        <span class="KEYWORD">return</span> S_FALSE;   <span class="COMMENT">// Сообщаем оболочке, что нужно использовать иконку по умолчанию</span>
+
+    dwFileSizeLo = GetFileSize ( hFile, &amp;dwFileSizeHi );
+
+    CloseHandle ( hFile );
+
+    <span class="KEYWORD">if</span> ( (DWORD) -<span class="NUMBER">1</span> == dwFileSizeLo  &amp;&amp;  GetLastError() != NO_ERROR )
+        <span class="KEYWORD">return</span> S_FALSE;   <span class="COMMENT">// Сообщаем оболочке, что нужно использовать иконку по умолчанию</span>
+
+    m_ldwFileSize = ((DWORDLONG) dwFileSizeHi)&lt;&lt;<span class="NUMBER">32</span> | dwFileSizeLo;
+</pre></td></tr></tbody></table></div>
+
+<p>Как только мы сохраним размер файла,  устанавливаем <strong>pwFlags</strong> в <strong>GIL_DONTCACHE</strong>, 
+чтобы сообщить Проводнику, что ему не нужно проверять кэш иконок. Этот флаг необходим, т.к.
+мы не заполнили <strong>szIconFile/piIndex</strong> и нам нужно, чтобы Проводник их проигнорировал.
+</p>
+
+<p>Флаг <strong>GIL_NOTFILENAME</strong> также устанавливается, хотя в текущих версиях оболочки
+он не имеет эффекта. Согласно документации его цель - сообщить Проводнику, что мы не 
+заполнили пару <strong>szIconFile/piIndex</strong>, но т.к. использование этого флага является
+бессмысленным (мы не дали Проводнику других данных для извлечения), то похоже, что он
+не проверяется Проводником.
+Но, так или иначе,  это хорошая идея - выставить этот флаг на случай,  если будущие версии 
+оболочки будут проверять его наличие.
+</p>
+
+<div id="ERBFA"><table class="code" width="98%"><tbody><tr><td><pre>    *pwFlags = GIL_NOTFILENAME | GIL_DONTCACHE;
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+<p>Теперь посмотрим внимательнее на <strong>Extract()</strong>. Вот ее прототип:
+</p>
+
+<div id="ENBFA"><table class="code" width="98%"><tbody><tr><td><pre>HRESULT IExtractIcon::Extract (
+    LPCTSTR pszFile, 
+    UINT    nIconIndex, 
+    HICON*  phiconLarge,
+    HICON*  phiconSmall,
+    UINT    nIconSize );
+</pre></td></tr></tbody></table></div>
+
+<p>Параметры:</p>
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<li>
+<strong>pszFile/nIconIndex</strong><br>
+Имя файла и индекс,  определяющие метонахождение иконки. Это те же самые значения, которые были возвращены из
+<strong>GetIconLocation()</strong>.
+</li><br>
+
+<li>
+<strong>phiconLarge, phiconSmall</strong><br>
+Указатели на HICON, которые <strong>Extract()</strong> должен установить на дескрипторы большой и маленькой
+иконок.
+</li><br>
+
+<li>
+<strong>nIconSize</strong><br>
+Указывает требуемые размеры иконок. Старшее слово определяет размеры (высоту и ширину, 
+т.к. они одинаковы) маленькой иконки, а младшее слово - размеры большой иконки. При нормальных
+обстоятельствах это будет 0x00100020 (старшее слово 16, младшее - 32), указывающее что требуется
+маленькая иконка 16х16 и большая 32х32.
+</li><br>
+
+</ul>
+
+<p>В нашем расширении мы не заполняли пару  имя/индекс в <strong>GetIconLocation()</strong>, 
+так что можно проигнорировать <strong>pszFile</strong> и  <strong>nIconIndex</strong>. Мы просто загружаем
+две иконки (какие - зависит от размера txt файла) и передаем их Проводнику.
+</p>
+
+<div id="EFBFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CTxtIconShlExt::Extract ( 
+    LPCTSTR pszFile,
+    UINT    nIconIndex, 
+    HICON*  phiconLarge,
+    HICON*  phiconSmall,
+    UINT    nIconSize )
+{
+UINT uIconID;
+
+    <span class="COMMENT">// Определить используемую иконку, исходя из размера файла</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> == m_ldwFileSize )
+        uIconID = IDI_ZERO_BYTES;
+    <span class="KEYWORD">else</span> <span class="KEYWORD">if</span> ( m_ldwFileSize &lt; <span class="NUMBER">4096</span> )
+        uIconID = IDI_UNDER_4K;
+    <span class="KEYWORD">else</span> <span class="KEYWORD">if</span> ( m_ldwFileSize &lt; <span class="NUMBER">8192</span> )
+        uIconID = IDI_UNDER_8K;
+    <span class="KEYWORD">else</span> 
+        uIconID = IDI_OVER_8K;
+
+    <span class="COMMENT">// Загружаем иконки</span>
+    *phiconLarge = (HICON) LoadImage ( _Module.GetResourceInstance(), 
+                                       MAKEINTRESOURCE(uIconID), IMAGE_ICON,
+                                       <span class="NUMBER">32</span>, <span class="NUMBER">32</span>, LR_DEFAULTCOLOR );
+
+    *phiconSmall = (HICON) LoadImage ( _Module.GetResourceInstance(), 
+                                       MAKEINTRESOURCE(uIconID), IMAGE_ICON,
+                                       <span class="NUMBER">16</span>, <span class="NUMBER">16</span>, LR_DEFAULTCOLOR );
+
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+<p>И вот оно! Проводник показывает иконки, которые мы ему передали.
+</p>
+
+<p>Еще одну вещь надо отметить при использовании метода 2 - установка флага
+<strong>GIL_SIMULATEDOC</strong> в <strong>GetIconLocation()</strong> не имеет никакого эффекта.
+</p>
+
+
+
+<h2>Регистрация расширения<a name="EDA"></a></h2>
+
+
+<p>Хэндлер иконок регистрируется под ключом типа файлов, для которого он
+предназначен, в нашем случае это <strong>HKCR\txtfile</strong>. Как и для других расширений
+используется ключ <strong>ShellEx</strong> под <strong>txtfile</strong>. Затем следует ключ <strong>IconHandler</strong>. 
+Значение умолчанию для этого ключа - GUID расширения. Заметьте, что может быть только один
+хэндлер иконок для каждого типа файлов. Мы также должны изменить значение ключа
+<strong>DefaultIcon</strong> на "%1",  чтобы наш обработчик был задействован.
+</p>
+
+<p>Вот RGS сценарий регистрации расширения:
+</p>
+
+<div id="EHDA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove txtfile
+    {
+        NoRemove DefaultIcon = s <span class="CHARACTER">'%%1'</span>
+        NoRemove ShellEx
+        {
+            ForceRemove IconHandler = s <span class="CHARACTER">'{DF4F5AE4-E795-4C12-BC26-7726C27F71AE}'</span>
+        }
+    }
+}
+</pre></td></tr></tbody></table></div>
+
+<p>Отметим, что для того, чтобы определить строку "%1", мы должны писать
+в RGS файле "%%1", т.к. <strong>%</strong> это спецсимвол, используемый для указания заменяемых параметров 
+(например "%MODULE%").
+</p>
+
+<p>Тот факт, что мы перезаписываем существующее значение <strong>DefaultIcon</strong> имеет
+большое значение. Как нам правильно деинсталировать свое расширение, если мы уничтожили
+старое значение <strong>DefaultIcon</strong>? Выход в том, что мы сохраняем значение <strong>DefaultIcon</strong>
+в <strong>DllRegisterServer()</strong> и восстанавливаем его в <strong>DllUnregisterServer()</strong>. Мы
+<strong>должны</strong> сделать это в процессе деинсталляции и оставить иконки текстовых файлов такими, 
+какими они были до нашего вмешательства.
+</p>
+
+<p>Посмотрите код функций регистрации/разрегистрации чтобы увидеть как они работают.
+Отметим, что мы делали сохранение перед вызовом ATL для выполнения RGS скрипта, поскольку
+если мы сделаем по другому, значение <strong>DefaultIcon</strong> будет перезаписано прежде, чем мы
+получить возможность сохранить его.
+</p>
+
+
+<h2>Продолжение следует...?<a name="EBA"></a></h2>
+
+
+<p>
+Если у вас есть идеи для будущих статей по расширениям оболочки, сообщите мне на email (и на 
+<a href="http://www.codeproject.com/shell/shellextguide9.asp">CodeProject</a> объявите тоже, 
+чтобы другие могли обсудить ваше предложение).
+</p>
+
+<div align="right"><font style="font-family: arial; font-size: 9pt; color: rgb(128, 136, 160);"><i><hr color="#8088a0" size="1" width="100%">
+                Любой из материалов, опубликованных на этом сервере, не может быть воспроизведен в какой бы
+                то ни было форме и какими бы то ни было средствами без письменного разрешения владельцев авторских
+                прав. 
+             </i></font></div><table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext9.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext9.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext9.xml?print" target="_blank" title="Версия для печати"><img src="shlext9.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307560" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307560" target="_self" title="Перейти к обсуждению статьи"><img src="shlext9.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307560"><font color="#646464"><font size="1"> Оценка </font><font color="black">65</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307560" title="Добавить в избранное"><img onclick="AddFav(307560);return false;" src="shlext9.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307560)" title="Подписка на сообщения"><img class="i" src="shlext9.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-3" title="+1"><img onclick="RateMsg(307560,-3);return false;" src="shlext9.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=1" title="Интересно"><img onclick="RateMsg(307560,1);return false;" src="shlext9.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307560,2);return false;" src="shlext9.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=3" title="Супер"><img onclick="RateMsg(307560,3);return false;" src="shlext9.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307560,-1);return false;" src="shlext9.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307560,-4);return false;" src="shlext9.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307560&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307560,0);return false;" src="shlext9.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table></body></html>

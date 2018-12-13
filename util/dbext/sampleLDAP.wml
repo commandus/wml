@@ -1,0 +1,37 @@
+<wml>
+  <card id="card1" title="First Card" newcontext="true">
+    <serverside action="db" opt="ldap">
+      host="localhost";port="389";binddn="";bindpwd="";basedn="dc=ensen,dc=ru"  
+    </serverside>
+    <serverside dataset="dsdept" action="query">
+      uid=ivanov  
+    </serverside>
+    <serverside dataset="dsemp" action="query">
+      uid=ivanov  
+    </serverside>
+    <serverside action="send" opt="cookie">  
+      "name=Andrei Ivanov","pwd=password"  
+    </serverside>
+    <p loop="cookie">
+      Today $(today). Cookie name: "$(name)" pwd: "$(pwd)" Select an application
+      -- Begin --
+    </p>
+    <p id="$(dsdept.displayname)" loop="dsdept">
+      <b>
+        mail: $(dsdept.mail)
+        phone: $(dsdept.telephoneNumber)     
+      </b>
+      <br/>
+      <table columns="1">
+        <tr id="$(dsemp.emp_no)" loop="dsemp">
+          <td>
+            $(dsemp.Last_Name), $(dsemp.First_Name)
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      -- End --
+    </p>
+  </card>
+</wml>

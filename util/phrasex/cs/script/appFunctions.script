@@ -1,0 +1,22 @@
+// appFunctions.script : application specific functions 
+//                       for PT7-Support
+
+function getDispatcher(product)
+  sql sqlProductInfo = 
+    'SELECT name, dispatcher FROM pt7cs_product '
+    'WHERE name = \'' + arg.product + '\'';
+  return sqlProductInfo.dispatcher;
+endfunction
+
+function getAllStaffEmails(product)
+  set local.allEmails = '';
+  // HelpDesk and CustomerSupport has only one team for all products
+  sql sqlStaff = 
+    'SELECT DISTINCT email FROM pt7cs_user '
+    'WHERE status <> \'disabled\' AND user_type <> \'EndUser\' ';
+  while (sqlStaff.fetch)
+    set local.allEmails = local.allEmails + sqlStaff.email + ';';
+  endwhile
+  sqlStaff.close;
+  return local.allEmails;
+endfunction

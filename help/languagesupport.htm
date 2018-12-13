@@ -1,0 +1,109 @@
+
+<html>
+<head>
+<title>National languages support
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>National languages support</h1>
+
+<p> The ASCII set of 128 characters includes upper-case and lower-case letters of the
+English alphabet, numbers, punctuation, and 33 control codes. Numerous extensions to ASCII have been
+devised and quite a few have become national or international standards. Notable among them is a family of international standards, ISO-8859, that
+defines extensions appropriate to certain language groups.
+</p>
+
+<p> Unicode version 2 uses 16 bits instead 7 or 8 bits of ASCII or extended ASCII.
+The&nbsp; character repertory and the codes assigned in Unicode are identical to those specified by ISO 10646,
+the international Universal Character Set (UCS) standard.&nbsp;
+</p>
+
+<p> If wml deck contains text in some different languages, specify utf-8
+encoding, for instance:
+</p>
+
+<p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+</p>
+
+<p>In this sample content encoding specifies a particular Unicode encoding of
+wml deck. It allows use any unicode characters. Otherwise, you can indicate one
+of non- unicode encodings, for instance:
+</p>
+
+<p> &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-2&quot;?&gt;
+</p>
+
+<p>In this case you are limited by iso-8859-2 specification. The editor displays
+Unicode characters well so there are no reasons to use some iso-8859
+international standards instead more flexible utf-8 encoding. If you prefer to
+use a particular code page, please see list of&nbsp; <a href="codepages.htm">Supported
+code pages</a>. In the bottom-
+right edge of the code editor window you can see current wml deck encoding, as
+shown below.&nbsp;
+</p>
+
+<p><img border="0" src="shot10.gif" width="300" height="117">
+</p>
+
+<p>While you compile wml deck to wmlc, specified in wml deck encoding (more
+strictly, xml description tag &lt;?xml&gt;) is used. If you do not set up <i>encoding</i>
+attribute, <i>unknown</i> encoding is used. But the editor must to know what
+encoding will be used.&nbsp;
+</p>
+
+<p>To change default character set encoding (<i>unknown</i>), select <i>Options</i>
+- <i>Preferences</i> menu. The Preferences dialog appears. Select <i>General</i>
+tab, select one of characters set as shown below.
+</p>
+
+<p><img border="0" src="shot07.gif" width="510" height="401"></p>
+<p>Note the editor font must supports national symbols of languages you uses.
+Therefore do not change default <i>Courier New</i> font in editor preferences to
+non- true type font like <i>Courier</i>. Windows true- type fonts <i>Times New
+Roman</i>, <i>Courier New</i> and some others can contain different sets of
+unicode characters depending what localization of the Widows do you have. If you
+use just ANSI and OEM characters set (depending on system localization) and no
+others, you can use any fonts like <i>FixedSys</i>, <i>MS SansSerif.</i></p>
+<p>Some elements like <b>go</b> element uses accept-charset attribute, for
+instance:&nbsp;</p>
+<p>&lt;go accept-charset=&quot;iso-8859-2&quot; ...&gt;</p>
+<p>In this sample attribute <i>accept-charset</i> specifies the list of character encodings for
+data that the web server must accept when processing input. The default value is<br>
+<i>unknown</i>. The user agent uses the character encoding that was used to transmit the WML
+deck containing this attribute.</p>
+<p>In addition to unicode encoding support feature in xml, wml implements
+internal national- language support mechanism. Following this way, you can
+create different parts of the wml deck in different character set using xml:lang
+attribute. To do this, set up xml:lang&nbsp; attributes of wml elements to
+language shortcut, for instance, en-us for english- american.</p>
+<p>To simplify entering most useful language and country abbreviation in the
+Attribute window, you can select them from list of countries and languages
+supports by your version of Windows in the Preferences dialog window:</p>
+<p><img border="0" src="shot08.gif" width="510" height="401"></p>
+<p>Select tab Languages support and mark up languages do you want to use in
+abbreviations of xml:lang attribute. Then select element in Element tree window,
+click on cobo box of xml:lang attribute in Attributes window and select
+abbreviation as shown below:</p>
+<p><img border="0" src="shot09.gif" width="499" height="500"></p>
+<p>&nbsp;</p>
+
+<p>See also: <a href="codepages.htm">Supported code pages</a> <a href="optionsautoconversion.htm">Automatic document
+conversion</a></p>
+
+</body>
+</html>

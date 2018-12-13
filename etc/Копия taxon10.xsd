@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema 
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns:taxon='http://commandus.com/dtd/taxon/1.0/'
+	xmlns:oebpackage='http://openebook.org/namespaces/oeb-package/1.0/' 
+	xmlns:dc='http://purl.org/dc/elements/1.0/'
+	elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+			<div class="heading">Taxon document Schema</div>
+			<div class="curation">
+				<p>Copyright (c) 2006 Andrei Ivanov. All rights reserved.</p>
+				<p>Note: This document has been automatically generated from the DTD Schema, using perl script.
+					<b>The Schema itself should always be taken as definitive</b>
+				</p>
+			</div>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name="ssScript">
+		<xs:complexType>
+			<xs:attribute name='dataset' type='xs:string' use='optional' />
+			<xs:attribute name='action' use='required'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='db' />
+						<xs:enumeration value='query' />
+						<xs:enumeration value='execute' />
+						<xs:enumeration value='move' />
+						<xs:enumeration value='defaultparam' />
+						<xs:enumeration value='defaultparams' />
+						<xs:enumeration value='send' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='opt' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ado' />
+						<xs:enumeration value='ib' />
+						<xs:enumeration value='bde' />
+						<xs:enumeration value='cookie' />
+						<xs:enumeration value='mail' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='taxon'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:sys' maxOccurs='unbounded' />
+				<xs:element ref='taxon:title' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:synonyms' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:distributions' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:plants' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:symbiosises' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:collections' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='sys'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='name' use='required'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='kingdom' />
+						<xs:enumeration value='subkingdom' />
+						<xs:enumeration value='phylum' />
+						<xs:enumeration value='division' />
+						<xs:enumeration value='subdivision' />
+						<xs:enumeration value='superclass' />
+						<xs:enumeration value='class' />
+						<xs:enumeration value='phylum' />
+						<xs:enumeration value='subphylum' />
+						<xs:enumeration value='infraclass' />
+						<xs:enumeration value='superorder' />
+						<xs:enumeration value='order' />
+						<xs:enumeration value='suborder' />
+						<xs:enumeration value='superfamily' />
+						<xs:enumeration value='family' />
+						<xs:enumeration value='subfamily' />
+						<xs:enumeration value='infrafamily' />
+						<xs:enumeration value='tribe' />
+						<xs:enumeration value='subtribe' />
+						<xs:enumeration value='genus' />
+						<xs:enumeration value='subgenus' />
+						<xs:enumeration value='section' />
+						<xs:enumeration value='species' />
+						<xs:enumeration value='taxon' />
+						<xs:enumeration value='outgroup' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='rank' type='xs:NMTOKEN' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='text'>
+		<xs:complexType>
+			<xs:attribute name='value' type='xs:string' use='required' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='title'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+			<xs:attribute name='option' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='description'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='synonyms'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:name' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='name'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+			<xs:attribute name='option' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='authors'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:person' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='person'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:name' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:degree' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:position' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:institute' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:department' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:phone' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:mail' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:email' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:birthday' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:dyingday' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='date' type='xs:string' use='optional' />
+			<xs:attribute name='rel' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='degree'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='position'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='institute'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='department'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='phone'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='mail'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='email'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='birthday'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='dyingday'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='x-metadata'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:meta' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='meta'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='name' type='xs:string' use='required' />
+			<xs:attribute name='content' type='xs:string' use='required' />
+			<xs:attribute name='scheme' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='distributions'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:distribution' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='distribution'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:area' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:stay' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:label' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='area'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:region' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:territory' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:location' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+			<xs:attribute name='name' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='region'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ocean' />
+						<xs:enumeration value='sea' />
+						<xs:enumeration value='basin' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='publications'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:publication' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='publication'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='dc:opf' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='dc:record' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='dc:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='dc:dc-metadata' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='dc:x-metadata' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='opf'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='record'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='dc-metadata'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='dc:dc' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Title'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Identifier'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='scheme' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ISBN' />
+						<xs:enumeration value='DOI' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Contributor'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='role' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='adp' />
+						<xs:enumeration value='ann' />
+						<xs:enumeration value='arr' />
+						<xs:enumeration value='art' />
+						<xs:enumeration value='asn' />
+						<xs:enumeration value='aut' />
+						<xs:enumeration value='aqt' />
+						<xs:enumeration value='aft' />
+						<xs:enumeration value='aui' />
+						<xs:enumeration value='ant' />
+						<xs:enumeration value='bkp' />
+						<xs:enumeration value='clb' />
+						<xs:enumeration value='cmm' />
+						<xs:enumeration value='com' />
+						<xs:enumeration value='dsr' />
+						<xs:enumeration value='edt' />
+						<xs:enumeration value='ill' />
+						<xs:enumeration value='lyr' />
+						<xs:enumeration value='mdc' />
+						<xs:enumeration value='mus' />
+						<xs:enumeration value='nrt' />
+						<xs:enumeration value='oth' />
+						<xs:enumeration value='pht' />
+						<xs:enumeration value='prt' />
+						<xs:enumeration value='red' />
+						<xs:enumeration value='rev' />
+						<xs:enumeration value='spn' />
+						<xs:enumeration value='ths' />
+						<xs:enumeration value='trc' />
+						<xs:enumeration value='trl' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='file-as' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Creator'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='role' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='adp' />
+						<xs:enumeration value='ann' />
+						<xs:enumeration value='arr' />
+						<xs:enumeration value='art' />
+						<xs:enumeration value='asn' />
+						<xs:enumeration value='aut' />
+						<xs:enumeration value='aqt' />
+						<xs:enumeration value='aft' />
+						<xs:enumeration value='aui' />
+						<xs:enumeration value='ant' />
+						<xs:enumeration value='bkp' />
+						<xs:enumeration value='clb' />
+						<xs:enumeration value='cmm' />
+						<xs:enumeration value='com' />
+						<xs:enumeration value='dsr' />
+						<xs:enumeration value='edt' />
+						<xs:enumeration value='ill' />
+						<xs:enumeration value='lyr' />
+						<xs:enumeration value='mdc' />
+						<xs:enumeration value='mus' />
+						<xs:enumeration value='nrt' />
+						<xs:enumeration value='oth' />
+						<xs:enumeration value='pht' />
+						<xs:enumeration value='prt' />
+						<xs:enumeration value='red' />
+						<xs:enumeration value='rev' />
+						<xs:enumeration value='spn' />
+						<xs:enumeration value='ths' />
+						<xs:enumeration value='trc' />
+						<xs:enumeration value='trl' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='file-as' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Subject'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Description'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Publisher'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Date'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='event' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='creation' />
+						<xs:enumeration value='publication' />
+						<xs:enumeration value='modification' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Type'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Format'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Source'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Language'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Relation'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Coverage'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Rights'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='territory'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ocean' />
+						<xs:enumeration value='sea' />
+						<xs:enumeration value='basin' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='location'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='name' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='stay'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:source' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:location' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:horisont' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:section' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:square' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:depth' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:gear' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:sample' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='station' />
+						<xs:enumeration value='vessel' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='source'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='log' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='horisont'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='section'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='square'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:text' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+			<xs:attribute name='type' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='hydro' />
+						<xs:enumeration value='pelagy' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='depth'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='date'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='gear'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='sample'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='label'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:latitude' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:longitude' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:base' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:point' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='latitude'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='longitude'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='base'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+			<xs:attribute name='distance' type='xs:string' use='optional' />
+			<xs:attribute name='direction' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='N' />
+						<xs:enumeration value='E' />
+						<xs:enumeration value='S' />
+						<xs:enumeration value='W' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='point'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='alt' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='plants'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='symbiosis'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:description' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:taxon' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:person' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:publications' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:region' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='symbiosises'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:hosts' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:parasites' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:plants' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='hosts'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='parasites'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:symbiosis' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='collections'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:collection' maxOccurs='unbounded' />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='collection'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:item' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='name' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='item'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='taxon:sex' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:age' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:count' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:date' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:authors' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:type' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:distribution' minOccurs='0' maxOccurs='1' />
+				<xs:element ref='taxon:x-metadata' minOccurs='0' maxOccurs='1' />
+			</xs:sequence>
+			<xs:attribute name='unique-identifier' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='sex'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='m' />
+						<xs:enumeration value='f' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='age'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='count'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+			<xs:attribute name='ratio' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='type'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='taxon:ssScript' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='value' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

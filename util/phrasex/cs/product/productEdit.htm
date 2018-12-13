@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside dataset="sqlStaff" action="query">
+    SELECT user_id FROM cs_user 
+    WHERE user_type &lt;&gt; 'EndUser' ORDER BY user_id
+  </serverside>
+  <serverside dataset="sqlPriorities" action="query">
+    SELECT name, is_def FROM cs_priority ORDER BY name
+  </serverside>
+
+  <serverside dataset="s1" action="query">
+    SELECT NAME, ROW_VER, DISPATCHER, PRODUCT_TYPE, IS_DEF, TICKET_PRIORITY, ON_NEW_TICKET1, ON_NEW_TICKET2, DESCRIPTION,  
+    CASE on_new_ticket1
+    WHEN 'notify_all' THEN ''  
+    WHEN 'do_nothing' THEN ''  
+    ELSE 'checked'  
+    END t1a,  
+
+    CASE on_new_ticket1
+    WHEN 'notify_all' THEN 'checked'  
+    ELSE ''  
+    END t1b,
+
+    CASE on_new_ticket1
+    WHEN 'do_nothing' THEN 'checked'  
+    ELSE ''  
+    END t1c,
+
+    CASE on_new_ticket2  
+    WHEN 'notify_all' THEN ''  
+    WHEN 'do_nothing' THEN ''  
+    ELSE 'checked'  
+    END t2a,  
+
+    CASE on_new_ticket2  
+    WHEN 'notify_all' THEN 'checked'  
+    ELSE ''  
+    END t2b,
+
+    CASE on_new_ticket2  
+    WHEN 'do_nothing' THEN 'checked'  
+    ELSE ''  
+    END t2c    
+   
+    FROM cs_product
+    WHERE name = '$(name)'
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Edit Product</title>
+</head>
+<body>
+
+<form method="POST" action="productEditOk.htm">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> :
+    <a href="productMan.htm">Product Manager</a> : Edit Product
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="3" align="right">
+    <a target="ptHelpWindow" href="../help/productHelp.html">Help</a>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Hint: 1. Private products are accessible to their end users, all 
+    staff members and managers. They are not accessible to end
+    users who do not use them. 
+    2. Requests escalated by the Escalator will go to the dispatcher.
+  </td>
+</tr>
+</table>
+<table width="400" border="0" cellspacing="2" cellpadding="0" loop="s1">
+<tr>
+  <td>
+    Name:<br/>
+    <input type="text" name="name" size="30" maxlength="50" value="$(s1.name)" />
+  </td>
+  <td>
+    Type:<br/>
+    <select name="product_type" size="1">
+      <option selected="selected">$(s1.product_type)</option>
+      <option>public</option>
+      <option>private</option>
+    </select>
+  </td>
+  <td>
+    Dispatcher:<br/>
+    <select name="dispatcher" size="1">
+      <option selected="selected">$(s1.dispatcher)</option>  
+      <option loop="sqlStaff">$(sqlStaff.user_id)</option>  
+    </select>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Description:<br/>
+    <input type="text" name="description" size="70" maxlength="80" value="$(s1.description)" />
+  </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td colspan="3">
+    <b>New Request Dispatching Rules:</b>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    When a new request on this product is submitted but 
+    not explicitly assigned, if its priority is equal to or higher than (i.e. &gt;=) 
+    <select name="ticket_priority" size="1">
+      <option selected="selected">$(s1.ticket_priority)</option>  
+      <option loop="sqlPriorities">$(sqlPriorities.name)</option>
+    </select>,
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    &nbsp;
+    <input type="radio" name="on_new_ticket1" value="to_dispatcher" checked="$(s1.t1a)" />
+      assign it to the dispatcher and notify him/her
+    <br/>&nbsp;
+    <input type="radio" name="on_new_ticket1" value="notify_all" checked="$(s1.t1b)" />
+      don't assign, notify all staff members and managers
+    <br/>&nbsp;
+    <input type="radio" name="on_new_ticket1" value="do_nothing" checked="$(s1.t1c)" />
+      don't assign or notify anybody
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    if not, <br/>
+    &nbsp;
+    <input type="radio" name="on_new_ticket2" value="to_dispatcher" checked="$(s1.t2a)" />
+      assign it to the dispatcher and notify him/her
+    <br/>&nbsp;
+    <input type="radio" name="on_new_ticket2" value="notify_all" checked="$(s1.t2b)" />
+      don't assign, notify all staff members and managers
+    <br/>&nbsp;
+    <input type="radio" name="on_new_ticket2" value="do_nothing" checked="$(s1.t2c)" />
+      don't assign or notify anybody
+  </td>
+</tr>
+
+<tr class="apbg">
+  <td colspan="3" align="center">
+    <input type="submit" value="Save"/>
+    <input type="hidden" name="old_name" value"="$(s1.name)" />
+    <input type="hidden" name="row_ver" value"="$(s1.row_ver)" />
+    <input type="hidden" name="is_def" value"="$(s1.is_def)" />
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

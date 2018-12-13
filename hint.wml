@@ -1,0 +1,1468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml1.1.dtd">
+<wml>
+  <!-- card & deck elements -->
+  <card id="wml">
+    <p id="wmlbrief">
+      <b>
+        wml
+      </b>
+      <br/>
+      <i>wml</i> defines a deck and encloses all the information and cards in the deck.
+    </p>
+    <p id="wmlattr">
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="card">
+    <p id="cardbrief">
+      <b>
+        card
+      </b>
+      <br/>
+      Indicates the general layout and user schemes in the user agent. The card is the basic unit of navigation within a deck. It is possible to move from one card to another within the same deck or to move to another deck. Unless specified otherwise, upon navigation to another deck, the first card is displayed.
+    </p>
+    <p id="cardattr">
+      <b>
+        newcontext="false"
+      </b>
+      <br/>
+      If you set this attribute to true, the browser context is re-initialized upon entry to this card. The browser context is used to manage all parameters and user agent states, including variables, the navigation history and other implementation-dependent information related to the current state of the user agent.
+      <br/>
+      <b>
+        ordered=boolean
+      </b>
+      <br/>
+      Gives an indication to the user agent about how the card content is organized.
+      <br/>
+      <b>
+        onenterforward="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href. Occurs when the user navigates into a card using a go task.
+      <br/>
+      <b>
+        onenterbackward="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href. Occurs when the user navigates into a card using a prev task.
+      <br/>
+      <b>
+        ontimer="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href after a specified amount of time.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="template">
+    <p id="templatebrief">
+      <b>
+        template
+      </b>
+      <br/>
+      Declares a template for cards in the deck. Event bindings specified in the template element (e.g. do or onevent) apply to all cards in that deck, although a card element may override the behaviour specified in the template element. In particular:
+      <br/>
+      DO elements specified in the template element may be overridden in individual cards if both elements have the same NAME attribute value.
+      <br/>
+      Intrinsic event bindings specified in the template element may be overridden by the specification of an event binding in a card element.
+    </p>
+    <p id="templateattr">
+      <b>
+        onenterforward="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href. Occurs when the user navigates into a card using a go task.
+      <b>
+        onenterbackward="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href. Occurs when the user navigates into a card using a prev task.
+      <b>
+        ontimer="href"
+      </b>
+      <br/>
+      Navigates to the location specified by href after a specified amount of time.
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="head">
+    <p id="headbrief">
+      <b>
+        head
+      </b>
+      <br/>
+      Contains information relating to the deck as a whole, including meta-data and access control tags.
+    </p>
+    <p id="headattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="access">
+    <p id="accessbrief">
+      <b>
+        access
+      </b>
+      <br/>
+      Specifies access control information for the entire deck. It is an error for a deck to contain more than one access element. If a deck does not include an access element, access control is disabled. When access control is disabled, cards in any deck can access this deck.
+      <br/>
+      A deck's domain and path attributes specify which other decks may access it. As the browser navigates from one deck to another, it performs access control checks to determine whether the destination deck allows access from the current deck.
+      <br/>
+      If a deck has a domain and/or path attribute, the referring deck's URI must match the values of the attributes. Matching is done as follows: the access domain is suffix-matched against the domain name portion of the referring URI and the access path is prefix matched against the path portion of the referring URI.
+      <br/>
+      Domain suffix matching is done using the entire element of each sub-domain and must match each element exactly (e.g. www.wapforum.org shall match wapforum.org, but shall not match forum.org).
+      <br/>
+      Path prefix matching is done using entire path elements and must match each element exactly (e.g. /X/Y matches /X in the attribute, but does not match /XZ in the attribute).
+    </p>
+    <p id="accessattr">
+      <b>
+        domain
+      </b>
+      <br/>
+      The domain suffix of allowed referring pages. Default value is current deck's domain.
+      <br/>
+      <b>
+        path
+      </b>
+      <br/>
+      The path prefix of allowed referring pages. Default value is "/".
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="meta">
+    <p id="metabrief">
+      <b>
+        meta
+      </b>
+      <br/>
+      Contains generic meta information relating the deck.
+      <br/>
+      Meta-information is specified with property names and values. This specification does not define any properties, nor does it define how browsers must interpret meta-data.
+    </p>
+    <p id="metaattr">
+      <b>
+        http-equiv
+      </b>
+      <br/>
+      May be used in place of name and indicates that the property should be interpreted as an HTTP header.
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the property name. The browser must ignore any meta-data named with this attribute. Servers should not emit WML content containing meta-data named with this attribute.
+      <br/>
+      <b>
+        content
+      </b>
+      <br/>
+      This attribute specifies the property value.
+      <br/>
+      <b>
+        forua
+      </b>
+      <br/>
+      Specifies that the author intended the property to reach the browser. In the case where the user agent supports the meta-data mechanism, and the property has its forua attribute set to true, the meta-data must be delivered to the browser.
+      <br/>
+      <b>
+        scheme
+      </b>
+      <br/>
+      This attribute specifies a form or structure that may be used to interpret the property value. Scheme values vary depending on the type of meta-data.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <!-- Event elements -->
+  <card id="do">
+    <p id="dobrief">
+      <b>
+        do
+      </b>
+      <br/>
+      Provides a general mechanism for performing actions on the current card.
+      <br/>
+      The representation of the do tag is dependent on the device and the author must only assume that the tag is mapped to a unique user interface widget, such as a button, that the user can activate. The do tag may appear at both the card and deck-level:
+      <br/>
+      Card-level: the do tag may appear inside a card tag and may be located anywhere in the text flow.
+      <br/>
+      Deck-level: the do tag may appear inside a deck template, indicating a deck-level do tag. A deck-level do tag applies to all cards in the deck, and is equivalent to having specified the do within each card. For the purposes of rendering, the browser must behave as if deck-level do tags are located at the end of the card's text flow.
+      <br/>
+      A card-level do tag overrides (or "shadows") a deck-level do tag if they have the same name. For a single card, the active do tags are defined as the do tags specified in the card, plus any do tags specified in the deck's template and not overridden in the card.
+      <br/>
+      Non-active do tags and active do tags with a noop task are not displayed. All active do tags with a task other than noop will be shown in some manner. When the user activates the do tag, the associated task is executed.
+    </p>
+    <p id="doattr">
+      <b>
+        type
+      </b>
+      <br/>
+      Provides a hint to the browser about the author's intended use of the tag and how the tag should be mapped to the physical user interface: 'accept' (positive acknowledgement); 'prev' (backward history navigation); 'help' (request for help); 'reset' (clearing or resetting state); 'options' (request for options or additional operations); 'delete' (delete item or choice); 'unknown' a generic do element.
+      <br/>
+      <b>
+        label
+      </b>
+      <br/>
+      Specifies a textual string suitable for labelling the user widget. To work well on a variety of browsers, labels should be six characters or shorter in length.
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the name of the do event binding.
+      <br/>
+      <b>
+        optional
+      </b>
+      <br/>
+      If true, the browser may ignore this element.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="onevent">
+    <p id="oneventbrief">
+      <b>
+        onevent
+      </b>
+      <br/>
+      Binds a task to a particular intrinsic event for the immediately enclosing element.
+      <br/>
+      For example, specifying an onevent element inside a card element associates an intrinsic event binding with that card element.
+      <br/>
+      The browser will ignore any onevent element specifying a type that does not correspond to a legal intrinsic event for the immediately enclosing element.
+    </p>
+    <p id="oneventattr">
+      <b>
+        name
+      </b>
+      <br/>
+      Indicates the name of the intrinsic event.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="postfield">
+    <p id="postfieldbrief">
+      <b>
+        postfield
+      </b>
+      <br/>
+      Specifies a field name and value for transmission to an origin server during a URI request.
+      <br/>
+      The actual encoding of the name and value will depend on the method used to communicate with the origin server.
+    </p>
+    <p id="postfieldattr">
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the variable name.
+      <br/>
+      <b>
+        value
+      </b>
+      <br/>
+      Specifies the variable value.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <!-- task elements -->
+  <card id="go">
+    <p id="gobrief">
+      <b>
+        go
+      </b>
+      Declares a go task, indicating navigation to a new URI. If the URI names a WML card or deck, the execution of the task will cause that item to be displayed. This task executes a push operation on the browser's history stack.
+    </p>
+    <p id="goattr">
+      <b>
+        href
+      </b>
+      <br/>
+      Specifies the destination URI.
+      <br/>
+      <b>
+        sendreferer
+      </b>
+      <br/>
+      If true, the request for the new URI will contain the URI of the deck containing this task - this can then be used for server-based access control.
+      <br/>
+      <b>
+        method
+      </b>
+      <br/>
+      Specifies the HTTP submission method. Possible values are POST (submission data included in request) or GET (submission data appended as a query to the URI requested).
+      <br/>
+      <b>
+        accept-charset
+      </b>
+      <br/>
+      Specifies the list of character encodings for data that the origin server must accept when processing input. The value of this attribute is a comma- or space-separated list of character encoding names.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="prev">
+    <p id="prevbrief">
+      <b>
+        prev
+      </b>
+      <br/>
+      Declares a prev task, indicating navigation to the previous URL on the history stack.
+    </p>
+    <p id="prevattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="refresh">
+    <p id="refreshbrief">
+      <b>
+        refresh
+      </b>
+      <br/>
+      Declares a refresh task, indicating an update of the screen and device context as specified by the setvar tags, for example. User-visible side effects of the state changes (e.g. a change in the screen display) occur during the processing of the refresh task.
+    </p>
+    <p id="refreshattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="noop">
+    <p id="noopbrief">
+      <b>
+        noop
+      </b>
+      <br/>
+      Specifies that nothing should be done - that is, no operation. This can be used in a card to shadow a task that has been specified in a template at the deck level.
+    </p>
+    <p id="noopattr">
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <!-- user input elements -->
+  <card id="input">
+    <p id="inputbrief">
+      <b>
+        input
+      </b>
+      <br/>
+      The input element specifies a text entry object. The user input is constrained by the optional format attribute.
+    </p>
+    <p id="inputattr">
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the name of the variable to set with the result of the user's text input. The name variable's value is used to pre-load the text entry object. If this value does not conform to the input mask, the browser will unset the variable and attempt to initialise the variable with the value attribute.
+      <br/>
+      <b>
+        type
+      </b>
+      <br/>
+      Specifies the type of text-input area. The following values are allowed: text (text entry control) or password (a text entry control where each character is displayed in an illegible form, such as with asterisks). Default is text.
+      <br/>
+      <b>
+        value
+      </b>
+      <br/>
+      The value attribute indicates the default value of the variable named in the name attribute. When the element is displayed and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the value attribute specifies a value that does not conform to the input mask specified by the format attribute, the browser must ignore the value attribute. In the case where no valid value can be established, the name variable is left unset.
+      <br/>
+      <b>
+        format
+      </b>
+      <br/>
+      Specifies an input mask for user input entries. The string consists of mask control characters and static text that is displayed in the input area. The format control characters specify the data format expected to be entered by the user. The format codes are:
+      <br/>
+      'A' (entry of any upper-case, non-numeric character);
+      <br/>
+      'a' (entry of any lower-case, non-numeric character);
+      <br/>
+      'N' (entry of any numeric character);
+      <br/>
+      'X' (entry of any upper-case character);
+      <br/>
+      'x' (entry of any lower-case character);
+      <br/>
+      'M' or 'm' (entry of any character);
+      <br/>
+      '*f' (entry of any number of characters where f is one of the above format codes);
+      <br/>
+      'nf' (entry of n characters where n is from 1 to 9 and f is one of the above format codes);
+      <br/>
+      '\c' (display the character, c, in the entry field: these characters are considered part of the input's value).
+      <br/>
+      <b>
+        emptyok
+      </b>
+      <br/>
+      Indicates that this input element accepts empty input although a non-empty format string has been specified. Default is false.
+      <br/>
+      <b>
+        size
+      </b>
+      <br/>
+      Specifies the width, in characters, of the text-input area.
+      <br/>
+      <b>
+        maxlength
+      </b>
+      <br/>
+      Specifies the maximum number of characters that can be entered by the user in the text-entry area.
+      <br/>
+      <b>
+        tabindex
+      </b>
+      <br/>
+      Specifies the tabbing position of the current element. The tabbing position indicates the relative order in which elements are traversed when tabbing within a single WML card.
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a title for this element, which may be used in the presentation of this object.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="select">
+    <p id="selectbrief">
+      <b>
+        select
+      </b>
+      <br/>
+      The select element lets users pick from a list of options. Each option is specified by an option element. Each option element may have one line of formatted text. Option elements may be organised into hierarchical groups using the optgroup element.
+    </p>
+    <p id="selectattr">
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the name of the variable to set with the result of the selection. The name variable's value is used to pre-load the text entry object.
+      <br/>
+      <b>
+        value
+      </b>
+      <br/>
+      Indicates the default value of the variable named in the name attribute. When the element is displayed, and the variable named in the name attribute is not set, the name variable may be assigned the value specified in the value attribute, depending on the values defined in iname and ivalue. If the name variable already contains a value, the value attribute is ignored. Any application of the default value is done before the list is pre-selected with the value of the name variable. If this element allows the selection of multiple options, the result of the user's choice is a list of all selected values, separated by the semicolon character. The name variable is set with this result. Similarly, the value attribute is interpreted as a semicolon-separated list of pre-selected options.
+      <br/>
+      <b>
+        iname
+      </b>
+      <br/>
+      Indicates the name of the variable to be set with the index result of the selection. The index result is the position of the currently selected option in the select list. An index of zero indicates that no option is selected. Index numbering begins at one and increases monotonically.
+      <br/>
+      <b>
+        ivalue
+      </b>
+      <br/>
+      Indicates the default-selected option element. When the element is displayed, if the variable named in the iname attribute is not set, it is assigned the default-selected entry. If the variable already contains a value, the ivalue attribute is ignored. If the iname attribute is not specified, the ivalue value is applied every time the element is displayed. If this element allows the selection of multiple options, the index result of the user's choice is a list of the indices of all the selected options, separated by the semicolon character. The iname variable is set with this result. Similarly, the ivalue attribute is interpreted as a semicolon-separated list of pre-selected options.
+      <br/>
+      <b>
+        multiple
+      </b>
+      <br/>
+      Indicates that the select list should accept multiple selections. When not set, the select list should only accept a single selected option. Default is false.
+      <br/>
+      <b>
+        tabindex
+      </b>
+      <br/>
+      Specifies the tabbing position of the current element. The tabbing position indicates the relative order in which elements are traversed when tabbing within a single WML card.
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a title for this element, which may be used in the presentation of this object.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="option">
+    <p id="optionbrief">
+      <b>
+        option
+      </b>
+      <br/>
+      This element specifies a single choice option in a select element.
+    </p>
+    <p id="optionattr">
+      <br/>
+      <b>
+        value
+      </b>
+      <br/>
+      Specifies the value to be used when setting the name variable. When the user selects this option, the resulting value specified in the value attribute is used to set the select element's name variable. The value attribute may contain variable references, which are evaluated before the name variable is set.
+      <br/>
+      <b>
+        onpick
+      </b>
+      <br/>
+      The URI that is loaded when the user selects or deselects this option.
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a title for this element, which may be used in the presentation of this object.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="optgroup">
+    <p id="optgroupbrief">
+      <b>
+        optgroup
+      </b>
+      <br/>
+      The optgroup element allows the author to group related option elements into a hierarchy. The browser may use this hierarchy to facilitate layout and presentation on a wide variety of devices.
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a title for this element, which may be used in the presentation of this object.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="fieldset">
+    <p id="fieldsetbrief">
+      <b>
+        fieldset
+      </b>
+      <br/>
+      Allows the grouping of related fields and text. This grouping allows the optimising of layout and navigation. Fieldset elements may nest, providing the author with a means of specifying behaviour across a wide variety of devices.
+    </p>
+    <p id="fieldsetattr">
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a title for this element, which may be used in the presentation of this object.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- anchors & images elements -->
+  <card id="a">
+    <p id="abrief">
+      <b>
+        a
+      </b>
+      <br/>
+      Specifies that the text within the tags a hyperlink. The destination of a link is specified as a URI: the address or ID of another tag. Authors are encouraged to use the a tag instead of anchor where possible. It is invalid to nest anchor tags. The a tag is a short form of the anchor tag; it is essentially bound to a go task without variables.
+    </p>
+    <p id="attr">
+      <b>
+        href
+      </b>
+      <br/>
+      Specifies the destination URI.
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a brief text string identifying the link.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="anchor">
+    <p id="anchorbrief">
+      <b>
+        anchor
+      </b>
+      <br/>
+      Specifies that the text within the tags a hyperlink. The destination of a link is specified as a URI: the address or ID of another tag. Authors are encouraged to use the a tag instead of anchor where possible. It is invalid to nest anchor tags.
+    </p>
+    <p id="anchorattr">
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a brief text string identifying the link.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="img">
+    <p id="imgbrief">
+      <b>
+        img
+      </b>
+      <br/>
+      Indicates that an image is to be included in the text flow. Image layout is done within the context of normal text layout.
+    </p>
+    <p id="imgattr">
+      <br/>
+      <b>
+        src
+      </b>
+      <br/>
+      This attribute specifies the URI of the image to be shown.
+      <br/>
+      <b>
+        localsrc
+      </b>
+      <br/>
+      Specifies an alternative internal representation for the image. If this image exists, the parameter takes precedence over any image specified in the src parameter.
+      <br/>
+      <b>
+        alt
+      </b>
+      <br/>
+      An alternative textual representation for the image if it can not be displayed using any other method.
+      <br/>
+      <b>
+        align
+      </b>
+      <br/>
+      Specifies image alignment with respect to the baseline of the text. It has three possible values: bottom, middle or top
+      <br/>
+      <b>
+        width
+      </b>
+      <br/>
+      Specifies the width of the image. If specified as a percentage value, the resulting size is based on the available horizontal space, not on the natural size of the image.
+      <br/>
+      <b>
+        height
+      </b>
+      <br/>
+      Specifies the height of the image. If specified as a percentage value, the resulting size is based on the available vertical space, not on the natural size of the image.
+      <br/>
+      <b>
+        hspace
+      </b>
+      <br/>
+      Specifies the amount of white space to be inserted to the left and right of the image. If specified as a percentage value, the resulting space is based on the available horizontal space, not on the natural size of the image.
+      <br/>
+      <b>
+        vspace
+      </b>
+      <br/>
+      Specifies the amount of white space to be inserted above and below the image. If specified as a percentage value, the resulting space is based on the available vertical space, not on the natural size of the image.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- text formatting elements -->
+  <card id="em">
+    <p id="embrief">
+      <b>
+        em
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with some form of emphasis. Authors should attempt to use the em and strong tags in place of the b, i and u tags, except where explicit control over text presentation is required.
+    </p>
+    <p id="emattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="strong">
+    <p id="strongbrief">
+      <b>
+        strong
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with some form of strong emphasis. Authors should attempt to use the strong and em tags in place of the b, i and u tags, except where explicit control over text presentation is required.
+    </p>
+    <p id="strongattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="i">
+    <p id="ibrief">
+      <b>
+        i
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with italic formatting. Authors should attempt to use the strong and em tags in place of the b, i and u tags, except where explicit control over text presentation is required.
+    </p>
+    <p id="iattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="b">
+    <p id="brief">
+      <b>
+        b
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with bold formatting. Authors should attempt to use the strong and em tags in place of the b, i and u tags, except where explicit control over text presentation is required.
+    </p>
+    <p id="battr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="u">
+    <p id="ubrief">
+      <b>
+        u
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with underline formatting. Authors should attempt to use the strong and em tags in place of the b, i and u tags, except where explicit control over text presentation is required.
+    </p>
+    <p id="uattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="big">
+    <p id="bigbrief">
+      <b>
+        big
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with a large font.
+    </p>
+    <p id="bigattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="small">
+    <p id="smallbrief">
+      <b>
+        small
+      </b>
+      <br/>
+      Indicates that the text within the tags should be rendered with a small font.
+    </p>
+    <p id="smallattr">
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- table elements -->
+  <card id="table">
+    <p id="tablebrief">
+      <b>
+        table
+      </b>
+      <br/>
+      Used together with the tr and td tags to create sets of aligned columns of text and images in a card. The table tags determine the structure of the columns. The tags separate content into columns, but do not specify column or intercolumn widths.
+      <br/>
+      The number of columns for the row set must be specified by the columns attribute. If the actual number of columns in a row is less than the value specified by the columns attribute, the row will be effectively padded with empty columns. The orientation of the table depends on the language. For left-to-right languages, the leftmost column is the first column in the table. Columns are added to the right side of a row to pad left-to-right tables. Columns are added to the left side of a row to pad right-to-left table.
+      <br/>
+      If the actual number of columns in a row is greater than the value specified by the columns attribute, the extra columns of the row will be aggregated into the last column, such that the row contains exactly the number of columns specified. A single inter-word space will be inserted between two cells that are being aggregated.
+      <br/>
+      The table will be rendered as narrow as possible given the contents. A non-zero width gutter is used to separate each non-empty column.
+    </p>
+    <p id="tableattr">
+      <br/>
+      <b>
+        align
+      </b>
+      <br/>
+      Specifies the layout of text and images (within the columns) as a list of alignment designations - one for each column.
+      <br/>
+      'C'- centre alignment C,
+      <br/>
+      'L'- left alignment
+      <br/>
+      'R'- right alignment with R.
+      <br/>
+      If an alignment designation is omitted, the default alignment is applied (left).
+      <br/>
+      <b>
+        columns
+      </b>
+      <br/>
+      Specifies the number of columns in the table. Must not be zero
+      <br/>
+      <b>
+        title
+      </b>
+      <br/>
+      Specifies a brief text string identifying the table.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="tr">
+    <p id="trbrief">
+      <b>
+        tr
+      </b>
+      <br/>
+      The tr element is used as a container to hold a single table row. Table rows may be empty (i.e., all cells are empty). Empty table rows are significant and must not be ignored.
+    </p>
+    <p id="trattr">
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+    </p>
+  </card>
+  <card id="td">
+    <p id="tdbrief">
+      <b>
+        td
+      </b>
+      <br/>
+    </p>
+    <p id="tdattr">
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- paragraph and new line elements -->
+  <card id="p">
+    <p id="pbrief">
+      <b>
+        p
+      </b>
+      <br/>
+      The p element establishes both the line wrap and alignment parameters for a paragraph. If the text alignment is not specified, it defaults to left. If the line-wrap mode is not specified, it is identical to the line-wrap mode of the previous paragraph in the current card. Empty paragraphs (ie, an empty element or an element with only insignificant white space) will be considered as insignificant and ignored by browsers. If the first p element in a card does not specify a line-wrap or alignment mode, that mode defaults to the initial mode for the card.
+      <br/>
+      The browser will insert a line break into the text flow between significant paragraphs.
+    </p>
+    <p id="pattr">
+      <br/>
+      <b>
+        mode
+      </b>
+      <br/>
+      Specifies the line-wrap mode for the paragraph. 'wrap' specifies breaking text mode and 'nowrap' specifies non-breaking text mode.
+      <br/>
+      <b>
+        align
+      </b>
+      <br/>
+      Specifies the text alignment mode for the paragraph. Can be 'left', 'center', or 'right'.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <card id="br">
+    <p id="brbrief">
+      <b>
+        br
+      </b>
+      <br/>
+      Ends the current line and starts a new line. Should also be supported within tables.
+    </p>
+    <p id="brattr">
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- timer element -->
+  <card id="timer">
+    <p id="timerbrief">
+      <b>
+        timer
+      </b>
+      <br/>
+      The timer element declares a card timer which exposes a means of processing inactivity or idle time. The timer is initialised and started at card entry and is stopped when the card is exited. Card entry is any task or user action that results in the card being activated, for example, navigating into the card. Card exit is defined as the execution of any task. The value of a timer will decrement from the initial value, triggering the delivery of an ontimer intrinsic event when it reaches zero. Note that timer resolution and the interaction of the timer with the browser's user interface and other time-based device functionality is implementation dependent.
+      <br/>
+      It is an error to have more than one timer element in a card.
+      <br/>
+      The timer timeout value is specified in units of one-tenth (1/10) of a second. The author should not expect a particular timer resolution and should provide the user with another means to invoke a timer's task. A timeout value of zero disables the timer.
+      <br/>
+      Invoking a refresh task is considered an exit. The task stops the timer, commits its value to the context, and updates the browser accordingly. Completion of the refresh task is considered an entry to the card. At that time, the timer must resume.
+    </p>
+    <p id="timerattr">
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the name of the variable to be set with the value of the timer. The name variable's value is used to set the timeout period upon timer initialisation. The variable named by the name attribute will be set with the current timer value when the card is exited or when the timer expires. For example, if the timer expires, the named variable is set to a value of zero.
+      <br/>
+      <b>
+        value
+      </b>
+      <br/>
+      Indicates the default value of the variable named in the name attribute - that is the timer value. When the timer is initialised and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the name attribute is not specified, the timeout is always initialised to the value specified in the value attribute.
+      <br/>
+      <b>
+        id
+      </b>
+      <br/>
+      Provides an element with a unique name within a single deck.
+      <br/>
+      <b>
+        class
+      </b>
+      <br/>
+      Affiliates an element with one or more classes.
+      <br/>
+      <b>
+        xml:lang
+      </b>
+      <br/>
+      Specifies the natural or formal language in which the document is written.
+    </p>
+  </card>
+  <!-- container(document) element -->
+  <card id="document">
+    <p id="documentbrief">
+      <b>
+        document
+      </b>
+      <br/>
+      This is top-level element.
+    </p>
+    <p id="documentattr">
+    </p>
+  </card>
+  <!-- comment element -->
+  <card id="comment">
+    <p id="commentbrief">
+      <b>
+        comment
+      </b>
+      <br/>
+      WML comments follow the XML commenting style.
+      <br/>
+      Comments are intended to be used by the WML author and are not displayed to the user by the user agent. Note that WML comments cannot be nested.
+    </p>
+    <p id="commentattr">
+    </p>
+  </card>
+  <!-- pcdata element -->
+  <card id="text">
+    <p id="textbrief">
+      <b>
+        text
+      </b>
+      <br/>
+      Defines text to be displayed to the user.
+    </p>
+    <p id="textattr">
+    </p>
+  </card>
+  <!-- xml element -->
+  <card id="xml">
+    <p id="xmlbrief">
+      <b>
+        XML declaration
+      </b>
+      <br/>
+      A valid WML deck is a valid XML document and therefore must contain an XML declaration.
+    </p>
+    <p id="xmlattr">
+    </p>
+  </card>
+  <!-- !doctype element -->
+  <card id="!doctype">
+    <p id="!doctypebrief">
+      <b>
+        XML document type declaration
+      </b>
+      <br/>
+      A valid WML deck is a valid XML document and therefore must contain document type declaration (in this case for WAP 1.1).
+    </p>
+    <p id="!doctypeattr">
+    </p>
+  </card>
+  <!-- serverSide element -->
+  <card id="serverSide">
+    <p id="serverSidebrief">
+      <b>
+        server side element
+      </b>
+      <br/>
+      Server side element is not a part of wml specification.
+    </p>
+    <p id="serverSideattr">
+      <br/>
+      <b>
+        name
+      </b>
+      <br/>
+      Specifies the name of the serverSide element to be set.
+    </p>
+  </card>
+  <!-- about screen -->
+  <card id="about">
+    <p id="aboutbrief">
+      <b>
+        About
+      </b>
+      <br/>
+      APOO wml editor.
+    </p>
+    <p id="aboutattr">
+      <br/>
+      Select element in element tree view and then press APOO button at the top of the main window.
+      <br/>
+      Also you can choose element from combobox.
+    </p>
+  </card>
+</wml>

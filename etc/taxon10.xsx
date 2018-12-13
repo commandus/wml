@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Этот файл создан автоматически конструктором XML-схем. Он содержит сведения о разметке для компонентов на поверхности разработки.-->
+<XSDDesignerLayout layoutVersion="2" viewPortLeft="499020" viewPortTop="0" zoom="100">
+    <ssScript_XmlElement left="438841" top="1000" width="5292" height="3122" selected="0" zOrder="33" index="0" expanded="1">
+        <action_XmlAttribute left="435878" top="4630" width="5292" height="873" selected="0" zOrder="34" index="1" expanded="1">
+            <_x0028_action_x0029__XmlSimpleType left="435878" top="6011" width="5292" height="3122" selected="0" zOrder="36" index="0" expanded="1" />
+        </action_XmlAttribute>
+        <opt_XmlAttribute left="441804" top="4630" width="5292" height="873" selected="0" zOrder="38" index="2" expanded="1">
+            <_x0028_opt_x0029__XmlSimpleType left="441804" top="6011" width="5292" height="3122" selected="0" zOrder="40" index="0" expanded="1" />
+        </opt_XmlAttribute>
+    </ssScript_XmlElement>
+    <taxon_XmlElement left="9206" top="254" width="5292" height="3122" selected="0" zOrder="2" index="1" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="-26350" top="3884" width="5292" height="3122" selected="0" zOrder="42" index="0" expanded="0" />
+        <ref_x003D_sys_XmlElement left="-20424" top="3884" width="5292" height="3122" selected="0" zOrder="44" index="1" expanded="0" />
+        <ref_x003D_title_XmlElement left="-14498" top="3884" width="5292" height="3122" selected="0" zOrder="46" index="2" expanded="0" />
+        <ref_x003D_description_XmlElement left="-8572" top="3884" width="5292" height="3122" selected="0" zOrder="48" index="3" expanded="0" />
+        <ref_x003D_synonyms_XmlElement left="-2646" top="3884" width="5292" height="3122" selected="0" zOrder="3" index="4" expanded="0" />
+        <ref_x003D_authors_XmlElement left="3280" top="3884" width="5292" height="3122" selected="0" zOrder="6" index="5" expanded="0" />
+        <ref_x003D_distributions_XmlElement left="9206" top="3884" width="5292" height="3122" selected="0" zOrder="9" index="6" expanded="0" />
+        <ref_x003D_publications_XmlElement left="15132" top="3884" width="5292" height="3122" selected="0" zOrder="12" index="7" expanded="0" />
+        <ref_x003D_date_XmlElement left="21058" top="3884" width="5292" height="3122" selected="0" zOrder="15" index="8" expanded="0" />
+        <ref_x003D_plants_XmlElement left="26984" top="3884" width="5292" height="3122" selected="0" zOrder="50" index="9" expanded="0" />
+        <ref_x003D_symbiosises_XmlElement left="32910" top="3884" width="5292" height="3122" selected="0" zOrder="52" index="10" expanded="0" />
+        <ref_x003D_collections_XmlElement left="38836" top="3884" width="5292" height="3122" selected="0" zOrder="54" index="11" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="44762" top="3884" width="5292" height="3122" selected="0" zOrder="56" index="12" expanded="0" />
+    </taxon_XmlElement>
+    <sys_XmlElement left="15132" top="254" width="5292" height="3122" selected="0" zOrder="18" index="2" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="12169" top="3884" width="5292" height="3122" selected="0" zOrder="20" index="0" expanded="0" />
+        <name_XmlAttribute left="18095" top="3884" width="5292" height="873" selected="0" zOrder="23" index="2" expanded="1">
+            <_x0028_name_x0029__XmlSimpleType left="18095" top="5265" width="5292" height="3122" selected="0" zOrder="26" index="0" expanded="1" />
+        </name_XmlAttribute>
+    </sys_XmlElement>
+    <synonyms_XmlElement left="38836" top="254" width="5292" height="3122" selected="0" zOrder="58" index="3" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="35873" top="3884" width="5292" height="3122" selected="0" zOrder="59" index="0" expanded="0" />
+        <ref_x003D_name_XmlElement left="41799" top="3884" width="5292" height="3122" selected="0" zOrder="61" index="1" expanded="0" />
+    </synonyms_XmlElement>
+    <name_XmlElement left="44762" top="254" width="5292" height="3122" selected="0" zOrder="63" index="4" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="44762" top="3884" width="5292" height="3122" selected="0" zOrder="64" index="0" expanded="0" />
+    </name_XmlElement>
+    <authors_XmlElement left="50688" top="254" width="5292" height="3122" selected="0" zOrder="66" index="5" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="47725" top="3884" width="5292" height="3122" selected="0" zOrder="67" index="0" expanded="0" />
+        <ref_x003D_person_XmlElement left="53651" top="3884" width="5292" height="3122" selected="0" zOrder="69" index="1" expanded="0" />
+    </authors_XmlElement>
+    <person_XmlElement left="56614" top="254" width="5292" height="3122" selected="0" zOrder="29" index="6" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="21058" top="3884" width="5292" height="3122" selected="0" zOrder="30" index="0" expanded="0" />
+        <ref_x003D_name_XmlElement left="26984" top="3884" width="5292" height="3122" selected="0" zOrder="71" index="1" expanded="0" />
+        <ref_x003D_description_XmlElement left="32910" top="3884" width="5292" height="3122" selected="0" zOrder="73" index="2" expanded="0" />
+        <ref_x003D_degree_XmlElement left="38836" top="3884" width="5292" height="3122" selected="0" zOrder="75" index="3" expanded="0" />
+        <ref_x003D_position_XmlElement left="44762" top="3884" width="5292" height="3122" selected="0" zOrder="77" index="4" expanded="0" />
+        <ref_x003D_institute_XmlElement left="50688" top="3884" width="5292" height="3122" selected="0" zOrder="79" index="5" expanded="0" />
+        <ref_x003D_department_XmlElement left="56614" top="3884" width="5292" height="3122" selected="0" zOrder="81" index="6" expanded="0" />
+        <ref_x003D_phone_XmlElement left="62540" top="3884" width="5292" height="3122" selected="0" zOrder="83" index="7" expanded="0" />
+        <ref_x003D_mail_XmlElement left="68466" top="3884" width="5292" height="3122" selected="0" zOrder="85" index="8" expanded="0" />
+        <ref_x003D_email_XmlElement left="74392" top="3884" width="5292" height="3122" selected="0" zOrder="87" index="9" expanded="0" />
+        <ref_x003D_birthday_XmlElement left="80318" top="3884" width="5292" height="3122" selected="0" zOrder="89" index="10" expanded="0" />
+        <ref_x003D_dyingday_XmlElement left="86244" top="3884" width="5292" height="3122" selected="0" zOrder="91" index="11" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="92170" top="3884" width="5292" height="3122" selected="0" zOrder="93" index="12" expanded="0" />
+    </person_XmlElement>
+    <degree_XmlElement left="62540" top="254" width="5292" height="3122" selected="0" zOrder="95" index="7" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="62540" top="3884" width="5292" height="3122" selected="0" zOrder="96" index="0" expanded="0" />
+    </degree_XmlElement>
+    <position_XmlElement left="68466" top="254" width="5292" height="3122" selected="0" zOrder="98" index="8" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="68466" top="3884" width="5292" height="3122" selected="0" zOrder="99" index="0" expanded="0" />
+    </position_XmlElement>
+    <institute_XmlElement left="74392" top="254" width="5292" height="3122" selected="0" zOrder="101" index="9" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="74392" top="3884" width="5292" height="3122" selected="0" zOrder="102" index="0" expanded="0" />
+    </institute_XmlElement>
+    <department_XmlElement left="80318" top="254" width="5292" height="3122" selected="0" zOrder="104" index="10" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="80318" top="3884" width="5292" height="3122" selected="0" zOrder="105" index="0" expanded="0" />
+    </department_XmlElement>
+    <phone_XmlElement left="86244" top="254" width="5292" height="3122" selected="0" zOrder="107" index="11" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="86244" top="3884" width="5292" height="3122" selected="0" zOrder="108" index="0" expanded="0" />
+    </phone_XmlElement>
+    <mail_XmlElement left="92170" top="254" width="5292" height="3122" selected="0" zOrder="110" index="12" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="92170" top="3884" width="5292" height="3122" selected="0" zOrder="111" index="0" expanded="0" />
+    </mail_XmlElement>
+    <email_XmlElement left="98096" top="254" width="5292" height="3122" selected="0" zOrder="113" index="13" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="98096" top="3884" width="5292" height="3122" selected="0" zOrder="114" index="0" expanded="0" />
+    </email_XmlElement>
+    <birthday_XmlElement left="104022" top="254" width="5292" height="3122" selected="0" zOrder="116" index="14" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="104022" top="3884" width="5292" height="3122" selected="0" zOrder="117" index="0" expanded="0" />
+    </birthday_XmlElement>
+    <dyingday_XmlElement left="109948" top="254" width="5292" height="3122" selected="0" zOrder="119" index="15" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="109948" top="3884" width="5292" height="3122" selected="0" zOrder="120" index="0" expanded="0" />
+    </dyingday_XmlElement>
+    <x-metadata_XmlElement left="115874" top="254" width="5292" height="3122" selected="0" zOrder="122" index="16" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="112911" top="3884" width="5292" height="3122" selected="0" zOrder="123" index="0" expanded="0" />
+        <ref_x003D_meta_XmlElement left="118837" top="3884" width="5292" height="3122" selected="0" zOrder="125" index="1" expanded="0" />
+    </x-metadata_XmlElement>
+    <meta_XmlElement left="121800" top="254" width="5292" height="3122" selected="0" zOrder="127" index="17" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="121800" top="3884" width="5292" height="3122" selected="0" zOrder="128" index="0" expanded="0" />
+    </meta_XmlElement>
+    <distributions_XmlElement left="127726" top="254" width="5292" height="3122" selected="0" zOrder="130" index="18" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="124763" top="3884" width="5292" height="3122" selected="0" zOrder="131" index="0" expanded="0" />
+        <ref_x003D_distribution_XmlElement left="130689" top="3884" width="5292" height="3122" selected="0" zOrder="133" index="1" expanded="0" />
+    </distributions_XmlElement>
+    <distribution_XmlElement left="133652" top="254" width="5292" height="3122" selected="0" zOrder="135" index="19" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="112911" top="3884" width="5292" height="3122" selected="0" zOrder="136" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="118837" top="3884" width="5292" height="3122" selected="0" zOrder="138" index="1" expanded="0" />
+        <ref_x003D_area_XmlElement left="124763" top="3884" width="5292" height="3122" selected="0" zOrder="140" index="2" expanded="0" />
+        <ref_x003D_stay_XmlElement left="130689" top="3884" width="5292" height="3122" selected="0" zOrder="142" index="3" expanded="0" />
+        <ref_x003D_label_XmlElement left="136615" top="3884" width="5292" height="3122" selected="0" zOrder="144" index="4" expanded="0" />
+        <ref_x003D_authors_XmlElement left="142541" top="3884" width="5292" height="3122" selected="0" zOrder="146" index="5" expanded="0" />
+        <ref_x003D_publications_XmlElement left="148467" top="3884" width="5292" height="3122" selected="0" zOrder="148" index="6" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="154393" top="3884" width="5292" height="3122" selected="0" zOrder="150" index="7" expanded="0" />
+    </distribution_XmlElement>
+    <area_XmlElement left="139578" top="254" width="5292" height="3122" selected="0" zOrder="152" index="20" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="118837" top="3884" width="5292" height="3122" selected="0" zOrder="153" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="124763" top="3884" width="5292" height="3122" selected="0" zOrder="155" index="1" expanded="0" />
+        <ref_x003D_region_XmlElement left="130689" top="3884" width="5292" height="3122" selected="0" zOrder="157" index="2" expanded="0" />
+        <ref_x003D_territory_XmlElement left="136615" top="3884" width="5292" height="3122" selected="0" zOrder="159" index="3" expanded="0" />
+        <ref_x003D_location_XmlElement left="142541" top="3884" width="5292" height="3122" selected="0" zOrder="161" index="4" expanded="0" />
+        <ref_x003D_authors_XmlElement left="148467" top="3884" width="5292" height="3122" selected="0" zOrder="163" index="5" expanded="0" />
+        <ref_x003D_publications_XmlElement left="154393" top="3884" width="5292" height="3122" selected="0" zOrder="165" index="6" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="160319" top="3884" width="5292" height="3122" selected="0" zOrder="167" index="7" expanded="0" />
+    </area_XmlElement>
+    <region_XmlElement left="145504" top="254" width="5292" height="3122" selected="0" zOrder="169" index="21" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="130689" top="3884" width="5292" height="3122" selected="0" zOrder="170" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="136615" top="3884" width="5292" height="3122" selected="0" zOrder="172" index="1" expanded="0" />
+        <ref_x003D_authors_XmlElement left="142541" top="3884" width="5292" height="3122" selected="0" zOrder="174" index="2" expanded="0" />
+        <ref_x003D_publications_XmlElement left="148467" top="3884" width="5292" height="3122" selected="0" zOrder="176" index="3" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="154393" top="3884" width="5292" height="3122" selected="0" zOrder="178" index="4" expanded="0" />
+        <type_XmlAttribute left="160319" top="3884" width="5292" height="873" selected="0" zOrder="180" index="6" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="160319" top="5265" width="5292" height="3122" selected="0" zOrder="182" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </region_XmlElement>
+    <publications_XmlElement left="151430" top="254" width="5292" height="3122" selected="0" zOrder="184" index="22" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="148467" top="3884" width="5292" height="3122" selected="0" zOrder="185" index="0" expanded="0" />
+        <ref_x003D_publication_XmlElement left="154393" top="3884" width="5292" height="3122" selected="0" zOrder="187" index="1" expanded="0" />
+    </publications_XmlElement>
+    <publication_XmlElement left="157356" top="254" width="5292" height="3122" selected="0" zOrder="189" index="23" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="139578" top="3884" width="5292" height="3122" selected="0" zOrder="190" index="0" expanded="0" />
+        <ref_x003D_opf_XmlElement left="145504" top="3884" width="5292" height="3122" selected="0" zOrder="192" index="1" expanded="0" />
+        <ref_x003D_record_XmlElement left="151430" top="3884" width="5292" height="3122" selected="0" zOrder="194" index="2" expanded="0" />
+        <ref_x003D_description_XmlElement left="157356" top="3884" width="5292" height="3122" selected="0" zOrder="196" index="3" expanded="0" />
+        <ref_x003D_dc-metadata_XmlElement left="163282" top="3884" width="5292" height="3122" selected="0" zOrder="198" index="4" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="169208" top="3884" width="5292" height="3122" selected="0" zOrder="200" index="5" expanded="0" />
+        <ref_x003D_authors_XmlElement left="175134" top="3884" width="5292" height="3122" selected="0" zOrder="202" index="6" expanded="0" />
+    </publication_XmlElement>
+    <opf_XmlElement left="163282" top="254" width="5292" height="3122" selected="0" zOrder="204" index="24" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="163282" top="3884" width="5292" height="3122" selected="0" zOrder="205" index="0" expanded="0" />
+    </opf_XmlElement>
+    <record_XmlElement left="169208" top="254" width="5292" height="3122" selected="0" zOrder="207" index="25" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="169208" top="3884" width="5292" height="3122" selected="0" zOrder="208" index="0" expanded="0" />
+    </record_XmlElement>
+    <dc-metadata_XmlElement left="175134" top="254" width="5292" height="3122" selected="0" zOrder="210" index="26" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="130689" top="3884" width="5292" height="3122" selected="0" zOrder="211" index="0" expanded="0" />
+        <ref_x003D_title_XmlElement left="136615" top="3884" width="5292" height="3122" selected="0" zOrder="213" index="1" expanded="0" />
+        <ref_x003D_identifier_XmlElement left="142541" top="3884" width="5292" height="3122" selected="0" zOrder="215" index="2" expanded="0" />
+        <ref_x003D_contributor_XmlElement left="148467" top="3884" width="5292" height="3122" selected="0" zOrder="217" index="3" expanded="0" />
+        <ref_x003D_creator_XmlElement left="154393" top="3884" width="5292" height="3122" selected="0" zOrder="219" index="4" expanded="0" />
+        <ref_x003D_subject_XmlElement left="160319" top="3884" width="5292" height="3122" selected="0" zOrder="221" index="5" expanded="0" />
+        <ref_x003D_description_XmlElement left="166245" top="3884" width="5292" height="3122" selected="0" zOrder="223" index="6" expanded="0" />
+        <ref_x003D_publisher_XmlElement left="172171" top="3884" width="5292" height="3122" selected="0" zOrder="225" index="7" expanded="0" />
+        <ref_x003D_date_XmlElement left="178097" top="3884" width="5292" height="3122" selected="0" zOrder="227" index="8" expanded="0" />
+        <ref_x003D_type_XmlElement left="184023" top="3884" width="5292" height="3122" selected="0" zOrder="229" index="9" expanded="0" />
+        <ref_x003D_format_XmlElement left="189949" top="3884" width="5292" height="3122" selected="0" zOrder="231" index="10" expanded="0" />
+        <ref_x003D_source_XmlElement left="195875" top="3884" width="5292" height="3122" selected="0" zOrder="233" index="11" expanded="0" />
+        <ref_x003D_language_XmlElement left="201801" top="3884" width="5292" height="3122" selected="0" zOrder="235" index="12" expanded="0" />
+        <ref_x003D_relation_XmlElement left="207727" top="3884" width="5292" height="3122" selected="0" zOrder="237" index="13" expanded="0" />
+        <ref_x003D_coverage_XmlElement left="213653" top="3884" width="5292" height="3122" selected="0" zOrder="239" index="14" expanded="0" />
+        <ref_x003D_rights_XmlElement left="219579" top="3884" width="5292" height="3122" selected="0" zOrder="241" index="15" expanded="0" />
+    </dc-metadata_XmlElement>
+    <title_XmlElement left="26984" top="254" width="5292" height="3122" selected="0" zOrder="243" index="27" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="26984" top="3884" width="5292" height="3122" selected="0" zOrder="244" index="0" expanded="0" />
+    </title_XmlElement>
+    <identifier_XmlElement left="450693" top="1000" width="5292" height="3122" selected="0" zOrder="483" index="28" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="447730" top="4630" width="5292" height="3122" selected="0" zOrder="484" index="0" expanded="0" />
+        <scheme_XmlAttribute left="453656" top="4630" width="5292" height="873" selected="0" zOrder="486" index="2" expanded="1">
+            <_x0028_scheme_x0029__XmlSimpleType left="453656" top="6011" width="5292" height="3122" selected="0" zOrder="488" index="0" expanded="1" />
+        </scheme_XmlAttribute>
+    </identifier_XmlElement>
+    <contributor_XmlElement left="462545" top="1000" width="5292" height="3122" selected="0" zOrder="490" index="29" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="459582" top="4630" width="5292" height="3122" selected="0" zOrder="491" index="0" expanded="0" />
+        <role_XmlAttribute left="465508" top="4630" width="5292" height="873" selected="0" zOrder="493" index="2" expanded="1">
+            <_x0028_role_x0029__XmlSimpleType left="465508" top="6011" width="5292" height="3122" selected="0" zOrder="495" index="0" expanded="1" />
+        </role_XmlAttribute>
+    </contributor_XmlElement>
+    <creator_XmlElement left="474397" top="1000" width="5292" height="3122" selected="0" zOrder="497" index="30" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="471434" top="4630" width="5292" height="3122" selected="0" zOrder="498" index="0" expanded="0" />
+        <role_XmlAttribute left="477360" top="4630" width="5292" height="873" selected="0" zOrder="500" index="2" expanded="1">
+            <_x0028_role_x0029__XmlSimpleType left="477360" top="6011" width="5292" height="3122" selected="0" zOrder="502" index="0" expanded="1" />
+        </role_XmlAttribute>
+    </creator_XmlElement>
+    <subject_XmlElement left="483286" top="1000" width="5292" height="3122" selected="0" zOrder="504" index="31" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="483286" top="4630" width="5292" height="3122" selected="0" zOrder="505" index="0" expanded="0" />
+    </subject_XmlElement>
+    <description_XmlElement left="32910" top="254" width="5292" height="3122" selected="0" zOrder="246" index="32" expanded="1" />
+    <publisher_XmlElement left="489212" top="1000" width="5292" height="3122" selected="0" zOrder="507" index="33" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="489212" top="4630" width="5292" height="3122" selected="0" zOrder="508" index="0" expanded="0" />
+    </publisher_XmlElement>
+    <date_XmlElement left="317358" top="254" width="5292" height="3122" selected="0" zOrder="247" index="34" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="314395" top="3884" width="5292" height="3122" selected="0" zOrder="248" index="0" expanded="0" />
+        <event_XmlAttribute left="320321" top="3884" width="5292" height="873" selected="0" zOrder="250" index="2" expanded="1">
+            <_x0028_event_x0029__XmlSimpleType left="320321" top="5265" width="5292" height="3122" selected="0" zOrder="252" index="0" expanded="1" />
+        </event_XmlAttribute>
+    </date_XmlElement>
+    <type_XmlElement left="429952" top="254" width="5292" height="3122" selected="0" zOrder="254" index="35" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="429952" top="3884" width="5292" height="3122" selected="0" zOrder="255" index="0" expanded="0" />
+    </type_XmlElement>
+    <format_XmlElement left="495138" top="1000" width="5292" height="3122" selected="0" zOrder="510" index="36" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="495138" top="4630" width="5292" height="3122" selected="0" zOrder="511" index="0" expanded="0" />
+    </format_XmlElement>
+    <language_XmlElement left="501064" top="1000" width="5292" height="3122" selected="0" zOrder="513" index="37" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="501064" top="4630" width="5292" height="3122" selected="0" zOrder="514" index="0" expanded="0" />
+    </language_XmlElement>
+    <relation_XmlElement left="506990" top="1000" width="5292" height="3122" selected="0" zOrder="516" index="38" expanded="1" />
+    <coverage_XmlElement left="512916" top="1000" width="5292" height="3122" selected="0" zOrder="517" index="39" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="512916" top="4630" width="5292" height="3122" selected="0" zOrder="518" index="0" expanded="0" />
+    </coverage_XmlElement>
+    <rights_XmlElement left="518842" top="1000" width="5292" height="3122" selected="0" zOrder="520" index="40" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="518842" top="4630" width="5292" height="3122" selected="0" zOrder="521" index="0" expanded="0" />
+    </rights_XmlElement>
+    <territory_XmlElement left="269950" top="254" width="5292" height="3122" selected="0" zOrder="257" index="41" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="255135" top="3884" width="5292" height="3122" selected="0" zOrder="258" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="261061" top="3884" width="5292" height="3122" selected="0" zOrder="260" index="1" expanded="0" />
+        <ref_x003D_authors_XmlElement left="266987" top="3884" width="5292" height="3122" selected="0" zOrder="262" index="2" expanded="0" />
+        <ref_x003D_publications_XmlElement left="272913" top="3884" width="5292" height="3122" selected="0" zOrder="264" index="3" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="278839" top="3884" width="5292" height="3122" selected="0" zOrder="266" index="4" expanded="0" />
+        <type_XmlAttribute left="284765" top="3884" width="5292" height="873" selected="0" zOrder="268" index="6" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="284765" top="5265" width="5292" height="3122" selected="0" zOrder="270" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </territory_XmlElement>
+    <location_XmlElement left="275876" top="254" width="5292" height="3122" selected="0" zOrder="272" index="42" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="264024" top="3884" width="5292" height="3122" selected="0" zOrder="273" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="269950" top="3884" width="5292" height="3122" selected="0" zOrder="275" index="1" expanded="0" />
+        <ref_x003D_authors_XmlElement left="275876" top="3884" width="5292" height="3122" selected="0" zOrder="277" index="2" expanded="0" />
+        <ref_x003D_publications_XmlElement left="281802" top="3884" width="5292" height="3122" selected="0" zOrder="279" index="3" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="287728" top="3884" width="5292" height="3122" selected="0" zOrder="281" index="4" expanded="0" />
+    </location_XmlElement>
+    <stay_XmlElement left="281802" top="254" width="5292" height="3122" selected="0" zOrder="283" index="43" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="240320" top="3884" width="5292" height="3122" selected="0" zOrder="284" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="246246" top="3884" width="5292" height="3122" selected="0" zOrder="286" index="1" expanded="0" />
+        <ref_x003D_source_XmlElement left="252172" top="3884" width="5292" height="3122" selected="0" zOrder="288" index="2" expanded="0" />
+        <ref_x003D_location_XmlElement left="258098" top="3884" width="5292" height="3122" selected="0" zOrder="290" index="3" expanded="0" />
+        <ref_x003D_horisont_XmlElement left="264024" top="3884" width="5292" height="3122" selected="0" zOrder="292" index="4" expanded="0" />
+        <ref_x003D_section_XmlElement left="269950" top="3884" width="5292" height="3122" selected="0" zOrder="294" index="5" expanded="0" />
+        <ref_x003D_square_XmlElement left="275876" top="3884" width="5292" height="3122" selected="0" zOrder="296" index="6" expanded="0" />
+        <ref_x003D_depth_XmlElement left="281802" top="3884" width="5292" height="3122" selected="0" zOrder="298" index="7" expanded="0" />
+        <ref_x003D_date_XmlElement left="287728" top="3884" width="5292" height="3122" selected="0" zOrder="300" index="8" expanded="0" />
+        <ref_x003D_gear_XmlElement left="293654" top="3884" width="5292" height="3122" selected="0" zOrder="302" index="9" expanded="0" />
+        <ref_x003D_sample_XmlElement left="299580" top="3884" width="5292" height="3122" selected="0" zOrder="304" index="10" expanded="0" />
+        <ref_x003D_authors_XmlElement left="305506" top="3884" width="5292" height="3122" selected="0" zOrder="306" index="11" expanded="0" />
+        <ref_x003D_publications_XmlElement left="311432" top="3884" width="5292" height="3122" selected="0" zOrder="308" index="12" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="317358" top="3884" width="5292" height="3122" selected="0" zOrder="310" index="13" expanded="0" />
+        <type_XmlAttribute left="323284" top="3884" width="5292" height="873" selected="0" zOrder="312" index="16" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="323284" top="5265" width="5292" height="3122" selected="0" zOrder="314" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </stay_XmlElement>
+    <source_XmlElement left="287728" top="254" width="5292" height="3122" selected="0" zOrder="316" index="44" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="278839" top="3884" width="5292" height="3122" selected="0" zOrder="317" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="284765" top="3884" width="5292" height="3122" selected="0" zOrder="319" index="1" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="290691" top="3884" width="5292" height="3122" selected="0" zOrder="321" index="2" expanded="0" />
+        <type_XmlAttribute left="296617" top="3884" width="5292" height="873" selected="0" zOrder="323" index="4" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="296617" top="5265" width="5292" height="3122" selected="0" zOrder="325" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </source_XmlElement>
+    <horisont_XmlElement left="293654" top="254" width="5292" height="3122" selected="0" zOrder="327" index="45" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="284765" top="3884" width="5292" height="3122" selected="0" zOrder="328" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="290691" top="3884" width="5292" height="3122" selected="0" zOrder="330" index="1" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="296617" top="3884" width="5292" height="3122" selected="0" zOrder="332" index="2" expanded="0" />
+        <type_XmlAttribute left="302543" top="3884" width="5292" height="873" selected="0" zOrder="334" index="4" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="302543" top="5265" width="5292" height="3122" selected="0" zOrder="336" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </horisont_XmlElement>
+    <section_XmlElement left="299580" top="254" width="5292" height="3122" selected="0" zOrder="338" index="46" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="290691" top="3884" width="5292" height="3122" selected="0" zOrder="339" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="296617" top="3884" width="5292" height="3122" selected="0" zOrder="341" index="1" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="302543" top="3884" width="5292" height="3122" selected="0" zOrder="343" index="2" expanded="0" />
+        <type_XmlAttribute left="308469" top="3884" width="5292" height="873" selected="0" zOrder="345" index="4" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="308469" top="5265" width="5292" height="3122" selected="0" zOrder="347" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </section_XmlElement>
+    <square_XmlElement left="305506" top="254" width="5292" height="3122" selected="0" zOrder="349" index="47" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="296617" top="3884" width="5292" height="3122" selected="0" zOrder="350" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="302543" top="3884" width="5292" height="3122" selected="0" zOrder="352" index="1" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="308469" top="3884" width="5292" height="3122" selected="0" zOrder="354" index="2" expanded="0" />
+        <type_XmlAttribute left="314395" top="3884" width="5292" height="873" selected="0" zOrder="356" index="4" expanded="1">
+            <_x0028_type_x0029__XmlSimpleType left="314395" top="5265" width="5292" height="3122" selected="0" zOrder="358" index="0" expanded="1" />
+        </type_XmlAttribute>
+    </square_XmlElement>
+    <depth_XmlElement left="311432" top="254" width="5292" height="3122" selected="0" zOrder="360" index="48" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="311432" top="3884" width="5292" height="3122" selected="0" zOrder="361" index="0" expanded="0" />
+    </depth_XmlElement>
+    <gear_XmlElement left="323284" top="254" width="5292" height="3122" selected="0" zOrder="363" index="49" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="323284" top="3884" width="5292" height="3122" selected="0" zOrder="364" index="0" expanded="0" />
+    </gear_XmlElement>
+    <sample_XmlElement left="329210" top="254" width="5292" height="3122" selected="0" zOrder="366" index="50" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="329210" top="3884" width="5292" height="3122" selected="0" zOrder="367" index="0" expanded="0" />
+    </sample_XmlElement>
+    <label_XmlElement left="335136" top="254" width="5292" height="3122" selected="0" zOrder="369" index="51" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="317358" top="3884" width="5292" height="3122" selected="0" zOrder="370" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="323284" top="3884" width="5292" height="3122" selected="0" zOrder="372" index="1" expanded="0" />
+        <ref_x003D_latitude_XmlElement left="329210" top="3884" width="5292" height="3122" selected="0" zOrder="374" index="2" expanded="0" />
+        <ref_x003D_longitude_XmlElement left="335136" top="3884" width="5292" height="3122" selected="0" zOrder="376" index="3" expanded="0" />
+        <ref_x003D_base_XmlElement left="341062" top="3884" width="5292" height="3122" selected="0" zOrder="378" index="4" expanded="0" />
+        <ref_x003D_point_XmlElement left="346988" top="3884" width="5292" height="3122" selected="0" zOrder="380" index="5" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="352914" top="3884" width="5292" height="3122" selected="0" zOrder="382" index="6" expanded="0" />
+    </label_XmlElement>
+    <latitude_XmlElement left="341062" top="254" width="5292" height="3122" selected="0" zOrder="384" index="52" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="341062" top="3884" width="5292" height="3122" selected="0" zOrder="385" index="0" expanded="0" />
+    </latitude_XmlElement>
+    <longitude_XmlElement left="346988" top="254" width="5292" height="3122" selected="0" zOrder="387" index="53" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="346988" top="3884" width="5292" height="3122" selected="0" zOrder="388" index="0" expanded="0" />
+    </longitude_XmlElement>
+    <base_XmlElement left="352914" top="254" width="5292" height="3122" selected="0" zOrder="390" index="54" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="349951" top="3884" width="5292" height="3122" selected="0" zOrder="391" index="0" expanded="0" />
+        <direction_XmlAttribute left="355877" top="3884" width="5292" height="873" selected="0" zOrder="393" index="4" expanded="1">
+            <_x0028_direction_x0029__XmlSimpleType left="355877" top="5265" width="5292" height="3122" selected="0" zOrder="395" index="0" expanded="1" />
+        </direction_XmlAttribute>
+    </base_XmlElement>
+    <point_XmlElement left="358840" top="254" width="5292" height="3122" selected="0" zOrder="397" index="55" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="358840" top="3884" width="5292" height="3122" selected="0" zOrder="398" index="0" expanded="0" />
+    </point_XmlElement>
+    <plants_XmlElement left="364766" top="254" width="5292" height="3122" selected="0" zOrder="400" index="56" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="361803" top="3884" width="5292" height="3122" selected="0" zOrder="401" index="0" expanded="0" />
+        <ref_x003D_symbiosis_XmlElement left="367729" top="3884" width="5292" height="3122" selected="0" zOrder="403" index="1" expanded="0" />
+    </plants_XmlElement>
+    <symbiosis_XmlElement left="370692" top="254" width="5292" height="3122" selected="0" zOrder="405" index="57" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="352914" top="3884" width="5292" height="3122" selected="0" zOrder="406" index="0" expanded="0" />
+        <ref_x003D_description_XmlElement left="358840" top="3884" width="5292" height="3122" selected="0" zOrder="408" index="1" expanded="0" />
+        <ref_x003D_taxon_XmlElement left="364766" top="3884" width="5292" height="3122" selected="0" zOrder="410" index="2" expanded="0" />
+        <ref_x003D_person_XmlElement left="370692" top="3884" width="5292" height="3122" selected="0" zOrder="412" index="3" expanded="0" />
+        <ref_x003D_publications_XmlElement left="376618" top="3884" width="5292" height="3122" selected="0" zOrder="414" index="4" expanded="0" />
+        <ref_x003D_region_XmlElement left="382544" top="3884" width="5292" height="3122" selected="0" zOrder="416" index="5" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="388470" top="3884" width="5292" height="3122" selected="0" zOrder="418" index="6" expanded="0" />
+    </symbiosis_XmlElement>
+    <symbiosises_XmlElement left="376618" top="254" width="5292" height="3122" selected="0" zOrder="420" index="58" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="367729" top="3884" width="5292" height="3122" selected="0" zOrder="421" index="0" expanded="0" />
+        <ref_x003D_hosts_XmlElement left="373655" top="3884" width="5292" height="3122" selected="0" zOrder="423" index="1" expanded="0" />
+        <ref_x003D_parasites_XmlElement left="379581" top="3884" width="5292" height="3122" selected="0" zOrder="425" index="2" expanded="0" />
+        <ref_x003D_plants_XmlElement left="385507" top="3884" width="5292" height="3122" selected="0" zOrder="427" index="3" expanded="0" />
+    </symbiosises_XmlElement>
+    <hosts_XmlElement left="382544" top="254" width="5292" height="3122" selected="0" zOrder="429" index="59" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="379581" top="3884" width="5292" height="3122" selected="0" zOrder="430" index="0" expanded="0" />
+        <ref_x003D_symbiosis_XmlElement left="385507" top="3884" width="5292" height="3122" selected="0" zOrder="432" index="1" expanded="0" />
+    </hosts_XmlElement>
+    <parasites_XmlElement left="388470" top="254" width="5292" height="3122" selected="0" zOrder="434" index="60" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="385507" top="3884" width="5292" height="3122" selected="0" zOrder="435" index="0" expanded="0" />
+        <ref_x003D_symbiosis_XmlElement left="391433" top="3884" width="5292" height="3122" selected="0" zOrder="437" index="1" expanded="0" />
+    </parasites_XmlElement>
+    <collections_XmlElement left="394396" top="254" width="5292" height="3122" selected="0" zOrder="439" index="61" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="391433" top="3884" width="5292" height="3122" selected="0" zOrder="440" index="0" expanded="0" />
+        <ref_x003D_collection_XmlElement left="397359" top="3884" width="5292" height="3122" selected="0" zOrder="442" index="1" expanded="0" />
+    </collections_XmlElement>
+    <collection_XmlElement left="400322" top="254" width="5292" height="3122" selected="0" zOrder="444" index="62" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="394396" top="3884" width="5292" height="3122" selected="0" zOrder="445" index="0" expanded="0" />
+        <ref_x003D_item_XmlElement left="400322" top="3884" width="5292" height="3122" selected="0" zOrder="447" index="1" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="406248" top="3884" width="5292" height="3122" selected="0" zOrder="449" index="2" expanded="0" />
+    </collection_XmlElement>
+    <item_XmlElement left="406248" top="254" width="5292" height="3122" selected="0" zOrder="451" index="63" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="382544" top="3884" width="5292" height="3122" selected="0" zOrder="452" index="0" expanded="0" />
+        <ref_x003D_sex_XmlElement left="388470" top="3884" width="5292" height="3122" selected="0" zOrder="454" index="1" expanded="0" />
+        <ref_x003D_age_XmlElement left="394396" top="3884" width="5292" height="3122" selected="0" zOrder="456" index="2" expanded="0" />
+        <ref_x003D_count_XmlElement left="400322" top="3884" width="5292" height="3122" selected="0" zOrder="458" index="3" expanded="0" />
+        <ref_x003D_date_XmlElement left="406248" top="3884" width="5292" height="3122" selected="0" zOrder="460" index="4" expanded="0" />
+        <ref_x003D_authors_XmlElement left="412174" top="3884" width="5292" height="3122" selected="0" zOrder="462" index="5" expanded="0" />
+        <ref_x003D_type_XmlElement left="418100" top="3884" width="5292" height="3122" selected="0" zOrder="464" index="6" expanded="0" />
+        <ref_x003D_distribution_XmlElement left="424026" top="3884" width="5292" height="3122" selected="0" zOrder="466" index="7" expanded="0" />
+        <ref_x003D_x-metadata_XmlElement left="429952" top="3884" width="5292" height="3122" selected="0" zOrder="468" index="8" expanded="0" />
+    </item_XmlElement>
+    <sex_XmlElement left="412174" top="254" width="5292" height="3122" selected="0" zOrder="470" index="64" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="409211" top="3884" width="5292" height="3122" selected="0" zOrder="471" index="0" expanded="0" />
+        <value_XmlAttribute left="415137" top="3884" width="5292" height="873" selected="0" zOrder="473" index="1" expanded="1">
+            <_x0028_value_x0029__XmlSimpleType left="415137" top="5265" width="5292" height="3122" selected="0" zOrder="475" index="0" expanded="1" />
+        </value_XmlAttribute>
+    </sex_XmlElement>
+    <age_XmlElement left="418100" top="254" width="5292" height="3122" selected="0" zOrder="477" index="65" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="418100" top="3884" width="5292" height="3122" selected="0" zOrder="478" index="0" expanded="0" />
+    </age_XmlElement>
+    <count_XmlElement left="424026" top="254" width="5292" height="3122" selected="0" zOrder="480" index="66" expanded="1">
+        <ref_x003D_ssScript_XmlElement left="424026" top="3884" width="5292" height="3122" selected="0" zOrder="481" index="0" expanded="0" />
+    </count_XmlElement>
+</XSDDesignerLayout>

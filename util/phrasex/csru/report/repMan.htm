@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside dataset="s1" action="query" >
+Подсказка Get</serverside>
+<serverside dataset="s1" action="query" >
+</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+check1</title>
+</head>
+<body >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+: Менеджер отчетов</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td valign="top" width="1%" class="apbg" >
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td nowrap="nowrap" >
+<form method="GET" action="$session.ticketFolder)ticketView.htm" >
+$(s1.c3)<br />
+<input type="text" name="ticket_id" size="8" />
+<input type="submit" value="go" />
+<input type="hidden" name="backToUrl" value="$request.url)" />
+<input type="hidden" name="backToPrompt" value="Report Manager" />
+</form>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td nowrap="nowrap" >
+<a href="repTab.htm?mode=new" >
+Этот раздел заполнится с наиболее недавно объявленными статьями новостей.<br />
+$(parentCat.kb_title)</a>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td nowrap="nowrap" >
+<a href="repCro.htm?mode=new" >
+Менеджер Статуса Статуса status/statusMan.htm:<br />
+$(parentCat.kb_title)</a>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td nowrap="nowrap" >
+<a href="repCustom.htm" >
+Статус: [$(имя)] удален.<br />
+$(parentCat.kb_title)</a>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td nowrap="nowrap" >
+<a target="ptHelpWindow" href="../help/repManHelp.html" >
+Родитель</a>
+</td>
+</tr>
+</table>
+</td>
+<td >
+&nbsp;</td>
+<td width="99%" valign="top" >
+<table width="100%" border="0" cellspacing="1" cellpadding="2" >
+<tr class="apbg" >
+<td >
+$(path:escape)</td>
+<td >
+/td></td>
+<td >
+Приоритет: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name).</td>
+<td >
+ght">Copyright &копия; 2003, Андрей Ivanov.</td>
+</tr>
+<tr >
+<td >
+Отчет о всех невыполненных запросах</td>
+<td >
+$s1.row_ver)</td>
+<td >
+sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt</td>
+<td >
+<a href="listOpen.htm" >
+$(s1.dispatcher)</a>
+</td>
+</tr>
+<tr class="apbg" >
+<td >
+Этот раздел заполнится с три наиболее часто посещающее общественные статьи не в вышеуказанном рекомендуемом списке статьи из базы знаний.</td>
+<td >
+$s1.row_ver)</td>
+<td >
+sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt</td>
+<td >
+<a href="repTrend.htm" >
+$(s1.dispatcher)</a>
+</td>
+</tr>
+<tr >
+<td >
+../accessdenied.htm?b=$(p-combined:escape)</td>
+<td >
+$s1.row_ver)</td>
+<td >
+sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt</td>
+<td >
+<a href="repTimeSheet.htm" >
+$(s1.dispatcher)</a>
+</td>
+</tr>
+<tr class="apbg" >
+<td >
+HTML</td>
+<td >
+$s1.row_ver)</td>
+<td >
+sqlAddArt sqlAddCat sqlAddContent sqlAddCount sqlAddNews sqlAddProduct sqlAddStatus sqlAddTicketFile sqlAddUser sqlArt</td>
+<td >
+<a href="repCost.htm" >
+$(s1.dispatcher)</a>
+</td>
+</tr>
+<tr loop="s1" class="$(s1.rowodd#apbg#)" >
+<td >
+$(s1.name)</td>
+<td >
+$(s1.rep_type)</td>
+<td >
+$(s1.rep_id)</td>
+<td nowrap="nowrap" >
+<a href="rep$(s1.rep_type)Run.htm?cro_id=$(s1.rep_id)" >
+$(s1.dispatcher)</a>
+|<a href="rep$(s1.rep_type).htm?cro_id=$(s1.rep_id)" >
+Новый Табличный</a>
+|<a href="rep$(s1.rep_type)Del.htm?repID=$s1.rep_id)" >
+kb_k3</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+</td>
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

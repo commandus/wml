@@ -1,0 +1,620 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  // from RepTab
+  if (request.fieldExist('tab_col1') OR request.fieldExist('tab_col12'))
+
+    // convert user friendly column names to real column names
+    local.setVar('Request ID',    'ticket_id');  // name, value
+    local.setVar('Title',         'title');
+    local.setVar('Status',        'status');
+    local.setVar('Product',       'product');
+    local.setVar('Priority',      'priority');
+    local.setVar('Deadline',      'deadline');
+    local.setVar('Serial Number', 'serial_num');
+    local.setVar('Cost',          'cost');
+    local.setVar('Turn Around',   'turn_around');
+
+    local.setVar('Submitted To',  'submitted_to');
+    local.setVar('Submitted By',  'submitted_by');
+    local.setVar('Company',       'company');
+    local.setVar('Submitted On',  'submitted_on');
+    local.setVar('Assigned To',   'assigned_to');
+    local.setVar('Assigned By',   'assigned_by');
+    local.setVar('Assigned On',   'assigned_on');
+    local.setVar('Closed By',     'closed_by');
+    local.setVar('Closed On',     'closed_on');
+    local.setVar('Descending',    'DESC');
+    local.setVar('Ascending',     'ASC');
+
+    set local.tab_col1 = local.var(request.tab_col1, request.tab_col1);
+    set local.tab_col2 = local.var(request.tab_col2, request.tab_col2);
+    set local.tab_col3 = local.var(request.tab_col3, request.tab_col3);
+    set local.tab_col4 = local.var(request.tab_col4, request.tab_col4);
+    set local.tab_sort1 = local.var(request.tab_sort1, request.tab_sort1);
+    set local.tab_sort2 = local.var(request.tab_sort2, request.tab_sort2);
+
+    set local.tab_sort1_dir = 
+      local.var(request.tab_sort1_dir, request.tab_sort1_dir);
+    set local.tab_sort2_dir = 
+      local.var(request.tab_sort2_dir, request.tab_sort2_dir);
+
+    set session.tab_sql_select = '';
+    if (local.tab_col1 <> '')
+      set session.tab_sql_select = local.tab_col1;
+    endif
+    if (local.tab_col2 <> '')
+      if (session.tab_sql_select <> '')
+        set session.tab_sql_select = session.tab_sql_select + ',';
+      endif
+      set session.tab_sql_select = 
+        session.tab_sql_select + local.tab_col2;
+    endif
+    if (local.tab_col3 <> '')
+      if (session.tab_sql_select <> '')
+        set session.tab_sql_select = session.tab_sql_select + ',';
+      endif
+      set session.tab_sql_select = 
+        session.tab_sql_select + local.tab_col3;
+    endif
+    if (local.tab_col4 <> '')
+      if (session.tab_sql_select <> '')
+        set session.tab_sql_select = session.tab_sql_select + ',';
+      endif
+      set session.tab_sql_select = 
+        session.tab_sql_select + local.tab_col4;
+    endif
+
+    set session.tab_sql_orderby = '';
+    if (local.tab_sort1 <> '')
+      set session.tab_sql_orderby = 
+        local.tab_sort1 + ' ' + local.tab_sort1_dir;
+    endif
+    if (local.tab_sort2 <> '')
+      if (session.tab_sql_orderby <> '')
+        set session.tab_sql_orderby = session.tab_sql_orderby + ',';
+      endif
+      set session.tab_sql_orderby = session.tab_sql_orderby + 
+        local.tab_sort2 + ' ' + local.tab_sort2_dir;
+    endif
+
+    set session.tab_max_row = request.tab_max_row;
+    set session.tab_name = request.tab_name;
+    set session.tab_status = request.tab_status;
+    set session.tab_product = request.tab_product;
+    set session.tab_serial_num = request.tab_serial_num;
+    set session.tab_priority1 = request.tab_priority1;
+    set session.tab_priority2 = request.tab_priority2;
+    set session.tab_deadline1 = request.tab_deadline1;
+    set session.tab_deadline2 = request.tab_deadline2;
+    set session.tab_keywords = request.tab_keywords;
+    set session.tab_sql_where = request.tab_sql_where;
+
+    set session.tab_submitted_to = request.tab_submitted_to;
+    set session.tab_submitted_by = request.tab_submitted_by;
+    set session.tab_company = request.tab_company;
+    set session.tab_submitted_on1 = request.tab_submitted_on1;
+    set session.tab_submitted_on2 = request.tab_submitted_on2;
+    set session.tab_assigned_to = request.tab_assigned_to;
+    set session.tab_assigned_by = request.tab_assigned_by;
+    set session.tab_assigned_on1 = request.tab_assigned_on1;
+    set session.tab_assigned_on2 = request.tab_assigned_on2;
+    set session.tab_closed_by = request.tab_closed_by;
+    set session.tab_closed_on1 = request.tab_closed_on1;
+    set session.tab_closed_on2 = request.tab_closed_on2;
+
+  // result of openning a report from repMan.htm
+  elseif (request.fieldExist('tab_id'))
+
+    <serverside dataset="sqlQuery" action="query">
+    SELECT row_ver, rep_id, name, max_row,
+        sql_select, sql_orderby, sql_where, htm_where
+      FROM cs_report WHERE rep_id = request.tab_id;
+    
+    if (sqlQuery.fetch <> 1)
+      error 'Report ' + request.tab_id + ' not found';
+    endif
+    set session.tab_id = sqlQuery.rep_id;
+    set session.tab_row_ver = sqlQuery.row_ver;
+    set session.tab_name = sqlQuery.name;
+    set session.tab_max_row = sqlQuery.max_row;
+    set session.tab_sql_where = sqlQuery.sql_where;
+    set session.tab_sql_select = sqlQuery.sql_select;
+    set session.tab_sql_orderby = sqlQuery.sql_orderby;
+
+    set session.tab_status = '';
+    set session.tab_product = '';
+    set session.tab_serial_num = '';
+    set session.tab_priority1 = '';
+    set session.tab_priority2 = '';
+    set session.tab_deadline1 = '';
+    set session.tab_deadline2 = '';
+    set session.tab_keywords = '';
+
+    set session.tab_submitted_to = '';
+    set session.tab_submitted_by = '';
+    set session.tab_company = '';
+    set session.tab_submitted_on1 = '';
+    set session.tab_submitted_on2 = '';
+    set session.tab_assigned_to = '';
+    set session.tab_assigned_by = '';
+    set session.tab_assigned_on1 = '';
+    set session.tab_assigned_on2 = '';
+    set session.tab_closed_by = '';
+    set session.tab_closed_on1 = '';
+    set session.tab_closed_on2 = '';
+
+    tokenizer tokensHtmWhere(sqlQuery.htm_where, '|');
+    set local.col_name = tokensHtmWhere.nextToken;
+    while (local.col_name <> '')
+      if (local.col_name = 'status')
+        set session.tab_status = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'product')
+        set session.tab_product = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'serial_num')
+        set session.tab_serial_num = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority1')
+        set session.tab_priority1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'priority2')
+        set session.tab_priority2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline1')
+        set session.tab_deadline1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'deadline2')
+        set session.tab_deadline2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'keywords')
+        set session.tab_keywords = tokensHtmWhere.nextToken;
+
+      elseif (local.col_name = 'submitted_to')
+        set session.tab_submitted_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_by')
+        set session.tab_submitted_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'company')
+        set session.tab_company = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on1')
+        set session.tab_submitted_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'submitted_on2')
+        set session.tab_submitted_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_to')
+        set session.tab_assigned_to = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_by')
+        set session.tab_assigned_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on1')
+        set session.tab_assigned_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'assigned_on2')
+        set session.tab_assigned_on2 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_by')
+        set session.tab_closed_by = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on1')
+        set session.tab_closed_on1 = tokensHtmWhere.nextToken;
+      elseif (local.col_name = 'closed_on2')
+        set session.tab_closed_on2 = tokensHtmWhere.nextToken;
+      endif
+      set local.col_name = tokensHtmWhere.nextToken;
+    endwhile
+  endif
+
+  if (session.tab_max_row < 1)
+    error 'Max Requests must be greater than 0';
+  endif
+  if (string.isValidDateTime(session.tab_submitted_on1) <> 1)
+    error 'Please enter a valid date-time for Submitted On >=';
+  endif
+  if (string.isValidDateTime(session.tab_submitted_on2) <> 1)
+    error 'Please enter a valid date-time for Submitted On <';
+  endif
+  if (string.isValidDateTime(session.tab_assigned_on1) <> 1)
+    error 'Please enter a valid date-time for Assigned On >=';
+  endif
+  if (string.isValidDateTime(session.tab_assigned_on2) <> 1)
+    error 'Please enter a valid date-time for Assigned On <';
+  endif
+  if (string.isValidDateTime(session.tab_closed_on1) <> 1)
+    error 'Please enter a valid date-time for Closed On >=';
+  endif
+  if (string.isValidDateTime(session.tab_closed_on2) <> 1)
+    error 'Please enter a valid date-time for Closed On <';
+  endif
+  if (string.isValidDateTime(session.tab_deadline1) <> 1)
+    error 'Please enter a valid date-time for Deadline >=';
+  endif
+  if (string.isValidDateTime(session.tab_deadline2) <> 1)
+    error 'Please enter a valid date-time for Deadline <';
+  endif
+
+  // construct the where clause
+  set local.w = '';
+  if (session.tab_status <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'status = \'' + session.tab_status + '\'';
+  endif
+  if (session.tab_product <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'product = \'' + session.tab_product + '\'';
+  endif
+  if (session.tab_serial_num <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'serial_num = \'' + session.tab_serial_num + '\'';
+  endif
+  if (session.tab_priority1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'priority >= \'' + session.tab_priority1 + '\'';
+  endif
+  if (session.tab_priority2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'priority <= \'' + session.tab_priority2 + '\'';
+  endif
+  if (session.tab_deadline1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'deadline >= ' + to.odbcDateStr(session.tab_deadline1);
+  endif
+  if (session.tab_deadline2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'deadline < ' + to.odbcDateStr(session.tab_deadline2);
+  endif
+
+  if (session.tab_submitted_to <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_to = \'' + to.2QuoteStr(session.tab_submitted_to) + '\'';
+  endif
+  if (session.tab_submitted_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      '('
+      'submitted_by = \'' + to.2QuoteStr(session.tab_submitted_by) + '\''
+      ' OR '
+      'co_submitter = \'' + to.2QuoteStr(session.tab_submitted_by) + '\''
+      ')';
+  endif
+  if (session.tab_company <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'company = \'' + to.2QuoteStr(session.tab_company) + '\'';
+  endif
+  if (session.tab_submitted_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on >= ' + to.odbcDateStr(session.tab_submitted_on1);
+  endif
+  if (session.tab_submitted_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'submitted_on < ' + to.odbcDateStr(session.tab_submitted_on2);
+  endif
+  if (session.tab_assigned_to <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_to = \'' + to.2QuoteStr(session.tab_assigned_to) + '\'';
+  endif
+  if (session.tab_assigned_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_by = \'' + to.2QuoteStr(session.tab_assigned_by) + '\'';
+  endif
+  if (session.tab_assigned_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_on >= ' + to.odbcDateStr(session.tab_assigned_on1);
+  endif
+  if (session.tab_assigned_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'assigned_on < ' + to.odbcDateStr(session.tab_assigned_on2);
+  endif
+  if (session.tab_closed_by <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_by = \'' + to.2QuoteStr(session.tab_closed_by) + '\'';
+  endif
+  if (session.tab_closed_on1 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_on >= ' + to.odbcDateStr(session.tab_closed_on1);
+  endif
+  if (session.tab_closed_on2 <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    set local.w = local.w + 
+      'closed_on < ' + to.odbcDateStr(session.tab_closed_on2);
+  endif
+  if (session.tab_sql_where <> '')
+    if (local.w <> '')
+      set local.w = local.w + ' AND ';
+    endif
+    // Using to.2QuoteStr breaks simple thing like [status <> 'closed'].
+    // The user needs to code the where clause himself.
+    set local.w = local.w + '(' + session.tab_sql_where + ')';
+  endif
+
+  set local.kwSearch = 0;
+  if (session.tab_keywords <> '')
+    tokenizer words(session.tab_keywords, ',;');
+    set local.word = string.trim(words.nextToken);
+
+    if (app.dbCaseSensitive = 1 AND 
+      string.findString(to.lower(local.dbType), 'oracle') > 0)
+
+      while (local.word <> '')
+        if (local.w <> '')
+          set local.w = local.w + ' AND ';
+        endif
+        set local.kwSearch = 1;
+        set local.w = local.w + 
+          '(upper(title) LIKE upper(\'%' + local.word + '%\')' +
+          ' OR upper(ch_description) LIKE upper(\'%' + local.word + '%\'))';
+        set local.word = to.2QuoteStr(string.trim(words.nextToken));
+      endwhile;
+
+    elseif (app.dbCaseSensitive = 1 AND
+      string.findString(to.lower(local.dbType), 'sql server') > 0)
+      // (ms) <serverside dataset="server does not allow upper(text_column). Hence case
+      // insenstive search on the ch_description field are not provided. 
+      // Trick:
+      // SELECT * FROM a WHERE UPPER(SUBSTRING(c, 1, 8000)) LIKE '%what%'
+      // Also check out Full-Text Indexing to see if it suits your needs.
+      while (local.word <> '')
+        if (local.w <> '')
+          set local.w = local.w + ' AND ';
+        endif
+        set local.kwSearch = 1;
+        set local.w = local.w + 
+          '(upper(title) LIKE upper(\'%' + local.word + '%\')' +
+          ' OR ch_description LIKE \'%' + local.word + '%\')';
+        set local.word = to.2QuoteStr(string.trim(words.nextToken));
+      endwhile;
+
+    else
+      while (local.word <> '')
+        if (local.w <> '')
+          set local.w = local.w + ' AND ';
+        endif
+        set local.kwSearch = 1;
+        set local.w = local.w + 
+          '(title LIKE \'%' + local.word + '%\'' +
+          ' OR ch_description LIKE \'%' + local.word + '%\')';
+        set local.word = to.2QuoteStr(string.trim(words.nextToken));
+      endwhile;
+    endif
+  endif
+
+  // put together the complete <serverside dataset="statment
+  if (local.kwSearch = 0)
+    set local.sql" action="query">
+    SELECT ticket_id, ' + session.tab_sql_select + 
+      ' FROM cs_ticket_view';
+    if (local.w <> '')
+      set local.sql = local.sql + ' WHERE ' + local.w;
+    endif
+  else
+    // inner join, won't show useless requests with no history
+    set local.sql" action="query">
+    SELECT ticket_id, ' 
+      + session.tab_sql_select + ' FROM cs_ticket_view, cs_ti_change';
+    if (local.w <> '')
+      set local.sql = local.sql + 
+        ' WHERE (cs_ticket_view.ticket_id = cs_ti_change.ch_ticket_id)'
+        ' AND (' + local.w + ')';
+    endif
+  endif
+
+  if (session.tab_sql_orderby <> '')
+    set local.sql = local.sql + ' ORDER BY ' + session.tab_sql_orderby;
+  </serverside>
+  endif
+
+  <serverside dataset="s1 = local.sql;
+
+  // convert system column names to user frienly names
+  set local.tab_col1 = '';
+  set local.tab_col2 = '';
+  set local.tab_col3 = '';
+  set local.tab_col4 = '';
+
+  tokenizer tokens(session.tab_sql_select, ' ,');
+  set local.count = 1;
+  set local.col_name = tokens.nextToken;
+
+  while (local.col_name <> '')
+    if (local.col_name = 'title')
+      set local.col_header = 'Title';
+    elseif (local.col_name = 'status')
+      set local.col_header = 'Status';
+    elseif (local.col_name = 'product')
+      set local.col_header = 'Product';
+    elseif (local.col_name = 'serial_num')
+      set local.col_header = 'Serial Number';
+    elseif (local.col_name = 'priority')
+      set local.col_header = 'Priority';
+    elseif (local.col_name = 'deadline')
+      set local.col_header = 'Deadline';
+    elseif (local.col_name = 'cost')
+      set local.col_header = 'Cost';
+    elseif (local.col_name = 'turn_around')
+      set local.col_header = 'Turn Around';
+
+    elseif (local.col_name = 'submitted_to')
+      set local.col_header = 'Submitted To';
+    elseif (local.col_name = 'submitted_by')
+      set local.col_header = 'Submitted By';
+    elseif (local.col_name = 'submitted_on')
+      set local.col_header = 'Submitted On';
+    elseif (local.col_name = 'assigned_to')
+      set local.col_header = 'Assigned To';
+    elseif (local.col_name = 'assigned_by')
+      set local.col_header = 'Assigned By';
+    elseif (local.col_name = 'assigned_on')
+      set local.col_header = 'Assigned On';
+    elseif (local.col_name = 'closed_by')
+      set local.col_header = 'Closed By';
+    elseif (local.col_name = 'closed_on')
+      set local.col_header = 'Closed On';
+    else
+      set local.col_header = local.col_name;
+    endif
+
+    if (local.count = 1)
+      set local.tab_col1 = local.col_header;
+    elseif (local.count = 2)
+      set local.tab_col2 = local.col_header;
+    elseif (local.count = 3)
+      set local.tab_col3 = local.col_header;
+    else
+      set local.tab_col4 = local.col_header;
+    endif
+
+    set local.count = 1 + local.count;
+    set local.col_name = tokens.nextToken;
+  endwhile
+
+  if (session.tab_name <> '')
+    set local.html_title = to.html(session.tab_name);
+  else
+    set local.html_title = 'Tabular Report Result';
+  endif
+
+  set local.backToInfo = 
+    'backToUrl=' + request.url + 
+    '&backToPrompt=' + $(local.html_title:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    $local.html_title)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="repTab.htm">Edit</a> | 
+    <a href="repTab.htm?mode=save">Save</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th  width="1%">ID&nbsp;</th>
+  <th >$local.tab_col1)&nbsp;</th>
+  <th >$local.tab_col2)&nbsp;</th>
+  <!$ if (local.tab_col3 <> '') )>
+    <th >$local.tab_col3)&nbsp;</th>
+  <!$ endif )>
+  <!$ if (local.tab_col4 <> '') )>
+    <th >$local.tab_col4)&nbsp;</th>
+  <!$ endif )>
+</tr>
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+  // The alternative is to use SELECT DISTINCT. But that requires ORDER 
+  // BY columns to be in select list, which conflicts with local.tab_*.
+  set local.last_tid = -1;
+
+  while (s1.fetch AND local.count < to.integer(session.tab_max_row)) 
+    if (s1.ticket_id = local.last_tid)
+      continue;  // back to fetch
+    else
+      local.last_tid = s1.ticket_id;
+    endif
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+)>
+<tr $local.bgcolor)>
+  <td width="1%" valign="top">
+    <a href=
+      "../ticket/ticketView.htm?ticket_id=$s1.ticket_id)&$local.backToInfo)"
+      >$s1.ticket_id)</a>&nbsp;
+  </td>
+  <td valign="top">$(s1.1))&nbsp;</td>
+  <td valign="top">$(s1.2))&nbsp;</td>
+  <!$ if (local.tab_col3 <> '') )>
+    <td valign="top">$(s1.3))&nbsp;</td>
+  <!$ endif )>
+  <!$ if (local.tab_col4 <> '') )>
+    <td valign="top">$(s1.4))&nbsp;</td>
+  <!$ endif )>
+</tr>
+<!$ endwhile )>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$ if (local.count >= to.integer(session.tab_max_row)) )>
+      Total: $local.count) or more requests found. 
+      $local.count) requests displayed. 
+    <!$ else )>
+      Total: $local.count) request(s) found and displayed. 
+    <!$ endif )>
+    $server.dateTime)
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

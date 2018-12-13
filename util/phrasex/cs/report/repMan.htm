@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+
+  <serverside dataset="s1" action="query">
+    SELECT rep_id, name, rep_type, rep_url FROM cs_report 
+    ORDER BY name
+  </serverside>
+  <serverside dataset="s1" action="query">
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta name="generator" content="apoo editor, http://commandus.com/" />
+  <link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title>apooHelpDesk Customer Support Report Manager</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : Report Manager
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td valign="top" width="1%" class="apbg">
+    <table border="0" cellspacing="0" cellpadding="2">
+    <tr>
+      <td nowrap="nowrap">
+       <form method="GET" action="$session.ticketFolder)ticketView.htm">
+        Request ID: <br/>
+        <input type="text" name="ticket_id" size="8"/>
+        <input type="submit" value="go"/>
+        <input type="hidden" name="backToUrl" value="$request.url)" />
+        <input type="hidden" name="backToPrompt" value="Report Manager" />
+       </form>
+      </td>
+    </tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap="nowrap">
+        <a href="repTab.htm?mode=new">New Tabular<br/>Report</a>
+      </td>
+    </tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap="nowrap">
+        <a href="repCro.htm?mode=new">New Crosstab<br/>Report</a> 
+      </td>
+    </tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap="nowrap">
+        <a href="repCustom.htm">New Custom<br/>Report</a> 
+      </td>
+    </tr>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr>
+      <td nowrap="nowrap">
+        <a target="ptHelpWindow" href="../help/repManHelp.html">Help</a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+  
+  <td width="99%" valign="top">
+    <table width="100%" border="0" cellspacing=1 cellpadding="2">
+    <tr class="apbg">
+      <td>Report Name </td>
+      <td>Type </td>
+      <td>ID </td>
+      <td>Command </td>
+    </tr>
+    <tr>
+      <td>All open requests listing report</td>
+      <td>System</td>
+      <td>n/a</td>
+      <td><a href="listOpen.htm">Run</a></td>
+    </tr>
+    <tr class="apbg">
+      <td>New Tickets vs. Closed Tickets Trend Report</td>
+      <td>System</td>
+      <td>n/a</td>
+      <td><a href="repTrend.htm">Run</a></td>
+    </tr>
+    <tr>
+      <td>Time Sheet Report</td>
+      <td>System</td>
+      <td>n/a</td>
+      <td><a href="repTimeSheet.htm">Run</a></td>
+    </tr>
+    <tr class="apbg">
+      <td>Cost Report</td>
+      <td>System</td>
+      <td>n/a</td>
+      <td><a href="repCost.htm">Run</a></td>
+    </tr>
+    <tr loop="s1" class="$(s1.rowodd#apbg#)">
+      <td>$(s1.name) </td>
+      <td>$(s1.rep_type) </td>
+      <td>$(s1.rep_id) </td>
+      <td nowrap="nowrap">
+          <a href="rep$(s1.rep_type)Run.htm?cro_id=$(s1.rep_id)">Run</a> | 
+          <a href="rep$(s1.rep_type).htm?cro_id=$(s1.rep_id)">Edit</a> | 
+          <a href="rep$(s1.rep_type)Del.htm?repID=$s1.rep_id)">Delete</a>
+      </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

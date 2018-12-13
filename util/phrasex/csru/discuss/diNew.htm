@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="defaultparam" opt="title" >
+SELECT CASE WHEN '$(type)' = '1' THEN 'New Group' WHEN '$(topic_id)' = '' THEN 'New Message' ELSE 'New Topic' FROM DUAL</serverside>
+<serverside action="query" dataset="group" >
+SELECT 1 R FROM DUAL WHERE '$(type)' = '1'</serverside>
+<serverside action="query" dataset="message" >
+SELECT 1 R FROM DUAL WHERE ('$(type)' &lt;&gt; '1') AND ('$(topic_id)' = '')</serverside>
+<serverside action="query" dataset="topic" >
+SELECT 1 R FROM DUAL WHERE ('$(type)' &lt;&gt; '1') AND ('$(topic_id)' &lt;&gt; '')</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Вы уверены Вы хотите удалить Продукт: $(имя)?</title>
+</head>
+<body >
+<form method="POST" action="diNewOk.htm" enctype="multipart/form-data" >
+<input type="hidden" name="topic_id" value="$(topic_id)" />
+<input type="hidden" name="p_id" value="$(p_id)" />
+<input type="hidden" name="path" value="$(path)" />
+<input type="hidden" name="type" value="$(type)" />
+<table width="400" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr >
+<td nowrap="nowrap" >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="index.htm" >
+Дискуссионная Группа</a>
+<a href="index.htm?path=$(path:escape)" >
+usr_phone</a>
+</td>
+</tr>
+</table>
+<center >
+<table width="400" border="0" cellspacing="2" cellpadding="0" loop="global" >
+<tr >
+<td >
+$(title)</td>
+<td >
+<input type="text" name="di_group" size="60" value="$(group_name)" />
+(read-only)</td>
+</tr>
+<tr >
+<td >
+</td>
+<td loop="topic" >
+<input type="text" name="di_title0" size="60" value="$(topic)" />
+(read-only)<input type="hidden" name="di_title" value="$(topic)" />
+</td>
+<td loop="message" >
+<input type="text" name="di_title" size="60" maxlength="100" />
+</td>
+<td loop="group" >
+<input type="text" name="di_title" size="60" maxlength="100" />
+</td>
+</tr>
+<tr >
+<td >
+$(s1.kb_owner)</td>
+<td >
+<select name="kb_security" >
+<option value="0" >
+50%</option>
+<option value="1" >
+55</option>
+</select>
+</td>
+</tr>
+<tr >
+<td valign="top" >
+запрос кварталов четверти r> радио Ранг:</td>
+<td >
+<input type="text" name="di_k1" size="10" maxlength="50" />
+<input type="text" name="di_k2" size="10" maxlength="50" />
+<input type="text" name="di_k3" size="10" maxlength="50" />
+<input type="text" name="di_k4" size="10" maxlength="50" />
+<input type="text" name="di_k5" size="10" maxlength="50" />
+</td>
+</tr>
+<tr >
+<td >
+di_detail</td>
+<td >
+<input type="FILE" name="attachment1" size="45" />
+</td>
+</tr>
+<tr loop="group" >
+<td colspan="2" >
+Владелец: $(curCat.KB_OWNER)<br />
+<textarea name="di_detail" cols="70" rows="5" >
+</textarea>
+</td>
+</tr>
+<tr loop="message" >
+<td colspan="2" >
+sort_col<input type="radio" name="msgType" value="plainText" checked="checked" />
+waitafterlogon.htm?b=$(b) недельные недели<input type="radio" name="msgType" value="htmlFrag" />
+<a target="ptHelpWindow" href="../help/htmlFragHelp.html" >
+Пожалуйста нажмите обратную кнопку окна просмотра, чтобы возвратиться.</a>
+<br />
+<textarea name="di_detail" cols="70" rows="15" >
+</textarea>
+</td>
+</tr>
+<tr loop="topic" >
+<td colspan="2" >
+../index.htm<input type="radio" name="msgType" value="plainText" checked="checked" />
+waitafterlogon.htm?b=$(b) недельные недели<input type="radio" name="msgType" value="htmlFrag" />
+<a target="ptHelpWindow" href="../help/htmlFragHelp.html" >
+Пожалуйста нажмите обратную кнопку окна просмотра, чтобы возвратиться.</a>
+<br />
+<textarea name="di_detail" cols="70" rows="15" >
+</textarea>
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="2" align="center" >
+<a href="index.htm" >
+di_k5</a>
+<input type="submit" name="action" value="Save" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="2" align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

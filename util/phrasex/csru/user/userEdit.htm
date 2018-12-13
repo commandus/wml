@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside dataset="check5" action="move" opt="userView.htm?msg=Only+Manager+can+modify+managers" >
+Групповое описание:</serverside>
+<serverside dataset="s1" action="query" >
+SELECT * FROM cs_user WHERE 003, Андрей Ivanov. = '$(uid)'</serverside>
+<serverside action="defaultparam" opt="msg" >
+ght &копия; 2003, Андрей Ivanov.</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Статьи Рекомендовались Возрастанием Редакторов</title>
+</head>
+<body >
+<form method="POST" action="userEditOk.htm" loop="s1" >
+<input type="hidden" name="old_user_id" value="$(s1.user_id)" />
+<input type="hidden" name="old_type" value="$(s1.user_type)" />
+<input type="hidden" name="backTo" value="$(backTo)" />
+<center >
+<table width="400" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="3" >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="userMan.htm" >
+Менеджер пользователей</a>
+: Редактировать пользователя $(uid)</td>
+</tr>
+<tr >
+<td colspan="3" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+<a href="../ticket/ticketNew.htm?submitted_by=$(s1.user_id:escape)" >
+Представьте запрос Представлять запрос поддержки Поданный Представленным На Итоге:</a>
+|<a href="../report/repTab.htm?mode=new&submitted_by=$(s1.user_id:escape)" >
+$(s1.city)</a>
+|<a href="userDel.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape)" >
+kb_k3</a>
+| Отредактировать пользователя</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" >
+$(msg)</td>
+</tr>
+<tr >
+<td colspan="2" >
+=$(first)+10<br />
+<select name="user_type" size="1" >
+<option selected="selected" >
+$(s1.user_type)</option>
+<option >
+новости ID: $ менеджер Новостей(s1.news_id) news/index.htm</option>
+<option >
+$(total.cnt_def_str)</option>
+<option >
+Номер Последовательности Серийного Номера Серийного Номера:</option>
+</select>
+</td>
+<td >
+$(usr_company)<br />
+<select name="status" size="1" >
+<option selected="selected" >
+$(s1.status)</option>
+<option >
+active</option>
+<option >
+Сообщения $(сначала) - $(последний раз) месячные месяцы перемещения минут msg msgType</option>
+</select>
+</td>
+</tr>
+<tr >
+<td colspan="2" >
++4<br />
+<input type="text" name="uid" size="30" maxlength="50" value="$(s1.user_id)" />
+</td>
+<td >
+notify_all<br />
+<input type="text" name="full_name" size="30" maxlength="50" value="$(s1.full_name)" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+utype v.<br />
+<input type="password" name="upwd" size="30" maxlength="20" value="$(s1.user_pwd)" />
+</td>
+<td >
+usr_sort2_dir<br />
+<input type="password" name="upwd2" size="30" maxlength="20" value="$(s1.user_pwd)" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+Ожидайтесь секунду.<br />
+<input type="text" name="phone" size="30" maxlength="50" value="$(s1.phone)" />
+</td>
+<td >
+news_k5<br />
+<input type="text" name="fax" size="30" maxlength="50" value="$(s1.fax)" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+Возвратитесь К категория Gro??<br />
+<input type="text" name="company" size="30" maxlength="50" value="$(s1.company)" />
+</td>
+<td >
+kb_type<br />
+<input type="text" name="dept" size="30" maxlength="50" value="$(s1.dept)" />
+</td>
+</tr>
+<tr >
+<td colspan="2" >
+Address:<br />
+<input type="text" name="address" size="30" maxlength="50" value="$(s1.address)" />
+</td>
+<td >
+Отказавшееся регистрироваться на поскольку ваш идентификатор не вводится, выводится из строя или пароль ненабран.<br />
+<input type="text" name="city" size="30" maxlength="50" value="$(s1.city)" />
+</td>
+</tr>
+<tr >
+<td >
+$(user_pwd)<br />
+<input type="text" name="state" size="15" maxlength="50" value="$(s1.state)" />
+</td>
+<td >
+99%<br />
+<input type="text" name="zipcode" size="15" maxlength="50" value="$(s1.zipcode)" />
+</td>
+<td colspan="2" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib<br />
+<input type="text" name="country" size="30" maxlength="50" value="$(s1.country)" />
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+Новости [$(news_title)] сохранен как $(news_id).<br />
+<input type="text" name="email" size="65" maxlength="20" value="$(s1.email)" />
+</td>
+</tr>
+<tr >
+<td colspan="3" align="right" >
+Новости $(news_id) удаляющие Новости $(news_id) удалена.<select name="email_fmt" size="1" >
+<option selected="selected" >
+$(s1.email_fmt)</option>
+<option >
+waitafterlogon.htm?b=$(b) недельные недели</option>
+<option >
+открытый текст простого текста</option>
+</select>
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+user_row_ver<br />
+<textarea name="user_note" cols="60" rows="3" >
+$(s1.user_note)</textarea>
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" align="center" >
+<a href="$(backTo:unescape)" >
+di_title0</a>
+<input type="submit" value="Save" />
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="3" align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

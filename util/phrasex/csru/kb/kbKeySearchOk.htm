@@ -1,0 +1,28 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  set local.mainMenu = app.startPage;
+  set local.isEndUser = 1;  // guests are treated as end users
+  set local.security = ' AND kb_security < 1';
+
+  // don't validate session. allow use of KB without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+    if (session.userType <>
+</form>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr class="apbg" >
+<th >
+do_nothing</th>
+</tr>
+<tr >
+<td >
+<ol >
+<!$
+    set local.count = 0;
+    while (sqlCat.fetch)
+      set local.count = 1 + local.count;
+      set local.catUrl = local.catLinkSsp + '?kb_id=' + sqlCat.kb_id;
+  )>

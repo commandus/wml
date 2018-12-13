@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="GET" ontimer="#card2">
+<p align="center">
+Test a GET!
+</p>
+<p>
+Your name:<br/>
+<input name="name" value="freddy"/><br/>
+<a href="http://applepiesolutions.com/cgi-bin/echo.wml?name=$name">
+GET it</a>
+</p>
+  <p align="center">
+<br/>
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+</wml>

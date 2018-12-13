@@ -1,0 +1,49 @@
+
+<html>
+<head>
+<title>How to move element
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to move element</h1>
+
+<p>After creation of new element it placed at the bottom of the currently
+selected parent element. If you want change position of the element inside
+parent element, you can use buttons <i>Move element up</i> and&nbsp; <i>Move
+element down</i>.&nbsp;</p>
+<p>In the element tree view window, select element what you want to move, then
+press one of two buttons on the control panes as shown below.</p>
+<p><img border="0" src="shot06.gif"></p>
+<p>You can use a key combination <i>Ctrl + Arrow Up</i> and <i>Ctrl + Arrow Down</i>
+to move selected element in elements tree instead.&nbsp;</p>
+<p>In case of moving element into other card, deck or other parent element, use <i>Ctrl
++ C</i> and <i>Ctrl + V</i> keys combination to copy and paste element into new
+location.&nbsp;</p>
+<p>In the element tree view window, select element what you want to move, then
+press <i>Ctrl + C</i>. Select destination parent element and press <i>Ctrl + V</i>.
+If parent element does not allow inserting of such element, warning dialog will
+be appear.</p>
+<p>Note that all elements inside copying element also inserts into new location.</p>
+<p>From other side, you can just select text in code editor window, cut and
+paste selection of code without code control. Press <i>F9</i> button to see what
+is wrong in code after this operation. Occurred errors or warnings are displayed
+in <i>Information window</i>.&nbsp; </p>
+<p>&nbsp;</p>
+
+</body>
+</html>

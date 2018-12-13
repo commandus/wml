@@ -1,0 +1,40 @@
+
+<html>
+<head>
+<title>Information window
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Information window</h1>
+<p>The information window show what is wrong in wml deck code. Each line
+consists of icon represents wml element where error occurred, file name and
+cursor position and short error description as shown in figure.</p>
+
+<p><img border="0" src="shot19.gif" width="487" height="94"><br>
+<br>
+To see where errors occurred, click on error line. The code editor window
+navigates to place where errors exists.
+</p>
+
+<p>Note that some errors are cascaded. It means you must fix first errors.
+Please note that if you use re- format feature (<i>Ctrl+F9</i>), all elements
+with errors destroys.
+</p>
+
+</body>
+</html>

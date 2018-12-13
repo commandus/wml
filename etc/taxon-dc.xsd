@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/taxon-dc.xsd" xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>
+			<div class="heading">Taxon DC document Schema</div>
+			<div class="curation">
+				<p>Copyright (c) 2006 Andrei Ivanov. All rights reserved.</p>
+				<p>Note: This document has been automatically generated from the DTD Schema, using perl script.
+					<b>The Schema itself should always be taken as definitive</b>
+				</p>
+			</div>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:element name='record'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' />
+			</xs:sequence>
+			<xs:attribute name='href' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='dc-metadata'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='dc' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Title'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Identifier'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='scheme' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='ISBN' />
+						<xs:enumeration value='DOI' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Contributor'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='role' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='adp' />
+						<xs:enumeration value='ann' />
+						<xs:enumeration value='arr' />
+						<xs:enumeration value='art' />
+						<xs:enumeration value='asn' />
+						<xs:enumeration value='aut' />
+						<xs:enumeration value='aqt' />
+						<xs:enumeration value='aft' />
+						<xs:enumeration value='aui' />
+						<xs:enumeration value='ant' />
+						<xs:enumeration value='bkp' />
+						<xs:enumeration value='clb' />
+						<xs:enumeration value='cmm' />
+						<xs:enumeration value='com' />
+						<xs:enumeration value='dsr' />
+						<xs:enumeration value='edt' />
+						<xs:enumeration value='ill' />
+						<xs:enumeration value='lyr' />
+						<xs:enumeration value='mdc' />
+						<xs:enumeration value='mus' />
+						<xs:enumeration value='nrt' />
+						<xs:enumeration value='oth' />
+						<xs:enumeration value='pht' />
+						<xs:enumeration value='prt' />
+						<xs:enumeration value='red' />
+						<xs:enumeration value='rev' />
+						<xs:enumeration value='spn' />
+						<xs:enumeration value='ths' />
+						<xs:enumeration value='trc' />
+						<xs:enumeration value='trl' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='file-as' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Creator'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='role' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='adp' />
+						<xs:enumeration value='ann' />
+						<xs:enumeration value='arr' />
+						<xs:enumeration value='art' />
+						<xs:enumeration value='asn' />
+						<xs:enumeration value='aut' />
+						<xs:enumeration value='aqt' />
+						<xs:enumeration value='aft' />
+						<xs:enumeration value='aui' />
+						<xs:enumeration value='ant' />
+						<xs:enumeration value='bkp' />
+						<xs:enumeration value='clb' />
+						<xs:enumeration value='cmm' />
+						<xs:enumeration value='com' />
+						<xs:enumeration value='dsr' />
+						<xs:enumeration value='edt' />
+						<xs:enumeration value='ill' />
+						<xs:enumeration value='lyr' />
+						<xs:enumeration value='mdc' />
+						<xs:enumeration value='mus' />
+						<xs:enumeration value='nrt' />
+						<xs:enumeration value='oth' />
+						<xs:enumeration value='pht' />
+						<xs:enumeration value='prt' />
+						<xs:enumeration value='red' />
+						<xs:enumeration value='rev' />
+						<xs:enumeration value='spn' />
+						<xs:enumeration value='ths' />
+						<xs:enumeration value='trc' />
+						<xs:enumeration value='trl' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name='file-as' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Subject'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Description'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Publisher'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Date'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+			<xs:attribute name='event' use='optional'>
+				<xs:simpleType>
+					<xs:restriction base='xs:string'>
+						<xs:enumeration value='creation' />
+						<xs:enumeration value='publication' />
+						<xs:enumeration value='modification' />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Type'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Format'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Source'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Language'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Relation'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Coverage'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='Rights'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='ssScript' minOccurs='0' maxOccurs='unbounded' />
+				<xs:element ref='text' minOccurs='0' maxOccurs='unbounded' />
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional' />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,307 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  if (request.fieldExist('use_what'))
+    set local.use_what = request.use_what;
+  else
+    set local.use_what = 'Use Last X';
+  endif
+
+  if (request.fieldExist('last_x'))
+    set local.last_x = request.last_x;
+  else
+    set local.last_x = 7;
+  endif
+  if (local.last_x < 1)
+    set local.last_x = 1;
+  endif
+  if (request.fieldExist('x_what'))
+    set local.x_what = request.x_what;
+  else
+    set local.x_what = 'days';
+  endif
+
+  if (local.use_what = 'Use Dates')
+    if (request.fieldExist('startDate') AND request.fieldExist('endDate'))
+      datetime startDate(request.startDate);
+      datetime endDate(request.endDate);
+    else
+      datetime startDate(server.date);
+      datetime endDate(startDate);
+      startDate.addDay(-6); // last 6 days
+      endDate.addDay(1);    // include today
+    endif
+  else
+    datetime startDate(server.date);
+    datetime endDate(startDate);
+    endDate.addDay(1);    // include today
+    if (local.x_what = 'weeks')
+      if (startDate.getDayOfWeek = 1)  // sunday
+        startDate.addDay(-7);
+      else
+        startDate.addDay(startDate.getDayOfWeek * (-1) + 1);
+      endif
+      startDate.addDay((local.last_x - 1) * (-7));
+    elseif (local.x_what = 'months')
+      if (startDate.getDay = 1)
+        setartDate.addMonth(-1);
+      else
+        startDate.addDay(startDate.getDay * (-1) + 1);
+      endif
+      startDate.addMonth((local.last_x - 1) * (-1));
+
+    elseif (local.x_what = 'quarters')
+      set local.m = startDate.getMonth;
+      if (local.m = 2 OR local.m = 3)
+        set local.m = 1;
+      elseif (local.m = 5 OR local.m = 6)
+        set local.m = 4;
+      elseif (local.m = 8 OR local.m = 9)
+        set local.m = 7;
+      else
+        set local.m = 10;
+      endif
+      datetime startOfQuarter(startDate.getYear, local.m, 1);
+      if (startDate = startOfQuarter)
+        startDate.addMonth(-3);
+      else
+        startDate.copy(startOfQuarter);
+      endif
+      startDate.addMonth((local.last_x - 1) * (-3));
+
+    elseif (local.x_what = 'years')
+      datetime startOfYear(startDate.getYear, 1, 1);
+      if (startDate = startOfYear)
+        startDate.addMonth(-12);
+      else
+        startDate.copy(startOfYear);
+      endif
+      startDate.addMonth((local.last_x - 1) * (-12));
+    else  // 'day'
+      startDate.addDay(local.last_x * (-1) + 1);
+    endif
+  endif
+
+  if (request.fieldExist('interval'))
+    set local.interval = request.interval;
+  else
+    set local.interval = 'day';
+  endif
+
+  array arDateEnd; // ending date for each column
+  array arHeader;
+  array arValue;
+  array arColTotal;
+
+  datetime currStartDate(startDate);
+  while (currStartDate < endDate)
+    arHeader.add(currStartDate.getDateStr2);
+    arValue.add(0);
+    arColTotal.add(0);
+
+    if (local.interval = 'week')
+      currStartDate.addDay(7);
+    elseif (local.interval = 'month')
+      currStartDate.addMonth(1);
+    elseif (local.interval = 'quarter')
+      currStartDate.addMonth(3);
+    elseif (local.interval = 'year')
+      currStartDate.addMonth(12);
+    else  // 'day'
+      currStartDate.addDay(1);
+    endif
+
+    arDateEnd.add(currStartDate);
+  endwhile
+
+  arDateEnd.add(currStartDate);  // dummy to keep all 4 array same size
+  arHeader.add('Total');
+  arValue.add(0);
+  arColTotal.add(0);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<form method=GET action="repTimeSheet.htm">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    Employee Time Sheet Report
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    Last: <br/>
+    <input type="text" name=last_x size=4 value="$local.last_x)"/>
+  </td>
+  <td valign="bottom">
+    <br/>
+    <select name=x_what size=1>
+      <option selected>$local.x_what)
+      <option>days
+      <option>weeks
+      <option>months
+      <option>quarters
+      <option>years
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td>
+    Date &gt;=: <br/>
+    <input type="text" name=startDate size=12 
+      value="$startDate.getDateStr)">
+  </td>
+  <td>
+    &lt;: <br/>
+    <input type="text" name=endDate size=12 
+      value="$endDate.getDateStr)">
+  </td>
+  <td>&nbsp;</td>
+  <td nowrap="nowrap" valign="bottom">
+    Interval: <br/>
+    <select name=interval size=1>
+      <option selected>$local.interval)
+      <option>day
+      <option>week
+      <option>month
+      <option>quarter
+      <option>year
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="bottom">
+    Date Range: <br/>
+    <select name=use_what size=1>
+      <option selected>$local.use_what)
+      <option>Use Last X
+      <option>Use Dates
+    </select>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="bottom">
+    <input type="submit" value="Update"/>
+  </td>
+</tr>
+</table>
+
+<br/>
+<table border=1 cellspacing="2" cellpadding="2">
+<tr>
+  <th> Employee </th>
+  <!$
+    set local.i = 0;
+    while (local.i < arHeader.getSize)
+  )>
+    <th> $arHeader.getAt(local.i)) </th>
+  <!$ 
+      set local.i = 1 + local.i;
+    endwhile 
+  )>
+</tr>
+
+<!$
+  <serverside dataset="sqlStaff" action="query">
+    SELECT user_id FROM cs_user WHERE user_type <> \'EndUser\' '
+    'ORDER BY user_id';
+  </serverside>
+  while (sqlStaff.fetch)
+)>
+<tr>
+  <th> $sqlStaff.user_id) </th>
+  <!$
+    // reset data
+    set local.i = 0;
+    while (local.i < arValue.getSize)
+      arValue.setAt(local.i, 0);
+      set local.i = 1 + local.i;
+    endwhile
+
+    <serverside dataset="sqlWorked" action="query">
+    SELECT ch_id, ch_made_on, ch_cost FROM cs_ti_change '
+      'WHERE ch_made_by = \'' + to.2QuoteStr(sqlStaff.user_id) + '\' '
+        'AND ch_made_on >= ' + startDate.getOdbcDateStr + ' '
+        'AND ch_made_on < ' + endDate.getOdbcDateStr + ' '
+      'ORDER BY ch_made_on ASC';
+  </serverside>
+
+    set local.i = 0;
+    while (sqlWorked.fetch)
+      // result is sorted by date.
+      while (sqlWorked.ch_made_on >= arDateEnd.getAt(local.i))
+        set local.i = 1 + local.i;
+      endwhile
+      set local.value = arValue.getAt(local.i) + sqlWorked.ch_cost;
+      arValue.setAt(local.i, local.value);
+    endwhile
+    sqlWorked.close;
+    
+    set local.i = 0;
+    set local.rowTotal = 0;
+    set local.valueCount = arValue.getSize - 1;
+    while (local.i < local.valueCount)
+      set local.rowTotal = local.rowTotal + arValue.getAt(local.i);
+      set local.colTotal = arColTotal.getAt(local.i) + arValue.getAt(local.i);
+      arColTotal.setAt(local.i, local.colTotal);
+      set local.i = 1 + local.i;
+    endwhile
+    arValue.setAt(local.valueCount, local.rowTotal);
+    set local.colTotal = arColTotal.getAt(local.valueCount) + local.rowTotal;
+    arColTotal.setAt(local.valueCount, local.colTotal);
+
+    set local.i = 0;
+    while (local.i < arValue.getSize)
+  )>
+    <td align="right"> $arValue.getAt(local.i)) </td>
+  <!$ 
+      set local.i = 1 + local.i;
+    endwhile 
+  )>
+</tr>
+<!$ 
+  endwhile
+)>
+
+<tr>
+  <th> Total </th>
+  <!$
+    set local.i = 0;
+    while (local.i < arColTotal.getSize)
+  )>
+    <td align="right"> $arColTotal.getAt(local.i)) </td>
+  <!$ 
+      set local.i = 1 + local.i;
+    endwhile 
+  )>
+</tr>
+</table>
+
+<br/>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+
+</form>
+</center>
+</body>
+</html>

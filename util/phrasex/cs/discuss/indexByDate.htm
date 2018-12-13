@@ -1,0 +1,462 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of forums without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  set local.title = app.name + ' : Discussion : ';
+  set local.path = '';
+  set local.links = 
+    '<a href="' + local.mainMenu + '">' + app.name + '</a>';
+  set local.di_id = '';
+  set local.level = 0;
+
+  // construct the links "app.name : DI : PT : ..." from 
+  // path=\nGroupName\nGroupID\nGroupName\nGroupID or di_id
+
+  if (request.fieldExist('path') AND request.path <> '')
+
+    // Always add \r to delimitor list because browser may convert
+    // \n to \r\n for hidden input fields
+    tokenizer tokens(request.path, '\r\n');
+    set local.name = tokens.nextToken;
+    set local.id = tokens.nextToken;
+    if (local.name <> '' AND local.id <> '')
+      set local.links = local.links + 
+        ' : <a href="index.htm">Discussion</a> : ';
+    else
+      set local.links = local.links + ' : Discussion';
+    endif
+
+    while (local.name <> '' AND local.id <> '')
+      set local.level = 1 + local.level;
+      set local.path = local.path + '\n' + local.name + '\n' + local.id;
+      set local.title = local.title + local.name;
+      set local.next_name = tokens.nextToken;
+      if (local.next_name <> '')  // not the last pair
+        set local.title = local.title + '.';
+        set local.links = local.links + 
+          '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+          local.name + '</a>.';
+      else
+        set local.links = local.links + local.name;
+        set local.di_id = local.id;
+      endif
+      set local.name = local.next_name;
+      set local.id = tokens.nextToken;
+    endwhile
+
+  elseif (request.fieldExist('di_id') AND request.di_id <> '')
+
+    set local.di_id = request.di_id;
+    set local.links = local.links + 
+      ' : <a href="index.htm">Discussion</a> : ';
+
+    <serverside dataset="s1" action="query">
+    SELECT di_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+        di_type, di_title FROM cs_discuss 
+      WHERE di_id = request.di_id;
+  </serverside>
+    if (s1.fetch <> 1)
+      error 'Group #' + request.di_id + ' not found.';
+    endif
+
+    if (s1.di_p5 <> '')  
+      // Groups need to reserve one P? level for its children. 
+      error 'Coding error. Group can not be a leave node.';
+    endif
+    if (s1.di_p4 <> '')
+      set local.level = 5;
+      <serverside dataset="sqlP4" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p4;
+  </serverside>
+      set local.title = local.title + sqlP4.di_title + '.'; 
+      set local.path = local.path + 
+        '\n' + sqlP4.di_title + '\n' + sqlP4.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP4.di_title + '</a>.';
+    endif
+    if (s1.di_p3 <> '')
+      <serverside dataset="sqlP3" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p3;
+  </serverside>
+      set local.title = local.title + sqlP3.di_title + '.'; 
+      set local.path = local.path + 
+        '\n' + sqlP3.di_title + '\n' + sqlP3.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP3.di_title + '</a>.';
+    endif
+    if (s1.di_p2 <> '')
+      <serverside dataset="sqlP2" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p2;
+  </serverside>
+      set local.title = local.title + sqlP2.di_title + '.'; 
+      set local.path = local.path + 
+        '\n' + sqlP2.di_title + '\n' + sqlP2.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP2.di_title + '</a>.';
+    endif
+    if (s1.di_p1 <> '')
+      <serverside dataset="sqlP1" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p1;
+  </serverside>
+      set local.title = local.title + sqlP1.di_title + '.'; 
+      set local.path = local.path + 
+        '\n' + sqlP1.di_title + '\n' + sqlP1.di_id;
+      set local.links = local.links + 
+        '<a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP1.di_title + '</a>.';
+    endif
+
+    set local.title = local.title + s1.di_title; 
+    set local.path = local.path + '\n' + s1.di_title + '\n' + s1.di_id;
+    set local.links = local.links + s1.di_title;
+
+  else
+    set local.links = local.links + ' : Discussion';
+  endif
+
+  if (local.di_id <> '')  
+    set local.where = 'di_p1 = ' + local.di_id;
+  else  // root
+    set local.where = 'di_p1 IS NULL';
+  endif
+  if (session.isValid = 0 OR session.userType = 'EndUser')
+    set local.where = local.where  + ' AND di_security < 1';
+  endif
+
+  set local.days = 0;
+  if (request.fieldExist('days'))
+    set local.days = request.days;
+  endif
+  set local.dateUpper = 
+    server.date - to.timeSpan(local.days, 0, 0) + to.timeSpan(1, 0, 0);
+  set local.dateLower = 
+    server.date - to.timeSpan(local.days, 0, 0);
+
+  <serverside dataset="sqlMsg" action="query">
+    SELECT di_id, di_topic_id, di_title, di_created_on, di_created_by '
+    'FROM cs_discuss '
+    'WHERE di_type <> 1 AND ' + local.where + 
+    ' AND di_created_on < ' + to.odbcDateTimeStr(local.dateUpper) + 
+    ' AND di_created_on >= ' + to.odbcDateTimeStr(local.dateLower) + 
+    ' ORDER BY di_created_on DESC';
+  </serverside>
+
+  <serverside dataset="sqlGroup" action="query">
+    SELECT di_id, di_title, di_detail FROM cs_discuss '
+    'WHERE di_type = 1 AND ' + local.where + 
+    ' ORDER BY di_title ASC';
+  </serverside>
+
+  <serverside dataset="sqlCountSubGroup" action="query">
+    SELECT Count(*) FROM cs_discuss '
+    'WHERE di_type = 1 AND ' + local.where;
+  set local.countSubGroup = sqlCountSubGroup.column(0);
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method=GET action="diSearchOk.htm">
+<input type="hidden" name=path value="$local.path)"/>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <!------------------ left pane ------------------>
+  <td valign="top" width="1%" class="apbg">
+    <table border="0" cellspacing="0" cellpadding="2">
+    <form method=GET action="diSearchOk.htm">
+    <tr>
+      <td>
+        Keywords: 
+        <input type="text" name=search_for size="15" maxlength="50"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="right">
+        <input type="submit" value="Search"/> 
+        <input type="hidden" name=path value="$local.path)"/>
+      </td>
+    </tr>
+    <!-- put it after row end to avoid the extra blank link after a form -->
+    </form>
+
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    
+    <!-- need to have another form for the Enter key to work -->
+    <form method=GET action="diSearchOk.htm">
+    <tr>
+      <td>
+        Message ID: 
+        <input type="text" name=di_id size="15" maxlength="50"/> 
+      </td>
+    </tr>
+    <tr>
+      <td align="right">
+        <input type="submit" value="Go"/> 
+      </td>
+    </tr>
+    </form>
+
+    <!$if (session.isValid = 0 OR session.userType = 'EndUser') )>
+      <!$if (local.di_id <> '') )>
+        <tr>
+          <td class="apbg">
+            <table border="0" cellspacing="0" cellpadding="0">
+            <tr><td height="1"></td></tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="diNew.htm?type=2&path=$(local.path:escape)">
+              Post Message</a>
+          </td>
+        </tr>
+      <!$endif)>
+      <tr>
+        <td class="apbg">
+          <table border="0" cellspacing="0" cellpadding="0">
+          <tr><td height="1"></td></tr></table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="ptHelpWindow" href="../help/diHelpEu.html">Help</a>
+        </td>
+      </tr>
+    <!$
+      else  // session.isValid AND session.userType <> 'EndUser' 
+    )>
+      <tr>
+        <td class="apbg">
+          <table border="0" cellspacing="0" cellpadding="0">
+          <tr><td height="1"></td></tr></table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="diSearch.htm?path=$(local.path:escape)">
+            Advanced Search</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="apbg">
+          <table border="0" cellspacing="0" cellpadding="0">
+          <tr><td height="1"></td></tr></table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="diNew.htm?type=2&path=$(local.path:escape)">
+            Post Message</a>
+        </td>
+      </tr>
+      <!$if (local.level < 5))>
+        <tr>
+          <td class="apbg">
+            <table border="0" cellspacing="0" cellpadding="0">
+            <tr><td height="1"></td></tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="diNew.htm?type=1&path=$(local.path:escape)">
+              New Group</a>
+          </td>
+        </tr>
+      <!$endif)>
+      <!$if (local.di_id <> '') )>
+        <tr>
+          <td class="apbg">
+            <table border="0" cellspacing="0" cellpadding="0">
+            <tr><td height="1"></td></tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="diGroup.htm?path=$(local.path:escape)">
+              View/Edit/Delete<br/>Current Group</a>
+          </td>
+        </tr>
+      <!$endif)>
+      <tr>
+        <td class="apbg">
+          <table border="0" cellspacing="0" cellpadding="0">
+          <tr><td height="1"></td></tr></table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="ptHelpWindow" href="../help/diHelp.html">Help</a>
+        </td>
+      </tr>
+    <!$ endif )>
+    <tr>
+      <td class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+
+  <!------------------ right pane ------------------>
+  <td width="99%" valign="top">
+    <!$if (local.countSubGroup > 0) )>
+      <table width="100%" border="0" cellspacing="0" cellpadding="2">
+      <tr>
+        <th >
+          Groups:
+        </th>
+      </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="2">
+      <tr class="apbg">
+        <td>Name</td>
+        <td>Description</td>
+      </tr>
+      <!$ 
+        set local.bgcolor = 'dummy';
+        while (sqlGroup.fetch) 
+          if (local.bgcolor = '')
+            set local.bgcolor = ' class="apbg"';
+          else
+            set local.bgcolor = '';
+          endif
+          set local.full = 
+            local.path + '\n' + sqlGroup.di_title + '\n' + sqlGroup.di_id;
+      )>
+      <tr $local.bgcolor)>
+        <td valign="top" nowrap="nowrap">
+          <a href="index.htm?path=$(local.full:escape)">
+          $(sqlGroup.di_title))</a>&nbsp;
+        </td>
+        <td>
+          $(sqlGroup.di_detail))
+        </td>
+      </tr>
+      <!$ endwhile )>
+      </table>
+    <!$endif)>
+    <br/>
+    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+    <tr>
+      <th colspan="2" >Messages: </th>
+    </tr>
+    <tr>
+      <td>$local.dateLower) - $local.dateUpper)</td>
+      <td align="right">
+        <!$ set local.earlier = local.days + 1; )>
+        <a href=
+        "index.htm?path=$(local.path:escape)&days=$local.earlier)">
+        Earlier Messages</a>
+        | 
+        <!$ if (local.days > 0) )>
+        <!$ set local.later = local.days - 1; )>
+        <a href=
+        "index.htm?path=$(local.path:escape)&days=$local.later)">
+        Later Messages</a> 
+        <!$ else )>
+        Later Messages 
+        <!$ endif )>
+      </td>
+    </tr>
+    </table>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+    <tr class="apbg">
+      <td>Topic</td>
+      <td>Date</td>
+      <td>Poster</td>
+    </tr>
+    <!$ 
+      set local.bgcolor = 'dummy';
+      while (sqlMsg.fetch) 
+        if (local.bgcolor = '')
+          set local.bgcolor = ' class="apbg"';
+        else
+          set local.bgcolor = '';
+        endif
+    )>
+    <tr $local.bgcolor)>
+      <td>
+        <a href=
+        "diTopic.htm?mid=$sqlMsg.di_id)&topic_id=$sqlMsg.di_topic_id)&path=$(local.path:escape)#$sqlMsg.di_id)">
+        $(sqlMsg.di_title))</a>
+      </td>
+      <td>$sqlMsg.di_created_on)&nbsp;</td>
+      <td>
+        <!$ if (sqlMsg.di_created_by = '') )>
+          Unregistered
+        <!$ else )>
+          $(sqlMsg.di_created_by))
+        <!$ endif )>
+      </td>
+    </tr>
+    <!$ endwhile )>
+    </table>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+    <tr>
+      <td align="right">
+        <a href=
+        "index.htm?path=$(local.path:escape)&days=$local.earlier)">
+        Earlier Messages</a>
+        | 
+        <!$ if (local.days > 0) )>
+          <a href=
+          "index.htm?path=$(local.path:escape)&days=$local.later)">
+          Later Messages</a>
+        <!$ else )>
+          Later Messages
+        <!$ endif )>
+      </td>
+    </tr>
+    </table>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</form>
+</body>
+</html>

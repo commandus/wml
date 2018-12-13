@@ -1,0 +1,103 @@
+
+<html>
+<head>
+<title>How to create an input element
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to create an input element</h1>
+
+<p>An input element is used to enter user input.  This input can either be used to change content in  other cards of your deck,
+send to other decks and it can be stored in a database. When a user enters data into a
+input and submits it, <b>name</b> and <b>value</b> attributes submits to
+server.&nbsp;</p>
+
+<ul>
+  <li><b>name</b>. The name of the variable to set with the result of the user’s text input.</li>
+  <li><b>default</b>. Specifies a default text string, which appears in the entry field.</li>
+  <li><b>format</b>.&nbsp; Specifies an input mask for user input entries. The default format
+    (*M) allows the user to enter any characters.</li>
+  <li><b>emptyok</b>.&nbsp; If emptyok is set to true, no user input is required;
+    else (the default), the user must enter text.</li>
+  <li><b>size</b>.&nbsp; Specifies the width, in characters, of the text input area.</li>
+  <li><b>maxlength</b>.&nbsp; Specifies the maximum number of characters that the user can enter in the text entry area.&nbsp;</li>
+</ul>
+<p>In the element tree view window, select paragraph and press element button <b>input</b>
+to create new input element.<br>
+In attributes window assign <b>name</b> and <b>value</b> attributes, then press <b>format</b>
+ellipsis button. Dialog window appears as shown below.&nbsp;<br>
+</p>
+<p><img border="0" src="shot05.gif"></p>
+<p>Format string consists of mask control characters and static text that is
+displayed in the input area. The format control characters specify the data
+format expected to be entered by the user. The format codes are:<br>
+</p>
+<table border="0">
+  <tr>
+    <td><b>A</b></td>
+    <td>entry of any upper-case, non-numeric character</td>
+  </tr>
+  <tr>
+    <td><b>a</b></td>
+    <td>lower-case, non-numeric character</td>
+  </tr>
+  <tr>
+    <td><b>N</b></td>
+    <td>numeric character</td>
+  </tr>
+  <tr>
+    <td><b>X</b></td>
+    <td>any upper-case character</td>
+  </tr>
+  <tr>
+    <td><b>x</b></td>
+    <td>any lower-case character</td>
+  </tr>
+  <tr>
+    <td><b>M</b> or <b>m&nbsp;</b></td>
+    <td>any character</td>
+  </tr>
+  <tr>
+    <td><b>*f</b></td>
+    <td> any number of characters where f is one of the above format codes</td>
+  </tr>
+  <tr>
+    <td><b>nf</b></td>
+    <td>n number of characters where n is from 1 to 9 and f is one of the above
+      format codes</td>
+  </tr>
+  <tr>
+    <td><b>\c</b></td>
+    <td>display the character <b>c</b> in the entry field. I is considered part
+      of the input's value.</td>
+  </tr>
+</table>
+<p>Choose one of format strings from list of samples and press <i>Replace</i>
+button.&nbsp;In left-side list you can navigate through format string samples
+sets. If appropriate format string does not not found, type format string in <i><u>F</u>ormat
+for user input</i> combo box or add selected from list of format characters by
+pressing <i><u>A</u>dd</i> button.</p>
+<p>Press <i>Ok</i> button.</p>
+
+<p>Wireless devices is restricted to a very small keyboard therefore usage
+numeric type of input fields in your user interface would&nbsp; be helpful for
+the user.</p>
+<p>&nbsp;</p>
+
+</body>
+</html>

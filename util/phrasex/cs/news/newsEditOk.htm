@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside action="defaultparam" opt="newsHome">
+    SELECT 'index.htm' R FROM DUAL;
+  </serverside>
+  <serverside dataset="user" action="move" opt="../accessdenied.htm?b=$(p-combined:escape)">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user WHERE 
+    (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') AND 
+    (status &lt;&gt; 'disabled')
+  </serverside>
+  <serverside dataset="sqlUpdateNews" action="execute">
+     UPDATE cs_news SET 
+     news_locked_by = NULL,
+     news_locked_on = NULL,  
+     news_k1 = '$(news_k1)',
+     news_k2 = '$(news_k2)',
+     news_k3 = '$(news_k3)',
+     news_k4 = '$(news_k4)',
+     news_k5 = '$(news_k5)',
+     news_updated_by = '$(user_id)', 
+     news_updated_on = 'today',  
+     news_title = '$(news_title)', 
+     news_format = '$(news_format)', 
+     news_detail = '$(news_detail)'  
+     WHERE news_id = $(news_id);
+  </serverside>
+  <serverside dataset="gen_nf" action="defaultparam" opt="att_id">
+    SELECT GEN_ID(cs_nf_new, 1) nf_id FROM dual
+  </serverside>
+  <serverside dataset="sqlDelAtt" action="execute">
+    DELETE FROM cs_news_file
+    WHERE nf_id = $(old_att_id)
+  </serverside>
+  <serverside dataset="sqlAttach1" action="execute">  
+    INSERT INTO cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content)
+    VALUES($(att_id), $(news_id), 'today', 'filename', 0, '$(attachment1:escape'))
+    WHERE $(attachment1:escape) &lt;&gt; ''  
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Edit News</title>
+</head>
+<body>
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="global">
+<tr>
+  <td>
+     <a href="../../select.htm">
+       $(appname)
+     </a>
+       :
+     <a href="index.htm">
+       News
+     </a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    News $(news_id) has been updated.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display [Warning: Page has 
+    Expired], [Do you want to repost the form data] or [Data Missing].
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="newsView.htm?news_id=$(news_id)&newsHome=$(newsHome:escape)">OK</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+</body>
+</html>

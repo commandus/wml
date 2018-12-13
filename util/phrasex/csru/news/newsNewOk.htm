@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="defaultparam" opt="newsHome" >
+di_detail</serverside>
+<serverside action="defaultparam" opt="news_id" >
+SELECT CAST(GEN_ID(cs_news_new, 1) AS INTEGER) FROM dual</serverside>
+<serverside action="defaultparam" opt="nf_id" >
+SELECT CAST(GEN_ID(cs_nf_new, 1) AS INTEGER) FROM dual</serverside>
+<serverside dataset="user" action="move" opt="../accessdenied.htm?b=$(p-combined:escape)" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside dataset="sqlAddNews" action="execute" >
+INSERT INTO cs_news(news_id, news_k1, news_k2, news_k3, news_k4, news_k5, news_created_by, news_created_on, news_updated_by, news_updated_on, news_visited, news_title, news_format, news_detail) VALUES($(news_id), '$(news_k1:unescape)', '$(news_k2:unescape)', '$(news_k3:unescape)', '$(news_k4:unescape)', '$(news_k5:unescape)', '$user_id', 'today', '$user_id', 'today', 0, '$(news_title:unescape)', '$(news_format:unescape)', '$(news_detail:unescape)')</serverside>
+<serverside dataset="sqlAttach1" action="execute" >
+INSERT INTO cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) VALUES($(nf_id), $(news_id), CAST('today' AS DATE), CAST('now' AS TIME), 1, '$(attachment1:unescape)')</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+att_count</title>
+</head>
+<body loop="global" >
+<center >
+<table width="400" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../../select.htm" >
+$(appname)</a>
+:<a href="index.htm" >
+Новости</a>
+: $(news_title)</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+Чтобы отменить и возвратиться к Приоритетный Менеджер, пожалуйста, чтобы отменить и возвращаться к Менеджер Продукта, пожалуйста, чтобы отменить и возвращаться к Коммерческие Менеджеры, пожалуйста используйте Обратную кнопку окна просмотра.<br />
+Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера.</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td align="center" >
+<a href="$(newsHome:unescape)" >
+di_k5</a>
+&nbsp;<a href="index.htm" >
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+</html>

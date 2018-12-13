@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="Confirm" title="Your Selections..." >
+<p align="left" mode="wrap">
+Your First Name:
+</p>
+<p align="left" mode="wrap">
+<b>
+Scott
+</b>
+</p>
+<p align="left" mode="wrap">
+Your Email Address:
+</p>
+<p align="left" mode="wrap">
+<b>
+Scott@xyz.com
+</b>
+</p>
+<p> 
+City you live in:
+</p>
+<p align="left" mode="wrap">
+<b>
+San Francisco
+</b>
+</p>
+<p align="left" mode="wrap">
+You want promotional email:
+</p>
+<p align="left" mode="wrap">
+<b>
+No
+</b>
+</p>
+<p align="left" mode="wrap">
+OS on your PC:
+</p>
+<p align="left" mode="wrap">
+<b>
+Windows
+</b>
+</p>
+<p align="left" mode="wrap">
+Applications on your PC:
+</p>
+<p align="left" mode="wrap">
+<b>
+Word
+</b>
+</p>
+<do label="Back To Registration" type="accept" >
+<go method="post" href="UserProfile.jsp" >
+</go>
+</do>
+</card>
+</wml>

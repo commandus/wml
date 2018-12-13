@@ -1,0 +1,78 @@
+LICENSE STATEMENT AND LIMITED WARRANTY
+
+IMPORTANT - READ CAREFULLY
+
+BY DOWNLOADING, INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU 
+ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE AGREEMENT, AND AGREE TO BE 
+BOUND BY ALL OF THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.  
+If you do not agree with the terms and conditions of this License Agreement 
+promptly return the unused Software to the place from which you obtained it 
+for a full refund.
+
+The use of this product constitutes your acceptance of the following 
+terms and conditions and your agreement to abide by them. This is a 
+legal agreement between you and me and/or my distributors. By using this 
+software, you are agreeing to be bound by the terms of this agreement.
+
+You are granted a nonexclusive license to use this software under the
+terms stated in this agreement. You may not distribute, rent or lease, 
+modify, translate, sublicense, time-share the software and documentation,
+neither may you transfer it to another party on a permanent or temporary basis. 
+You may not copy of the software except case of making one copy 
+of the this software as an archival backup copy of the original media. Any 
+other copies you make of the Licensed Software are in violation of this 
+License Agreement.
+
+You may not reverse engineer, decompile, or disassemble this
+software, except and only to the extent that such activity is expressly
+permitted by applicable law notwithstanding this limitation.
+
+If you purchased this Software as an upgrade, it constitutes a single product 
+together with the product that you upgraded, and may not be used to increase 
+the total number of licensed copies of the Software.  You may use the upgraded 
+product only in accordance with this License Agreement and you may not 
+transfer this Software or the product you upgraded unless they are transferred 
+together as a single product.
+
+THIS SOFTWARE AND ACCOMPANYING DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT
+WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED.THE ENTIRE RISK ARISING
+OUT OF USE AND PERFORMANCE OF THIS SOFTWARE IS ASSUMED BY YOU.
+
+I and my distributor will not be liable for any special, incidental, consequential,
+indirect or similar damages due to the loss of data, loss of business
+profits, business interruption or any other reason arising
+from the use of this software. In no event shall me liability for any
+damages ever exceed the price paid for the license to use the software,
+regardless of the form of the claim. Because some states do not allow
+the exclusion or limitation of liability for consequential or incidental
+damages, the above limitation may not apply to you. If any provision of
+this agreement is found void, invalid or unenforceable, it will not
+affect the validity of the balance of this agreement, which shall
+remain valid and enforceable according to its terms.
+
+The Software is not fault-tolerant and is not designed, manufactured or 
+intended for use or resale as on-line control equipment in hazardous 
+environments requiring fail-safe performance. Suppliers specifically disclaim 
+any express or implied warranty of fitness for high risk activities
+
+This License Agreement is effective from the first date you install 
+the Software.  You may terminate this license at any time by destroying 
+or returning the Software, all back up copies and all related materials provided 
+by distributor. Your license rights automatically and immediately terminate 
+without notice if you fail to comply with any provision of this 
+Agreement.
+
+This License Agreement may only be modified in writing signed by you and author
+or suppliers. If any provision of this License Agreement is found void or 
+unenforceable, the remainder will remain valid and enforceable according to its terms. 
+If any remedy provided is determined to have failed for its essential purpose, 
+all limitations of liability and exclusions of damages set forth in the Limited 
+Warranty shall remain in effect.
+
+IF YOU AGREE TO THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT, please 
+press the "YES" or "ACCEPT" button to continue installation process. This will
+be the legal equivalent of your signature on a written contract, and equally binding.
+You must agree to these terms and conditions in order to install the Software.
+If you do not agree with these terms and conditions, you should press the "No" or
+"I DO NOT ACCEPT" button to exit installation process.
+

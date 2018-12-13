@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside action="defaultparam" opt="first">
+    SELECT 1 FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="last">
+    SELECT 10 FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_col1">
+    SELECT CASE 
+    WHEN '$(col1)' = 'User ID' THEN 'user_id'  
+    WHEN '$(col1)' = 'User Name' THEN 'full_name'
+    WHEN '$(col1)' = 'Company' THEN 'company'
+    WHEN '$(col1)' = 'Department' THEN 'dept'
+    WHEN '$(col1)' = 'Email Address' THEN 'email'
+    WHEN '$(col1)' = 'Phone Number' THEN 'phone'
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_col2">
+    SELECT CASE 
+    WHEN '$(col2)' = 'User ID' THEN 'user_id'  
+    WHEN '$(col2)' = 'User Name' THEN 'full_name'
+    WHEN '$(col2)' = 'Company' THEN 'company'
+    WHEN '$(col2)' = 'Department' THEN 'dept'
+    WHEN '$(col2)' = 'Email Address' THEN 'email'
+    WHEN '$(col2)' = 'Phone Number' THEN 'phone'
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_col3">
+    SELECT CASE 
+    WHEN '$(col3)' = 'User ID' THEN 'user_id'  
+    WHEN '$(col3)' = 'User Name' THEN 'full_name'
+    WHEN '$(col3)' = 'Company' THEN 'company'
+    WHEN '$(col3)' = 'Department' THEN 'dept'
+    WHEN '$(col3)' = 'Email Address' THEN 'email'
+    WHEN '$(col3)' = 'Phone Number' THEN 'phone'
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_sort1">
+    SELECT CASE 
+    WHEN '$(sort1)' = 'User ID' THEN 'user_id'  
+    WHEN '$(sort1)' = 'User Name' THEN 'full_name'
+    WHEN '$(sort1)' = 'Company' THEN 'company'
+    WHEN '$(sort1)' = 'Department' THEN 'dept'
+    WHEN '$(sort1)' = 'Email Address' THEN 'email'
+    WHEN '$(sort1)' = 'Phone Number' THEN 'phone'
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_sort1_dir">
+    SELECT CASE 
+    WHEN '$(sort1_dir)' = 'Descending' THEN 'DESC'  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_sort2">
+    SELECT CASE 
+    WHEN '$(sort2)' = 'User ID' THEN ', user_id'  
+    WHEN '$(sort2)' = 'User Name' THEN ', full_name'
+    WHEN '$(sort2)' = 'Company' THEN ', company'
+    WHEN '$(sort2)' = 'Department' THEN ', dept'
+    WHEN '$(sort2)' = 'Email Address' THEN ', email'
+    WHEN '$(sort2)' = 'Phone Number' THEN ', phone'
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="n_sort2_dir">
+    SELECT CASE 
+    WHEN ('$(sort2)' &lt;&gt; '') AND ('$(sort2_dir)' = 'Descending') THEN 'DESC'  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_user_id">
+    SELECT CASE 
+    WHEN ('$(uid)' &lt;&gt; '') THEN 'UPPER(user_id) LIKE (''$(uid)%'') AND '  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_email">
+    SELECT CASE 
+    WHEN ('$(email)' &lt;&gt; '') THEN 'UPPER(email) LIKE (''$(email)%'') AND '  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_full_name">
+    SELECT CASE 
+    WHEN ('$(full_name)' &lt;&gt; '') THEN 'UPPER(full_name) LIKE (''$(full_name)%'') AND '  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_phone">
+    SELECT CASE 
+    WHEN ('$(phone)' &lt;&gt; '') THEN 'UPPER(phone) LIKE (''$(phone)%'') AND '  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_company">
+    SELECT CASE 
+    WHEN ('$(company)' &lt;&gt; '') THEN 'UPPER(company) LIKE (''$(company)%'') AND '  
+    ELSE ''  
+    END R FROM DUAL
+  </serverside>
+  <serverside action="defaultparam" opt="cla_dept">
+    SELECT CASE 
+    WHEN ('$(dept)' &lt;&gt; '') THEN 'UPPER(dept) LIKE (''$(dept)%'') AND '  
+    ELSE '1 = 1'  
+    END R FROM DUAL
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT user_id, COALESCE($(n_col1), '-- no data --') c1, COALESCE($(n_col2), '-- no data --') c2, COALESCE($(n_col3), '-- no data --') c3 FROM cs_user 
+    WHERE $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $(cla_dept)
+    ORDER BY $(n_sort1) $(n_sort1_dir) $(n_sort2) $(n_sort2_dir)  
+  </serverside>
+  <serverside dataset="total" action="query">
+    SELECT COUNT(user_id) cnt FROM cs_user  
+    WHERE $(cla_user_id) $(cla_email) $(cla_full_name) $(cla_phone) $(cla_company) $(cla_dept)
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support User List</title>
+</head>
+<body loop="global">
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="4">
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : Result
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr>
+<td width="50%"></td>
+<td>Items: $(first) - $(last)</td><td align="right">
+
+<form action="userManOk.htm" method="POST">
+<input type="hidden" name="first" value="=G1($(first)-10)"/>
+<input type="hidden" name="last" value="=G1($(first)-10)+9"/>
+<input type="hidden" name="uid" value="$(uid)" />  
+<input type="hidden" name="email" value="$(email)" />
+<input type="hidden" name="full_name" value="$(full_name)" />
+<input type="hidden" name="phone" value="$(phone)" />
+<input type="hidden" name="company" value="$(company)" />
+<input type="hidden" name="dept" value="$(dept)" />
+<input type="hidden" name="col1" value="$(col1)" />
+<input type="hidden" name="col2" value="$(col2)" />
+<input type="hidden" name="col3" value="$(col3)" />
+<input type="hidden" name="max_row" value="$(max_row)" />
+<input type="hidden" name="sort1" value="$(sort1)" />
+<input type="hidden" name="sort1_dir" value="$(sort1_dir)" />
+<input type="hidden" name="sort2" value="$(sort2)" />
+<input type="hidden" name="sort2_dir" value="$(sort2_dir)" />
+
+<input type="submit" name="go" value="Prev"/>
+</form>
+</td><td>
+<form action="userManOk.htm" method="POST">
+<input type="hidden" name="first" value="=$(first)+10"/>
+<input type="hidden" name="last" value="=$(first)+19"/>
+<input type="hidden" name="uid" value="$(uid)" />  
+<input type="hidden" name="email" value="$(email)" />
+<input type="hidden" name="full_name" value="$(full_name)" />
+<input type="hidden" name="phone" value="$(phone)" />
+<input type="hidden" name="company" value="$(company)" />
+<input type="hidden" name="dept" value="$(dept)" />
+<input type="hidden" name="col1" value="$(col1)" />
+<input type="hidden" name="col2" value="$(col2)" />
+<input type="hidden" name="col3" value="$(col3)" />
+<input type="hidden" name="max_row" value="$(max_row)" />
+<input type="hidden" name="sort1" value="$(sort1)" />
+<input type="hidden" name="sort1_dir" value="$(sort1_dir)" />
+<input type="hidden" name="sort2" value="$(sort2)" />
+<input type="hidden" name="sort2_dir" value="$(sort2_dir)" />
+<input type="submit" name="go" value="Next"/> 
+<a href="userNew.htm">New User</a>
+</form></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th align="left"> User ID </th>
+  <th align="left">$(col1)</th>
+  <th align="left">$(col2)</th>
+  <th align="left">$(col3)</th>
+</tr>
+<tr class="apbg">
+  <td colspan="4">
+  </td>
+</tr>
+
+<tr loop="s1" class="$(s1.rowodd#apbg#)" first="$(first)" last="$(last)">
+  <td>
+    <a href="userView.htm?uid=$(s1.user_id:unesc)&backTo=userManOk.htm?$(q-combined:escape)">$(s1.user_id)</a>
+  </td>
+  <td>$(s1.c1)</td>
+  <td>$(s1.c2)</td>
+  <td>$(s1.c3)</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr loop="total">
+  <td>
+      Total: $(total.cnt) users found. 
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

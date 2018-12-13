@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <serverside action="db" opt="ib">
+      db=$(DB_HD)
+    </serverside>
+    <serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm">
+      SELECT user_id, user_pwd, user_type, status FROM cs_user
+      WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+      AND (status &lt;&gt; 'disabled')
+    </serverside>
+    <serverside action="defaultparam" opt="kb_id">
+      SELECT -1 R FROM DUAL;
+    </serverside>
+    <serverside dataset="catP5" action="query">
+    SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND 
+    (p.kb_id = c.kb_p5)
+    </serverside>
+    <serverside dataset="catP4" action="query">
+    SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND 
+    (p.kb_id = c.kb_p4)
+    </serverside>
+    <serverside dataset="catP3" action="query">
+    SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND 
+    (p.kb_id = c.kb_p3)
+    </serverside>
+    <serverside dataset="catP2" action="query">
+    SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND 
+    (p.kb_id = c.kb_p2)
+    </serverside>
+    <serverside dataset="catP1" action="query">
+    SELECT p.kb_id kb_id, COALESCE(p.kb_title , '--') kb_title FROM cs_kb c, cs_kb p WHERE (c.kb_id = $kb_id) AND 
+    (p.kb_id = c.kb_p1)
+    </serverside>
+    <serverside dataset="s1" action="query">
+      SELECT kb_id, kb_p4, kb_type FROM cs_kb
+      WHERE kb_id = $(kb_id)
+    </serverside>
+    <serverside dataset="curCat" action="query">
+      SELECT kb_id, kb_title,  
+      KB_RANK, KB_VISITED, KB_OWNER, KB_CREATED_BY, KB_CREATED_ON,
+      KB_UPDATED_BY, KB_UPDATED_ON, KB_TITLE, KB_SUMMARY, KB_NAME, KB_SIZE
+      FROM cs_kb
+      WHERE (kb_id = $(kb_id)) AND (kb_security &lt; 1)  
+    </serverside>
+    <serverside action="execute">
+      UPDATE cs_kb  
+      SET kb_visited = kb_visited + 1  
+    </serverside>
+    <serverside dataset="sqlCat" action="query">
+      SELECT kb_id, kb_title FROM cs_kb
+      WHERE (kb_type = 1) AND (kb_p1 = $(kb_id)) AND (kb_security &lt; 1)  
+      ORDER BY kb_title ASC
+    </serverside>
+    <serverside dataset="sqlArt" action="query">
+      SELECT kb_id, kb_type, kb_title, kb_summary, kb_updated_on, kb_name, 
+      kb_size FROM cs_kb WHERE (kb_type &gt; 1) AND (kb_security &lt; 1) AND  
+      (kb_p1 = $(kb_id)) 
+      ORDER BY kb_title ASC
+    </serverside>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title>
+      Knowledge Base articles - Customer support - apooHelpDesk
+    </title>
+  </head>
+  <body loop="global">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td loop="curCat">
+          <a href="../index.htm">Customer Support main menu</a> : Knowledge base : $(curCat.kb_title) 
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <hr/>
+        </td>
+      </tr>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="apbg" valign="top" width="1%">
+          <table border="0" cellspacing="0" cellpadding="2">
+            <tr>
+              <td>
+                <form action="kbKeySearchOk.htm" method="GET">
+                  <table border="0" cellspacing="0" cellpadding="2">
+                    <tr>
+                      <td>
+                        Keywords:
+                        <input type="text" name="keywords" size="15" maxlength="50"/>
+                        <input type="hidden" name="kb_id" value="$(kb_id)"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        <input type="submit" value="Search"/>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.htm" method="GET">
+                  <table border="0" cellspacing="0" cellpadding="2">
+                    <tr>
+                      <td>
+                        Knowledge ID:
+                        <input type="text" name="kb_id" size="15" maxlength="50"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="right">
+                        <input type="submit" value="Go"/>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="kbAdvSearch.htm?kb_id=$(kb_id)">
+                  Advanced Search
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="kbNewCat.htm?kb_id=$(kb_id)">
+                  New Category
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="kbNewArt.htm?kb_id=$(kb_id)">
+                  New Article
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="recommended.htm">
+                  Recommended Articles
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="faq.htm">
+                  Frequently Asked Questions
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a href="../help/kbHelp.html" target="ptHelpWindow">
+                  Help
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="apbg">
+                <table border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="1">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <!-- right pane ---------------- -->
+        <td valign="top" width="99%">
+          <table width="100%" border="0" cellspacing="0" cellpadding="2" loop="curCat">
+            <tr>
+              <td>Rank: $(curCat.KB_RANK) Visited: $(curCat.KB_VISITED)
+              </td>
+              <td>Owner: $(curCat.KB_OWNER)
+              </td>
+              <td>Creator: $(curCat.KB_CREATED_BY) $(curCat.KB_CREATED_ON)
+              </td>
+              <td>Updated: $(curCat.KB_UPDATED_BY) $(curCat.KB_UPDATED_ON)
+              </td>
+              <td>Summary: $(curCat.KB_SUMMARY)
+              </td>
+              <td>Name: $(curCat.KB_NAME) Size: $(curCat.KB_SIZE)  
+              </td>
+            </tr>
+<tr>
+  <td align="right" colspan="6">
+      <a href="../help/kbHelp.html">Help</a> |  
+      <a href="kbEditCat.htm?kb_id=$(kb_id)">Edit category</a> | 
+      <a href="kbDelete.htm?kb_id=$(kb_id)">Delete category</a>
+  </td>
+</tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr class="apbg">
+              <td colspan="2">
+                Categories
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">
+                <ul>
+                  <li loop="sqlCat">
+                    <a href="?kb_id=$(sqlCat.kb_id)">
+                      $(sqlCat.kb_title)
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td valign="top">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr class="apbg">
+              <td>
+                Articles
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ul loop="sqlArt">
+                  <li>
+                    <a href="kbView.htm?kb_id=$(sqlArt.kb_id)">
+                      $(sqlArt.kb_title)
+                    </a>
+                    <br/>
+                    $(sqlArt.kb_summary)
+        (Did this article help?
+                    <a href="kbVote.htm?vote=yes&id=$(sqlArt.kb_id)">
+                      yes
+                    </a>
+                    |
+                    <a href="kbVote.htm?vote=no&id=$(sqlArt.kb_id)">
+                      no
+                    </a>
+                    )
+                    <br/>
+                    <a href="kbEditArt.htm?kb_id=$(sqlArt.kb_id)">Edit</a> | 
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="apbg">
+              <td>
+                Links
+              </td>
+            </tr>
+
+      <tr>
+        <td>
+    <span loop="catP5">
+     <b><a href="index.htm?kb_id=$(catP5.kb_id)">$(catP5.kb_title)</a></b> :   
+    </span>
+    <span loop="catP4">
+     <a href="index.htm?kb_id=$(catP4.kb_id)">$(catP4.kb_title)</a> :   
+    </span>
+    <span loop="catP3">
+     <a href="index.htm?kb_id=$(catP3.kb_id)">$(catP3.kb_title)</a> :   
+    </span>
+    <span loop="catP2">
+     <a href="index.htm?kb_id=$(catP2.kb_id)">$(catP2.kb_title)</a> :   
+    </span>
+    <span loop="catP1">
+     <a href="index.htm?kb_id=$(catP1.kb_id)">$(catP1.kb_title)</a> :   
+    </span>
+        </td>
+      </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">
+          Copyright &copy; 2003, Andrei Ivanov.
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

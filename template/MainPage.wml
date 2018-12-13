@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="Welcome" title="Welcome to Bank Of  XYZ" >
+<p align="left" mode="wrap">
+Please select one of the following :
+</p>
+<p>
+<select name="selection" ivalue="5" multiple="false" >
+<option onpick="Account.jsp" value="1" >Account Balance</option>
+<option onpick="Checking.jsp" value="2" >Checking Account Details</option>
+<option onpick="Savings.jsp" value="3" >Savings Account Details</option>
+<option onpick="Wire.jsp" value="4" >Wire Transfer</option>
+<option onpick="Mortgage.jsp" value="5" >Mortgage</option>
+</select>
+</p>
+</card>
+</wml>

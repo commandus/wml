@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<title>Prologue elements</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel="StyleSheet" href="default.css">
+</head>
+
+<body>
+
+<h1>Prologue elements</h1>
+<table border="0">
+  <tr>
+    <td><a href="#xml">?xml</a>  xml declaration</td>
+  </tr>
+  <tr>
+    <td><a href="#doctype"> <img border="0" src="sxml.gif" width="8" height="8">
+      !doctype</a> <img border="0" src="sdoctype.gif" width="8" height="8">
+      document type declaration</td>
+  </tr>
+</table>
+
+<p><a name=xml>?xml</a> declaration <img border="0" src="xml.gif" width="24" height="24">
+<br id=xmlbrief0>A valid WML deck is a valid XML document and therefore must contain an XML declaration.
+Each XML document starts with XML declaration and document
+type declaration. For instance, if you use version WML 1.3 you must enter:
+<p>&lt;?xml version=&quot;1.0&quot;?&gt;</p>
+<p>&lt;!DOCTYPE wml PUBLIC &quot;-//WAPFORUM//DTD WML 1.3//EN&quot;
+&quot;http://www.wapforum.org/DTD/wml13.dtd&quot;&gt;</p>
+<p>XML declaration and document type declaration are
+part of the XML document named prologue and it is an error to omit the prologue.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=xmlattr0>
+<b>version</b>
+<br>specifies the XML version number. Value 1.0 is recommended.
+<br><b>encoding</b>
+<br>specifies the XML encoding character set. Default value is UTF-8 and this
+value is recommended.
+</p>
+
+<p id=xmlattr0>
+&nbsp;
+</p>
+
+<p id=xmlattr0>
+&nbsp;
+</p>
+
+<p><a name=doctype>!doctype</a> <img border="0" src="doctype.gif" width="24" height="24">
+<br id="doctypebrief">
+XML document type declaration. A valid WML deck is a valid XML document and
+therefore must contain document type declaration.
+<p>Each XML document starts with XML declaration and document
+type declaration. For instance, if you use version WML 1.3 you must enter:
+<p>&lt;?xml version=&quot;1.0&quot;?&gt;</p>
+<p>&lt;!DOCTYPE wml PUBLIC &quot;-//WAPFORUM//DTD WML 1.3//EN&quot;
+&quot;http://www.wapforum.org/DTD/wml13.dtd&quot;&gt;</p>
+<p>XML declaration and document type declaration are
+part of the XML document named prologue and it is an error to omit the prologue.
+<p>Because only version number is changeable, you must set attribute version to
+1.0, 1.1, 1.2 or 1.3 in the <a href="windowattributes.htm">Element
+attributes window</a>.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id="doctypeattr"><b>version</b><br>
+specifies WML version and appropriate WML DTD document. Values 1.0, 1.1, 1.2 or
+1.3 are correct, but it is recommends to use version 1.1 or higher.</p>
+
+<p id="doctypeattr">See also: <a href="wmlreference.htm">WML reference</a></p>
+
+</body>
+
+</html>

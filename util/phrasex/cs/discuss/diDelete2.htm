@@ -1,0 +1,70 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  <serverside dataset="s1" action="query">
+    SELECT di_type, di_topic_id, di_owner, di_title FROM cs_discuss 
+    WHERE di_id = request.di_id;
+  </serverside>
+  if (session.userType <> 'Manager'
+    AND session.userID <> s1.di_owner)
+    error 'Only managers or the owner of this discussion can delete this';
+  endif
+  
+  if (s1.di_type = 1)
+    set local.title = 'Delete Group #' + request.di_id;
+  elseif (s1.di_topic_id = '')
+    set local.title = 'Delete Topic #' + request.di_id;
+  else 
+    set local.title = 'Delete Message #' + request.di_id;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+
+<body>
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      $(local.title))
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    <!$if (s1.di_type = 1) )>
+      Are you sure you want to delete group <br/>
+      #$request.di_id) [$s1.di_title)] 
+      and all its child groups and topics?
+    <!$elseif (s1.di_topic_id = ''))>
+      Do you want to delete all messages on topic <br/>
+      #$request.di_id) [$s1.di_title)] 
+    <!$else)>
+      Do you want to delete message <br/>
+      #$request.di_id) [$s1.di_title)] 
+    <!$endif)>
+    <br/>
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">No</a> | 
+    <a href="diDeleteOk.htm?di_id=$request.di_id)">Yes</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

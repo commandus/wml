@@ -1,0 +1,246 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+  if (string.isValidDateTime(request.deadline) <> 1)
+    error 'Please enter a valid date-time for Deadline';
+  endif
+
+  set local.note_data = request.note_data;
+  if (local.note_data = '')
+    set local.note_data = 'No note is entered.';  // for cost
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  file attach1('request.add_attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  set local.change = 'Assigned to ' + request.assigned_to + '. ';
+  if (request.old_priority <> request.priority)
+    set local.change = local.change + 
+      'Changed priority from [' + request.old_priority + '] to [' +
+      request.priority + ']. ';
+  endif
+  if (request.old_deadline <> request.deadline)
+    set local.change = local.change + 
+      'Changed deadline from [' + request.old_deadline + '] to [' +
+      request.deadline + ']. ';
+  endif
+
+  // Request, change and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlTicket" action="execute">    UPDATE cs_ticket SET
+      row_ver = 1 + request.row_ver,
+      title = request.title, 
+      assigned_by = session.userID, 
+      assigned_to = request.assigned_to,
+      assigned_on = server.dateTime,
+      priority = request.priority, 
+      deadline = request.deadline, 
+      cost = request.total_cost + request.new_cost,
+      due_rem_flag = 'y'
+    WHERE ticket_id = request.ticket_id
+      AND row_ver = request.row_ver;
+  </serverside> 
+
+  set local.ch_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddChange = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_cost, ch_description)
+    VALUES(
+      local.ch_id, request.ticket_id, 'log', 
+      session.userID, server.dateTime, 0, local.change);
+  </serverside>
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddNote = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_cost, ch_format, ch_description)
+    VALUES(
+      local.note_id, request.ticket_id, 'public', 
+      session.userID, server.dateTime, request.new_cost, 
+      request.note_format, local.note_data);
+  </serverside>
+  
+  // attachment has been defined above when checking its size
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  set local.em_msg = '';
+
+  if (server.emailSenderEnabled AND 
+      request.old_assigned_to = request.assigned_to)
+    set local.em_msg = local.em_msg + 
+      'The assignment and the unassignment notification email '
+      'were not sent because the Assigned To was not changed. ';
+
+  elseif (server.emailSenderEnabled)
+    Email_Out em;
+    if (server.taskEnabled('CustomerSupport Email Importer'))
+      set em.from = server.importerEmail;
+    else
+      set em.from = server.adminEmail;
+    endif
+    set local.hyperLink = server.httpAddress + 
+      app.startPage + '?ticket_id=' + request.ticket_id;
+
+    <serverside dataset="sqlAssignedTo" action="query">
+    SELECT email FROM cs_user '
+      'WHERE user_id = \'' + to.2QuoteStr(request.assigned_to) + '\'';
+      
+    if (request.assigned_to = '')
+      set local.em_msg = local.em_msg + 
+        'The assignment notification email was not sent because '
+        'the Assigned To field is empty. ';
+    elseif (request.assigned_to = session.userID)
+      set local.em_msg = local.em_msg + 
+        'The assignment notification email was not sent because '
+        'you assigned the request to yourself. ';
+    elseif (sqlAssignedTo.email = '')
+      set local.em_msg = local.em_msg + 
+        'The assignment notification email was not sent because ' 
+        + request.assigned_to + ' does not have an email address. ';
+    else      
+      set em.to = sqlAssignedTo.email;
+      set em.subject = 
+        'Request #' + request.ticket_id + ' has been assigned to you.';
+      set em.content = 
+        'Dear ' + request.assigned_to + ',\r\n\r\n' +
+        request.title + '\r\n' + local.hyperLink + 
+        '&user_id=' + $(request.assigned_to:escape) + 
+        '\r\n\r\n' + app.name;
+      em.send;
+      set local.em_msg = local.em_msg + 
+        'The assignment notification email has been sent to ' 
+        + em.to + '. ';
+    endif
+    
+    // request is re-assigned, notify old assigned_to
+    <serverside dataset="sqlOldAssignedTo" action="query">
+    SELECT email FROM cs_user '
+      'WHERE user_id = \'' + to.2QuoteStr(request.old_assigned_to) + '\'';
+
+    if (request.old_assigned_to = '')
+      set local.em_msg = local.em_msg + 
+        'The unassignment notification email was not sent because '
+        'the request had not been assigned before you assigned it. ';
+    elseif (request.old_assigned_to = session.userID)
+      set local.em_msg = local.em_msg + 
+        'The unassignment notification email was not sent because '
+        'the request was assigned to you. ';
+    elseif (sqlOldAssignedto.email = '')
+      set local.em_msg = local.em_msg + 
+        'The unassignment notification email was not sent because ' 
+        + request.old_assigned_to + ' does not have an email address. ';
+    else
+      set em.to = sqlOldAssignedto.email;
+      set em.subject = 
+        'You are no longer responsible for request #' + request.ticket_id;
+      set em.content = 
+        'Dear ' + request.old_assigned_to + ',\r\n\r\n' +
+        request.title + '\r\n' + local.hyperLink + 
+        '&user_id=' + $(request.old_assigned_to:escape) + 
+        '\r\n\r\n' + app.name;
+      em.send;
+      set local.em_msg = local.em_msg + 
+        'The unassignment notification email has been sent to '
+        + em.to + '. ';
+    endif
+  endif
+
+  set local.viewUrl = 
+    'ticketView.htm?ticket_id=' + request.ticket_id +
+    '&backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Request Assigned
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    <a href="$local.viewUrl)">Request #$request.ticket_id)</a> 
+    has been assigned to $request.assigned_to).
+
+    <!$ if (server.emailSenderEnabled) )>
+      <br/>$ to.html(local.em_msg) )
+      For details about when notification emails are sent, please click 
+      <a target="ptHelpWindow" href="../help/emailHelp.html">here</a>.
+    <!$ endif )>
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

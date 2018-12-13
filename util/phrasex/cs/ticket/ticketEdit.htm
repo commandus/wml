@@ -1,0 +1,262 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT row_ver, title, status, product, serial_num, 
+      priority, deadline, submitted_to, submitted_by, 
+      co_submitter, submitter_cc 
+    FROM cs_ticket
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+
+  <serverside dataset="sqlLastStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num DESC';
+  </serverside>
+  set local.lastStatus = sqlLastStatus.name;
+  sqlLastStatus.close;
+
+  <serverside dataset="sqlFirstStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC';
+  </serverside>
+  set local.firstStatus = sqlFirstStatus.name;
+  sqlFirstStatus.close;
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="ticketEditOk.htm"  
+  enctype="multipart/form-data">
+
+<input type="hidden" name=backToUrl value="$request.backToUrl)"/>
+<input type="hidden" name=backToPrompt value="$request.backToPrompt)"/>
+<input type="hidden" name=ticket_id value="$request.ticket_id)"/>
+<input type="hidden" name=row_ver value="$s1.row_ver)"/>
+
+<center>
+<table width=500 border="0" cellspacing="0" cellpadding="2">
+<tr>
+  <td colspan="3">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Edit Request #$request.ticket_id)
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="3" align="right">
+    To reopen or close this request, go back to the request detail page.
+    <a target="ptHelpWindow" href="../help/ticketEditHelp.html">Help</a>    
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Title: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+    <input type="text" name=title size="70" maxlength="100"
+      value="$(s1.title))">
+    <!$ else )>
+    <input type="text" name=title size="60" maxlength="100"
+      value="$(s1.title))">
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td>
+    Status: <br/>
+    <select name=status size=1>
+      <!-- has duplicates but can handle NULL -->
+      <option selected>$s1.status) 
+      <!$
+        <serverside dataset="sqlStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+        while (sqlStatus.fetch)
+          if (sqlStatus.name <> local.firstStatus AND
+            sqlStatus.name <> local.lastStatus)
+            response.write('<option>');
+            response.write(sqlStatus.name);
+            response.write('\r\n');
+          endif
+        endwhile 
+      )>
+    </select>
+  </td>
+  <td>
+    Product: <br/>
+    <select name=product size=1>
+      <option selected>$s1.product)
+      <!$
+        <serverside dataset="sqlProducts" action="query">
+    SELECT name FROM cs_product ORDER BY name ASC;
+  </serverside>
+        while (sqlProducts.fetch)
+      )>
+        <option>$sqlProducts.name)
+      <!$ endwhile )>
+    </select>
+  </td>  
+  <td>
+    Serial Number: <br/>
+    <select name=serial_num size=1>
+      <!-- an empty option is needed to make sure this form field 
+        is always sent to the server in case nothing is selected-->
+      <option>
+      <!$
+        if (s1.submitted_by <> '')
+          <serverside dataset="sqlSales" action="query">
+    SELECT sa_serial FROM cs_sale
+            WHERE sa_sold_to = s1.submitted_by
+              OR sa_contact1 = s1.submitted_by
+              OR sa_contact2 = s1.submitted_by;
+          while (sqlSales.fetch)
+            if (sqlSales.sa_serial = s1.serial_num)
+              response.write('<option selected>');
+            else
+              response.write('<option>');
+            endif
+            response.write(sqlSales.sa_serial + '\r\n');
+          endwhile
+        endif
+      )>
+    </select>
+  </td>
+</tr>
+<tr>
+  <td>
+    Submitted To:<br/>
+    <select name=submitted_to size=1>
+      <option selected>$s1.submitted_to)
+      <!$
+        <serverside dataset="sqlStaff" action="query">
+    SELECT user_id FROM cs_user 
+          WHERE status <> 'disabled' AND user_type <> 'EndUser' 
+          ORDER BY user_id ASC;
+  </serverside>
+        while (sqlStaff.fetch)
+      )>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td>
+    Submitted By: <br/>
+    <input type="text" name=submitted_by size="20" maxlength="50"
+      value="$s1.submitted_by)">
+  </td>
+  <td>
+    Co-Submitter: <br/>
+    <input type="text" name=co_submitter size="20" maxlength="50"
+      value="$s1.co_submitter)">
+  </td>
+</tr>
+<tr>
+  <td valign="bottom">
+    Priority:<br/>
+    <select name=priority size=1>
+      <option selected>$s1.priority)
+      <!$
+        <serverside dataset="sqlPriorities" action="query">
+    SELECT name FROM cs_priority ORDER BY name ASC;
+  </serverside>
+        while (sqlPriorities.fetch)
+      )>
+        <option>$sqlPriorities.name)
+      <!$ endwhile )>
+    </select>
+  </td>
+  <td valign="bottom">
+    Deadline: 
+    <input type="text" name=deadline size="20" maxlength="20" 
+      value="$s1.deadline)">
+  </td>
+  <td valign="bottom">
+    Other Submitters' Email: <br/>
+    <input type="text" name=submitter_cc size="20" maxlength="50"
+      value="$s1.submitter_cc)">
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    History: 
+    <textarea cols=70 rows=8 wrap=virtual><!$ 
+      // without the primary key ch_id, Access driver gets 
+      // confused if two records have the same made by and made on.
+      // Note: need all entries to make the total cost right.
+      <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+        'WHERE ch_ticket_id = ' + request.ticket_id + ' '
+          'AND ch_type <> \'log\' '
+        'ORDER BY ch_made_on DESC';
+  </serverside>
+      set local.totalCost = 0;
+      while (sqlHistory.fetch)
+        response.write('[' +  sqlHistory.ch_made_on);
+        response.write(' by ' + sqlHistory.ch_made_by);
+        // note: ch_cost < 0 means a credit. It needs to be shown.
+        if (sqlHistory.ch_cost <> 0)
+          response.write(', cost ' + sqlHistory.ch_cost + ' minutes');
+        endif
+        response.write(']\r\n');
+        response.write(to.html2(sqlHistory.ch_description) + '\r\n\r\n');
+        set local.totalCost = local.totalCost + sqlHistory.ch_cost;
+      endwhile
+    )></textarea>
+    <input type="hidden" name=total_cost value="$local.totalCost)"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    New
+    [<input type=radio name=note_type checked value="public"/>Public
+    <input type=radio name=note_type value="internal"/>Internal
+    ] Note 
+    [in <input type=radio name=note_format value="0" checked/>plain text
+    <input type=radio name=note_format 
+      value="1"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    ]: <br/>
+    <textarea name=note_data cols=70 rows=10 wrap=virtual></textarea>
+    <!--there should be no space between textarea pairs-->
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    New Cost:
+    <input type="text" name=new_cost size="5" maxlength=10/> minutes
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Attach File:
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=add_attachment1 size="45"/>
+    <!$ else )>
+      <input type=FILE name=add_attachment1 size=35/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="3">
+    <input type="submit" name=action value="Save"/>
+    <input type="submit" name=action value="Preview HTML"/>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

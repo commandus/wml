@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+
+<card id="navi" title="Навигация в  WinWAP">
+<p align="center">
+   <img src="wwbyst.wbmp" alt="WinWAP"/>
+</p>
+<p>
+  <br/>
+  <big>Информация по навигации в  WinWAP:</big>
+  <br/>
+  <br/>
+  <a href="navi/1.wml">Ручной набор адреса</a>
+  <br/>
+  <a href="navi/2.wml">Щелчок на связи</a>
+  <br/>
+  <a href="navi/3.wml">Щелчок на кнопке</a>
+  <br/>
+  <a href="navi/4.wml">Автоматическое перенаправление</a>
+  <br/>
+  <a href="navi/5.wml">Назад и Вперед</a>
+  <br/>
+  <br/>
+  <br/>
+  В нижнем левом углу окна приложения имеетеся текст, показывающий что броузер делает в настоящее время, и если этот текст указывает  ‘сделано (done)’, это означает, что он имеет загруженную страницу и все ее содержание.
+  <br/>
+  <do label="Назад"> <go href="@prev"/> </do>
+</p>
+</card>
+</wml>

@@ -1,0 +1,97 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  if (request.fieldExist('max_row'))  // from search form, not refresh
+    if (request.max_row < 1)
+      error 'Max Records must be greater than 0';
+    endif
+    if (request.col1 = request.col2 
+      OR request.col1 = request.col2 OR request.col2 = request.col3)
+      error 'Field 1, 2 and 3 must be different';
+    endif
+    set session.sa_max_row = request.max_row;
+    set session.sa_col1 = request.col1; 
+    set session.sa_col2 = request.col2;
+    set session.sa_col3 = request.col3;
+    set session.sa_sort1 = request.sort1;
+    set session.sa_sort1_dir = request.sort1_dir;
+    set session.sa_sort2 = request.sort2;
+    set session.sa_sort2_dir = request.sort2_dir;
+    set session.sa_serial = request.sa_serial;
+    set session.sa_product = request.sa_product;
+    set session.sa_sold_to = request.sa_sold_to;
+    set session.sa_sold_on1 = request.sa_sold_on1;
+    set session.sa_sold_on2 = request.sa_sold_on2;
+  endif
+
+  // convert user friendly column names to real column names
+  if (session.sa_col1 = 'Product')
+    set local.col1 = 'sa_product';
+  elseif (session.sa_col1 = 'Sold To')
+    set local.col1 = 'sa_sold_to';
+  elseif (session.sa_col1 = 'Sold On')
+    set local.col1 = 'sa_sold_on';
+  else
+    set local.col1 = session.sa_col1;
+  endif
+  if (session.sa_col2 = 'Product')
+    set local.col2 = 'sa_product';
+  elseif (session.sa_col2 = 'Sold To')
+    set local.col2 = 'sa_sold_to';
+  elseif (session.sa_col2 = 'Sold On')
+    set local.col2 = 'sa_sold_on';
+  else
+    set local.col2 = session.sa_col2;
+  endif
+  if (session.sa_col3 = 'Product')
+    set local.col3 = 'sa_product';
+  elseif (session.sa_col3 = 'Sold To')
+    set local.col3 = 'sa_sold_to';
+  elseif (session.sa_col3 = 'Sold On')
+    set local.col3 = 'sa_sold_on';
+  else
+    set local.col3 = session.sa_col3;
+  endif
+
+  if (session.sa_sort1 = 'Serial Number')
+    set local.sort1 = 'sa_serial';
+  elseif (session.sa_sort1 = 'Product')
+    set local.sort1 = 'sa_product';
+  elseif (session.sa_sort1 = 'Sold To')
+    set local.sort1 = 'sa_sold_to';
+  elseif (session.sa_sort1 = 'Sold On')
+    set local.sort1 = 'sa_sold_on';
+  else
+    set local.sort1 = session.sa_sort1;
+  endif
+  if (session.sa_sort1_dir = 'Descending')
+    set local.sort1_dir = 'DESC';
+  else
+    set local.sort1_dir = 'ASC';
+  endif
+  if (session.sa_sort2 = 'Serial Number')
+    set local.sort2 = 'sa_serial';
+  elseif (session.sa_sort2 = 'Product')
+    set local.sort2 = 'sa_product';
+  elseif (session.sa_sort2 = 'Sold To')
+    set local.sort2 = 'sa_sold_to';
+  elseif (session.sa_sort2 = 'Sold On')
+    set local.sort2 = 'sa_sold_on';
+  else
+    set local.sort2 = session.sa_sort2;
+  endif
+  if (session.sa_sort2_dir = 'Descending')
+    set local.sort2_dir = 'DESC';
+  else
+    set local.sort2_dir = 'ASC';
+  endif
+   
+  // construct the <serverside dataset="statement
+  set local.s = 'sa_serial';
+  if (local.col1 <>

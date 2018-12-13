@@ -1,0 +1,71 @@
+
+<html>
+<head>
+<title>Configuring web server MIME types
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Configuring web server MIME types</h1>
+<p>To publish your wml decks, you need to have a web server having the proper MIME types configured.  Microsoft's Internet Information Services (IIS) and Apache
+are two of the most popular Web servers. Procedures to configure MIME types on these two
+servers are different. For more details how to set up WAP MIME types you can
+read your web server user manual.</p>
+<h3> Configure MIME types in Microsoft IIS</h3>
+<ul>
+  <li>In the Start menu, go to Programs>Administrative Tools>Internet Services Manager.</li>
+  <li>Select your Web server and right click on the icon, select Properties.</li>
+  <li>Click on the Computer MIME map tab and click Edit.</li>
+  <li>In the File Type window, click New Type.</li>
+  <li>Enter the associated file extensions and content types:</li>
+</ul>
+<table border="0">
+  <tr>
+    <td>Associated file extension&nbsp;</td>
+    <td>MIME content type</td>
+  </tr>
+  <tr>
+    <td>.wml</td>
+    <td>text/vnd.wap.wml</td>
+  </tr>
+  <tr>
+    <td>.wmls</td>
+    <td>text/vnd.wap.wmlscript</td>
+  </tr>
+  <tr>
+    <td>.wbmp</td>
+    <td>image/vnd.wap.wbmp</td>
+  </tr>
+</table>
+<h3> Configure MIME types in Apache</h3>
+<ul>
+  <li>Create a text file called .htaccess in the top level HTML directory or
+    edit if exists</li>
+  <li> insert the following text:&nbsp;</li>
+</ul>
+<blockquote>
+  <p>addtype text/vnd.wap.wml  wml<br>
+  addtype text/vnd.wap.wmlscript  wmls<br>
+  addtype image/vnd.wap.wbmp  wbmp</p>
+</blockquote>
+<ul>
+  <li>Save the file in the top level HTML directory of your server, restart
+    Apache.</li>
+</ul>
+
+</body>
+</html>

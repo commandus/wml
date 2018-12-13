@@ -1,0 +1,236 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+  if (string.isValidDateTime(request.deadline) <> 1)
+    error 'Please enter a valid date-time for Deadline';
+  endif
+
+  set local.note_data = request.note_data;
+  if (local.note_data = '')
+    set local.note_data = 'No note is entered.';  // for new_cost
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+  
+  file attach1('request.add_attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  if (request.submitted_by <> '')
+    <serverside dataset="sqlSubmittedBy" action="query">
+    SELECT user_id FROM cs_user 
+      WHERE user_id = request.submitted_by;
+  </serverside>
+    if (sqlSubmittedBy.fetch <> 1)
+      error 'User [' + request.submitted_by + '] does not exist';
+    endif
+    sqlSubmittedBy.close;
+  endif
+
+  if (request.co_submitter <> '')
+    <serverside dataset="sqlCoSubmitter" action="query">
+    SELECT user_id FROM cs_user 
+      WHERE user_id = request.co_submitter;
+  </serverside>
+    if (sqlCoSubmitter.fetch <> 1)
+      error 'User [' + request.co_submitter + '] does not exist';
+    endif
+    sqlCoSubmitter.close;
+  endif
+
+  if (request.submitter_cc <> ''
+      AND (string.findString(request.submitter_cc, '@') < 1 
+        OR string.findString(request.submitter_cc, '.') < 1) )
+    error 'Other Submitters\' email address is invalid.';  
+  endif
+  //-------- everything is validated now ----------------------------
+
+  <serverside dataset="sqlOld" action="query">
+    SELECT status, product, serial_num, submitted_to, '
+      'submitted_by, co_submitter, submitter_cc, priority, deadline '
+    'FROM cs_ticket '
+    'WHERE ticket_id = ' + request.ticket_id;
+  
+  set local.change = '';
+  if (sqlOld.status <> request.status)  // user defined status
+    set local.change = local.change + 
+      'Changed status from [' + 
+      sqlOld.status + '] to [' + request.status + ']. ';
+  endif
+  if (sqlOld.product <> request.product)
+    set local.change = local.change + 
+      'Changed "Product" from [' + 
+      sqlOld.product + '] to [' + request.product + ']. ';
+  endif
+  if (sqlOld.serial_num <> request.serial_num)
+    set local.change = local.change + 
+      'Changed "Serial Number" from [' + 
+      sqlOld.serial_num + '] to [' + request.serial_num + ']. ';
+  endif
+  if (sqlOld.submitted_to <> request.submitted_to)
+    set local.change = local.change + 
+      'Changed "Submitted To" from [' + 
+      sqlOld.submitted_to + '] to [' + request.submitted_to + ']. ';
+  endif
+  if (sqlOld.submitted_by <> request.submitted_by)
+    set local.change = local.change + 
+      'Changed "Submitted By" from [' + 
+      sqlOld.submitted_by + '] to [' + request.submitted_by + ']. ';
+  endif
+  if (sqlOld.co_submitter <> request.co_submitter)
+    set local.change = local.change + 
+      'Changed "Co-Submitter" from [' + 
+      sqlOld.co_submitter + '] to [' + request.co_submitter + ']. ';
+  endif
+  if (sqlOld.submitter_cc <> request.submitter_cc)
+    set local.change = local.change + 
+      'Changed "Other Submitters\' Email" from [' + 
+      sqlOld.submitter_cc + '] to [' + request.submitter_cc + ']. ';
+  endif
+  if (sqlOld.priority <> request.priority)
+    set local.change = local.change + 
+      'Changed priority from [' + 
+      sqlOld.priority + '] to [' + request.priority + ']. ';
+  endif
+  if (sqlOld.deadline <> request.deadline)
+    set local.change = local.change + 
+      'Changed deadline from [' + 
+      sqlOld.deadline + '] to [' + request.deadline + ']. ';
+  endif
+  sqlOld.close;
+
+  // Request, change and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlTicket" action="execute">    UPDATE cs_ticket SET
+      row_ver = 1 + request.row_ver,
+      title = request.title, 
+      status = request.status, 
+      product = request.product, 
+      serial_num = request.serial_num, 
+      submitted_by = request.submitted_by, 
+      co_submitter = request.co_submitter,
+      submitter_cc = request.submitter_cc,
+      submitted_to = request.submitted_to, 
+      priority = request.priority, 
+      deadline = request.deadline, 
+      cost = request.total_cost + request.new_cost,
+      due_rem_flag = 'y'
+    WHERE ticket_id = request.ticket_id
+      AND row_ver = request.row_ver;
+  </serverside> 
+
+  if (local.change <> '')
+    set local.ch_id = 
+      local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+    <serverside dataset="sqlAddChange = 
+      INSERT INTO cs_ti_change(
+        ch_id, ch_ticket_id, ch_type, 
+        ch_made_by, ch_made_on, ch_cost, ch_description)
+      VALUES(
+        local.ch_id, request.ticket_id, 'log', 
+        session.userID, server.dateTime, 0, local.change);
+  </serverside>
+  endif
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddNote = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_cost,  
+      ch_format, ch_description)
+    VALUES(
+      local.note_id, request.ticket_id, request.note_type, 
+      session.userID, server.dateTime, request.new_cost,
+      request.note_format, local.note_data);
+  </serverside>
+  
+  // attachment has been defined above when checking its size
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  set local.backToInfo = 
+    'backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Request Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    <a href=
+      "ticketView.htm?ticket_id=$request.ticket_id)&$local.backToInfo)"
+      >Request #$request.ticket_id)</a> has been updated. 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

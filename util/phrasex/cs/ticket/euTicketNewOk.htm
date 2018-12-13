@@ -1,0 +1,282 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (request.title = '')
+    error 'Please enter title';
+  endif
+  if (request.product = 'Please select a product')
+    error 'Please select a product.';
+  endif
+  
+  if (request.note_data <> '')
+    set local.note_data = request.note_data;
+  else
+    set local.note_data = 'No detail is entered.';
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+  
+  file attach1('request.attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  file attach2('request.attachment2');
+  if (attach2.name <> '' AND attach2.size = 0)  
+    error 'Attachment ' + attach2.name + ' is empty.';
+  endif
+  if (attach2.name <> '' AND attach2.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach2.name + ' exceeded 5M limit.';
+  endif
+
+  // apply the routing scheme defined in product manager
+  set local.notify = 'none';  // none, all, disp
+  set local.assigned_to = '';
+  set local.disp_email = '';
+  set local.disp_empty_disabled = 0;
+
+  if (request.product <> '')
+    <serverside dataset="sqlProductInfo" action="query">
+    SELECT dispatcher, ticket_priority, on_new_ticket1, on_new_ticket2
+      FROM cs_product
+      WHERE name = request.product;
+  </serverside>
+    if (sqlProductInfo.fetch <> 1)
+      error 'Product [' + request.product + '] not found. '
+        'Please refresh the request entry form and retry.';
+    endif
+    if (request.priority <= sqlProductInfo.ticket_priority)
+      if (sqlProductInfo.on_new_ticket1 = 'to_dispatcher') 
+        set local.notify = 'disp';
+        set local.assigned_to = sqlProductInfo.dispatcher;
+      elseif (sqlProductInfo.on_new_ticket1 = 'notify_all') 
+        set local.notify = 'all';
+      endif
+    else
+      if (sqlProductInfo.on_new_ticket2 = 'to_dispatcher')
+        set local.notify = 'disp';
+        set local.assigned_to = sqlProductInfo.dispatcher;
+      elseif (sqlProductInfo.on_new_ticket2 = 'notify_all') 
+        set local.notify = 'all';
+      endif
+    endif
+    sqlProductInfo.close;
+
+    if (local.notify = 'disp')
+      if (local.assigned_to <> '')
+        <serverside dataset="sqlAssignedTo" action="query">
+    SELECT status, email FROM cs_user 
+          WHERE user_id = local.assigned_to;
+  </serverside>
+        if (sqlAssignedTo.fetch)
+          if (sqlAssignedTo.status <> 'disabled')
+            set local.disp_email = sqlAssignedTo.email;
+          else
+            set local.disp_empty_disabled = 1;
+          endif
+        endif
+        sqlAssignedTo.close;
+      else
+        set local.disp_empty_disabled = 1;
+      endif
+      if (local.disp_empty_disabled = 1)
+        set local.notify = 'all';
+        set local.assigned_to = '';
+      endif
+    endif
+  endif
+
+  <serverside dataset="sqlFirstStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num ASC;
+  </serverside>
+  set local.firstStatus = sqlFirstStatus.name;
+  sqlFirstStatus.close;
+
+  set local.ticket_id = 
+    local.getUniqueID('cs_ticket', 'ticket_id', 'registry');
+
+  // Request, detail and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlTicket = 
+    INSERT INTO cs_ticket(
+      ticket_id, row_ver, status, title, 
+      submitted_by, submitted_on,
+      assigned_to, assigned_on, 
+      product, priority, serial_num, due_rem_flag) 
+    VALUES(
+      local.ticket_id, 1, local.firstStatus, request.title,
+      session.userID, server.dateTime, 
+      local.assigned_to, server.dateTime,
+      request.product, request.priority, request.serial_num, 'y');
+  </serverside>
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddNote = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, ch_made_by, ch_made_on, 
+      ch_format, ch_description)
+    VALUES(
+      local.note_id, local.ticket_id, 'public', 
+      session.userID, server.dateTime,
+      request.note_format, local.note_data);
+  </serverside>
+
+  // attachments have been defined above when checking their sizes
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAttach1 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  if (attach2.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAttach2 = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach2.name, attach2.size, attach2.content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  if (server.emailSenderEnabled)
+    Email_Out em;
+    if (server.taskEnabled('CustomerSupport Email Importer'))
+      set em.from = server.importerEmail;
+    else
+      set em.from = server.adminEmail;
+    endif
+
+    set local.hyperLink = server.httpAddress + 
+      app.startPage + '?ticket_id=' + local.ticket_id;
+      
+    <serverside dataset="sqlSubmittedBy" action="query">
+    SELECT email FROM cs_user WHERE user_id = session.userID;
+    if (sqlSubmittedBy.fetch AND sqlSubmittedBy.email <> '')
+      set em.to = sqlSubmittedBy.email;
+      set em.subject = 
+        'Request #' + local.ticket_id + ': ' + request.title;
+      set em.content = 
+        'Dear ' + session.userID + ',\r\n\r\n' + 
+        'The request you submitted has been accepted. '
+        'To follow up on it, please go to \r\n' + 
+        local.hyperLink + '&user_id=' + $(session.userID:escape) + 
+        '\r\n\r\n' + app.name;
+      em.send;
+    endif
+    sqlSubmittedBy.close;
+
+    if (local.notify = 'all')
+      <serverside dataset="sqlStaff" action="query">
+    SELECT DISTINCT email FROM cs_user '
+        'WHERE status <> \'disabled\' AND user_type <> \'EndUser\' ';
+
+      set local.allStaff = '';
+      while (sqlStaff.fetch)
+        set local.allStaff = local.allStaff + sqlStaff.email + ';';
+      endwhile
+      sqlStaff.close;
+
+      set em.to = local.allStaff;
+      set em.subject = 
+        'Request #' + local.ticket_id + ' has been submitted.';
+      set em.content = 'Dear All,\r\n\r\n';
+      if (local.disp_empty_disabled = 1)
+        set em.content = em.content +
+          'You got this notification because the product dispatcher '
+          'user account is not defined or is disabled.\r\n\r\n';
+      endif
+      set em.content = em.content + 
+        request.title + '\r\n' + local.hyperLink + '\r\n\r\n' + app.name;
+        
+      if (em.to <> '')
+        em.send;
+      endif
+      
+    elseif (local.notify = 'disp' AND local.disp_email <> '')
+      set em.to = local.disp_email;
+      set em.subject = 
+        'Request #' + local.ticket_id + 
+        ' has been submitted and assigned to you. ';
+      set em.content = 
+        'Dear ' + local.assigned_to + ',\r\n\r\n' +
+        request.title + '\r\n' + local.hyperLink + 
+        '&user_id=' + $(local.assigned_to:escape) + 
+        '\r\n\r\n' + app.name;
+      em.send;
+    endif
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      New Request Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    The request you submitted has been accepted and saved as 
+    <a href="euTicketView.htm?ticket_id=$local.ticket_id)">
+    #$local.ticket_id)</a>. Please make a note of it.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="euTicketNew.htm">New Request</a> 
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

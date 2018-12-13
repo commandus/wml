@@ -1,0 +1,242 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  set local.path = '';
+  set local.links = 
+    '<a href="' + session.mainMenu + '">' + app.name + '</a> : ' +
+    '<a href="index.htm">Discussion</a>';
+
+  set local.di_id = '';
+  
+  // construct the links "app.name : KB : PT : ..." from 
+  // path=\nName\nID\nName\nID
+
+  if (request.fieldExist('path') AND request.path <> '')
+
+    // Always add \r to delimitor list because browser may convert
+    // \n to \r\n for hidden input fields
+    tokenizer tokens(request.path, '\r\n');
+    set local.name = tokens.nextToken;
+    set local.id = tokens.nextToken;
+    while (local.name <> '' AND local.id <> '')
+      set local.next_name = tokens.nextToken;
+      if (local.next_name <> '')  // not the last pair
+        set local.path = local.path + '\n' + local.name + '\n' + local.id;
+        set local.links = local.links + 
+          ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+          local.name + '</a>';
+      else
+        set local.di_id = local.id;
+      endif
+      set local.name = local.next_name;
+      set local.id = tokens.nextToken;
+    endwhile
+
+  elseif (request.fieldExist('di_id') AND request.di_id <> '')
+    set local.di_id = request.di_id;
+  endif
+
+  if (local.di_id = '')
+    error 'Disussion Group ID not specified.';
+  endif
+    
+  <serverside dataset="s1" action="query">
+    SELECT di_id, di_p1, di_p2, di_p3, di_p4, di_p5, 
+      di_k1, di_k2, di_k3, di_k4, di_k5, 
+      di_type, di_owner, di_title, di_detail, 
+      di_created_by, di_created_on, di_updated_by, di_updated_on,
+      di_locked_by, di_locked_on, di_security
+    FROM cs_discuss 
+    WHERE di_id = local.di_id;
+  </serverside>
+  if (s1.fetch <> 1)
+    error 'Discussion #' + local.di_id + ' not found.';
+  endif
+
+  if (local.path = '')
+    if (s1.di_p5 <> '')
+      <serverside dataset="sqlP5" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p5;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP5.di_title + '\n' + sqlP5.di_id;
+      set local.links = local.links + 
+        ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP5.di_title + '</a>';
+    endif
+    if (s1.di_p4 <> '')
+      <serverside dataset="sqlP4" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p4;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP4.di_title + '\n' + sqlP4.di_id;
+      set local.links = local.links + 
+        ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP4.di_title + '</a>';
+    endif
+    if (s1.di_p3 <> '')
+      <serverside dataset="sqlP3" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p3;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP3.di_title + '\n' + sqlP3.di_id;
+      set local.links = local.links + 
+        ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP3.di_title + '</a>';
+    endif
+    if (s1.di_p2 <> '')
+      <serverside dataset="sqlP2" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p2;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP2.di_title + '\n' + sqlP2.di_id;
+      set local.links = local.links + 
+        ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP2.di_title + '</a>';
+    endif
+    if (s1.di_p1 <> '')
+      <serverside dataset="sqlP1" action="query">
+    SELECT di_id, di_title FROM cs_discuss 
+        WHERE di_id = s1.di_p1;
+  </serverside>
+      set local.path = local.path + 
+        '\n' + sqlP1.di_title + '\n' + sqlP1.di_id;
+      set local.links = local.links + 
+        ' : <a href="index.htm?path=' + $(local.path:escape) + '">' + 
+        sqlP1.di_title + '</a>';
+    endif
+  endif
+  set local.path = local.path + '\n' + s1.di_title + '\n' + s1.di_id;
+
+  if (s1.di_type <> 1)
+    error 'Internal coding error';
+  endif
+
+  set local.links = local.links + ' : Group #' + local.di_id ;
+
+  set local.keywords = s1.di_k1;
+  if (s1.di_k2 <> '')
+    if (local.keywords <> '')
+      set local.keywords = local.keywords + ', ';
+    endif
+    set local.keywords = local.keywords + s1.di_k2;
+  endif
+  if (s1.di_k3 <> '')
+    if (local.keywords <> '')
+      set local.keywords = local.keywords + ', ';
+    endif
+    set local.keywords = local.keywords + s1.di_k3;
+  endif
+  if (s1.di_k4 <> '')
+    if (local.keywords <> '')
+      set local.keywords = local.keywords + ', ';
+    endif
+    set local.keywords = local.keywords + s1.di_k4;
+  endif
+  if (s1.di_k5 <> '')
+    if (local.keywords <> '')
+      set local.keywords = local.keywords + ', ';
+    endif
+    set local.keywords = local.keywords + s1.di_k5;
+  endif
+
+  set local.delUrl = 
+    'diDelete.htm?di_id=' + s1.di_id + 
+    '&backToUrl=' + $(request.urlFull:escape);
+    
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="index.htm?path=$(local.path:escape)">List Children</a> | 
+    <a href="diEditGroup.htm?path=$(local.path:escape)">Edit</a> | 
+    <a href="$local.delUrl)">Delete</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td> $(s1.di_title))</td></tr>
+<tr class="apbg">
+  <th >Owner: </th>
+  <th >Security Level: </th>
+  <th >Locked By: </th>
+  <th >Locked On: </th>
+</tr>
+<tr>
+  <td>$(s1.di_owner)) </td>
+  <td>$(s1.di_security)) </td>
+  <td>$(s1.di_locked_by)) </td>
+  <td>$(s1.di_locked_on)) </td>
+</tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr class="apbg">
+  <th >Created By: </th>
+  <th >Created On: </th>
+  <th >Updated By: </th>
+  <th >Updated On: </th>
+</tr>
+<tr>
+  <td>$(s1.di_created_by)) </td>
+  <td>$(s1.di_created_on)) </td>
+  <td>$(s1.di_updated_by)) </td>
+  <td>$(s1.di_updated_on)) </td>
+</tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr class="apbg">
+  <th  colspan="4">Keywords: </th>
+</tr>
+<tr>
+  <td colspan="4">$(local.keywords))</td>
+</tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr class="apbg">
+  <th  colspan="4">Description: </th>
+</tr>
+<tr>
+  <td colspan="4">$(s1.di_detail))
+  <!$ 
+    <serverside dataset="s2" action="query">
+    SELECT dif_id, dif_name, dif_size FROM cs_di_file 
+      WHERE dif_di_id = s1.di_id;
+  </serverside>
+    if (s2.fetch)
+      set local.attUrl = 
+        to.fileUrl('cs_di_file', 'dif_id', s2.dif_id, 
+                   'dif_content', s2.dif_name);
+  )>
+    <br/>
+    Attachment: 
+    <a href="$local.attUrl)">$s2.dif_name)</a>
+    
+  <!$ endif )>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+</body>
+</html>

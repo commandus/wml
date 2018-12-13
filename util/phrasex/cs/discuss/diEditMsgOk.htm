@@ -1,0 +1,258 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.old_owner <> '' AND session.userType <> 'Manager'
+    AND session.userID <> request.old_owner)
+    error 'Only managers or the owner of this group can edit this.';
+  endif
+  if (request.di_detail = '')
+    error 'Please enter message.';
+  endif
+  if (app.maxText > 0 AND string.length(request.di_detail) > app.maxText)
+    set local.extra = string.length(request.di_detail) - app.maxText;
+    error 
+      'The field in your database for storing messages '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'Please shorten your message by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  file attach1('request.attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  if (request.action = 'Preview HTML')
+    set local.title = 'Preview message #' + request.di_id; 
+  elseif (request.action = 'Cancel')
+    set local.title = 'Message #' + request.di_id + ' unlocked'; 
+  elseif (request.action = 'Save')
+    set local.title = 'Message #' + request.di_id + ' updated';
+  else
+    error 'diEditMsgOk.htm can only handle Cancel, Save and Preview.';
+  endif
+
+  set local.type = 2;
+  if (request.msgType = 'htmlFrag')
+    set local.type = 3;
+  endif
+
+  set local.changedFamily = 0;
+  if (request.action = 'Cancel')
+    <serverside dataset="sqlUnlockMsg" action="execute">    UPDATE cs_discuss SET 
+        di_locked_by = NULL,
+        di_locked_on = NULL
+      WHERE di_id = request.di_id 
+        AND di_locked_by = session.userID;
+  </serverside>
+  
+  elseif (request.action = 'Save')
+    if (request.new_di_p1 = 'root' AND request.di_p1 = '')
+      error 'This message is already under discussion root.';
+    endif
+
+    // By grouping the <serverside dataset="statements below into a "transaction", 
+    // we can be sure that all of them succeed or none does. 
+    // There should be no open <serverside dataset="object before calling this function.
+    local.beginTransaction; 
+
+    set local.di_p1 = '';
+    set local.di_p2 = '';
+    set local.di_p3 = '';
+    set local.di_p4 = '';
+    set local.di_p5 = '';
+
+    if (request.new_di_p1 = 'root') // request.di_p1 <> '' checked above
+      set local.changedFamily = 1;
+    elseif (request.new_di_p1 <> '' 
+      AND request.new_di_p1 <> request.di_p1)
+      <serverside dataset="sqlParent" action="query">
+    SELECT di_p1, di_p2, di_p3, di_p4 FROM cs_discuss
+        WHERE di_type = 1 AND di_id = request.new_di_p1;
+  </serverside>
+      if (sqlParent.fetch <> 1)
+        error 'Group #' + request.new_di_p1 + ' does not exist.';
+      endif
+      set local.changedFamily = 1;
+      set local.di_p1 = request.new_di_p1;
+      set local.di_p2 = sqlParent.di_p1;
+      set local.di_p3 = sqlParent.di_p2;
+      set local.di_p4 = sqlParent.di_p3;
+      set local.di_p5 = sqlParent.di_p4;
+
+    // parent not changed, but to account for parent's parent having been
+    // moved. there is still a chance of error if it is moved after this
+    // but before the update statement
+    elseif (request.di_p1 <> '')
+      <serverside dataset="sqlParent" action="query">
+    SELECT di_p1, di_p2, di_p3, di_p4 FROM cs_discuss
+        WHERE di_type = 1 AND di_id = request.di_p1;
+  </serverside>
+      if (sqlParent.fetch <> 1)
+        error 'Parent group #' + request.di_p1 + ' does not exist.';
+      endif
+      set local.di_p1 = request.di_p1;
+      set local.di_p2 = sqlParent.di_p1;
+      set local.di_p3 = sqlParent.di_p2;
+      set local.di_p4 = sqlParent.di_p3;
+      set local.di_p5 = sqlParent.di_p4;
+    endif
+
+    <serverside dataset="sqlUpdateMsg" action="execute">    UPDATE cs_discuss SET 
+        di_p1 = local.di_p1,
+        di_p2 = local.di_p2,
+        di_p3 = local.di_p3,
+        di_p4 = local.di_p4,
+        di_p5 = local.di_p5,
+        di_k1 = request.di_k1,
+        di_k2 = request.di_k2,
+        di_k3 = request.di_k3,
+        di_k4 = request.di_k4,
+        di_k5 = request.di_k5,
+        di_type = local.type, 
+        di_owner = request.di_owner, 
+        di_updated_by = session.userID, 
+        di_updated_on = server.dateTime,  
+        di_locked_by = NULL,
+        di_locked_on = NULL,
+        di_title = request.di_title, 
+        di_security = request.di_security, 
+        di_detail = request.di_detail
+      WHERE di_id = request.di_id 
+        AND di_locked_by = session.userID;
+  </serverside>
+
+    // if it is a topic, move all messages belonging to this topic
+    if (request.di_topic_id = '' AND local.changedFamily = 1)
+      if (local.di_p1 = '')
+        set local.di_p1 = 'NULL';
+      endif
+      if (local.di_p2 = '')
+        set local.di_p2 = 'NULL';
+      endif
+      if (local.di_p3 = '')
+        set local.di_p3 = 'NULL';
+      endif
+      if (local.di_p4 = '')
+        set local.di_p4 = 'NULL';
+      endif
+      if (local.di_p5 = '')
+        set local.di_p5 = 'NULL';
+      endif
+      // use a string to avoid "no row affected" benign error
+      <serverside dataset="sqlMoveAllChildren" action="execute">    UPDATE cs_discuss SET'
+          ' di_p1 = ' + local.di_p1 +
+          ',di_p2 = ' + local.di_p2 +
+          ',di_p3 = ' + local.di_p3 +
+          ',di_p4 = ' + local.di_p4 +
+          ',di_p5 = ' + local.di_p5 +
+        ' WHERE di_topic_id = ' + request.di_id;
+  </serverside>
+    endif
+
+    // attachments have been defined above when checking their sizes
+    if (attach1.name <> '')
+      // allow only one attachment to a message
+      <serverside dataset="sqlDelOld" action="execute">    DELETE FROM cs_di_file WHERE dif_di_id = ' + request.di_id;
+  </serverside>
+
+      set local.dif_id = 
+        local.getUniqueID('cs_di_file', 'dif_id', 'registry');
+      <serverside dataset="sqlAttach1 = 
+        INSERT INTO cs_di_file(
+          dif_id, dif_di_id, dif_time, 
+          dif_name, dif_size, dif_content)
+        VALUES(
+          local.dif_id, request.di_id, server.dateTime, 
+          attach1.name, attach1.size, attach1.content);
+  </serverside>
+    endif
+
+    local.commitTransaction;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<!$ if (request.action = 'Preview HTML') )>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr> 
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td class="apbg">
+    If you don't see the copyright notice at the end of this page,
+    then there is a problem in the HTML fragment you entered.
+  </td>
+</tr>
+<tr>
+  <td><br/>
+    <!$ if (local.type = 2) )>
+      $(request.di_detail))
+    <!$ else )>
+      $request.di_detail)
+    <!$ endif )>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+<!$ else )>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    $local.title)
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    <!$if (request.action = 'Cancel'))>
+      Message #$request.di_id) has been unlocked. 
+    <!$else)>
+      Message #$request.di_id) has been updated. 
+    <!$endif)>
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <!$ 
+      set local.cgiParam = 'mid=' + request.di_id + 
+        '&topic_id=' + request.di_topic_id + '#' + request.di_id;
+    )>
+    <a href="diTopic.htm?$local.cgiParam)">OK</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+<!$ endif )>
+
+</body>
+</html>

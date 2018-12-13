@@ -1,0 +1,29 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$ 
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of KB without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  set local.max_count = 10;
+
+  set local.kbLinkType = 'content';
+  if (session.isValid AND session.varExist('kbLinkType'))
+    set local.kbLinkType = session.kbLinkType;
+  endif
+  if (local.kbLinkType = 'content')
+    set local.artLinkSsp = 'kbView.htm';
+  else
+    set local.artLinkSsp = 'kbDetail.htm';
+  endif
+  
+)>

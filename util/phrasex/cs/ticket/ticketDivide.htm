@@ -1,0 +1,129 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.fieldExist('ticket_id') = 0)
+    error 'Missing source request ticket_id for this new request.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT title FROM cs_ticket WHERE ticket_id = request.ticket_id;
+
+  <serverside dataset="sqlLastNote" action="query">
+    SELECT ch_id, ch_description FROM cs_ti_change 
+    WHERE ch_ticket_id = request.ticket_id AND ch_type = 'public' 
+    ORDER BY ch_made_on DESC;
+  </serverside>
+)>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+  $(appname) : New Request Based On #$request.ticket_id)
+</title>
+</head>
+<body>
+
+<form method="POST" action="ticketDivideOk.htm">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+    New Request Based On #$request.ticket_id)
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr>
+  <td colspan="3">
+    Title: <br/>
+    <!$ if (request.browserType = 'MSIE') )>
+    <input type="text" name=title size="70" maxlength="100"
+      value="$(s1.title))">
+    <!$ else )>
+    <input type="text" name=title size="60" maxlength="100"
+      value="$(s1.title))">
+    <!$ endif )>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    History: 
+    
+      (read-only. use copy and paste to copy to the detail text box.)
+     <br/>
+    <textarea cols=70 rows=10 wrap=virtual><!$ 
+      // without the primary key ch_id, Access driver gets 
+      // confused if two records have the same made by and made on.
+      // Note: need all entries to make the total cost right.
+      <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+        'WHERE ch_ticket_id = ' + request.ticket_id + ' '
+          'AND ch_type <> \'log\' '
+        'ORDER BY ch_made_on DESC';
+  </serverside>
+      set local.totalCost = 0;
+      while (sqlHistory.fetch)
+        response.write('[' +  sqlHistory.ch_made_on);
+        response.write(' by ' + sqlHistory.ch_made_by);
+        // note: ch_cost < 0 means a credit. It needs to be shown.
+        if (sqlHistory.ch_cost <> 0)
+          response.write(', cost ' + sqlHistory.ch_cost + ' minutes');
+        endif
+        response.write(']\r\n');
+        response.write(to.html2(sqlHistory.ch_description) + '\r\n\r\n');
+        set local.totalCost = local.totalCost + sqlHistory.ch_cost;
+      endwhile
+    )></textarea>
+    <input type="hidden" name=total_cost value="$local.totalCost)"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    Detail
+    
+    [in <input type=radio name=note_format value="0" checked/>plain text
+    <input type=radio name=note_format 
+      value="1"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    ]
+    : <br/>
+    <textarea name=note_data cols=70 rows=12 wrap=virtual
+      >$(sqlLastNote.ch_description))</textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    New Cost: 
+    <input type="text" name=new_cost size="5" maxlength=10/> minutes
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="3">
+    To carry attachments over, enter their attachment ID.
+  </td>
+</tr>
+<tr>
+  <td>Attachment 1 ID: <br/><input type="text" name=attach_id1 size="20"></td/>
+  <td>Attachment 2 ID: <br/><input type="text" name=attach_id2 size="20"></td/>
+  <td>Attachment 3 ID: <br/><input type="text" name=attach_id3 size="20"></td/>
+</tr>
+<tr class="apbg">
+  <td colspan="3" align="center">
+    <input type="submit" name=action value="Submit"/>
+    <input type="submit" name=action value="Preview HTML"/>
+    <input type="hidden" name=old_ticket_id value="$request.ticket_id)"/>
+    <input type="hidden" name=backToUrl value="$request.backToUrl)"/>
+    <input type="hidden" name=backToPrompt value="$request.backToPrompt)"/>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

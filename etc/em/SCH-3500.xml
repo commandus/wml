@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<device>
+	<name>Samsung SCH-3500</name>
+	<progid>Intava.Simulator.Openwave</progid>
+	<platformid>wap:1.1|openwave:3.1</platformid>
+	<display>
+		<x>130</x>
+		<y>52</y>
+		<devicex>96</devicex>
+		<devicey>32</devicey>
+		<fgcolor red="0" green="0" blue="0"/>
+		<bgcolor red="146" green="175" blue="168"/>
+		<browserarea>
+			<x>130</x>
+			<y>39</y>
+			<xoffset>0</xoffset>
+			<yoffset>0</yoffset>
+			<fgcolor red="0" green="0" blue="0"/>
+			<bgcolor red="146" green="175" blue="168"/>
+		</browserarea>
+		<softbuttons>
+			<fgcolor red="146" green="175" blue="168"/>
+			<bgcolor red="0" green="0" blue="0"/>
+			<font name="Courier" height="13" variablewidth="0"/>
+			<drawstyle>1</drawstyle>
+			<presentationstyle>1</presentationstyle>
+			<softbutton1>
+				<x>65</x>
+				<y>13</y>
+				<xoffset>0</xoffset>
+				<yoffset>39</yoffset>
+				<align>0</align>
+			</softbutton1>
+			<softbutton2>
+				<x>65</x>
+				<y>13</y>
+				<xoffset>65</xoffset>
+				<yoffset>39</yoffset>
+				<align>2</align>
+			</softbutton2>
+		</softbuttons>
+		<scrollbararea>
+			<x>7</x>
+			<y>13</y>
+			<xoffset>64</xoffset>
+			<yoffset>39</yoffset>
+			<fgcolor red="0" green="0" blue="0"/>
+			<bgcolor red="146" green="175" blue="168"/>
+			<scrollbarimages>
+			</scrollbarimages>
+		</scrollbararea>
+	</display>
+	<userinterface>
+		<displayoffsetx>87</displayoffsetx>
+		<displayoffsety>171</displayoffsety>
+		<buttons>
+			<button comment="Up" x1="124" y1="249" x2="178" y2="274">38</button>
+			<button comment="Down" x1="124" y1="275" x2="178" y2="301">40</button>
+			<button comment="OK/Soft1" x1="72" y1="249" x2="123" y2="285">13</button>
+			<button comment="Menu/Soft2" x1="179" y1="249" x2="230" y2="285">0</button>
+			<button comment="Clr/Back" x1="124" y1="312" x2="182" y2="343">8</button>
+			<button comment="*" x1="67" y1="475" x2="120" y2="513">36</button>
+			<button comment="#" x1="187" y1="475" x2="239" y2="511">35</button>
+			<button comment="0" x1="121" y1="476" x2="186" y2="513">48</button>
+			<button comment="1" x1="56" y1="355" x2="120" y2="392">49</button>
+			<button comment="2" x1="121" y1="359" x2="184" y2="396">50</button>
+			<button comment="3" x1="187" y1="355" x2="252" y2="393">51</button>
+			<button comment="4" x1="56" y1="395" x2="120" y2="431">52</button>
+			<button comment="5" x1="121" y1="398" x2="186" y2="435">53</button>
+			<button comment="6" x1="187" y1="395" x2="252" y2="431">54</button>
+			<button comment="7" x1="56" y1="433" x2="120" y2="470">55</button>
+			<button comment="8" x1="121" y1="437" x2="186" y2="473">56</button>
+			<button comment="9" x1="187" y1="434" x2="252" y2="470">57</button>
+		</buttons>
+		<uiimages>
+		</uiimages>
+	</userinterface>
+	<parser>
+		<font name="Courier" height="13" variablewidth="0"/>
+		<cxprefix>6</cxprefix>
+		<cyprefix>8</cyprefix>
+		<supportbold>1</supportbold>
+		<supportitalics>1</supportitalics>
+		<supportunderline>0</supportunderline>
+		<supportstrong>0</supportstrong>
+		<supportemphasis>0</supportemphasis>
+		<supportbig>0</supportbig>
+		<supportsmall>0</supportsmall>
+		<supportimages>1</supportimages>
+		<supportlocalsrcimages>1</supportlocalsrcimages>
+		<supportaccesskeys>1</supportaccesskeys>
+		<anchordelimleft> [</anchordelimleft>
+		<anchordelimright>]</anchordelimright>
+		<highlightmode>1</highlightmode>
+		<xdevicebrowser>96</xdevicebrowser>
+		<characterset height="8" width="6" variablewidth="0"/>
+	</parser>
+		<accepttypes>
+		<accepttype>text/wml</accepttype>
+		<accepttype>image/bmp</accepttype>
+		<accepttype>image/wbmp</accepttype>
+	</accepttypes>
+	<requestheaders>IntavaSimulator</requestheaders>
+</device>

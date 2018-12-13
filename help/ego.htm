@@ -1,0 +1,38 @@
+
+<html>
+<head>
+<title>go
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+
+<p><a name=go>go</a>
+ <img border="0" src="go.gif" width="24" height="24">
+<br id=gobrief>Declares a go task, indicating navigation to a new URI. If the URI names a WML card or deck, the execution of the task will cause that item to be displayed. This task executes a push operation on the browser's history stack.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=goattr>
+  <b>href</b>
+  <br>Specifies the destination URI.
+  <br><b>sendreferer</b>
+  <br>If true, the request for the new URI will contain the URI of the deck containing this task - this can then be used for server-based access control.
+  <br><b>method</b>
+  <br>Specifies the HTTP submission method. Possible values are POST (submission data included in request) or GET (submission data appended as a query to the URI requested).
+  <br><b>cache-control</b>
+  <br>If this attribute is present, and the value is set to “no-cache”, the client MUST reload the URL from the origin server. This attribute represents the HTTP “cachecontrol” header, when this attribute is present, the HTTP “cache-control” header MUST be added to the request with the same value as specified in the attribute.
+  <br><b>enctype</b>
+  <br>This attribute specifies the content type used to submit the parameter to the server. The default value is
+  application/x-wwwform-urlencoded. Currently application/x-www-form-urlencoded or multipart/form-data can be specified.
+  <br><b>accept-charset</b>
+  <br>Specifies the list of character encodings for data that the origin server must accept when processing input. The value of this attribute is a comma- or space-separated list of character encoding names.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+</body>
+</html>

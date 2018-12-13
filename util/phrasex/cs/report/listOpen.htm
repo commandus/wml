@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND ((user_type = 'Manager') OR (user_type = 'StaffMember'))  
+  </serverside>
+  <serverside action="defaultparam" opt="sort_col">
+    SELECT 'Product' R FROM dual  
+  </serverside>  
+  <serverside action="defaultparam" opt="col">
+    SELECT CASE 
+    WHEN '$(sort_col)' = 'Product' THEN 'product'  
+    WHEN '$(sort_col)' = 'Priority' THEN 'priority'  
+    WHEN '$(sort_col)' = 'Deadline' THEN 'deadline'  
+    WHEN '$(sort_col)' = 'Submitted On' THEN 'submitted_on'  
+    WHEN '$(sort_col)' = 'Assigned On' THEN 'assigned_on'  
+    WHEN '$(sort_col)' = 'Status' THEN 'status'  
+    ELSE ''
+    END R FROM dual  
+  </serverside>
+  <serverside action="defaultparam" opt="sort_dir">
+    SELECT '' FROM dual  
+  </serverside>
+  <serverside dataset="sqlLastStatus" action="defaultparam">
+    SELECT FIRST 1 name FROM cs_status ORDER BY seq_num DESC
+  </serverside>
+  <serverside dataset="sqlOpen" action="query">
+    SELECT ticket_id, title, submitted_by, assigned_to 
+    FROM cs_ticket
+    WHERE status &lt;&gt; '$(sqlLastStatus)'
+    ORDER BY $(sort_col) $(sort_dir), ticket_id
+  </serverside>  
+  <serverside dataset="total" action="query">
+    SELECT COUNT(ticket_id) cnt, CAST('today' AS DATE) dt  
+    FROM cs_ticket
+    WHERE status &lt;&gt; '$(sqlLastStatus)'
+  </serverside>  
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Report Open Requests</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0" loop="global">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="repMan.htm">Report Manager</a> : Open Requests
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+   <form method="GET" action="listOpen.htm">
+    Sort By:
+    <select name="sort_col" size="1">
+      <option selected="selected">$(sort_col)</option>
+      <option>Product</option>
+      <option>Priority</option>
+      <option>Deadline</option>
+      <option>Submitted On</option>
+      <option>Assigned On</option>
+      <option>Status</option>
+    </select>
+    <select name="sort_dir" size="1">
+      <option selected="selected">$(sort_dir)</option>  
+        <option>Descending</option>
+        <option>Ascending</option>
+    </select>
+    <input type="submit" value="Go"/>
+    <a target="ptHelpWindow" href="../help/listOpenHelp.html">Help</a>
+   </form>
+  </td>
+</tr>
+
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0" loop="global">
+<tr class="apbg">
+  <th > ID </th>
+  <th > Title </th>
+  <th nowrap="nowrap"> $(sort_col) </th>
+  <th nowrap="nowrap"> Submitted By </th>
+  <th nowrap="nowrap"> Assigned To </th>
+</tr>
+<tr loop="sqlOpen">
+  <td valign="top">
+    <a href="$(ticketFolder)ticketView.htm?$(param)">$(sqlOpen.ticket_id)</a>
+  </td>
+  <td valign="top">$(sqlOpen.title)</td>
+  <td valign="top">$(sqlOpen.Column1)</td>
+  <td valign="top">
+    $(sqlOpen.submitted_by)
+  </td>
+  <td valign="top">
+    $(sqlOpen.assigned_to)
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td loop="total">
+      Total: $(total.cnt). Report generated $(total.dt) 
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

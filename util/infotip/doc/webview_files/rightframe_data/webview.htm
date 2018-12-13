@@ -1,0 +1,731 @@
+<html><head><!--TOOLBAR_EXEMPT-->
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Customizing a Folder's Web View (Windows Explorer and Controls)</title>
+    	
+<meta name="Description" content="">
+<meta name="Robots" content="all">
+<meta name="Keywords" content="Customizing a Folder's Web View">
+<meta name="MS.LOCALE" content="en-us">
+
+<meta name="Author" content="platsdk"><link rel="stylesheet" type="text/css" href="toolbar_data/n6.css">
+<link rel="stylesheet" type="text/css" href="toolbar_data/down.css">
+
+<style type="text/css"><!--
+
+	PRE.clsCode { font-size:110%; } 
+
+	PRE.clsSyntax { font-size:100%; }  
+
+--></style>
+
+	<style>
+	BODY
+	{
+		font-family:verdana,arial,helvetica;
+		margin:0;
+	}
+	</style>
+	
+<script language="javascript" src="webview_data/common.js"></script>
+<script language="javascript" src="webview_data/browdata.js"></script>
+<script language="javascript" src="toolbar_data/toolbar.js"></script><layer visibility="hide"></layer><link rel="stylesheet" type="text/css" href="webview_data/ie4.css"><link rel="stylesheet" type="text/css" href="webview_data/inetsdk.css"><link rel="stylesheet" type="text/css" href="webview_data/default.css"><meta name="pagetype" content="ovw"><meta name="devlang" content=""><meta name="src" content="/platformx/shell/programmersguide/shell_int/shell_int_extending/webview.xml"><meta name="pubpath" content="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/webview.asp"><meta name="ID" content="_win32_Web_View"><meta name="MS-HAID" content="_win32_Web_View"><style>.time { behavior: url(#default#time2); }</style><style>v\:* { behavior: url(#default#VML); }</style><script>//<!--
+var gbDBG = true;
+//--></script><script language="JavaScript1.2">
+//<!--
+var gsHTCPath = "/library/en-us/shellcc/platform/code/";
+var gsGraphicsPath = "/library/en-us/shellcc/platform/graphics/";
+var gsCodePath = "/library/en-us/shellcc/platform/code/";
+//--></script><script language="JavaScript1.2">
+//<!--
+var gsContextMenuPath = gsHTCPath + "contextmenu.htc";
+var gsCodeDecoPath = gsHTCPath + "codedeco.htc";
+var gsStoreName="platform";
+var gsGraphicsPath = "/library/en-us/shellcc/platform/graphics/";
+//--></script><script language="JavaScript1.2">
+//<!--
+function CMemberInfo()
+{   this.defView = 'all';
+}
+var g_oMemberInfo = new CMemberInfo();
+//--></script><script language="JavaScript1.2">
+//<!--
+function InitPage()
+{
+  if (!assert( (typeof(oBD) == 'object' && oBD != null), "browdata object unavailable!") )
+  {
+    return;
+  }
+  if ("MSIE" == oBD.browser && oBD.majorVer >= 5 && (oBD.platform.toLowerCase()!="x" && oBD.platform!="Mac" && oBD.platform!="PPC" ))
+  {
+    if (typeof(PreInit) == 'function') PreInit();
+    if (typeof(PostGBInit) == 'function') PostGBInit();
+    if (typeof(PostInit) == 'function') PostInit();
+    if (typeof(initTabbedMembers) == 'function') initTabbedMembers();
+    if (typeof(hideExamples) == 'function') hideExamples();
+  }
+  if (oBD.getsNavBar && oBD.platform!="PPC" )
+  {
+    if (typeof(SetShowMes) == 'function') SetShowMes();
+  }
+}
+
+function assert(bCond, sMsg)
+{
+  if (bCond) { return true; }
+  else { if (gbDBG) { alert(sMsg); } return false; }
+}
+
+window.onload = InitPage;
+
+//--></script><script language="JavaScript1.2">
+function PreInit()
+{
+    if (top == self)
+        location.replace("http://" + document.domain +"/library/default.asp?url=" + document.URL.substring("http://".length + document.domain.length));
+}
+</script><script language="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru-RU; rv:1.7.5) Gecko/20041108 Firefox/1.0";
+
+		this.bot = false;
+
+		this.browser = "Nav";
+
+		this.majorVer = 5;
+
+		this.minorVer = "0";
+
+		this.platform = "NT";
+
+		this.getsNavBar = false;
+
+		this.doesActiveX = false;
+
+		this.doesPersistence = false;
+
+		this.fullVer = 5;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></script><script language="JavaScript"><!--
+
+   if (document.layers) {
+    origWidth  = innerWidth;
+  origHeight = innerHeight;
+   }
+
+   function resizeFix() { if (innerWidth != origWidth || innerHeight != origHeight) location.reload(); }
+
+   if (document.layers) onresize = resizeFix;
+
+   //--></script><!-- base --><script language="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru-RU; rv:1.7.5) Gecko/20041108 Firefox/1.0";
+
+		this.bot = false;
+
+		this.browser = "Nav";
+
+		this.majorVer = 5;
+
+		this.minorVer = "0";
+
+		this.platform = "NT";
+
+		this.getsNavBar = false;
+
+		this.doesActiveX = false;
+
+		this.doesPersistence = false;
+
+		this.fullVer = 5;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></script><script language="JavaScript"><!--
+
+   if (document.layers) {
+    origWidth  = innerWidth;
+  origHeight = innerHeight;
+   }
+
+   function resizeFix() { if (innerWidth != origWidth || innerHeight != origHeight) location.reload(); }
+
+   if (document.layers) onresize = resizeFix;
+
+   //--></script><script>
+	if( self == top )
+{
+	location = "/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/webview.asp";
+}
+
+</script><meta name="MSHKeywordA" content="_win32_Web_View"><meta name="MSHKeywordF" content="Customizing a Folder's Web View"><meta name="MSHKeywordK" content="Customizing a Folder's Web View"><meta name="MSHAttr" content="TopicType:kbRef"><meta name="MSHAttr" content="Locale:kbEnglish"><meta name="MSHAttr" content="DocSet:WCSDK"><meta name="MSHAttr" content="DocSet:PSDK"><meta name="MSHAttr" content="TargetOS:Windows"><meta name="MSHAttr" content="DevLang:DHTML"><meta name="MSHAttr" content="DevLangVers:kbDHTML"><meta name="MSHAttr" content="Technology:DHTML"><meta name="MSHAttr" content="TechnologyVers:kbDHTML"><meta name="MSHAttr" content="Technology:Shell"><meta name="MSHAttr" content="TechnologyVers:kbShell"><link rel="stylesheet" type="text/css" href="webview_data/css.css"><script language="javascript">
+var doImage=doImage;var TType=TType;
+function mhHover(tbl,idx,cls){var t,d;if(document.getElementById)t=document.getElementById(tbl);else t=document.all(tbl);if(t==null)return;if(t.getElementsByTagName)d=t.getElementsByTagName("TD");else d=t.all.tags("TD");if(d==null)return;if(d.length<=idx)return;d[idx].className=cls;}
+function footerjs(doc){if(doImage==null){var tt=TType==null?"PV":TType;doc.write('<layer visibility="hide"><div style="display:none"><img src="http://c.microsoft.com/trans_pixel.asp?source=msdn&TYPE=' + tt + '&p=library_en-us_shellcc_platform_shell_programmersguide_shell_int_shell_int_extending&r=http%3a%2f%2fmsdn.microsoft.com%2flibrary%2fshared%2fdeeptree%2fasp%2frightframe.asp%3fdtcfg%3d%2flibrary%2fdeeptreeconfig.xml%26url%3d%2flibrary%2fen-us%2fshellcc%2fplatform%2fshell%2fprogrammersguide%2fshell_int%2fshell_int_extending%2fwebview.asp%3fframe%3dtrue%26hidetoc%3dfalse" width=0 height=0 hspace=0 vspace=0 border=0 /></div></layer>');}}
+</script></head>
+
+<body topmargin="0" leftmargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0" text="#000000"><div style="display: none;"><img src="webview_data/trans_pixel.gif" border="0" height="0" hspace="0" vspace="0" width="0"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<xml:namespace ns="urn:schemas-microsoft-com:time" prefix="t">
+
+
+<xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="v">
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+   
+
+   
+
+   
+
+
+
+<xml id="xmlPageContext"><eyebrow findmenu="false">
+	<item label="MSDN Home" url="/default.asp">
+	<item label="MSDN Library" url="/library/default.asp">
+	<item label="Win32 and COM Development" url="/library/en-us/dnanchor/html/anch_win32com.asp" id="msdnlib1369" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1369_.xml"><item label="User Interface" url="/library/en-us/dnanchor/html/anch_UIDesignDev.asp" id="msdnlib1860" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1860_.xml"><item label="Windows User Experience" id="msdnlib1882"><item label="Windows Shell" url="/library/en-us/dnanchor/html/anch_WinShell.asp" id="msdnlib1887"><item label="Windows Shell" id="shellcc2327" xmlsrc="/library/en-us/toc/shellcc/shellcc2327_.xml"><item label="Shell Programmer's Guide" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_intro.asp" id="shellcc2328"><item label="Intermediate Shell Techniques" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int.asp" id="shellcc2382" xmlsrc="/library/en-us/toc/shellcc/shellcc2382_.xml"><item label="Intermediate Shell Techniques: Extending the Shell" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extending.asp" id="shellcc2391"><item label="Customizing a Folder's Web View" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/webview.asp" id="shellcc2404"></item></item>
+<!--VENUS_START-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--VENUS_END-->
+
+
+
+ 
+
+       </item></item></item></item></item></item></item></item></item></eyebrow></xml></xml:namespace></xml:namespace><table bgcolor="#ffffff" border="0" cellpadding="4" cellspacing="0" height="24" width="100%">
+       <tbody><tr>
+        <td class="eyebrow" align="left" valign="middle" width="100%">&nbsp;&nbsp;
+
+            <a class="small" target="_top" href="http://msdn.microsoft.com/default.asp">MSDN Home</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp">MSDN Library</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_win32com.asp">Win32 and COM Development</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_UIDesignDev.asp">User Interface</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_WinShell.asp">Windows Shell</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_intro.asp">Shell Programmer's Guide</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int.asp">Intermediate Shell Techniques</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extending.asp">Intermediate Shell Techniques: Extending the Shell</a><a href=""></a>
+        </td>
+       </tr>
+       </tbody></table>
+ <table class="clsContainer" float="left" border="0" cellpadding="15" cellspacing="0" width="100%"> <tbody><tr> <td valign="top">
+<!------------------->
+<!-- BEGIN_CONTENT -->
+<!------------------->
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+<div class="clsDocBody"><table cellpadding="0" cellspacing="0" width="97%"><tbody><tr><td><h1>Customizing a Folder's Web View
+</h1></td></tr></tbody></table>
+<hr size="1"><p>A Web view is a powerful and flexible way to use the
+Microsoft Windows Explorer to display information about the contents of
+a Shell folder.</p><ul><li><a target="_self" href="#introduction">Introduction</a></li><li><a target="_self" href="#templates">Using the Web View Template</a></li><li><a target="_self" href="#unknown_5330">Summary</a></li></ul><h2><a name="introduction"></a>Introduction</h2><p>Windows
+offers users two primary ways to view and navigate the Shell namespace.
+The most familiar of these, the Classic style, is similar to the
+familiar Windows File Manager. The right pane lists the contents of the
+currently selected folder in one of five formats: Large Icon, Small
+Icon, List, Details, and Thumbnail. The major difference from Windows
+File Manager is the left pane, which looks very similar to the Explorer
+bar of Microsoft Internet Explorer. It can be resized or removed, and
+it can display several panes in addition to the familiar file system
+tree, such as a search pane.</p><div class="clsNote"><b>
+Note</b>&nbsp;&nbsp;The
+information in this document does not apply to Windows XP, the
+techniques discussed apply only to earlier versions of Windows. </div><p>The following illustration shows the Printers folder in Classic style. </p><p><img alt="Classic style of the Printers folder." src="webview_data/WebView1.gif"></p><p>The
+Classic style works reasonably well for normal file system folders and
+files. However, with the introduction of Windows 95, the file system
+has evolved into the <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/namespace.asp">namespace</a>. The namespace allows the creation of <i>virtual folders</i>,
+such as Printers or Network Neighborhood, that can represent very
+different types of information than a normal file system folder. </p><p>The
+Web style, also known as a Web view, offers a more flexible and
+powerful way of presenting information than Classic style. In a Web
+view, the user basically views and navigates the namespace using
+Internet Explorer. The basic layout of a Web view is similar to Classic
+style. The Explorer bar is unchanged. However, the region that was
+occupied by the file list becomes a general-purpose display area that
+is effectively a Web page. A Web view is still used to display
+information about the contents of a folder, but there are few
+constraints on what information is displayed, or how. Each folder can
+have its own Web view, customized to suit its particular features.</p><p>The following illustration shows a Web view of the Printers folder (shown previously in Classic style). </p><p><img alt="Default Web view of the Printers folder." src="webview_data/WebView2.gif"></p><p>Much
+like conventional Web pages, Web views are controlled by an HTML-based
+template. Authoring a Web view template is nearly identical to
+authoring a Web page and provides the same degree of flexibility in
+content and layout of information. Web view templates can use Dynamic
+HTML (DHTML) and scripting to respond to events, such as a user
+clicking an item. They can also host objects that allow them to obtain
+and display information from the folder or its contents. </p><p>The user can choose a Web view by starting Windows Explorer, clicking <b>Folder Options</b> on the <b>View</b> menu, and selecting this option: <b>Enable Web content in folders</b>. However, the user can also start Internet Explorer and point the browser at the file system by clicking the <b>View</b> menu, pointing to <b>Explorer Bar</b>, and clicking <b>Folders</b>. In a Web view, there is virtually no difference between Internet Explorer and Windows Explorer.</p><p>On
+the left side of the right pane, the Printers Web view displays a
+banner with the folder's name and icon, followed by a block of
+information about the folder. The usual file list occupies the right
+side of the page. </p><p>When a user clicks an item, detailed
+information about the item appears in the information block. The
+Printers Web view actually displays much the same information that is
+available in Classic style, but it does so in a more usable format.
+However, a Web view is not simply a different way to display Classic
+style information. For example, a link to a useful Web site can be
+displayed below the information block, a feature that is not available
+in Classic style. If the user clicks the link, the site will be
+displayed.</p><p>The Printers Web view shown in the preceding
+illustration is similar to the Classic style, because the underlying
+Web view template (an .htt file) was written that way. The list of
+files, for instance, is not generated by the Web view template
+directly. It is created and displayed by a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/webviewfoldercontents/webviewfoldercontents.asp">WebViewFolderContents</a>
+object hosted by the Web view template. The object's methods and
+properties allow the Web view to control its layout and obtain
+information about particular items. The content and layout of the
+banner and information block is specified in the Web view template.</p><p>Because
+a Web view supports DHTML, the template can also be used to handle user
+interaction. For instance, when a user clicks one of the printer icons,
+the <b>WebViewFolderIcon</b> object fires a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/shellfolderview/selectionchanged.asp">SelectionChanged</a>
+event. The template uses a DHTML event handler written in script to
+retrieve the requested information and display it in the information
+block. </p><p>This simple example for the Printers folder is by no
+means the only way to use a Web view. By writing your own template and,
+if necessary, objects, you can use a Web view to display information
+and interact with the user in whatever way you find most effective.
+Note that, at present, Web view templates only display system-defined
+virtual folders. Although developers can create a virtual folder by
+implementing a namespace extension, they must use the techniques
+described in <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_adv/namespaceextension/namespace.asp">Creating a Shell Namespace Extension</a> to display it. </p><h2><a name="templates"></a>Using the Web View Template</h2><p>The way data is displayed in a Web view can be customized in a limited way by modifying a folder's Desktop.ini file. See <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_extending/custom.asp">Customizing Folders with Desktop.ini</a> for details. A much more flexible and powerful way to customize a Web view is to create a custom Web view template.</p><p>The
+Web view template controls what is displayed in a Web view and how. It
+uses standard HTML, DHTML, and scripting techniques to obtain and
+display information and interact with the user. This section discusses
+how to create a Web view by examining a simple template—Generic.htt.</p><pre class="clsCode" autohilite="1">&lt;html&gt;
+	&lt;style&gt;
+	&lt;!-- This section defines a variety of styles that can be used
+	 when displaying the document --&gt;
+		body		{font: 8pt/10pt verdana; margin: 0}
+		#Banner		{position: absolute; width: 100%; height: 88px; background: URL(res://webvw.dll/folder.gif) no-repeat top left}
+		#MiniBanner	{position: absolute; width: 100%; height: 32px; background: window}
+		#Icon		{position: absolute; left: 11px; top: 12px; width: 64px; height: 64px}
+		#FileList	{position: absolute; left: 30%; top: 88px; width: 1px; height: 1px}
+		#Info		{position: absolute; top: 88px; width: 30%; background: window; overflow: auto}
+		p		{margin-left: 20px; margin-right: 8px}
+		p.Title		{font: 16pt/16pt verdana; font-weight: bold; color: #0099FF}
+		a:link		{color: #FF6633}
+		a:visited	{color: #0099FF}
+		a:active 	{color: black}
+	&lt;/style&gt;
+
+	&lt;head&gt;
+		&lt;!-- allow references to any resources you might add to the
+		 folder --&gt;
+		&lt;base href="%THISDIRPATH%\"&gt;
+
+		&lt;script language="JavaScript"&gt;
+		
+		&lt;!-- This section defines a number of JavaScript utilities --&gt;
+			var L_Intro_Text	= "This folder contains a variety of interesting stuff.&lt;br&gt;&lt;br&gt;To get information about any of them, click the items icon.&lt;br&gt;&lt;br&gt;";
+			var L_Multiple_Text	= " objects selected.";
+
+			function FixSize() {
+			// this function handles layout issues not covered by the style sheet
+
+				var hideTop	= 200;
+				var hideLeft	= 400;
+				var miniHeight	= 32;
+
+				if (200 &gt; document.body.clientHeight) {
+				//A short window. Use the minibanner
+					document.all.Banner.style.visibility = "hidden";
+					document.all.MiniBanner.style.visibility = "visible";
+					document.all.FileList.style.top = 32;
+					document.all.Info.style.top = 32;
+				}
+
+				else {
+				//A normal window. Use the normal banner
+					document.all.Banner.style.visibility = "visible";
+					document.all.MiniBanner.style.visibility = "hidden";
+					document.all.FileList.style.top = (document.all.Banner.offsetHeight - 32) + "px";
+					document.all.Info.style.top = (document.all.Banner.offsetHeight) + "px";
+					document.all.Rule.style.width = (document.body.clientWidth &gt; 84 ? document.body.clientWidth - 84 : 0) + "px"; 	 
+				}
+				if (400 &gt; document.body.clientWidth) {
+				//A narrow window. Hide the Info region and expand the file list region
+					document.all.Info.style.visibility = "hidden";
+					document.all.FileList.style.pixelLeft = 0;
+					document.all.FileList.style.pixelTop = document.all.Info.style.pixelTop;
+				}
+
+				else {
+				//Normal width
+					document.all.Info.style.visibility = "visible";
+					document.all.FileList.style.pixelLeft = document.all.Info.style.pixelWidth;
+				}
+				document.all.FileList.style.pixelWidth = document.body.clientWidth - document.all.FileList.style.pixelLeft;
+				document.all.FileList.style.pixelHeight = document.body.clientHeight - document.all.FileList.style.pixelTop;
+				document.all.Info.style.pixelHeight = document.body.clientHeight - document.all.Info.style.pixelTop;
+			}
+
+			function Init() {
+				/* Set the initial layout and have FixSize() called whenever the window gets resized*/
+				window.onresize = FixSize;
+				FixSize();
+				TextBlock.innerHTML = L_Intro_Text;
+			}
+		&lt;/script&gt;
+
+		&lt;script language="JavaScript" for="FileList" event="SelectionChanged"&gt;
+			// Updates the TextBlock region when an item is selected
+			var data;
+			var text;
+
+			// name
+			text = "&lt;b&gt;" + FileList.FocusedItem.Name + "&lt;/b&gt;";
+
+			// comment
+			data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 3);
+			if (data)
+				text += "&lt;br&gt;" + data;
+
+			// documents
+			data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 1);
+			if (data)
+				text += "&lt;br&gt;&lt;br&gt;" + FileList.Folder.GetDetailsOf(null, 1) + ": " + data;
+
+			// status
+			data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 2);
+			if (data)
+				text += "&lt;br&gt;&lt;br&gt;&lt;b&gt;&lt;font color=red&gt;" + data + "&lt;/font&gt;&lt;/b&gt;";
+
+			// tip?
+			data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, -1);
+			if (data != "" &amp;&amp; data != FileList.FocusedItem.Name)
+				text += "&lt;br&gt;&lt;br&gt;" + data;
+
+			TextBlock.innerHTML = text;
+		&lt;/script&gt;
+	&lt;/head&gt;
+&lt;!-- The body of the document controls the actual data display.
+ It uses several scripting objects to communicate with the
+ namespace folder, and calls on the JavaScript objects defined
+ in the header to handle much of the processing --&gt;
+	&lt;body scroll=no onload="Init()"&gt;
+
+		&lt;!-- The normal banner. This banner displays the folder
+		 name and icon at the top of the WebView pane. This banner
+		 is used if the WebView pane is sufficiently large to
+		 display the icon and still have room for some information --&gt;
+		&lt;div id="Banner" style="visibility: hidden"&gt;
+			&lt;!-- Display the folder name using a table with nowrap
+			 to prevent word wrapping. Explorer will replace
+			  %THISDIRNAME% with the current folder name --&gt;
+			&lt;table class="clsStd"&gt;&lt;tr&gt;&lt;td nowrap&gt;
+				&lt;p class=Title style="margin-left: 104px; margin-top: 16px"&gt;
+				%THISDIRNAME% 
+			&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+			&lt;!-- this is more efficient than a long graphic, but it has to be adjusted in FixSize() --&gt;
+			&lt;hr id="Rule" size=1px color=black style="position: absolute; top: 44px; left: 84px"&gt;
+			&lt;!-- Load the WebViewFolderIcon object, which extracts the folder's icon --&gt;
+			&lt;object id=Icon classid="clsid:e5df9d10-3b52-11d1-83e8-00a0c90dc849"&gt;
+				&lt;param name="scale" value=200&gt;
+			&lt;/object&gt;
+		&lt;/div&gt;
+
+		&lt;!-- The mini banner. This banner is used when the
+		 WebView pane is too short to display the icon. Instead,
+		  it displays only the folder name --&gt;
+		&lt;div id="MiniBanner" style="visibility: hidden"&gt;
+			&lt;!-- use a table with nowrap to prevent word wrapping --&gt;
+			&lt;table class="clsStd"&gt;&lt;tr&gt;&lt;td nowrap&gt;
+				&lt;p class=Title style="margin-left: 16px; margin-top: 4px"&gt;
+				%THISDIRNAME%
+			&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+		&lt;/div&gt;
+
+		&lt;!-- The Info region. This displays the information
+		 associated with a folder or file. Javascript in the header
+		 is used to generate the regions contents by by assigning
+		 a text block to TextBlock.innerHTML --&gt;
+		&lt;div id="Info"&gt;
+			&lt;p style="margin-top: 16px");
+			&lt;span id="TextBlock"&gt;
+			&lt;/span&gt;
+		&lt;/div&gt;
+		&lt;!-- end left info panel --&gt;
+
+		&lt;!-- Load the WebViewFolderContents object. This object
+		 returns information on the contents of the folder that
+		  can be used in the information display.  --&gt;
+		&lt;object id="FileList" border=0 tabindex=1 classid="clsid:1820FED0-473E-11D0-A96C-00C04FD705A2"
+		&lt;/object&gt;
+
+	&lt;/body&gt;
+&lt;/html&gt;
+			</pre><p>A
+simple way to create your own Web view template is to take Generic.htt
+and modify it. Because it is rather limited, you should also look at
+other, more complex examples for additional ideas. You can find them by
+searching your system for the .htt extension used by all Web view
+templates. If you want to create a custom template for a folder, you
+should start with the default Folder.htt template, which is usually
+stored in either C:\Winnt\Web or C:\Windows\Web. Note that these files
+are defined as hidden, so you may need to modify your Windows Explorer
+settings to view them. Once an .htt file is created, it should be
+marked as read-only and hidden. </p><p>Web view templates use the .htt
+extension because they differ slightly from conventional .htm
+documents. The main difference is several special variables in .htt
+files that the system replaces with the current namespace values. The
+%THISDIR% and %THISDIRPATH% variables represent the name and path of
+the currently selected folder. The %TEMPLATEDIR% variable represents
+the folder where the Web view style sheets are stored. </p><p>Like
+most HTML templates, .htt files have two basic parts: a body and a
+head. The template body controls the basic layout of the Web view and
+loads the objects used to communicate with the namespace and display
+information. The head contains scripts and functions that do tasks such
+as handling resizing and obtaining information from the folder. Most
+templates, including Generic.htt, also include a style sheet. In
+general, it is better to include the style sheet information in your
+template. Separate style sheets may not work properly when a Web view
+is used with remote namespaces. </p><h3><a name="unknown_94599"></a>The Template Body</h3><p>The
+body of the template specifies what will be presented by a Web view. It
+is also where the objects used to display information and communicate
+with namespace folders are loaded. The layout defined by Generic.htt is
+similar to that shown in the illustration in the previous section.
+There are three display regions: the banner and information block on
+the left side of the view, and the file list on the right. </p><p>The
+regions are all assigned identifiers to be used by the style sheet and
+DHTML. As discussed in the next section, there are two possible
+banners, with identifiers of "Banner" and "MiniBanner". The identifier
+of the information block's region is "Info". The file list object's
+identifier is "FileList". The details of the region's <a target="_self" href="#layout">layout</a> are handled by the style sheet and a Microsoft JScript function, <a target="_self" href="#FixSize">FixSize</a>, which is discussed later in the chapter. </p><h4><a name="unknown_75145"></a>The Banner Region</h4><p>The
+banner is located at the top of the display, in the upper-left corner
+of the Web view. The normal banner displays the name and icon of the
+folder whose contents are displayed in the file list on the right.
+However, if the window becomes too short, there may be no room below
+the icon to display information. For this reason, Generic.htt also
+defines a minibanner that only displays the folder name. Both banners
+are initially defined as hidden. <a target="_self" href="#FixSize">FixSize</a> chooses which one to display and sets it to "visible". </p><p>The normal banner for Generic.htt is defined by: </p><pre class="clsCode" autohilite="1">&lt;div id="Banner" style="visibility: hidden"&gt;
+	&lt;table class="clsStd"&gt;&lt;tr&gt;&lt;td nowrap&gt;
+	&lt;p class=Title style="margin-left: 104px; margin-top: 16px"&gt;
+		%THISDIRNAME% 
+	&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+	&lt;hr id="Rule" size=1px color=black style="position: absolute; top: 44px; left: 84px"&gt;
+	&lt;object id=Icon classid="clsid:e5df9d10-3b52-11d1-83e8-00a0c90dc849"&gt;
+		&lt;param name="scale" value=200&gt;
+	&lt;/object&gt;
+&lt;/div&gt;
+					</pre><p>The
+first part of the banner section displays the title with a horizontal
+rule underneath it. Table tags are used to control its position. The
+nowrap attribute is set for the &lt;TD&gt; tag to prevent word
+wrapping. The system will replace %THISDIRNAME% with the name of the
+current folder. A <b>WebViewFolderIcon</b> object, with an identifier of "Icon" for simplicity, is then loaded to extract and display the folder's icon. </p><p>The
+minibanner section is similar to the normal banner. The format of the
+title is placed slightly higher and does not have a rule. Because there
+is no icon, the <b>WebViewFolderIcon</b> object is not loaded. </p><pre class="clsCode" autohilite="1">&lt;div id="MiniBanner" style="visibility: hidden"&gt;
+	&lt;table class="clsStd"&gt;&lt;tr&gt;&lt;td nowrap&gt;
+		&lt;p class=Title style="margin-left: 16px; margin-top: 4px"&gt;
+		%THISDIRNAME%
+	&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+					</pre><h4><a name="unknown_50562"></a>The Info Region</h4><p>The
+portion of the Web view below the banner is used to present detailed
+information about the selected item. If no item is selected, a default
+message is shown. Because Generic.htt only displays a single block of
+text, this section is quite simple. </p><pre class="clsCode" autohilite="1">&lt;div id="Info"&gt;
+	&lt;p style="margin-top: 16px");
+		&lt;span id="TextBlock"&gt;
+		&lt;/span&gt;
+&lt;/div&gt;
+					</pre><p>Most of the work of collecting the information is handled by a <a target="_self" href="#Folder_Information">folder information script</a> that is discussed later in the chapter. It displays the information by assigning the text to <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/innerHTML.asp" target="_top">TextBlock.innerHTML</a>. </p><p>You
+can easily customize the information display by modifying these
+elements or including additional ones. Anything that you can put on a
+Web page can be used. For example, to display a link to your Web site,
+you can add an anchor element after the text block in Generic.htt. </p><pre class="clsCode" autohilite="1">&lt;div id="Info"&gt;
+	&lt;p style="margin-top: 16px");
+		&lt;span id="TextBlock"&gt;
+		&lt;/span&gt;
+		&lt;span&gt;
+		&lt;p&gt; Click on &lt;a href="http://your.address"&gt;&lt;/a&gt;
+		&lt;/span&gt;
+&lt;/div&gt;
+					</pre><h4><a name="unknown_61312"></a>The FileList Region</h4><p>Finally, Generic.htt loads a <b>WebViewFolderContents</b>
+object for the FileList region. Because its identifier is set to
+"FileList", it will be referred to as the FileList object from now on. </p><pre class="clsCode" autohilite="1">&lt;object id="FileList" border=0 tabindex=1 classid="clsid:1820FED0-473E-11D0-A96C-00C04FD705A2"
+		&lt;/object&gt;
+					</pre><p>The
+FileList object is found in most Web views and serves several purposes.
+FileList displays the list of items contained by the selected folder
+with the same options and appearance as the file list in Classic style.
+When an item is selected, FileList notifies the Web view by firing a <a target="_self" href="#Folder_Information">SelectionChanged</a>
+event. FileList also exposes methods and properties that can be used to
+retrieve information about individual items and control the position
+and size of its display area. </p><p>Although the FileList object is
+very useful, it only returns standard file system information, such as
+file size or attributes. To retrieve other kinds of information from a
+Shell folder, you will have to load and handle additional objects. Any
+object that can be hosted by a Web page can be used with a Web view. </p><h3><a name="unknown_85615"></a>The Template Head</h3><p>The
+head of the Web view template contains the scripts and functions that
+do most of the actual work. There are two essential tasks that need to
+be handled. One is the layout of the Web view display, which needs to
+be adjusted to accommodate different display regions. The other is
+retrieving and displaying information from the folder when an item is
+selected. As with style sheets, it is better to include all scripts and
+functions in the template instead of referencing them as separate
+files. </p><h4><a name="layout"></a>Controlling the Web View Layout</h4><p>The
+area available for a Web view depends on the size of the Web view
+window and how much of it is taken up by the Windows Explorer bar. This
+area will change anytime the window or Windows Explorer bar is resized.
+So the layout needs to be matched to the available area when a Web view
+is loaded and change appropriately when it is resized. Much of the
+layout is specified in the style sheet. The Info region, for example,
+is defined to occupy the leftmost 30 percent of the Web view. </p><pre class="clsCode" autohilite="1">#Info		{position: absolute; top: 88px; width: 30%; background: window;
+	overflow: auto}
+					</pre><p>As a Web view is resized, the width of the Info region will change to maintain that percentage. <a target="_self" href="#FixSize">FixSize</a> manages the layout issues that can't be handled by a style sheet. </p><h4><a name="unknown_41731"></a>Loading and Initializing the Web View</h4><p>When
+a Web view is loaded, the layout needs to be adjusted to fit the
+available display area. Because no item has been selected yet, Web
+views normally display some default information that applies to the
+whole folder. To handle initialization, the &lt;BODY&gt; tag for
+Generic.htt detects the <a href="http://msdn.microsoft.com/workshop/author/behaviors/reference/events/onload_1.asp" target="_top">onload</a> event and calls the <b>Init</b> function. </p><pre class="clsCode" autohilite="1">&lt;body scroll=no onload="Init"&gt;
+					</pre><p><b>Init</b> is a simple JScript function. </p><pre class="clsCode" autohilite="1">function Init() {
+	window.onresize = FixSize;
+	FixSize();
+	TextBlock.innerHTML = L_Intro_Text;
+}
+					</pre><p><b>Init</b> binds <a target="_self" href="#FixSize">FixSize</a> to the <a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/events/onresize.asp" target="_top">window.onresize</a> event so that it will be called whenever the Web view display area changes. It then runs <a target="_self" href="#FixSize">FixSize</a>
+to set the initial layout and assigns L_Intro_Text to the Info region.
+L_Intro_Text is a block of introductory text that is defined in the
+style sheet section. </p><pre class="clsCode" autohilite="1">var L_Intro_Text	= "This folder contains a variety of interesting stuff.&lt;br&gt;
+&lt;br&gt;To get information about any of them, click the items icon.&lt;br&gt;&lt;br&gt;";
+					</pre><h4><a name="FixSize"></a>Adjusting the Layout by using the FixSize function</h4><p>The <a target="_self" href="#FixSize">FixSize</a> function is used to specify several aspects of the layout that can't be handled by the style sheet. </p><p>There are two possible banners that can be used, depending on the height of the Web view. </p><pre class="clsCode" autohilite="1">if (200 &gt; document.body.clientHeight) {
+	//A short window. Use the minibanner.
+	document.all.Banner.style.visibility = "hidden";
+	document.all.MiniBanner.style.visibility = "visible";
+	document.all.FileList.style.top = 32;
+	document.all.Info.style.top = 32;
+}
+else {
+	//A normal window. Use the normal banner.
+	document.all.Banner.style.visibility = "visible";
+	document.all.MiniBanner.style.visibility = "hidden";
+	document.all.FileList.style.top = (document.all.Banner.offsetHeight - 32) + "px";
+	document.all.Info.style.top = (document.all.Banner.offsetHeight) + "px";
+	document.all.Rule.style.width = (document.body.clientWidth &gt; 84 ?    								document.body.clientWidth - 84 : 0) + "px"; 	 
+}
+					</pre><p>Generic.htt
+uses a height of 200 pixels as the dividing line between normal and
+minibanners. It sets the style of the selected banner to visible and
+the other to hidden. It also sets several layout properties for the
+Info and FileList regions so that they fit properly with the selected
+banner. </p><p>If a Web view becomes too narrow, <a target="_self" href="#FixSize">FixSize</a> uses the full width of the display area for the FileList display. </p><pre class="clsCode" autohilite="1">if (400 &gt; document.body.clientWidth) {
+	//A narrow window. Hide the Info region, and expand the file list region.
+	document.all.Info.style.visibility = "hidden";
+	document.all.FileList.style.pixelLeft = 0;
+	document.all.FileList.style.pixelTop = document.all.Info.style.pixelTop;
+}
+
+else {
+	//Normal width.
+	document.all.Info.style.visibility = "visible";
+	document.all.FileList.style.pixelLeft = document.all.Info.style.pixelWidth;
+}
+					</pre><p>Generic.htt uses 400 pixels as the dividing line between narrow and wide displays. If the Web view is too narrow, <a target="_self" href="#FixSize">FixSize</a> hides the Info region and modifies the FileList 
+<a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/pixelLeft.asp" target="_top">pixelLeft</a> property so that it fills the entire region below the banner. </p><p>The final few lines of <a target="_self" href="#FixSize">FixSize</a>
+adjust several layout properties based on the results of the preceding
+code. The width of the FileList region is adjusted so that it exactly
+fills the portion of the Web view not occupied by the Info region. The
+height of the Info region is sized to fit between the banner and the
+bottom of the Web view. </p><pre class="clsCode" autohilite="1">document.all.FileList.style.pixelWidth = document.body.clientWidth
+	document.all.FileList.style.pixelLeft;
+document.all.FileList.style.pixelHeight = document.body.clientHeight
+	document.all.FileList.style.pixelTop;
+document.all.Info.style.pixelHeight = document.body.clientHeight
+	document.all.Info.style.pixelTop;
+					</pre><h4><a name="Folder_Information"></a>Retrieving and Displaying Folder Information</h4><p>When a user selects an item, the FileList object fires a <a target="_self" href="#Folder_Information">SelectionChanged</a>
+event. This event is handled by a JScript script. For simplicity, the
+script found in Generic.htt assumes that only one item can be selected
+at a time. </p><pre class="clsCode" autohilite="1">&lt;script language="JavaScript" for="FileList" event="SelectionChanged"&gt;
+	// Updates the TextBlock region when an item is selected.
+	var data;
+	var text;
+
+	// Name
+	text = "&lt;b&gt;" + FileList.FocusedItem.Name + "&lt;/b&gt;";
+
+	// Comment
+	data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 3);
+	if (data)
+		text += "&lt;br&gt;" + data;
+
+	// Documents
+	data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 1);
+	if (data)
+		text += "&lt;br&gt;&lt;br&gt;" + FileList.Folder.GetDetailsOf(null, 1) + ": " + data;
+
+	// Status
+	data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, 2);
+	if (data)
+		text += "&lt;br&gt;&lt;br&gt;&lt;b&gt;&lt;font color=red&gt;" + data + "&lt;/font&gt;&lt;/b&gt;";
+
+	// Tip 
+	data = FileList.Folder.GetDetailsOf(FileList.FocusedItem, -1);
+	if (data != "" &amp;&amp; data != FileList.FocusedItem.Name)
+		text += "&lt;br&gt;&lt;br&gt;" + data;
+
+	TextBlock.innerHTML = text;
+&lt;/script&gt;
+					</pre><p>The script uses two FileList properties, <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/shellfolderview/focuseditem.asp">FileList.FocusedItem</a>and <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/shellfolderview/folder.asp">FileList.Folder</a> to obtain information about the item. <b>FileList.FocusedItem</b> identifies the selected item, with the item's name given by 						<b>FileList.FocusedItem.Name</b>. <b>FileList.Folder</b> is actually a pointer to a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/folder/folder.asp">Folder</a> object. The Folder object's <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/objects/folder/getdetailsof.asp">GetDetailsOf</a> method is used to retrieve the remaining information about the item. </p><p>All
+the information is concatenated into a single text string, separated by
+&lt;BR&gt; tags for readability. The text is then displayed by
+assigning it to <b>TextBlock.innerHTML</b>. </p><h2><a name="unknown_5330"></a>Summary</h2><p>This
+chapter outlines some of the techniques you can use to customize the
+way the Windows Explorer displays information about Shell folders.
+Creating a Desktop.ini file allows you to do some simple customization,
+such as displaying a custom icon in place of the standard folder icon.
+When a folder appears in a Web view, its layout and display are
+controlled by an HTML-based template that determines what information
+is displayed and how. You can exercise a high degree of control over a
+folder's Web view by using standard HTML, DHTML, and scripting
+techniques to create a custom template. </p></div>
+
+
+
+<!----------------->
+<!-- END_CONTENT -->
+<!----------------->
+ </td> </tr> </tbody></table><br style="line-height: 1px; overflow: hidden;" clear="all"><table id="msviFooter" cellpadding="0" cellspacing="0" width="100%"><tbody><tr valign="bottom"><td id="msviFooter2" style=""><div id="msviLocalFooter"><nobr><a href="http://go.microsoft.com/?linkid=317027">Manage Your Profile</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/isapi/gomscom.asp?target=/legal/" target="_parent">Legal</a> |</nobr><wbr><nobr><a href="http://register.microsoft.com/contactus30/contactus.asp?domain=msdn" target="_parent">Contact Us</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/flash/" target="_parent">MSDN Flash Newsletter</a></nobr></div><div id="msviGlobalFooter"><span dir="ltr">©2005 Microsoft Corporation. All rights reserved.&nbsp;</span><nobr><a href="http://www.microsoft.com/info/cpyright.mspx">Terms of Use</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx">Trademarks</a> |</nobr><wbr><nobr><a href="http://www.microsoft.com/info/privacy.mspx">Privacy Statement</a></nobr></div></td><td bgcolor="#669aff" width="105"><img src="webview_data/text.jpg" alt="Microsoft" title="" border="0" height="29" width="105"></td></tr></tbody></table>
+<script language="javascript">footerjs(document);</script><layer visibility="hide"></layer><div style="display: none;"><img src="webview_data/trans_pixel_002.gif" border="0" height="0" hspace="0" vspace="0" width="0"></div>
+ </body></html>

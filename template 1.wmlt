@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN" "http://www.wapforum.org/DTD/wml12.dtd">
+<wml>
+  <head>
+    <meta name="meta" content="ggg" forua="forua"/>
+  </head>
+  <card title="card title" ordered="true" class="pclass" newcontext="true" xml:lang="xml">
+    <p mode="mode" class="pclass">
+<br id="ssa"/>
+<em %templateattrls="f">Emphasis text</em>
+    </p>
+  </card>
+</wml>

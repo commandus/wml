@@ -1,0 +1,17 @@
+/****************************************************************************
+
+apooedieext.rc
+Part of wmledit3 project
+
+*****************************************************************************/
+#define HTML 23    // HTML resource identifier, used for html, gif and so on
+#define WML  WML   // WML resource identifier
+#define GIF  GIF   // GIF resource identifier
+#define INI  INI   // INI file resource identifier
+#define ICO  ICO   // ICONS
+
+MAINICON	Icon	c32.ico
+16		Icon	c32.ico
+16s		Icon	c16.ico
+2		Icon	b32.ico
+2s		Icon	b16.ico

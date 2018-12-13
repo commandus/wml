@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside action="defaultparam" opt="id" >
+SELECT -1 R FROM DUAL</serverside>
+<serverside action="defaultparam" opt="parent_id" >
+SELECT COALESCE(kb_p1, -1) kb_p1 FROM cs_kb WHERE kb_id = $(id)</serverside>
+<serverside action="execute" >
+активный адрес Адреса действия:</serverside>
+<head loop="global" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<meta http-equiv="refresh" content="3; url='index.htm?kb_id=$(parent_id)'" />
+<title >
+назначьте это в диспетчере и уведомьте его/ее Назначенный На Присвоенном</title>
+</head>
+<body >
+<center >
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="global" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="index.htm?kb_id=$(parent_id)" >
+di_title</a>
+:<a href="kbView.htm?kb_id=$(id)" >
+50</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+&lt;:<a href="index.htm?kb_id=$(parent_id)" >
+ortTopX))</a>
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+</html>

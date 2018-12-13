@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.3.xml">
+<wml>
+<card id="Info" title="Employee Information" >
+<p align="left" >
+<i>
+Welcome To Employee Reward Page.
+</i>
+</p>
+<p>
+<img align="bottom" alt="Our  People" vspace="0" hspace="0" src="file:file://C:\mbuilder\tutorials\samples\EmployeeList\content\image.gif" />
+</p>
+<p align="left" >
+<i>
+</i>
+</p>
+<p>
+<a href="List.jsp" >Employees Of  The Month</a>
+</p>
+<p>
+<a href="Table.jsp" >Contact Information</a>
+</p>
+</card>
+</wml>

@@ -1,0 +1,233 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.varExist('usr_max_row') <> 1)
+    set session.usr_max_row = 500;
+    set session.usr_col1 = 'Email Address';
+    set session.usr_col2 = 'Phone Number';
+    set session.usr_col3 = 'Full Name';
+    set session.usr_sort1 = 'User ID';
+    set session.usr_sort1_dir = 'Ascending';
+    set session.usr_sort2 = '';
+    set session.usr_sort2_dir = 'Ascending';
+    set session.usr_user_id = '';
+    set session.usr_full_name = '';
+    set session.usr_phone = '';
+    set session.usr_email = '';
+    set session.usr_company = '';
+    set session.usr_dept = '';
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+    $(appname) : Select the user to submit a request for
+  </title>
+</head>
+<body>
+
+<form method=GET action="userFindOk.htm">
+<center>
+<table width="400" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td colspan="3">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Select the user to submit a request for
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr>
+  <td valign="top">
+    <table width=100 border="0" cellspacing="2" cellpadding="0">
+    <tr class="apbg" >
+      <td class="apbg" valign="top">
+        
+      </td>
+      <td nowrap="nowrap">
+        <a href="userNew.htm">Submit a request<br/>for a new user</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr class="apbg">
+      <td class="apbg" valign="top">
+        
+      </td>
+      <td>
+        <a href="$session.ticketFolder)ticketNew.htm">   
+        Submit a request<br/>for myself</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="apbg">
+        <table border="0" cellspacing="0" cellpadding="0">
+        <tr><td height="1"></td></tr></table>
+      </td>
+    </tr>
+    <tr class="apbg">
+      <td class="apbg" valign="top">
+        
+      </td>
+      <td>
+        To submit a request for another existing user, 
+        use the form on the right pane to locate his/her user account first.
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>&nbsp;</td>
+  <td valign="top">
+    <table border="0" cellspacing="2" cellpadding="0">
+    <tr class="apbg">
+      <td colspan=5>
+        List user accounts that meet these conditions:
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="bottom">
+        User ID starts with: <br/>
+        <input type="text" name=user_id size="30" maxlength="50" 
+        value="$(session.usr_user_id))">
+      </td>
+      <td> </td>
+      <td colspan="2" valign="bottom">
+        and Email Address starts with: <br/>
+        <input type="text" name=email size="30" maxlength="50"
+        value="$(session.usr_email))">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="bottom">
+        and Full Name starts with: <br/>
+        <input type="text" name=full_name size="30" maxlength="50"
+        value="$(session.usr_full_name))">
+      </td>
+      <td> </td>
+      <td colspan="2" valign="bottom">
+        and Phone Number starts with: <br/>
+        <input type="text" name=phone size="30" maxlength="50"
+        value="$(session.usr_phone))">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="bottom">
+        and Company starts with: <br/>
+        <input type="text" name=company size="30" maxlength="50"
+        value="$(session.usr_company))">
+      </td>
+      <td> </td>
+      <td colspan="2" valign="bottom">
+        and Department starts with: <br/>
+        <input type="text" name=dept size="30" maxlength="50"
+        value="$(session.usr_dept))">
+      </td>
+    </tr>
+    <tr>
+      <td colspan=5 class="apbg">
+        Display:
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom">Field 1:<br/>
+        <select name=col1 size=1>
+          <option selected>$session.usr_col1)
+          <option>Email Address
+          <option>Phone Number
+          <option>Full Name
+          <option>Company
+          <option>Department
+        </select>
+      </td>
+      <td valign="bottom">Field 2:<br/>
+        <select name=col2 size=1>
+          <option selected>$session.usr_col2)
+          <option>Email Address
+          <option>Phone Number
+          <option>Full Name
+          <option>Company
+          <option>Department
+        </select>
+      </td>
+      <td> </td>
+      <td valign="bottom">Field 3:<br/>
+        <select name=col3 size=1>
+          <option selected>$session.usr_col3)
+          <option>Email Address
+          <option>Phone Number
+          <option>Full Name
+          <option>Company
+          <option>Department
+        </select>
+      </td>
+      <td valign="bottom">
+        Max Users:<br/>
+        <input type="text" name=max_row size="10" maxlength="4"
+        value="$session.usr_max_row)">
+      </td>
+    </tr>
+    <tr>
+      <td>Sort By 1:<br/>
+        <select name=sort1 size=1>
+          <option selected>$session.usr_sort1)
+          <option>User ID
+          <option>Email Address
+          <option>Serial Number
+          <option>Full Name
+          <option>Company
+          <option>Department
+          <option>Phone Number
+        </select>
+      </td>
+      <td><br/>
+        <select name=sort1_dir size=1>
+          <option selected>$session.usr_sort1_dir)
+          <option>Ascending
+          <option>Descending
+        </select>
+      </td>
+      <td> </td>
+      <td>Sort By 2:<br/>
+        <select name=sort2 size=1>
+          <option selected>$session.usr_sort2)
+          <option>
+          <option>User ID
+          <option>Email Address
+          <option>Serial Number
+          <option>Full Name
+          <option>Company
+          <option>Department
+          <option>Phone Number
+        </select>
+      </td>
+      <td><br/>
+        <select name=sort2_dir size=1>
+          <option selected>$session.usr_sort2_dir)
+          <option>Ascending
+          <option>Descending
+        </select>
+      </td>
+    </tr>
+    <tr class="apbg">
+      <td align="center" colspan=5>
+        <input type="submit" value="List"/>
+      </td>
+    </tr>
+    </table>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

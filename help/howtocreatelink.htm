@@ -1,0 +1,37 @@
+
+<html>
+<head>
+<title>How to create a link between cards
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to create a link between cards</h1>
+
+<p>To create a link between cards you must have created at least two cards.
+Check that linked card have an <b>id</b> attribute. For instance, let say
+id=&quot;card2&quot;.</p>
+<p>Press element button <b>a</b> to create a link element and assign value of
+attribute href to #card2 in Attributes window.<br>
+<br>
+<br>
+<img border="0" src="shot02.gif"></p>
+<p>If you want create a link to card in other deck, specify path containing the
+deck url and card identifier, for instance, /news/news.wml#card2. Unless specified otherwise, upon navigation to another deck, the first card is displayed.</p>
+
+</body>
+</html>

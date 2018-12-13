@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN>
+<html>
+<head>
+<title>apoo editor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="copyright" content="Andrei Ivanov">
+<meta name="revisit-after" content="30 days">
+<meta name="Robot" content="ALL">
+<meta name="keywords" content="mobile devices,mobile platform,sms messaging,developer,development,wireless development, application development wireless,
+mobile software,wireless software,wireless applications,enterprise software,devcenter,studio,pda,pocket pc,ipaq,WAP,xml,wml,apoo,wbmp,image,bitmap,convertor">
+<script language="JavaScript">
+function expand(i){
+var browsName = navigator.appName; browsVersion = parseInt(navigator.appVersion);
+if ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4)){
+}
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<base target="main">
+<link rel="StyleSheet" href="default.css">
+</head>
+
+<body>
+<a href="index.html" target="_top">Return to main page</a>
+<p>
+<ul>
+  <li><a href="introduction.htm" onclick="expand('introduction')">Introduction</a>
+    <ul id="introduction" style="display:none">
+      <li id="introduction"><a href="preface.htm">Preface</a>
+      <li><a href="wapoverview.htm">WAP Overview</a>
+      <li><a href="wirelessoverview.htm">Wireless Overview</a>
+      <li><a href="wmloverview.htm">WML overview</a>
+      <li><a href="languagesupport.htm">National languages support</a>
+      <li><a href="codepages.htm">Supported codepages</a>
+      <li><a href="optionsautoconversion.htm">Entity conversion</a>
+    </ul>
+  <li><a href="setup.htm" onclick="expand('installation')">Installation</a>
+    <ul id="installation" style="display:none">
+      <li><a href="setup.htm">Minimum System Requirements</a>
+      <li><a href="license.htm">License agreement</a>
+      <li><a href="webserver.htm">Configure MIME types in Apache and IIS</a>
+      <li><a href="register.htm">Register evaluation copy</a>
+    </ul>
+  <li><a href="howtocreateimage.htm" onclick="expand('howto')">How to</a>
+    <ul id="howto" style="display:none">
+      <li><a href="howtocreateimage.htm">insert an image</a>
+      <li><a href="howtocreateinput.htm">create an input element</a>
+      <li><a href="howtocreatelink.htm">create a link between cards</a>
+      <li><a href="howtocreateselectionlist.htm">create a selection list</a>
+      <li><a href="howtocreatesoftkey.htm">create a soft key</a>
+      <li><a href="howtomoveelement.htm">move element</a>
+      <li><a href="howtousevariables.htm">use variables</a>
+      <li><a href="howtocreatecard.htm">create a new card</a>
+    </ul>
+  <li><a href="interfaceguide.htm" onclick="expand('interface')">Interface walkthrough</a>
+    <ul id="interface" style="display:none">
+      <li><a href="windowproject.htm">Project window</a>
+      <li><a href="windowtools.htm">Tools panel</a>
+      <li><a href="windowmenu.htm">New element buttons panel</a>
+      <li><a href="windowcode.htm">WML code window</a>
+      <li><a href="windowelements.htm">WML elements tree window</a>
+      <li><a href="windowattributes.htm">WML element attributes window</a>
+      <li><a href="windowerror.htm">Information window</a>
+      <li><a href="shellintegration.htm">Shell integration</a>
+      <li><a href="keyboardshortcuts.htm">Keyboard shortcuts</a>
+    </ul>
+  <li><a href="wmlreference.htm" onclick="expand('reference')">WML reference</a>
+    <ul id="reference" style="display:none">
+      <li><a href="wmlrefdeck.htm" onclick="expand('deck')">Deck and card elements</a>
+        <ul id="deck" style="display:none">
+          <li><a href="edeck.htm">deck</a>
+          <li><a href="ewml.htm">wml</a>
+          <li><a href="ecard.htm">card</a>
+          <li><a href="etemplate.htm">template</a>
+          <li><a href="ehead.htm">head</a>
+          <li><a href="eaccess.htm">access</a>
+          <li><a href="emeta.htm">meta</a>
+          <li><a href="exml.htm">xml declaration</a>
+        </ul>
+      <li><a href="wmlrefui.htm" onclick="expand('ui')">User input elements</a>
+        <ul id="ui" style="display:none">
+          <li><a href="einput.htm">input</a>
+          <li><a href="eselect.htm">select</a>
+          <li><a href="eoption.htm">option</a>
+          <li><a href="eoptgroup.htm">optgroup</a>
+          <li><a href="efieldset.htm">fieldset</a>
+        </ul>  
+      <li><a href="wmlreftask.htm" onclick="expand('task')">Task elements</a>
+        <ul id="task" style="display:none">
+          <li><a href="ego.htm">go</a>
+          <li><a href="eprev.htm">prev</a>
+          <li><a href="erefresh.htm">refresh</a>
+          <li><a href="enoop.htm">noop</a>
+        </ul>
+      <li><a href="wmlrefevent.htm" onclick="expand('event')">Event</a>
+        <ul id="event" style="display:none">
+          <li><a href="edo.htm">do</a>
+          <li><a href="eonevent.htm">onevent</a>
+          <li><a href="epostfield.htm">postfield</a>
+          <li><a href="etimer.htm">timer</a>
+        </ul>
+      <li><a href="wmlrefanchor.htm" onclick="expand('anchor')">Anchors and image elements</a>
+        <ul id="anchor" style="display:none">
+          <li><a href="ea.htm">a</a>
+          <li><a href="eanchor.htm">anchor</a>
+          <li><a href="eimg.htm">img</a>
+        </ul>
+      <li><a href="wmlrefbr.htm" onclick="expand('br')">Text layout formatting elements</a>
+        <ul id="br" style="display:none">
+          <li><a href="ep.htm">p</a>
+          <li><a href="ebr.htm">br</a>
+          <li><a href="etable.htm">table</a>
+          <li><a href="etr.htm">tr</a>
+          <li><a href="etd.htm">td</a>
+        </ul>
+      <li><a href="wmlrefemph.htm" onclick="expand('emph')">Emphasis elements</a>
+        <ul id="emph" style="display:none">
+          <li><a href="eem.htm">em</a>
+          <li><a href="estrong.htm">strong</a>
+          <li><a href="eb.htm">b</a>
+          <li><a href="ei.htm">i</a>
+          <li><a href="eu.htm">u</a>
+          <li><a href="ebig.htm">big</a>
+          <li><a href="esmall.htm">small</a>
+        </ul>
+      <li><a href="wmlreftext.htm" onclick="expand('text')">Text</a>
+        <ul id="text" style="display:none">
+          <li><a href="epcdata.htm">pcdata</a>
+          <li><a href="ecomment.htm">comment</a>
+          <li><a href="epre.htm">pre</a>
+        </ul>
+      <li><a href="wmlrefvar.htm" onclick="expand('var')">Variables</a>
+        <ul id="var" style="display:none">
+          <li><a href="esetvar.htm">setvar</a>
+        </ul>
+    </ul>
+  <li><a href="opref.htm" onclick="expand('opreference')">Open eBook package file reference</a>
+    <ul id="opreference" style="display:none">
+		<li><a href="opcomment.htm">!--</a>
+		<li><a href="opdoctype.htm">!DOCTYPE</a>
+		<li><a href="opxml.htm">?xml</a>
+		<li><a href="opdccontributor.htm">dc:Contributor</a>
+		<li><a href="opdccoverage.htm">dc:Coverage</a>
+		<li><a href="opdccreator.htm">dc:Creator</a>
+		<li><a href="opdcdate.htm">dc:Date</a>
+		<li><a href="opdcdescription.htm">dc:Description</a>
+		<li><a href="opdcformat.htm">dc:Format</a>
+		<li><a href="opdcidentifier.htm">dc:Identifier</a>
+		<li><a href="opdclanguage.htm">dc:Language</a>
+		<li><a href="opdcmetadata.htm">dc-metadata</a>
+		<li><a href="opdcpublisher.htm">dc:Publisher</a>
+		<li><a href="opdcrelation.htm">dc:Relation</a>
+		<li><a href="opdcrights.htm">dc:Rights</a>
+		<li><a href="opdcsource.htm">dc:Source</a>
+		<li><a href="opdcsubject.htm">dc:Subject</a>
+		<li><a href="opdctitle.htm">dc:Title</a>
+		<li><a href="opdctype.htm">dc:Type</a>
+		<li><a href="opdcxmlns.htm">dc:xmlns</a>
+		<li><a href="opguide.htm">guide</a>
+		<li><a href="opitem.htm">item</a>
+		<li><a href="opitemref.htm">itemref</a>
+		<li><a href="opmanifest.htm">manifest</a>
+		<li><a href="opmeta.htm">meta</a>
+		<li><a href="opref.htm">ref</a>
+		<li><a href="opreference.htm">reference</a>
+		<li><a href="opsite.htm">site</a>
+		<li><a href="opspine.htm">spine</a>
+		<li><a href="optour.htm">tour</a>
+		<li><a href="optours.htm">tours</a>
+		<li><a href="opxmetadata.htm">x-metadata</a>
+    </ul>
+  <li><a href="obref.htm" onclick="expand('obreference')">Open eBook source file reference</a>
+    <ul id="obreference" style="display:none">
+		<li><a href="obcomment.htm">!--</a>
+		<li><a href="obdoctype.htm">!DOCTYPE</a>
+		<li><a href="obxml.htm">?xml</a>
+		<li><a href="oba.htm">a</a>
+		<li><a href="obb.htm">b</a>
+		<li><a href="obbase.htm">base</a>
+		<li><a href="obbig.htm">big</a>
+		<li><a href="obblockquote.htm">blockquote</a>
+		<li><a href="obbody.htm">body</a>
+		<li><a href="obbr.htm">br</a>
+		<li><a href="obcaption.htm">caption</a>
+		<li><a href="obcenter.htm">center</a>
+		<li><a href="obcite.htm">cite</a>
+		<li><a href="obcode.htm">code</a>
+		<li><a href="obdd.htm">dd</a>
+		<li><a href="obdfn.htm">dfn</a>
+		<li><a href="obdiv.htm">div</a>
+		<li><a href="obdl.htm">dl</a>
+		<li><a href="obdt.htm">dt</a>
+		<li><a href="obem.htm">em</a>
+		<li><a href="obfont.htm">font</a>
+		<li><a href="obh1.htm">h1</a>
+		<li><a href="obh2.htm">h2</a>
+		<li><a href="obh3.htm">h3</a>
+		<li><a href="obh4.htm">h4</a>
+		<li><a href="obh5.htm">h5</a>
+		<li><a href="obh6.htm">h6</a>
+		<li><a href="obhead.htm">head</a>
+		<li><a href="obhr.htm">hr</a>
+		<li><a href="obhtml.htm">html</a>
+		<li><a href="obi.htm">i</a>
+		<li><a href="obimg.htm">img</a>
+		<li><a href="obkbd.htm">kbd</a>
+		<li><a href="obli.htm">li</a>
+		<li><a href="oblink.htm">link</a>
+		<li><a href="obmenu.htm">menu</a>
+		<li><a href="obmeta.htm">meta</a>
+		<li><a href="obol.htm">ol</a>
+		<li><a href="obp.htm">p</a>
+		<li><a href="obpre.htm">pre</a>
+		<li><a href="obq.htm">1</a>
+		<li><a href="obref.htm">ref</a>
+		<li><a href="obsamp.htm">samp</a>
+		<li><a href="obscript.htm">script</a>
+		<li><a href="obsmall.htm">small</a>
+		<li><a href="obspan.htm">span</a>
+		<li><a href="obstrike.htm">strike</a>
+		<li><a href="obstrikethrough.htm">strikethrough</a>
+		<li><a href="obstrong.htm">strong</a>
+		<li><a href="obstyle.htm">style</a>
+		<li><a href="obsub.htm">sub</a>
+		<li><a href="obsup.htm">sup</a>
+		<li><a href="obtable.htm">table</a>
+		<li><a href="obtd.htm">td</a>
+		<li><a href="obth.htm">th</a>
+		<li><a href="obtitle.htm">title</a>
+		<li><a href="obtr.htm">tr</a>
+		<li><a href="obtt.htm">tt</a>
+		<li><a href="obu.htm">u</a>
+		<li><a href="obul.htm">ul</a>
+		<li><a href="obvar.htm">var</a>
+    </ul>
+    <li><a href="introduction.htm" onclick="expand('glossary')">Glossary</a>
+      <ul id="glossary" style="display:none">
+		<li><a href="cmdregexp.htm">Regular expressions</a>
+		<li><a href="cmdxpathexp.htm">XPath expressions</a>
+		<li><a href="codepages.htm">List of supported codepages</a>
+	</ul>
+<p>
+  <a href="index.html" target="_top">Return to main page</a>
+</p>
+</body>

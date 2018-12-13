@@ -1,0 +1,454 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  
+  // validate user input
+  set local.kb_k1 = to.2QuoteStr(request.kb_k1);
+  set local.kb_k2 = to.2QuoteStr(request.kb_k2);
+  set local.kb_k3 = to.2QuoteStr(request.kb_k3);
+
+  set local.where = '';
+  if (local.kb_k1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    if (app.dbCaseSensitive = 1)
+      set local.where = local.where + 
+        '(upper(kb_k1) = \'' + upper(local.kb_k1) + '\' OR'
+        ' upper(kb_k2) = \'' + upper(local.kb_k1) + '\' OR'
+        ' upper(kb_k3) = \'' + upper(local.kb_k1) + '\' OR'
+        ' upper(kb_k4) = \'' + upper(local.kb_k1) + '\' OR'
+        ' upper(kb_k5) = \'' + upper(local.kb_k1) + '\' OR'
+        ' upper(kb_title) LIKE \'%' + upper(local.kb_k1) + '%\' OR'
+        ' upper(kb_summary) LIKE \'%' + upper(local.kb_k1) + '%\')';
+    else
+      set local.where = local.where + 
+        '(kb_k1 = \'' + local.kb_k1 + '\' OR'
+        ' kb_k2 = \'' + local.kb_k1 + '\' OR'
+        ' kb_k3 = \'' + local.kb_k1 + '\' OR'
+        ' kb_k4 = \'' + local.kb_k1 + '\' OR'
+        ' kb_k5 = \'' + local.kb_k1 + '\' OR'
+        ' kb_title LIKE \'%' + local.kb_k1 + '%\' OR'
+        ' kb_summary LIKE \'%' + local.kb_k1 + '%\')';
+    endif
+  endif
+  if (local.kb_k2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    if (app.dbCaseSensitive = 1)
+      set local.where = local.where + 
+        '(upper(kb_k1) = \'' + upper(local.kb_k2) + '\' OR'
+        ' upper(kb_k2) = \'' + upper(local.kb_k2) + '\' OR'
+        ' upper(kb_k3) = \'' + upper(local.kb_k2) + '\' OR'
+        ' upper(kb_k4) = \'' + upper(local.kb_k2) + '\' OR'
+        ' upper(kb_k5) = \'' + upper(local.kb_k2) + '\' OR'
+        ' upper(kb_title) LIKE \'%' + upper(local.kb_k2) + '%\' OR'
+        ' upper(kb_summary) LIKE \'%' + upper(local.kb_k2) + '%\')';
+    else
+      set local.where = local.where + 
+        '(kb_k1 = \'' + local.kb_k2 + '\' OR'
+        ' kb_k2 = \'' + local.kb_k2 + '\' OR'
+        ' kb_k3 = \'' + local.kb_k2 + '\' OR'
+        ' kb_k4 = \'' + local.kb_k2 + '\' OR'
+        ' kb_k5 = \'' + local.kb_k2 + '\' OR'
+        ' kb_title LIKE \'%' + local.kb_k2 + '%\' OR'
+        ' kb_summary LIKE \'%' + local.kb_k2 + '%\')';
+    endif
+  endif
+  if (local.kb_k3 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    if (app.dbCaseSensitive = 1)
+      set local.where = local.where + 
+        '(upper(kb_k1) = \'' + upper(local.kb_k3) + '\' OR'
+        ' upper(kb_k2) = \'' + upper(local.kb_k3) + '\' OR'
+        ' upper(kb_k3) = \'' + upper(local.kb_k3) + '\' OR'
+        ' upper(kb_k4) = \'' + upper(local.kb_k3) + '\' OR'
+        ' upper(kb_k5) = \'' + upper(local.kb_k3) + '\' OR'
+        ' upper(kb_title) LIKE \'%' + upper(local.kb_k3) + '%\' OR'
+        ' upper(kb_summary) LIKE \'%' + upper(local.kb_k3) + '%\')';
+    else
+      set local.where = local.where + 
+        '(kb_k1 = \'' + local.kb_k3 + '\' OR'
+        ' kb_k2 = \'' + local.kb_k3 + '\' OR'
+        ' kb_k3 = \'' + local.kb_k3 + '\' OR'
+        ' kb_k4 = \'' + local.kb_k3 + '\' OR'
+        ' kb_k5 = \'' + local.kb_k3 + '\' OR'
+        ' kb_title LIKE \'%' + local.kb_k3 + '%\' OR'
+        ' kb_summary LIKE \'%' + local.kb_k3 + '%\')';
+    endif
+  endif
+
+  if (request.kb_owner <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_owner = \'' + to.2QuoteStr(request.kb_owner) + '\'';
+  endif
+  if (request.kb_visited1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 'kb_visited >= ' + request.kb_visited1;
+  endif
+  if (request.kb_visited2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 'kb_visited < ' + request.kb_visited2;
+  endif
+  if (request.kb_rank1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 'kb_rank >= ' + request.kb_rank1;
+  endif
+  if (request.kb_rank2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 'kb_rank < ' + request.kb_rank2;
+  endif
+
+  if (request.kb_created_by <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_created_by = \'' + to.2QuoteStr(request.kb_created_by) + '\'';
+  endif
+  if (request.kb_updated_by <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_updated_by = \'' + to.2QuoteStr(request.kb_updated_by) + '\'';
+  endif
+  if (request.kb_locked_by <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_locked_by = \'' + to.2QuoteStr(request.kb_locked_by) + '\'';
+  endif
+  if (request.kb_created_on1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_created_on >= ' + to.odbcDateStr(request.kb_created_on1);
+  endif
+  if (request.kb_created_on2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_created_on < ' + to.odbcDateStr(request.kb_created_on2);
+  endif
+  if (request.kb_updated_on1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_updated_on >= ' + to.odbcDateStr(request.kb_updated_on1);
+  endif
+  if (request.kb_updated_on2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_updated_on < ' + to.odbcDateStr(request.kb_updated_on2);
+  endif
+  if (request.kb_locked_on1 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_locked_on >= ' + to.odbcDateStr(request.kb_locked_on1);
+  endif
+  if (request.kb_locked_on2 <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    set local.where = local.where + 
+      'kb_locked_on < ' + to.odbcDateStr(request.kb_locked_on2);
+  endif
+  if (request.kb_sql_where <> '')
+    if (local.where <> '')
+      set local.where = local.where + ' AND ';
+    endif
+    // Using to.2QuoteStr breaks simple thing like [status <> 'closed'].
+    // The user needs to code the where clause himself.
+    set local.where = local.where + '(' + request.kb_sql_where + ')';
+  endif
+
+  // must be before adding the parent condition
+  if (local.where = '')
+    error 'Please enter some conditions before searching.';
+  endif
+  
+  if (request.kb_id <> '')  
+    set local.where = '(' + local.where + ') AND '
+      '(kb_p1 = ' + request.kb_id +
+      ' OR kb_p2 = ' + request.kb_id +
+      ' OR kb_p3 = ' + request.kb_id +
+      ' OR kb_p4 = ' + request.kb_id +
+      ' OR kb_p5 = ' + request.kb_id + ')';
+  endif
+
+  set local.security = ' AND kb_security < 1';
+  if (session.userType <> 'EndUser')
+    set local.security = '';
+  endif
+
+  // construct the order by clause
+  set local.o = '';
+  set local.kb_sort1 = '';
+  if (request.fieldExist('kb_sort1') AND request.kb_sort1 <> '')
+    set local.kb_sort1_UI = request.kb_sort1;
+    // convert user friendly column names to real column names
+    if (request.kb_sort1 = 'Owner')
+      set local.kb_sort1 = 'kb_owner';
+    elseif (request.kb_sort1 = 'Visit Count')
+      set local.kb_sort1 = 'kb_visited';
+    elseif (request.kb_sort1 = 'Rank')
+      set local.kb_sort1 = 'kb_rank';
+    elseif (request.kb_sort1 = 'Locked By')
+      set local.kb_sort1 = 'kb_locked_by';
+    elseif (request.kb_sort1 = 'Locked On')
+      set local.kb_sort1 = 'kb_locked_on';
+    elseif (request.kb_sort1 = 'Updated By')
+      set local.kb_sort1 = 'kb_updated_by';
+    elseif (request.kb_sort1 = 'Updated On')
+      set local.kb_sort1 = 'kb_updated_on';
+    elseif (request.kb_sort1 = 'Created By')
+      set local.kb_sort1 = 'kb_created_by';
+    elseif (request.kb_sort1 = 'Created On')
+      set local.kb_sort1 = 'kb_created_on';
+    else
+      error 'unknown column name: ' + request.kb_sort1;
+    endif
+    if (request.kb_sort1_dir = 'Descending')
+      set local.kb_sort1_dir = 'DESC';
+    else
+      set local.kb_sort1_dir = 'ASC';
+    endif
+    set local.o = local.kb_sort1 + ' ' + local.kb_sort1_dir;
+  endif
+
+  set local.kb_sort2 = '';
+  if (request.fieldExist('kb_sort2') AND request.kb_sort2 <> '')
+    if (request.fieldExist('kb_sort1') = 0 OR request.kb_sort1 = '')
+      error 'Please sepcify primary sorting order. ';
+    endif
+    set local.kb_sort2_UI = request.kb_sort2;
+    // convert user friendly column names to real column names
+    if (request.kb_sort2 = 'Owner')
+      set local.kb_sort2 = 'kb_owner';
+    elseif (request.kb_sort2 = 'Visit Count')
+      set local.kb_sort2 = 'kb_visited';
+    elseif (request.kb_sort2 = 'Rank')
+      set local.kb_sort2 = 'kb_rank';
+    elseif (request.kb_sort2 = 'Locked By')
+      set local.kb_sort2 = 'kb_locked_by';
+    elseif (request.kb_sort2 = 'Locked On')
+      set local.kb_sort2 = 'kb_locked_on';
+    elseif (request.kb_sort2 = 'Updated By')
+      set local.kb_sort2 = 'kb_updated_by';
+    elseif (request.kb_sort2 = 'Updated On')
+      set local.kb_sort2 = 'kb_updated_on';
+    elseif (request.kb_sort2 = 'Created By')
+      set local.kb_sort2 = 'kb_created_by';
+    elseif (request.kb_sort2 = 'Created On')
+      set local.kb_sort2 = 'kb_created_on';
+    else
+      error 'unknown column name: ' + request.kb_sort2;
+    endif
+    if (request.kb_sort2_dir = 'Descending')
+      set local.kb_sort2_dir = 'DESC';
+    else
+      set local.kb_sort2_dir = 'ASC';
+    endif
+    if (local.o <> '')
+      set local.o = local.o + ',';
+    endif
+    set local.o = local.o + local.kb_sort2 + ' ' + local.kb_sort2_dir;
+  endif
+
+  if (local.o <> '')
+    set local.o = ' ORDER BY ' + local.o;
+  </serverside>
+  else
+    set local.kb_sort1 = 'kb_visited';
+    set local.kb_sort1_UI = 'Visit Count';
+    set local.o = ' ORDER BY ' + local.kb_sort1 + ' DESC';
+  </serverside>
+  endif
+
+  // construct the complete <serverside dataset="statement. 
+  set local.s" action="query">
+    SELECT kb_id, kb_p1, kb_title, kb_summary '
+    'FROM cs_kb WHERE kb_type = 1 AND ' + 
+    local.where + local.security + ' ORDER BY kb_title';
+  </serverside>
+  <serverside dataset="sqlCat = local.s;
+
+  set local.s" action="query">
+    SELECT ';
+  if (local.kb_sort1 <> '')
+    set local.s = local.s + local.kb_sort1 + ', ';
+    if (local.kb_sort2 <> '')
+      set local.s = local.s + local.kb_sort2 + ', ';
+    endif
+  endif
+  set local.s = local.s + 
+    'kb_id, kb_p1, kb_type, kb_title, '
+    'kb_summary, kb_name, kb_size FROM cs_kb '
+    'WHERE kb_type <> 1 AND ' + 
+    local.where + local.security + local.o;
+  <serverside dataset="sqlArt = local.s;
+
+  file fKbIndex('index.htm');
+  array arRet = fKbIndex.getKbPathAndLinks(request.kb_id, 1);    
+
+  set local.title = arRet.getAt(0);
+  if (local.title <> '')
+    set local.title = local.title + ' : ';
+  endif
+  set local.title = 
+    app.name + ' : KB : ' + local.title + 'Advanced Search Result';
+  
+  set local.links = arRet.getAt(1);
+  if (local.links <> '')
+    set local.links = local.links + ' : ';
+  endif
+  set local.links = 
+    '<a href="' + session.mainMenu + '">' + app.name + '</a> : '
+    '<a href="index.htm">KB</a> : ' + 
+    local.links + 'Advanced Search Result';
+
+  set local.kbLinkType = 'content';
+  if (session.varExist('kbLinkType'))
+    set local.kbLinkType = session.kbLinkType;
+  endif
+  if (local.kbLinkType = 'content')
+    set local.catLinkSsp = 'index.htm';
+    set local.artLinkSsp = 'kbView.htm';
+  else
+    set local.catLinkSsp = 'kbDetail.htm';
+    set local.artLinkSsp = 'kbDetail.htm';
+  endif
+  
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <th >
+    Categories
+  </th>
+</tr>
+<tr>
+  <td><ol>
+  <!$
+    set local.count = 0;
+    while (sqlCat.fetch)
+      set local.count = 1 + local.count;
+      set local.catUrl = local.catLinkSsp + '?kb_id=' + sqlCat.kb_id;
+  )>
+    <li>
+    <a href="$local.catUrl)">
+      <!$ if (sqlCat.kb_p1 <> request.kb_id) )>
+        ...
+      <!$ endif )>
+      $(sqlCat.kb_title))</a>
+    <br/>
+    
+  <!$ endwhile )>
+  <!$ if (local.count = 0) )>
+    No category is found.
+  <!$ endif )>
+  </ol></td>
+</tr>
+</table>
+
+<!$if (request.browserType = 'Navigator'))>
+  <br/>
+<!$endif)>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="apbg">
+  <th >
+    Articles
+  </th>
+</tr>
+<tr>
+  <td><ol>
+  <!$
+    set local.count = 0;
+    while (sqlArt.fetch)
+      set local.artUrl = local.artLinkSsp + '?kb_id=' + sqlArt.kb_id;
+      set local.count = 1 + local.count;
+  )>
+    <li>
+    <a href="$local.artUrl)">$(sqlArt.kb_title))</a>
+    <br/>
+    $(sqlArt.kb_summary))
+    (
+  <!$
+    if (local.kb_sort1 <> '')
+      response.write(local.kb_sort1_UI);
+      response.write(': ');
+      response.write(sqlArt.column(local.kb_sort1));
+      response.write('; ');
+      if (local.kb_sort2 <> '')
+        response.write(local.kb_sort2_UI);
+        response.write(': ');
+        response.write(sqlArt.column(local.kb_sort2));
+        response.write('; ');
+      endif
+    endif
+  )>
+    <!$ if (sqlArt.kb_type = 5 AND sqlArt.kb_name <> '') )>
+      $sqlArt.kb_size) bytes;
+    <!$ endif )>
+    Did this article help? 
+    <a href="kbVote.htm?vote=yes&id=$sqlArt.kb_id)">yes</a> | 
+    <a href="kbVote.htm?vote=no&id=$sqlArt.kb_id)">no</a> 
+    )
+    
+  <!$ endwhile )>
+  <!$ if (local.count = 0) )>
+    No article is found.
+  <!$ endif )>
+  </ol></td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

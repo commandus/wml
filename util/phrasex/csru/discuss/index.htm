@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=discuss/index.htm" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside action="defaultparam" opt="first" >
+SELECT 1 R FROM DUAL;</serverside>
+<serverside action="defaultparam" opt="last" >
+SELECT $(first) + 10 R FROM DUAL</serverside>
+<serverside action="defaultparam" opt="path" >
+SELECT -1 R FROM dual</serverside>
+<serverside action="defaultparam" opt="di_id" >
+SELECT -1 R FROM dual</serverside>
+<serverside dataset="IsDi_Id" action="query" >
+SELECT di_id, Регистрационные Файлы: FROM cs_discuss WHERE (cs_discuss.di_id = $(di_id))</serverside>
+<serverside dataset="s1" action="query" >
+SELECT di_id, di_p1, di_p2, di_p3, di_p4, di_p5, di_type, Регистрационные Файлы: FROM cs_discuss WHERE di_id = $(di_id)</serverside>
+<serverside dataset="catP5" action="query" >
+Область 1:</serverside>
+<serverside dataset="catP4" action="query" >
+Факс факса faq.htm:</serverside>
+<serverside dataset="catP3" action="query" >
+Отказавшееся регистрироваться на поскольку ваш идентификатор не вводится, выводится из строя или пароль ненабран.</serverside>
+<serverside dataset="catP2" action="query" >
+f1.user_id.focus()</serverside>
+<serverside dataset="catP1" action="query" >
+f1.uid.focus()</serverside>
+<serverside dataset="IsNotLevel5" action="query" >
+SELECT Последний Последний Доступ: FROM cs_discuss WHERE (di_id = $(di_id)) AND (di_p5 IS NULL)</serverside>
+<serverside dataset="sqlMaxMinIDs" action="query" >
+выведенная из строя Дискуссия Дискуссии discuss/index.htm Группирует diSearch.htm?path=$(path:escape) Диспетчер диспетчера diSearchOk.htm:</serverside>
+<serverside dataset="sqlMsgIDs" action="query" >
+SELECT Последний Последний Доступ: FROM (SELECT Последний Последний Доступ: FROM cs_discuss WHERE di_type &lt;&gt; 1 ORDER BY Последний Последний Доступ: WHERE ROWNUM &lt;= 10</serverside>
+<serverside dataset="sqlMsg" action="query" >
+SELECT di_id, di_topic_id, di_title, di_created_on, COALESCE(di_created_by, 'unknown') di_created_by FROM cs_discuss WHERE di_type &lt;&gt; 1 ORDER BY di_id DESC</serverside>
+<serverside dataset="sqlGroup" action="query" >
+SELECT di_id, di_title, Сообщение $(newsHome:unescape) $(p_id) FROM cs_discuss WHERE di_type = 1 ORDER BY di_title</serverside>
+<serverside dataset="sqlCountSubGroup" action="query" >
+SELECT COUNT(*) FROM cs_discuss WHERE di_type = 1 AND</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Вы уверены Вы хотите удалить новости Вы уверены Вы хотите удалить Приоритет: $(имя)?</title>
+</head>
+<body loop="global" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+: Дискуссионная Группа</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<!------------------ left pane ------------------>
+<td valign="top" width="1%" class="apbg" >
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+<form method="GET" action="diSearchOk.htm" >
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+запрос кварталов четверти r> радио Ранг:<input type="text" name="search_for" size="15" maxlength="50" />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<input type="submit" value="Search" />
+<input type="hidden" name="path" value="$(path)" />
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+<tr >
+<td >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td >
+<form method="GET" action="diSearchOk.htm" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+Сортировка:<input type="text" name="di_id" size="15" maxlength="50" />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<input type="submit" value="Go" />
+</td>
+</tr>
+</table>
+</form>
+</td>
+</tr>
+<tr >
+<td >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td >
+<a href="diSearch.htm?path=$(path:escape)" >
+Продвинутый поиск</a>
+</td>
+</tr>
+<tr >
+<td >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td >
+<a href="diNew.htm?type=2&path=$(path:escape)" >
+Почтовый Индекс:</a>
+</td>
+</tr>
+<tr loop="IsNotLevel5" >
+<td >
+<a href="diNew.htm?type=1&path=$(path:escape)" >
+Статус: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $ статус(old_name).</a>
+</td>
+</tr>
+<tr loop="IsDi_Id" >
+<td >
+<a href="diGroup.htm?path=$(path:escape)" >
+Новый Табличный<b >
+$(IsDi_Id.di_title)</b>
+Владелец:</a>
+</td>
+</tr>
+<tr >
+<td >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td >
+<a target="ptHelpWindow" href="../help/diHelp.html" >
+Родитель</a>
+</td>
+</tr>
+<tr >
+<td >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td >
+&nbsp;</td>
+<!------------------ right pane ------------------>
+<td width="99%" valign="top" >
+<table width="100%" border="0" cellspacing="0" cellpadding="2" loop="sqlGroup" >
+<tr >
+<th >
+p_id</th>
+</tr>
+<tr class="apbg" >
+<td >
+sqlAttach1</td>
+<td >
+kbVote.htm?vote=yes&id=$(sqlArt.kb_id)</td>
+</tr>
+<tr >
+<td valign="top" nowrap="nowrap" >
+<a href="index.htm?path=$(full:escape)" >
+$(sqlGroup.di_title)</a>
+</td>
+<td >
+$(sqlGroup.di_detail)</td>
+</tr>
+</table>
+<br />
+<hr />
+<table width="100%" border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<th >
+sort_dir</th>
+<td width="80%" >
+&nbsp;</td>
+<td >
+<form action="index.htm" method="POST" >
+<input type="hidden" name="first" value="=G1($(first)-10)" />
+<input type="hidden" name="path" value="$(path:escape)" />
+<input type="hidden" name="di_id" value="$(di_id:escape)" />
+<input type="submit" name="go" value="Previous" />
+</form>
+</td>
+<td >
+<form action="index.htm" method="POST" >
+<input type="hidden" name="first" value="=$(first)+10" />
+<input type="hidden" name="path" value="$(path:escape)" />
+<input type="hidden" name="di_id" value="$(di_id:escape)" />
+<input type="submit" name="go" value="Next" />
+</form>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" >
+<tr class="apbg" >
+<td >
+../help/statusEditHelp.html</td>
+<td >
+" ?</td>
+<td >
+Пункты: $(сначала) - $(последний раз) k</td>
+</tr>
+<tr loop="sqlMsg" first="$(first)" last="$(last)" >
+<td valign="top" >
+<a href="diTopic.htm?mid=$(sqlMsg.di_id)&topic_id=$(sqlMsg.di_topic_id)&path=$(path:escape)#$(sqlMsg.di_id)" >
+$(sqlMsg.di_title)</a>
+</td>
+<td valign="top" >
+$(sqlMsg.di_created_by)</td>
+<td valign="top" >
+$(sqlMsg.di_created_on)</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" >
+Коммерческие Менеджеры sale/saleMan.htm saleNew.htm saleSearchOk.htm Сохраняют шкале Шкалу:</td>
+</tr>
+<tr >
+<td colspan="3" >
+<span loop="catP5" >
+<b >
+<a href="index.htm?kb_id=$(catP5.kb_id)" >
+$(catP5.kb_title)</a>
+</b>
+:</span>
+<span loop="catP4" >
+<a href="index.htm?kb_id=$(catP4.kb_id)" >
+$(catP4.kb_title)</a>
+:</span>
+<span loop="catP3" >
+<a href="index.htm?kb_id=$(catP3.kb_id)" >
+$(catP3.kb_title)</a>
+:</span>
+<span loop="catP2" >
+<a href="index.htm?kb_id=$(catP2.kb_id)" >
+$(catP2.kb_title)</a>
+:</span>
+<span loop="catP1" >
+<a href="index.htm?kb_id=$(catP1.kb_id)" >
+$(catP1.kb_title)</a>
+:</span>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

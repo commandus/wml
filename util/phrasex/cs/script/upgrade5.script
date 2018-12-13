@@ -1,0 +1,982 @@
+// /cs/script/upgrade5.script : 
+// Script for upgrading PT 5-SupportSite data to PT7-CustomerSupport
+//
+// IMPORTANT:
+// 1. Before running this script, backup your original data! Make sure 
+//    the source data source and target data source information are 
+//    correct. All data in the target data source will be deleted!
+// 2. This script does not copy database fields and tables you added.
+//    You must write your code in this file to copy them.
+// 3. This script does not copy PT5_TICKET.CUSTOM_*. If you use them,
+//    you need to add them to the section where that table is copied.
+
+// If you are upgrading a version older than 5.06, you must change the
+// following variable to 0.
+set local.hasTablesForDiscussionForum = 1;
+
+set local.sourceDsn = 'pt5data';  // source data source name
+set local.sourceUid = '';         // source user ID
+set local.sourcePwd = '';         // source password
+
+set local.targetDsn = 'pt7data';  // target data source name
+set local.targetUid = '';         // target user ID
+set local.targetPwd = '';         // target password
+
+// Set default data source to target
+local.useDataSource(local.targetDsn, local.targetUid, local.targetPwd);
+
+// Make sure target data source does not have any data. 
+// You can remove this check only if you are sure that the target 
+// data source is truely the target data source with useless data.
+//
+sql target_ticket = 'SELECT ticket_id FROM pt7cs_ticket';
+sql target_kb = 'SELECT kb_id FROM pt7cs_kb';
+if (target_ticket.fetch OR target_kb.fetch)
+  error 'Target data source ' + local.targetDsn + ' has data in it. '
+    'Make sure you did not switch the source and target data '
+    'sources by mistake. ';
+endif
+target_ticket.close;
+target_kb.close;
+
+//------------ Delete data in the target data source ----------------
+// Order is important due to referential integrity constraints.
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_ti_file');
+sql d1 = 'DELETE FROM pt7cs_ti_file';
+d1.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_ti_change');
+sql d2 = 'DELETE FROM pt7cs_ti_change';
+d2.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_ticket');
+sql d3 = 'DELETE FROM pt7cs_ticket';
+d3.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_kb_file');
+sql d4 = 'DELETE FROM pt7cs_kb_file';
+d4.execute;
+
+// MS Access does not do "delete cascade" when it handles multi-record 
+// delete: "DELETE FROM pt7cs_kb". It returns "Record is deleted" error. 
+// That is why we delete KB level by level to make sure child KB
+// records are deleted before their parent records.
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_kb');
+sql d5a = 
+  'DELETE FROM pt7cs_kb '
+  'WHERE kb_p1 IS NOT NULL AND kb_p2 IS NOT NULL AND kb_p3 IS NOT NULL '
+  'AND kb_p4 IS NOT NULL AND kb_p5 IS NOT NULL';
+d5a.execute;
+
+sql d5b = 
+  'DELETE FROM pt7cs_kb '
+  'WHERE kb_p1 IS NOT NULL AND kb_p2 IS NOT NULL AND kb_p3 IS NOT NULL '
+  'AND kb_p4 IS NOT NULL';
+d5b.execute;
+
+sql d5c = 
+  'DELETE FROM pt7cs_kb '
+  'WHERE kb_p1 IS NOT NULL AND kb_p2 IS NOT NULL AND kb_p3 IS NOT NULL';
+d5c.execute;
+
+sql d5d = 
+  'DELETE FROM pt7cs_kb '
+  'WHERE kb_p1 IS NOT NULL AND kb_p2 IS NOT NULL';
+d5d.execute;
+
+sql d5e = 'DELETE FROM pt7cs_kb WHERE kb_p1 IS NOT NULL';
+d5e.execute;
+
+sql d5f = 'DELETE FROM pt7cs_kb';
+d5f.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_di_file');
+sql d6 = 'DELETE FROM pt7cs_di_file';
+d6.execute;
+
+// MS Access does not do "delete cascade" when it handles multi-record 
+// delete: "DELETE FROM pt7cs_kb" or "..pt7cs_discuss WHERE di_id > 0". 
+// It returns "Record is deleted" error. 
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_discuss');
+
+sql d7a1 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL '
+  'AND di_p4 IS NOT NULL AND di_p5 IS NOT NULL '
+  'AND di_topic_id IS NOT NULL';
+d7a1.execute;
+
+sql d7a2 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL '
+  'AND di_p4 IS NOT NULL AND di_p5 IS NOT NULL';
+d7a2.execute;
+
+sql d7b1 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL '
+  'AND di_p4 IS NOT NULL '
+  'AND di_topic_id IS NOT NULL';
+d7b1.execute;
+
+sql d7b2 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL '
+  'AND di_p4 IS NOT NULL';
+d7b2.execute;
+
+sql d7c1 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL '
+  'AND di_topic_id IS NOT NULL';
+d7c1.execute;
+
+sql d7c2 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL AND di_p3 IS NOT NULL';
+d7c2.execute;
+
+sql d7d1 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL '
+  'AND di_topic_id IS NOT NULL';
+d7d1.execute;
+
+sql d7d2 = 
+  'DELETE FROM pt7cs_discuss '
+  'WHERE di_p1 IS NOT NULL AND di_p2 IS NOT NULL';
+d7d2.execute;
+
+sql d7e1 = 
+  'DELETE FROM pt7cs_discuss WHERE di_p1 IS NOT NULL '
+  'AND di_topic_id IS NOT NULL';
+d7e1.execute;
+
+sql d7e2 = 
+  'DELETE FROM pt7cs_discuss WHERE di_p1 IS NOT NULL';
+d7e2.execute;
+
+sql d7f1 = 
+  'DELETE FROM pt7cs_discuss WHERE di_topic_id IS NOT NULL';
+d7f1.execute;
+
+sql d7f2 = 
+  'DELETE FROM pt7cs_discuss';
+d7f2.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_news_file');
+sql d8a = 'DELETE FROM pt7cs_news_file';
+d8a.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_news');
+sql d8b = 'DELETE FROM pt7cs_news';
+d8b.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_sale');
+sql d9a = 'DELETE FROM pt7cs_sale';
+d9a.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_product');
+sql d9b = 'DELETE FROM pt7cs_product';
+d9b.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_user');
+sql d10 = 'DELETE FROM pt7cs_user';
+d10.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_priority');
+sql d11 = 'DELETE FROM pt7cs_priority';
+d11.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_status');
+sql d12 = 'DELETE FROM pt7cs_status';
+d12.execute;
+
+server.log('Deleting ' + local.targetDsn + '.pt7cs_report');
+sql d13 = 'DELETE FROM pt7cs_report';
+d13.execute;
+
+// no need to upgrade pt7_registry because it is shared and its
+// data are system generated
+
+//------------------------------- Copy data -------------------------
+
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_USER to ' + local.targetDsn + '.pt7cs_user');
+sql s1 = 'SELECT * FROM PT5_USER';
+s1.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s1.fetch)
+  sql i1 = 
+    INSERT INTO pt7cs_user(
+      user_id, user_pwd, user_row_ver, full_name, status,
+      user_type, phone, fax, email, company,
+      dept, title, address, city, state,
+      zipcode, country, user_note
+    )
+    VALUES(
+      s1.USER_ID, to.encrypted(s1.PASSWORD), s1.ROW_VER, s1.FULL_NAME, 
+      s1.STATUS, s1.TYPE, s1.PHONE, s1.FAX, s1.EMAIL, s1.COMPANY,
+      s1.DEPT, s1.TITLE, s1.ADDRESS, s1.CITY, s1.STATE,
+      s1.ZIPCODE, s1.COUNTRY, s1.NOTE
+    );
+  i1.execute;
+  i1.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s1.close;
+server.log(local.count);
+
+//--------------------------- product --------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_PRODUCT to ' + local.targetDsn + '.pt7cs_product');
+sql s2 = 'SELECT * FROM PT5_PRODUCT';
+s2.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s2.fetch)
+  sql sqlDispatcher = 
+    'SELECT USER_ID FROM PT5_TEAM '
+    'WHERE PRODUCT = \'' + s2.NAME + '\' '
+      'AND ROLE_TYPE = \'Dispatcher\'';
+  sqlDispatcher.useDataSource(
+    local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+  sql i2 = 
+    INSERT INTO pt7cs_product(
+      name, row_ver, product_type, dispatcher, description)
+    VALUES(
+      s2.NAME, s2.ROW_VER, s2.TYPE, sqlDispatcher.USER_ID, s2.DESCRIPTION);
+  i2.execute;
+  i2.close;
+  sqlDispatcher.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s2.close;
+server.log(local.count);
+
+//--------------------------- knowledge base ------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_KB to ' + local.targetDsn + '.pt7cs_kb');
+set local.count = 0;
+
+sql s6a = 'SELECT * FROM PT5_KB WHERE KB_P1 IS NULL';
+s6a.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+while (s6a.fetch)
+  // PT5: kb_type 1=category 2=text 3=file 4=url 
+  // PT7: kb_type 1=category 2=plain text 3=html fragment 4=url 5=file
+  set local.kb_type = s6a.KB_TYPE;
+  if (local.kb_type = 3)
+    set local.kb_type = 5;
+  endif
+  sql i6a = 
+    INSERT INTO pt7cs_kb(
+      kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5,
+      kb_k1, kb_k2, kb_k3, kb_k4, kb_k5,
+      kb_type, kb_owner, kb_created_by, kb_created_on,
+      kb_updated_by, kb_updated_on, kb_locked_by, kb_locked_on,
+      kb_title, kb_summary, kb_name, kb_size,
+      kb_visited, kb_security)
+    VALUES(
+      s6a.KB_ID, s6a.KB_P1, s6a.KB_P2, s6a.KB_P3, s6a.KB_P4, s6a.KB_P5,
+      s6a.KB_K1, s6a.KB_K2, s6a.KB_K3, s6a.KB_K4, s6a.KB_K5,
+      local.kb_type, s6a.KB_OWNER, s6a.KB_CREATED_BY, s6a.KB_CREATED_ON,
+      s6a.KB_UPDATED_BY, s6a.KB_UPDATED_ON, s6a.KB_LOCKED_BY, s6a.KB_LOCKED_ON,
+      s6a.KB_TITLE, s6a.KB_SUMMARY, s6a.KB_NAME, s6a.KB_SIZE,
+      s6a.KB_VISITED, s6a.KB_SECURITY);
+  i6a.execute;
+  i6a.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s6a.close;
+
+sql s6b = 'SELECT * FROM PT5_KB WHERE KB_P1 IS NOT NULL AND KB_P2 IS NULL';
+s6b.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+while (s6b.fetch)
+  set local.kb_type = s6b.KB_TYPE;
+  if (local.kb_type = 3)
+    set local.kb_type = 5;
+  endif
+  sql i6b = 
+    INSERT INTO pt7cs_kb(
+      kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5,
+      kb_k1, kb_k2, kb_k3, kb_k4, kb_k5,
+      kb_type, kb_owner, kb_created_by, kb_created_on,
+      kb_updated_by, kb_updated_on, kb_locked_by, kb_locked_on,
+      kb_title, kb_summary, kb_name, kb_size,
+      kb_visited, kb_security)
+    VALUES(
+      s6b.KB_ID, s6b.KB_P1, s6b.KB_P2, s6b.KB_P3, s6b.KB_P4, s6b.KB_P5,
+      s6b.KB_K1, s6b.KB_K2, s6b.KB_K3, s6b.KB_K4, s6b.KB_K5,
+      local.kb_type, s6b.KB_OWNER, s6b.KB_CREATED_BY, s6b.KB_CREATED_ON,
+      s6b.KB_UPDATED_BY, s6b.KB_UPDATED_ON, s6b.KB_LOCKED_BY, s6b.KB_LOCKED_ON,
+      s6b.KB_TITLE, s6b.KB_SUMMARY, s6b.KB_NAME, s6b.KB_SIZE,
+      s6b.KB_VISITED, s6b.KB_SECURITY);
+  i6b.execute;
+  i6b.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s6b.close;
+
+sql s6c = 
+  'SELECT * FROM PT5_KB '
+  'WHERE KB_P1 IS NOT NULL AND KB_P2 IS NOT NULL AND KB_P3 IS NULL';
+s6c.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+while (s6c.fetch)
+  set local.kb_type = s6c.KB_TYPE;
+  if (local.kb_type = 3)
+    set local.kb_type = 5;
+  endif
+  sql i6c = 
+    INSERT INTO pt7cs_kb(
+      kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5,
+      kb_k1, kb_k2, kb_k3, kb_k4, kb_k5,
+      kb_type, kb_owner, kb_created_by, kb_created_on,
+      kb_updated_by, kb_updated_on, kb_locked_by, kb_locked_on,
+      kb_title, kb_summary, kb_name, kb_size,
+      kb_visited, kb_security)
+    VALUES(
+      s6c.KB_ID, s6c.KB_P1, s6c.KB_P2, s6c.KB_P3, s6c.KB_P4, s6c.KB_P5,
+      s6c.KB_K1, s6c.KB_K2, s6c.KB_K3, s6c.KB_K4, s6c.KB_K5,
+      local.kb_type, s6c.KB_OWNER, s6c.KB_CREATED_BY, s6c.KB_CREATED_ON,
+      s6c.KB_UPDATED_BY, s6c.KB_UPDATED_ON, s6c.KB_LOCKED_BY, s6c.KB_LOCKED_ON,
+      s6c.KB_TITLE, s6c.KB_SUMMARY, s6c.KB_NAME, s6c.KB_SIZE,
+      s6c.KB_VISITED, s6c.KB_SECURITY);
+  i6c.execute;
+  i6c.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s6c.close;
+
+sql s6d = 
+  'SELECT * FROM PT5_KB '
+  'WHERE KB_P1 IS NOT NULL AND KB_P2 IS NOT NULL AND KB_P3 IS NOT NULL '
+  'AND KB_P4 IS NULL';
+s6d.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+while (s6d.fetch)
+  set local.kb_type = s6d.KB_TYPE;
+  if (local.kb_type = 3)
+    set local.kb_type = 5;
+  endif
+  sql i6d = 
+    INSERT INTO pt7cs_kb(
+      kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5,
+      kb_k1, kb_k2, kb_k3, kb_k4, kb_k5,
+      kb_type, kb_owner, kb_created_by, kb_created_on,
+      kb_updated_by, kb_updated_on, kb_locked_by, kb_locked_on,
+      kb_title, kb_summary, kb_name, kb_size,
+      kb_visited, kb_security)
+    VALUES(
+      s6d.KB_ID, s6d.KB_P1, s6d.KB_P2, s6d.KB_P3, s6d.KB_P4, s6d.KB_P5,
+      s6d.KB_K1, s6d.KB_K2, s6d.KB_K3, s6d.KB_K4, s6d.KB_K5,
+      local.kb_type, s6d.KB_OWNER, s6d.KB_CREATED_BY, s6d.KB_CREATED_ON,
+      s6d.KB_UPDATED_BY, s6d.KB_UPDATED_ON, s6d.KB_LOCKED_BY, s6d.KB_LOCKED_ON,
+      s6d.KB_TITLE, s6d.KB_SUMMARY, s6d.KB_NAME, s6d.KB_SIZE,
+      s6d.KB_VISITED, s6d.KB_SECURITY);
+  i6d.execute;
+  i6d.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s6d.close;
+
+sql s6e = 
+  'SELECT * FROM PT5_KB '
+  'WHERE KB_P1 IS NOT NULL AND KB_P2 IS NOT NULL AND KB_P3 IS NOT NULL '
+  'AND KB_P4 IS NOT NULL';
+s6e.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+while (s6e.fetch)
+  set local.kb_type = s6e.KB_TYPE;
+  if (local.kb_type = 3)
+    set local.kb_type = 5;
+  endif
+  sql i6e = 
+    INSERT INTO pt7cs_kb(
+      kb_id, kb_p1, kb_p2, kb_p3, kb_p4, kb_p5,
+      kb_k1, kb_k2, kb_k3, kb_k4, kb_k5,
+      kb_type, kb_owner, kb_created_by, kb_created_on,
+      kb_updated_by, kb_updated_on, kb_locked_by, kb_locked_on,
+      kb_title, kb_summary, kb_name, kb_size,
+      kb_visited, kb_security)
+    VALUES(
+      s6e.KB_ID, s6e.KB_P1, s6e.KB_P2, s6e.KB_P3, s6e.KB_P4, s6e.KB_P5,
+      s6e.KB_K1, s6e.KB_K2, s6e.KB_K3, s6e.KB_K4, s6e.KB_K5,
+      local.kb_type, s6e.KB_OWNER, s6e.KB_CREATED_BY, s6e.KB_CREATED_ON,
+      s6e.KB_UPDATED_BY, s6e.KB_UPDATED_ON, s6e.KB_LOCKED_BY, s6e.KB_LOCKED_ON,
+      s6e.KB_TITLE, s6e.KB_SUMMARY, s6e.KB_NAME, s6e.KB_SIZE,
+      s6e.KB_VISITED, s6e.KB_SECURITY);
+  i6e.execute;
+  i6e.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s6e.close;
+server.log(local.count);
+
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_KB_FILE to ' + local.targetDsn + '.pt7cs_kb_file');
+sql s7 = 'SELECT * FROM PT5_KB_FILE';
+s7.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s7.fetch)
+  set local.kbf_id =
+    local.getUniqueID('pt7cs_kb_file', 'kbf_id', 'pt7_registry');
+  sql sqlKB = 
+    'SELECT KB_ID, KB_NAME, KB_SIZE FROM PT5_KB '
+    'WHERE KB_ID = ' + s7.KB_ID;
+  sqlKB.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+  sql i7 = 
+    INSERT INTO pt7cs_kb_file(
+      kbf_id, kbf_kb_id, kbf_type, kbf_name, 
+      kbf_size, kbf_content)
+    VALUES(
+      local.kbf_id, s7.KB_ID, 1, sqlKB.KB_NAME, 
+      sqlKB.KB_SIZE, s7.KB_CONTENT);
+  i7.execute;
+  i7.close;
+  sqlKB.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s7.close;
+server.log(local.count);
+
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_FILE to ' + local.targetDsn + '.pt7cs_kb_file');
+sql s20 = 
+  'SELECT * FROM PT5_KB '
+  'WHERE KB_TICKET_ID IS NOT NULL AND KB_TICKET_ID <> 0';
+s20.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s20.fetch)
+  sql kbFiles = 
+    'SELECT * FROM PT5_FILE WHERE FILE_TICKET_ID = ' + s20.KB_TICKET_ID;
+  kbFiles.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+  while (kbFiles.fetch)
+    set local.kbf_id =
+      local.getUniqueID('pt7cs_kb_file', 'kbf_id', 'pt7_registry');
+    sql i20 = 
+      INSERT INTO pt7cs_kb_file(
+        kbf_id, kbf_kb_id, kbf_type, kbf_name, 
+        kbf_size, kbf_content)
+      VALUES(
+        local.kbf_id, s20.kb_id, 2, kbFiles.FILE_NAME,
+        kbFiles.FILE_SIZE, kbFiles.FILE_DATA);
+    i20.execute;
+    i20.close;
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  kbFiles.close;
+endwhile
+s20.close;
+server.log(local.count);
+
+//--------------------------- sales ---------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_SALE to ' + local.targetDsn + '.pt7cs_sale');
+sql s9 = 'SELECT * FROM PT5_SALE';
+s9.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s9.fetch)
+  sql i9 = 
+    INSERT INTO pt7cs_sale(
+      sa_serial, row_ver, sa_product, 
+      sa_sold_to, sa_contact1, sa_contact2, sa_sold_on, 
+      sa_notes)
+    VALUES(
+      s9.SA_SERIAL, s9.ROW_VER, s9.SA_PRODUCT, 
+      s9.SA_SOLD_TO, s9.SA_CONTACT1, s9.SA_CONTACT2, s9.SA_SOLD_ON, 
+      s9.SA_NOTES);
+  i9.execute;
+  i9.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s9.close;
+server.log(local.count);
+
+//--------------------------- report --------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_QUERY to ' + local.targetDsn + '.pt7cs_report');
+sql s10 = 'SELECT * FROM PT5_QUERY';
+s10.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s10.fetch)
+  sql i10 = 
+    INSERT INTO pt7cs_report(
+      rep_id, row_ver, name, rep_type,
+      sql_select, sql_where, sql_orderby,
+      max_row, max_col, rep_url, htm_where)
+    VALUES(
+      s10.QUERY_ID, s10.ROW_VER, s10.NAME, s10.TYPE,
+      s10.SQL_SELECT, s10.SQL_WHERE, s10.SQL_ORDERBY,
+      s10.MAX_ROW, s10.MAX_COL, s10.REP_URL, s10.HTM_WHERE);
+  i10.execute;
+  i10.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s10.close;
+server.log(local.count);
+
+//--------------------------- status --------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_STATUS to ' + local.targetDsn + '.pt7cs_status');
+sql s11 = 'SELECT * FROM PT5_STATUS';
+s11.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s11.fetch)
+  sql i11 = 
+    INSERT INTO pt7cs_status(name, row_ver, seq_num, description)
+    VALUES(s11.NAME, s11.ROW_VER, s11.SEQ_NUM, s11.DESCRIPTION);
+  i11.execute;
+  i11.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s11.close;
+server.log(local.count);
+
+//--------------------------- priority --------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_PRIORITY to ' + local.targetDsn + '.pt7cs_priority');
+sql s12 = 'SELECT * FROM PT5_PRIORITY';
+s12.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s12.fetch)
+  sql i12 = 
+    INSERT INTO pt7cs_priority(name, row_ver, is_def, description)
+    VALUES(s12.NAME, s12.ROW_VER, s12.IS_DEF, s12.DESCRIPTION);
+  i12.execute;
+  i12.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s12.close;
+server.log(local.count);
+
+//--------------------------- request --------------------------------
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_TICKET to ' + local.targetDsn + '.pt7cs_ticket');
+sql s14 = 'SELECT * FROM PT5_TICKET';
+s14.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s14.fetch)
+  sql i14 = 
+    INSERT INTO pt7cs_ticket(
+      ticket_id, row_ver, status, priority, 
+      deadline, serial_num, 
+      submitted_to, submitted_by, submitted_on, 
+      assigned_to, assigned_by, assigned_on, 
+      closed_by, closed_on, 
+      product, title, cost, turn_around, 
+      due_rem_flag)
+    VALUES(
+      s14.TICKET_ID, s14.ROW_VER, s14.STATUS, s14.PRIORITY, 
+      s14.DEADLINE, s14.SERIAL_NUM, 
+      s14.SUBMITTED_TO, s14.SUBMITTED_BY, s14.SUBMITTED_ON, 
+      s14.ASSIGNED_TO, s14.ASSIGNED_BY, s14.ASSIGNED_ON, 
+      s14.CLOSED_BY, s14.CLOSED_ON, 
+      s14.PRODUCT, s14.TITLE, s14.COST, S14.TURN_AROUND, 
+      s14.REMINDER_FLAG);
+  i14.execute;
+  i14.close;
+  set local.count = 1 + local.count;
+  server.logstr('.');
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log(local.count);
+  endif
+endwhile
+s14.close;
+server.log(local.count);
+
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_CHANGE to ' + local.targetDsn + '.pt7cs_ti_change');
+sql s15 = 'SELECT * FROM PT5_CHANGE';
+s15.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s15.fetch)
+  set local.type = s15.CH_TYPE;
+  if (local.type = 'detail')
+    set local.type = 'public';
+  endif
+  sql i15 = 
+    INSERT INTO pt7cs_ti_change(
+      ch_id, ch_ticket_id, ch_made_by, ch_made_on, 
+      ch_cost, ch_type, ch_format, ch_description)
+    VALUES(
+      s15.CH_ID, s15.CH_TICKET_ID, s15.CH_MADE_BY, s15.CH_MADE_ON, 
+      s15.CH_COST, local.type, 0, s15.CH_DESCRIPTION);
+  i15.execute;
+  i15.close;
+  set local.count = 1 + local.count;
+
+  server.logstr('.');
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log(local.count);
+  endif
+endwhile
+s15.close;
+server.log(local.count);
+
+server.log('Copying from ' + 
+  local.sourceDsn + '.PT5_FILE to ' + local.targetDsn + '.pt7cs_ti_file' + 
+  '. This operation can be slow, please be patient.');
+sql s16 = 'SELECT * FROM PT5_FILE';
+s16.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+set local.count = 0;
+while (s16.fetch)
+  sql sqlOldCh =
+    'SELECT CH_ID FROM PT5_CHANGE '
+    'WHERE CH_TICKET_ID = ' + s16.FILE_TICKET_ID + ' '
+    'ORDER BY CH_ID ASC';
+  sqlOldCh.useDataSource(local.sourceDsn, 
+                         local.sourceUid, local.sourcePwd);
+  set local.ch_id = sqlOldCh.CH_ID;
+  sqlOldCh.close;
+
+  sql i16 = 
+    INSERT INTO pt7cs_ti_file(
+      tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+    VALUES(
+      s16.FILE_ID, local.ch_id, s16.FILE_NAME,
+      s16.FILE_SIZE, s16.FILE_DATA);
+  i16.execute;
+  i16.close;
+  set local.count = 1 + local.count;
+  if (local.count > 0 AND local.count % 50 = 0)
+    server.log('.');
+  else
+    server.logstr('.');
+  endif
+endwhile
+s16.close;
+server.log(local.count);
+
+//--------------------------- discussion ----------------------------
+if (local.hasTablesForDiscussionForum = 1)
+  server.log('Copying from ' + 
+    local.sourceDsn + '.PT5_DISCUSS to ' + local.targetDsn + '.pt7cs_discuss');
+  set local.count = 0;
+
+  sql s18a = 
+    'SELECT * FROM PT5_DISCUSS WHERE DI_P1 IS NULL ORDER BY DI_ID ASC'; 
+  s18a.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+  while (s18a.fetch)
+    if (s18a.DI_TYPE = 1)   // categories
+      sql i18a1 = 
+        INSERT INTO pt7cs_discuss(
+          di_id, 
+          di_p1, di_p2, di_p3, di_p4, di_p5,
+          di_k1, di_k2, di_k3, di_k4, di_k5,
+          di_type, di_owner, 
+          di_created_by, di_created_on,
+          di_updated_by, di_updated_on, 
+          di_locked_by, di_locked_on, 
+          di_title, di_detail, di_topic_id,
+          di_visited, di_security)
+        VALUES(
+          s18a.DI_ID, 
+          s18a.DI_P1, s18a.DI_P2, s18a.DI_P3, s18a.DI_P4, s18a.DI_P5,
+          s18a.DI_K1, s18a.DI_K2, s18a.DI_K3, s18a.DI_K4, s18a.DI_K5,
+          s18a.DI_TYPE, s18a.DI_OWNER, 
+          s18a.DI_CREATED_BY, s18a.DI_CREATED_ON,
+          s18a.DI_UPDATED_BY, s18a.DI_UPDATED_ON, 
+          s18a.DI_LOCKED_BY, s18a.DI_LOCKED_ON, 
+          s18a.DI_TITLE, s18a.DI_DETAIL, s18a.DI_TOPIC_ID,  
+          s18a.DI_VISITED, s18a.DI_SECURITY);
+      i18a1.execute;
+      i18a1.close;
+    else  // root discussion messages in PT5 = news articles in PT7
+      set local.news_id = 
+        local.getUniqueID('pt7cs_news', 'news_id', 'pt7_registry');
+      if (s18a.DI_TYPE = 3)
+        set local.di_format = 'htmlFrag';
+      else
+        set local.di_format = 'plainText';
+      endif
+      sql i18a2 = 
+        INSERT INTO pt7cs_news(
+          news_id, news_created_by, news_created_on,
+          news_updated_by, news_updated_on, 
+          news_locked_by, news_locked_on, news_visited,
+          news_k1, news_k2, news_k3, news_k4, news_k5,
+          news_title, news_format, news_detail)
+        VALUES(
+          local.news_id, s18a.di_created_by, s18a.di_created_on,
+          s18a.di_updated_by, s18a.di_updated_on,
+          s18a.di_locked_by, s18a.di_locked_on, s18a.di_visited,
+          s18a.di_k1, s18a.di_k2, s18a.di_k3, s18a.di_k4, s18a.di_k5,
+          s18a.di_title, local.di_format, s18a.di_detail);
+      i18a2.execute;
+      i18a2.close;
+
+      // must copy its files now otherwise we lose track of di_id.
+      sql s18a2_f = 
+        'SELECT * FROM PT5_DI_ATTA WHERE DIA_DI_ID = ' + s18a.DI_ID;
+      s18a2_f.useDataSource(
+        local.sourceDsn, local.sourceUid, local.sourcePwd);
+      while (s18a2_f.fetch)
+        set local.nf_id = 
+          local.getUniqueID('pt7cs_news_file', 'nf_id', 'pt7_registry');
+        sql i18a2_f = 
+          INSERT INTO pt7cs_news_file(
+            nf_id, nf_news_id, nf_time, 
+            nf_name, nf_size, nf_content)
+          VALUES(
+            local.nf_id, local.news_id, s18a2_f.DIA_TIME, 
+            s18a2_f.DIA_NAME, s18a2_f.DIA_SIZE, s18a2_f.DIA_DATA);
+        i18a2_f.execute;
+        i18a2_f.close;
+      endwhile
+      s18a2_f.close;
+    endif
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  s18a.close;
+
+  sql s18b = 
+    'SELECT * FROM PT5_DISCUSS '
+    'WHERE DI_P1 IS NOT NULL AND DI_P2 IS NULL '
+    'ORDER BY DI_ID ASC'; // order by ID so that topic record is copied first
+  s18b.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+  while (s18b.fetch)
+    sql i18b = 
+      INSERT INTO pt7cs_discuss(
+        di_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+        di_k1, di_k2, di_k3, di_k4, di_k5,
+        di_type, di_owner, di_created_by, di_created_on,
+        di_updated_by, di_updated_on, di_locked_by, 
+        di_locked_on, di_title, di_detail, di_topic_id,
+        di_visited, di_security)
+      VALUES(
+        s18b.DI_ID, s18b.DI_P1, s18b.DI_P2, s18b.DI_P3, s18b.DI_P4, s18b.DI_P5,
+        s18b.DI_K1, s18b.DI_K2, s18b.DI_K3, s18b.DI_K4, s18b.DI_K5,
+        s18b.DI_TYPE, s18b.DI_OWNER, s18b.DI_CREATED_BY, s18b.DI_CREATED_ON,
+        s18b.DI_UPDATED_BY, s18b.DI_UPDATED_ON, s18b.DI_LOCKED_BY, 
+        s18b.DI_LOCKED_ON, s18b.DI_TITLE, s18b.DI_DETAIL, s18b.DI_TOPIC_ID, 
+        s18b.DI_VISITED, s18b.DI_SECURITY);
+    i18b.execute;
+    i18b.close;
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  s18b.close;
+
+  sql s18c = 
+    'SELECT * FROM PT5_DISCUSS '
+    'WHERE DI_P1 IS NOT NULL AND DI_P2 IS NOT NULL AND DI_P3 IS NULL '
+    'ORDER BY DI_ID ASC'; // order by ID so that topic record is copied first
+  s18c.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+  while (s18c.fetch)
+    sql i18c = 
+      INSERT INTO pt7cs_discuss(
+        di_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+        di_k1, di_k2, di_k3, di_k4, di_k5,
+        di_type, di_owner, di_created_by, di_created_on,
+        di_updated_by, di_updated_on, di_locked_by, 
+        di_locked_on, di_title, di_detail, di_topic_id,
+        di_visited, di_security)
+      VALUES(
+        s18c.DI_ID, s18c.DI_P1, s18c.DI_P2, s18c.DI_P3, s18c.DI_P4, s18c.DI_P5,
+        s18c.DI_K1, s18c.DI_K2, s18c.DI_K3, s18c.DI_K4, s18c.DI_K5,
+        s18c.DI_TYPE, s18c.DI_OWNER, s18c.DI_CREATED_BY, s18c.DI_CREATED_ON,
+        s18c.DI_UPDATED_BY, s18c.DI_UPDATED_ON, s18c.DI_LOCKED_BY, 
+        s18c.DI_LOCKED_ON, s18c.DI_TITLE, s18c.DI_DETAIL, s18c.DI_TOPIC_ID, 
+        s18c.DI_VISITED, s18c.DI_SECURITY);
+    i18c.execute;
+    i18c.close;
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  s18c.close;
+
+  sql s18d = 
+    'SELECT * FROM PT5_DISCUSS '
+    'WHERE DI_P1 IS NOT NULL AND DI_P2 IS NOT NULL '
+      'AND DI_P3 IS NOT NULL AND DI_P4 IS NULL '
+    'ORDER BY DI_ID ASC'; // order by ID so that topic record is copied first
+  s18d.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+  while (s18d.fetch)
+    sql i18d = 
+      INSERT INTO pt7cs_discuss(
+        di_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+        di_k1, di_k2, di_k3, di_k4, di_k5,
+        di_type, di_owner, di_created_by, di_created_on,
+        di_updated_by, di_updated_on, di_locked_by, 
+        di_locked_on, di_title, di_detail, di_topic_id,
+        di_visited, di_security)
+      VALUES(
+        s18d.DI_ID, s18d.DI_P1, s18d.DI_P2, s18d.DI_P3, s18d.DI_P4, s18d.DI_P5,
+        s18d.DI_K1, s18d.DI_K2, s18d.DI_K3, s18d.DI_K4, s18d.DI_K5,
+        s18d.DI_TYPE, s18d.DI_OWNER, s18d.DI_CREATED_BY, s18d.DI_CREATED_ON,
+        s18d.DI_UPDATED_BY, s18d.DI_UPDATED_ON, s18d.DI_LOCKED_BY, 
+        s18d.DI_LOCKED_ON, s18d.DI_TITLE, s18d.DI_DETAIL, s18d.DI_TOPIC_ID,
+        s18d.DI_VISITED, s18d.DI_SECURITY);
+    i18d.execute;
+    i18d.close;
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  s18d.close;
+
+  sql s18e = 
+    'SELECT * FROM PT5_DISCUSS '
+    'WHERE DI_P1 IS NOT NULL AND DI_P2 IS NOT NULL '
+      'AND DI_P3 IS NOT NULL AND DI_P4 IS NOT NULL '
+    'ORDER BY DI_ID ASC'; // order by ID so that topic record is copied first
+  s18e.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+  while (s18e.fetch)
+    sql i18e = 
+      INSERT INTO pt7cs_discuss(
+        di_id, di_p1, di_p2, di_p3, di_p4, di_p5,
+        di_k1, di_k2, di_k3, di_k4, di_k5,
+        di_type, di_owner, di_created_by, di_created_on,
+        di_updated_by, di_updated_on, di_locked_by, 
+        di_locked_on, di_title, di_detail, di_topic_id,
+        di_visited, di_security)
+      VALUES(
+        s18e.DI_ID, s18e.DI_P1, s18e.DI_P2, s18e.DI_P3, s18e.DI_P4, s18e.DI_P5,
+        s18e.DI_K1, s18e.DI_K2, s18e.DI_K3, s18e.DI_K4, s18e.DI_K5,
+        s18e.DI_TYPE, s18e.DI_OWNER, s18e.DI_CREATED_BY, s18e.DI_CREATED_ON,
+        s18e.DI_UPDATED_BY, s18e.DI_UPDATED_ON, s18e.DI_LOCKED_BY, 
+        s18e.DI_LOCKED_ON, s18e.DI_TITLE, s18e.DI_DETAIL, s18e.DI_TOPIC_ID,
+        s18e.DI_VISITED, s18e.DI_SECURITY);
+    i18e.execute;
+    i18e.close;
+    set local.count = 1 + local.count;
+    if (local.count > 0 AND local.count % 50 = 0)
+      server.log('.');
+    else
+      server.logstr('.');
+    endif
+  endwhile
+  s18e.close;
+  server.log(local.count);
+
+  server.log('Copying from ' + 
+    local.sourceDsn + '.PT5_DI_ATTA to ' + 
+    local.targetDsn + '.pt7cs_di_file or .pt7cs_news_file');
+  sql s19 = 'SELECT * FROM PT5_DI_ATTA';
+  s19.useDataSource(local.sourceDsn, local.sourceUid, local.sourcePwd);
+
+  set local.count = 0;
+  while (s19.fetch)
+    sql sqlIsDi =
+      'SELECT di_id FROM pt7cs_discuss WHERE di_id = ' + s19.DIA_DI_ID;
+    if (sqlIsDi.fetch) // otherwise it is a file for the news
+      sql i19b = 
+        INSERT INTO pt7cs_di_file(
+          dif_id, dif_di_id, dif_name, dif_size, 
+          dif_time, dif_content)
+        VALUES(
+          s19.DIA_ID, s19.DIA_DI_ID, s19.DIA_NAME, s19.DIA_SIZE, 
+          s19.DIA_TIME, s19.DIA_DATA);
+      i19b.execute;
+      i19b.close;
+      set local.count = 1 + local.count;
+      if (local.count > 0 AND local.count % 50 = 0)
+        server.log('.');
+      else
+        server.logstr('.');
+      endif
+    endif
+    sqlIsDi.close;
+  endwhile
+  s19.close;
+  server.log(local.count);
+endif
+
+server.log('pt5-sp data to pt7-cs upgrade finished successfully');

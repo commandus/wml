@@ -1,0 +1,6 @@
+To compile and run the wmlbrowser, you need QT library (www.trolltech.com) (not the snapshot version).
+
+Simply run make ou make -f Makefile.arm for arm processor (Compaq iPaq by example).
+and execute the executable ./qwmlbrowser (do not forget to set the environment variables QTDIR to qt_path and LD_LIBRARY_PATH to qt_path/lib).
+
+Rq: configure files will be provided soon

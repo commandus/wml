@@ -1,0 +1,109 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.cus_name = '')
+    error 'Please enter a report name';
+  endif
+  if (request.cus_url = '')
+    error 'Please enter a report template HTTP address';
+  endif
+
+  if (request.command = 'Save Report')
+    if (session.userType <> 'Manager')
+      error 'Only managers can save a report';
+    endif
+
+    if (request.fieldExist('cus_id'))
+      <serverside dataset="sqlUpdate" action="execute">    UPDATE cs_report SET
+          name = request.cus_name,
+          rep_url = request.cus_url,
+        WHERE rep_id = request.cus_id;
+  </serverside>
+  </serverside>
+    else
+      set local.rep_id = 
+        local.getUniqueID('cs_report', 'rep_id', 'registry');
+      <serverside dataset="sqlInsert = 
+        INSERT INTO cs_report(
+          rep_id, row_ver, name, rep_type, rep_url)
+        VALUES(
+          local.rep_id, 1, request.cus_name, 'Custom', request.cus_url);
+  </serverside>   
+    endif
+  endif
+)>
+<head>
+  <!$if (request.command = 'Save Report'))>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+  <!$else)>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+  <!$endif)>
+</head>
+<body>
+
+<center>
+<!$if (request.command = 'Save Report'))>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Custom Report Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Report: [$request.cus_name)] has been saved.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="repMan.htm">Report Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+<!$else)>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Run Custom Report
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Click the following link to run the report: 
+    <a href="$request.cus_url)">$request.cus_url)</a>
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+<!$endif)>
+</center>
+</body>
+</html>

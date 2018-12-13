@@ -1,0 +1,84 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (request.user_id = '')
+    error 'Please enter a user ID';
+  endif
+  if (string.findOneOf(request.user_id, '{|}') > 0)
+    error '{|} are not allowed in user ID';
+  endif
+  if (request.user_pwd <> request.user_pwd2)
+    error 'The two passwords you entered do not match.';
+  endif
+  if (request.email <> ''
+      AND (string.findString(request.email, '@') < 1 
+        OR string.findString(request.email, '.') < 1))
+    error 'Invalid email address.';  
+  endif
+
+  <serverside dataset="sqlUserExist" action="query">
+    SELECT user_id FROM cs_user WHERE user_id = request.user_id;
+  if (sqlUserExist.fetch = 1)
+    error 'User ID: [' + request.user_id + '] has been used. '
+      ' Please choose another one. ';
+  endif
+
+  <serverside dataset="sqlAddUser = 
+    INSERT INTO cs_user(
+      user_row_ver, user_type, user_id, user_pwd,
+      status, email, phone, fax, 
+      full_name, company, dept, 
+      address, city, state, 
+      zipcode, country) 
+    VALUES(
+      1, 'EndUser', request.user_id, to.encrypted(request.user_pwd), 
+      'active', request.email, request.phone, request.fax, 
+      request.full_name, request.company, request.dept, 
+      request.address, request.city, request.state, 
+      request.zipcode, request.country);
+  </serverside>
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$app.startPage)">$(appname)</a> : 
+      New account created
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Your account has been created. You can now use the following 
+    information to 
+    <a href="$app.startPage)?user_id=$(request.user_id:escape)">
+    log on</a>.
+    <br/>
+    &nbsp; User ID: $request.user_id) <br/>
+    &nbsp; Password: $request.user_pwd) 
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<html>
+<head>
+<title>New element buttons panel
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>New element buttons panel</h1>
+<p>View of the element buttons panel depends on wml deck context and currently
+selected element. Select different elements in the <a href="windowelements.htm">elements
+tree window</a> and see how buttons changes in the panel.</p>
+
+<p><img border="0" src="shot22.gif" width="498" height="87"><br>
+<br>
+Each button represents wml element what you can insert in the selected element.
+In figure you see <b>card</b> button, <b>template</b> button, <b>head</b> and
+comment buttons available for <b>wml</b> element. Note you can not see others
+elements in the panel because they are does not allowed in the wml deck.
+</p>
+
+<p>For instance click on <b>card</b> button. Your new card is created and is ready to be edited.
+New card appears on code editor
+window and the elements tree window reflects changes. Click on created element
+in the the elements tree window and set attributes.
+</p>
+
+<p>Then click on <b>head</b> button. New head element appears after card
+element. This looks wrong. You can <a href="howtomoveelement.htm">change
+placement</a> of the head and card elements using <i>Ctrl+Arrow Up</i>&nbsp; and
+<i>Ctrl+Arrow Down</i> keys.
+</p>
+
+<p>See also: <a href="windowtools.htm">Tools panel</a></p>
+
+</body>
+</html>

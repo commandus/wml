@@ -1,0 +1,73 @@
+
+<html>
+<head>
+<title>Variables</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Variables</h1>
+
+<table border="0">
+  <tr>
+    <td><a href="#setvar">setvar <img border="0" src="ssetvar.gif" width="8" height="8"></a>
+    </td>
+  </tr>
+</table>
+
+<p><a name=setvar>setvar</a>
+ <img border="0" src="setvar.gif" width="24" height="24">
+<br id=setvarbrief>Specifies a variable allow you to create dynamic decks and cards based on user input.
+Variable names are case-sensitive and consist of a ASCII letter or underscore followed by a zero
+or more letters, digits, or underscores. The following table describes how you can substitute variable values.
+<table border="0">
+  <tr>
+    <td>$var or $(var)</td>
+    <td>Escapes the variable using URL escaping conventions in the appropriate context.</td>
+  </tr>
+  <tr>
+    <td>$(var:e) or $(var:escape)</td>
+    <td>Escaping no alphanumeric characters according to URL encoding conventions.</td>
+  </tr>
+  <tr>
+    <td>$(var:unesc)</td>
+    <td>Unescaping no alphanumeric characters according to URL encoding conventions.</td>
+  </tr>
+  <tr>
+    <td>$(var:n) or $(var:noesc)</td>
+    <td>Substitutes the value of var, without escaping non-alphanumeric characters.</td>
+  </tr>
+</table>
+
+<p><a href="#setvar" style="margin-left: 32" onclick="expand('setvarattr')">attributes</a>  
+<p id=setvarattr style="margin-left: 64;display=none">
+  <b>name</b>
+  <br>Specifies the variable name.
+  <br><b>value</b>
+  <br>Specifies the variable value.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+
+<!-- task elements -->
+
+</body>
+</html>

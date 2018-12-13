@@ -1,0 +1,145 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.target_ticket_id = request.ticket_id)
+    error 'You cannot merge a request with itself.';
+  endif
+
+  if (request.new_cost <> '' AND request.note_data = '')
+    set local.note_data = 'Added cost'; // so that cost can be shown
+  else
+    set local.note_data = request.note_data;
+  endif
+  if (app.maxText > 0 AND string.length(local.note_data) > app.maxText)
+    set local.extra = string.length(local.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  <serverside dataset="sqlFindTarget" action="query">
+    SELECT ticket_id FROM cs_ticket 
+    WHERE ticket_id = request.target_ticket_id;
+  </serverside>
+  if (sqlFindTarget.fetch <> 1)
+    error 'Target request #' + request.target_ticket_id + ' not found.';
+  endif
+  sqlFindTarget.close;
+
+  // Request, change and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlMoveHistory" action="execute">    UPDATE cs_ti_change SET '
+      'ch_ticket_id = ' + request.target_ticket_id + ' '
+    'WHERE ch_ticket_id = ' + request.ticket_id;
+  </serverside>
+
+  // attachments are linked to the change records. no need to touch them.
+
+  set local.change = 
+    'Merged with request #' + request.ticket_id + '. ';
+  set local.ch_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddChange = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, ch_made_by, 
+      ch_made_on, ch_cost, ch_description)
+    VALUES(
+      local.ch_id, request.target_ticket_id, 'log', 
+      session.userID, server.dateTime, 0, local.change);
+  </serverside>
+  
+  if (local.note_data <> '')
+    set local.ch_id = 
+      local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+    <serverside dataset="sqlAddNote = 
+      INSERT INTO cs_ti_change(
+        ch_id, ch_ticket_id, ch_type, 
+        ch_made_by, ch_made_on, ch_cost, ch_format, ch_description)
+      VALUES(
+        local.ch_id, request.target_ticket_id, 'public', 
+        session.userID, server.dateTime, request.new_cost, 
+        request.note_format, local.note_data);
+  </serverside>
+  endif
+  
+  // calculate total cost AFTER cost of this history record is updated.
+  <serverside dataset="sqlSumCost" action="query">
+    SELECT sum(ch_cost) FROM cs_ti_change
+    WHERE ch_ticket_id = request.target_ticket_id;
+  </serverside>
+  set local.totalCost = sqlSumCost.column(0);
+  sqlSumCost.close;
+
+  <serverside dataset="sqlUpdateCost" action="execute">    UPDATE cs_ticket SET cost = local.totalCost
+    WHERE ticket_id = request.target_ticket_id;
+  </serverside>
+  </serverside>
+
+  <serverside dataset="sqlDeleteSourceTicket" action="execute">    DELETE FROM cs_ticket WHERE ticket_id = ' + request.ticket_id;
+  </serverside>
+
+  local.commitTransaction;
+
+  set local.backToInfo = 
+    'backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Request Assigned
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Request #$request.ticket_id) has been merged into <a href=
+      "ticketView.htm?ticket_id=$request.target_ticket_id)&$local.backToInfo)"
+      >request #$request.target_ticket_id)</a>.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

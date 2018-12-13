@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Open eBook package file markup reference</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Open eBook package file markup reference</h1>
+<p>eBook publication in accordance to the Open eBook Standard requires a package file (.opf file) to be converted into system- dependent format. requires a package file for each eBook.</p>
+<p>Package files are XML-style files that like all others XML files are largely lower-case throughout (the exceptions are the various &quot;dc:Metadata&quot;
+tags).</p>
+<p>Sample (given in Microsoft ® Reader SDK):</p>
+<p>package unique-identifier=&quot;isbn&quot;&gt;<br>
+&nbsp;&lt;metadata&gt;<br>
+&nbsp;&nbsp;&lt;dc-metadata<br>
+&nbsp;&nbsp;&nbsp;xmlns:dc=&quot;http://purl.org/metadata/dublin_core&quot;<br>
+&nbsp;&nbsp;&nbsp;xmlns:oebpackage=&quot;http://openebook.org/namespaces/oeb-package/1.0/&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Title&gt;Great Expectations&lt;/dc:Title&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Contributor role=&quot;aui&quot;&gt;Stanley Weintraub&lt;/dc:Contributor&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Contributor role=&quot;art&quot;&gt;Robert Braithwaite Martineau&lt;/dc:Contributor&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Creator file-as=&quot;Dickens, Charles&quot; role=&quot;aut&quot;&gt;Charles Dickens&lt;/dc:Creator&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Coverage&gt;19th Century England&lt;/dc:Coverage&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Date&gt;July, © 2000&lt;/dc:Date&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Identifier id=&quot;isbn&quot;&gt;0-451-52671-6&lt;/dc:Identifier&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Language&gt;en&lt;/dc:Language&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;dc:Publisher&gt;Penguin Putnam Inc.&lt;/dc:Publisher&gt;<br>
+&nbsp;&nbsp;&lt;/dc-metadata&gt;<br>
+&nbsp;&nbsp;&lt;x-metadata&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;meta name=&quot;ms-chaptertour&quot; content=&quot;chaptertour&quot;/&gt;<br>
+&nbsp;&nbsp;&lt;/x-metadata&gt;<br>
+&nbsp;&lt;/metadata&gt;<br>
+&nbsp;&lt;manifest&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;content&quot; href=&quot;Dickens_Expect.htm&quot; media-type=&quot;text/x-oeb1-document&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;about&quot; href=&quot;Dickens_About.htm&quot; media-type=&quot;text/x-oeb1-document&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;coverstandard&quot; href=&quot;GEcover.jpg&quot; media-type=&quot;image/jpeg&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;thumbstandard&quot; href=&quot;GEthumbnail.jpg&quot; media-type=&quot;image/jpeg&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;titlestandard&quot; href=&quot;GEtitle.jpg&quot; media-type=&quot;image/jpeg&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;cover&quot; href=&quot;Dickens480.jpg&quot; media-type=&quot;image/jpeg&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;thumb&quot; href=&quot;Dickens090.jpg&quot; media-type=&quot;image/jpeg&quot; /&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;plate 1&quot; href=&quot;kit.jpg&quot; media-type=&quot;image/jpeg&quot;/&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;plate 2&quot; href=&quot;havisham.jpg&quot; media-type=&quot;image/jpeg&quot;/&gt;<br>
+&nbsp;&nbsp;&lt;item id=&quot;plate 3&quot; href=&quot;jaggers.jpg&quot; media-type=&quot;image/jpeg&quot;/&gt;<br>
+&nbsp;&lt;/manifest&gt;<br>
+&nbsp;&lt;spine&gt;<br>
+&nbsp;&nbsp;&lt;itemref idref=&quot;content&quot; /&gt;<br>
+&nbsp;&lt;/spine&gt;<br>
+&nbsp;&lt;guide&gt;<br>
+&nbsp;&nbsp;&lt;reference type=&quot;toc&quot; title=&quot;Table of Contents&quot; href=&quot;Dickens_Expect.htm#TOC&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-coverimage-standard&quot; title=&quot;cover image standard&quot; href=&quot;GEcover.jpg&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-thumbimage-standard&quot; title=&quot;thumb image standard&quot; href=&quot;GEthumbnail.jpg&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-titleimage-standard&quot; title=&quot;title image standard&quot; href=&quot;Getitle.jpg&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-coverimage&quot; title=&quot;PPC cover image&quot; href=&quot;Dickens480.jpg&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-thumbimage&quot; title=&quot;PPC thumbnail image&quot; href=&quot;Dickens090.jpg&quot; /&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;other.ms-firstpage&quot; title=&quot;&quot; href=&quot;Dickens_Expect.htm#p1&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;reference type=&quot;title-page&quot; title=&quot;&quot; href=&quot;Dickens_About.htm&quot;/&gt;<br>
+&nbsp;&lt;/guide&gt;<br>
+&nbsp;&lt;tours&gt;<br>
+&nbsp;&nbsp;&lt;tour id=&quot;chaptertour&quot; title=&quot;chapter tour&quot;&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch1&quot; href=&quot;Dickens_Expect.htm#Ch1&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch2&quot; href=&quot;Dickens_Expect.htm#Ch2&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch3&quot; href=&quot;Dickens_Expect.htm#Ch3&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch4&quot; href=&quot;Dickens_Expect.htm#Ch4&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch5&quot; href=&quot;Dickens_Expect.htm#Ch5&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch6&quot; href=&quot;Dickens_Expect.htm#Ch6&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch7&quot; href=&quot;Dickens_Expect.htm#Ch7&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch8&quot; href=&quot;Dickens_Expect.htm#Ch8&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch9&quot; href=&quot;Dickens_Expect.htm#Ch9&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch10&quot; href=&quot;Dickens_Expect.htm#Ch10&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch11&quot; href=&quot;Dickens_Expect.htm#Ch11&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;ch12&quot; href=&quot;Dickens_Expect.htm#Ch12&quot;/&gt;<br>
+&nbsp;&nbsp;&nbsp;&lt;site title=&quot;epilogue&quot; href=&quot;Dickens_Expect.htm #Epilogue&quot;/&gt;<br>
+&nbsp;&nbsp;&lt;/tour&gt;<br>
+&nbsp;&lt;/tours&gt;<br>
+&lt;/package&gt;
+</p>
+<p>
+See also:
+</p>
+
+<p><a href="oeboverview.htm">Open eBook overview</a> </p>
+
+<p><a href="oppackage.htm">Open eBook package document</a> </p>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>apooHelpDesk</title>apooHelpDesk</title>
+  Help : How to enter HTML fragment text
+</title>
+</head>
+<body>
+<center>
+<table width="90%">
+<tr>
+  <td><font size=+1>
+    Help : How to enter HTML fragment text
+  </font></td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>
+When entering text for a knowledge base article, a discussion
+message or a request, you can enter plain text or a HTML fragment. 
+HTML allows you to format the text you enter. It uses tags enclosed 
+in "&lt;" and "&gt;" to represent the formatting information. 
+<br/>
+For example, "Hello &lt;b&gt;World&lt;/b&gt;!" shows up as
+Hello <b>World</b>! To enter "&lt;" or "&gt;" themselves, 
+you need to type "&amp;lt;" or "&amp;gt;" respectively. 
+To enter the "&amp;" itself, you need to type "&amp;amp;".  
+<br/>
+Here are some basic yet very useful tags. 
+<br/>
+<table border=1 cellspacing="2" cellpadding="2">
+<tr>
+  <th> Tag </th> 
+  <th> Meaning </th>
+  <th> Sample Code </th> 
+  <th> How it would look on the browser</th> 
+</tr>
+<tr>
+  <td> &lt;b&gt; &lt;/b&gt; </td>
+  <td> bold </td>
+  <td nowrap="nowrap"> Hello &lt;b&gt;World&lt;/b&gt; </td>
+  <td nowrap="nowrap"> Hello <b>World</b> </td>
+</tr>
+<tr>
+  <td> &lt;i&gt; &lt;/i&gt;</td>
+  <td> italic </td>
+  <td nowrap="nowrap"> Hello &lt;i&gt;World&lt;/i&gt; </td>
+  <td nowrap="nowrap"> Hello <i>World</i> </td>
+</tr>
+<tr>
+  <td> &lt;br&gt;</td>
+  <td> line break</td>
+  <td nowrap="nowrap"> Hello &lt;br&gt;World </td>
+  <td nowrap="nowrap"> Hello <br/>World </td>
+</tr>
+<tr>
+  <td> &lt;p&gt;</td>
+  <td> paragraph </td>
+  <td nowrap="nowrap"> Hello &lt;p&gt;World </td>
+  <td nowrap="nowrap"> Hello <br/>World </td>
+</tr>
+<tr>
+  <td> &lt;pre&gt; &lt;/pre&gt;</td>
+  <td> preformatted </td>
+  <td nowrap="nowrap"> 
+    &lt;pre&gt; <br/>
+    if (request.user_id = '') <br/>
+    &nbsp;error 'enter ID'; <br/>
+    endif <br/>
+    &lt;/pre&gt; 
+  </td>
+  <td nowrap="nowrap"> 
+<pre>
+if (request.user_id = '') 
+  error 'enter ID'; 
+endif 
+</pre> 
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+  <td nowrap="nowrap"> 
+    if (request.user_id = '') <br/>
+    &nbsp;error 'enter ID'; <br/>
+    endif
+  </td>
+  <td nowrap="nowrap">
+    if (request.user_id = '') 
+      error 'enter ID'; 
+    endif 
+  </td>
+</tr>
+<tr>
+  <td nowrap="nowrap"> 
+    &lt;ol&gt; <br/>
+    &nbsp; &lt;li&gt; <br/>
+    &lt;/ol&gt;
+  </td>
+  <td> ordered list</td>
+  <td nowrap="nowrap"> 
+    &lt;ol&gt; <br/>
+    &nbsp; &lt;li&gt; item 1 <br/>
+    &nbsp; &lt;li&gt; item 2 <br/>
+    &lt;/ol&gt;
+  </td>
+  <td nowrap="nowrap">
+    <ol>
+      <li>item 1
+      <li>item 2
+    </ol>
+  </td>
+</tr>
+<tr>
+  <td nowrap="nowrap"> 
+    &lt;ul&gt; <br/>
+    &nbsp; &lt;li&gt; <br/>
+    &lt;/ul&gt;
+  </td>
+  <td> unordered list</td>
+  <td nowrap="nowrap"> 
+    &lt;ul&gt; <br/>
+    &nbsp; &lt;li&gt; item 1 <br/>
+    &nbsp; &lt;li&gt; item 2 <br/>
+    &lt;/ul&gt;
+  </td>
+  <td nowrap="nowrap">
+    <ul>
+      <li>item 1
+      <li>item 2
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td nowrap="nowrap"> 
+    &lt;table&gt; <br/>
+    &lt;tr&gt; <br/>
+    &nbsp; &lt;td&gt; &lt;/td&gt; <br/>
+    &lt;/tr&gt; <br/>
+    &lt;/table&gt;
+  </td>
+  <td nowrap="nowrap">
+    table <br/>
+    row <br/>
+    &nbsp; column column_end <br/>
+    row_end <br/>
+    table_end
+  </td>
+  <td nowrap="nowrap"> 
+    &lt;table&gt; <br/>
+    &lt;tr&gt; <br/>
+    &nbsp; &lt;td&gt; 1,1 &lt;/td&gt; <br/>
+    &nbsp; &lt;td&gt; 1,2 &lt;/td&gt; <br/>
+    &lt;/tr&gt; <br/>
+    &lt;tr&gt; <br/>
+    &nbsp; &lt;td&gt; 2,1 &lt;/td&gt; <br/>
+    &nbsp; &lt;td&gt; 2,2 &lt;/td&gt; <br/>
+    &lt;/tr&gt; <br/>
+    &lt;/table&gt;
+  </td>
+  <td align="center">
+    <table>
+    <tr> <td> 1.1 </td><td> 1.2 </td> </tr>
+    <tr> <td> 2.1 </td><td> 2.2 </td> </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<br/>
+Note, make sure you enter tags valid within the body of a HTML file only. 
+Do not enter &lt;/body&gt; or &lt;/html&gt; tag.
+</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right"><a href="index.html">index</a></td></tr>
+</table>
+</center>
+</body>
+</html>

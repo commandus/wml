@@ -1,0 +1,24 @@
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <serverside action="db" opt="ib">
+     db=$(DB_HD) 
+  </serverside>
+  <serverside action="send" opt="cookie">
+     "user_id=$(user_id)","user_pwd=$(user_pwd)" 
+  </serverside>
+  <head loop="global">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title loop="cookie">
+      Welcome $(user_id) - apooHelpDesk Customer Support Logon in progress
+    </title>
+    <meta http-equiv="refresh" content="3; url=$(b:unescape)"/>
+  </head>
+  <body loop="User">
+    <center>
+      Wait a 3 seconds.<br/>  
+      <a href="$(b:unescape)">Continue</a>  
+    </center>
+  </body>
+</html>

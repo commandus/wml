@@ -1,0 +1,87 @@
+
+<html>
+<head>
+<title>Automatic entity conversion on loading and saving</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Automatic entity conversion on loading and saving</h1>
+
+<p ALIGN="LEFT">When it is required, you may use character
+entities instead of input characters directly. For instance, if you are prefer
+to use specific code page (instead of more universal
+Unicode) you are limited by given character encoding. Character entities are a character encoding-independent
+mechanism for entering any character from the document character set. Entities
+are designed for use in non-Unicode encoded documents.&nbsp;</p>
+
+<p ALIGN="LEFT"> In WML all numeric character
+entities are referenced with respect to the Unicode and not to the current document
+encoding (charset). This means that alpha (first letter in Greek alphabet) can
+be represented as &amp;#x3B1; (hexadecimal Unicode number) or &amp;#945;
+(decimal Unicode number) and these numbers always
+refers to the alpha, independent of the current character encoding. This means
+also that you can use Greek characters in your document encoded in the iso-8859-1
+or us-ascii but not exactly iso-8859-7 (Greek encoding) with entities.</p>
+
+<p> Please note it is more easy to use UTF-8 encoding because you are input any
+characters directly (or choose them from the <a href="howtosymbol.htm"> Insert a
+special symbol dialog</a>. If you prefer to
+use a particular code page, please see list of&nbsp; <a href="codepages.htm">Supported
+code pages</a>.
+</p>
+
+<p> The editor displays Unicode characters well so it is possible to represent
+glyphs instead of Unicode numbers. It means that all numeric entities 'll be
+replaced to the Unicode characters after document is loaded. By default editor
+do not that. To enable this feature, you must enter to the <i>Editor Options</i>
+dialog, select <i>Auto conversion</i> tab sheet and mark <i>Replace entities to
+characters</i>, as
+shown below.&nbsp;
+</p>
+
+<p><img border="0" src="shot32.gif" width="342" height="282" alt="Editor options, Auto conversion tab sheet">
+</p>
+
+<p>Also, if you would like save any non-ASCII characters as numeric entities,
+you must enter to the <i>Editor Options</i> dialog, select <i>Auto conversion</i>
+tab sheet and mark <i>Replace all non-ASCII characters to entities</i>.
+</p>
+
+<p>As you can see, there are two additional options: <i>Numeric entities are
+referenced with respect to the document encoding (charset)</i> for loading and
+saving document both. WML documentation declares that all numeric character entities are referenced with respect to the
+document character set (Unicode) and not to the current document encoding (charset).
+But if there are some documents you have use numeric character entities are referenced with respect to the document encoding
+(charset), you can load them correctly (mark first checkbox) and than save it.
+This procedure will fix documents with incorrect entities.
+</p>
+
+<p>And, if you would like save in use numeric character entities are referenced with respect to the document encoding
+(charset), mark second checkbox.
+</p>
+
+<p>Note that both <i>Numeric entities are referenced with respect to the
+document encoding (charset)</i> options are valid if appropriate <i>Replace ..</i>
+option is marked.
+</p>
+
+<p>See also: <a href="languagesupport.htm">National languages support</a> <a href="codepages.htm">Supported code pages</a> 
+ <a href="howtosymbol.htm">How to insert a special symbol</a> 
+</p>
+
+</body>
+</html>

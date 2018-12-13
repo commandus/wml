@@ -1,0 +1,323 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+
+  if (request.fieldExist('max_row'))  // from search form, not refresh
+    if (request.max_row < 1)
+      error 'Max Records must be greater than 0';
+    endif
+    if (request.col1 = request.col2 
+      OR request.col1 = request.col2 OR request.col2 = request.col3)
+      error 'Field 1, 2 and 3 must be different';
+    endif
+    set session.usr_max_row = request.max_row;
+    set session.usr_col1 = request.col1;
+    set session.usr_col2 = request.col2;
+    set session.usr_col3 = request.col3;
+    set session.usr_sort1 = request.sort1;
+    set session.usr_sort1_dir = request.sort1_dir;
+    set session.usr_sort2 = request.sort2;
+    set session.usr_sort2_dir = request.sort2_dir;
+    set session.usr_user_id = request.user_id;
+    set session.usr_full_name = request.full_name;
+    set session.usr_phone = request.phone;
+    set session.usr_email = request.email;
+    set session.usr_company = request.company;
+    set session.usr_dept = request.dept;
+  endif
+
+  // covert user friendly column names to real column names
+  if (session.usr_col1 = 'User ID')
+    set local.col1 = 'user_id';
+  elseif (session.usr_col1 = 'Full Name')
+    set local.col1 = 'full_name';
+  elseif (session.usr_col1 = 'Company')
+    set local.col1 = 'company';
+  elseif (session.usr_col1 = 'Department')
+    set local.col1 = 'dept';
+  elseif (session.usr_col1 = 'Email Address')
+    set local.col1 = 'email';
+  elseif (session.usr_col1 = 'Phone Number')
+    set local.col1 = 'phone';
+  else
+    set local.col1 = '';
+  endif
+  if (session.usr_col2 = 'User ID')
+    set local.col2 = 'user_id';
+  elseif (session.usr_col2 = 'Full Name')
+    set local.col2 = 'full_name';
+  elseif (session.usr_col2 = 'Company')
+    set local.col2 = 'company';
+  elseif (session.usr_col2 = 'Department')
+    set local.col2 = 'dept';
+  elseif (session.usr_col2 = 'Email Address')
+    set local.col2 = 'email';
+  elseif (session.usr_col2 = 'Phone Number')
+    set local.col2 = 'phone';
+  else
+    set local.col2 = '';
+  endif
+  if (session.usr_col3 = 'User ID')
+    set local.col3 = 'user_id';
+  elseif (session.usr_col3 = 'Full Name')
+    set local.col3 = 'full_name';
+  elseif (session.usr_col3 = 'Company')
+    set local.col3 = 'company';
+  elseif (session.usr_col3 = 'Department')
+    set local.col3 = 'dept';
+  elseif (session.usr_col3 = 'Email Address')
+    set local.col3 = 'email';
+  elseif (session.usr_col3 = 'Phone Number')
+    set local.col3 = 'phone';
+  else
+    set local.col3 = '';
+  endif
+
+  if (session.usr_sort1 = 'User ID')
+    set local.sort1 = 'user_id';
+  elseif (session.usr_sort1 = 'Full Name')
+    set local.sort1 = 'full_name';
+  elseif (session.usr_sort1 = 'Company')
+    set local.sort1 = 'company';
+  elseif (session.usr_sort1 = 'Department')
+    set local.sort1 = 'dept';
+  elseif (session.usr_sort1 = 'Email Address')
+    set local.sort1 = 'email';
+  elseif (session.usr_sort1 = 'Phone Number')
+    set local.sort1 = 'phone';
+  else
+    set local.sort1 = '';
+  endif
+  if (session.usr_sort1_dir = 'Descending')
+    set local.sort1_dir = 'DESC';
+  else
+    set local.sort1_dir = 'ASC';
+  endif
+  if (session.usr_sort2 = 'User ID')
+    set local.sort2 = 'user_id';
+  elseif (session.usr_sort2 = 'Full Name')
+    set local.sort2 = 'full_name';
+  elseif (session.usr_sort2 = 'Company')
+    set local.sort2 = 'company';
+  elseif (session.usr_sort2 = 'Department')
+    set local.sort2 = 'dept';
+  elseif (session.usr_sort2 = 'Email Address')
+    set local.sort2 = 'email';
+  elseif (session.usr_sort2 = 'Phone Number')
+    set local.sort2 = 'phone';
+  else
+    set local.sort2 = '';
+  endif
+  if (session.usr_sort2_dir = 'Descending')
+    set local.sort2_dir = 'DESC';
+  else
+    set local.sort2_dir = 'ASC';
+  endif
+   
+  // construct the <serverside dataset="statement
+  set local.s = 'user_id';
+  if (local.col1 <> '')
+    set local.s = local.s + ',' + local.col1;
+  endif
+  if (local.col2 <> '')
+    set local.s = local.s + ',' + local.col2;
+  endif
+  if (local.col3 <> '')
+    set local.s = local.s + ',' + local.col3;
+  endif
+
+  set local.w = '';
+  if (app.dbCaseSensitive = 1)  // set in index.htm
+    if (session.usr_user_id <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(user_id) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_user_id) + '%\')';
+    endif
+    if (session.usr_full_name <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(full_name) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_full_name) + '%\')';
+    endif
+    if (session.usr_company <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(company) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_company) + '%\')';
+    endif
+    if (session.usr_dept <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(dept) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_dept) + '%\')';
+    endif
+    if (session.usr_email <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(email) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_email) + '%\')';
+    endif
+    if (session.usr_phone <> '')
+      if (local.w <> '')
+        set local.w = local.w + ' AND ';
+      endif
+      set local.w = local.w + 
+        'upper(phone) LIKE '
+        'upper(\'' + to.2QuoteStr(session.usr_phone) + '%\')';
+    endif
+  else  // ms access is not case sensitive and does not support upper()
+    if (session.usr_user_id <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'user_id LIKE \'' + to.2QuoteStr(session.usr_user_id) + '%\'';
+    endif
+    if (session.usr_full_name <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'full_name LIKE \'' + to.2QuoteStr(session.usr_full_name) + '%\'';
+    endif
+    if (session.usr_company <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'company LIKE \'' + to.2QuoteStr(session.usr_company) + '%\'';
+    endif
+    if (session.usr_dept <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'dept LIKE \'' + to.2QuoteStr(session.usr_dept) + '%\'';
+    endif
+    if (session.usr_email <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'email LIKE \'' + to.2QuoteStr(session.usr_email) + '%\'';
+    endif
+    if (session.usr_phone <> '')
+        if (local.w <> '')
+        set local.w = local.w + ' AND ';
+        endif
+        set local.w = local.w + 
+        'phone LIKE \'' + to.2QuoteStr(session.usr_phone) + '%\'';
+    endif
+  endif
+
+  set local.o = '';
+  if (local.sort1 <> '')
+    set local.o = local.o + local.sort1 + ' ' + local.sort1_dir;
+  endif
+  if (local.sort2 <> '')
+    if (local.o <> '')
+      set local.o = local.o + ', ';
+    endif
+    set local.o = local.o + local.sort2 + ' ' + local.sort2_dir;
+  endif
+
+  set local.sql" action="query">
+    SELECT ' + local.s + ' FROM cs_user';
+  if (local.w <> '')
+    set local.sql = local.sql + ' WHERE ' + local.w;
+  endif
+  if (local.o <> '')
+    set local.sql = local.sql + ' ORDER BY ' + local.o;
+  </serverside>
+  endif
+
+  <serverside dataset="s1 = local.sql;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> :
+    <a href="userFind.htm">Select Submitter</a> : Users Found
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <th > User ID </th>
+  <th > $session.usr_col1)</th>
+  <th > $session.usr_col2)</th>
+  <th > $session.usr_col3)</th>
+  <th > Command </th>
+</tr>
+
+<!$ 
+  set local.count = 0; 
+  set local.bgcolor = 'dummy'; 
+
+  while (s1.fetch AND local.count < to.integer(session.usr_max_row)) 
+    set local.count = 1 + local.count; 
+    if (local.bgcolor = '') 
+      set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+    else 
+      set local.bgcolor = ''; 
+    endif 
+    set local.viewUrl = 
+      'userView.htm?user_id=' + $(s1.user_id:escape) + 
+      '&backTo=userFindOk';
+    set local.newTicketUrl = 
+      session.ticketFolder + 
+      'ticketNew.htm?submitted_by=' + $(s1.user_id:escape);
+)>
+<tr $local.bgcolor)>
+  <td><a href="$local.viewUrl)">$s1.user_id)</a></td>
+  <td>$(s1.1))</td>
+  <td>$(s1.2))</td>
+  <td>$(s1.3))</td>
+  <td><a href="$local.newTicketUrl)">New Request</a></td>
+</tr>
+<!$endwhile)>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    <!$if (local.count >= to.integer(session.usr_max_row)))>
+      Total: $local.count) or more users found. 
+      $local.count) users displayed. 
+    <!$else)>
+      Total: $local.count) user(s) found and displayed. 
+    <!$endif)>
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

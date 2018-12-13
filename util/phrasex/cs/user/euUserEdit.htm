@@ -1,0 +1,128 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+
+  if (session.userID <> request.user_id 
+      AND session.userType <> 'Manager')
+    error 'Only managers or ' + request.user_id + 
+          ' can edit ' + request.user_id;
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT * FROM cs_user WHERE user_id = request.user_id;
+  if (s1.fetch <> 1)
+    error request.user_id + ' no longer exists.';
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="euUserEditOk.htm">
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="4">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Update $(s1.user_id))
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr>
+  <td colspan="2">
+    Full Name:<br/>
+    <input type="text" name=full_name size="30" maxlength="50" 
+      value="$(s1.full_name))">
+  </td>
+  <td colspan="2">
+    Email Addresses: <br/>
+    <input type="text" name=email size="30" maxlength="50" 
+      value="$(s1.email))">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Password: <br/>
+    <input type=password name=user_pwd size="30" maxlength="20" 
+      value="$(to.decrypted(s1.user_pwd)))">
+  </td>
+  <td colspan="2">
+    Password (Again): <br/>
+    <input type=password name=user_pwd2 size="30" maxlength="20" 
+      value="$(to.decrypted(s1.user_pwd)))"><br/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Phone:<br/>
+    <input type="text" name=phone size="30" maxlength="50" 
+      value="$(s1.phone))">
+  </td>
+  <td colspan="2">
+    Fax:<br/>
+    <input type="text" name=fax size="30" maxlength="50" 
+      value="$(s1.fax))">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Company:<br/>
+    <input type="text" name=company size="30" maxlength="50" 
+      value="$(s1.company))">
+  </td>
+  <td colspan="2">
+    Department:<br/>
+    <input type="text" name=dept size="30" maxlength="50"
+      value="$(s1.dept))">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Address: <br/>
+    <input type="text" name=address size="30" maxlength="50" 
+      value="$(s1.address))">
+  </td>
+  <td colspan="2">
+    City: <br/>
+    <input type="text" name=city size="30" maxlength="50" 
+      value="$(s1.city))">
+  </td>
+</tr>
+<tr>
+  <td>
+    State:  <br/>
+    <input type="text" name=state size="15" maxlength="50" 
+      value="$(s1.state))">
+  </td>
+  <td>
+    Zip Code: <br/>
+    <input type="text" name=zipcode size=12 maxlength="50" 
+      value="$(s1.zipcode))">
+  </td>
+  <td colspan="2">
+    Country: <br/>
+    <input type="text" name=country size="30" maxlength="50"
+      value="$(s1.country))">
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="4" align="center">
+    <input type="submit" value="Save"/>
+    <!-- very important to include these two lines -->
+    <input type="hidden" name=user_id value="$s1.user_id)"/>
+    <input type="hidden" name=user_row_ver value="$s1.user_row_ver)"/>
+  </td>
+</tr>
+<tr><td colspan="4"><hr/></td></tr>
+<tr><td colspan="4" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

@@ -1,0 +1,953 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    
+    <title>Руководство полного идиота по написанию расширений оболочки - Часть VII</title><meta name="robots" content="index,nofollow">
+    <link rel="stylesheet" href="shlext7.xml_files/article.css" type="text/css">
+    <script language="javascript" src="shlext7.xml_files/rsdn.js">
+    </script>
+    <script language="javascript" src="shlext7.xml_files/Forum.js">
+    </script></head>
+  <body marginheight="20" marginwidth="20"><!-- SpyLOG f:1211 -->
+<script language="javascript"><!--
+Mu="u1358.84.spylog.com";Md=document;Mnv=navigator;Mp=1;
+Mn=(Mnv.appName.substring(0,2)=="Mi")?0:1;Mrn=Math.random();
+Mt=(new Date()).getTimezoneOffset();
+Mz="p="+Mp+"&rn="+Mrn+"&t="+Mt;
+My="";
+My+="<a href='http://"+Mu+"/cnt?cid=135884&f=3&p="+Mp+"&rn="+Mrn+"' target=_blank>";
+My+="<img src='http://"+Mu+"/cnt?cid=135884&"+Mz+"&r1="+escape(Md.referrer)+"&r="+escape(parent.document.referrer)+"&pg="+escape(window.location.href)+"' border=0 width=1 height=1 alt=' '>";
+My+="</a>";Md.write(My);//--></script><a href="http://u1358.84.spylog.com/cnt?cid=135884&amp;f=3&amp;p=1&amp;rn=0.5359323616279675" target="_blank"><img src="shlext7.xml_files/cnt.gif" alt=" " border="0" height="1" width="1"></a><noscript>
+<a href="http://u1358.84.spylog.com/cnt?cid=135884&f=3&p=1" target=_blank>
+<img src="http://u1358.84.spylog.com/cnt?cid=135884&p=1" alt=' ' border='0' width=1 height=1 >
+</a></noscript>
+<!-- SpyLOG -->
+
+<!-- HotLog -->
+<script language="javascript">
+hotlog_js="1.0";hotlog_d=document; hotlog_n=navigator;hotlog_rn=Math.random();
+hotlog_n_n=(hotlog_n.appName.substring(0,3)=="Mic")?0:1;
+hotlog_r=""+hotlog_rn+"&s=21251&r="+escape(hotlog_d.referrer)+"&pg="+
+escape(window.location.href);
+hotlog_d.cookie="hotlog=1"; hotlog_r+="&c="+(hotlog_d.cookie?"Y":"N");
+hotlog_d.cookie="hotlog=1; expires=Thu, 01-Jan-70 00:00:01 GMT"</script>
+<script language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")</script>
+<script language="javascript1.2">
+hotlog_js="1.2";hotlog_s=screen;
+hotlog_r+="&wh="+hotlog_s.width+'x'+hotlog_s.height+"&px="+((hotlog_n_n==0)?
+hotlog_s.colorDepth:hotlog_s.pixelDepth)</script>
+<script language="javascript1.3">hotlog_js="1.3"</script>
+<script language="javascript">hotlog_r+="&js="+hotlog_js;
+hotlog_d.write("<img src=\"http://hit2.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&\" border=0 width=1 height=1 alt=' '>")</script><img src="shlext7.xml_files/count.gif" alt=" " border="0" height="1" width="1">
+<noscript>
+<img src="http://hit2.hotlog.ru/cgi-bin/hotlog/count?s=21251" border=0 width=1 height=1 alt=' '>
+</noscript>
+<!-- /HotLog -->
+
+<!--begin of Rambler's Top100 code -->
+<a href="http://top100.rambler.ru/top100/">
+<img src="shlext7.xml_files/top100.gif" alt="" border="0" height="1" width="1"></a>
+<!--end of Top100 code-->
+
+<!--Rating@Mail.ru COUNTER--><script language="JavaScript"><!--
+d=document;a='';a+=';r='+escape(d.referrer)
+js=10//--></script><script language="JavaScript1.1"><!--
+a+=';j='+navigator.javaEnabled()
+js=11//--></script><script language="JavaScript1.2"><!--
+s=screen;a+=';s='+s.width+'*'+s.height
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth)
+js=12//--></script><script language="JavaScript1.3"><!--
+js=13//--></script><script language="JavaScript"><!--
+d.write('<img src="http://top.list.ru/counter'+
+'?id=555384;js='+js+a+';rand='+Math.random()+
+'" height=1 width=1>')
+if(js>11)d.write('<'+'!-- ')//--></script><img src="shlext7.xml_files/counter.gif" height="1" width="1"><!-- <noscript><img
+src="http://top.list.ru/counter?js=na;id=555384"
+height=1 width=1 alt=""></noscript><script language="JavaScript"><!--
+if(js>11)d.write('--'+'>')//--><!--/COUNTER-->
+<table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext7.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext7.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext7.xml?print" target="_blank" title="Версия для печати"><img src="shlext7.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307548" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307548" target="_self" title="Перейти к обсуждению статьи"><img src="shlext7.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307548"><font color="#646464"><font size="1"> Оценка </font><font color="black">0</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307548" title="Добавить в избранное"><img onclick="AddFav(307548);return false;" src="shlext7.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307548)" title="Подписка на сообщения"><img class="i" src="shlext7.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-3" title="+1"><img onclick="RateMsg(307548,-3);return false;" src="shlext7.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=1" title="Интересно"><img onclick="RateMsg(307548,1);return false;" src="shlext7.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307548,2);return false;" src="shlext7.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=3" title="Супер"><img onclick="RateMsg(307548,3);return false;" src="shlext7.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307548,-1);return false;" src="shlext7.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307548,-4);return false;" src="shlext7.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307548,0);return false;" src="shlext7.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table><script language="javascript" src="shlext7.xml_files/orfo.js" type="text/javascript"></script><form name="orfo_form" target="orfo_frame" action="http://orphus.dklab.ru/" method="post"><input name="email" value="orfo@rsdn.ru" type="hidden"><input name="subject" value="Орфографическая ошибка" type="hidden"><input name="Referrer" value="" type="hidden"><input name="Address" value="" type="hidden"><input name="Context" value="" type="hidden"></form>	<iframe name="orfo_frame" valign="top" border="0" style="position: absolute; visibility: hidden;" height="1" width="1"></iframe><table bgcolor="#9999ff" border="0" cellpadding="0" cellspacing="0" width="1"><tbody><tr><td><a onclick="return orfo_imgclick()" target="_blank" href="http://orphus.dklab.ru/"><img src="shlext7.xml_files/orfo.gif" alt="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" title="Выделите орфографическую ошибку мышью и нажмите Ctrl+Enter. Сделаем язык чище!" __width="121" __height="21" border="0"></a></td></tr></tbody></table>
+<script language="javascript">
+function ToggleCode(id)
+{
+	el=document.getElementById(id);
+	img=document.getElementById("img"+id);
+	if(el.style.display=="none")
+	{
+	  img.src="/images/ls2.gif";
+	  el.style.display="";
+	}
+	else
+	{
+	img.src="/images/ls1.gif";
+	el.style.display="none";
+	}
+}
+</script><h1>Руководство полного идиота по написанию расширений оболочки - Часть VII<br><span class="subtitle">Руководство по использованию owner-drawn меню в расширениях контекстных меню и по созданию расширения контекстного меню,
+которое отзывается на правый щелчок на фоне окна каталога.</span></h1><h5><span class="title">Автор: </span><span class="value"><a target="_blank" href="mailto:mdunn@inreach.com" title="Отправить письмо">Michael Dunn</a></span><br><span class="title">Перевод: </span><span class="value">Инна Кирюшкина<br><a target="_blank" href="mailto:odissey@rsdn.ru" title="Отправить письмо">Алексей Кирюшкин</a></span><br><span class="title">Источник: </span><span class="value"><a target="_blank" title="Открыть в новом окне" href="http://www.codeproject.com/shell/shellextguide7.asp">The Code Project</a></span></h5><h6><span class="title">Опубликовано: </span><span class="value">22.11.2001</span><br><span class="title">Исправлено: </span><span class="value">12.01.2000</span><br><span class="title">Версия текста: </span><span class="value">1.0</span></h6><div style="margin-left: 2em;"><a href="#EJA"><b></b></a><br><div style="margin-left: 2em;"></div><a href="#EHA"><b>Введение</b></a><br><div style="margin-left: 2em;"></div><a href="#EFA"><b>Расширение 1 - Пункты меню owner-drawn.</b></a><br><div style="margin-left: 2em;"><a href="#ETFA">Использование AppWizard</a><br><a href="#ERFA">Интерфейс инициализации.</a><br><a href="#EPFA">Взаимодействие с контекстным меню</a><br><a href="#ENFA">Модифицирование контекстного меню.</a><br><a href="#ELFA">Отображение всплывающей подсказки в строке состояния.</a><br><a href="#EJFA">Выполнение выбора пользователя.</a><br><a href="#EHFA">Рисование пункта меню.</a><br><a href="#EFFA">Обработка WM_MEASUREITEM</a><br><a href="#EDFA">Обработка WM_DRAWITEM</a><br><a href="#EBFA">Регистрация расширения оболочки</a><br></div><a href="#EDA"><b>Расширение 2 - Обработка щелчка правой кнопкой мыши на фоне окна каталога.</b></a><br><div style="margin-left: 2em;"><a href="#EDDA">Отличия в IShellExtInit::Initialize()</a><br><a href="#EBDA">Отличия в регистрации.</a><br></div><a href="#EBA"><b>Продолжение следует...?</b></a><br><div style="margin-left: 2em;"></div></div><h2><a name="EJA"></a></h2>
+<a href="http://www.rsdn.ru/article/winshell/shlext7/ShellExtGuide7_demo.zip"><img src="shlext7.xml_files/fileA.gif" align="middle" border="0" height="11" width="28">Демонстрационный проект</a>
+<h2>Введение<a name="EHA"></a></h2>
+
+
+<p>Руководство Идиота возвращается с новой главой! 
+В этой части я отвечу на некоторые вопросы читателей и затрону две темы:
+использование owner-drawn (собственноручно-нарисованного) меню в расширениях 
+контекстных меню и создание расширений контекстных меню, которые загружаются,
+когда пользователь щелкает правой кнопкой мыши на фоне окна каталога. Вы должны 
+были уже прочесть Части <a href="http://www.rsdn.ru/article/?winshell/shlext1.xml"> I</a> и <a href="http://www.rsdn.ru/article/?winshell/shlext2.xml"> II</a>, поэтому знаете основные понятия о расширениях
+контекстных меню. 
+</p>
+<h2>Расширение 1 - Пункты меню owner-drawn.<a name="EFA"></a></h2>
+
+
+<p>В этой части я рассмотрю дополнительную работу, необходимую для реализации owner-drawn меню.
+</p>
+
+<p>Поскольку это расширение реализует owner-drawn меню, нам придется 
+иметь дело с графикой. Я решил скопировать что-нибудь из того, что делает  
+программа <a href="http://www.acdsystems.com/English/Products/ImagingProducts/Utilities/Picaview/index.htm" target="_blank"><img src="shlext7.xml_files/extA.gif" align="middle" border="0" height="11" width="17">PicaView</a>:
+Показать эскиз графического файла в контекстном меню. Вот как выглядят пункты меню 
+PicaView:
+</p>
+
+<p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_1.gif"><br><i style="font-size: x-small;"></i></p>
+
+
+<p>Это расширение создаст эскиз файла ВМР. Чтобы упростить код я не буду беспокоиться
+о пропорциях и сочетании цветов. Исправление этих недочетов я оставляю в качестве 
+домашнего задания для читателя. ;)
+</p>
+
+<h3>Использование AppWizard<a name="ETFA"></a></h3>
+
+
+<p>Запустите AppWizard и создайте новый ATL COM проект. Назовем его <strong>BmpViewerExt</strong>.
+Щелкните ОК, чтобы перейти к первому (и единственному) диалогу мастера. Пометьте
+переключатель "Support MFC" и затем щелкните Finish. Теперь у нас есть пустой ATL
+проект, который построит DLL, но нам необходимо еще добавить наш COM объект-расширение.
+В дереве ClassView щелкните правой кнопкой мыши на пункте <strong>BmpViewerExt classes</strong> и
+укажите <strong>New ATL Object</strong>.
+</p>
+
+
+<p>В мастере ATL Object на первой панели уже выбран <strong>Simple Object</strong>, поэтому просто 
+щелкните Next. На второй панели в поле редактирования Short Name введите <strong>BmpCtxMenuExt</strong>
+и щелкните ОК (остальные поля заполнятся автоматически). Эти действия создадут класс
+<strong>CBmpCtxMenuExt</strong>, который содержит основной код для реализации COM объектов. Мы 
+добавим наш код в этот класс.
+</p>
+
+
+
+<h3>Интерфейс инициализации.<a name="ERFA"></a></h3> 
+
+
+<p>Как и для предыдущих расширений контекстных меню, это расширение реализует интерфейс
+<strong>IShellExtInit</strong>. Чтобы добавить <strong>IShellExtInit</strong> к нашему COM объекту,
+откройте <strong>BmpCtxMenuExt.h</strong> и добавьте выделенные строки. Несколько переменных,
+которые здесь указаны, мы будем использовать позже, в процессе рисования пункта меню. 
+</p>
+
+<div id="ERRFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="PREPROCESSOR">#include &lt;comdef.h&gt;</span>
+
+<span class="COMMENT">/////////////////////////////////////////////////////////////////////////////</span>
+<span class="COMMENT">// CBmpCtxMenuExt</span>
+
+<span class="KEYWORD">class</span> ATL_NO_VTABLE CBmpCtxMenuExt : 
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CBmpCtxMenuExt, &amp;CLSID_BmpCtxMenuExt&gt;,
+    <span class="KEYWORD">public</span> IDispatchImpl&lt;IBmpCtxMenuExt, &amp;IID_IBmpCtxMenuExt, &amp;LIBID_BMPVIEWEREXTLib&gt;,
+    <strong><span class="KEYWORD">public</span> IShellExtInit</strong>
+{
+BEGIN_COM_MAP(CBmpCtxMenuExt)
+    COM_INTERFACE_ENTRY(IBmpCtxMenuExt)
+    COM_INTERFACE_ENTRY(IDispatch)
+    <strong>COM_INTERFACE_ENTRY(IShellExtInit)</strong>
+END_COM_MAP()
+
+<span class="KEYWORD">public</span>:
+    <strong><span class="COMMENT">// IShellExtInit</span>
+    STDMETHOD(Initialize)(LPCITEMIDLIST, LPDATAOBJECT, HKEY);
+
+<span class="KEYWORD">protected</span>:
+    TCHAR   m_szFile[MAX_PATH];
+    CBitmap m_bmp;
+    UINT    m_uOurItemID;
+
+    LONG m_lItemWidth, m_lItemHeight;
+    LONG m_lBmpWidth, m_lBmpHeight;
+
+    <span class="KEYWORD">static</span> <span class="KEYWORD">const</span> LONG m_lMaxThumbnailSize;
+    <span class="KEYWORD">static</span> <span class="KEYWORD">const</span> LONG m_l3DBorderWidth;
+    <span class="KEYWORD">static</span> <span class="KEYWORD">const</span> LONG m_lMenuItemSpacing;
+    <span class="KEYWORD">static</span> <span class="KEYWORD">const</span> LONG m_lTotalBorderSpace;
+
+    <span class="COMMENT">// Helper functions for handling the menu-related messages.</span>
+    STDMETHOD(MenuMessageHandler)(UINT, WPARAM, LPARAM, LRESULT*);
+    STDMETHOD(OnMeasureItem)(MEASUREITEMSTRUCT*, LRESULT*);
+    STDMETHOD(OnDrawItem)(DRAWITEMSTRUCT*, LRESULT*);</strong>
+};</pre></td></tr></tbody></table></div>
+
+
+<p>Что нам предстоит сделать в <strong>IShellExtInit::Initialize()</strong>,  так это получить имя 
+выбранного файла, и если это BMP-файл, создать его эскиз.
+</p>
+
+<p>В файл <strong>BmpCtxMenuExt.cpp</strong> добавим объявления для следующих статических
+переменных. Они управляют визуальными аспектами эскиза и его границами. Не стесняясь измените
+эти значения, и проследите, как это отразится на конечном 
+результате в меню.
+</p>
+
+<div id="ELRFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">const</span> LONG CBmpCtxMenuExt::m_lMaxThumbnailSize = <span class="NUMBER">64</span>;
+<span class="KEYWORD">const</span> LONG CBmpCtxMenuExt::m_l3DBorderWidth    = <span class="NUMBER">2</span>;
+<span class="KEYWORD">const</span> LONG CBmpCtxMenuExt::m_lMenuItemSpacing  = <span class="NUMBER">4</span>;
+<span class="KEYWORD">const</span> LONG CBmpCtxMenuExt::m_lTotalBorderSpace = <span class="NUMBER">2</span>*(m_lMenuItemSpacing+m_l3DBorderWidth);</pre></td></tr></tbody></table></div>
+
+<p>Эти константы означают следующее:
+</p>
+
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+<strong>m_lMaxThumbnailSize:</strong> Если картинка больше (в любом измерении), чем
+это число, она будет сжата до такой степени, чтобы каждая сторона квадрата
+была m_lMaxThumbnailSize пикселей. Если картинка меньше (в обоих измерениях) 
+она будет оставлена без изменений.<br> 
+<strong>m_l3DBorderWidth:</strong> Толщина объемной границы, которая будет сделана по 
+периметру эскиза, в пикселях.<br> 
+<strong>m_lMenuItemSpacing:</strong> Число пикселей, составляющих пустое пространство 
+вокруг объемной границы. Это обеспечит небольшой зазор между
+эскизом и окружающими его пунктами меню.<br>
+</ul>
+
+<p>Также добавим определение функции <strong>IShellExtInit::Initialize()</strong>:
+</p>
+
+<div id="EDRFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::Initialize (
+    LPCITEMIDLIST pidlFolder,
+    LPDATAOBJECT  pDO,
+    HKEY          hkeyProgID )
+{
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+    COleDataObject dataobj;
+    HGLOBAL        hglobal;
+    HDROP          hdrop;
+    <span class="KEYWORD">bool</span>           bOK = <span class="KEYWORD">false</span>;
+
+    dataobj.Attach ( pDO, FALSE );      <span class="COMMENT">// FALSE = don't release IDataObject interface when destroyed</span>
+
+    <span class="COMMENT">// Get the first selected file name.  I'll keep this simple and just check</span>
+    <span class="COMMENT">// the first name to see if it's a .BMP.</span>
+    hglobal = dataobj.GetGlobalData ( CF_HDROP );
+
+    <span class="KEYWORD">if</span> ( NULL == hglobal )
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    hdrop = (HDROP) GlobalLock ( hglobal );
+
+    <span class="KEYWORD">if</span> ( NULL == hdrop )
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    <span class="COMMENT">// Get the name of the first selected file.</span>
+    <span class="KEYWORD">if</span> ( DragQueryFile ( hdrop, <span class="NUMBER">0</span>, m_szFile, MAX_PATH ))
+        {
+        <span class="COMMENT">// Is its extension .BMP?</span>
+        <span class="KEYWORD">if</span> ( PathMatchSpec ( m_szFile, _T(<span class="STRING">"*.bmp"</span>) ))
+            {
+            <span class="COMMENT">// Load the bitmap and attach our CBitmap object to it.</span>
+            HBITMAP hbm = (HBITMAP) LoadImage ( NULL, m_szFile, IMAGE_BITMAP, <span class="NUMBER">0</span>, <span class="NUMBER">0</span>, 
+                                                LR_LOADFROMFILE );
+
+            <span class="KEYWORD">if</span> ( NULL != hbm )
+                {
+                <span class="COMMENT">// We loaded the bitmap, so attach the CBitmap to it.</span>
+                m_bmp.Attach ( hbm );
+                bOK = <span class="KEYWORD">true</span>;
+                }
+            }
+        }
+
+    GlobalUnlock ( hglobal );
+
+    <span class="KEYWORD">return</span> bOK ? S_OK : E_FAIL;
+}</pre></td></tr></tbody></table></div>
+
+
+<p>Код здесь вполне прямолинейный. Мы загружаем картинку из файла и подключаем 
+к ней объект CBitmap для дальнейшей работы.
+</p>
+
+
+
+<h3>Взаимодействие с контекстным меню<a name="EPFA"></a></h3>
+
+
+<p> Как и раньше, если <strong>IShellExtInit::Initialize()</strong> возвращает S_OK, 
+проводник запрашивает у нашего расширения интерфейс <strong>IContextMenu</strong>.
+Чтобы позволить нашему расширению создавать пункты owner-drawn меню
+он также запрашивает <strong>IContextMenu3</strong>. <strong>IContextMenu3 </strong>добавляет метод к 
+<strong>IContextMenu</strong>, который мы будем использовать для нашего рисования.
+</p>
+
+<p>
+Существует интерфейс <strong>IContextMenu2</strong>, который, как заявляет Microsoft, поддерживается
+оболочкой версии 4.0. Однако, на Windows95 оболочка никогда не вызывает <strong>IContextMenu2</strong>.
+В результате вы просто не сможете сделать пункты меню owner-drawn в оболочке версии 4.0
+(на NT4 может быть по-другому. У меня не было возможности проверить на NT4).
+Вы можете сделать так,  чтобы пункт меню отображал битмап, но это приведет к тому, что когда 
+этот пункт меню выбран, он выглядит просто безобразно.(Это то, что делает Pica View).
+</p>
+
+<p>
+<strong>IContextMenu3</strong> унаследован от <strong>IContextMenu2</strong> и добавляет метод <strong>HandleMenuMsg2()</strong> к
+<strong>IContextMenu</strong>.
+Этот метод дает нам возможность отреагировать на два сообщения меню:
+<strong>WM_MEASUREITERM</strong> и <strong>WM_DROWITEM</strong>. Документация говорит, что метод <strong>HandleMenuMsg2()</strong>
+будет вызван, так что он вполне может обработать <strong>WM_INITMENUPOPUP </strong>и <strong>WM_MENUCHAR</strong>,
+однако во время моего тестирования в оболочке 4.72(Win95) и 5.0(Win2K)
+<strong>HandleMenuMsg2()</strong> никогда не получал ни одного из этих сообщений.
+</p>
+
+<p>
+Поскольку <strong>IContextMenu3 </strong>наследуется от <strong>IContextMenu2 </strong>(который сам наследуется
+от <strong>IContextMenu</strong>) нам надо, чтобы наш класс С++ просто наследоввался от <strong>IContextMenu3</strong>.
+Откройте <strong>BmpCtxMenuExt.h</strong> и добавьте выделенные строки:
+</p>
+
+<div id="EBPFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="KEYWORD">class</span> ATL_NO_VTABLE CBmpCtxMenuExt : 
+    <span class="KEYWORD">public</span> CComObjectRootEx&lt;CComSingleThreadModel&gt;,
+    <span class="KEYWORD">public</span> CComCoClass&lt;CBmpCtxMenuExt, &amp;CLSID_BmpCtxMenuExt&gt;,
+    <span class="KEYWORD">public</span> IDispatchImpl&lt;IBmpCtxMenuExt, &amp;IID_IBmpCtxMenuExt, &amp;LIBID_BMPVIEWEREXTLib&gt;,
+    <span class="KEYWORD">public</span> IShellExtInit,
+    <strong><span class="KEYWORD">public</span> IContextMenu3</strong>
+{
+BEGIN_COM_MAP(CSimpleShlExt)
+    COM_INTERFACE_ENTRY(ISimpleShlExt)
+    COM_INTERFACE_ENTRY(IDispatch)
+    COM_INTERFACE_ENTRY(IShellExtInit)
+    <strong>COM_INTERFACE_ENTRY(IContextMenu)
+    COM_INTERFACE_ENTRY(IContextMenu2)
+    COM_INTERFACE_ENTRY(IContextMenu3)</strong>
+END_COM_MAP()
+
+<span class="KEYWORD">public</span>:
+    <strong><span class="COMMENT">// IContextMenu</span>
+    STDMETHOD(QueryContextMenu)(HMENU, UINT, UINT, UINT, UINT);
+    STDMETHOD(InvokeCommand)(LPCMINVOKECOMMANDINFO);
+    STDMETHOD(GetCommandString)(UINT_PTR, UINT, UINT*, LPSTR, UINT);
+
+    <span class="COMMENT">// IContextMenu2</span>
+    STDMETHOD(HandleMenuMsg)(UINT, WPARAM, LPARAM);
+
+    <span class="COMMENT">// IContextMenu3</span>
+    STDMETHOD(HandleMenuMsg2)(UINT, WPARAM, LPARAM, LRESULT*);</strong>
+</pre></td></tr></tbody></table></div>
+
+
+
+<h3>Модифицирование контекстного меню.<a name="ENFA"></a></h3>
+
+
+<p>
+Как и раньше мы выполняем работу в трех методах <strong>IContextMenu</strong>.
+Мы добавляем свой пункт меню в <strong>QueryContextMenu()</strong>. Сначала мы проверяем версию 
+оболочки. Если это 4.71 или выше, то мы можем добавить пункт меню owner-drawn.
+В других случаях мы добавляем пункт, который показывает битмап.
+В последнем случае это все, что мы должны сделать. Меню само позаботится об отображении битмапа.
+</p>
+
+<p>
+Итак, во-первых, код для проверки версии оболочки. Он вызывает экспортируемую
+функцию <strong>DllGetVersion()</strong> для извлечения версии. Если эта функция отсутствует, то DLL версии 4.0,
+так как <strong>DllGetVersion()</strong> не было в shell32.dll версии 4.0.
+</p>
+
+<div id="EHNFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::QueryContextMenu (
+    HMENU hmenu,
+    UINT uIndex,
+    UINT uidCmdFirst,
+    UINT uidCmdLast,
+    UINT uFlags )
+{
+    <span class="COMMENT">// If the flags include CMF_DEFAULTONLY then we shouldn't do anything.</span>
+    <span class="KEYWORD">if</span> ( uFlags &amp; CMF_DEFAULTONLY )
+        {
+        <span class="KEYWORD">return</span> MAKE_HRESULT ( SEVERITY_SUCCESS, FACILITY_NULL, <span class="NUMBER">0</span> );
+        }
+
+    <span class="KEYWORD">bool</span> bUseOwnerDraw = <span class="KEYWORD">false</span>;
+    HINSTANCE hinstShell;
+
+    hinstShell = GetModuleHandle ( _T(<span class="STRING">"shell32"</span>) );
+
+    <span class="KEYWORD">if</span> ( NULL != hinstShell )
+        {
+        DLLGETVERSIONPROC pProc;
+
+        pProc = (DLLGETVERSIONPROC) GetProcAddress(hinstShell, <span class="STRING">"DllGetVersion"</span>);
+
+        <span class="KEYWORD">if</span> ( NULL != pProc )
+            {
+            DLLVERSIONINFO rInfo = { <span class="KEYWORD">sizeof</span>(DLLVERSIONINFO) };
+
+            <span class="KEYWORD">if</span> ( SUCCEEDED( pProc ( &amp;rInfo ) ))
+                {
+                <span class="KEYWORD">if</span> ( rInfo.dwMajorVersion &gt; <span class="NUMBER">4</span> ||
+                     rInfo.dwMinorVersion &gt;= <span class="NUMBER">71</span> )
+                    {
+                    bUseOwnerDraw = <span class="KEYWORD">true</span>;
+                    }
+                }
+            }
+        }
+</pre></td></tr></tbody></table></div>
+
+
+<p>
+В этой точке значение <strong>bUseOwnerDrow</strong> дает добро на использование owner-drawn 
+пунктов меню. Если TRUE, то мы вставляем пункт owner-drawn (смотри строку, которая 
+устанавливает <strong>mii.fType</strong>). Если FALSE, мы добавляем пункт - битмап, 
+и затем сообщаем меню хэндл битмапа для отображения.
+Для добавления пункта код использует <strong>InsertMenuItem()</strong>; использование старой функции
+<strong>InsertMenu()</strong> требует, чтобы вы вернулись и вызвали <strong>ModifyMenu()</strong> для  
+изменения стиля пункта меню на owner-drawn.
+</p>
+
+<div id="EDNFA"><table class="code" width="98%"><tbody><tr><td><pre>    MENUITEMINFO mii;
+
+    mii.cbSize = <span class="KEYWORD">sizeof</span>(MENUITEMINFO);
+    mii.fMask  = MIIM_ID | MIIM_TYPE;
+    mii.fType  = bUseOwnerDraw ? MFT_OWNERDRAW : MFT_BITMAP;
+    mii.wID    = uidCmdFirst;
+
+    <span class="KEYWORD">if</span> ( !bUseOwnerDraw )
+        {
+        <span class="COMMENT">// NOTE: This will put the full-sized bitmap in the menu, which is</span>
+        <span class="COMMENT">// obviously a bit less than optimal.  Compressing the bitmap down</span>
+        <span class="COMMENT">// to a thumbnail is left as an exercise.</span>
+        mii.dwTypeData = (LPTSTR) m_bmp.GetSafeHandle();
+        }
+
+    InsertMenuItem ( hmenu, uIndex, TRUE, &amp;mii );
+
+    <span class="COMMENT">// Store the menu item's ID so we can check against it later when</span>
+    <span class="COMMENT">// WM_MEASUREITEM/WM_DRAWITEM are sent.</span>
+    m_uOurItemID = uidCmdFirst;
+
+    <span class="COMMENT">// Tell the shell we added 1 top-level menu item.</span>
+    <span class="KEYWORD">return</span> MAKE_HRESULT ( SEVERITY_SUCCESS, FACILITY_NULL, <span class="NUMBER">1</span> );
+}
+</pre></td></tr></tbody></table></div>
+
+<p>
+Мы сохраняем ID пункта меню в <strong>m_UOurItemID</strong>, так мы опознаем ID позже, когда 
+прибудут другие сообщения. Это не строго необходимо, поскольку у нас только один
+пункт меню, но, тем не менее, является хорошей практикой, и абсолютно обязательно,
+если у вас много пунктов.
+</p>
+
+
+
+
+<h3>Отображение всплывающей подсказки в строке состояния.<a name="ELFA"></a></h3>
+
+            
+ 
+<p>
+Отображение всплывающей подсказки ничем не отличается от аналогичной операции
+в предыдущих расширениях. Проводник вызывает <strong>GetCommandString()</strong>, чтобы извлечь
+строку, которую он покажет в строке состояния.
+</p>
+
+<div id="EBLFA"><table class="code" width="98%"><tbody><tr><td><pre><span class="PREPROCESSOR">#include</span> &lt;atlconv.h&gt;  <span class="COMMENT">// for ATL string conversion macros</span>
+
+STDMETHODIMP CBmpCtxMenuExt::GetCommandString (
+                               UINT uCmd, UINT uFlags, UINT* puReserved,
+                               LPSTR pszName, UINT cchMax )
+{
+    <span class="KEYWORD">static</span> LPCTSTR szHelpString = _T(<span class="STRING">"Select this thumbnail to view the entire picture."</span>);
+
+    USES_CONVERSION;
+
+    <span class="COMMENT">// Check idCmd, it must be 0 since we have only one menu item.</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> != uCmd )
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    <span class="COMMENT">// If Explorer is asking for a help string, copy our string into the</span>
+    <span class="COMMENT">// supplied buffer.</span>
+    <span class="KEYWORD">if</span> ( uFlags &amp; GCS_HELPTEXT )
+        {
+        <span class="KEYWORD">if</span> ( uFlags &amp; GCS_UNICODE )
+            {
+            <span class="COMMENT">// We need to cast pszName to a Unicode string, and then use the</span>
+            <span class="COMMENT">// Unicode string copy API.</span>
+            lstrcpynW ( (LPWSTR) pszName, T2CW(szHelpString), cchMax );
+            }
+        <span class="KEYWORD">else</span>
+            {
+            <span class="COMMENT">// Use the ANSI string copy API to return the help string.</span>
+            lstrcpynA ( pszName, T2CA(szHelpString), cchMax );
+            }
+        }
+
+    <span class="KEYWORD">return</span> S_OK;
+}</pre></td></tr></tbody></table></div>
+
+
+
+<h3>Выполнение выбора пользователя.<a name="EJFA"></a></h3>
+
+             
+
+<p>
+Последний метод в <strong>IContextMenu</strong> - это <strong>InvokeCommand()</strong>. Этот метод будет вызван,
+если пользователь щелкнет на пункте меню, добавленном нами. Расширение вызовет
+<strong>ShellExecute()</strong>, чтобы открыть картинку в Paint (или
+другой программе, ассоциированной с BMP-файлами).
+</p>
+
+<div id="EBJFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::InvokeCommand ( LPCMINVOKECOMMANDINFO pInfo )
+{
+    <span class="COMMENT">// If lpVerb really points to a string, ignore this function call and bail out.</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> != HIWORD( pInfo-&gt;lpVerb ))
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    <span class="COMMENT">// The command ID must be 0 since we only have one menu item.</span>
+    <span class="KEYWORD">if</span> ( <span class="NUMBER">0</span> != LOWORD( pInfo-&gt;lpVerb ))
+        <span class="KEYWORD">return</span> E_INVALIDARG;
+
+    <span class="COMMENT">// Open the bitmap in the default paint program.</span>
+    ShellExecute ( pInfo-&gt;hwnd, _T(<span class="STRING">"open"</span>), m_szFile, NULL, NULL, SW_SHOWNORMAL );
+
+    <span class="KEYWORD">return</span> S_OK;
+}</pre></td></tr></tbody></table></div>
+
+
+
+<h3>Рисование пункта меню.<a name="EHFA"></a></h3>
+
+            
+<p>
+Итак, держу пари, вы заскучали к этому времени со всеми этими кодами, которые вы видели и раньше.
+Пора приступить к новым и интересным штучкам! Два дополнительных метода <strong>IContextMenu2</strong>
+и <strong>IContextMenu3 </strong>приведены ниже. Они просто вызывают единственную вспомогательную 
+функцию, которая, в свою очередь, вызывает обработчик сообщений. Я разработал этот 
+метод чтобы избежать двух разных версий обработчиков сообщений (по одному для
+<strong>IContextMenu2 </strong>и <strong>IContextMenu3</strong>). В <strong>HandleMenuMsg2()</strong> есть одна странность,   
+связанная с параметром <strong>LRESULT</strong>, которую я объясню в комментариях.
+</p>
+
+<div id="EHHFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::HandleMenuMsg ( UINT uMsg, WPARAM wParam, LPARAM lParam )
+{
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+    <span class="COMMENT">// res - подставная переменная типа LRESULT. Она не используется  </span>
+    <span class="COMMENT">// (<strong>IContextMenu2::HandleMenuMsg()</strong> не предоставляет способа </span>
+    <span class="COMMENT">// возвращать результат), но она здесь для того, чтобы</span>
+    <span class="COMMENT">// код в <strong>MenuMessageHandler()</strong> мог быть одинаковым   </span>
+    <span class="COMMENT">// независимо от того, через какой интерфейс</span>
+    <span class="COMMENT">// был получен вызов (<strong>IContextMenu2 </strong>или <strong>3</strong>).</span>
+
+    LRESULT res;
+
+    <span class="KEYWORD">return</span> MenuMessageHandler ( uMsg, wParam, lParam, &amp;res );
+}
+
+STDMETHODIMP CBmpCtxMenuExt::HandleMenuMsg2 ( UINT uMsg, WPARAM wParam, LPARAM lParam,
+                                              LRESULT* pResult )
+{
+    AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+    <span class="COMMENT">// Для сообщений, которые не имеют возвращаемых значений,     </span>
+    <span class="COMMENT">// pResult есть NULL. Это очень плохо со стороны MS, поскольку это     </span>
+    <span class="COMMENT">// вынуждает нас проверять корректность pResult перед использованием.  </span>
+    <span class="COMMENT">// Вы могли бы подумать, что указатель </span>
+    <span class="COMMENT">// к возвращаемому значению всегда должен бы быть действительным, </span>
+    <span class="COMMENT">// но нет. Если он NULL, я создаю подставную переменную,   </span>
+    <span class="COMMENT">// поэтому код в MenuMessageHandler() всегда будет иметь     </span>
+    <span class="COMMENT">// действительный указатель pResult .                       </span>
+
+    <span class="KEYWORD">if</span> ( NULL == pResult )
+        {
+        LRESULT res;
+        <span class="KEYWORD">return</span> MenuMessageHandler ( uMsg, wParam, lParam, &amp;res );
+        }
+    <span class="KEYWORD">else</span>
+        {
+        <span class="KEYWORD">return</span> MenuMessageHandler ( uMsg, wParam, lParam, pResult );
+        }
+}</pre></td></tr></tbody></table></div>
+
+<p>
+<strong>MenuMessageHandler()</strong> просто пересылает <strong>WM_MEASUREITEM </strong>и <strong>WM_DROWITEM </strong>отдельным 
+функциям-обработчикам сообщений. 
+</p>
+
+<div id="EDHFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::MenuMessageHandler ( UINT uMsg, WPARAM wParam,
+                                                  LPARAM lParam, LRESULT* pResult )
+{
+    <span class="KEYWORD">switch</span> ( uMsg )
+        {
+        <span class="KEYWORD">case</span> WM_MEASUREITEM:
+            <span class="KEYWORD">return</span> OnMeasureItem ( (MEASUREITEMSTRUCT*) lParam, pResult );
+        <span class="KEYWORD">break</span>;
+
+        <span class="KEYWORD">case</span> WM_DRAWITEM:
+            <span class="KEYWORD">return</span> OnDrawItem ( (DRAWITEMSTRUCT*) lParam, pResult );
+        <span class="KEYWORD">break</span>;
+        }
+
+    <span class="KEYWORD">return</span> S_OK;
+}</pre></td></tr></tbody></table></div>
+
+<p>
+Как я отмечал раньше, документация говорит, что оболочка должна позволять нашему 
+расширению оперировать с <strong>WM_INITMENUPOPUP </strong>и <strong>WM_MENUCHAR</strong>. Но за все время
+моих опытов я никогда не видел, чтобы эти сообщения приходили.
+</p>
+
+
+
+<h3>Обработка WM_MEASUREITEM<a name="EFFA"></a></h3>
+
+
+<p>
+Когда оболочка посылает нашему расширению сообщение <strong>WM_MEASUREITEM </strong>для запроса
+размеров нашего пункта меню, мы начинаем с проверки, затребованы ли размеры
+нашего собственного пункта меню. Если тест пройден, мы получаем размеры битмапа, 
+затем вычисляем размер всего пункта меню.
+</p>
+
+<p>
+Сначала размер битмапа:
+</p>
+
+<div id="EJFFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::OnMeasureItem ( MEASUREITEMSTRUCT* pmis, LRESULT* pResult )
+{
+BITMAP bm;
+LONG   lThumbWidth;
+LONG   lThumbHeight;
+
+    <span class="COMMENT">// Check that we're getting called for our own menu item.</span>
+    <span class="KEYWORD">if</span> ( m_uOurItemID != pmis-&gt;itemID )
+        <span class="KEYWORD">return</span> S_OK;
+
+    m_bmp.GetBitmap ( &amp;bm );
+
+    m_lBmpWidth = bm.bmWidth;
+    m_lBmpHeight = bm.bmHeight;
+</pre></td></tr></tbody></table></div>
+ 
+<p>
+Далее, мы вычисляем размер эскиза,  и, исходя из этого, размер всего пункта меню. Если
+картинка меньше,  чем максимальный размер эскиза (который в демонстрационном проекте 64х64),
+то она будет нарисована как есть. Иначе,  картинка будет нарисована размером 64х64. Это может
+исказить ее вид,  но опять же,  создание приятного вида эскиза оставлено для упражнений.
+</p>
+
+<div id="EFFFA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// Calculate the bitmap thumbnail size.</span>
+    lThumbWidth = (m_lBmpWidth &lt;= m_lMaxThumbnailSize) ? m_lBmpWidth : 
+                    m_lMaxThumbnailSize;
+
+    lThumbHeight = (m_lBmpHeight &lt;= m_lMaxThumbnailSize) ? m_lBmpHeight :
+                     m_lMaxThumbnailSize;
+
+    <span class="COMMENT">// Calculate the size of the menu item, which is the size of the thumbnail +</span>
+    <span class="COMMENT">// the border and padding (which provides some space at the edges of the item).</span>
+    m_lItemWidth = lThumbWidth + m_lTotalBorderSpace;
+    m_lItemHeight = lThumbHeight + m_lTotalBorderSpace;
+</pre></td></tr></tbody></table></div>
+
+<p>
+Теперь,  когда у нас есть размер пункта меню,  мы сохраняем размеры обратно в <strong>MENUITEMSTRUCT</strong>, 
+которую мы получили с сообщением. Проводник зарезервирует достаточно места в меню для нашего пункта.
+</p>
+
+<div id="EBFFA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// Store the size of the item in the MEASUREITEMSTRUCT.</span>
+    pmis-&gt;itemWidth = m_lItemWidth;
+    pmis-&gt;itemHeight = m_lItemHeight;
+
+    *pResult = TRUE;            <span class="COMMENT">// we handled the message</span>
+
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+  
+
+
+
+<h3>Обработка WM_DRAWITEM<a name="EDFA"></a></h3>
+
+
+<p>
+Когда мы получаем сообщение <strong>WM_DRAWITEM</strong>, проводник требует, чтобы мы действительно вывели 
+наш пункт меню. Мы начинаем с вычисления прямоугольника, в котором мы нарисуем объемную границу
+вокруг эскиза.
+Это не обязательно тот же прямоугольник,  которые занимает пункт меню,  потому что меню может оказаться шире,  
+чем размер,  который мы установили в обработчике <strong>WM_MEASUREITEM</strong>.
+</p>
+
+<div id="E2DFA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBmpCtxMenuExt::OnDrawItem ( DRAWITEMSTRUCT* pdis, LRESULT* pResult )
+{
+CDC   dcBmpSrc;
+CDC*  pdcMenu = CDC::FromHandle ( pdis-&gt;hDC );
+CRect rcItem ( pdis-&gt;rcItem );  <span class="COMMENT">// RECT of our menu item</span>
+CRect rcDraw;                   <span class="COMMENT">// RECT in which we'll be drawing</span>
+
+    <span class="COMMENT">// Check that we're getting called for our own menu item.</span>
+    <span class="KEYWORD">if</span> ( m_uOurItemID != pdis-&gt;itemID )
+        <span class="KEYWORD">return</span> S_OK;
+            
+    <span class="COMMENT">// rcDraw will first be set to the RECT that we set in WM_MEASUREITEM.</span>
+    <span class="COMMENT">// It will get deflated as we go along.</span>
+    rcDraw.left = (rcItem.right + rcItem.left - m_lItemWidth) / <span class="NUMBER">2</span>;
+    rcDraw.top = (rcItem.top + rcItem.bottom - m_lItemHeight) / <span class="NUMBER">2</span>;
+    rcDraw.right = rcDraw.left + m_lItemWidth;
+    rcDraw.bottom = rcDraw.top + m_lItemHeight;
+
+    <span class="COMMENT">// Shrink rcDraw to account for the padding space around</span>
+    <span class="COMMENT">// the thumbnail.</span>
+
+    rcDraw.DeflateRect ( m_lMenuItemSpacing, m_lMenuItemSpacing );
+</pre></td></tr></tbody></table></div>
+
+<p>
+Первый шаг рисования - окрашивание фона пункта меню. Элемент <strong>itemState</strong> структуры
+<strong>DRAWITEMSTRUCT</strong> показывает, отмечен наш пункт меню,  или нет. Это определяет,  какой цвет мы 
+используем для фона.
+</p>
+
+<div id="EXDFA"><table class="code" width="98%"><tbody><tr><td><pre>    <span class="COMMENT">// Fill in the background of the menu item.</span>
+    <span class="KEYWORD">if</span> ( pdis-&gt;itemState &amp; ODS_SELECTED )
+        pdcMenu-&gt;FillSolidRect ( rcItem, GetSysColor ( COLOR_HIGHLIGHT ));
+    <span class="KEYWORD">else</span>
+        pdcMenu-&gt;FillSolidRect ( rcItem, GetSysColor ( COLOR_3DFACE ));
+</pre></td></tr></tbody></table></div>
+
+<p>
+Далее, мы рисуем вдавленую границу, чтобы эскиз выглядел в меню утопленным.
+</p>
+
+<div id="ETDFA"><table class="code" width="98%"><tbody><tr><td><pre>    
+    <span class="COMMENT">// Draw the sunken 3D border.</span>
+    <span class="KEYWORD">for</span> ( <span class="KEYWORD">int</span> i = <span class="NUMBER">1</span>; i &lt;= m_l3DBorderWidth; i++ )
+        {
+        pdcMenu-&gt;Draw3dRect ( rcDraw, GetSysColor ( COLOR_3DDKSHADOW ),
+                              GetSysColor ( COLOR_3DHILIGHT ));
+
+        rcDraw.DeflateRect ( <span class="NUMBER">1</span>, <span class="NUMBER">1</span> );
+        }
+</pre></td></tr></tbody></table></div>
+
+<p>
+Последний шаг - нарисовать сам эскиз. Я выбрал простой путь и просто сделал вызов <strong>StretchBlt()</strong>.
+Результат не всегда красивый,  но моей целью было сохранить простоту кода.
+</p>
+
+<div id="EPDFA"><table class="code" width="98%"><tbody><tr><td><pre>    
+    <span class="COMMENT">// Create a new DC and select the original bitmap into it.</span>
+    dcBmpSrc.CreateCompatibleDC ( &amp;dc );
+    dcBmpSrc.SelectObject ( &amp;m_bmp );
+
+    <span class="COMMENT">// Blit the bitmap to the menu DC.</span>
+    pdcMenu-&gt;StretchBlt ( rcDraw.left, rcDraw.top, rcDraw.Width(), rcDraw.Height(),
+                          &amp;dcBmpSrc, <span class="NUMBER">0</span>, <span class="NUMBER">0</span>, m_lBmpWidth, m_lBmpHeight, SRCCOPY );
+
+    *pResult = TRUE;            <span class="COMMENT">// we handled the message</span>
+
+    <span class="KEYWORD">return</span> S_OK;
+}
+</pre></td></tr></tbody></table></div>
+
+<p>
+Замечу,  что в реальном расширении было бы хорошей идеей использовать для рисования свободный 
+от мерцания класс,  чтобы пункт меню не мерцал,  когда вы перемещаете над ним мышь.
+</p>
+
+<p>
+Вот несколько экранных кадров меню! Сначала - это меню в невыбраном и в выбранном состоянии.
+</p>
+
+<p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_2.gif"><br><i style="font-size: x-small;"></i></p> <p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_3.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>
+А здесь - меню в оболочке версии 4.00. Заметьте, как в выбранном состоянии инвертируются все цвета,  
+делая его безобразным.
+</p>
+
+
+<p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_4.gif"><br><i style="font-size: x-small;"></i></p> <p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_5.gif"><br><i style="font-size: x-small;"></i></p>
+
+
+
+
+<h3>Регистрация расширения оболочки<a name="EBFA"></a></h3>
+
+
+<p>
+Регистрация нашего "вьювера битмапов" делается так же,  как и других расширений контекстных меню. Вот RGS
+сценарий для этой работы:
+</p>
+
+<div id="EDBFA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove Paint.Picture
+    {
+        NoRemove ShellEx
+        {
+            NoRemove ContextMenuHandlers
+            {
+                BitmapPreview = s <span class="CHARACTER">'{D6F469CD-3DC7-408F-BB5F-74A1CA2647C9}'</span>
+            }
+        }
+    }
+}
+
+</pre></td></tr></tbody></table></div>
+
+
+<p>
+Заметьте,  что тип файлов "Paint.Picture" здесь жестко закодирован. Если вы не используете Paint,  как
+вьювер по умолчанию для BMP-файлов,  то вам необходимо изменить "Paint.Picture" на то,  что указано в
+значении по умолчанию в ключе <strong>HKCR\.bmp</strong>. Разумеется в коммерческом коде вы должны делать эту 
+регистрацию в <strong>DllRegisterServer()</strong>, поэтому вы можете проверить, является ли ключ "Paint.Picture"
+подходящем местом для записи.
+Я более подробно говорил об этом в <a href="http://www.rsdn.ru/article/?winshell/shlext1.xml">Части I</a>.
+</p>
+
+
+
+
+
+<h2>Расширение 2 - Обработка щелчка правой кнопкой мыши на фоне окна каталога.<a name="EDA"></a></h2>
+
+
+<p>
+В оболочке версии 4.71 и более поздних,  вы можете модифицировать контекстное меню,  отображаемое,  когда 
+вы щелкаете правой кнопкой мыши на рабочем столе или любом окне проводника,  в котором просматривается 
+каталог файловой системы. Программирование этого вида расширений подобно другим расширениям контекстного меню.
+Вот два основных отличия:
+</p>
+
+<ul style="list-style-type: square; list-style-image: none; list-style-position: outside;">
+Параметры в <strong>IShellExtInit::Initialize()</strong> использованы иначе.<br> 
+Расширение регистрируется под другим ключом.<br> 
+</ul>
+
+<p>
+Я не пойду снова по всем шагам,  необходимым для расширения. Посмотрите демонстрационный проект, если
+вы хотите увидеть все целиком.
+</p>
+
+<h3>Отличия в IShellExtInit::Initialize()<a name="EDDA"></a></h3>
+
+
+
+<p>
+Метод <strong>Initialize()</strong> имеет параметр <strong>pidlFolder</strong>, который до этого времени мы игнорировали,  
+потому что он был NULL. Сейчас,  наконец-то, этот параметр пригодится! Это PIDL каталога,  где произошел
+щелчок правой кнопкой мыши. Второй параметр (<strong>IDataObject*</strong>) - NULL,  потому что не было выбрано 
+ни одного файла.
+</p>
+
+<p>
+Вот реализация <strong>Initialize()</strong> из демонстрационного проекта:
+</p>
+
+<div id="EDDDA"><table class="code" width="98%"><tbody><tr><td><pre>STDMETHODIMP CBkgndCtxMenuExt::Initialize (
+    LPCITEMIDLIST pidlFolder,
+    LPDATAOBJECT  pDO,
+    HKEY          hkeyProgID )
+{
+    <span class="COMMENT">// pidlFolder - PIDL каталога,  на котором был щелчок.  pDO -</span>
+    <span class="COMMENT">// NULL, т.к. не было указано с чем работать.</span>
+    <span class="COMMENT">// Мы получаем обычный путь к каталогу из его PIDL с помощью</span>
+    <span class="COMMENT">// SHGetPathFromIDList() API.</span>
+
+    <span class="KEYWORD">return</span> SHGetPathFromIDList ( pidlFolder, m_szDirClickedIn ) ? S_OK : E_INVALIDARG;
+}
+</pre></td></tr></tbody></table></div>
+
+<p>
+Функция <strong>SHGetPathFromIDList()</strong> получает полный путь папки,  который мы сохраняем для 
+дальнейшего использования. Возвращаемое этой функцией BOOL-значение используется для индикации 
+успеха или неудачи операции.
+</p>
+
+
+
+
+<h3>Отличия в регистрации.<a name="EBDA"></a></h3>
+
+
+<p>
+Этот тип расширений регистрируется под другим ключом - а именно <strong>HKCR\Directory\Background\ShellEx\ContextMenuHandlers</strong>. 
+Вот RGS сценарий для регистрации:
+</p>
+
+<div id="EJBDA"><table class="code" width="98%"><tbody><tr><td><pre>HKCR
+{
+    NoRemove Directory
+    {
+        NoRemove Background
+        {
+            NoRemove ShellEx
+            {
+                NoRemove ContextMenuHandlers
+                {
+                    ForceRemove SimpleBkgndExtension = s <span class="CHARACTER">'{9E5E1445-6CEA-4761-8E45-AA19F654571E}'</span>
+                }
+            }
+        }
+    }
+}
+</pre></td></tr></tbody></table></div>
+
+<p>
+За исключением этих двух отличий,  расширение работает также,  как и другие расширения контекстного меню.
+Хотя все же есть одна ловушка в  <strong>IContextMenu::QueryContextMenu()</strong>. Похоже параметр <strong>uIndex</strong>
+всегда равен -1 (0xFFFFFFFF). Передача -1 в качестве индекса в <strong>InsertMenu()</strong> означает, что новый пункт 
+будет расположен в самом низу меню. Однако,  если вы инкрементируете <strong>uIndex</strong>,  он переполнится и станет равным 
+нулю,  означая, что если вы снова передадите <strong>uIndex</strong> в <strong>InsertMenu()</strong>,  то второй пункт появится 
+в самом верху меню. Посмотрите в демонстрационном проекте код для <strong>QueryContextMenu()</strong> чтобы видеть, 
+как правильно добавить пункты меню на нужное место.
+</p>
+
+<p>
+Вот как выглядит модифицированное контекстное меню,  с двумя добавленными пунктами в конце. Отмечу, что, 
+IMHO, добавление пунктов в конец меню таким образом имеет значительные проблемы в удобстве использования. Предположим,  
+пользователь хочет указать пункт <strong>"Properties"</strong>. Обычные действия в этом случае - это щелчок правой кнопкой мыши и 
+затем выбор последнего пункта меню. Когда появляется наше расширение и добавляет пункты после <strong>"Properties"</strong>, 
+мы заставляем привычку пользователя работать неправильно,  что может причинить расстройство и вызвать несколько неприятных
+email-ов. ;) 
+</p>
+
+<p style="text-align: center;"><img src="shlext7.xml_files/ShellExtGuide7_6.gif"><br><i style="font-size: x-small;"></i></p>
+
+<p>
+Вы должны, вероятно, сделать ваши пункты меню визуально выделяющимися (может быть с картинками),  но все равно
+даже после этого привычка пользователя будет работатьь не так. Вы также заставляете пользователя 
+отвлекаться от своей задачи и искать правильный пункт меню. 
+Используйте этот тип расширения осторожно.
+</p>
+
+
+
+<h2>Продолжение следует...?<a name="EBA"></a></h2>
+
+
+<p>
+Если у вас есть идеи для статей по расширениям оболочки,  пришлите мне email (и 
+<a href="http://www.codeproject.com/shell/shellextguide7.asp"> здесь</a> объявите тоже, 
+чтобы другие могли обсудить это).
+</p>
+
+<div align="right"><font style="font-family: arial; font-size: 9pt; color: rgb(128, 136, 160);"><i><hr color="#8088a0" size="1" width="100%">
+                Любой из материалов, опубликованных на этом сервере, не может быть воспроизведен в какой бы
+                то ни было форме и какими бы то ни было средствами без письменного разрешения владельцев авторских
+                прав. 
+             </i></font></div><table celpadding="2" style="border: 1px solid rgb(157, 170, 189); padding: 0px 5px; font-family: verdana; font-weight: bold; color: rgb(100, 100, 100); background-color: rgb(230, 230, 230);" border="0" cellspacing="0" width="100%"><tbody><tr><td nowrap="nowrap"><font style="font-weight: normal;" size="1"><script language="javascript" src="shlext7.xml_files/shMenu.js" type="text/javascript"></script>&lt;&lt;<a href="http://www.rsdn.ru/?article/winshell/shlext7.xml" target="_top">Показать&nbsp;меню</a>&nbsp;</font></td><td align="right" nowrap="nowrap" width="100%"><font size="2">&nbsp;<a href="http://www.rsdn.ru/article/winshell/shlext7.xml?print" target="_blank" title="Версия для печати"><img src="shlext7.xml_files/printer2.gif" align="middle" border="0" height="14" width="16"></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307548" target="_self" title="Перейти к обсуждению статьи"><font color="#646464" size="1"> Сообщений </font><font color="black">0</font></a>&nbsp;&nbsp;<a href="http://www.rsdn.ru/forum/?mid=307548" target="_self" title="Перейти к обсуждению статьи"><img src="shlext7.xml_files/showfr.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;<a href="http://www.rsdn.ru/Forum/RateList.aspx?mid=307548"><font color="#646464"><font size="1"> Оценка </font><font color="black">0</font></font></a>&nbsp;&nbsp; <a target="_blank" href="http://www.rsdn.ru/Users/Private/AddFav.aspx?mid=307548" title="Добавить в избранное"><img onclick="AddFav(307548);return false;" src="shlext7.xml_files/fav.gif" align="middle" border="0" height="14"></a>&nbsp;&nbsp;<a href="javascript:SubMsg(307548)" title="Подписка на сообщения"><img class="i" src="shlext7.xml_files/sub.gif" align="middle" border="0" height="14" width="18"></a>&nbsp;&nbsp;&nbsp;<font size="1">Оценить </font><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-3" title="+1"><img onclick="RateMsg(307548,-3);return false;" src="shlext7.xml_files/n11.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=1" title="Интересно"><img onclick="RateMsg(307548,1);return false;" src="shlext7.xml_files/n1.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=2" title="Спасибо"><img onclick="RateMsg(307548,2);return false;" src="shlext7.xml_files/n2.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=3" title="Супер"><img onclick="RateMsg(307548,3);return false;" src="shlext7.xml_files/n3.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-1" title="Удалить оценку"><img onclick="RateMsg(307548,-1);return false;" src="shlext7.xml_files/nx.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=-4" title="Согласен"><img onclick="RateMsg(307548,-4);return false;" src="shlext7.xml_files/np.gif" align="middle" border="0" height="14" width="18"></a><a target="_blank" href="http://www.rsdn.ru/forum/Private/Rate.aspx?mid=307548&amp;rate=0" title="Не согласен"><img onclick="RateMsg(307548,0);return false;" src="shlext7.xml_files/nm.gif" eight="14px" align="middle" border="0" width="18"></a>&nbsp;
+					</font></td></tr></tbody></table></body></html>

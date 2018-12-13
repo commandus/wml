@@ -1,0 +1,27 @@
+<wml>
+  <card id="$generator" title="First Card" newcontext="true">
+    <serverside action="db">
+      db=DBDEMOS;
+    </serverside>
+    <serverside dataset="dsvendor" action="query">
+      SELECT vendorno, vendorName FROM vendors
+      WHERE vendorno in (3511, 3820)
+    </serverside>
+    <serverside dataset="dspart" action="query">
+      SELECT p.partno, p.vendorno, p.description, p.cost FROM parts p, vendors v WHERE (p.vendorno=$(dsvendor.vendorno)) and (p.vendorno = v.vendorno)
+    </serverside>
+    <p id="$(dsvendor.vendorno)" loop="dsvendor" first="1">
+      <b>
+        $(dsvendor.vendorName)
+      </b>
+      <br/>
+      <table columns="1">
+        <tr id="$(dspart.partno)" loop="dspart" first="1">
+          <td>
+            $(dspart.Description), $(dspart.cost)
+          </td>
+        </tr>
+      </table>
+    </p>
+  </card>
+</wml>

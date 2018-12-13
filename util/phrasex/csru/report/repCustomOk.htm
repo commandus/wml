@@ -1,0 +1,14 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (request.cus_name = '')
+    error 'Please enter a report name';
+  endif
+  if (request.cus_url = '')
+    error 'Please enter a report template HTTP address';
+  endif
+
+  if (request.command = 'Save Report')
+    if (session.userType <>

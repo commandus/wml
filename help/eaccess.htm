@@ -1,0 +1,32 @@
+
+<html>
+<head>
+<title>access
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+<p><a name=access>access</a>
+ <img border="0" src="access.gif" width="24" height="24">
+  <br id=accessbrief>Specifies access control information for the entire deck. It is an error for a deck to contain more than one access element. If a deck does not include an access element, access control is disabled. When access control is disabled, cards in any deck can access this deck.
+  <br>A deck's domain and path attributes specify which other decks may access it. As the browser navigates from one deck to another, it performs access control checks to determine whether the destination deck allows access from the current deck.
+  <br>If a deck has a domain and/or path attribute, the referring deck's URI must match the values of the attributes. Matching is done as follows: the access domain is suffix-matched against the domain name portion of the referring URI and the access path is prefix matched against the path portion of the referring URI.
+  <br>Domain suffix matching is done using the entire element of each sub-domain and must match each element exactly (e.g. www.wapforum.org shall match wapforum.org, but shall not match forum.org).
+  <br>Path prefix matching is done using entire path elements and must match each element exactly (e.g. /X/Y matches /X in the attribute, but does not match /XZ in the attribute).
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=accessattr>
+  <b>domain</b>
+  <br>The domain suffix of allowed referring pages. Default value is current deck's domain.
+  <br><b>path</b>
+  <br>The path prefix of allowed referring pages. Default value is "/".
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+</body>
+</html>

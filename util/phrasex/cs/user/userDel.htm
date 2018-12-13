@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=user/userMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')
+  </serverside>
+  <serverside dataset="check6" action="move" opt="userView.htm?msg=cannot+remove+because+$(uid)+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape)">
+    SELECT name FROM cs_product
+    WHERE dispatcher = '$(uid)'  
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Delete User</title>
+</head>
+<body>
+
+<form method="POST" action="userDelOk.htm">
+<input type="hidden" name="uid" value="$(uid)"/>
+<input type="hidden" name="backTo" value="$(backTo:escape)"/>
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : 
+    <a href="userMan.htm">User Manager</a> : Delete $(uid) User  
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Note, all references to $(uid) will be cleared. 
+    For example, a change $(uid) made to a request
+    will become one made by an unknown person. If this is not
+    what you want, you may want to edit this user account and
+    change its status to [disabled]. 
+    <br/>
+    To cancel and go back to User Manager,
+    please use the browser's Back button.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Are you sure you want to delete User: $(uid) ?
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <input type="submit" value="Yes" />
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

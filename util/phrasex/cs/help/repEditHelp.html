@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>apooHelpDesk</title>apooHelpDesk</title>
+  Help : Report Conditions
+</title>
+</head>
+<body>
+<center>
+<table width="90%">
+<tr>
+  <td><font size=+1>
+    Help : Report Conditions
+  </font></td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>
+The system will search for records that satisfy ALL conditions; i.e.
+all conditions are combined using AND to search the database.
+<br/>
+<b>Date Format</b>
+<br/>
+A valid date is an all-digit string delimited by a space, slash, dash
+or period: " /-." depending on your settings in Control Panel, 
+Regional Settings. The year, month and day must appear in the order 
+specified in the date format string. For example, if the date format
+is "mm/dd/yyyy", "January 2, 1999" is invalid. It should be "02/01/1999".
+<br/>
+<b>How to specify empty values</b>
+<br/>
+To specify an empty value for a condition, for example, to list all 
+records that have not been assigned, you can type "ASSIGNED_TO IS NULL" 
+in the &quot;SQL Where Clause&quot; text field. See the following section for
+further examples and details.
+<br/>
+<b>SQL Where Clause</b>
+<br/>
+The <serverside dataset="Where Clause allows your to specify report conditions that
+can not be specified by the other user interface elements on this
+screen, such as A OR B. It is sent to the database server almost without
+translation. Therefore, whatever you enter in this field must be understood by the 
+database you are using. This means that you must use the column names defined 
+in the database and follow strict syntax. The following chart lists common syntax
+accepted by most databases. <br/>
+<table align="center" border="0" cellspacing=1 cellpadding="2">
+<tr bgcolor="#dcdcdc">
+<td><b>Column Type</b></td><td><b>Syntax</b></td><td><b>Example</b></td>
+</tr>
+<tr bgcolor="#eeeeee">
+<td>String</td><td>column operator 'value'</td>
+<td>product = 'MS Word'</td>
+</tr>
+<tr bgcolor="#eeeeee">
+<td>Number</td><td>column operator value</td>
+<td>ticket_id > 1000</td>
+</tr>
+<tr bgcolor="#eeeeee">
+<td>Date</td><td>column operator {d 'yyyy-mm-dd'}</td>
+<td>submitted_on < {d '1999-12-31'}</td>
+</tr>
+</table>
+<br/>
+To specify an empty value for a column type, use IS NULL. 
+For example, you can say ASSIGNED_TO IS NULL, DEADLINE IS NULL, etc.
+<br/>
+The following is a list of columns you can use: <br/>
+<table align="center" border="0" cellspacing=1 cellpadding="2">
+<tr bgcolor="#dcdcdc">
+<td><b>Friendly Name</b></td><td><b>Column Name</b></td><td><b>Type</b></td>
+<td><b>Friendly Name</b></td><td><b>Column Name</b></td><td><b>Type</b></td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Request ID</td>
+<td bgcolor="#eeeeee">ticket_id</td>
+<td bgcolor="#eeeeee">Number</td>
+<td bgcolor="#dcdcdc">Title</td>
+<td bgcolor="#eeeeee">title</td>
+<td bgcolor="#eeeeee">String</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Status</td>
+<td bgcolor="#eeeeee">status</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Product</td>
+<td bgcolor="#eeeeee">product</td>
+<td bgcolor="#eeeeee">String</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Priority</td>
+<td bgcolor="#eeeeee">priority</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Deadline</td>
+<td bgcolor="#eeeeee">deadline</td>
+<td bgcolor="#eeeeee">Date</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Submitted To</td>
+<td bgcolor="#eeeeee">submitted_to</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Submitted By</td>
+<td bgcolor="#eeeeee">submitted_by</td>
+<td bgcolor="#eeeeee">String</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Submitted On</td>
+<td bgcolor="#eeeeee">submitted_on</td>
+<td bgcolor="#eeeeee">Date</td>
+<td bgcolor="#dcdcdc">Assigned To</td>
+<td bgcolor="#eeeeee">assigned_to</td>
+<td bgcolor="#eeeeee">String</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Assigned By</td>
+<td bgcolor="#eeeeee">assigned_by</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Assigned On</td>
+<td bgcolor="#eeeeee">assigned_on</td>
+<td bgcolor="#eeeeee">Date</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Resolved By</td>
+<td bgcolor="#eeeeee">resolved_by</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Resolved On</td>
+<td bgcolor="#eeeeee">resolved_on</td>
+<td bgcolor="#eeeeee">Date</td>
+</tr>
+<tr>
+<td bgcolor="#dcdcdc">Closed By</td>
+<td bgcolor="#eeeeee">closed_by</td>
+<td bgcolor="#eeeeee">String</td>
+<td bgcolor="#dcdcdc">Closed On</td>
+<td bgcolor="#eeeeee">closed_on</td>
+<td bgcolor="#eeeeee">Date</td>
+</tr>
+</table>
+<br/>
+Custom fields are not used in pre-created templates. 
+Their usage is defined by this website's administrators.
+<br/>
+Example 1:
+You have three products: product1, product2 and product3. If you want 
+to list all requests on product1 or product2, you can set the <serverside dataset="Where 
+Clause text box to:
+<pre>
+    product = 'product1' OR product = 'product2';
+</pre>
+<br/>
+Example 2:
+Your user ID is 'john' and you want to see all open requests submitted or
+assigned to you, you can set the Status to 'open' and set the <serverside dataset="Where 
+Clause text box to:
+<pre>
+    submitted_to = 'john' OR assigned_to = 'john'
+</pre>
+<br/>
+Example 3:
+To list all unassigned records, type the following in the <serverside dataset="Where 
+Clause text box:
+<pre>
+    assigned_to IS NULL
+</pre>
+</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right"><a href="index.html">index</a></td></tr>
+</table>
+</center>
+</body>
+</html>

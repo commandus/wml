@@ -1,0 +1,121 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+
+  // don't validate session. allow use of KB without logging on.
+  if (session.isValid)
+    set local.mainMenu = session.mainMenu;
+  else
+    set local.mainMenu = app.startPage;
+  endif
+
+  set local.max_count = 10;
+
+  set local.kbLinkType = 'content';
+  if (session.isValid AND session.varExist('kbLinkType'))
+    set local.kbLinkType = session.kbLinkType;
+  endif
+  if (local.kbLinkType = 'content')
+    set local.artLinkSsp = 'kbView.htm';
+  else
+    set local.artLinkSsp = 'kbDetail.htm';
+  endif
+  
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$local.mainMenu)">$(appname)</a> : 
+    <a href="index.htm">KB</a> : 
+    Recommended Articles
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    Top $local.max_count) editor recommended knowledge articles: 
+    <ol>
+    <!$
+      // Select IDs only to improve performance. The alternative is to
+      // use SELECT TOP X, whose support and syntax differ between DBs.
+      <serverside dataset="sqlRecommendedIDs" action="query">
+    SELECT kb_id FROM cs_kb '
+        'WHERE kb_security < 1 AND kb_type <> 1 '
+        'ORDER BY kb_rank ASC';
+  </serverside>
+
+      set local.count = 0;  
+      set local.IDs = '';
+      set local.IDs_faq = '';  // exclude them from FAQ
+      while (local.count < local.max_count AND sqlRecommendedIDs.fetch)
+        set local.count = 1 + local.count;
+        if (local.IDs <> '')
+          set local.IDs = local.IDs + ' OR ';
+        endif
+        set local.IDs = local.IDs + 'kb_id = ' + sqlRecommendedIDs.kb_id;
+
+        set local.IDs_faq = local.IDs_faq + 
+          'AND kb_id <> ' + sqlRecommendedIDs.kb_id;
+      endwhile
+      sqlRecommendedIDs.close;
+    
+      if (local.count = 0)
+        response.write('<li>No article found.');
+      else
+        // now we get the details        
+        <serverside dataset="sqlArt0" action="query">
+    SELECT kb_id, kb_type, kb_title, kb_visited, '
+          'kb_summary, kb_updated_on, kb_name, kb_size FROM cs_kb '
+          'WHERE ' + local.IDs + 
+          ' ORDER BY kb_rank ASC';
+  </serverside>
+
+        while (sqlArt0.fetch)
+          set local.artUrl = local.artLinkSsp + '?kb_id=' + sqlArt0.kb_id; 
+    )>
+          <li>
+          <a href="$local.artUrl)">$(sqlArt0.kb_title))</a>
+          <br/>
+          $(sqlArt0.kb_summary))
+          (
+          <!$ if (sqlArt0.kb_type = 3 AND sqlArt0.kb_name <> '') )>
+            $sqlArt0.kb_size) bytes;
+          <!$ endif )>
+          Did this article help? 
+          <a href="kb/kbVote.htm?vote=yes&id=$sqlArt0.kb_id)">yes</a>
+          | <a href="kb/kbVote.htm?vote=no&id=$sqlArt0.kb_id)">no</a>
+          )
+          
+    <!$
+        endwhile
+      endif
+    )>
+    </ol>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+</body>
+</html>

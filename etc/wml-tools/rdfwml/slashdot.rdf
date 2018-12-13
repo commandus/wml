@@ -1,0 +1,66 @@
+<?xml version="1.0"?><rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://my.netscape.com/rdf/simple/0.9/">
+
+  <channel>
+    <title>Slashdot:News for Nerds. Stuff that Matters.</title>
+    <link>http://slashdot.org/index.pl?section=</link>
+    <description>News for Nerds.  Stuff that Matters</description>
+  </channel>
+
+  <image>
+    <title>Slashdot</title>
+    <url>http://slashdot.org/images/slashdotlg.gif</url>
+    <link>http://slashdot.org</link>
+  </image>
+  
+  <item>
+    <title>The Genome Project and the Dark Side</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/01/1232256</link>
+  </item>
+  
+  <item>
+    <title>Corporate vs Open Source:Sun Stealing Blackdown?</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/08/027200</link>
+  </item>
+  
+  <item>
+    <title>Napster Being Sued by RIAA</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/08/0752248</link>
+  </item>
+  
+  <item>
+    <title>iCraveTV Sued by Networks</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/08/025251</link>
+  </item>
+  
+  <item>
+    <title>On Using X w/o the Rodent</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/08/0157254</link>
+  </item>
+  
+  <item>
+    <title>V2 OS</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/07/1617224</link>
+  </item>
+  
+  <item>
+    <title>Legos Declared Toy of Century</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/07/152238</link>
+  </item>
+  
+  <item>
+    <title>British Telecom Announces Unmetered Net Access</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/07/0923250</link>
+  </item>
+  
+  <item>
+    <title>No Linux at Fox.com</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/07/1315234</link>
+  </item>
+  
+  <item>
+    <title>VA Linux IPO Update</title>
+    <link>http://slashdot.org/article.pl?sid=99/12/07/169214</link>
+  </item>
+</rdf:RDF>

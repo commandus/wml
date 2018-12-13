@@ -1,0 +1,328 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.title = '')
+    error 'Please enter title.';
+  endif
+  if (request.submitted_by = '')
+    error 'Please enter submitted by.';
+  endif
+
+  if (request.note_data = '' )
+    error 'Please enter some note.';
+  endif
+  if (app.maxText > 0 AND string.length(request.note_data) > app.maxText)
+    set local.extra = string.length(request.note_data) - app.maxText;
+    error 
+      'The field in your database for storing notes '
+      'can hold up to ' + app.maxText + ' 8-bit characters. '
+      'The note you entered plus some system added text has exceeded '
+      'that limit. Please shorten your note by ' + local.extra + 
+      ' characters and then retry.';
+  endif
+
+  file attach1('request.add_attachment1');
+  if (attach1.name <> '' AND attach1.size = 0)  
+    error 'Attachment ' + attach1.name + ' is empty.';
+  endif
+  if (attach1.name <> '' AND attach1.size > 5000000)  // about 5 Meg
+    error 'Attachment ' + attach1.name + ' exceeded 5M limit.';
+  endif
+
+  set local.submitterEmail = '';
+  if (request.submitted_by <> '')
+    <serverside dataset="sqlSubmittedBy" action="query">
+    SELECT user_id, email FROM cs_user 
+      WHERE user_id = request.submitted_by;
+  </serverside>
+    if (sqlSubmittedBy.fetch <> 1)
+      error 'User [' + request.submitted_by + '] does not exist';
+    else
+      set local.submitterEmail = sqlSubmittedBy.email;
+    endif
+    sqlSubmittedBy.close;
+  endif
+
+  set local.coSubmitterEmail = '';
+  if (request.co_submitter <> '')
+    <serverside dataset="sqlCoSubmitter" action="query">
+    SELECT user_id, email FROM cs_user 
+      WHERE user_id = request.co_submitter;
+  </serverside>
+    if (sqlCoSubmitter.fetch <> 1)
+      error 'User [' + request.co_submitter + '] does not exist';
+    else
+      set local.coSubmitterEmail = sqlCoSubmitter.email;
+    endif
+    sqlCoSubmitter.close;
+  endif
+
+  if (request.submitter_cc <> ''
+      AND (string.findString(request.submitter_cc, '@') < 1 
+        OR string.findString(request.submitter_cc, '.') < 1))
+    error 'Other Submitters\' email address is invalid.';  
+  endif
+  //-------- everything is validated now ----------------------------
+
+  set local.change = '';
+  <serverside dataset="sqlOld" action="query">
+    SELECT submitted_by, co_submitter, submitter_cc '
+    'FROM cs_ticket '
+    'WHERE ticket_id = ' + request.ticket_id;
+  
+  if (sqlOld.submitted_by <> request.submitted_by)
+    set local.change = local.change + 
+      'Changed "Submitted By" from [' + 
+      sqlOld.submitted_by + '] to [' + request.submitted_by + ']. ';
+  endif
+  if (sqlOld.co_submitter <> request.co_submitter)
+    set local.change = local.change + 
+      'Changed "Co-Submitter" from [' + 
+      sqlOld.co_submitter + '] to [' + request.co_submitter + ']. ';
+  endif
+  if (sqlOld.submitter_cc <> request.submitter_cc)
+    set local.change = local.change + 
+      'Changed "Other Submitters\' Email" from [' + 
+      sqlOld.submitter_cc + '] to [' + request.submitter_cc + ']. ';
+  endif
+  sqlOld.close;
+
+  // Request, change and attachments will all get saved or none does.
+  local.beginTransaction;
+
+  <serverside dataset="sqlTicket" action="execute">    UPDATE cs_ticket SET
+      row_ver = 1 + request.row_ver,
+      submitted_by = request.submitted_by, 
+      co_submitter = request.co_submitter,
+      submitter_cc = request.submitter_cc,
+      title = request.title, 
+      cost = request.total_cost + request.new_cost,
+      due_rem_flag = 'y'
+    WHERE ticket_id = request.ticket_id
+      AND row_ver = request.row_ver;
+  </serverside> 
+
+  if (local.change <> '')
+    set local.ch_id = 
+      local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+    <serverside dataset="sqlAddChange = 
+      INSERT INTO cs_ti_change(
+        ch_id, ch_ticket_id, ch_type, 
+        ch_made_by, ch_made_on, ch_cost, ch_description)
+      VALUES(
+        local.ch_id, request.ticket_id, 'log', 
+        session.userID, server.dateTime, 0, local.change);
+  </serverside>
+  endif
+
+  set local.note_id = 
+    local.getUniqueID('cs_ti_change', 'ch_id', 'registry');
+  <serverside dataset="sqlAddNote = 
+    INSERT INTO cs_ti_change(
+      ch_id, ch_ticket_id, ch_type, 
+      ch_made_by, ch_made_on, ch_cost, ch_format, ch_description)
+    VALUES(
+      local.note_id, request.ticket_id, 'public', 
+      session.userID, server.dateTime, request.new_cost,
+      request.note_format, request.note_data);
+  </serverside>
+  
+  // attachment has been defined above when checking its size
+  if (attach1.name <> '')
+    set local.tif_id = 
+      local.getUniqueID('cs_ti_file', 'tif_id', 'registry');
+    <serverside dataset="sqlAddAttchment = 
+      INSERT INTO cs_ti_file(
+        tif_id, tif_ch_id, tif_name, tif_size, tif_content)
+      VALUES(
+        local.tif_id, local.note_id, 
+        attach1.name, attach1.size, attach1.content);
+  </serverside>
+  endif
+
+  local.commitTransaction;
+
+  set local.em_msg = '';
+
+  if (server.emailSenderEnabled)
+    Email_Out em;
+    if (server.taskEnabled('CustomerSupport Email Importer'))
+      set em.from = server.importerEmail;
+    else
+      set em.from = server.adminEmail;
+    endif
+    set em.subject = 
+      'Request #' + request.ticket_id + ': ' + request.title;
+
+    set em.to = '';
+    set em.cc = request.submitter_cc;
+    set local.submitted_by_ok = 0;
+    set local.co_submitter_ok = 0;
+    
+    if (request.submitted_by = '')
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Submitted By because ' 
+        'it is empty. ';
+    elseif (request.submitted_by = session.userID)
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Submitted By because ' 
+        'you are the Submitted By. ';
+    elseif (local.submitterEmail = '')
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Submitted By because ' 
+        + request.submitted_by + ' does not have an email address. ';
+    else
+      set em.to = local.submitterEmail;
+      set local.submitted_by_ok = 1;
+    endif
+
+    if (request.co_submitter = '')
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Co-Submitter because ' 
+        'it is empty. ';
+    elseif (request.co_submitter = session.userID)
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Co-Submitter because ' 
+        'you are the Co-Submitter. ';
+    elseif (local.coSubmitterEmail = '')
+      set local.em_msg = local.em_msg + 
+        'Your note was not sent to the Co-Submitter because ' 
+        + request.co_submitter + ' does not have an email address. ';
+    else
+      if (em.to <> '')
+        set em.to = em.to + '; ';
+      endif
+      set em.to = em.to + local.coSubmitterEmail;
+      set local.co_submitter_ok = 1;
+    endif
+
+    set local.hyperLink = server.httpAddress + 
+      app.startPage + '?ticket_id=' + request.ticket_id + '&user_id=';
+    set local.link1 = local.hyperLink + $(request.submitted_by:escape);
+    set local.link2 = local.hyperLink + $(request.co_submitter:escape);
+
+    if (request.note_format = 1)
+      set em.contentType = 'text/html';
+      set local.head = 
+        '<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">\r\n'
+        '<body>\r\nDear ';
+      set local.tail = '\r\n<br/>To respond, go to ';
+      if (local.submitted_by_ok = 1)
+        set local.head = local.head + request.submitted_by;
+        set local.tail = local.tail + 
+          '\r\n<a href="' + local.link1 + '">' + local.link1 + '</a>';
+      endif
+      if (local.co_submitter_ok = 1)
+        if (local.submitted_by_ok = 1)
+          set local.head = local.head + ' and ';
+          set local.tail = local.tail + '\r\n<br/>or ';
+        endif
+        set local.head = local.head + request.co_submitter;
+        set local.tail = local.tail + 
+          '\r\n<a href="' + local.link2 + '">' + local.link2 + '</a>';
+      endif
+      set local.head = local.head + ',\r\n<br/>';
+      set local.tail = local.tail + 
+        '\r\n<br/>\r\n' + app.name + '\r\n</body></html>';
+
+    else
+      set local.head = 'Dear ';
+      set local.tail = '\r\n\r\nTo respond, go to ';
+      if (local.submitted_by_ok = 1)
+        set local.head = local.head + request.submitted_by;
+        set local.tail = local.tail + local.link1;
+      endif
+      if (local.co_submitter_ok = 1)
+        if (local.submitted_by_ok = 1)
+          set local.head = local.head + ' and ';
+          set local.tail = local.tail + '\r\nor ';
+        endif
+        set local.head = local.head + request.co_submitter;
+        set local.tail = local.tail + local.link2;
+      endif
+      set local.head = local.head + ',\r\n\r\n';
+      set local.tail = local.tail + '\r\n\r\n' + app.name;
+    endif
+
+    set em.content = local.head + request.note_data + local.tail;
+    if (attach1.name <> '')
+      em.attach(attach1.name, attach1.content);
+    endif
+    if (em.to <> '')
+      em.send;
+      if (em.cc <> '')
+        set local.em_msg = local.em_msg + 
+          'Your note has been sent to  ' + em.to + ' and copied to '
+          + em.cc + '. ';
+      else
+        set local.em_msg = local.em_msg + 
+          'Your note has been sent to  ' + em.to + '. ';
+      endif        
+    endif
+  endif
+
+  set local.viewUrl = 
+    'ticketView.htm?ticket_id=' + request.ticket_id +
+    '&backToUrl=' + $(request.backToUrl:escape) + 
+    '&backToPrompt=' + $(request.backToPrompt:escape);
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Request Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    <a href="$local.viewUrl)">Request #$request.ticket_id)</a> 
+    has been responded to. 
+
+    <!$ if (server.emailSenderEnabled) )>
+      <br/>$ to.html(local.em_msg) )
+      For details about when notification emails are sent, please click 
+      <a target="ptHelpWindow" href="../help/emailHelp.html">here</a>.
+    <!$ endif )>
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="$request.backToUrl)">$request.backToPrompt)</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

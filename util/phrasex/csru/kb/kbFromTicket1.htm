@@ -1,0 +1,15 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  set local.title = 'Copy Request #' + request.ticket_id + ' to KB';
+  set local.kb_id = '';
+  if (request.fieldExist('kb_id'))
+    set local.kb_id = request.kb_id;
+  endif
+
+  set local.kb_id = '';
+  set local.title = app.name + ' : Knowledge Base';
+  set local.links = 
+    '<a href="' + session.mainMenu + '">

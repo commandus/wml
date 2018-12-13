@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside action="defaultparam" opt="sort_col" >
+gen_nf</serverside>
+<serverside action="defaultparam" opt="col" >
+SELECT CASE WHEN '$(sort_col)' = 'Product' THEN 'product' WHEN '$(sort_col)' = 'Priority' THEN 'priority' WHEN '$(sort_col)' = 'Deadline' THEN 'deadline' WHEN '$(sort_col)' = 'Submitted On' THEN 'submitted_on' WHEN '$(sort_col)' = 'Assigned On' THEN 'assigned_on' WHEN '$(sort_col)' = 'Status' THEN 'status' ELSE '' END R FROM dual</serverside>
+<serverside action="defaultparam" opt="sort_dir" >
+SELECT '' FROM dual</serverside>
+<serverside dataset="sqlLastStatus" action="defaultparam" >
+Подробная Деталь:</serverside>
+<serverside dataset="sqlOpen" action="query" >
+группа</serverside>
+<serverside dataset="total" action="query" >
+SELECT COUNT(ticket_id) cnt, CAST('today' AS DATE) dt FROM cs_ticket WHERE $(usr_col1) &lt;&gt; '$(sqlLastStatus)'</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+check2</title>
+</head>
+<body >
+<table width="100%" border="0" cellspacing="2" cellpadding="0" loop="global" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="repMan.htm" >
+Менеджер отчетов</a>
+: Открытые запросы</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+<form method="GET" action="listOpen.htm" >
+$(s1.news_title)<select name="sort_col" size="1" >
+<option selected="selected" >
+$(sort_col)</option>
+<option >
+$(closedH)</option>
+<option >
+"user_id=$(user_id)","user_pwd=$(user_pwd)" "user_id=guest","user_pwd=guest" $(appname) $(arSubmittedCount)</option>
+<option >
+kb_content_url</option>
+<option >
+$request.ticket_id)</option>
+<option >
+отд</option>
+<option >
+$(usr_col1)</option>
+</select>
+<select name="sort_dir" size="1" >
+<option selected="selected" >
+$(sort_dir)</option>
+<option >
+kbVote.htm?vote=no&id=$sqlArt.kb_id)</option>
+<option >
+УДАЛИТЕСЬ ИЗ cs_kb ГДЕ kb_id = $(kb_id);</option>
+</select>
+<input type="submit" value="Go" />
+<a target="ptHelpWindow" href="../help/listOpenHelp.html" >
+Родитель</a>
+</form>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" loop="global" >
+<tr class="apbg" >
+<th >
+Приоритет: [$(имя)] скорректирован. Пожалуйста скорректируйте все сообщения, которые используют $(old_name).</th>
+<th >
+../accessdenied.htm?b=discuss/index.htm</th>
+<th nowrap="nowrap" >
+$(sort_col)</th>
+<th nowrap="nowrap" >
+$request.sa_serial)</th>
+<th nowrap="nowrap" >
+Сход Описания Описания:</th>
+</tr>
+<tr loop="sqlOpen" >
+<td valign="top" >
+<a href="$(ticketFolder)ticketView.htm?$(param)" >
+$(sqlOpen.ticket_id)</a>
+</td>
+<td valign="top" >
+$(sqlOpen.title)</td>
+<td valign="top" >
+$(sqlOpen.Column1)</td>
+<td valign="top" >
+$(sqlOpen.submitted_by)</td>
+<td valign="top" >
+$(sqlOpen.assigned_to)</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="2" >
+<hr />
+</td>
+</tr>
+<tr >
+<td loop="total" >
+/hd/copyright.htm /hd/cs/help/index.html /log/day01.txt /log/day02.txt /log/day03.txt /log/day04.txt /log/day05.txt /log/day06.txt /log/day07.txt /log/day08.txt /log/day09.txt /log/day10.txt /log/day11.txt /log/day12.txt /log/day13.txt /log/day14.txt /log/day15.txt /log/day16.txt /log/day17.txt /log/day18.txt</td>
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

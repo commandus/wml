@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>  
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=status/statusMan.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')  
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT name, seq_num, description 
+    FROM cs_status ORDER BY seq_num
+  </serverside>
+  <serverside dataset="total" action="query">
+    SELECT COUNT(seq_num) cnt  
+    FROM cs_status  
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Customer Support Status Manager</title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a> :  
+    <a href="../mainMenuManager.htm">Manager menu</a> : Status Manager
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr>
+  <td align="right">
+    <a href="statusNew.htm">New Status</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr class="apbg">
+  <td>Name</td>
+  <td width="1%">Seq.#</td>
+  <td>Description</td>
+  <td width="1%">Command</td>
+</tr>
+<tr loop="s1" class="$(s1.rowodd#apbg#)">
+  <td>$(s1.name)</td>
+  <td>$(s1.seq_num)</td>
+  <td>$(s1.description)</td>
+  <td nowrap="nowrap" width="1%">
+    <a href="statusEdit.htm?name=$(s1.name:escape)">Edit</a> | 
+    <a href="statusDel.htm?name=$(s1.name:escape)">Delete</a>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr loop="total">
+  <td>
+    Total: $(total.cnt) status(es)  
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

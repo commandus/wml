@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+<card id="otps" title="Опции WinWAP">
+<p align="center">
+   <img src="wwhelp.wbmp" alt="WinWAP"/>
+</p>
+<p>
+  <br/>
+  <big>Опции в  WinWAP</big>
+  <br/>
+  <br/>
+  Здесь имеется множество визуальных и технических опций, с помощью которых вы можете изменять вид и поведение  WinWAP.
+  <br/>
+  Для доступа к этим опциям выберите  &#x22;Опции&#x22; в меню  &#x22;Правка&#x22; .
+  <br/>
+</p>
+<p align="center">
+  Группы опций :<br/>
+  &#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;<br/><br/>
+  <a href="opts/gen.wml">Общие</a><br/>
+  <a href="opts/http.wml">HTTP</a><br/>
+  <a href="opts/gw.wml">Шлюз WAP</a><br/>
+  <a href="opts/oth.wml">Другие</a><br/>
+  <a href="opts/snd.wml">Звуки</a><br/>
+  <a href="opts/int.wml">Интерфейс</a><br/>
+  &#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;&#x5F;<br/>
+  <do label="Назад"> <go href="@prev"/> </do>
+</p>
+</card>
+</wml>

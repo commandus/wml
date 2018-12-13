@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Open eBook markup reference</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == 'block'){
+		document.getElementById(i).style.display = 'none';
+	}	else {
+		document.getElementById(i).style.display = 'block';
+	}
+	return;	
+}
+</script>
+</head>
+<body onload=expand('commontags')>
+<h1>Open eBook markup reference</h1>
+<p>Markup is the basic element of authoring any eBook and consists of subset of HTML elements: tags and their attributes.&nbsp;</p>
+<p>Authoring for Microsoft Reader format is generally similar to authoring for a browser. Most of the tags and attributes will be familiar to anyone who has worked with HTML.</p>
+<p>Note: Some tags and attributes does not supported by Windows Reader Version 1.5 or the Pocket PC Reader version.</p>
+<p><a href="#common" onclick="expand('commontags')">Common tags <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=commontags style="margin-left: 64; display='none'">
+  <li><a href="obhtml.htm">html</a></li>
+  <li><a href="obxml.htm"> xml document descciption</a></li>
+  <li><a href="obdoctype.htm">dtd</a></li>
+  <li><a href="obbody.htm">body</a></li>
+  <li><a href="obhead.htm">head</a></li>
+  <li><a href="obmeta.htm">meta</a></li>
+  <li><a href="obtitle.htm">title</a></li>
+  <li><a href="obscript.htm">script</a></li>
+  <li><a href="obbase.htm">base</a></li>
+  <li><a href="obobject.htm">object</a></li>
+  <li><a href="obparam.htm">param</a></li>
+  <li><a href="obarea.htm">area</a></li>
+  <li><a href="obmap.htm">map</a></li>
+  <li><a href="oblink.htm">link</a></li>
+  <li><a href="oba.htm">a</a></li>
+  <li><a href="obvar.htm">var</a></li>
+  <li><a href="obimg.htm">img</a></li>
+  <li><a href="obstyle.htm">style</a></li>
+</ul>
+
+<p><a href="#list" onclick="expand('listtags')">List <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=listtags style="margin-left: 64; display='none'">
+  <li><a href="obli.htm">li</a></li>
+  <li><a href="obul.htm">ul</a> (bulleted)</li>
+  <li><a href="obol.htm">ol</a> (numbered)</li>
+</ul>
+
+<p><a href="#definition" onclick="expand('definitiontags')">Definitions <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=definitiontags style="margin-left: 64; display='none'">
+  <li><a href="obdl.htm">dl</a></li>
+  <li><a href="obdd.htm">dd</a></li>
+  <li><a href="obdt.htm">dt</a></li>
+  <li> <a href="obdfn.htm"> dfn</a></li>
+</ul>
+
+<p><a href="#heading" onclick="expand('headingtags')">Headings <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=headingtags style="margin-left: 64; display='none'">
+  <li><a href="obh1.htm">h1</a></li>
+  <li><a href="obh2.htm">h2</a></li>
+  <li><a href="obh3.htm">h3</a></li>
+  <li><a href="obh4.htm">h4</a></li>
+  <li><a href="obh5.htm">h5</a></li>
+  <li><a href="obh6.htm">h6</a></li>
+</ul>
+
+<p><a href="#format" onclick="expand('formattags')">Format preserving tags, citation <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=formattags style="margin-left: 64; display='none'">
+  <li><a href="obpre.htm">pre</a></li>
+  <li><a href="obcode.htm">code</a></li>
+  <li><a href="obkbd.htm">kbd</a></li>
+  <li> <a href="obtt.htm"> tt</a></li>
+  <li> <a href="obcite.htm"> cite</a></li>
+  <li><a href="obblockquote.htm">blockquote</a></li>
+  <li><a href="obq.htm">q</a></li>
+</ul>
+
+<p><a href="#flow" onclick="expand('flowtags')">Formatting <img border="0" src="ra.gif" width="7" height="7"></a> (click on arrow to expand list)
+<ul id=flowtags style="margin-left: 64; display='none'">
+  <li><a href="obp.htm">p</a></li>
+  <li><a href="obbr.htm">br</a></li>
+  <li><a href="obdiv.htm">div</a></li>
+  <li><a href="obhr.htm">hr</a></li>
+  <li><a href="obcenter.htm">center</a></li>
+  <li><a href="obtable.htm">table</a></li>
+  <li><a href="obcaption.htm">caption</a></li>
+  <li><a href="obtd.htm">td</a></li>
+  <li><a href="obth.htm">th</a></li>
+  <li><a href="obtr.htm">tr</a></li>
+  <li><a href="obspan.htm">span</a></li>
+  <li><a href="obfont.htm"> font</a></li>
+  <li><a href="obsmall.htm"> small</a></li>
+  <li><a href="obbig.htm">big</a></li>
+  <li><a href="obb.htm">b</a></li>
+  <li><a href="obstrong.htm" strong</a></li>
+  <li><a href="obi.htm">i</a></li>
+  <li><a href="obem.htm">em</a></li>
+  <li><a href="obu.htm">u</a></li>
+  <li><a href="obstrike.htm">strike</a></li>
+  <li><a href="obs.htm">s</a></li>
+  <li><a href="obsup.htm">sup</a></li>
+  <li><a href="obsub.htm">sub</a></li>
+</ul>
+<p><br>
+See also:
+</p>
+
+<p><a href="oeboverview.htm">Open eBook overview</a> </p>
+
+<p><a href="opref.htm">Open eBook package reference</a> </p>
+
+</body>
+
+</html>

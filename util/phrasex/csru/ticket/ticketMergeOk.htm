@@ -1,0 +1,21 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  if (to.lower(request.action) = 'preview html')
+    response.clear();
+    file fPreview('htmlFragView.htm');
+    fPreview.htmRun();
+    return;
+  endif
+  
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  if (request.target_ticket_id = request.ticket_id)
+    error 'You cannot merge a request with itself.';
+  endif
+
+  if (request.new_cost <>
+ꮫꮫꮫꮫ

@@ -1,0 +1,183 @@
+
+<html>
+<head>
+<title>National languages support
+</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Supported code pages</h1>
+
+<p>	
+A table of supported codepages and their WMLC codes is shown below<br>
+</p>
+<table border="0">
+  <tr>
+    <td class="tdbanner">Code page</td>
+    <td class="tdbanner">WMLC Binary code</td>
+    <td class="tdbanner">Transliteration is implemented</td>
+    <td class="tdbanner">Remarks</td>
+  </tr>
+  <tr>
+    <td colspan="4"></td>
+  </tr>
+  <tr>
+    <td>big5</td>
+    <td>07EA</td>
+    <td>-</td>
+    <td>IANA MIBEnum value 2026</td>
+  </tr>
+  <tr>
+    <td>iso-10646-ucs-2</td>
+    <td>03E8</td>
+    <td>-</td>
+    <td>IANA MIBEnum value 1000</td>
+  </tr>
+  <tr>
+    <td>us-ascii</td>
+    <td>3</td>
+    <td>+</td>
+    <td>ASCII</td>
+  </tr>
+  <tr>
+    <td>iso-8859-1</td>
+    <td>4</td>
+    <td>+</td>
+    <td>Latin-1</td>
+  </tr>
+  <tr>
+    <td>iso-8859-2</td>
+    <td>5</td>
+    <td>+</td>
+    <td>Latin-2</td>
+  </tr>
+  <tr>
+    <td>iso-8859-3</td>
+    <td>6</td>
+    <td>+</td>
+    <td>Latin-3</td>
+  </tr>
+  <tr>
+    <td>iso-8859-4</td>
+    <td>7</td>
+    <td>+</td>
+    <td>Latin-4</td>
+  </tr>
+  <tr>
+    <td>iso-8859-5</td>
+    <td>8</td>
+    <td>+</td>
+    <td>Cyrillic</td>
+  </tr>
+  <tr>
+    <td>iso-8859-6</td>
+    <td>9</td>
+    <td>+</td>
+    <td>Arabic</td>
+  </tr>
+  <tr>
+    <td>iso-8859-7</td>
+    <td>A</td>
+    <td>+</td>
+    <td>Greek</td>
+  </tr>
+  <tr>
+    <td>iso-8859-8</td>
+    <td>B</td>
+    <td>+</td>
+    <td>Hebrew</td>
+  </tr>
+  <tr>
+    <td>iso-8859-9</td>
+    <td>C</td>
+    <td>+</td>
+    <td>Latin-6</td>
+  </tr>
+  <tr>
+    <td>iso-8859-10</td>
+    <td>D</td>
+    <td>+</td>
+    <td>no code is provided in WML docs.</td>
+  </tr>
+  <tr>
+    <td>iso-8859-13</td>
+    <td>E</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>iso-8859-14</td>
+    <td>F</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>iso-8859-15</td>
+    <td>10</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>shift_JIS</td>
+    <td>11</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>utf-8</td>
+    <td>6A</td>
+    <td>+</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>KOI8-R</td>
+    <td>80</td>
+    <td>+</td>
+    <td>no code is provided in WML docs.</td>
+  </tr>
+  <tr>
+    <td>cp10000_MacRoman</td>
+    <td>81</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>Windows-1250</td>
+    <td>82</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>Windows-1251</td>
+    <td>83</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+  <tr>
+    <td>Windows-1252</td>
+    <td>84</td>
+    <td>+</td>
+    <td>-&quot;-</td>
+  </tr>
+</table>
+<p>Note that only first 9 iso-8859 code pages have valid WML codes. If possible,
+use more flexible utf-8 encoding instead of other code pages available.</p>
+<p>See also: <a href="languagesupport.htm">National languages support</a>  <a href="optionsautoconversion.htm">Automatic
+document conversion</a></p>
+
+</body>
+</html>

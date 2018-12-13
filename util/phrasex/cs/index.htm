@@ -1,0 +1,283 @@
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml">
+  <serverside action="db" opt="ib">
+     db=$(DB_HD) 
+  </serverside>
+  <serverside dataset="News" action="query">
+     SELECT news_id, news_title, news_created_on, news_created_by FROM cs_news 
+    ORDER BY news_id DESC 
+  </serverside>
+  <serverside dataset="NewsArt" action="query">
+     SELECT kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, 
+    kb_name, kb_size FROM cs_kb ORDER BY kb_rank ASC 
+  </serverside>
+  <serverside dataset="NewsArt1" action="query">
+    SELECT kb_id, kb_type, kb_title, kb_visited, kb_summary, kb_updated_on, 
+    kb_name, kb_size FROM cs_kb ORDER BY kb_visited DESC 
+  </serverside>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="generator" content="apoo editor, http://commandus.com/"/>
+    <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+    <title>
+      apooHelpDesk Customer Support $(today)
+    </title>
+  </head>
+  <body onload="f1.user_id.focus()">
+    <form action="logon.htm" method="POST" name="f1">
+      <input type="hidden" name="ticket_id" value="$(ticket_id)"/>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <hr/>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="apbg" valign="top" width="1%">
+            <table border="0" cellspacing="0" cellpadding="2">
+              <tr>
+                <td>
+                   User ID: 
+                  <input name="user_id" size="15" maxlength="50"/>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                   Password: 
+                  <input type="password" name="user_pwd" size="15" maxlength="20"/>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <input type="submit" value="Log on"/>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="user/forgot.htm">
+                    Forgot ID or password
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="user/signUp.htm">
+                    Sign up for new account
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="configureBrowser.htm">
+                    Configure my web browser
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="user/signUp.htm">
+                    Submit a request
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="kb/index.htm">
+                    Knowledge Base
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a href="discuss/index.htm">
+                    Discussion
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="apbg">
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="1">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td valign="top">
+             Today $(today) 
+            <br/>
+            <a href="news/index.htm">
+              News
+            </a>
+            : 
+            <blockquote>
+              This section will be populated with the most recently posted news 
+              articles.
+            </blockquote>
+            <ul>
+              <li loop="News" first="1" last="10">
+                <a href="news/newsView.htm?news_id=$(News.news_id)">
+                  $(News.news_title)
+                </a>
+              </li>
+            </ul>
+            <a href="kb/recommended.htm">
+              Articles Recommended by Editors
+            </a>
+            : 
+            <blockquote>
+              This section will be populated with the top public articles from 
+              the knowledge base recommended by the editors.
+            </blockquote>
+            <ul>
+              <li loop="NewsArt" first="1" last="10">
+                <a href="kb/kbView.htm?kb_id=$(NewsArt.kb_id)">
+                  $(NewsArt.kb_title)
+                </a>
+                <blockquote>
+                   $(NewsArt.kb_summary)) $(NewsArt.kb_size) bytes; 
+                  <br/>
+                  Did this article help? 
+                  <a href="kb/kbVote.htm?vote=yes&amp;id=$(NewsArt.kb_id)">
+                    yes
+                  </a>
+                   | 
+                  <a href="kb/kbVote.htm?vote=no&amp;id=$(NewsArt.kb_id)">
+                    no
+                  </a>
+                </blockquote>
+              </li>
+            </ul>
+            <a href="kb/faq.htm">
+              Frequently Asked Questions
+            </a>
+            : 
+            <blockquote>
+               This section will be populated with the three most frequently 
+              visited public articles not in the above recommended article list from the 
+              knowledge base. 
+            </blockquote>
+            <ul>
+              <li loop="NewsArt1" first="1" last="10">
+                <a href="kb/kbView.htm?kb_id=$(NewsArt1.kb_id)">
+                  $(NewsArt1.kb_title)
+                </a>
+                <blockquote>
+                   $(NewsArt1.kb_summary) $(NewsArt1.kb_size) bytes; Visited 
+                  $(NewsArt1.kb_visited); 
+                  <br/>
+                   Did this article help? 
+                  <a href="kb/kbVote.htm?vote=yes&amp;id=$(NewsArt1.kb_id)">
+                    yes
+                  </a>
+                   | 
+                  <a href="kb/kbVote.htm?vote=no&amp;id=$(NewsArt1.kb_id)">
+                    no
+                  </a>
+                </blockquote>
+              </li>
+            </ul>
+            <a href="http://$(_host)$(_scriptname)$(_pathinfo)">
+              Refresh
+            </a>
+             | 
+            <a href="http://$(_host)$(_scriptname)/hd/index.htm">
+              Back
+            </a>
+          </td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="2">
+            <hr/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+             Powered by 
+            <a href="/hd/copyright.htm">
+              ApooHelpDesk
+            </a>
+          </td>
+          <td align="right">
+             Copyright &copy; 2003, Andrei Ivanov. 
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

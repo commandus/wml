@@ -1,0 +1,48 @@
+<?xml version="1.0"?> 
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"> 
+ 
+<wml> 
+
+  <template>
+    <do type="accept" label="Back">
+      <prev/>
+    </do>
+  </template>
+
+	<card id="cv" title="CV"> 
+		<p>
+			CV of <b>Thomas Neill</b><br/>
+			<table columns="1">
+				<tr><td><a href="cv-exp.wml">Experience</a></td></tr>
+				<tr><td><a href="cv-edu.wml">Education</a></td></tr>
+				<tr><td><a href="#ein">Interests</a></td></tr>
+				<tr><td><a href="#esk">Skills</a></td></tr>
+				<tr><td><a href="#ere">References</a></td></tr>
+			</table>
+		</p> 
+	</card> 
+
+	<card id="ein" title="CV - Interests">
+		<p>
+			Personal interests include playing guitar (electric and classical), playing pool
+			and snooker with friends, reading books (mostly by Terry Pratchett and Arthur C. Clarke)
+			and playing video games.
+		</p>
+	</card>
+
+	<card id="esk" title="CV - Skills">
+		<p>
+			<b>Languages</b>: C, C++, Perl, Java, JavaScript, HTML, WML, WMLscript<br/>
+			<b>OSs</b>: UNIX (Linux, Solaris, *BSD), Windows (Win9x, NT4, 2000)<br/>
+			<b>Other skills</b>: DHTML, CGI, TCP/IP (including firewalls, masquerading,
+			secure connectivity), HTTP, HTTPS, FTP, SMTP, POP, DNS.
+		</p>
+	</card>
+
+	<card id="ere" title="CV - References">
+		<p>
+			References are available on request to cv@pwot.co.uk
+		</p>
+	</card>
+
+</wml> 

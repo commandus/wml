@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') AND (user_type = 'Manager')    
+  </serverside>
+  <serverside action="defaultparam" opt="kb_id">
+    SELECT -2 R FROM DUAL
+  </serverside>
+  <serverside action="defaultparams">
+    select name, val from dict where lang='en' and name STARTING WITH 'kb_type_'
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT kb_type, kb_p1, kb_owner, kb_title,  
+    CASE kb_type
+    WHEN 1 THEN '$(kb_type_cat)'
+    ELSE '$(kb_type_art)'
+    END itemtype
+    FROM cs_kb 
+    WHERE kb_id = $(kb_id)
+  </serverside>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Delete Knowledge Base Item</title>
+</head>
+<body>
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="s1">
+<tr>
+  <td>
+    <a href="../index.htm">Customer Support main menu</a>
+     :
+     <a href="index.htm">
+      Customer Support Knowledge Base menu
+     </a>
+     : $(s1.itemtype) $(kb_id) Delete  
+   </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    $(s1.itemtype) $(kb_id) [<b>$(s1.kb_title)</b>] and all its decendants have been deleted.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="index.htm?kb_id=$(s1.kb_p1)">OK</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+  <serverside dataset="sqlDeleteKB" action="execute">
+    DELETE FROM cs_kb WHERE kb_id = $(kb_id); 
+  </serverside>
+</html>

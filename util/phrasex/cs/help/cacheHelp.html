@@ -1,0 +1,342 @@
+<html>
+<head>
+<title>apooHelpDesk</title>apooHelpDesk</title>
+  Help : Choosing a Web Browser
+</title>
+</head>
+<body>
+<center>
+<table width="90%">
+<tr>
+  <td><font size=+1>
+    Help : Choosing a Web Browser
+  </font></td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>
+<br/>
+<b>Background</b><br/>
+In order to improve browsing performance, most web browsers and proxy 
+servers store web pages in their cache. When you go back to a visited 
+page, they can sometimes display it to you quickly without fetching it 
+from the actual website. Proxy servers are used by most companies to 
+relay communications between internal users and external websites in 
+order to protect their internal networks. 
+<br/>
+HTTP is the protocol that specifies how a web browser and a website talk to each other. It defines an "Expires" header to tell
+web 
+browsers and proxy servers when to discard cached pages. According to the HTTP
+protocol, when a user clicks on the Back button of a browser, this should bring up the cached web page regardless
+of the date in the 
+"Expires" header.
+<br/>
+ApooHelpDesk dynamically retrieves data from a database and
+generates HTML files based on the logic in SSP files. It includes an "Expires" header with
+the current date and time, to indicate that the generated HTML 
+file should expire immediately. This way, when you return to a page you have
+already visited, your web browser or proxy server will request new content from ApooHelpDesk.
+<br/>
+<b>Problems</b><br/>
+Unfortunately, different browsers
+work differently. There are five problems related to the cache and the
+back button.
+<ol>
+  <li>
+    Unless reposting data, unable to go back to forms with method=POST 
+    but no
+    enctype=multipart/formdata. Example: logon-&gt;main menu-&gt;New
+    Request-&gt;back</li>
+  <li>
+    Unless reposting data, unable to go back to forms with method=POST and
+    enctype=multipart/formdata, needed for uploading file. Example: New
+    Request-&gt;submit-&gt;main menu-&gt;back</li>
+  <li>
+    Stale pages. Example: new product-&gt;New Request</li>
+  <li>
+    Slow going back. Example: MyTodoList-&gt;View Request-&gt;back</li>
+  <li>
+    Resizing clears form/page. Example: New Request-&gt;enter data-&gt;resize
+    browser</li>
+</ol>
+<br/>
+Test Results (n = no problem encountered. y = yes, problem encountered.)
+<table border="1">
+  <tr>
+    <td>browser behind proxy server</td>
+    <td>expires header</td>
+    <td>browser cache</td>
+    <td nowrap="nowrap">IE5.5</td>
+    <td nowrap="nowrap">IE5.0</td>
+    <td nowrap="nowrap">IE4.0</td>
+    <td nowrap="nowrap">N6.0</td>
+    <td nowrap="nowrap">N4.7<br/>N4.6</td>
+    <td nowrap="nowrap">N4.5</td>
+  </tr>
+  <tr>
+    <td>no</td>
+    <td>no</td>
+    <td nowrap="nowrap">auto</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">session</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">n,n,n,n,n</td>
+    <td nowrap="nowrap">n,n,n,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">every visit</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">n,n,n,n,n</td>
+    <td nowrap="nowrap">n,n,n,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">never</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp; </td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp; </td>
+    <td>yes</td>
+    <td nowrap="nowrap">auto</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">session</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">every visit</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">never</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>yes</td>
+    <td>no</td>
+    <td nowrap="nowrap">auto</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">session</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">every visit</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,y,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">never</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">n,y,y,n,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+    <td nowrap="nowrap">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp; </td>
+    <td>yes</td>
+    <td nowrap="nowrap">auto</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+    <td nowrap="nowrap">n/a</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">session</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">every visit</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,n,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td nowrap="nowrap">never</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,n,n</td>
+    <td nowrap="nowrap">n,y,n,y,n</td>
+    <td nowrap="nowrap">y,y,y,n,n</td>
+    <td nowrap="nowrap">y,y,n,y,y</td>
+    <td nowrap="nowrap">n,n,y,n,n</td>
+  </tr>
+</table>
+<br/>Netscape 6 always overrides the &quot;Expires&quot; header if its cache is set to
+&quot;Never&quot;. Netscape Navigator 4.5 test results show a problem with the
+&quot;Expires&quot; header causing stale pages.
+<br/>In addition to the &quot;Expires&quot; header, the &quot;Cache-Control: no-cache&quot; and
+&quot;Prama:
+no-cache&quot; headers also instruct the proxy server or
+browser not to cache a web page. Tests show that these headers do not work well
+and are problematic, even when using IE5 behind a proxy server.
+<br/>
+<b>ApooHelpDesk's Solution</b><br/>
+If a request is issued from a browser through a proxy server, Perfect 
+Tracker will always include the &quot;Expires&quot; header with its response. ApooHelpDesk can not
+include or exclude the header
+selectively based on the client browser type, because different browsers may be
+configured with the same proxy server. An IE browser may pick up cached content from
+a Navigator browser residing on the proxy. To resolve the stale content problem,
+you can find the following code in all shipped .htm files.<pre>  if (Request.VIA &lt;&gt; '')
+    Response.Expires(0);  
+  endif</pre>
+This will work fine if the browser connects directly to ApooHelpDesk and is
+NOT configured to always display pages from its cache.<br/>
+Forms are used throughout the ApooHelpDesk web application. There are four types of
+forms: logon forms, search forms, edit/save forms and delete forms. Problem #1
+described above involves form handling.&nbsp; To resolve this problem, after a
+user logs on successfully, ApooHelpDesk redirects 
+the request to a URL without form data. (See /hd/index.htm, Response.redirect.) 
+This trick turns a HTTP POST operation into a GET operation without exposing the
+user's password in the browser's address box. Without this fix, the following 
+scenario causes a "Do you want to repost the form
+data" message with Netscape 6.
+<pre>  Logon --&gt; Main Menu --&gt; New Request --&gt; Browser's Back button</pre>
+Similarly, the GET operation is used to avoid problems with search forms.
+However, edit/save forms must call the POST method instead, because they may
+contain file data. If the GET method were to be used in those forms, duplicate records
+could be created when the browser resends a request due to a window resizing.&nbsp;
+<br/>
+You may also encounter a "Page has expired" warning, a "Do you want to repost the
+form data" message or a "Data Missing" error when
+you go back to a page that saves or changes a new record. An example
+of this is when you return to the "New Request has been saved" page from the 
+main menu. These messages are normal. Do not refresh, repost or reload form data
+when this occurs.&nbsp;
+<br/>
+Most delete forms use the POST method to avoid deleting the same record 
+multiple times. Some delete forms check for the existence of a record before deleting
+it. Hence these forms can use the GET method.
+<br/>
+<b>Conclusion</b><br/>
+If you access ApooHelpDesk directly without going through a proxy server, you
+are fine. If you are behind a corporate proxy server, you should upgrade your web browser to Internet Explorer 5.x, Netscape 6 
+or newer versions of these browsers.
+</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right"><a href="index.html">index</a></td></tr>
+</table>
+</center>
+</body>
+</html>

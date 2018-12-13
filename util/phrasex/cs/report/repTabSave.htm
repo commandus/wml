@@ -1,0 +1,272 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType <> 'Manager')
+    error 'Only managers can save a report';
+  endif
+  if (request.tab_name = '')
+    error 'Please enter a report name';
+  endif
+  if (string.isValidDateTime(request.tab_submitted_on1) <> 1)
+    error 'Please enter a valid date-time for Submitted On >=';
+  endif
+  if (string.isValidDateTime(request.tab_submitted_on2) <> 1)
+    error 'Please enter a valid date-time for Submitted On <';
+  endif
+  if (string.isValidDateTime(request.tab_assigned_on1) <> 1)
+    error 'Please enter a valid date-time for Assigned On >=';
+  endif
+  if (string.isValidDateTime(request.tab_assigned_on2) <> 1)
+    error 'Please enter a valid date-time for Assigned On <';
+  endif
+  if (string.isValidDateTime(request.tab_closed_on1) <> 1)
+    error 'Please enter a valid date-time for Closed On >=';
+  endif
+  if (string.isValidDateTime(request.tab_closed_on2) <> 1)
+    error 'Please enter a valid date-time for Closed On <';
+  endif
+  if (string.isValidDateTime(request.tab_deadline1) <> 1)
+    error 'Please enter a valid date-time for Deadline >=';
+  endif
+  if (string.isValidDateTime(request.tab_deadline2) <> 1)
+    error 'Please enter a valid date-time for Deadline <';
+  endif
+
+  // convert user friendly column names to real column names
+  local.setVar('Request ID',     'ticket_id');
+  local.setVar('Title',         'title');
+  local.setVar('Status',        'status');
+  local.setVar('Product',       'product');
+  local.setVar('Priority',      'priority');
+  local.setVar('Deadline',      'deadline');
+  local.setVar('Serial Number', 'serial_num');
+  local.setVar('Cost',          'cost');
+  local.setVar('Turn Around',   'turn_around');
+  local.setVar('Submitted To',  'submitted_to');
+  local.setVar('Submitted By',  'submitted_by');
+  local.setVar('Submitted On',  'submitted_on');
+  local.setVar('Assigned To',   'assigned_to');
+  local.setVar('Assigned By',   'assigned_by');
+  local.setVar('Assigned On',   'assigned_on');
+  local.setVar('Closed By',     'closed_by');
+  local.setVar('Closed On',     'closed_on');
+  local.setVar('Descending',    'DESC');
+  local.setVar('Ascending',     'ASC');
+
+  set local.tab_col1 = local.var(request.tab_col1, request.tab_col1);
+  set local.tab_col2 = local.var(request.tab_col2, request.tab_col2);
+  set local.tab_col3 = local.var(request.tab_col3, request.tab_col3);
+  set local.tab_col4 = local.var(request.tab_col4, request.tab_col4);
+  set local.tab_sort1 = local.var(request.tab_sort1, request.tab_sort1);
+  set local.tab_sort2 = local.var(request.tab_sort2, request.tab_sort2);
+  
+  set local.tab_sort1_dir = 
+    local.var(request.tab_sort1_dir, request.tab_sort1_dir);
+  set local.tab_sort2_dir = 
+    local.var(request.tab_sort2_dir, request.tab_sort2_dir);
+
+  set session.tab_name = request.tab_name;
+  set session.tab_max_row = request.tab_max_row;
+  set session.tab_sql_where = request.tab_sql_where;
+  set session.tab_status = request.tab_status;
+  set session.tab_product = request.tab_product;
+  set session.tab_priority1 = request.tab_priority1;
+  set session.tab_priority2 = request.tab_priority2;
+  set session.tab_deadline1 = request.tab_deadline1;
+  set session.tab_deadline2 = request.tab_deadline2;
+  set session.tab_submitted_to = request.tab_submitted_to;
+  set session.tab_submitted_by = request.tab_submitted_by;
+  set session.tab_submitted_on1 = request.tab_submitted_on1;
+  set session.tab_submitted_on2 = request.tab_submitted_on2;
+  set session.tab_assigned_to = request.tab_assigned_to;
+  set session.tab_assigned_by = request.tab_assigned_by;
+  set session.tab_assigned_on1 = request.tab_assigned_on1;
+  set session.tab_assigned_on2 = request.tab_assigned_on2;
+  set session.tab_closed_by = request.tab_closed_by;
+  set session.tab_closed_on1 = request.tab_closed_on1;
+  set session.tab_closed_on2 = request.tab_closed_on2;
+  set session.tab_serial_num = request.tab_serial_num;
+  set session.tab_company = request.tab_company;
+  set session.tab_keywords = request.tab_keywords;
+
+  // construct the select list
+  set session.tab_sql_select = '';
+  if (local.tab_col1 <> '')
+    set session.tab_sql_select = local.tab_col1;
+  endif
+  if (local.tab_col2 <> '')
+    if (session.tab_sql_select <> '')
+      set session.tab_sql_select = session.tab_sql_select + ',';
+    endif
+    set session.tab_sql_select = 
+      session.tab_sql_select + local.tab_col2;
+  endif
+  if (local.tab_col3 <> '')
+    if (session.tab_sql_select <> '')
+      set session.tab_sql_select = session.tab_sql_select + ',';
+    endif
+    set session.tab_sql_select = 
+      session.tab_sql_select + local.tab_col3;
+  endif
+  if (local.tab_col4 <> '')
+    if (session.tab_sql_select <> '')
+      set session.tab_sql_select = session.tab_sql_select + ',';
+    endif
+    set session.tab_sql_select = 
+      session.tab_sql_select + local.tab_col4;
+  endif
+
+  // construct the order by
+  set session.tab_sql_orderby = '';
+  if (local.tab_sort1 <> '')
+    set session.tab_sql_orderby = 
+      local.tab_sort1 + ' ' + local.tab_sort1_dir;
+  endif
+  if (local.tab_sort2 <> '')
+    if (session.tab_sql_orderby <> '')
+      set session.tab_sql_orderby = session.tab_sql_orderby + ',';
+    endif
+    set session.tab_sql_orderby = session.tab_sql_orderby + 
+      local.tab_sort2 + ' ' + local.tab_sort2_dir;
+  endif
+
+  // construct the htm_where, not the <serverside dataset="WHERE clause
+  set local.w = '';
+  if (session.tab_status <> '')
+    set local.w = local.w + '|status|' + session.tab_status;
+  endif
+  if (session.tab_product <> '')
+    set local.w = local.w + '|product|' + session.tab_product;
+  endif
+  if (session.tab_priority1 <> '')
+    set local.w = local.w + '|priority1|' + session.tab_priority1;
+  endif
+  if (session.tab_priority2 <> '')
+    set local.w = local.w + '|priority2|' + session.tab_priority2;
+  endif
+  if (session.tab_deadline1 <> '')
+    set local.w = local.w + '|deadline1|' + session.tab_deadline1;
+  endif
+  if (session.tab_deadline2 <> '')
+    set local.w = local.w + '|deadline2|' + session.tab_deadline2;
+  endif
+  if (session.tab_submitted_to <> '')
+    set local.w = local.w + '|submitted_to|' + session.tab_submitted_to;
+  endif
+  if (session.tab_submitted_by <> '')
+    set local.w = local.w + '|submitted_by|' + session.tab_submitted_by;
+  endif
+  if (session.tab_submitted_on1 <> '')
+    set local.w = local.w + '|submitted_on1|' + session.tab_submitted_on1;
+  endif
+  if (session.tab_submitted_on2 <> '')
+    set local.w = local.w + '|submitted_on2|' + session.tab_submitted_on2;
+  endif
+  if (session.tab_assigned_to <> '')
+    set local.w = local.w + '|assigned_to|' + session.tab_assigned_to;
+  endif
+  if (session.tab_assigned_by <> '')
+    set local.w = local.w + '|assigned_by|' + session.tab_assigned_by;
+  endif
+  if (session.tab_assigned_on1 <> '')
+    set local.w = local.w + '|assigned_on1|' + session.tab_assigned_on1;
+  endif
+  if (session.tab_assigned_on2 <> '')
+    set local.w = local.w + '|assigned_on2|' + session.tab_assigned_on2;
+  endif
+  if (session.tab_closed_by <> '')
+    set local.w = local.w + '|closed_by|' + session.tab_closed_by;
+  endif
+  if (session.tab_closed_on1 <> '')
+    set local.w = local.w + '|closed_on1|' + session.tab_closed_on1;
+  endif
+  if (session.tab_closed_on2 <> '')
+    set local.w = local.w + '|closed_on2|' + session.tab_closed_on2;
+  endif
+  if (session.tab_serial_num <> '')
+    set local.w = local.w + '|serial_num|' + session.tab_serial_num;
+  endif
+  if (session.tab_company <> '')
+    set local.w = local.w + '|company|' + session.tab_company;
+  endif
+  if (session.tab_keywords <> '')
+    set local.w = local.w + '|keywords|' + session.tab_keywords;
+  endif
+
+  if (session.tab_id = 0)
+    set local.rep_id = 
+      local.getUniqueID('cs_report', 'rep_id', 'registry');
+    <serverside dataset="sqlInsert = 
+      INSERT INTO cs_report(
+        rep_id, row_ver, name, 
+        rep_type, max_row, 
+        sql_select, sql_orderby, sql_where, htm_where)
+      VALUES(
+        local.rep_id, 1, session.tab_name, 
+        'Tabular', session.tab_max_row, 
+        session.tab_sql_select, session.tab_sql_orderby, 
+        session.tab_sql_where, local.w);
+
+    sqlInsert.execute;   
+    set session.tab_id = local.rep_id; 
+    set session.tab_row_ver = 1;
+  else
+    <serverside dataset="sqlUpdate" action="execute">    UPDATE cs_report SET
+        row_ver = 1 + session.tab_row_ver,
+        name = session.tab_name,
+        max_row = session.tab_max_row,
+        sql_select = session.tab_sql_select,
+        sql_orderby = session.tab_sql_orderby,
+        sql_where = session.tab_sql_where,
+        htm_where = local.w,
+      WHERE rep_id = session.tab_id 
+        AND row_ver = session.tab_row_ver;
+
+    sqlUpdate.execute;
+    set session.tab_row_ver = 1 + session.tab_row_ver;
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Tabular Report Saved
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Report: [$session.tab_name)] has been saved.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="repMan.htm">Report Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+</body>
+</html>

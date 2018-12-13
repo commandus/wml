@@ -1,0 +1,217 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  set local.links = 
+    '<a href="' + session.mainMenu + '">' + app.name + '</a> : ' + 
+    '<a href="index.htm">KB</a> : Advanced Search';
+
+  file fKbIndex('index.htm');
+  set local.path = fKbIndex.getKbPathAndLinks(request.kb_id, 0);
+  if (local.path = '')
+    set local.path = 'KB root';
+  endif
+  
+  <serverside dataset="sqlStaff" action="query">
+    SELECT user_id FROM cs_user 
+    WHERE user_type <> 'EndUser' ORDER BY user_id ASC;
+  </serverside>
+  </serverside>
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method=GET action="kbAdvSearchOk.htm">
+<input type="hidden" name=kb_id value="$request.kb_id)"/> 
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="3">
+    Search for records that satisfy ALL conditions.
+    (date format: $server.dateFormat))
+  </td>
+</tr>
+<tr>
+  <td colspan="3"> 
+    Search Within 
+    <a href="index.htm?kb_id=$request.kb_id)">Parent Category</a>: 
+    (read-only)<br/>
+    <input size="65" value="$(local.path))"/> 
+  </td>
+</tr>
+<tr>
+  <td>
+    Keyword 1:<br/>
+    <input type="text" name=kb_k1 size="20" maxlength="50"/>
+  </td>
+  <td>
+    Keyword 2:<br/>
+    <input type="text" name=kb_k2 size="20" maxlength="50"/>
+  </td>
+  <td>
+    Keyword 3:<br/>
+    <input type="text" name=kb_k3 size="20" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    Owner:<br/>
+    <select name=kb_owner size=1>
+      <option> 
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td>
+    Visit Count >=:<br/>
+    <input type="text" name=kb_visited1 size="20" maxlength="20"/>
+  </td>
+  <td>
+    Visit Count <:<br/>
+    <input type="text" name=kb_visited2 size="20" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td>
+    Rank >=:<br/>
+    <input type="text" name=kb_rank1 size="20" maxlength="20"/>
+  </td>
+  <td>
+    Rank <:<br/>
+    <input type="text" name=kb_rank2 size="20" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    Locked By:<br/>
+    <select name=kb_locked_by size=1>
+      <option> 
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td>
+    Locked On >=:<br/>
+    <input type="text" name=kb_locked_on1 size="20" maxlength="20"/>
+  </td>
+  <td>
+    Locked On <:<br/>
+    <input type="text" name=kb_locked_on2 size="20" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    Updated By:<br/>
+    <select name=kb_updated_by size=1>
+      <option> 
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td>
+    Updated On >=:<br/>
+    <input type="text" name=kb_updated_on1 size="20" maxlength="20"/>
+  </td>
+  <td>
+    Updated On <:<br/>
+    <input type="text" name=kb_updated_on2 size="20" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    Created By:<br/>
+    <select name=kb_created_by size=1>
+      <option> 
+      <!$sqlStaff.close)>
+      <!$while (sqlStaff.fetch))>
+        <option>$sqlStaff.user_id)
+      <!$endwhile)>
+    </select>
+  </td>
+  <td>
+    Created On >=:<br/>
+    <input type="text" name=kb_created_on1 size="20" maxlength="20"/>
+  </td>
+  <td>
+    Created On <:<br/>
+    <input type="text" name=kb_created_on2 size="20" maxlength="20"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3">
+    <serverside dataset="Where Clause:<br/>
+    <input type="text" name=kb_sql_where size="65" maxlength=250/>
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    Sort Result By: 
+    <select name=kb_sort1 size=1>
+      <option selected>
+      <option>Owner
+      <option>Visit Count
+      <option>Updated By
+      <option>Updated On
+      <option>Locked By
+      <option>Locked On
+      <option>Created By
+      <option>Created On
+    </select>
+    <select name=kb_sort1_dir size=1>
+      <option selected>Descending
+      <option>Ascending
+    </select>
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="right">
+    then by:
+    <select name=kb_sort2 size=1>
+      <option selected>
+      <option>Owner
+      <option>Visit Count
+      <option>Updated By
+      <option>Updated On
+      <option>Locked By
+      <option>Locked On
+      <option>Created By
+      <option>Created On
+    </select>
+    <select name=kb_sort2_dir size=1>
+      <option selected>Descending
+      <option>Ascending
+    </select>
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="3">
+    <input type="submit" value="Search"/>
+  </td>
+</tr>
+<tr><td colspan="3"><hr/></td></tr>
+<tr><td colspan="3" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

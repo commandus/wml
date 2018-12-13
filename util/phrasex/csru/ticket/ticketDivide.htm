@@ -1,0 +1,10 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+
+  if (request.fieldExist('ticket_id') = 0)
+    error 'Missing source request ticket_id for this new request.';
+  endif
+
+  <serverside dataset="s1" action="query">

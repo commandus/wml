@@ -1,0 +1,104 @@
+
+<html>
+<head>
+<title>Anchors and image elements</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Anchors and image elements</h1>
+
+<table border="0">
+  <tr>
+    <td><a href="#a">a</a> <a href="#anchor">anchor</a> <a href="#img">img <img border="0" src="simg.gif" width="8" height="8"></a></td>
+  </tr>
+</table>
+
+<p><a name=a>a</a>
+ <img border="0" src="a.gif" width="24" height="24">
+<br id=abrief>Specifies that the text within the tags a hyperlink. The destination of a link is specified as a URI: the address or ID of another tag. Authors are encouraged to use the a tag instead of anchor where possible. It is invalid to nest anchor tags. The a tag is a short form of the anchor tag; it is essentially bound to a go task without variables.
+<br><a href="#a" style="margin-left: 32" onclick="expand('aattr')">attributes</a>
+<p id=aattr style="margin-left: 64;display=none">
+  <b>href</b>
+  <br>Specifies the destination URI. For instance, &quot;wtai://wp/mc;+18005551234&quot;.
+  <br><b>title</b>
+  <br>Specifies a brief text string identifying the link.
+  <br><b>accesskey</b>
+  <br>Assigns an access key (a single character from the document character set) to an element to allow the user to activate a particular element by using a single key. The phones usually have "0"-"9", "*" and "#" keys. Activating an access key assigned to an element gives focus to the element. When a user activates a link defined by the
+  <b>a</b> element, the user agent generally follows the link. The access key may be recognized directly, or it may be necessary to press it in conjunction with a "command" key.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=anchor>anchor</a>
+ <img border="0" src="anchor.gif" width="24" height="24">
+<br id=anchorbrief>Specifies that the text within the tags a hyperlink. The destination of a link is specified as a URI: the address or ID of another tag. Authors are encouraged to use the a tag instead of anchor where possible. It is invalid to nest anchor tags.
+<br><a href="#anchor" style="margin-left: 32" onclick="expand('anchorattr')">attributes</a>
+<p id=anchorattr style="margin-left: 64;display=none">
+  <br><b>title</b>
+  <br>Specifies a brief text string identifying the link.
+  <br><b>accesskey</b>
+  <br>Assigns an access key (a single character from the document character set)
+  to an element to allow the user to activate a particular element by using a
+  single key. The phones usually have &quot;0&quot;-&quot;9&quot;, &quot;*&quot;
+  and &quot;#&quot; keys. Activating an access key assigned to an element gives
+  focus to the element. When a user activates a link defined by the <b>anchor</b>
+  element, the user agent generally follows the link. The access key may be
+  recognized directly, or it may be necessary to press it in conjunction with a
+  &quot;command&quot; key.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=img>img</a>
+ <img border="0" src="img.gif" width="24" height="24">
+<br id=imgbrief>Indicates that an image is to be included in the text flow. Image layout is done within the context of normal text layout.
+<br><a href="#img" style="margin-left: 32" onclick="expand('imgattr')">attributes</a>
+<p id=imgattr style="margin-left: 64;display=none">
+  <br><b>src</b>
+  <br>This attribute specifies the URI of the image to be shown.
+  <br><b>localsrc</b>
+  <br>Specifies an alternative internal representation for the image. If this image exists, the parameter takes precedence over any image specified in the src parameter.
+  <br><b>alt</b>
+  <br>An alternative textual representation for the image if it can not be displayed using any other method.
+  <br><b>align</b>
+  <br>Specifies image alignment with respect to the baseline of the text. It has three possible values: bottom, middle or top
+  <br><b>width</b>
+  <br>Specifies the width of the image. If specified as a percentage value, the resulting size is based on the available horizontal space, not on the natural size of the image.
+  <br><b>height</b>
+  <br>Specifies the height of the image. If specified as a percentage value, the resulting size is based on the available vertical space, not on the natural size of the image.
+  <br><b>hspace</b>
+  <br>Specifies the amount of white space to be inserted to the left and right of the image. If specified as a percentage value, the resulting space is based on the available horizontal space, not on the natural size of the image.
+  <br><b>vspace</b>
+  <br>Specifies the amount of white space to be inserted above and below the image. If specified as a percentage value, the resulting space is based on the available vertical space, not on the natural size of the image.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<!-- text formatting elements -->
+
+</body>
+</html>

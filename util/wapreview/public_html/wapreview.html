@@ -1,0 +1,24 @@
+<html><head>
+<TITLE>wap simulator</TITLE>
+<META HTTP-EQUIV="Applepie Solutions" CONTENT="no-cache">
+<script>
+<!-- change the following line to open the browser elsewhere -->
+var homebase="http://www.applepiesolutions.com/swap/wml/1.wml";
+</script>
+<applet name="wapplet" 
+        archive="wapreview.jar" 
+        code="wapreview.class" 
+        width=0 height=0>
+<!-- server installation requires changing the following two values -->
+<param name="imgconverter" value="http://www.applepiesolutions.com/cgi-bin/wbmp2gif?img=">
+<param name="gateway" value="http://www.applepiesolutions.com/cgi-bin/lwpproxy.cgi/">
+</applet>
+<script src=wapreview.js></script>
+</head>
+<body BGCOLOR="#9FC0A2" 
+    onunload='document.wapplet.destroy();'
+    onload='setCard(homebase);' 
+    vlink=black link=black>
+</body>
+</html>
+

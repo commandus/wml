@@ -1,0 +1,48 @@
+/*
+clsErrUnexpected - a code path was hit unexpectedly in the template
+clsBadDesc - bad or missing description
+clsBadXREF - the specified xref rid doesn't exist in the targets db
+clsBadTERM - the specified term rid doesn't exist in the glossary db
+clsBadTLA - the specified tla rid doesn't exist in the acronym db
+clsBadXrefPN - the user requested the persisted name, but the xref doesn't have one.
+clsBadXrefRN - the user requested the runtime name, but the xref doesn't have one.
+clsBadParam - bad parameter markup
+clsBadInRef - bad internal reference to a parameter (tenative name)
+clsBadPV - bad possible value (pv) formatting within a <param>
+clsBadShowMe - invalid showme id
+clsBadLocalLink - the specified local link doesn't exist in the document
+clsBadOutlineLoc - the outline tag was placed in a bad location
+clsBadFragId - the specified fragment identifier (@fid) is invalid
+clsBadPRef - the specified parameter id (pid) is invalid
+clsBadMRef - the specified member id (mid) is invalid
+clsNotImpl - the feature is not yet implemented
+clsBadRetCode - bad retcode; (@name $and$ desc) or (@rid) wasn't specified
+clsUndefinedType - the rid associated with the dtype tag could not be found in the dtypes collection
+clsBadAttrDesc - must spec desc or literal pvs for attribute 
+clsBadFlag - the flag was not found or is missing the name attribute or desc child
+clsBadTopicType - the metadata/@type is unrecognized
+clsNoObject - the method, property, or event doesn't specify an object in the applies section
+clsBadPVRef - bad possible value reference
+clsNoDISPID - missing DISPID on iface tag; this is primarily used in event pages when transformed through C++ event template
+*/
+SPAN.clsBadXREF, SPAN.clsBadTERM, SPAN.clsBadTLA, SPAN.clsBadXrefPN, SPAN.clsBadXrefRN, SPAN.clsBadDesc, 
+SPAN.clsBadParam, SPAN.clsBadRetVal, SPAN.clsBadInRef, SPAN.clsBadPV, SPAN.clsBadShowMe, SPAN.clsBadLocalLink, 
+SPAN.clsErrUnexpected, SPAN.clsBadOutlineLoc, SPAN.clsBadFragId, SPAN.clsBadPRef, SPAN.clsBadMRef, SPAN.clsNotImpl, 
+SPAN.clsBadRetCode, SPAN.clsUndefinedType, SPAN.clsBadAttrDesc, SPAN.clsBadFlag, SPAN.clsBadTopicType, SPAN.clsNoObject, 
+SPAN.clsBadPVRef, SPAN.clsNoDISPID
+	{background-color:red}
+
+/* overview sidebar idea */
+DIV.clsSideBar { position:relative;font-size:10pt;font-style:italic;float:right;width:100px;background-color:yellow }
+
+/* In PSDK, m-left=14; m-right=12; They also use a P, but MSTP recommends 1 note w/ multiple Ps rather than individual notes  */
+DIV.clsNote {
+	margin-bottom: 4pt;
+	background-color: #EEEEEE;
+}
+
+DIV.clsAPIList { margin-left : 20px; }
+DIV.clsAPIListDesc { margin-top: 5px; margin-bottom: 10px }
+DIV.clsAPIItem { margin-left : 20px; margin-bottom: 5px; }
+
+SPAN.clsFmtLib, SPAN.clsFmtInc, SPAN.clsFmtIDL, SPAN.clsFmtDLL { text-transform:lowercase }

@@ -1,0 +1,154 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users cannot run this report.';
+  endif
+
+  <serverside dataset="sqlLastStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num DESC;
+  </serverside>
+
+  <serverside dataset="s1" action="query">
+    SELECT ticket_id, title, status, product, serial_num, '
+       'priority, deadline, submitted_to, submitted_by, submitted_on, '
+       'assigned_to, assigned_by, assigned_on, closed_by, closed_on '
+    'FROM cs_ticket '
+    'WHERE status <> \'' + sqlLastStatus.name + '\' '
+    'ORDER BY ticket_id ASC';
+  </serverside>
+
+  set local.count = 0;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>$(appname) : 
+    All open requests detail report 
+  </title>
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      All open requests detail report
+  </td>
+  <td align="right">$server.dateTime)</td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+</table>
+
+<!-- limit to 500 requests to avoid listing all records in a big 
+     database. You can change this limit to fit your needs -->
+
+<!$ while (s1.fetch AND local.count < 500) )>
+<!$ if (local.count > 0) )><hr/><!$ endif )>
+<!$ set local.count = 1 + local.count; )>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="3">
+    #$s1.ticket_id) : $(s1.title))
+  </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td> Status: </td>
+  <td> Product: </td>
+  <td> Serial Number: </td>
+</tr>
+<tr>
+  <td> $(s1.status)) </td>
+  <td> $(s1.product)) </td>
+  <td> $(s1.serial_num)) </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td> </td>
+  <td> Priority: </td>
+  <td> Deadline: </td>
+</tr>
+<tr>
+  <td> </td>
+  <td>$(s1.priority)) </td>
+  <td>$(s1.deadline)) </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td> Submitted To: </td>
+  <td> Submitted By: </td>
+  <td> Submitted On: </td>
+</tr>
+<tr>
+  <td>$(s1.submitted_to)) </td>
+  <td>$(s1.submitted_by)) </td>
+  <td>$(s1.submitted_on)) </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td> Assigned To: </td>
+  <td> Assigned By: </td>
+  <td> Assigned On: </td>
+</tr>
+<tr>
+  <td>$(s1.assigned_to)) </td>
+  <td>$(s1.assigned_by)) </td>
+  <td>$(s1.assigned_on)) </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td> </td>
+  <td> Closed By: </td>
+  <td> Closed On: </td>
+</tr>
+<tr>
+  <td> </td>
+  <td>$(s1.closed_by)) </td>
+  <td>$(s1.closed_on)) </td>
+</tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr class="apbg">
+  <td colspan="3">History: </td>
+</tr>
+<tr>
+  <td colspan="3">
+    <!$ 
+      <serverside dataset="sqlHistory" action="query">
+    SELECT * FROM cs_ti_change '
+        'WHERE ch_ticket_id = ' + s1.ticket_id + 
+        ' ORDER BY ch_made_on DESC';
+  </serverside>
+
+      while (sqlHistory.fetch)
+        response.write('[' + sqlHistory.ch_made_on + ' by ' + 
+          sqlHistory.ch_made_by + '] ');
+        if (sqlHistory.ch_format = 1)
+          response.write(sqlHistory.ch_description);
+        else
+          response.write(to.html(sqlHistory.ch_description));
+        endif
+        response.write('<br/><br/>\r\n');
+      endwhile
+      sqlHistory.close;
+    )>
+  </td>
+</tr>
+</table>
+<!$ endwhile )>
+
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td>
+    Total: $local.count) request(s). Maximum 500 can be displayed.
+  </td>
+  <td align="right">Copyright &copy; 2003, Andrei Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

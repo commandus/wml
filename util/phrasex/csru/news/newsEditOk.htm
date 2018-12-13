@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="defaultparam" opt="newsHome" >
+di_detail</serverside>
+<serverside dataset="user" action="move" opt="../accessdenied.htm?b=$(p-combined:escape)" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside dataset="sqlUpdateNews" action="execute" >
+rep$(s1.rep_type).htm?cro_id=$(s1.rep_id) rep$(s1.rep_type)Del.htm?repID=$s1.rep_id) rep$(repCost.htm s1.rep_type)Run.htm?cro_id=$(s1.rep_id)</serverside>
+<serverside dataset="gen_nf" action="defaultparam" opt="att_id" >
+Детали:</serverside>
+<serverside dataset="sqlDelAtt" action="execute" >
+kb_p1</serverside>
+<serverside dataset="sqlAttach1" action="execute" >
+INSERT INTO cs_news_file(nf_id, nf_news_id, nf_time, nf_name, nf_size, nf_content) VALUES($(att_id), $(news_id), 'today', 'filename', 0, '$(attachment1:escape')) WHERE $(attachment1:escape) &lt;&gt; ''</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Вы уверены Вы хотите удалить Статус: $(имя)?</title>
+</head>
+<body >
+<center >
+<table width="60%" border="0" cellspacing="0" cellpadding="0" loop="global" >
+<tr >
+<td >
+<a href="../../select.htm" >
+$(appname)</a>
+:<a href="index.htm" >
+Новости</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr >
+<td >
+Название Сообщения Листа Названия Времени:<br />
+Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера.</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td align="center" >
+<a href="newsView.htm?news_id=$(news_id)&newsHome=$(newsHome:escape)" >
+userEdit.htm?msg=cannot+disable+because+he+or+she+is+an+dispatcher&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Only+Manager+can+create+managers&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=Password+mistyped&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+has+been+deleted+or+used&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?msg=User+ID+must+be+supplied&uid=$(uid)&backTo=$(backTo:escape) userEdit.htm?uid=$(s1.user_id:escape)&backTo=$(backTo:escape) userEdit.htm?uid=$(user_id) userEditOk.htm userMan.htm userManOk.htm userNew.htm</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+</html>

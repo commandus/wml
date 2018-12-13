@@ -1,0 +1,58 @@
+
+<html>
+<head>
+<title>input
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+
+<p><a name=input>input</a>
+ <img border="0" src="input.gif" width="24" height="24">
+<br id=inputbrief>The input element specifies a text entry object. The user input is constrained by the optional format attribute.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=inputattr>
+  <b>name</b>
+  <br>Specifies the name of the variable to set with the result of the user's text input. The name variable's value is used to pre-load the text entry object. If this value does not conform to the input mask, the browser will unset the variable and attempt to
+  initialize the variable with the value attribute.
+  <br><b>type</b>
+  <br>Specifies the type of text-input area. The following values are allowed: text (text entry control) or password (a text entry control where each character is displayed in an illegible form, such as with asterisks). Default is text.
+  <br><b>value</b>
+  <br>The value attribute indicates the default value of the variable named in the name attribute. When the element is displayed and the variable named in the name attribute is not set, the name variable is assigned the value specified in the value attribute. If the name variable already contains a value, the value attribute is ignored. If the value attribute specifies a value that does not conform to the input mask specified by the format attribute, the browser must ignore the value attribute. In the case where no valid value can be established, the name variable is left unset.
+  <br><b>format</b>
+  <br>Specifies an input mask for user input entries. The string consists of mask control characters and static text that is displayed in the input area. The format control characters specify the data format expected to be entered by the user. The format codes are:
+    <br> 'A' (entry of any upper-case, non-numeric character);
+    <br> 'a' (entry of any lower-case, non-numeric character);
+    <br> 'N' (entry of any numeric character);
+    <br> 'X' (entry of any upper-case character);
+    <br> 'x' (entry of any lower-case character);
+    <br> 'M' or 'm' (entry of any character);
+    <br> '*f' (entry of any number of characters where f is one of the above format codes);
+    <br> 'nf' (entry of n characters where n is from 1 to 9 and f is one of the above format codes);
+    <br> '\c' (display the character, c, in the entry field: these characters are considered part of the input's value).
+  <br><b>emptyok</b>
+  <br>Indicates that this input element accepts empty input although a non-empty format string has been specified. Default is false.
+  <br><b>size</b>
+  <br>Specifies the width, in characters, of the text-input area.
+  <br><b>maxlength</b>
+  <br>Specifies the maximum number of characters that can be entered by the user in the text-entry area.
+  <br><b>tabindex</b>
+  <br>Specifies the tabbing position of the current element. The tabbing position indicates the relative order in which elements are traversed when tabbing within a single WML card.
+  <br><b>title</b>
+  <br>Specifies a title for this element, which may be used in the presentation of this object.
+  <br><b>accesskey</b>
+  <br>Assigns an access key (a single character from the document character set) to an element to allow the user to activate a particular element by using a single key. The phones usually have "0"-"9", "*" and "#" keys. Activating an access key assigned to an element gives focus to the element. When the user activates a
+  <b>input</b>, it allows input. The access key may be recognized directly, or it may be necessary to press it in conjunction with a "command" key.  
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+</body>
+</html>

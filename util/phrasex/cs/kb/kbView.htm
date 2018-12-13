@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+  <serverside action="db" opt="ib">
+    db=$(DB_HD)
+  </serverside>
+  <serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm">
+    SELECT user_id, user_pwd, user_type, status FROM cs_user
+    WHERE (upper(user_id) = upper('$(user_id)')) AND (user_pwd = '$(user_pwd)') 
+    AND (status &lt;&gt; 'disabled') 
+  </serverside>
+  <serverside action="defaultparam" opt="kb_id">
+    SELECT -1 R FROM DUAL
+  </serverside>
+  <serverside dataset="sqlParent" action="query">
+    SELECT kb_id, kb_p1, kb_title, kb_security FROM cs_kb WHERE kb_id = $(kb_id)
+  </serverside>
+  <serverside dataset="s1" action="query">
+    SELECT * FROM cs_kb WHERE kb_id = $(kb_id)  
+  </serverside>
+  <serverside dataset="s2" action="query">
+    SELECT * FROM cs_kb_file WHERE kbf_kb_id = $(kb_id)  
+  </serverside>
+  <serverside dataset="sqlLock" action="execute">    
+   UPDATE cs_kb SET kb_locked_by = $(user_id), kb_locked_on = 'today'
+   WHERE kb_id = $(kb_id)
+  </serverside>  
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk Knowledge Base View Article</title>
+</head>
+<body>
+
+<input type="hidden" name="kb_id" value="$(kb_id)"/> 
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0" loop="s1">
+<tr>
+  <td colspan="2">
+    <a href="../index.htm">Customer Support main menu</a> :
+    <a href="index.htm?kb_id=$(kb_id)">Parent Category</a>:
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr>
+  <td> 
+    Category
+  </td>
+  <td loop="sqlParent"> 
+    <input type="text" name="kb_cat" size="60" value="$(sqlParent.kb_title)" />(read-only)
+  </td>
+</tr>
+
+<tr>
+  <td>Title:</td>
+  <td><input type="text" name="kb_title" size="60" maxlength="100" /></td>
+</tr>
+<tr>
+  <td>Security:</td>
+  <td>
+    <select name="kb_security">
+      <option value="0">
+         visible to everybody
+      </option>
+       <option value="1">
+         visible to internal staff only
+       </option>
+    </select>  
+  </td>
+</tr>
+<tr>
+  <td>Rank:</td>
+  <td>
+    <input type="text" name="kb_rank" size="4" maxlength="4" value="$(s1.kb_rank)" /> 
+    (Enter a number 0..99. Affects its position on the recommended list.)
+  </td>
+</tr>
+<tr>
+  <td valign="top">Keywords:</td>
+  <td>
+    <input type="text" name="kb_k1" size="10" maxlength="50" value="$(s1.kb_k1)"/>
+    <input type="text" name="kb_k2" size="10" maxlength="50" value="$(s1.kb_k2)"/>
+    <input type="text" name="kb_k3" size="10" maxlength="50" value="$(s1.kb_k3)"/>
+    <input type="text" name="kb_k4" size="10" maxlength="50" value="$(s1.kb_k4)"/>
+    <input type="text" name="kb_k5" size="10" maxlength="50" value="$(s1.kb_k5)"/>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Summary:<br/>
+    <textarea name="kb_summary" cols="70" rows="3">$(s1.kb_summary)</textarea>
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    Use one of the following three methods to input article content
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+<table width="400" border="0" cellspacing="2" cellpadding="0" loop="s2">
+<tr>
+  <td colspan="2">
+    (Method 1) Enter     
+    <input type="radio" name="textType" value="plainText" checked="checked" />plain text
+    <input type="radio" name="textType" value="htmlFrag" /><a target="ptHelpWindow" href="../help/htmlFragHelp.html">HTML fragment</a>:
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    <textarea name="kb_content" cols="70" rows="20">$(s2.kbf_content)</textarea>
+  </td>
+</tr>
+<tr>
+  <td></td>
+  <td align="right">
+    Attach a file: 
+    <input type="FILE" name="kb_attachment1" size="45" value="$(s2.kbf_name)" />
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    <br/>
+    (Method 2) Enter a HTTP address: <br/>
+    <input type="text" name="kb_content_url" size="55" maxlength="100" />
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    (Method 3) Upload a file: <br/>
+    <input type="FILE" name="kb_content_file" size="55" />
+  </td>
+</tr>
+</table>  
+  </td>
+</tr>
+
+<tr class="apbg">
+  <td colspan="2" align="center" loop="sqlParent">
+    <a href="index.htm?kb_id=$(sqlParent.kb_p1)">Back</a>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

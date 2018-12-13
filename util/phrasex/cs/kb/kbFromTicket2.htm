@@ -1,0 +1,136 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.fieldExist('kb_id') = 0)
+    error 'kb_id missing.';
+  endif
+
+  <serverside dataset="s1" action="query">
+    SELECT title, product FROM cs_ticket 
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+  if (s1.fetch <> 1)
+    error 'Request #' + request.ticket_id + ' not found.';
+  endif
+  <serverside dataset="s2" action="query">
+    SELECT ch_id, ch_description FROM cs_ti_change 
+    WHERE ch_ticket_id = request.ticket_id AND ch_type <> 'log'
+    ORDER BY ch_made_on ASC;
+  </serverside>
+    
+  file fKbIndex('index.htm');
+  set local.path = fKbIndex.getKbPathAndLinks(request.kb_id, 0);
+  if (local.path = '')
+    set local.path = 'KB root';
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+    $(appname) : New Article based on Request #$request.ticket_id)
+  </title>
+</head>
+<body>
+
+<form method="POST" action="kbNewArtOk.htm">
+<input type="hidden" name=parent_id value="$request.kb_id)"/> 
+<input type="hidden" name=ticket_id value="$request.ticket_id)"/>
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      New Article
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr class="apbg">
+  <td colspan="2" align="right">
+    based on request #$request.ticket_id)
+  </td>
+</tr>
+<tr>
+  <td>Title:</td>
+  <td>
+    <input type="text" name=kb_title size="60" maxlength="100"
+      value="$(s1.title))">
+  </td>
+</tr>
+<tr>
+  <td>Security:</td>
+  <td>
+    <input type="text" name=kb_security size=2 maxlength=1 value="0"/> 
+    (0 = visible to everybody; 1 = visible to internal staff only)
+  </td>
+</tr>
+<tr>
+  <td>Rank:</td>
+  <td>
+    <input type="text" name=kb_rank size=4 maxlength="4" value="99"/> 
+    (Enter a number. Affects its position on the recommended list.)
+  </td>
+</tr>
+<tr>
+  <td valign="top">Keywords:</td>
+  <td>
+    <input type="text" name=kb_k1 size="10" maxlength="50" 
+      value="$(s1.product))">
+    <input type="text" name=kb_k2 size="10" maxlength="50"/>
+    <input type="text" name=kb_k3 size="10" maxlength="50"/>
+    <input type="text" name=kb_k4 size="10" maxlength="50"/>
+    <input type="text" name=kb_k5 size="10" maxlength="50"/>
+  </td>
+</tr>
+<tr>
+  <td> 
+    Parent<br/>Category: 
+  </td>
+  <td> 
+    <input type="text" name=kb_cat size="60" 
+      value="$(local.path)) (read-only)">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Summary:<br/>
+    <textarea name=kb_summary cols=70 rows=3 wrap=virtual></textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Knowledge content:
+    <input type=radio name=textType value="plainText" checked/>plain text
+    <input type=radio name=textType 
+      value="htmlFrag"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    :<br/>
+    <textarea name=kb_content cols=70 rows=14 wrap=virtual><!$
+      while (s2.fetch)
+        response.write(to.html2(s2.ch_description));
+        response.write('\r\n');
+      endwhile
+    )></textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    All attachments will be copied to the knowledge base
+  </td>
+</tr>
+<tr class="apbg">
+  <td colspan="2" align="center">
+    <input type="submit" name="action" value="Save"/>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td colspan="2" align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

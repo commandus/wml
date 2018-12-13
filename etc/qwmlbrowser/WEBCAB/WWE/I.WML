@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<head>
+<meta http-equiv="Cache-Control" content="max-age=600"/>
+</head>
+<card title="WebCab.de">
+<do type="prev" label="Back"><prev/></do>
+<p align="center">WWE</p>
+<p><b>Categories:</b></p>
+<p><a href="/wwe/Business/i.wml">- Business &amp; Economy</a> (289) new</p>
+<p><a href="/wwe/Computers/i.wml">- Computers &amp; Internet</a> (86)</p>
+<p><a href="/wwe/Entertainment/i.wml">- Entertainment</a> (158) new</p>
+<p><a href="/wwe/Health/i.wml">- Health</a> (22) new</p>
+<p><a href="/wwe/News/i.wml">- News &amp; Media</a> (109) new</p>
+<p><a href="/wwe/Other/i.wml">- Other</a> (56)</p>
+<p><a href="/wwe/Portal/i.wml">- Portal</a> (130) new</p>
+<p><a href="/wwe/Reference/i.wml">- Reference</a> (13)</p>
+<p><a href="/wwe/Regional/i.wml">- Regional</a> (2383) new</p>
+<p><a href="/wwe/Science/i.wml">- Science</a> (14)</p>
+<p><a href="/wwe/Search/i.wml">- Search Engines</a> (42)</p>
+<p><a href="/wwe/Society/i.wml">- Society &amp; Culture</a> (60)</p>
+<p><a href="/wwe/Sport/i.wml">- Sport</a> (36)</p>
+<p><a href="/wwe/Travel/i.wml">- Travel</a> (123) new</p>
+
+<p>----</p>
+<p><b>Menu:</b></p>
+<p><anchor>- Search<go href="/cgi-bin/ws.cgi" sendreferer="true"/></anchor></p>
+<p><a href="/wwe/tree.wml">- Site Tree</a></p>
+<p><a href="/wwe/new/i.wml">- What&apos;s New</a></p>
+<p><anchor>- Add a Link<go href="/cgi-bin/wa.cgi" sendreferer="true"/></anchor></p>
+<p><anchor>- Modify a Link<go href="/cgi-bin/wm.cgi" sendreferer="true"/></anchor></p>
+<p><anchor>- New Links Notification<go href="/cgi-bin/wsu.cgi" sendreferer="true"/></anchor></p>
+<p><a href="/i.wml">- WebCab.de</a></p>
+<p><a href="/url.wml">- Load URL</a></p>
+<p>----</p>
+<p><b>3521</b> (1138 different) links in 1013 categories!</p>
+<p align="center">---------------</p>
+<p>&#169; 2000 <anchor>webmaster@webcab.de<go href="http://webcab.de/cgi-bin/sendmail.cgi/f2?n=500&amp;r=0" method="post">
+<postfield name="s" value="WWE:"/>
+</go></anchor></p>
+</card>
+</wml>

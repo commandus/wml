@@ -1,0 +1,81 @@
+// todoRem.script : script for Todo Reminder of PT7-Support
+
+if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+  file fAppInit('../appInit.ssp');
+  fAppInit.appInit();
+endif
+
+if (server.emailSenderEnabled = 0) 
+  server.log('Please enable Email Sender so that '
+             'notification emails can be sent.');
+endif
+
+sql sqlLastStatus = 
+  'SELECT name FROM pt7cs_status ORDER BY seq_num DESC';
+set local.lastStatus = sqlLastStatus.name;
+sqlLastStatus.close;
+
+set local.count = 0;
+
+sql sqlStaff = 
+  'SELECT user_id, email, email_fmt FROM pt7cs_user '
+  'WHERE user_type <> \'EndUser\'';
+
+while (sqlStaff.fetch) 
+
+  email_out eout; 
+  response.clear();
+
+  if (sqlStaff.email_fmt != 'HTML')
+    set local.todoCount = 
+      local.generatePlainTextToDoList(sqlStaff.user_id, local.lastStatus);
+  else
+    set eout.contentType = 'text/html';
+    set request.userID = sqlStaff.user_id;
+    set request.lastStatus = local.lastStatus;
+    file fHtmlTodoList('todoList.ssp');
+    set local.todoCount = fHtmlTodoList.sspRun();
+  endif
+  
+  if (local.todoCount > 0) 
+    if (server.importerEnabled)
+      set eout.from = server.importerEmail;
+    else
+      set eout.from = server.adminEmail;
+    endif
+    set eout.to = sqlStaff.email; 
+    set eout.subject = 'Your todo list'; 
+    set eout.content = response.content;
+    eout.send; 
+    set local.count = 1 + local.count;
+  endif 
+endwhile
+server.log('Total ' + local.count + ' todo reminder(s) sent');
+
+
+function generatePlainTextToDoList(userID, lastStatus)
+  sql sqlTodo = 
+    'SELECT ticket_id, title FROM pt7cs_ticket '
+    'WHERE status <> \'' + arg.lastStatus + '\' '
+      'AND assigned_to = \'' + to.2QuoteStr(arg.userID) + '\'';
+
+  set local.todoCount = 0;
+  set local.todoList = 'Your todo list:\r\n';
+
+  // limit todo list to 500 records
+  while (sqlTodo.fetch AND local.todoCount <= 500) 
+    set local.todoCount = 1 + local.todoCount;
+    set local.todoList = local.todoList + 
+      sqlTodo.ticket_id + ': ' + sqlTodo.title + '\r\n'; 
+  endwhile 
+  sqlTodo.close; 
+
+  if (local.todoCount > 0) 
+    response.write(
+      'Dear ' + arg.userID + ',\r\n\r\n' +
+      local.todoList + 
+      'Total: ' + local.todoCount + ' todo item(s).' + 
+      '\r\n\r\n' + app.name);
+  endif
+  return local.todoCount;
+endfunction

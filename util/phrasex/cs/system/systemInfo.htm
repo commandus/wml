@@ -1,0 +1,262 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (session.userType = 'EndUser')
+    error 'End users do not have the right to this operation.';
+  endif
+  sessMan.prepareForFetch;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<!-- dummy form so that connection strings in textarea
+     can show up Netscape Navigator -->
+<form method=GET action="systemInfo.htm">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      System Information
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>
+        Log Files:
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>
+        Daily log files show activities/errors from background tasks
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/log/day01.txt">1</a> 
+        <a href="/log/day02.txt">2</a> 
+        <a href="/log/day03.txt">3</a> 
+        <a href="/log/day04.txt">4</a> 
+        <a href="/log/day05.txt">5</a> 
+        <a href="/log/day06.txt">6</a> 
+        <a href="/log/day07.txt">7</a> 
+        <a href="/log/day08.txt">8</a> 
+        <a href="/log/day09.txt">9</a> 
+        <a href="/log/day10.txt">10</a> 
+        <a href="/log/day11.txt">11</a> 
+        <a href="/log/day12.txt">12</a> 
+        <a href="/log/day13.txt">13</a> 
+        <a href="/log/day14.txt">14</a> 
+        <a href="/log/day15.txt">15</a> 
+        <a href="/log/day16.txt">16</a> 
+        <a href="/log/day17.txt">17</a> 
+        <a href="/log/day18.txt">18</a> 
+        <a href="/log/day19.txt">19</a> 
+        <a href="/log/day20.txt">20</a> 
+        <a href="/log/day21.txt">21</a> 
+        <a href="/log/day22.txt">22</a> 
+        <a href="/log/day23.txt">23</a> 
+        <a href="/log/day24.txt">24</a> 
+        <a href="/log/day25.txt">25</a> 
+        <a href="/log/day26.txt">26</a> 
+        <a href="/log/day27.txt">27</a> 
+        <a href="/log/day28.txt">28</a> 
+        <a href="/log/day29.txt">29</a> 
+        <a href="/log/day30.txt">30</a> 
+        <a href="/log/day31.txt">31</a> 
+      </td>
+    </tr>
+    </table>
+  </td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>
+        Sessions:
+      </td>
+    </tr>
+    <tr>
+      <td>
+        (sessions are automatically removed 
+        $server.sessionTimeout) minutes after they are created)
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>User ID</td>
+      <td>IP Address</td>
+      <td>Start Time</td>
+      <td>Last Access</td>
+      <td>Application</td>
+      <td width="1%" nowrap="nowrap">Command</td>
+    </tr>
+    <!$
+      set local.count = 0;
+      set local.lastUser = '';
+      set local.bgcolor = 'dummy'; 
+
+      while (sessMan.fetch AND local.count < 500)
+        if (sessMan.user_id <> local.lastUser)
+          set local.lastUser = sessMan.user_id;
+          set local.count = 1 + local.count;
+          if (local.bgcolor = '') 
+            set local.bgcolor = 'bgcolor="' + app.altBgColor + '"'; 
+          else 
+            set local.bgcolor = ''; 
+          endif 
+        endif
+        response.write('  <tr ' + local.bgcolor + '>\r\n');
+      )>
+      <td>
+        <a href=
+          "../user/userView.htm?user_id=$(sessMan.user_id:escape)">
+        $sessMan.user_id)</a>
+      </td>
+      <td>$sessMan.ip_address)</td>
+      <td>$sessMan.start_time)</td>
+      <td>$sessMan.last_access)</td>
+      <td>$sessMan.app_path)</td>
+      <td width="1%" nowrap="nowrap">
+        <!-- be careful, do not remove current session -->
+        <!$if (sessMan.user_id <> session.userID))>
+          <a href="sessionDel.htm?user_id=$(sessMan.user_id:escape)">
+          Delete</a>
+        <!$else)>
+          n/a
+        <!$endif)>
+      </td>
+    </tr>
+    <!$endwhile)>
+    <tr>
+      <td align="right" colspan=6>
+        <!$if (local.count >= 500))>
+          Total: $local.count) or more users are online. 
+          $local.count) users displayed. 
+        <!$elseif (local.count > 1))>
+          Total: $local.count) users are online and displayed. 
+        <!$else)>
+          Total: $local.count) user is online and displayed. 
+        <!$endif)>    
+      </td>
+    </tr>
+    </table>
+  </td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>
+        Applications:
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td>
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>Each directory is an application</td>
+    </tr>
+    <tr>
+      <td>$server.AppInfo)</td>
+    </tr>
+    </table>
+  </td>
+</tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>
+        Data Sources:
+      </td>
+    </tr>
+    <!$if (server.DsIdleTimeout > 0))>
+      <tr>
+        <td>
+          (data sources idle for more than 2 hours 
+          are automatically closed)
+        </td>
+      </tr>
+    <!$endif)>
+    </table>
+  </td>
+  <td valign="top">
+    <table width="100%" border="0" cellspacing="2" cellpadding=1>
+    <tr class="apbg">
+      <td>Directory</td>
+      <td>ODBC Connect String</td>
+      <td>Last Access</td>
+      <td>Status</td>
+    </tr>
+    <!$
+      set local.Ds = server.DataSourceInfo;
+      Tokenizer lines(local.Ds, '\r\n');
+      set local.Line = lines.NextToken;
+      set local.bgcolor = '';
+      while (local.Line <> '')
+        response.write('<tr ' + local.bgcolor + '>');
+        if (local.bgcolor = '')
+          set local.bgcolor = 'bgcolor="' + app.altBgColor + '"';
+        else
+          set local.bgcolor = '';
+        endif
+        Tokenizer parts(local.Line, '\t');
+        response.write('<td>');
+        response.write(parts.NextToken);
+        response.write('</td>\r\n');
+        response.write('<td>');
+        response.write(
+          '<textarea name=dummy cols=40 rows=3 wrap=virtual>');
+        response.write(to.html2(parts.NextToken));
+        response.write('</textarea>');
+        response.write('</td>\r\n');
+        response.write('<td>');
+        response.write(parts.NextToken);
+        response.write('</td>\r\n');
+        response.write('<td>');
+        response.write(parts.NextToken);
+        response.write('</td>\r\n');
+        response.write('</tr>\r\n');
+        set local.Line = lines.NextToken;
+      endwhile
+    )>
+    </table>
+  </td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+
+</form>
+</body>
+</html>

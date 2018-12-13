@@ -1,0 +1,40 @@
+
+<html>
+<head>
+<title>do
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+
+<p><a name=do>do</a>
+ <img border="0" src="do.gif" width="24" height="24">
+<br id=dobrief>Provides a general mechanism for performing actions on the current card.
+  <br>The representation of the do tag is dependent on the device and the author must only assume that the tag is mapped to a unique user interface widget, such as a button, that the user can activate. The do tag may appear at both the card and deck-level:
+  <br>Card-level: the do tag may appear inside a card tag and may be located anywhere in the text flow.
+  <br>Deck-level: the do tag may appear inside a deck template, indicating a deck-level do tag. A deck-level do tag applies to all cards in the deck, and is equivalent to having specified the do within each card. For the purposes of rendering, the browser must behave as if deck-level do tags are located at the end of the card's text flow.
+  <br>A card-level do tag overrides (or "shadows") a deck-level do tag if they have the same name. For a single card, the active do tags are defined as the do tags specified in the card, plus any do tags specified in the deck's template and not overridden in the card.
+  <br>Non-active do tags and active do tags with a noop task are not displayed. All active do tags with a task other than noop will be shown in some manner. When the user activates the do tag, the associated task is executed.
+<p style="margin-left: 32"><b>attributes</b></p>
+<p id=doattr>
+  <b>type</b>
+  <br>Provides a hint to the browser about the author's intended use of the tag and how the tag should be mapped to the physical user interface: 'accept' (positive acknowledgement);
+  'prev' (backward history navigation); 'help' (request for help); 'reset' (clearing or resetting state); 'options' (request for options or additional operations); 'delete' (delete item or choice); 'unknown' a generic do element.
+  <br><b>label</b>
+  <br>Specifies a textual string suitable for labeling the user widget. To work well on a variety of browsers, labels should be six characters or shorter in length.
+  <br><b>name</b>
+  <br>Specifies the name of the do event binding.
+  <br><b>optional</b>
+  <br>If true, the browser may ignore this element.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+</body>
+</html>

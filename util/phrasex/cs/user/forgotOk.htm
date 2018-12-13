@@ -1,0 +1,73 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+  if (server.emailSenderEnabled <> 1)
+    error 'Email sender not enabled, please notify administrator. ';
+  endif
+
+  if (request.email = '')
+    error 'Please enter your email address';
+  endif
+
+  <serverside dataset="sqlFindUser" action="query">
+    SELECT user_id, user_pwd FROM cs_user 
+    WHERE email = request.email;
+  </serverside>
+  if (sqlFindUser.fetch <> 1)
+    error 'There is no account that matches your email address. '
+      ' Please register again.';
+  endif
+
+  email_out em;
+  set em.to = request.email;
+  if (server.taskEnabled('CustomerSupport Email Importer'))
+    set em.from = server.importerEmail;
+  else
+    set em.from = server.adminEmail;
+  endif
+  set em.subject = 'The account information you requested.';
+  set em.content = 
+    'Dear ' + sqlFindUser.user_id + ',\r\n\r\n' + 
+    'Your user name: ' + sqlFindUser.user_id + '\r\n' +
+    'Your password: ' + to.decrypted(sqlFindUser.user_pwd) + '\r\n' + 
+    '\r\n' + app.name;
+  em.send;
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$app.startPage)">$(appname)</a> : 
+      Forgot ID/password
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    You should receive an email containing your account information 
+    in around $server.emailSenderInterval) minutes.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+
+</body>
+</html>

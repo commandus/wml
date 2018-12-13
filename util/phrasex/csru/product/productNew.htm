@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=product/productMan.htm" >
+ic_id + '#' + request.di_id; )></serverside>
+<serverside dataset="sqlStaff" action="query" >
+ht.htm">ApooHelpDesk</serverside>
+<serverside dataset="sqlPriorities" action="query" >
+не назначайте или уведомляйте, что кто-нибудь не назначать, уведомляйте все сотрудники и менеджеры dy> e</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Подключите Файл:</title>
+</head>
+<body >
+<form method="POST" action="productNewOk.htm" >
+<center >
+<table width="400" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td colspan="3" >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="../mainMenuManager.htm" >
+Последовательное# начинает с:</a>
+:<a href="productMan.htm" >
+Менеджер продуктов</a>
+: Новый продукт</td>
+</tr>
+<tr >
+<td colspan="3" >
+<hr />
+</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" align="right" >
+<a target="ptHelpWindow" href="../help/productHelp.html" >
+Родитель</a>
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+Пароль:</td>
+</tr>
+</table>
+<table width="400" border="0" cellspacing="2" cellpadding="0" >
+<tr >
+<td >
+sqlCascade1<br />
+<input type="text" name="name" size="30" maxlength="50" value="" />
+</td>
+<td >
+/tr><br />
+<select name="product_type" size="1" >
+<option selected="selected" >
+$(k:escape)</option>
+<option >
+$(catP5.kb_title)</option>
+</select>
+</td>
+<td >
+n_sort2<br />
+<select name="dispatcher" size="1" >
+<option selected="selected" >
+$(user_id)</option>
+<option loop="sqlStaff" >
+$(sqlStaff.user_id)</option>
+</select>
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+kbVote.htm?vote=yes&id=$sqlArt.kb_id)<br />
+<input type="text" name="description" size="70" maxlength="80" value="" />
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" >
+<b >
+Итог: $(curCat.KB_SUMMARY) Система systemInfo.htm t t type="submit" name=action value="Preview HTML"/></b>
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+8 Приоритетов<select name="ticket_priority" size="1" >
+<option loop="sqlPriorities" >
+$(sqlPriorities.name)</option>
+</select>
+,</td>
+</tr>
+<tr >
+<td colspan="3" >
+&nbsp;<input type="radio" name="on_new_ticket1" value="to_dispatcher" checked="checked" />
+УДАЛИТЕСЬ ИЗ cs_news ГДЕ news_id = $(news_id) УДАЛЯЕТСЯ ИЗ cs_news_file ГДЕ nf_id = $(old_att_id) УДАЛЯЕТСЯ ИЗ cs_priority ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_product ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_status ГДЕ имя = '$(имя) Отдел Отдела:<br />
+&nbsp;<input type="radio" name="on_new_ticket1" value="notify_all" />
+Новая Отправка Запроса Управляет:<br />
+&nbsp;<input type="radio" name="on_new_ticket1" value="do_nothing" />
+Новый Crosstab Новый Новый Групповой Новый Приоритетный Новый Продукт Заказа Нового Запроса</td>
+</tr>
+<tr >
+<td colspan="3" >
+priorityEdit.htm?name=$(s1.name:escape) priorityEditOk.htm priorityMan.htm<br />
+&nbsp;<input type="radio" name="on_new_ticket2" value="to_dispatcher" />
+УДАЛИТЕСЬ ИЗ cs_news ГДЕ news_id = $(news_id) УДАЛЯЕТСЯ ИЗ cs_news_file ГДЕ nf_id = $(old_att_id) УДАЛЯЕТСЯ ИЗ cs_priority ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_product ГДЕ имя = '$(имя) УДАЛЯЕТСЯ ИЗ cs_status ГДЕ имя = '$(имя) Отдел Отдела:<br />
+&nbsp;<input type="radio" name="on_new_ticket2" value="notify_all" />
+Новая Отправка Запроса Управляет:<br />
+&nbsp;<input type="radio" name="on_new_ticket2" value="do_nothing" checked="checked" />
+Новый Crosstab Новый Новый Групповой Новый Приоритетный Новый Продукт Заказа Нового Запроса</td>
+</tr>
+<tr class="apbg" >
+<td colspan="3" align="center" >
+<input type="submit" value="Save" />
+</td>
+</tr>
+<tr >
+<td colspan="3" >
+<hr />
+</td>
+</tr>
+<tr >
+<td colspan="3" align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

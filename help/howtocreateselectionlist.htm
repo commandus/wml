@@ -1,0 +1,56 @@
+
+<html>
+<head>
+<title>How to create a selection list</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>How to create a selection list</h1>
+
+<p>Selection lists can be used to easily create a list of options that can be links to other cards or be used to quickly collect user input through a set of pre-defined options.
+The small size of wireless devices leads to limited options for user input,
+therefore instead of requiring the user to input text, create a list of options to choose
+from.&nbsp;</p>
+<p>To create a selection list, select paragraph in the element tree window,
+press element button <b>select</b> to create new element.<br>
+<br>
+  In the attributes window define the selection options, what action is taken when an option is selected, and other variables.&nbsp;
+</p>
+<ul>
+  <li><b>name</b> attribute. Name of the variable that receives the value of the chosen
+    item;</li>
+  <li><b>multiple</b>. When set to true, multiple user selections are permitted; when
+    false (default), only a single user selection is allowed.&nbsp;</li>
+  <li><b>default</b>. The default value of the variable specified by the name attribute. If the name variable already
+    contains a value, the name attribute is ignored.</li>
+  <li><b>title</b>. A title for the select element.</li>
+</ul>
+<p>In difference of using name and default attributes, you have ability assign
+defaults by index:</p>
+<ul>
+  <li><b>iname</b>. The name of the variable that is set with the index result of the user selection.
+    The number 1 specifies the first item, the number 0 indicates that no option is selected.</li>
+  <li><b>ivalue</b>. The index of the option element selected by default. If the variable specified by the iname
+    attribute is not set when the card is displayed, it is assigned the entry selected by default. If the
+    variable already contains a value, the ivalue attribute is ignored.<br>
+  </li>
+</ul>
+<p>
+<img border="0" src="shot03.gif"></p>
+
+</body>
+</html>

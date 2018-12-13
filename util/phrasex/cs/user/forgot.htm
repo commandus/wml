@@ -1,0 +1,58 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+  
+  if (app.isValid = 0 OR app.var('allInitialized', 0) = 0)
+    file fAppInit('../appInit.htm');
+    fAppInit.appInit();
+  endif
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="forgotOk.htm">
+<center>
+<table width=200 border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$app.startPage)">
+    
+    
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Please enter your email address: <br/>
+    <input type="text" name=email size="5"0 maxlength="50"/>
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    We will locate your account using your email address.
+    If your account is located, we will send your user name
+    and password to the email address you provided.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <input type="submit" value="OK"/>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+
+</body>
+</html>

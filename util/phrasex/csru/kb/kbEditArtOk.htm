@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside dataset="User" action="move" opt="../accessdenied.htm?b=kb/index.htm" >
+http://$(_host)$(_scriptname)$(_pathinfo) http://$(_host)$(_scriptname)/hd/index.htm http://www.w3.org/1999/xhtml я ib</serverside>
+<serverside action="defaultparam" opt="parent_id" >
+SELECT COALESCE(kb_p1, -1) kb_p1 FROM cs_kb WHERE kb_if = $(kb_id)</serverside>
+<serverside action="defaultparam" opt="kb_content_file" >
+SELECT '' R FROM DUAL</serverside>
+<serverside action="defaultparam" opt="kb_type" >
+SELECT CASE WHEN ('$(kb_content)' &lt;&gt; '') AND ('$(textType)' = 'plainText') THEN 2 WHEN ('$(kb_content)' &lt;&gt; '') AND ('$(textType)' = 'htmlFrag') THEN 3 WHEN ('$(kb_content_url)' &lt;&gt; '') THEN 4 WHEN ('$(kb_content_file)' &lt;&gt; '') THEN 5 ELSE 2 END kb_type FROM dual</serverside>
+<serverside dataset="sqlAddArt" action="execute" >
+productEdit.htm?name=$(s1.name:escape) productEditOk.htm productMan.htm</serverside>
+<serverside dataset="sqlUpdContent" action="execute" >
+Ранг: $(curCat.KB_RANK) Посещенное: $(curCat.KB_VISITED) Рекомендуемые Статьи recommended.htm Освежать ответчиков Ivanov.</serverside>
+<serverside dataset="sqlAddTicketFile" action="execute" >
+INSERT INTO cs_kb_file(kbf_kb_id, kbf_type, kbf_name, kbf_size, kbf_content) SELECT $(kb_id), 2, sqlFiles.tif_name, sqlFiles.tif_size, sqlFiles.tif_content FROM cs_ti_file sqlFiles WHERE sqlFiles.tif_ch_id IN ( SELECT ch_id FROM cs_ti_change WHERE ch_ticket_id = $(ticket_id))</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+col1</title>
+</head>
+<body loop="global" >
+<center >
+<table width="400" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+:<a href="index.htm?kb_id=$(kb_id)" >
+usr_max_row</a>
+: Новая статья сохранена</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr loop="sqlParent" >
+<td >
+дневные дни db<br />
+Если Вы в браузере нажмете кнопку Назад или Вперед чтобы вернуться на эту страницу позже, ваше окно просмотра может отобразить [Предупреждение: Срок действия страницы истек], [Вы хотите вновь послать данные в форму]. Это нормально. Не обновляйте содержимое браузера.</td>
+</tr>
+<tr >
+<td >
+&nbsp;</td>
+</tr>
+<tr class="apbg" >
+<td align="center" >
+<a href="index.htm?kb_id=$(parent_id)" >
+usr_max_row</a>
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$ 
+  
+
+  <serverside dataset="s1" action="query">
+    SELECT ticket_id, row_ver, status, co_submitter, submitter_cc
+    FROM cs_ticket
+    WHERE ticket_id = request.ticket_id;
+  </serverside>
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<form method="POST" action="euTicketFollowUpOk.htm"  
+  enctype="multipart/form-data">
+<input type="hidden" name=ticket_id value="$s1.ticket_id)"/>
+<input type="hidden" name=row_ver value="$s1.row_ver)"/>
+
+<center>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+  <td colspan="2">
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Follow up #$s1.ticket_id)
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+
+<!$
+  <serverside dataset="sqlLastStatus" action="query">
+    SELECT name FROM cs_status ORDER BY seq_num DESC;
+  </serverside>
+  if (s1.status = sqlLastStatus.name)
+)>
+  <tr class="apbg">
+    <td colspan="2">
+      <input type="hidden" name=was_closed value="y"/>
+      This request has been closed. Your new input will reopen it.
+    </td>
+  </tr>
+<!$endif)>
+<tr>
+  <td>
+    Co-Submitter: <br/>
+    <input type="text" name=co_submitter size=25 maxlength="50"
+      value="$(s1.co_submitter))">
+  </td>
+  <td>
+    Other Submitters' Email Addresses: 
+    <input type="text" name=submitter_cc size="45" maxlength="20"0
+      value="$(s1.submitter_cc))">
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Additional Information
+    
+    [in <input type=radio name=note_format value="0" checked/>plain text
+    <input type=radio name=note_format 
+      value="1"><a target="ptHelpWindow" 
+        href="../help/htmlFragHelp.html">HTML fragment</a>
+    ]
+    : <br/>
+    <textarea name=note_data cols=70 rows=14 wrap=virtual></textarea>
+  </td>
+</tr>
+<tr>
+  <td colspan="2">
+    Attach File: 
+    <!$ if (request.browserType = 'MSIE') )>
+      <input type=FILE name=add_attachment1 size="5"5/>
+    <!$ else )>
+      <input type=FILE name=add_attachment1 size="45"/>
+    <!$ endif )>
+  </td>
+</tr>
+<tr class="apbg">
+  <td align="center" colspan="2">
+    <input type="submit" name=action value="Save"/>
+    <input type="submit" name=action value="Preview HTML"/>
+  </td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<tr><td align="right" colspan="2">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>

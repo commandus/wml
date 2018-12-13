@@ -1,0 +1,27 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global" >
+<!$
+  
+
+  // User can get here from a link in a report sent by email
+  if (session.isValid = 0)
+    response.redirect(app.startPage + '?ticket_id=' + request.ticket_id);
+  endif
+
+  if (session.userType <>
+<input type="hidden" name="ticket_id" value="$request.ticket_id)" />
+</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</center>
+</form>
+</body>
+</html>

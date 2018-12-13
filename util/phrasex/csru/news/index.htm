@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html loop="global" dir="LTR" xmlns="http://www.w3.org/1999/xhtml" >
+<serverside action="db" opt="ib" >
+kb_content_file</serverside>
+<serverside action="defaultparam" opt="k" >
+SELECT '' R FROM DUAL;</serverside>
+<serverside action="defaultparam" opt="d1" >
+SELECT cast('today' as DATE) - 7 FROM DUAL;</serverside>
+<serverside action="defaultparam" opt="d2" >
+SELECT cast('today' as DATE) FROM DUAL;</serverside>
+<serverside action="defaultparam" opt="first" >
+SELECT 1 FROM DUAL;</serverside>
+<serverside action="defaultparam" opt="last" >
+SELECT 10 FROM DUAL;</serverside>
+<serverside dataset="News" action="query" >
+f1</serverside>
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="generator" content="apoo editor, http://commandus.com/" />
+<link href="$(CSS)" type="text/css" rel="stylesheet" />
+<title >
+Обратная Сторона на Обратной Стороне категории, чтобы Указать Обратно в родительской категории Обратно Приоритетному Менеджеру Обратно Менеджеру Продукта Обратно Менеджеру Статуса Обратно Менеджеру Потребителя backTo backToPrompt backToUrl нижней Категории Категории Категорий:</title>
+</head>
+<body >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<a href="../index.htm" >
+ВКЛЮЧИТЕСЬ В cs_product( имя, row_ver, диспетчер, product_type, описание, ticket_priority, on_new_ticket1, on_new_ticket2) ВЕЛИЧИНЫ( '$(имя)', 1, '$(диспетчер)', '$(product_type)', '$(описание)', '$(ticket_priority)', '$(on_new_ticket1)', '$(on_new_ticket2)') ВКЛЮЧАЮТСЯ В cs_status(row_ver, имя, seq_num, описание) ВЕЛИЧИНЫ(1, '$(имя)', $(seq_num), '$(описание)')</a>
+: Новости</td>
+</tr>
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td class="apbg" valign="top" width="1%" >
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+<form action="newsView.htm" method="POST" >
+Чтобы отменить и возвратиться к Сеансовый Менеджер, пожалуйста используйте Обратную кнопку окна просмотра.<input name="news_id" size="15" maxlength="50" />
+<br />
+<input type="hidden" name="newsHome" value="$(p-combined:escape)" />
+<br />
+<input type="submit" value="Go" />
+</form>
+</td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+<form loop="global" action="index.htm" method="POST" >
+запрос кварталов четверти r> радио Ранг:<input name="k" value="$(k:unescape)" size="15" maxlength="50" />
+<br />
+- $ байты(attachment.nf_size) - $(attachment.nf_time)<input name="d1" value="$(d1:unescape)" size="15" maxlength="50" />
+<br />
+../help/kbHelp.html<input name="d2" value="$(d2:unescape)" size="15" maxlength="50" />
+<br />
+<input type="submit" value="Search" />
+</form>
+</td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+<a href="newsNew.htm" >
+индекс</a>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr >
+<td >
+<a href="/hd/cs/help/index.html" >
+Родитель</a>
+</td>
+</tr>
+<tr >
+<td class="apbg" >
+<table border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td height="1" >
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td >
+&nbsp;</td>
+<!-- right pane ---------------- -->
+<td valign="top" width="99%" >
+parentCat Пароль пароля (Снова):<table loop="global" width="100%" border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td align="right" >
+<table border="0" >
+<tr >
+<td >
+py; 2003, Андрей Ivanov.</td>
+<td >
+<form action="index.htm" method="POST" >
+<input type="hidden" name="first" value="=G1($(first)-10)" />
+<input type="hidden" name="last" value="=G1($(first)-10)+9" />
+<input type="hidden" name="k" value="$(k:escape)" />
+<input type="hidden" name="d1" value="$(d1:escape)" />
+<input type="hidden" name="d2" value="$(d2:escape)" />
+<input type="submit" name="go" value="Previous" />
+</form>
+</td>
+<td >
+<form action="index.htm" method="POST" >
+<input type="hidden" name="first" value="=$(first)+10" />
+<input type="hidden" name="last" value="=$(first)+19" />
+<input type="hidden" name="k" value="$(k:escape)" />
+<input type="hidden" name="d1" value="$(d1:escape)" />
+<input type="hidden" name="d2" value="$(d2:escape)" />
+<input type="submit" name="go" value="Next" />
+</form>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" >
+<tr class="apbg" >
+<td >
+../accessdenied.htm?b=discuss/index.htm</td>
+<td >
+Пункты: $(сначала) - $(последний раз) k</td>
+<td >
+-</td>
+</tr>
+<tr loop="News" first="$(first)" last="$(last)" valign="top" class="$(News.rowodd#apbg#)" >
+<td >
+<a href="newsView.htm?news_id=$(News.news_id:escape)&newsHome=$(p-combined:escape)" >
+$(News.news_title)</a>
+&nbsp;</td>
+<td valign="top" >
+$(News.news_created_on)&nbsp;</td>
+<td valign="top" >
+$(News.news_created_by)&nbsp;</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" >
+<tr >
+<td >
+&nbsp;</td>
+<td align="right" >
+&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+<tr >
+<td >
+<hr />
+</td>
+</tr>
+<tr >
+<td align="right" >
+Copyright &copy; 2003, Андрей Ivanov.</td>
+</tr>
+</table>
+</body>
+</html>

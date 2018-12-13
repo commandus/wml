@@ -1,0 +1,117 @@
+
+<html>
+<head>
+<title>Text layout formatting elements</title>
+<script>
+function expand(i){
+var browsName = navigator.appName;
+	browsVersion = parseInt(navigator.appVersion);
+	if(document.getElementById(i).style.display == "none"){
+		document.getElementById(i).style.display = "block";
+	}	else {
+		document.getElementById(i).style.display = "none";
+	}
+	return;	
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel=StyleSheet href=default.css>
+</head>
+<body>
+<h1>Text layout formatting elements</h1>
+
+<table border="0">
+  <tr>
+    <td><a href="#p">p <img border="0" src="sp.gif" width="8" height="8"></a> <a href="#br">br <img border="0" src="sbr.gif" width="8" height="8"></a> <a href="#table">table</a> <a href="#tr">tr</a>
+<a href="#td">td <img border="0" src="stable.gif" width="8" height="8"></a></td>
+  </tr>
+</table>
+
+<p><a name=table>table</a>
+ <img border="0" src="table.gif" width="24" height="24">
+<br id=tablebrief>Used together with the tr and td tags to create sets of aligned columns of text and images in a card. The table tags determine the structure of the columns. The tags separate content into columns, but do not specify column or intercolumn widths.
+  <br>The number of columns for the row set must be specified by the columns attribute. If the actual number of columns in a row is less than the value specified by the columns attribute, the row will be effectively padded with empty columns. The orientation of the table depends on the language. For left-to-right languages, the leftmost column is the first column in the table. Columns are added to the right side of a row to pad left-to-right tables. Columns are added to the left side of a row to pad right-to-left table.
+  <br>If the actual number of columns in a row is greater than the value specified by the columns attribute, the extra columns of the row will be aggregated into the last column, such that the row contains exactly the number of columns specified. A single inter-word space will be inserted between two cells that are being aggregated.
+  <br>The table will be rendered as narrow as possible given the contents. A non-zero width gutter is used to separate each non-empty column.
+<br><a href="#table" style="margin-left: 32" onclick="expand('tableattr')">attributes</a>
+<p id=tableattr style="margin-left: 64;display=none">
+  <br><b>align</b>
+  <br>Specifies the layout of text and images (within the columns) as a list of alignment designations - one for each column.
+    <br> 'C'- center alignment C,
+    <br> 'L'- left alignment
+    <br> 'R'- right alignment with R.
+  <br>If an alignment designation is omitted, the default alignment is applied (left).
+  <br><b>columns</b>
+  <br> Specifies the number of columns in the table. Must not be zero
+  <br><b>title</b>
+  <br>Specifies a brief text string identifying the table.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=tr>tr</a>
+ <img border="0" src="tr.gif" width="24" height="24">
+<br id=trbrief>The tr element is used as a container to hold a single table row. Table rows may be empty (i.e., all cells are empty). Empty table rows are significant and must not be ignored.
+<br><a href="#tr" style="margin-left: 32" onclick="expand('trattr')">attributes</a>
+<p id=trattr style="margin-left: 64;display=none">
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+</p>
+
+<p><a name=td>td</a>
+ <img border="0" src="td.gif" width="24" height="24">
+<br id=tdbrief>The td element is used as a container to hold a single table cell.
+<br><a href="#td" style="margin-left: 32" onclick="expand('tdattr')">attributes</a>
+<p id=tdattr style="margin-left: 64;display=none">
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<!-- paragraph and new line elements -->
+
+<p><a name=p>p</a>
+ <img border="0" src="p.gif" width="24" height="24">
+<br id=pbrief>The p element establishes both the line wrap and alignment parameters for a paragraph. If the text alignment is not specified, it defaults to left. If the line-wrap mode is not specified, it is identical to the line-wrap mode of the previous paragraph in the current card. Empty paragraphs (ie, an empty element or an element with only insignificant white space) will be considered as insignificant and ignored by browsers. If the first p element in a card does not specify a line-wrap or alignment mode, that mode defaults to the initial mode for the card.
+  <br>The browser will insert a line break into the text flow between significant paragraphs.
+<br><a href="#p" style="margin-left: 32" onclick="expand('pattr')">attributes</a>
+<p id=pattr style="margin-left: 64;display=none">
+  <br><b>mode</b>
+  <br>Specifies the line-wrap mode for the paragraph. 'wrap' specifies breaking text mode and 'nowrap' specifies non-breaking text mode.
+  <br><b>align</b>
+  <br>Specifies the text alignment mode for the paragraph. Can be 'left', 'center', or 'right'.
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<p><a name=br>br</a>
+ <img border="0" src="br.gif" width="24" height="24">
+<br id=brbrief>Ends the current line and starts a new line. Should also be supported within tables.
+<br><a href="#br" style="margin-left: 32" onclick="expand('brattr')">attributes</a>
+<p id=brattr style="margin-left: 64;display=none">
+  <br><b>id</b>
+  <br>Provides an element with a unique name within a single deck.
+  <br><b>class</b>
+  <br>Affiliates an element with one or more classes.
+  <br><b>xml:lang</b>
+  <br>Specifies the natural or formal language in which the document is written.
+</p>
+
+<!-- timer element -->
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+<html><head><!--TOOLBAR_EXEMPT-->
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Creating Property Sheet Handlers (Windows Explorer and Controls)</title>
+    	
+<meta name="Description" content="">
+<meta name="Robots" content="all">
+<meta name="Keywords" content="Creating Property Sheet Handlers">
+<meta name="MS.LOCALE" content="en-us">
+
+<meta name="Author" content="platsdk"><link rel="stylesheet" type="text/css" href="toolbar_data/n6.css">
+<link rel="stylesheet" type="text/css" href="toolbar_data/down.css">
+
+<style type="text/css"><!--
+
+	PRE.clsCode { font-size:110%; } 
+
+	PRE.clsSyntax { font-size:100%; }  
+
+--></style>
+
+	<style>
+	BODY
+	{
+		font-family:verdana,arial,helvetica;
+		margin:0;
+	}
+	</style>
+	
+<script language="javascript" src="shell_ext_data/common.js"></script>
+<script language="javascript" src="shell_ext_data/browdata.js"></script>
+<script language="javascript" src="toolbar_data/toolbar.js"></script><layer visibility="hide"></layer><link rel="stylesheet" type="text/css" href="shell_ext_data/ie4.css"><link rel="stylesheet" type="text/css" href="shell_ext_data/inetsdk.css"><link rel="stylesheet" type="text/css" href="shell_ext_data/default.css"><meta name="pagetype" content="ovw"><meta name="devlang" content=""><meta name="src" content="/platformx/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/propsheethandlers.xml"><meta name="pubpath" content="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/propsheethandlers.asp"><meta name="ID" content="_win32_propsheet_handlers"><meta name="MS-HAID" content="_win32_propsheet_handlers"><style>.time { behavior: url(#default#time2); }</style><style>v\:* { behavior: url(#default#VML); }</style><script>//<!--
+var gbDBG = true;
+//--></script><script language="JavaScript1.2">
+//<!--
+var gsHTCPath = "/library/en-us/shellcc/platform/code/";
+var gsGraphicsPath = "/library/en-us/shellcc/platform/graphics/";
+var gsCodePath = "/library/en-us/shellcc/platform/code/";
+//--></script><script language="JavaScript1.2">
+//<!--
+var gsContextMenuPath = gsHTCPath + "contextmenu.htc";
+var gsCodeDecoPath = gsHTCPath + "codedeco.htc";
+var gsStoreName="platform";
+var gsGraphicsPath = "/library/en-us/shellcc/platform/graphics/";
+//--></script><script language="JavaScript1.2">
+//<!--
+function CMemberInfo()
+{   this.defView = 'all';
+}
+var g_oMemberInfo = new CMemberInfo();
+//--></script><script language="JavaScript1.2">
+//<!--
+function InitPage()
+{
+  if (!assert( (typeof(oBD) == 'object' && oBD != null), "browdata object unavailable!") )
+  {
+    return;
+  }
+  if ("MSIE" == oBD.browser && oBD.majorVer >= 5 && (oBD.platform.toLowerCase()!="x" && oBD.platform!="Mac" && oBD.platform!="PPC" ))
+  {
+    if (typeof(PreInit) == 'function') PreInit();
+    if (typeof(PostGBInit) == 'function') PostGBInit();
+    if (typeof(PostInit) == 'function') PostInit();
+    if (typeof(initTabbedMembers) == 'function') initTabbedMembers();
+    if (typeof(hideExamples) == 'function') hideExamples();
+  }
+  if (oBD.getsNavBar && oBD.platform!="PPC" )
+  {
+    if (typeof(SetShowMes) == 'function') SetShowMes();
+  }
+}
+
+function assert(bCond, sMsg)
+{
+  if (bCond) { return true; }
+  else { if (gbDBG) { alert(sMsg); } return false; }
+}
+
+window.onload = InitPage;
+
+//--></script><script language="JavaScript1.2">
+function PreInit()
+{
+    if (top == self)
+        location.replace("http://" + document.domain +"/library/default.asp?url=" + document.URL.substring("http://".length + document.domain.length));
+}
+</script><script language="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru-RU; rv:1.7.5) Gecko/20041108 Firefox/1.0";
+
+		this.bot = false;
+
+		this.browser = "Nav";
+
+		this.majorVer = 5;
+
+		this.minorVer = "0";
+
+		this.platform = "NT";
+
+		this.getsNavBar = false;
+
+		this.doesActiveX = false;
+
+		this.doesPersistence = false;
+
+		this.fullVer = 5;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></script><script language="JavaScript"><!--
+
+   if (document.layers) {
+    origWidth  = innerWidth;
+  origHeight = innerHeight;
+   }
+
+   function resizeFix() { if (innerWidth != origWidth || innerHeight != origHeight) location.reload(); }
+
+   if (document.layers) onresize = resizeFix;
+
+   //--></script><!-- base --><script language="JavaScript"><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru-RU; rv:1.7.5) Gecko/20041108 Firefox/1.0";
+
+		this.bot = false;
+
+		this.browser = "Nav";
+
+		this.majorVer = 5;
+
+		this.minorVer = "0";
+
+		this.platform = "NT";
+
+		this.getsNavBar = false;
+
+		this.doesActiveX = false;
+
+		this.doesPersistence = false;
+
+		this.fullVer = 5;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></script><script language="JavaScript"><!--
+
+   if (document.layers) {
+    origWidth  = innerWidth;
+  origHeight = innerHeight;
+   }
+
+   function resizeFix() { if (innerWidth != origWidth || innerHeight != origHeight) location.reload(); }
+
+   if (document.layers) onresize = resizeFix;
+
+   //--></script><script>
+	if( self == top )
+{
+	location = "/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/propsheethandlers.asp";
+}
+
+</script><meta name="MSHKeywordA" content="_win32_propsheet_handlers"><meta name="MSHKeywordF" content="Creating Property Sheet Handlers"><meta name="MSHKeywordK" content="Creating Property Sheet Handlers"><meta name="MSHAttr" content="TopicType:kbRef"><meta name="MSHAttr" content="Locale:kbEnglish"><meta name="MSHAttr" content="DocSet:WCSDK"><meta name="MSHAttr" content="DocSet:PSDK"><meta name="MSHAttr" content="TargetOS:Windows"><meta name="MSHAttr" content="DevLang:DHTML"><meta name="MSHAttr" content="DevLangVers:kbDHTML"><meta name="MSHAttr" content="Technology:DHTML"><meta name="MSHAttr" content="TechnologyVers:kbDHTML"><meta name="MSHAttr" content="Technology:Shell"><meta name="MSHAttr" content="TechnologyVers:kbShell"><link rel="stylesheet" type="text/css" href="shell_ext_data/css.css"><script language="javascript">
+var doImage=doImage;var TType=TType;
+function mhHover(tbl,idx,cls){var t,d;if(document.getElementById)t=document.getElementById(tbl);else t=document.all(tbl);if(t==null)return;if(t.getElementsByTagName)d=t.getElementsByTagName("TD");else d=t.all.tags("TD");if(d==null)return;if(d.length<=idx)return;d[idx].className=cls;}
+function footerjs(doc){if(doImage==null){var tt=TType==null?"PV":TType;doc.write('<layer visibility="hide"><div style="display:none"><img src="http://c.microsoft.com/trans_pixel.asp?source=msdn&TYPE=' + tt + '&p=library_en-us_shellcc_platform_shell_programmersguide_shell_int_shell_int_extending_extensionhandlers&r=http%3a%2f%2fmsdn.microsoft.com%2flibrary%2fshared%2fdeeptree%2fasp%2fdeeptreeDL.asp%3fstcfg%3d%2flibrary%2fsearchtabconfig.xml%26dtcfg%3d%2flibrary%2fdeeptreeconfig.xml%26url%3d%2flibrary%2fen-us%2fshellcc%2fplatform%2fshell%2fprogrammersguide%2fshell_int%2fshell_int_extending%2fextensionhandlers%2fshell_ext.asp%3fframe%3dtrue" width=0 height=0 hspace=0 vspace=0 border=0 /></div></layer>');}}
+</script></head>
+
+<body topmargin="0" leftmargin="0" bgcolor="#ffffff" marginheight="0" marginwidth="0" text="#000000"><div style="display: none;"><img src="shell_ext_data/trans_pixel_002.gif" border="0" height="0" hspace="0" vspace="0" width="0"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<xml:namespace ns="urn:schemas-microsoft-com:time" prefix="t">
+
+
+<xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="v">
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+   
+
+   
+
+   
+
+
+
+<xml id="xmlPageContext"><eyebrow findmenu="false">
+	<item label="MSDN Home" url="/default.asp">
+	<item label="MSDN Library" url="/library/default.asp">
+	<item label="Win32 and COM Development" url="/library/en-us/dnanchor/html/anch_win32com.asp" id="msdnlib1369" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1369_.xml"><item label="User Interface" url="/library/en-us/dnanchor/html/anch_UIDesignDev.asp" id="msdnlib1860" xmlsrc="/library/en-us/toc/msdnlib/msdnlib1860_.xml"><item label="Windows User Experience" id="msdnlib1882"><item label="Windows Shell" url="/library/en-us/dnanchor/html/anch_WinShell.asp" id="msdnlib1887"><item label="Windows Shell" id="shellcc2327" xmlsrc="/library/en-us/toc/shellcc/shellcc2327_.xml"><item label="Shell Programmer's Guide" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_intro.asp" id="shellcc2328"><item label="Intermediate Shell Techniques" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int.asp" id="shellcc2382" xmlsrc="/library/en-us/toc/shellcc/shellcc2382_.xml"><item label="Intermediate Shell Techniques: Extending the Shell" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extending.asp" id="shellcc2391"><item label="Creating Shell Extension Handlers" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp" id="shellcc2392"><item label="Creating Property Sheet Handlers" url="/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/propsheethandlers.asp" id="shellcc2400"></item></item>
+<!--VENUS_START-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--VENUS_END-->
+
+
+
+ 
+
+       </item></item></item></item></item></item></item></item></item></item></eyebrow></xml></xml:namespace></xml:namespace><table bgcolor="#ffffff" border="0" cellpadding="4" cellspacing="0" height="24" width="100%">
+       <tbody><tr>
+        <td class="eyebrow" align="left" valign="middle" width="100%">&nbsp;&nbsp;
+
+            <a class="small" target="_top" href="http://msdn.microsoft.com/default.asp">MSDN Home</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp">MSDN Library</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_win32com.asp">Win32 and COM Development</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_UIDesignDev.asp">User Interface</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnanchor/html/anch_WinShell.asp">Windows Shell</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_intro.asp">Shell Programmer's Guide</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int.asp">Intermediate Shell Techniques</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extending.asp">Intermediate Shell Techniques: Extending the Shell</a>&nbsp;&gt;&nbsp;
+            <a class="small" target="_top" href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp">Creating Shell Extension Handlers</a><a href=""></a>
+        </td>
+       </tr>
+       </tbody></table>
+ <table class="clsContainer" float="left" border="0" cellpadding="15" cellspacing="0" width="100%"> <tbody><tr> <td valign="top">
+<!------------------->
+<!-- BEGIN_CONTENT -->
+<!------------------->
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+<div class="clsDocBody"><table cellpadding="0" cellspacing="0" width="97%"><tbody><tr><td><h1>Creating Property Sheet Handlers
+</h1></td></tr></tbody></table>
+<hr size="1"><p>When a user right-clicks a Shell object, the shortcut menu that is displayed normally includes a <b>Properties</b>
+item. Selecting that item launches a property sheet that allows the
+user to view, and in some cases modify, the object's properties. You
+can customize this property sheet by implementing and registering a <i>property sheet handler</i>.</p><p>The general procedures for implementing and registering a Shell extension handler are discussed in <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp">Creating Shell Extension Handlers</a>. This document focuses on those aspects of implementation that are specific to property sheet handlers.</p><ul><li><a target="_self" href="#work">How Property Sheet Handlers Work</a></li><li><a target="_self" href="#fileclass">Registering and Implementing a Property Sheet Handler for a File Class</a></li><li><a target="_self" href="#drive">Registering and Implementing a Property Sheet Handler for a Mounted Drive</a></li><li><a target="_self" href="#cpl">Registering and Implementing a Property Sheet Handler for a Control Panel Application</a></li></ul><h2><a name="work"></a>How Property Sheet Handlers Work</h2><p>The following illustration shows the Properties property sheet for a Microsoft Windows XP text file.</p><p><img alt="Property Sheet" src="shell_ext_data/propsheethandler1.jpg"></p><p>This
+illustration shows the default Properties property sheet that is
+displayed for any file. For many such property sheets, you can add one
+or more pages to the property sheet by implementing and registering a
+property sheet handler.</p><p>Property sheet handlers are most commonly registered for a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_extending/fileassociations/fileassoc.asp">file class</a>.
+Each handler can add one custom page to the Properties property sheet
+for the class. These pages typically give users access to properties
+that are specific to the particular file class. A class consisting of
+text documents could, for instance, display a page that listed the
+title and author, and an abstract of the document. A special case of
+this type of property sheet handler is used to add a page to the
+Properties property sheet for a mounted drive.</p><p>The other use for
+property sheet handlers is to replace pages in the property sheets
+displayed by Control Panel applications. A mouse manufacturer, for
+instance, can use a property sheet handler to replace the <b>Buttons</b> page on the Control Panel's <b>Mouse Properties</b> property sheet with a page that is customized for the characteristics of its mouse.</p><p>Like
+all Shell extension handlers, property sheet handlers are in-process
+Component Object Model (COM) objects implemented as dynamic-link
+libraries (DLLs). They must export two interfaces in addition to <a href="http://msdn.microsoft.com/library/en-us/com/htm/cmi_q2z_9dwu.asp" target="_top">IUnknown</a>: <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/ifaces/ishellextinit/ishellextinit.asp">IShellExtInit</a> and <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/ifaces/ishellpropsheetext/ishellpropsheetext.asp">IShellPropSheetExt</a>.</p><p>The <b>IShellExtInit</b> interface is used by the Shell to initialize the handler. When the Shell calls <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/ifaces/ishellextinit/Initialize.asp">Initialize</a>,
+it passes in a data object with the object's name, and the pointer to
+an item identifier list (PIDL) of the folder that contains the file.
+The <i>hRegKey</i> parameter is not used with property sheet handlers. The <b>Initialize</b>
+method must extract the file name from the data object, and store the
+name and the folder's PIDL for later use. For further details, see <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp#_shell_imp_IShellExtInit">Implementing IShellExtInit</a>.</p><p>The remainder of the operation takes place through the handler's <b>IShellPropSheetExt</b> interface. If the property sheet is associated with a file class, the Shell calls <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/ifaces/ishellpropsheetext/AddPages.asp">AddPages</a>
+to allow the handler to add a page to the property sheet. If the
+property sheet is associated with a Control Panel application, the
+Shell calls <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/reference/ifaces/ishellpropsheetext/ReplacePage.asp">ReplacePage</a> to allow the handler to replace a page.</p><h2><a name="fileclass"></a>Registering and Implementing a Property Sheet Handler for a File Class</h2><p>When
+the user right-clicks a member of a file class to display the
+Properties property sheet, the Shell calls the property sheet handlers
+that are registered for the file class. Each handler can add one custom
+page to the default property sheet.</p><h3><a name="class_reg"></a>Registering a Property Sheet Handler for a File Class</h3><p>In addition to normal COM registration, add a <nobr><wbr><b>PropertySheetHandlers</b></nobr>
+ subkey to the <nobr><wbr><b>shellex</b></nobr>
+ subkey of the ProgID key of the application associated with the file class. Create a subkey of <nobr><wbr><b>PropertySheetHandlers</b></nobr>
+with the handler's name, and set the default value to the string form
+of the property sheet handler's class identifier (CLSID)&nbsp;globally
+unique identifier (GUID).</p><p>To
+add more than one page to the property sheet, register a handler for
+each page. The maximum number of pages that a property sheet can
+support is 32. To register multiple handlers, create a key under the <nobr><wbr><b>shellex</b></nobr>
+key for each handler, with the default value set to the handler's
+CLSID&nbsp;GUID. It is not necessary to create a distinct object for
+each handler, so multiple handlers can all have the same GUID value.
+The pages will be displayed in the order that their keys are listed
+under <nobr><wbr><b>shellex</b></nobr>
+.</p><p>The
+following example illustrates a registry entry that enables two
+property sheet extension handlers for the .myp file class used as an
+example in <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics.asp">Shell Basics</a>. In this example, a separate object is used for each page, but a single object could also be used for both.</p><p></p><dl><dt><b>HKEY_CLASSES_ROOT</b></dt><dl><dt><b><i>.myp</i></b></dt><dd>(Default) = MyProgram.1</dd></dl><dl><dt><b>CLSID</b></dt><dl><dt><b><i>{Page 1 Property Sheet Handler CLSID GUID}</i></b></dt><dl><dt><b>InProcServer32</b></dt><dd>(Default) = C:\MyDir\MyPropSheet1.dll</dd><dd>ThreadingModel<b>=</b>
+Apartment</dd></dl></dl><dl><dt><b><i>{Page 2 Property Sheet Handler CLSID GUID}</i></b></dt><dl><dt><b>InProcServer32</b></dt><dd>(Default) = C:\MyDir\MyPropSheet2.dll</dd><dd>ThreadingModel<b>=</b>
+Apartment</dd></dl></dl></dl><dl><dt><b><i>MyProgram.1</i></b></dt><dd>(Default) = MyProgram Application</dd><dl><dt><b>shellex</b></dt><dl><dt><b>PropertySheetHandlers</b></dt><dl><dt><b>MyPropSheet1</b></dt><dd>(Default) = {Page1 Property Sheet Handler CLSID GUID}</dd></dl><dl><dt><b>MyPropSheet2</b></dt><dd>(Default) = {Page2 Property Sheet Handler CLSID GUID}</dd></dl></dl></dl></dl></dl><p></p><p>For a general discussion of how to register Shell extension handlers, see <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp">Creating Shell Extension Handlers</a>.</p><h3><a name="class_impl"></a>Implementing a Property Sheet Handler for a File Class</h3><p>In addition to the general implementation discussed in <a target="_self" href="#work">How Property Sheet Handlers Work</a>, a property sheet handler for a file class must also have an appropriate implementation of <b>IShellPropSheetExt</b>. Only the <b>AddPages</b> method needs a nontoken implementation. The Shell doesn't call <b>ReplacePage</b>.</p><h4><a name="unknown_74526"></a>Implementing the AddPages Method</h4><p>The <b>AddPages</b> method allows a property sheet handler to add a page to a property sheet. The method has two input parameters. The first, <i>lpfnAddPage</i>, is a pointer to an <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/commctls/propsheet/functions/addpropsheetpageproc.asp">AddPropSheetPageProc</a>
+callback function that is used to provide the Shell with the
+information needed to add the page to the property sheet. The second, <i>lParam</i>,
+is a Shell-defined value that is not processed by the handler. It is
+simply passed back to the Shell when the callback function is called.</p><p>The general procedure for implementing <b>AddPages</b> is:</p><ol><li>Assign appropriate values to the members of a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/commctls/propsheet/structures/propsheetpage.asp">PROPSHEETPAGE</a> structure. In particular: 
+							<ul><ul><li>Assign the variable that holds the handler's reference count to the <b>pcRefParent</b> member. This practice prevents the handler object from being unloaded while the property sheet is still being displayed.</li><li>You can also implement a <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/commctls/propsheet/functions/propsheetpageproc.asp">PropSheetPageProc</a> callback function and assign its pointer to a <b>pfnCallback</b> member. This function is called when the page is created and when it is about to be destroyed.</li></ul></ul></li><li>Create the page's HPAGE handle by passing the <b>PROPSHEETPAGE</b> structure to <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/commctls/propsheet/functions/createpropertysheetpage.asp">CreatePropertySheetPage</a>.</li><li>Call the function pointed to by <i>lpfnAddPage</i>. Set its first parameter to the HPAGE handle created in the previous step. Set its second parameter to the <i>lParam</i> value passed in to <b>AddPages</b> by the Shell.</li><li>Any messages associated with the page will be passed to the dialog box procedure that was assigned to the <b>pfnDlgProc</b> member of the <b>PROPSHEETPAGE</b> structure. </li><li>If you assigned a <b>PropSheetPageProc</b> callback function to <b>pfnCallback</b>,
+it will be called when the page is about to be destroyed. Your handler
+can then perform any needed cleanup operations, such as releasing any
+references it holds. </li></ol><p>The following code sample illustrates a simple <b>AddPages</b> implementation.</p><pre class="clsCode" autohilite="1">STDMETHODIMP CShellPropSheetExt::AddPages(LPFNADDPROPSHEETPAGE 
+    lpfnAddPage, LPARAM lParam)
+{
+    PROPSHEETPAGE  psp;
+    HPROPSHEETPAGE hPage;
+
+    psp.dwSize        = sizeof(psp);
+    psp.dwFlags       = PSP_USEREFPARENT | PSP_USETITLE | PSP_USECALLBACK;
+    psp.hInstance     = g_hInst;
+    psp.pszTemplate   = MAKEINTRESOURCE(IDD_PAGEDLG);
+    psp.hIcon         = 0;
+    psp.pszTitle      = TEXT("Extension Page");
+    psp.pfnDlgProc    = (DLGPROC)PageDlgProc;
+    psp.pcRefParent   = &amp;g_DllRefCount;
+    psp.pfnCallback   = PageCallbackProc;
+    psp.lParam        = (LPARAM)this;
+
+    hPage = CreatePropertySheetPage(&amp;psp);
+            
+    if(hPage) 
+    {
+        if(lpfnAddPage(hPage, lParam))
+        {
+            this-&gt;AddRef();
+            return S_OK;
+        }
+        else
+        {
+            DestroyPropertySheetPage(hPage);
+        }
+    }
+    else
+    {
+        return E_OUTOFMEMORY;
+    }
+    return E_FAIL;
+}</pre><p>The <i>g_hInst</i>
+variable is the instance handle for the DLL, and IDD_PAGEDLG is the
+resource identifier (ID) of the page's dialog box template. The <i>PageDlgProc</i> function is the dialog box procedure that handles the page's messages. The <i>g_DllRefCount</i> variable holds the object's reference count. The <b>AddPages</b> method calls <a href="http://msdn.microsoft.com/library/en-us/com/htm/cmi_q2z_3rja.asp" target="_top">AddRef</a> to increment it. However, the reference count is released by the callback function, <i>PageCallbackProc</i>, when the page is about to be destroyed.</p><h2><a name="drive"></a>Registering and Implementing a Property Sheet Handler for a Mounted Drive</h2><p>Each
+mounted drive has a Properties sheet that can be displayed by the user.
+The following illustration shows a Properties property sheet for a
+CD-ROM drive.</p><p><img alt="CD-ROM Properties property sheet" src="shell_ext_data/propsheethandler2.jpg"></p><p>There
+are a wide variety of devices that can be mounted as drives. Because
+the default property sheet, designed for disk drives, might not be
+sufficient for some devices, a property sheet handler can be
+implemented to add a page that is specific to the mounted device. The
+basic implementation of this type of property sheet handler is
+identical to that discussed in <a target="_self" href="#fileclass">Registering and Implementing a Property Sheet Handler for a File Class</a>, with two exceptions.</p><ul><li>The data object passed to the handler's <b>Initialize</b> method may contain the drive path in the <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_programming/transferring/clipboard.asp#CFSTR_MOUNTEDVOLUME">CFSTR_MOUNTEDVOLUME</a> format instead of the <a href="http://msdn.microsoft.com/library/en-us/shellcc/platform/shell/programmersguide/shell_basics/shell_basics_programming/transferring/clipboard.asp#CF_HDROP">CF_HDROP</a> format. The <b>CF_HDROP</b> format is used when the device is mounted to a drive letter. The <b>CFSTR_MOUNTEDVOLUME</b> format is used with NTFS file systems when the remote device is mounted to a folder rather than to a drive letter. </li><li>The handler's GUID is registered under the
+                    <nobr><wbr><b>HKEY_CLASSES_ROOT</b><wbr><b>\Drive</b><wbr><b>\shellex</b><wbr><b>\PropertySheetHandlers</b></nobr>
+ key.
+				</li></ul><h2><a name="cpl"></a>Registering and Implementing a Property Sheet Handler for a Control Panel Application</h2><p>Many
+Control Panel applications display a Properties property sheet to
+enable users to view and modify various device and system settings. Two
+of them—Mouse and Display—allow property sheet handlers to replace one
+or more of their pages with a custom page. Keyboard previously allowed
+property sheet handlers to replace the <b>Speed</b> page, but that page is not replaceable in Windows 2000 or Windows XP. The following illustration shows the <b>Mouse Properties</b> property sheet.</p><p><img alt="Mouse Properties property sheet" src="shell_ext_data/propsheethandler3.jpg"></p><p>Property sheet handlers for Control Panel applications are similar to those for file classes, with three primary exceptions:</p><ul><li>They are called by a Control Panel application, not the Shell. </li><li>They are registered differently. </li></ul><h3><a name="panel_reg"></a>Registering a Property Sheet Handler for a Control Panel Application</h3><p>A
+Control Panel application property sheet handler must be registered
+under Control Panel subkey. This key can be in either of two locations,
+depending on whether the handler is to be per-user or per-computer. For
+per-user registration, the Control Panel subkey is <nobr><wbr><b>HKEY_CURRENT_USER</b><wbr><b>\Control Panel</b></nobr>
+. The macro REGSTR_PATH_CONTROLPANEL as defined in Regstr.h can be used
+in code in place of "Control Panel". For per-computer registration, the
+location is </p><dl><dt><b>HKEY_LOCAL_MACHINE</b></dt><dl><dt><b>Software</b></dt><dl><dt><b>Microsoft</b></dt><dl><dt><b>Windows</b></dt><dl><dt><b>Current Version</b></dt><dl><dt><b>Controls Folder</b></dt></dl></dl></dl></dl></dl></dl>This
+path can be referred to in code as
+HKEY_LOCAL_MACHINE\REGSTR_PATH_CONTROLSFOLDER, using the
+REGSTR_PATH_CONTROLSFOLDER macro defined in Regstr.h.<p></p><p>The
+Control Panel applications that allow property sheet handlers to
+replace pages have a subkey under the Control Panel's subkey, named for
+the application such as Mouse and Display. The application's subkey
+must have a <nobr><wbr><b>shellex</b></nobr>
+ subkey with a <nobr><wbr><b>PropertySheetHandlers</b></nobr>
+ subkey. To register a property sheet handler, add its GUID to the <nobr><wbr><b>PropertySheetHandlers</b></nobr>
+ subkey associated with the Control Panel application. To do so, create a subkey of the <nobr><wbr><b>PropertySheetHandlers</b></nobr>
+ subkey, named for the property sheet handler, and set its default value to the string form of the handler's GUID.</p><p>The
+following example registers a property sheet handler for the Mouse
+Control Panel application on a per-computer basis. To register it on a
+per-user basis, replace <nobr><wbr><b>HKEY_LOCAL_MACHINE</b><wbr><b>\REGSTR_PATH_CONTROLSFOLDER</b></nobr>
+ with <nobr><wbr><b>HKEY_CURRENT_USER</b><wbr><b>\REGSTR_PATH_CONTROLPANEL</b></nobr>
+.
+
+					</p><dl><dt><b>HKEY_LOCAL_MACHINE</b></dt><dl><dt><b><i>REGSTR_PATH_CONTROLSFOLDER</i></b></dt><dl><dt><b>Mouse</b></dt><dl><dt><b>shellex</b></dt><dl><dt><b>PropertySheetHandlers</b></dt><dl><dt><b><i>MyPropHandler</i></b></dt><dd>(Default) = {MyPropHandler CLSID GUID}</dd></dl></dl></dl></dl></dl></dl><p></p><h3><a name="panel_impl"></a>Implementing a Property Sheet Handler for a Control Panel Application</h3><p>The procedure for implementing a Control Panel property sheet handler is very similar to that discussed in <a target="_self" href="#fileclass">Registering and Implementing a Property Sheet Handler for a File Class</a>. The primary difference is that now <b>ReplacePage</b> needs a nontoken implementation instead of <b>AddPages</b>.</p><p>When a Control Panel application is about to display its property sheet, it calls the property sheet handler's <b>ReplacePage</b> method once for each page that can be replaced. The <i>uPageID</i>
+parameter is set to the page's ID. The IDs for the available pages are
+defined in Cplext.h. The currently available IDs are listed in the
+following table.</p><table class="clsStd"><tbody><tr><th>Page ID</th><th>Description</th><th>Control Panel application</th></tr><tr><td>CPLPAGE_MOUSE_BUTTONS</td><td>The Buttons page</td><td>Mouse</td></tr><tr><td>CPLPAGE_MOUSE_PTRMOTION</td><td>The Motion page</td><td>Mouse</td></tr><tr><td>CPLPAGE_MOUSE_WHEEL</td><td>The Wheel page</td><td>Mouse</td></tr><tr><td>CPLPAGE_KEYBOARD_SPEED</td><td>The Speed page</td><td>Keyboard</td></tr><tr><td>CPLPAGE_DISPLAY_BACKGROUND</td><td>The Background page</td><td>Display</td></tr></tbody></table><p>Otherwise, the procedure for creating and replacing a page is identical to that for adding a page. For further information, see <a target="_self" href="#fileclass">Registering and Implementing a Property Sheet Handler for a File Class</a>.</p></div>
+
+
+
+<!----------------->
+<!-- END_CONTENT -->
+<!----------------->
+ </td> </tr> </tbody></table><br style="line-height: 1px; overflow: hidden;" clear="all"><table id="msviFooter" cellpadding="0" cellspacing="0" width="100%"><tbody><tr valign="bottom"><td id="msviFooter2" style=""><div id="msviLocalFooter"><nobr><a href="http://go.microsoft.com/?linkid=317027">Manage Your Profile</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/isapi/gomscom.asp?target=/legal/" target="_parent">Legal</a> |</nobr><wbr><nobr><a href="http://register.microsoft.com/contactus30/contactus.asp?domain=msdn" target="_parent">Contact Us</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/flash/" target="_parent">MSDN Flash Newsletter</a></nobr></div><div id="msviGlobalFooter"><span dir="ltr">©2005 Microsoft Corporation. All rights reserved.&nbsp;</span><nobr><a href="http://www.microsoft.com/info/cpyright.mspx">Terms of Use</a> |</nobr><wbr><nobr><a href="http://msdn.microsoft.com/library/toolbar/3.0/trademarks/en-us.mspx">Trademarks</a> |</nobr><wbr><nobr><a href="http://www.microsoft.com/info/privacy.mspx">Privacy Statement</a></nobr></div></td><td bgcolor="#669aff" width="105"><img src="shell_ext_data/text.jpg" alt="Microsoft" title="" border="0" height="29" width="105"></td></tr></tbody></table>
+<script language="javascript">footerjs(document);</script><layer visibility="hide"></layer><div style="display: none;"><img src="shell_ext_data/trans_pixel.gif" border="0" height="0" hspace="0" vspace="0" width="0"></div>
+ </body></html>

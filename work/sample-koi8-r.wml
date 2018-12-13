@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="KOI8-R"?>
+<wml>
+  <card id="card1" title="First Card" newcontext="true">
+    <serverside action="db">
+      db=DBDEMOS;user=SYSDBA;password=CHANGE_ON_INSTALL  
+    </serverside>
+    <serverside dataset="ds" action="query">
+      SELECT empno, LastName, FirstName 
+      FROM employee  
+    </serverside>
+    <p xml:lang="el-gr" align="right" mode="wrap">
+      <do type="prev" label="Back">
+        <go href="logo1.wbmp" method="post">
+          <postfield name="postfieldname" value="value"/>
+        </go>
+      </do>
+      <input name="age" type="text" value="20" format="NNNN\ AA"/>
+      <b loop="ds" first="1" last="10">
+        Дельта Delta в кои 8  
+        &#e4;&#c5;
+      </b>
+      <i>
+      </i>
+      <em>
+        Emphasis text $var1:escaped
+      </em>
+      <big>
+        Biggest text
+      </big>
+      <small>
+        Small text
+      </small>
+      <b>
+        <i>
+          bold italic text
+        </i>
+      </b>
+      <img xml:lang="en-us" alt="alt image" src="Icon32.wbmp" height="32" width="32"/>
+      <select name="gender" ivalue="1">
+        <option value="M">
+          Male
+        </option>
+        <option value="F">
+          Female
+        </option>
+      </select>
+      <a href="#card2">
+      </a>
+    </p>
+  </card>
+  <card>
+  </card>
+</wml>

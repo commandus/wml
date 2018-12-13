@@ -1,0 +1,90 @@
+<html dir="LTR" xmlns="http://www.w3.org/1999/xhtml" loop="global">
+<!$
+  
+
+
+  if (request.sa_serial = '')
+    error 'Please enter serial number';
+  endif
+  if (string.isValidDateTime(request.sa_sold_on) <> 1)
+    error 'Please enter a valid date-time for Sold On';
+  endif
+  <serverside dataset="sqlSaleIdUsed" action="query">
+    SELECT sa_serial FROM cs_sale WHERE sa_serial = request.sa_serial;
+  if (request.sa_serial <> request.old_sa_serial 
+    AND sqlSaleIdUsed.fetch = 1)
+    error 'Serial Number [' + request.sa_serial + '] has been used. '
+      'Please enter a different one.';
+  endif
+  <serverside dataset="sqlSoldToExist" action="query">
+    SELECT user_id FROM cs_user WHERE user_id = request.sa_sold_to;
+  if (request.sa_sold_to <> '' AND sqlSoldToExist.fetch <> 1)
+    error 'User [' + request.sa_sold_to + '] does not exist';
+  endif
+  <serverside dataset="sqlContact1Exist" action="query">
+    SELECT user_id FROM cs_user WHERE user_id = request.sa_contact1;
+  if (request.sa_contact1 <> '' AND sqlContact1Exist.fetch <> 1)
+    error 'User [' + request.sa_contact1 + '] does not exist';
+  endif
+  <serverside dataset="sqlContact2Exist" action="query">
+    SELECT user_id FROM cs_user WHERE user_id = request.sa_contact2;
+  if (request.sa_contact2 <> '' AND sqlContact2Exist.fetch <> 1)
+    error 'User [' + request.sa_contact2 + '] does not exist';
+  endif
+
+  <serverside dataset="sqlUpdateSale" action="execute">    UPDATE cs_sale SET
+      row_ver = 1 + request.row_ver,
+      sa_serial = request.sa_serial,
+      sa_product = request.sa_product, 
+      sa_sold_to = request.sa_sold_to,
+      sa_sold_on = request.sa_sold_on,
+      sa_contact1 = request.sa_contact1,
+      sa_contact2 = request.sa_contact2,
+      sa_notes = request.sa_notes
+    WHERE sa_serial = request.old_sa_serial
+      AND row_ver = request.row_ver;
+  </serverside> 
+
+)>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Language" content="en-us"/>
+  <meta name="generator" content="apoo editor, http://commandus.com/"/>
+  <link href="$(CSS)" type="text/css" rel="stylesheet"/>
+<title>apooHelpDesk</title>
+</head>
+<body>
+
+<center>
+<table width="60%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+  <td>
+    <a href="$session.mainMenu)">$(appname)</a> : 
+      Sale Updated
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr>
+  <td>
+    Sale: [$request.sa_serial)] has been updated.
+    <br/>
+    If you use your browser's Back/Forward button to come back to this
+    page later on, your browser may display "Warning: Page has 
+    Expired", "Do you want to repost the form data" or "Data Missing".
+    That is normal. Do not refresh, repost or reload.
+  </td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="apbg">
+  <td align="center">
+    <a href="saleSearchOk.htm">Refresh Search Result</a> | 
+    <a href="saleMan.htm">Sales Manager</a>
+  </td>
+</tr>
+<tr><td><hr/></td></tr>
+<tr><td align="right">Copyright &copy; 2003, Andrei Ivanov.</td></tr>
+</table>
+</center>
+</body>
+</html>

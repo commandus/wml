@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+<template>
+<do type="prev" name="Previous" label="Back">
+<prev/>
+</do>
+</template>
+<card id="card1" title="Formatting">
+<p align="center"><b>paragraphs</b></p>
+<p align="left">&lt;p align="left"&gt;</p>
+<p align="center">&lt;p align="center"&gt;</p>
+<p align="right">&lt;p align="right"&gt;</p>
+<p align="center">
+<b>other tags</b><br/>
+<em>&lt;em&gt;</em><br/>
+<b>&lt;b&gt;</b><br/>
+<big>&lt;big&gt;</big><br/>
+<i>&lt;i&gt;</i><br/>
+<u>&lt;u&gt;</u><br/>
+</p>
+<p align="center">
+<a href="demo.wml#demo">more demos</a>
+</p>
+</card>
+</wml>
